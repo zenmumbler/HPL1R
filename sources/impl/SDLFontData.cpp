@@ -238,10 +238,8 @@ namespace hpl {
 
 		//Blit the surface using blending. This way it should create a nice
 		//b&w image where the font is white.
-		SDL_SetAlpha(pBmp->GetSurface(),0,0);
-		SDL_SetAlpha(pGlyphSurface,SDL_SRCALPHA,0);
+		SDL_SetSurfaceBlendMode(pGlyphSurface, SDL_BLENDMODE_ADD);
 		SDL_BlitSurface(pGlyphSurface, NULL, pBmp->GetSurface(),NULL);
-		SDL_SetAlpha(pBmp->GetSurface(),0,0);
 
 		//Set the alpha of the bitmap to the average color.
 		//So we get some alpha bledning.
