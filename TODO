@@ -1,3 +1,0 @@
-* Adjust to build off of system included libraries and headers instead of the dependency bundle
-* remove FLTK dependency
-* Add in Bitsream Vera or other Open font.
