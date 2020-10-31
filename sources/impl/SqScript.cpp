@@ -22,6 +22,8 @@
 #include "math/Math.h"
 #include "impl/Platform.h"
 #include <stdio.h>
+#include "impl/scripthelper.h"
+
 
 namespace hpl {
 
@@ -49,7 +51,7 @@ namespace hpl {
 
 	cSqScript::~cSqScript()
 	{
-		mpScriptEngine->Discard(msModuleName.c_str());
+		mpScriptEngine->DiscardModule(msModuleName.c_str());
 		mpContext->Release();
 	}
 
@@ -70,22 +72,23 @@ namespace hpl {
 			return false;
 		}
 
-		if(mpScriptEngine->AddScriptSection(msModuleName.c_str(), "main", pCharBuffer, lLength)<0)
+		mpModule = mpScriptEngine->GetModule(msModuleName.c_str(), asGM_ALWAYS_CREATE);
+		if(mpModule->AddScriptSection("main", pCharBuffer, lLength)<0)
 		{
 			Error("Couldn't add script '%s'!\n",asFileName.c_str());
 			hplDeleteArray(pCharBuffer);
 			return false;
 		}
 
-		if(mpScriptEngine->Build(msModuleName.c_str())<0)
+		int lBuildOutput = mpModule->Build();
+
+		if(lBuildOutput < 0)
 		{
 			Error("Couldn't build script '%s'!\n",asFileName.c_str());
 			Log("------- SCRIPT OUTPUT BEGIN --------------------------\n");
 			mpScriptOutput->Display();
 			mpScriptOutput->Clear();
 			Log("------- SCRIPT OUTPUT END ----------------------------\n");
-
-
 
 			hplDeleteArray(pCharBuffer);
 			return false;
@@ -100,7 +103,7 @@ namespace hpl {
 
 	int cSqScript::GetFuncHandle(const tString& asFunc)
 	{
-		return mpScriptEngine->GetFunctionIDByName(msModuleName.c_str(),asFunc.c_str());
+		return mpModule->GetFunctionIdByName(asFunc.c_str());
 	}
 
 	//-----------------------------------------------------------------------
@@ -114,7 +117,7 @@ namespace hpl {
 
 	bool cSqScript::Run(const tString& asFuncLine)
 	{
-		mpScriptEngine->ExecuteString(msModuleName.c_str(), asFuncLine.c_str());
+		ExecuteString(mpScriptEngine, asFuncLine.c_str(), mpModule);
 
 		return true;
 	}

@@ -1053,6 +1053,9 @@ namespace hpl {
 					iPhysicsJointSlider *pSliderJoint = static_cast<iPhysicsJointSlider*>(pJoint);
 					return pSliderJoint->GetMinDistance();
 				}
+			case ePhysicsJointType_Ball:
+			case ePhysicsJointType_LastEnum:
+				break;
 			}
 		}
 		/////////////////////////////
@@ -1076,6 +1079,9 @@ namespace hpl {
 					iPhysicsJointSlider *pSliderJoint = static_cast<iPhysicsJointSlider*>(pJoint);
 					return pSliderJoint->GetMaxDistance();
 				}
+			case ePhysicsJointType_Ball:
+			case ePhysicsJointType_LastEnum:
+				break;
 			}
 
 		}
@@ -1245,6 +1251,9 @@ namespace hpl {
 					pSliderJoint->SetMinDistance(afVal);
 					break;
 				}
+			case ePhysicsJointType_Ball:
+			case ePhysicsJointType_LastEnum:
+				break;
 			}
 		}
 		/////////////////////////////
@@ -1271,8 +1280,10 @@ namespace hpl {
 					pSliderJoint->SetMaxDistance(afVal);
 					break;
 				}
+			case ePhysicsJointType_Ball:
+			case ePhysicsJointType_LastEnum:
+				break;
 			}
-
 		}
 		else
 		{

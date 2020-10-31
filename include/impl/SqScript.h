@@ -46,6 +46,7 @@ namespace hpl {
 		cScriptOutput *mpScriptOutput;
 
 		asIScriptContext *mpContext;
+		asIScriptModule *mpModule;
 
 		int mlHandle;
 		tString msModuleName;
