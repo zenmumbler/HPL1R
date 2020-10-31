@@ -18,7 +18,7 @@
  */
 #include "impl/KeyboardSDL.h"
 
-#include "SDL/SDL.h"
+#include <SDL/SDL.h>
 
 #include "impl/LowLevelInputSDL.h"
 

@@ -30,8 +30,8 @@
 #include "impl/Platform.h"
 #include "system/String.h"
 
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
+#include <SDL2/SDL.h>
+#include <SDL2_image/SDL_image.h>
 #include "resources/MeshLoaderHandler.h"
 #include "resources/VideoManager.h"
 

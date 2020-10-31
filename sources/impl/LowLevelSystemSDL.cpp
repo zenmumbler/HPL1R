@@ -44,7 +44,7 @@
 #include "impl/LowLevelSystemSDL.h"
 #include "impl/SqScript.h"
 
-#include "SDL/SDL.h"
+#include <SDL2/SDL.h>
 
 #include "impl/stdstring.h"
 #include "impl/scriptstring.h"

@@ -22,7 +22,7 @@
 #include "graphics/Bitmap2D.h"
 #include "impl/SDLPixelFormat.h"
 
-#include "SDL/SDL.h"
+#include <SDL2/SDL.h>
 
 namespace hpl {
 

@@ -18,7 +18,7 @@
  */
 #include "impl/MouseSDL.h"
 
-#include "SDL/SDL.h"
+#include <SDL2/SDL.h>
 
 #include "graphics/LowLevelGraphics.h"
 #include "impl/LowLevelInputSDL.h"

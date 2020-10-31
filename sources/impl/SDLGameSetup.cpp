@@ -35,7 +35,7 @@
 #endif
 #include "haptic/Haptic.h"
 
-#include "SDL/SDL.h"
+#include <SDL2/SDL.h>
 
 namespace hpl {
 

@@ -24,8 +24,8 @@
 #include <Cg/cg.h>
 #include <Cg/cgGL.h>
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_ttf.h>
+#include <SDL2/SDL.h>
+//#include <SDL2/ttf.h>
 // Unix's X11 Defines DestoryAll which collides with methods
 #undef DestroyAll
 

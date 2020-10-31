@@ -30,7 +30,7 @@
 #else
 #include <GL/glu.h>
 #endif
-#include "SDL/SDL.h"
+#include <SDL2/SDL.h>
 
 
 namespace hpl {
