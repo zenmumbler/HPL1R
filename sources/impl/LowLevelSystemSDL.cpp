@@ -26,11 +26,6 @@
 #include <shlobj.h>
 #endif
 
-#ifndef WIN32
-// Include FLTK
-#include "FL/fl_ask.H"
-#endif
-
 #define _UNICODE
 
 #include <stdio.h>
@@ -449,7 +444,9 @@ namespace hpl {
 		sMess += asCaption;
 		sMess +=_W("\n\n");
 		sMess += text;
-		fl_alert("%ls\n\n%ls",asCaption,text);
+
+		// TODO: show system alert
+
 		#endif
 	}
 
