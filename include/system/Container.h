@@ -32,6 +32,8 @@ namespace hpl {
 	class iContainerIterator
 	{
 	friend class cSerializeClass;
+	public:
+		virtual ~iContainerIterator() {}
 	protected:
 		virtual bool HasNext()=0;
 
