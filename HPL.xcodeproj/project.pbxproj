@@ -7,27 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E84AA02254CACE0000EA53C /* scriptstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */; };
+		8E84AA03254CACE0000EA53C /* scriptstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */; };
+		8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84AA0C254CB3D2000EA53C /* Cg.framework */; };
+		8E9728D7254CBAC60033415B /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728D4254CBAC60033415B /* Vorbis.framework */; };
+		8E9728D9254CBAC60033415B /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728D5254CBAC60033415B /* Ogg.framework */; };
+		8E9728DC254CBB4B0033415B /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DA254CBB4B0033415B /* SDL2_image.framework */; };
+		8E9728DD254CBB4B0033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DB254CBB4B0033415B /* SDL2.framework */; };
+		8E9728DF254CBBAF0033415B /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DE254CBBAF0033415B /* SDL2_ttf.framework */; };
+		8E9728E4254CBC190033415B /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728E2254CBC190033415B /* libvorbisfile.a */; };
+		8E9728E5254CBC190033415B /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728E3254CBC190033415B /* libvorbis.a */; };
 		DB00EF3511A9CEA1007DFB32 /* libHPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF8484B0AC76D1A00BB15CD /* libHPL.a */; };
 		DB00EF3811A9CEAD007DFB32 /* PhysicsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB00EF1311A9CE84007DFB32 /* PhysicsTest.cpp */; };
 		DB00EF3E11A9CEC8007DFB32 /* SimpleCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB00EF0911A9CE84007DFB32 /* SimpleCamera.cpp */; };
 		DB00EF3F11A9CEC9007DFB32 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB00EF0B11A9CE84007DFB32 /* stdafx.cpp */; };
-		DB00EF6D11A9CFE1007DFB32 /* libas.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00EF5C11A9CFD9007DFB32 /* libas.a */; };
-		DB00EF6E11A9CFE2007DFB32 /* libnewton32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00EF5E11A9CFD9007DFB32 /* libnewton32.a */; };
+		DB00EF6D11A9CFE1007DFB32 /* libangelscript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00EF5C11A9CFD9007DFB32 /* libangelscript.a */; };
+		DB00EF6E11A9CFE2007DFB32 /* libnewton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00EF5E11A9CFD9007DFB32 /* libnewton.a */; };
 		DB00EF7111A9CFFA007DFB32 /* libOALWrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00EF5611A9CFB9007DFB32 /* libOALWrapper.a */; };
 		DB00F0C111A9D025007DFB32 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00F0BB11A9D025007DFB32 /* OpenAL.framework */; };
-		DB00F0C211A9D025007DFB32 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00F0BC11A9D025007DFB32 /* Cg.framework */; };
 		DB00F0C311A9D025007DFB32 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00F0BD11A9D025007DFB32 /* OpenGL.framework */; };
-		DB00F0C411A9D025007DFB32 /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00F0BE11A9D025007DFB32 /* SDL_image.framework */; };
-		DB00F0C511A9D025007DFB32 /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00F0BF11A9D025007DFB32 /* SDL_ttf.framework */; };
-		DB00F0C611A9D025007DFB32 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00F0C011A9D025007DFB32 /* SDL.framework */; };
-		DB00F0C911A9D036007DFB32 /* libfltk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00EF5D11A9CFD9007DFB32 /* libfltk.a */; };
 		DB00F0CE11A9D04D007DFB32 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = DB00F0CD11A9D04D007DFB32 /* SDLMain.m */; };
-		DB00F0D311A9D080007DFB32 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00F0D111A9D080007DFB32 /* Carbon.framework */; };
 		DB00F0D411A9D080007DFB32 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00F0D211A9D080007DFB32 /* Cocoa.framework */; };
-		DB00F0D711A9D096007DFB32 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00EF5911A9CFD9007DFB32 /* Ogg.framework */; };
-		DB00F0D811A9D098007DFB32 /* Theora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00EF5A11A9CFD9007DFB32 /* Theora.framework */; };
-		DB00F0DA11A9D099007DFB32 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00EF5B11A9CFD9007DFB32 /* Vorbis.framework */; };
-		DB00F0DD11A9D0A6007DFB32 /* ALUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00EF5811A9CFD9007DFB32 /* ALUT.framework */; };
 		DB019B210D7462DE00FADC2C /* VideoManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB9F0D7076B200809E03 /* VideoManager.cpp */; };
 		DB294E100C11DC6E005DA55C /* CRC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB294E0F0C11DC6E005DA55C /* CRC.cpp */; };
 		DB4AFB470D7075B900809E03 /* Haptic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB450D7075B900809E03 /* Haptic.cpp */; };
@@ -260,23 +260,40 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8E84A9C3254C8277000EA53C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB00EF5111A9CFB9007DFB32 /* OALWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DB1550DB11E64C8E005799BB;
+			remoteInfo = SimpleTest;
+		};
 		DB00EF3611A9CEA5007DFB32 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBF8483A0AC76CC500BB15CD /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DBF8484A0AC76D1A00BB15CD /* HPL */;
+			remoteGlobalIDString = DBF8484A0AC76D1A00BB15CD;
 			remoteInfo = HPL;
 		};
 		DB00EF5511A9CFB9007DFB32 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DB00EF5111A9CFB9007DFB32 /* OALWrapper.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = DBF9A2D9119A601600CCFDC9 /* libOALWrapper.a */;
+			remoteGlobalIDString = DBF9A2D9119A601600CCFDC9;
 			remoteInfo = OALWrapper;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstring_utils.cpp; sourceTree = "<group>"; };
+		8E84AA0C254CB3D2000EA53C /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cg.framework; path = lib/macosx/Cg.framework; sourceTree = "<group>"; };
+		8E9728CF254CB92F0033415B /* scripthelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripthelper.h; sourceTree = "<group>"; };
+		8E9728D4254CBAC60033415B /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = lib/macosx/Vorbis.framework; sourceTree = "<group>"; };
+		8E9728D5254CBAC60033415B /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = lib/macosx/Ogg.framework; sourceTree = "<group>"; };
+		8E9728DA254CBB4B0033415B /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = lib/macosx/SDL2_image.framework; sourceTree = "<group>"; };
+		8E9728DB254CBB4B0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = lib/macosx/SDL2.framework; sourceTree = "<group>"; };
+		8E9728DE254CBBAF0033415B /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = lib/macosx/SDL2_ttf.framework; sourceTree = "<group>"; };
+		8E9728E2254CBC190033415B /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = lib/macosx/libvorbisfile.a; sourceTree = "<group>"; };
+		8E9728E3254CBC190033415B /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = lib/macosx/libvorbis.a; sourceTree = "<group>"; };
 		DB00EF0911A9CE84007DFB32 /* SimpleCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleCamera.cpp; sourceTree = "<group>"; };
 		DB00EF0A11A9CE84007DFB32 /* SimpleCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleCamera.h; sourceTree = "<group>"; };
 		DB00EF0B11A9CE84007DFB32 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
@@ -309,22 +326,12 @@
 		DB00EF2D11A9CE85007DFB32 /* VideoTest.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = VideoTest.vcproj; sourceTree = "<group>"; };
 		DB00EF3111A9CE93007DFB32 /* PhysicsTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PhysicsTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB00EF5111A9CFB9007DFB32 /* OALWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OALWrapper.xcodeproj; path = ../OALWrapper/OALWrapper.xcodeproj; sourceTree = SOURCE_ROOT; };
-		DB00EF5811A9CFD9007DFB32 /* ALUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ALUT.framework; path = lib/macosx/ALUT.framework; sourceTree = "<group>"; };
-		DB00EF5911A9CFD9007DFB32 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = lib/macosx/Ogg.framework; sourceTree = "<group>"; };
-		DB00EF5A11A9CFD9007DFB32 /* Theora.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Theora.framework; path = lib/macosx/Theora.framework; sourceTree = "<group>"; };
-		DB00EF5B11A9CFD9007DFB32 /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = lib/macosx/Vorbis.framework; sourceTree = "<group>"; };
-		DB00EF5C11A9CFD9007DFB32 /* libas.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libas.a; path = lib/macosx/libas.a; sourceTree = "<group>"; };
-		DB00EF5D11A9CFD9007DFB32 /* libfltk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfltk.a; path = lib/macosx/libfltk.a; sourceTree = "<group>"; };
-		DB00EF5E11A9CFD9007DFB32 /* libnewton32.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnewton32.a; path = lib/macosx/libnewton32.a; sourceTree = "<group>"; };
+		DB00EF5C11A9CFD9007DFB32 /* libangelscript.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libangelscript.a; path = lib/macosx/libangelscript.a; sourceTree = "<group>"; };
+		DB00EF5E11A9CFD9007DFB32 /* libnewton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnewton.a; path = lib/macosx/libnewton.a; sourceTree = "<group>"; };
 		DB00F0BB11A9D025007DFB32 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = /System/Library/Frameworks/OpenAL.framework; sourceTree = "<absolute>"; };
-		DB00F0BC11A9D025007DFB32 /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cg.framework; path = /Library/Frameworks/Cg.framework; sourceTree = "<absolute>"; };
 		DB00F0BD11A9D025007DFB32 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
-		DB00F0BE11A9D025007DFB32 /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = /Library/Frameworks/SDL_image.framework; sourceTree = "<absolute>"; };
-		DB00F0BF11A9D025007DFB32 /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = /Library/Frameworks/SDL_ttf.framework; sourceTree = "<absolute>"; };
-		DB00F0C011A9D025007DFB32 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
 		DB00F0CC11A9D04D007DFB32 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
 		DB00F0CD11A9D04D007DFB32 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
-		DB00F0D111A9D080007DFB32 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		DB00F0D211A9D080007DFB32 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		DB27F0180ACB9AB90054ACA3 /* AI.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AI.h; sourceTree = "<group>"; };
 		DB27F0190ACB9AB90054ACA3 /* AINodeContainer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AINodeContainer.h; sourceTree = "<group>"; };
@@ -424,10 +431,9 @@
 		DB27F07E0ACB9AB90054ACA3 /* SDLBitmap2D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SDLBitmap2D.h; sourceTree = "<group>"; };
 		DB27F07F0ACB9AB90054ACA3 /* SDLFontData.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SDLFontData.h; sourceTree = "<group>"; };
 		DB27F0800ACB9AB90054ACA3 /* SDLGameSetup.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SDLGameSetup.h; sourceTree = "<group>"; };
-		DB27F0810ACB9AB90054ACA3 /* SDLPixelFormat.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SDLPixelFormat.h; sourceTree = "<group>"; };
 		DB27F0820ACB9AB90054ACA3 /* SDLTexture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SDLTexture.h; sourceTree = "<group>"; };
 		DB27F0830ACB9AB90054ACA3 /* SqScript.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SqScript.h; sourceTree = "<group>"; };
-		DB27F0840ACB9AB90054ACA3 /* stdstring.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = stdstring.h; sourceTree = "<group>"; };
+		DB27F0840ACB9AB90054ACA3 /* scriptstdstring.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = scriptstdstring.h; sourceTree = "<group>"; };
 		DB27F0860ACB9AB90054ACA3 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
 		DB27F0870ACB9AB90054ACA3 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		DB27F0880ACB9AB90054ACA3 /* VertexBufferOGL.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = VertexBufferOGL.h; sourceTree = "<group>"; };
@@ -724,7 +730,7 @@
 		DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = SDLGameSetup.cpp; sourceTree = "<group>"; };
 		DBF849AA0AC76D5800BB15CD /* SDLTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = SDLTexture.cpp; sourceTree = "<group>"; };
 		DBF849AC0AC76D5800BB15CD /* SqScript.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = SqScript.cpp; sourceTree = "<group>"; };
-		DBF849AD0AC76D5800BB15CD /* stdstring.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = stdstring.cpp; sourceTree = "<group>"; };
+		DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstdstring.cpp; sourceTree = "<group>"; };
 		DBF849AF0AC76D5800BB15CD /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
 		DBF849B00AC76D5800BB15CD /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		DBF849B10AC76D5800BB15CD /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
@@ -838,23 +844,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E9728D9254CBAC60033415B /* Ogg.framework in Frameworks */,
 				DB00EF3511A9CEA1007DFB32 /* libHPL.a in Frameworks */,
-				DB00EF6D11A9CFE1007DFB32 /* libas.a in Frameworks */,
-				DB00EF6E11A9CFE2007DFB32 /* libnewton32.a in Frameworks */,
+				DB00EF6D11A9CFE1007DFB32 /* libangelscript.a in Frameworks */,
+				DB00EF6E11A9CFE2007DFB32 /* libnewton.a in Frameworks */,
 				DB00EF7111A9CFFA007DFB32 /* libOALWrapper.a in Frameworks */,
 				DB00F0C111A9D025007DFB32 /* OpenAL.framework in Frameworks */,
-				DB00F0C211A9D025007DFB32 /* Cg.framework in Frameworks */,
+				8E9728D7254CBAC60033415B /* Vorbis.framework in Frameworks */,
 				DB00F0C311A9D025007DFB32 /* OpenGL.framework in Frameworks */,
-				DB00F0C411A9D025007DFB32 /* SDL_image.framework in Frameworks */,
-				DB00F0C511A9D025007DFB32 /* SDL_ttf.framework in Frameworks */,
-				DB00F0C611A9D025007DFB32 /* SDL.framework in Frameworks */,
-				DB00F0C911A9D036007DFB32 /* libfltk.a in Frameworks */,
-				DB00F0D311A9D080007DFB32 /* Carbon.framework in Frameworks */,
 				DB00F0D411A9D080007DFB32 /* Cocoa.framework in Frameworks */,
-				DB00F0D711A9D096007DFB32 /* Ogg.framework in Frameworks */,
-				DB00F0D811A9D098007DFB32 /* Theora.framework in Frameworks */,
-				DB00F0DA11A9D099007DFB32 /* Vorbis.framework in Frameworks */,
-				DB00F0DD11A9D0A6007DFB32 /* ALUT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,6 +860,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E9728E4254CBC190033415B /* libvorbisfile.a in Frameworks */,
+				8E9728E5254CBC190033415B /* libvorbis.a in Frameworks */,
+				8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */,
+				8E9728DD254CBB4B0033415B /* SDL2.framework in Frameworks */,
+				8E9728DC254CBB4B0033415B /* SDL2_image.framework in Frameworks */,
+				8E9728DF254CBBAF0033415B /* SDL2_ttf.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -974,16 +978,19 @@
 		DB00EF5011A9CF86007DFB32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E9728E3254CBC190033415B /* libvorbis.a */,
+				8E9728E2254CBC190033415B /* libvorbisfile.a */,
+				8E9728DE254CBBAF0033415B /* SDL2_ttf.framework */,
+				8E9728DA254CBB4B0033415B /* SDL2_image.framework */,
+				8E9728DB254CBB4B0033415B /* SDL2.framework */,
+				8E9728D5254CBAC60033415B /* Ogg.framework */,
+				8E9728D4254CBAC60033415B /* Vorbis.framework */,
+				8E84AA0C254CB3D2000EA53C /* Cg.framework */,
 				DB00EF5711A9CFD9007DFB32 /* dependencies */,
 				DB00EF5111A9CFB9007DFB32 /* OALWrapper.xcodeproj */,
 				DB00F0BB11A9D025007DFB32 /* OpenAL.framework */,
-				DB00F0BC11A9D025007DFB32 /* Cg.framework */,
 				DB00F0BD11A9D025007DFB32 /* OpenGL.framework */,
-				DB00F0BE11A9D025007DFB32 /* SDL_image.framework */,
-				DB00F0BF11A9D025007DFB32 /* SDL_ttf.framework */,
-				DB00F0D111A9D080007DFB32 /* Carbon.framework */,
 				DB00F0D211A9D080007DFB32 /* Cocoa.framework */,
-				DB00F0C011A9D025007DFB32 /* SDL.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -992,6 +999,7 @@
 			isa = PBXGroup;
 			children = (
 				DB00EF5611A9CFB9007DFB32 /* libOALWrapper.a */,
+				8E84A9C4254C8277000EA53C /* SimpleTest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -999,13 +1007,8 @@
 		DB00EF5711A9CFD9007DFB32 /* dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				DB00EF5811A9CFD9007DFB32 /* ALUT.framework */,
-				DB00EF5911A9CFD9007DFB32 /* Ogg.framework */,
-				DB00EF5A11A9CFD9007DFB32 /* Theora.framework */,
-				DB00EF5B11A9CFD9007DFB32 /* Vorbis.framework */,
-				DB00EF5C11A9CFD9007DFB32 /* libas.a */,
-				DB00EF5D11A9CFD9007DFB32 /* libfltk.a */,
-				DB00EF5E11A9CFD9007DFB32 /* libnewton32.a */,
+				DB00EF5C11A9CFD9007DFB32 /* libangelscript.a */,
+				DB00EF5E11A9CFD9007DFB32 /* libnewton.a */,
 			);
 			name = dependencies;
 			path = ../dependencies;
@@ -1146,10 +1149,10 @@
 				DB27F07E0ACB9AB90054ACA3 /* SDLBitmap2D.h */,
 				DB27F07F0ACB9AB90054ACA3 /* SDLFontData.h */,
 				DB27F0800ACB9AB90054ACA3 /* SDLGameSetup.h */,
-				DB27F0810ACB9AB90054ACA3 /* SDLPixelFormat.h */,
 				DB27F0820ACB9AB90054ACA3 /* SDLTexture.h */,
 				DB27F0830ACB9AB90054ACA3 /* SqScript.h */,
-				DB27F0840ACB9AB90054ACA3 /* stdstring.h */,
+				8E9728CF254CB92F0033415B /* scripthelper.h */,
+				DB27F0840ACB9AB90054ACA3 /* scriptstdstring.h */,
 				DB27F0850ACB9AB90054ACA3 /* tinyXML */,
 				DB27F0880ACB9AB90054ACA3 /* VertexBufferOGL.h */,
 				DB27F0890ACB9AB90054ACA3 /* VertexBufferVBO.h */,
@@ -1607,7 +1610,8 @@
 				DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */,
 				DBF849AA0AC76D5800BB15CD /* SDLTexture.cpp */,
 				DBF849AC0AC76D5800BB15CD /* SqScript.cpp */,
-				DBF849AD0AC76D5800BB15CD /* stdstring.cpp */,
+				8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */,
+				DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */,
 				DBF849AE0AC76D5800BB15CD /* tinyXml */,
 				DBF849B30AC76D5800BB15CD /* VertexBufferOGL.cpp */,
 				DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */,
@@ -1857,9 +1861,17 @@
 /* Begin PBXProject section */
 		DBF8483A0AC76CC500BB15CD /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1210;
+			};
 			buildConfigurationList = DBF8483B0AC76CC500BB15CD /* Build configuration list for PBXProject "HPL" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
 			mainGroup = DBF848380AC76CC500BB15CD;
 			productRefGroup = DBF8484C0AC76D1A00BB15CD /* Products */;
 			projectDirPath = "";
@@ -1878,6 +1890,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		8E84A9C4254C8277000EA53C /* SimpleTest */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = SimpleTest;
+			remoteRef = 8E84A9C3254C8277000EA53C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		DB00EF5611A9CFB9007DFB32 /* libOALWrapper.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1894,6 +1913,7 @@
 			files = (
 				DB00EF3811A9CEAD007DFB32 /* PhysicsTest.cpp in Sources */,
 				DB00EF3E11A9CEC8007DFB32 /* SimpleCamera.cpp in Sources */,
+				8E84AA03254CACE0000EA53C /* scriptstring_utils.cpp in Sources */,
 				DB00EF3F11A9CEC9007DFB32 /* stdafx.cpp in Sources */,
 				DB00F0CE11A9D04D007DFB32 /* SDLMain.m in Sources */,
 			);
@@ -2110,6 +2130,7 @@
 				DB4AFB480D7075B900809E03 /* LowLevelHaptic.cpp in Sources */,
 				DB4AFB6C0D70766B00809E03 /* Gui.cpp in Sources */,
 				DB4AFB6D0D70766B00809E03 /* GuiGfxElement.cpp in Sources */,
+				8E84AA02254CACE0000EA53C /* scriptstring_utils.cpp in Sources */,
 				DB4AFB6E0D70766B00809E03 /* GuiMaterialBasicTypes.cpp in Sources */,
 				DB4AFB6F0D70766B00809E03 /* GuiPopUp.cpp in Sources */,
 				DB4AFB700D70766B00809E03 /* GuiPopUpMessageBox.cpp in Sources */,
@@ -2150,13 +2171,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
+					"$(PROJECT_DIR)/lib/macosx",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2168,6 +2191,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
+					"$(PROJECT_DIR)/lib/macosx",
 				);
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -2175,7 +2199,6 @@
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = PhysicsTest;
 			};
 			name = Debug;
@@ -2184,13 +2207,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
+					"$(PROJECT_DIR)/lib/macosx",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				HEADER_SEARCH_PATHS = (
@@ -2201,6 +2226,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
+					"$(PROJECT_DIR)/lib/macosx",
 				);
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -2208,7 +2234,6 @@
 					"-framework",
 					AppKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = PhysicsTest;
 				ZERO_LINK = NO;
 			};
@@ -2218,25 +2243,47 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = i386;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				GCC_MODEL_TUNING = G5;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__MACOSX__,
 					AS_MAX_PORTABILITY,
+					GL_SILENCE_DEPRECATION,
 				);
-				GCC_VERSION = 4.0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_MISSING_PARENTHESES = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				PREBINDING = NO;
-				SDKROOT = macosx10.4;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2245,30 +2292,46 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					i386,
-					ppc,
-				);
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__MACOSX__,
 					AS_MAX_PORTABILITY,
+					GL_SILENCE_DEPRECATION,
 				);
-				GCC_VERSION = 4.0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_MISSING_PARENTHESES = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				PREBINDING = NO;
-				SDKROOT = macosx10.4;
-				SEPARATE_STRIP = YES;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2276,7 +2339,13 @@
 		DBF8484E0AC76D1B00BB15CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(PROJECT_DIR)/lib/macosx",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				HEADER_SEARCH_PATHS = (
@@ -2284,8 +2353,10 @@
 					../dependencies/include,
 					../OALWrapper/include,
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PREBINDING = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/macosx",
+				);
 				PRODUCT_NAME = HPL;
 				ZERO_LINK = NO;
 			};
@@ -2294,8 +2365,13 @@
 		DBF8484F0AC76D1B00BB15CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COPY_PHASE_STRIP = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"$(PROJECT_DIR)/lib/macosx",
+				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
@@ -2305,8 +2381,10 @@
 					../OALWrapper/include,
 				);
 				INSTALL_PATH = /usr/local/lib;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PREBINDING = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib/macosx",
+				);
 				PRODUCT_NAME = HPL;
 				ZERO_LINK = NO;
 			};
