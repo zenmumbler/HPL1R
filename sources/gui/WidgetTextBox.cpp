@@ -404,12 +404,12 @@ namespace hpl {
 
 		/////////////////////////////
 		//Get space to the left
-		for(size_t i=mlMarkerCharPos+1; i < (int)msText.size(); ++i)
+		for(size_t i=mlMarkerCharPos+1; i < msText.size(); ++i)
 		{
-			if(msText[i] == _W(' ') || i==(int)msText.size()-1)
+			if(msText[i] == _W(' ') || i==msText.size()-1)
 			{
-				if(i==(int)msText.size()-1) SetMarkerPos((int)msText.size()-1);
-				else						SetMarkerPos((int)i);
+				if(i==msText.size()-1) SetMarkerPos(static_cast<int>(msText.size()-1));
+				else				   SetMarkerPos(static_cast<int>(i));
 				break;
 			}
 		}
