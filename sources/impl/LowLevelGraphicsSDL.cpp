@@ -99,8 +99,6 @@ namespace hpl {
 			mhKeyTrapper = NULL;
 		#endif
 
-		mpPixelFormat = hplNew(cSDLPixelFormat, () );
-
 		mpRenderTarget=NULL;
 
 		for(int i=0;i<MAX_TEXTUREUNITS;i++)
@@ -143,8 +141,6 @@ namespace hpl {
 		hplFree(mpVertexArray);
 		hplFree(mpIndexArray);
 		for(int i=0;i<MAX_TEXTUREUNITS;i++)	hplFree(mpTexCoordArray[i]);
-
-		hplDelete(mpPixelFormat);
 
 		//Exit extra stuff
 		ExitCG();
@@ -562,7 +558,7 @@ namespace hpl {
 	{
 		glFinish();
 
-		cSDLBitmap2D *pBmp = hplNew( cSDLBitmap2D, (mpPixelFormat) );
+		cSDLBitmap2D *pBmp = hplNew( cSDLBitmap2D, () );
 		pBmp->Create(cVector2l(mvScreenSize.x,mvScreenSize.y),32);
 
 		unsigned char *pDestPixels = (unsigned char*)pBmp->GetSurface()->pixels;
@@ -599,7 +595,7 @@ namespace hpl {
 
 	iBitmap2D* cLowLevelGraphicsSDL::CreateBitmap2D(const cVector2l &avSize, unsigned int alBpp)
 	{
-		cSDLBitmap2D *pBmp = hplNew( cSDLBitmap2D, (mpPixelFormat) );
+		cSDLBitmap2D *pBmp = hplNew( cSDLBitmap2D, () );
 		pBmp->Create(avSize,alBpp);
 
 		return pBmp;
@@ -616,7 +612,7 @@ namespace hpl {
 
 	iBitmap2D* cLowLevelGraphicsSDL::CreateBitmap2DFromSurface(SDL_Surface* apSurface,const tString& asType)
 	{
-		cSDLBitmap2D *pBmp = hplNew( cSDLBitmap2D, (apSurface,mpPixelFormat,asType) );
+		cSDLBitmap2D *pBmp = hplNew( cSDLBitmap2D, (apSurface,asType) );
 
 		pBmp->msType = asType;
 
@@ -633,23 +629,18 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iPixelFormat* cLowLevelGraphicsSDL::GetPixelFormat()
-	{
-		return mpPixelFormat;
-	}
-
 	//-----------------------------------------------------------------------
 
 	iTexture* cLowLevelGraphicsSDL::CreateTexture(bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)
 	{
-		return hplNew( cSDLTexture, ("",mpPixelFormat,this,aType, abUseMipMaps, aTarget) );
+		return hplNew( cSDLTexture, ("",this,aType, abUseMipMaps, aTarget) );
 	}
 
 	//-----------------------------------------------------------------------
 
 	iTexture* cLowLevelGraphicsSDL::CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)
 	{
-		return hplNew( cSDLTexture, (asName,mpPixelFormat,this,aType, abUseMipMaps, aTarget) );
+		return hplNew( cSDLTexture, (asName,this,aType, abUseMipMaps, aTarget) );
 	}
 
 	//-----------------------------------------------------------------------
@@ -657,7 +648,7 @@ namespace hpl {
 	iTexture* cLowLevelGraphicsSDL::CreateTexture(iBitmap2D* apBmp,bool abUseMipMaps, eTextureType aType,
 												eTextureTarget aTarget)
 	{
-		cSDLTexture *pTex = hplNew( cSDLTexture, ("",mpPixelFormat,this,aType, abUseMipMaps, aTarget) );
+		cSDLTexture *pTex = hplNew( cSDLTexture, ("",this,aType, abUseMipMaps, aTarget) );
 		pTex->CreateFromBitmap(apBmp);
 
 		return pTex;
@@ -672,7 +663,7 @@ namespace hpl {
 
 		if(aType==eTextureType_RenderTarget)
 		{
-			pTex = hplNew( cSDLTexture, ("",mpPixelFormat,this,aType, abUseMipMaps, aTarget) );
+			pTex = hplNew( cSDLTexture, ("",this,aType, abUseMipMaps, aTarget) );
 			pTex->Create(avSize.x, avSize.y, aFillCol);
 		}
 		else
@@ -680,7 +671,7 @@ namespace hpl {
 			iBitmap2D* pBmp = CreateBitmap2D(avSize,alBpp);
 			pBmp->FillRect(cRect2l(0,0,0,0),aFillCol);
 
-			pTex = hplNew( cSDLTexture, ("",mpPixelFormat,this,aType, abUseMipMaps, aTarget) );
+			pTex = hplNew( cSDLTexture, ("",this,aType, abUseMipMaps, aTarget) );
 			bool bRet = pTex->CreateFromBitmap(pBmp);
 
 			hplDelete(pBmp);

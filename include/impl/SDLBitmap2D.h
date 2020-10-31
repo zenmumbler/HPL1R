@@ -20,7 +20,6 @@
 #define HPL_SDL_BITMAP2D_H
 
 #include "graphics/Bitmap2D.h"
-#include "impl/SDLPixelFormat.h"
 
 #include <SDL2/SDL.h>
 
@@ -29,8 +28,8 @@ namespace hpl {
 	class cSDLBitmap2D : public iBitmap2D
 	{
 	public:
-		cSDLBitmap2D(iPixelFormat *apPxlFmt);
-		cSDLBitmap2D(SDL_Surface* apSurface,iPixelFormat *apPxlFmt,const tString& asType);
+		cSDLBitmap2D();
+		cSDLBitmap2D(SDL_Surface* apSurface, const tString& asType);
 		~cSDLBitmap2D();
 
 		bool SaveToFile(const tString& asFile);
@@ -53,12 +52,10 @@ namespace hpl {
 
 		//SDL Specific
 		SDL_Surface* GetSurface();
-		SDL_PixelFormat *GetPixelFmt32(){ return mpSDLPixelFmt32;}
 
 		tString msType;
 	private:
 		SDL_Surface* mpSurface;
-		SDL_PixelFormat *mpSDLPixelFmt32;
 	};
 };
 #endif // HPL_SDL_BITMAP2D_H

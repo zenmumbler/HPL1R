@@ -28,27 +28,21 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cSDLBitmap2D::cSDLBitmap2D(iPixelFormat *apPxlFmt) : iBitmap2D("SDL",apPxlFmt)
+	cSDLBitmap2D::cSDLBitmap2D() : iBitmap2D("SDL")
 	{
 		mpSurface = NULL;
 		mlHeight = 0;
 		mlWidth = 0;
-
-		cSDLPixelFormat *pFmt = static_cast<cSDLPixelFormat*>(apPxlFmt);
-		mpSDLPixelFmt32 = pFmt->GetSDLPixelFormat32();
 	}
 
-	cSDLBitmap2D::cSDLBitmap2D(SDL_Surface* apSurface,iPixelFormat *apPxlFmt,const tString& asType) :
-	iBitmap2D("SDL",apPxlFmt)
+	cSDLBitmap2D::cSDLBitmap2D(SDL_Surface* apSurface, const tString& asType) :
+	iBitmap2D("SDL")
 	{
 		mpSurface = apSurface;
 		mlHeight = mpSurface->h;
 		mlWidth = mpSurface->w;
 
 		msType = asType;
-
-		cSDLPixelFormat *pFmt = static_cast<cSDLPixelFormat*>(apPxlFmt);
-		mpSDLPixelFmt32 = pFmt->GetSDLPixelFormat32();
 	}
 	cSDLBitmap2D::~cSDLBitmap2D()
 	{
@@ -112,10 +106,20 @@ namespace hpl {
 		rect.w = aRect.w<=0?mlWidth:aRect.w;
 		rect.h = aRect.h<=0?mlHeight:aRect.h;
 
-		unsigned int col = SDL_MapRGBA(mpSDLPixelFmt32,(int)(aColor.r*255.0f),(int)(aColor.g*255.0f),
-										(int)(aColor.b*255.0f),(int)(aColor.a*255.0f));
+		Uint32 col =
+#if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+		(static_cast<Uint8>(aColor.r * 255.0f) << 24) |
+		(static_cast<Uint8>(aColor.g * 255.0f) << 16) |
+		(static_cast<Uint8>(aColor.b * 255.0f) << 8) |
+		(static_cast<Uint8>(aColor.a * 255.0f));
+#else
+		(static_cast<Uint8>(aColor.a * 255.0f) << 24) |
+		(static_cast<Uint8>(aColor.b * 255.0f) << 16) |
+		(static_cast<Uint8>(aColor.g * 255.0f) << 8) |
+		(static_cast<Uint8>(aColor.r * 255.0f));
+#endif
 
-		SDL_FillRect(mpSurface, &rect,col);
+		SDL_FillRect(mpSurface, &rect, col);
 	}
 
 	//-----------------------------------------------------------------------
@@ -129,9 +133,11 @@ namespace hpl {
 
 	bool cSDLBitmap2D::Create(cVector2l avSize, unsigned int alBpp)
 	{
-		mpSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, avSize.x, avSize.y, 32,
-			mpSDLPixelFmt32->Rmask, mpSDLPixelFmt32->Gmask,
-			mpSDLPixelFmt32->Bmask, mpSDLPixelFmt32->Amask);
+		Uint32 format = SDL_PIXELFORMAT_ABGR32;
+		if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
+			format = SDL_PIXELFORMAT_RGBA32;
+		}
+		mpSurface = SDL_CreateRGBSurfaceWithFormat(SDL_SWSURFACE, avSize.x, avSize.y, 32, format);
 
 		if(mpSurface==NULL) return false;
 

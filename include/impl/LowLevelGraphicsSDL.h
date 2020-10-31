@@ -30,7 +30,6 @@
 #undef DestroyAll
 
 #include "graphics/LowLevelGraphics.h"
-#include "impl/SDLPixelFormat.h"
 #include "math/MathTypes.h"
 
 
@@ -83,9 +82,6 @@ namespace hpl {
 		iTexture* CreateTexture(iBitmap2D* apBmp,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget);
 		iTexture* CreateTexture(const cVector2l& avSize,int alBpp,cColor aFillCol,
 								bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget);
-
-
-		iPixelFormat* GetPixelFormat();
 
 		iGpuProgram* CreateGpuProgram(const tString& asName, eGpuProgramType aType);
 
@@ -263,7 +259,6 @@ namespace hpl {
 
 		//SDL Variables
 		SDL_Surface *mpScreen;
-		cSDLPixelFormat *mpPixelFormat;
 
 		//Vertex Array variables
 		//The vertex arrays used:

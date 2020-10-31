@@ -26,12 +26,10 @@
 
 namespace hpl {
 
-	class iPixelFormat;
-
 	class iBitmap2D : public iLowLevelPicture
 	{
 	public:
-		iBitmap2D(tString asType,iPixelFormat *apPxlFmt) : iLowLevelPicture(asType){}
+		iBitmap2D(tString asType) : iLowLevelPicture(asType){}
 		virtual ~iBitmap2D() {}
 
 		/**

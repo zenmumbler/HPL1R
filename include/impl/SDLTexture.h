@@ -38,7 +38,7 @@ namespace hpl {
 	class cSDLTexture : public iTexture
 	{
 	public:
-		cSDLTexture(const tString &asName,iPixelFormat *apPxlFmt,iLowLevelGraphics* apLowLevelGraphics,
+		cSDLTexture(const tString &asName, iLowLevelGraphics* apLowLevelGraphics,
 					eTextureType aType, bool abUseMipMaps, eTextureTarget aTarget,
 					bool abCompress=false);
 		~cSDLTexture();

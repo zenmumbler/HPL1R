@@ -22,7 +22,6 @@
 #include <vector>
 #include "graphics/LowLevelPicture.h"
 #include "graphics/Bitmap2D.h"
-#include "graphics/PixelFormat.h"
 #include "graphics/GraphicsTypes.h"
 #include "resources/ResourceBase.h"
 
@@ -85,7 +84,7 @@ namespace hpl {
 	class iTexture : public iLowLevelPicture, public iResourceBase
 	{
 	public:
-		iTexture(tString asName,tString asType,iPixelFormat *apPxlFmt,iLowLevelGraphics* apLowLevelGraphics,
+		iTexture(tString asName,tString asType, iLowLevelGraphics* apLowLevelGraphics,
 				eTextureType aType,bool abUseMipMaps, eTextureTarget aTarget,
 				bool abCompress=false)
 			: iLowLevelPicture(asType), iResourceBase(asName,0),
