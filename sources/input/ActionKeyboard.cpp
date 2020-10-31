@@ -216,6 +216,7 @@ namespace hpl
 			case eKey_POWER: tsKey.append("Power"); break;
 			case eKey_EURO: tsKey.append("Euro"); break;
 			case eKey_NONE: tsKey.append("None"); break;
+			default: break;
 		}
 		if (tsKey != "") {
 			return tsKey;

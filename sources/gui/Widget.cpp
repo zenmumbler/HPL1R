@@ -168,6 +168,7 @@ namespace hpl {
 				case eGuiMessage_KeyPress:			bRet = OnKeyPress(aData); break;
 				case eGuiMessage_GotFocus:			bRet = OnGotFocus(aData); break;
 				case eGuiMessage_LostFocus:			bRet = OnLostFocus(aData); break;
+				default: break;
 			}
 		}
 

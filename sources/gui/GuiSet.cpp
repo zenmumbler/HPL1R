@@ -266,6 +266,8 @@ namespace hpl {
 			case eGuiMessage_MouseDoubleClick:	return OnMouseDoubleClick(aData);
 
 			case eGuiMessage_KeyPress:			return OnKeyPress(aData);
+
+			default: break;
 		}
 
 		return false;

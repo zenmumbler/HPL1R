@@ -70,6 +70,7 @@ namespace hpl
 			case eMButton_7: return "Mouse7";
 			case eMButton_8: return "Mouse8";
 			case eMButton_9: return "Mouse9";
+			default: break;
 		}
 		return "Unknown";
 	}
