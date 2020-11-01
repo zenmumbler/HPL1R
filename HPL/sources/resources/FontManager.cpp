@@ -79,16 +79,17 @@ namespace hpl {
 			tString sExt = cString::ToLowerCase(cString::GetFileExt(asName));
 
 			//True Type Font
-			if(sExt == "ttf")
-			{
-				if(pFont->CreateFromFontFile(sPath,alSize,alFirstChar,alLastChar)==false){
-					hplDelete(pFont);
-					EndLoad();
-					return NULL;
-				}
-			}
+//			if(sExt == "ttf")
+//			{
+//				if(pFont->CreateFromFontFile(sPath,alSize,alFirstChar,alLastChar)==false){
+//					hplDelete(pFont);
+//					EndLoad();
+//					return NULL;
+//				}
+//			}
+//			else
 			//Angel code font type
-			else if(sExt == "fnt")
+			if(sExt == "fnt")
 			{
 				if(pFont->CreateFromBitmapFile(sPath)==false){
 					hplDelete(pFont);

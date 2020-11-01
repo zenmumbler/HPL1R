@@ -22,7 +22,6 @@
 #include "graphics/FontData.h"
 
 #include <SDL2/SDL.h>
-#include <SDL2_ttf/SDL_ttf.h>
 
 namespace hpl {
 
@@ -37,8 +36,6 @@ namespace hpl {
 		bool CreateFromBitmapFile(const tString &asFileName);
 
 	private:
-		cGlyph* RenderGlyph(TTF_Font* apFont,unsigned short aChar, int alFontSize);
-
 	};
 
 };

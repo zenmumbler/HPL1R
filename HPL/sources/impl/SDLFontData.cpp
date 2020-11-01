@@ -168,10 +168,10 @@ namespace hpl {
 	}
 
 	//-----------------------------------------------------------------------
-
 	bool cSDLFontData::CreateFromFontFile(const tString &asFileName, int alSize, unsigned short alFirstChar,
 		unsigned short alLastChar)
 	{
+		/*
 		cGlyph* pGlyph=NULL;
 
 		mlFirstChar = alFirstChar;
@@ -188,10 +188,10 @@ namespace hpl {
 		for(int i=alFirstChar; i<=alLastChar;i++)
 		{
 			unsigned short lUniCode = i;
-			/*char c = (char)i;
+			//char c = (char)i;
 
-			if(c == 'ö')lUniCode = 'o';
-			else if(c == 'Ö')lUniCode = 'O';*/
+			//if(c == 'ö')lUniCode = 'o';
+			//else if(c == 'Ö')lUniCode = 'O';
 
 			pGlyph = RenderGlyph(pFont, lUniCode, alSize);
 			AddGlyph(pGlyph);
@@ -204,10 +204,10 @@ namespace hpl {
 
 		//Cleanup
 		TTF_CloseFont(pFont);
-
 		return true;
+		*/
+		return false;
 	}
-
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////
@@ -216,6 +216,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+/*
 	cGlyph* cSDLFontData::RenderGlyph(TTF_Font* apFont,unsigned short aChar, int alFontSize)
 	{
 		//If the font is saved to disk, then load the bitmap from disk instead.
@@ -266,7 +267,7 @@ namespace hpl {
 
 		return pGlyph;
 	}
-
+*/
 	//-----------------------------------------------------------------------
 
 }
