@@ -20,7 +20,7 @@
 
 #include "Init.h"
 
-#include "SDL/SDL.h"
+#include <SDL2/SDL.h>
 
 #ifdef WIN32
 	#include <windows.h>

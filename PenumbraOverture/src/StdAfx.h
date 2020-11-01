@@ -19,7 +19,7 @@
 #ifndef GAME_STDAFX_H
 #define GAME_STDAFX_H
 
-#include <hpl.h>
+#include "hpl.h"
 
 #endif // GAME_STDAFX_H
 
