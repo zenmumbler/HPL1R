@@ -8,8 +8,6 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleGetInfoString</key>
 	<string>Penumbra: Overture Version 1.0.3013, Copyright 2006-2010 Frictional Games.</string>
-	<key>CFBundleIconFile</key>
-	<string>penumbra</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.frictionalgames.PenumbraOverture</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -22,6 +20,8 @@
 	<string>1.0.3013</string>
 	<key>CFBundleVersion</key>
 	<string>1.0.3013</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.games</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright 2006-2010 Frictional Games.</string>
 	<key>NSMainNibFile</key>

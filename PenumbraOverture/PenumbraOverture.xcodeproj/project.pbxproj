@@ -66,38 +66,13 @@
 		DB06305F111D3E3F0048C5E9 /* HapticGameCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB150D70708200809E03 /* HapticGameCamera.cpp */; };
 		DB063060111D3E3F0048C5E9 /* PlayerState_InteractHaptX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB170D70708200809E03 /* PlayerState_InteractHaptX.cpp */; };
 		DB063061111D3E3F0048C5E9 /* PlayerState_MiscHaptX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB190D70708200809E03 /* PlayerState_MiscHaptX.cpp */; };
-		DB063065111D3E3F0048C5E9 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF84A9E0AC76EB900BB15CD /* SDL.framework */; };
-		DB063066111D3E3F0048C5E9 /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF84A9C0AC76EB900BB15CD /* SDL_image.framework */; };
-		DB063067111D3E3F0048C5E9 /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF84A9D0AC76EB900BB15CD /* SDL_ttf.framework */; };
 		DB063068111D3E3F0048C5E9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF84AA40AC76EEE00BB15CD /* OpenGL.framework */; };
 		DB063069111D3E3F0048C5E9 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCEE71E0B4B53550088A7E3 /* OpenAL.framework */; };
-		DB06306B111D3E3F0048C5E9 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF84AA30AC76EEE00BB15CD /* Cg.framework */; };
-		DB06306E111D3E3F0048C5E9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB294D4F0C11BFEF005DA55C /* Carbon.framework */; };
-		DB063070111D3E3F0048C5E9 /* Cg.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = DBF84AA30AC76EEE00BB15CD /* Cg.framework */; };
-		DB063074111D3E3F0048C5E9 /* SDL_image.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = DBF84A9C0AC76EB900BB15CD /* SDL_image.framework */; };
-		DB063075111D3E3F0048C5E9 /* SDL_ttf.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = DBF84A9D0AC76EB900BB15CD /* SDL_ttf.framework */; };
-		DB063076111D3E3F0048C5E9 /* SDL.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = DBF84A9E0AC76EB900BB15CD /* SDL.framework */; };
-		DBF9A382119A655F00CCFDC9 /* libnewton32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF9A34E119A645000CCFDC9 /* libnewton32.a */; };
-		DBF9A384119A656100CCFDC9 /* libas.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF9A34C119A645000CCFDC9 /* libas.a */; };
-		DBF9A3D7119A65A500CCFDC9 /* libHPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF9A3D6119A659300CCFDC9 /* libHPL.a */; };
 		DBF9A3D8119A65AB00CCFDC9 /* libOALWrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF9A3CD119A658A00CCFDC9 /* libOALWrapper.a */; };
-		DBF9A3E0119A65CB00CCFDC9 /* Ogg.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = DBF9A376119A655A00CCFDC9 /* Ogg.framework */; };
-		DBF9A3E1119A65CE00CCFDC9 /* Vorbis.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = DBF9A378119A655A00CCFDC9 /* Vorbis.framework */; };
-		DBF9A40E119A67A500CCFDC9 /* ALUT.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = DBCEE7430B4B5D290088A7E3 /* ALUT.framework */; };
-		DBF9A440119A690800CCFDC9 /* ALUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF9A3EC119A664700CCFDC9 /* ALUT.framework */; };
-		DBF9A446119A696200CCFDC9 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF9A376119A655A00CCFDC9 /* Ogg.framework */; };
-		DBF9A449119A696900CCFDC9 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF9A378119A655A00CCFDC9 /* Vorbis.framework */; };
 		DBF9A455119A6B5E00CCFDC9 /* PlayerState_WeaponHaptX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB1B0D70708200809E03 /* PlayerState_WeaponHaptX.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8E84A9C8254C9975000EA53C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DB00EF3111A9CE93007DFB32;
-			remoteInfo = PhysicsTest;
-		};
 		8E84A9CB254C9975000EA53C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBF9A3C5119A658A00CCFDC9 /* OALWrapper.xcodeproj */;
@@ -111,20 +86,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = DBF9A2D9119A601600CCFDC9;
 			remoteInfo = OALWrapper;
-		};
-		DBF9A3D5119A659300CCFDC9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DBF8484B0AC76D1A00BB15CD;
-			remoteInfo = HPL;
-		};
-		DBF9A3F2119A669400CCFDC9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = DBF8484A0AC76D1A00BB15CD;
-			remoteInfo = HPL;
 		};
 		DBF9A3F4119A669400CCFDC9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -142,13 +103,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				DBF9A40E119A67A500CCFDC9 /* ALUT.framework in Copy Frameworks into .app */,
-				DBF9A3E1119A65CE00CCFDC9 /* Vorbis.framework in Copy Frameworks into .app */,
-				DBF9A3E0119A65CB00CCFDC9 /* Ogg.framework in Copy Frameworks into .app */,
-				DB063070111D3E3F0048C5E9 /* Cg.framework in Copy Frameworks into .app */,
-				DB063074111D3E3F0048C5E9 /* SDL_image.framework in Copy Frameworks into .app */,
-				DB063075111D3E3F0048C5E9 /* SDL_ttf.framework in Copy Frameworks into .app */,
-				DB063076111D3E3F0048C5E9 /* SDL.framework in Copy Frameworks into .app */,
 			);
 			name = "Copy Frameworks into .app";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,10 +110,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8EB7C395254E48A900277667 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DB06307A111D3E3F0048C5E9 /* PenumbraOverture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PenumbraOverture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB2707770ACCDEE40054ACA3 /* GameEnemy_Spider.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GameEnemy_Spider.cpp; sourceTree = "<group>"; };
 		DB2707780ACCDEE40054ACA3 /* GameEnemy_Spider.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GameEnemy_Spider.h; sourceTree = "<group>"; };
-		DB294D4F0C11BFEF005DA55C /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		DB294DD00C11D2B2005DA55C /* Version.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		DB2AFF4B0B9E75FD00E872A8 /* DemoEndText.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = DemoEndText.cpp; sourceTree = "<group>"; };
 		DB2AFF4C0B9E75FD00E872A8 /* DemoEndText.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DemoEndText.h; sourceTree = "<group>"; };
@@ -172,7 +126,6 @@
 		DB4AFB1A0D70708200809E03 /* PlayerState_MiscHaptX.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PlayerState_MiscHaptX.h; sourceTree = "<group>"; };
 		DB4AFB1B0D70708200809E03 /* PlayerState_WeaponHaptX.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerState_WeaponHaptX.cpp; sourceTree = "<group>"; };
 		DB4AFB1C0D70708200809E03 /* PlayerState_WeaponHaptX.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PlayerState_WeaponHaptX.h; sourceTree = "<group>"; };
-		DBCD21AF0DC031E9006BF4EC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		DBCEE6260B4B365C0088A7E3 /* GameDamageArea.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GameDamageArea.cpp; sourceTree = "<group>"; };
 		DBCEE6270B4B365C0088A7E3 /* GameDamageArea.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GameDamageArea.h; sourceTree = "<group>"; };
 		DBCEE6280B4B365C0088A7E3 /* GameEnemy_Worm.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GameEnemy_Worm.cpp; sourceTree = "<group>"; };
@@ -184,7 +137,6 @@
 		DBCEE62E0B4B365C0088A7E3 /* RadioHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = RadioHandler.cpp; sourceTree = "<group>"; };
 		DBCEE62F0B4B365C0088A7E3 /* RadioHandler.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = RadioHandler.h; sourceTree = "<group>"; };
 		DBCEE71E0B4B53550088A7E3 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = /System/Library/Frameworks/OpenAL.framework; sourceTree = "<absolute>"; };
-		DBCEE7430B4B5D290088A7E3 /* ALUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ALUT.framework; path = /Library/Frameworks/ALUT.framework; sourceTree = "<absolute>"; };
 		DBF84A1F0AC76D8F00BB15CD /* AttackHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = AttackHandler.cpp; sourceTree = "<group>"; };
 		DBF84A200AC76D8F00BB15CD /* AttackHandler.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AttackHandler.h; sourceTree = "<group>"; };
 		DBF84A210AC76D8F00BB15CD /* ButtonHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonHandler.cpp; sourceTree = "<group>"; };
@@ -275,24 +227,13 @@
 		DBF84A7B0AC76D8F00BB15CD /* TriggerHandler.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TriggerHandler.h; sourceTree = "<group>"; };
 		DBF84A7C0AC76D8F00BB15CD /* Triggers.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Triggers.cpp; sourceTree = "<group>"; };
 		DBF84A7D0AC76D8F00BB15CD /* Triggers.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Triggers.h; sourceTree = "<group>"; };
-		DBF84A9C0AC76EB900BB15CD /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = /Library/Frameworks/SDL_image.framework; sourceTree = "<absolute>"; };
-		DBF84A9D0AC76EB900BB15CD /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = /Library/Frameworks/SDL_ttf.framework; sourceTree = "<absolute>"; };
-		DBF84A9E0AC76EB900BB15CD /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
-		DBF84AA30AC76EEE00BB15CD /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cg.framework; path = /Library/Frameworks/Cg.framework; sourceTree = "<absolute>"; };
 		DBF84AA40AC76EEE00BB15CD /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		DBF84FF80AC7873A00BB15CD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		DBF84FFF0AC7878B00BB15CD /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
 		DBF850000AC7878B00BB15CD /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
-		DBF9A34C119A645000CCFDC9 /* libas.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libas.a; path = lib/macosx/libas.a; sourceTree = "<group>"; };
-		DBF9A34D119A645000CCFDC9 /* libfltk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfltk.a; path = lib/macosx/libfltk.a; sourceTree = "<group>"; };
-		DBF9A34E119A645000CCFDC9 /* libnewton32.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnewton32.a; path = lib/macosx/libnewton32.a; sourceTree = "<group>"; };
 		DBF9A34F119A649000CCFDC9 /* PenumbraOverture-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PenumbraOverture-Info.plist"; sourceTree = "<group>"; };
-		DBF9A376119A655A00CCFDC9 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = lib/macosx/Ogg.framework; sourceTree = "<group>"; };
-		DBF9A377119A655A00CCFDC9 /* Theora.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Theora.framework; path = lib/macosx/Theora.framework; sourceTree = "<group>"; };
-		DBF9A378119A655A00CCFDC9 /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = lib/macosx/Vorbis.framework; sourceTree = "<group>"; };
 		DBF9A3C5119A658A00CCFDC9 /* OALWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OALWrapper.xcodeproj; path = ../OALWrapper/OALWrapper.xcodeproj; sourceTree = SOURCE_ROOT; };
-		DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HPL.xcodeproj; path = ../HPL1Engine/HPL.xcodeproj; sourceTree = SOURCE_ROOT; };
-		DBF9A3EC119A664700CCFDC9 /* ALUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ALUT.framework; path = lib/macosx/ALUT.framework; sourceTree = "<group>"; };
+		DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HPL.xcodeproj; path = ../HPL/HPL.xcodeproj; sourceTree = SOURCE_ROOT; };
 		DBFBA01A0B65E4660021DAE2 /* Credits.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Credits.cpp; sourceTree = "<group>"; };
 		DBFBA01B0B65E4660021DAE2 /* Credits.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Credits.h; sourceTree = "<group>"; };
 		DBFBA01C0B65E4660021DAE2 /* GameLiquidArea.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GameLiquidArea.cpp; sourceTree = "<group>"; };
@@ -309,19 +250,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBF9A3D8119A65AB00CCFDC9 /* libOALWrapper.a in Frameworks */,
-				DBF9A3D7119A65A500CCFDC9 /* libHPL.a in Frameworks */,
-				DB063065111D3E3F0048C5E9 /* SDL.framework in Frameworks */,
-				DB063066111D3E3F0048C5E9 /* SDL_image.framework in Frameworks */,
-				DB063067111D3E3F0048C5E9 /* SDL_ttf.framework in Frameworks */,
 				DB063068111D3E3F0048C5E9 /* OpenGL.framework in Frameworks */,
 				DB063069111D3E3F0048C5E9 /* OpenAL.framework in Frameworks */,
-				DB06306B111D3E3F0048C5E9 /* Cg.framework in Frameworks */,
-				DB06306E111D3E3F0048C5E9 /* Carbon.framework in Frameworks */,
-				DBF9A382119A655F00CCFDC9 /* libnewton32.a in Frameworks */,
-				DBF9A384119A656100CCFDC9 /* libas.a in Frameworks */,
-				DBF9A440119A690800CCFDC9 /* ALUT.framework in Frameworks */,
-				DBF9A446119A696200CCFDC9 /* Ogg.framework in Frameworks */,
-				DBF9A449119A696900CCFDC9 /* Vorbis.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +387,7 @@
 				DB294DD00C11D2B2005DA55C /* Version.h */,
 			);
 			name = Source;
+			path = src;
 			sourceTree = "<group>";
 		};
 		DBF848380AC76CC500BB15CD = {
@@ -480,13 +411,6 @@
 		DBF84A9A0AC76E5E00BB15CD /* dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				DBF9A3EC119A664700CCFDC9 /* ALUT.framework */,
-				DBF9A376119A655A00CCFDC9 /* Ogg.framework */,
-				DBF9A377119A655A00CCFDC9 /* Theora.framework */,
-				DBF9A378119A655A00CCFDC9 /* Vorbis.framework */,
-				DBF9A34C119A645000CCFDC9 /* libas.a */,
-				DBF9A34D119A645000CCFDC9 /* libfltk.a */,
-				DBF9A34E119A645000CCFDC9 /* libnewton32.a */,
 			);
 			name = dependencies;
 			path = ../dependencies;
@@ -498,16 +422,9 @@
 				DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */,
 				DBF9A3C5119A658A00CCFDC9 /* OALWrapper.xcodeproj */,
 				DBF84A9A0AC76E5E00BB15CD /* dependencies */,
-				DBCD21AF0DC031E9006BF4EC /* Security.framework */,
-				DB294D4F0C11BFEF005DA55C /* Carbon.framework */,
-				DBCEE7430B4B5D290088A7E3 /* ALUT.framework */,
 				DBCEE71E0B4B53550088A7E3 /* OpenAL.framework */,
 				DBF84FF80AC7873A00BB15CD /* Cocoa.framework */,
-				DBF84AA30AC76EEE00BB15CD /* Cg.framework */,
 				DBF84AA40AC76EEE00BB15CD /* OpenGL.framework */,
-				DBF84A9C0AC76EB900BB15CD /* SDL_image.framework */,
-				DBF84A9D0AC76EB900BB15CD /* SDL_ttf.framework */,
-				DBF84A9E0AC76EB900BB15CD /* SDL.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -521,18 +438,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DBF9A3CF119A659300CCFDC9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DBF9A3D6119A659300CCFDC9 /* libHPL.a */,
-				8E84A9C9254C9975000EA53C /* PhysicsTest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		DBFBD2690AC8A8A50062EA6B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8EB7C395254E48A900277667 /* Images.xcassets */,
 				DBF9A34F119A649000CCFDC9 /* PenumbraOverture-Info.plist */,
 			);
 			name = Resources;
@@ -553,7 +462,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				DBF9A3F3119A669400CCFDC9 /* PBXTargetDependency */,
 				DBF9A3F5119A669400CCFDC9 /* PBXTargetDependency */,
 			);
 			name = PenumbraOverture;
@@ -581,10 +489,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = DBF9A3CF119A659300CCFDC9 /* Products */;
-					ProjectRef = DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */;
-				},
-				{
 					ProductGroup = DBF9A3C6119A658A00CCFDC9 /* Products */;
 					ProjectRef = DBF9A3C5119A658A00CCFDC9 /* OALWrapper.xcodeproj */;
 				},
@@ -597,13 +501,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		8E84A9C9254C9975000EA53C /* PhysicsTest */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = PhysicsTest;
-			remoteRef = 8E84A9C8254C9975000EA53C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		8E84A9CC254C9975000EA53C /* SimpleTest */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
@@ -616,13 +513,6 @@
 			fileType = archive.ar;
 			path = libOALWrapper.a;
 			remoteRef = DBF9A3CC119A658A00CCFDC9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DBF9A3D6119A659300CCFDC9 /* libHPL.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libHPL.a;
-			remoteRef = DBF9A3D5119A659300CCFDC9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -708,11 +598,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		DBF9A3F3119A669400CCFDC9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = HPL;
-			targetProxy = DBF9A3F2119A669400CCFDC9 /* PBXContainerItemProxy */;
-		};
 		DBF9A3F5119A669400CCFDC9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = OALWrapper;
@@ -724,6 +609,7 @@
 		DB063078111D3E3F0048C5E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
@@ -754,6 +640,7 @@
 		DB063079111D3E3F0048C5E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
