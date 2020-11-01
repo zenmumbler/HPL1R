@@ -29,7 +29,7 @@ namespace hpl {
 	{
 	public:
 
-		iResourceBase(tString asName,unsigned long alPrio);
+		iResourceBase(tString asName,unsigned int alPrio);
 
 		virtual ~iResourceBase();
 
