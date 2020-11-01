@@ -290,6 +290,19 @@ template <class T> 	class cMatrix {
 	}
 };
 
-};
+//-------------------------------------------
+
+template <typename T>
+const cMatrix<T> cMatrix<T>::Identity(1,0,0,0,
+									  0,1,0,0,
+									  0,0,1,0,
+									  0,0,0,1);
+template <typename T>
+const cMatrix<T> cMatrix<T>::Zero(0,0,0,0,
+								  0,0,0,0,
+								  0,0,0,0,
+								  0,0,0,0);
+
+}
 
 #endif // HPL_MATRIX_H
