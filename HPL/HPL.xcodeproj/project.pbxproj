@@ -12,6 +12,8 @@
 		8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84AA0C254CB3D2000EA53C /* Cg.framework */; };
 		8E9728DC254CBB4B0033415B /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DA254CBB4B0033415B /* SDL2_image.framework */; };
 		8E9728DF254CBBAF0033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DE254CBBAF0033415B /* SDL2.framework */; };
+		8EB7C3D9254F603E00277667 /* scripthelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7C3D8254F603E00277667 /* scripthelper.cpp */; };
+		8EB7C3DA254F603E00277667 /* scripthelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7C3D8254F603E00277667 /* scripthelper.cpp */; };
 		DB00EF3511A9CEA1007DFB32 /* libHPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF8484B0AC76D1A00BB15CD /* libHPL.a */; };
 		DB00EF3811A9CEAD007DFB32 /* PhysicsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB00EF1311A9CE84007DFB32 /* PhysicsTest.cpp */; };
 		DB00EF3E11A9CEC8007DFB32 /* SimpleCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB00EF0911A9CE84007DFB32 /* SimpleCamera.cpp */; };
@@ -283,6 +285,7 @@
 		8E9728CF254CB92F0033415B /* scripthelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripthelper.h; sourceTree = "<group>"; };
 		8E9728DA254CBB4B0033415B /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_image.framework; sourceTree = "<group>"; };
 		8E9728DE254CBBAF0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
+		8EB7C3D8254F603E00277667 /* scripthelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripthelper.cpp; sourceTree = "<group>"; };
 		DB00EF0911A9CE84007DFB32 /* SimpleCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleCamera.cpp; sourceTree = "<group>"; };
 		DB00EF0A11A9CE84007DFB32 /* SimpleCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleCamera.h; sourceTree = "<group>"; };
 		DB00EF0B11A9CE84007DFB32 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
@@ -1590,6 +1593,7 @@
 				DBF849AC0AC76D5800BB15CD /* SqScript.cpp */,
 				8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */,
 				DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */,
+				8EB7C3D8254F603E00277667 /* scripthelper.cpp */,
 				DBF849AE0AC76D5800BB15CD /* tinyXml */,
 				DBF849B30AC76D5800BB15CD /* VertexBufferOGL.cpp */,
 				DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */,
@@ -1892,6 +1896,7 @@
 				DB00EF3E11A9CEC8007DFB32 /* SimpleCamera.cpp in Sources */,
 				8E84AA03254CACE0000EA53C /* scriptstring_utils.cpp in Sources */,
 				DB00EF3F11A9CEC9007DFB32 /* stdafx.cpp in Sources */,
+				8EB7C3DA254F603E00277667 /* scripthelper.cpp in Sources */,
 				DB00F0CE11A9D04D007DFB32 /* SDLMain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1904,6 +1909,7 @@
 				DBF84AA90AC76F1E00BB15CD /* ActionKeyboard.cpp in Sources */,
 				DBF84AAA0AC76F1E00BB15CD /* ActionMouseButton.cpp in Sources */,
 				DBF84AAB0AC76F1E00BB15CD /* AI.cpp in Sources */,
+				8EB7C3D9254F603E00277667 /* scripthelper.cpp in Sources */,
 				DBF84AAC0AC76F1E00BB15CD /* AINodeContainer.cpp in Sources */,
 				DBF84AAD0AC76F1E00BB15CD /* AINodeGenerator.cpp in Sources */,
 				DBF84AAE0AC76F1E00BB15CD /* Animation.cpp in Sources */,
