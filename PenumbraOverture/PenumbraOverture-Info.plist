@@ -24,8 +24,6 @@
 	<string>public.app-category.games</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright 2006-2010 Frictional Games.</string>
-	<key>NSMainNibFile</key>
-	<string>SDLMain</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 </dict>
