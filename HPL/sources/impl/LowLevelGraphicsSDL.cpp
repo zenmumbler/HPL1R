@@ -465,6 +465,12 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	void cLowLevelGraphicsSDL::SetInputGrab(bool abX) {
+		SDL_SetWindowGrab(mpWindow, abX ? SDL_TRUE : SDL_FALSE);
+	}
+
+	//-----------------------------------------------------------------------
+
 	void cLowLevelGraphicsSDL::SetVsyncActive(bool abX)
 	{
 		#if defined(WIN32)

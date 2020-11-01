@@ -55,6 +55,7 @@ namespace hpl {
 		int GetCaps(eGraphicCaps aType);
 
 		void ShowCursor(bool abX);
+		void SetInputGrab(bool abX);
 
 		void SetVsyncActive(bool abX);
 

@@ -20,6 +20,7 @@
 
 #include "impl/MouseSDL.h"
 #include "impl/KeyboardSDL.h"
+#include "impl/LowLevelGraphicsSDL.h"
 
 #include "system/LowLevelSystem.h"
 
@@ -53,7 +54,8 @@ namespace hpl {
 
 	void cLowLevelInputSDL::LockInput(bool abX)
 	{
-		SDL_WM_GrabInput(abX ? SDL_GRAB_ON : SDL_GRAB_OFF);
+		cLowLevelGraphicsSDL *pGraphics = static_cast<cLowLevelGraphicsSDL*>(mpLowLevelGraphics);
+		pGraphics->SetInputGrab(abX);
 	}
 
 	//-----------------------------------------------------------------------
