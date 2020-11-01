@@ -409,7 +409,7 @@ bool cInit::Init(tString asCommandLine)
 	Vars.AddInt("StreamBufferSize",mpConfig->GetInt("Sound", "StreamBufferSize", 64));
 	Vars.AddInt("StreamBufferCount",mpConfig->GetInt("Sound", "StreamBufferCount", 4));
 	Vars.AddString("DeviceName",mpConfig->GetString("Sound", "DeviceName", "NULL"));
-	Vars.AddString("WindowCaption", "Penumbra Loading...");
+	Vars.AddString("WindowCaption", "Penumbra");
 
 	Vars.AddBool("LowLevelSoundLogging", mpConfig->GetBool("Sound","LowLevelLogging", false));
 

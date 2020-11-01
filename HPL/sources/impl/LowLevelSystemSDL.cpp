@@ -689,7 +689,7 @@ namespace hpl {
 
 	void SetWindowCaption(const tString &asName)
 	{
-		SDL_WM_SetCaption(asName.c_str(),"");
+		// TODO: this requires a ref to window, but this is only called from Init when gpInit is not yet set, suggest move to lowlevelgraphics
 	}
 
 	//-----------------------------------------------------------------------

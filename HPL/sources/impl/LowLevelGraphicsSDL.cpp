@@ -212,14 +212,9 @@ namespace hpl {
 			}
 			else
 			{
-				SetWindowCaption(asWindowCaption);
 				CreateMessageBoxW(_W("Warning!"),
 									_W("Could not set displaymode and 640x480 is used instead!\n"));
 			}
-		}
-		else
-		{
-			SetWindowCaption(asWindowCaption);
 		}
 
 		Log(" Init Glee...");
