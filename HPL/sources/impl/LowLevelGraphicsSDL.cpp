@@ -22,7 +22,6 @@
 #pragma comment(lib, "GLaux.lib")
 #pragma comment(lib, "Cg.lib")
 #pragma comment(lib, "CgGL.lib")
-#pragma comment(lib, "SDL_ttf.lib")
 #endif
 
 #include <assert.h>
@@ -123,8 +122,6 @@ namespace hpl {
 
 		//Init extra stuff
 		InitCG();
-
-		TTF_Init();
 	}
 
 	//-----------------------------------------------------------------------
@@ -144,7 +141,6 @@ namespace hpl {
 
 		//Exit extra stuff
 		ExitCG();
-		TTF_Quit();
 	}
 
 	//-----------------------------------------------------------------------

@@ -67,8 +67,6 @@ namespace hpl {
 
 		BeginLoad(asName);
 
-		//asNewName = cString::SetFileExt(asName,"ttf");
-
 		pFont = static_cast<iFontData*>(this->FindLoadedResource(asNewName,sPath));
 
 		if(pFont==NULL && sPath!="")
@@ -78,16 +76,6 @@ namespace hpl {
 
 			tString sExt = cString::ToLowerCase(cString::GetFileExt(asName));
 
-			//True Type Font
-//			if(sExt == "ttf")
-//			{
-//				if(pFont->CreateFromFontFile(sPath,alSize,alFirstChar,alLastChar)==false){
-//					hplDelete(pFont);
-//					EndLoad();
-//					return NULL;
-//				}
-//			}
-//			else
 			//Angel code font type
 			if(sExt == "fnt")
 			{
