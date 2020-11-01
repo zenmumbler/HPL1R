@@ -12,7 +12,7 @@
 		8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84AA0C254CB3D2000EA53C /* Cg.framework */; };
 		8E9728DC254CBB4B0033415B /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DA254CBB4B0033415B /* SDL2_image.framework */; };
 		8E9728DD254CBB4B0033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DB254CBB4B0033415B /* SDL2.framework */; };
-		8E9728DF254CBBAF0033415B /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DE254CBBAF0033415B /* SDL2_ttf.framework */; };
+		8E9728DF254CBBAF0033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DE254CBBAF0033415B /* SDL2.framework */; };
 		DB00EF3511A9CEA1007DFB32 /* libHPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF8484B0AC76D1A00BB15CD /* libHPL.a */; };
 		DB00EF3811A9CEAD007DFB32 /* PhysicsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB00EF1311A9CE84007DFB32 /* PhysicsTest.cpp */; };
 		DB00EF3E11A9CEC8007DFB32 /* SimpleCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB00EF0911A9CE84007DFB32 /* SimpleCamera.cpp */; };
@@ -150,7 +150,6 @@
 		DBF84B040AC76F1E00BB15CD /* MaterialHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849740AC76D5800BB15CD /* MaterialHandler.cpp */; };
 		DBF84B050AC76F1E00BB15CD /* MaterialManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849DF0AC76D5800BB15CD /* MaterialManager.cpp */; };
 		DBF84B060AC76F1E00BB15CD /* Math.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849C00AC76D5800BB15CD /* Math.cpp */; };
-		DBF84B070AC76F1E00BB15CD /* MathTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849C10AC76D5800BB15CD /* MathTypes.cpp */; };
 		DBF84B080AC76F1E00BB15CD /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849750AC76D5800BB15CD /* Mesh.cpp */; };
 		DBF84B090AC76F1E00BB15CD /* Mesh2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849760AC76D5800BB15CD /* Mesh2d.cpp */; };
 		DBF84B0A0AC76F1E00BB15CD /* MeshCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849770AC76D5800BB15CD /* MeshCreator.cpp */; };
@@ -281,11 +280,11 @@
 
 /* Begin PBXFileReference section */
 		8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstring_utils.cpp; sourceTree = "<group>"; };
-		8E84AA0C254CB3D2000EA53C /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cg.framework; path = lib/macosx/Cg.framework; sourceTree = "<group>"; };
+		8E84AA0C254CB3D2000EA53C /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cg.framework; sourceTree = "<group>"; };
 		8E9728CF254CB92F0033415B /* scripthelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripthelper.h; sourceTree = "<group>"; };
-		8E9728DA254CBB4B0033415B /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = lib/macosx/SDL2_image.framework; sourceTree = "<group>"; };
-		8E9728DB254CBB4B0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = lib/macosx/SDL2.framework; sourceTree = "<group>"; };
-		8E9728DE254CBBAF0033415B /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = lib/macosx/SDL2_ttf.framework; sourceTree = "<group>"; };
+		8E9728DA254CBB4B0033415B /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_image.framework; sourceTree = "<group>"; };
+		8E9728DB254CBB4B0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
+		8E9728DE254CBBAF0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		DB00EF0911A9CE84007DFB32 /* SimpleCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleCamera.cpp; sourceTree = "<group>"; };
 		DB00EF0A11A9CE84007DFB32 /* SimpleCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleCamera.h; sourceTree = "<group>"; };
 		DB00EF0B11A9CE84007DFB32 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
@@ -318,8 +317,8 @@
 		DB00EF2D11A9CE85007DFB32 /* VideoTest.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = VideoTest.vcproj; sourceTree = "<group>"; };
 		DB00EF3111A9CE93007DFB32 /* PhysicsTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PhysicsTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB00EF5111A9CFB9007DFB32 /* OALWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OALWrapper.xcodeproj; path = ../OALWrapper/OALWrapper.xcodeproj; sourceTree = SOURCE_ROOT; };
-		DB00EF5C11A9CFD9007DFB32 /* libangelscript.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libangelscript.a; path = lib/macosx/libangelscript.a; sourceTree = "<group>"; };
-		DB00EF5E11A9CFD9007DFB32 /* libnewton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnewton.a; path = lib/macosx/libnewton.a; sourceTree = "<group>"; };
+		DB00EF5C11A9CFD9007DFB32 /* libangelscript.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libangelscript.a; sourceTree = "<group>"; };
+		DB00EF5E11A9CFD9007DFB32 /* libnewton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libnewton.a; sourceTree = "<group>"; };
 		DB00F0BB11A9D025007DFB32 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = /System/Library/Frameworks/OpenAL.framework; sourceTree = "<absolute>"; };
 		DB00F0BD11A9D025007DFB32 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		DB00F0CC11A9D04D007DFB32 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
@@ -739,7 +738,6 @@
 		DBF849BE0AC76D5800BB15CD /* BoundingVolume.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = BoundingVolume.cpp; sourceTree = "<group>"; };
 		DBF849BF0AC76D5800BB15CD /* Frustum.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Frustum.cpp; sourceTree = "<group>"; };
 		DBF849C00AC76D5800BB15CD /* Math.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Math.cpp; sourceTree = "<group>"; };
-		DBF849C10AC76D5800BB15CD /* MathTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MathTypes.cpp; sourceTree = "<group>"; };
 		DBF849C20AC76D5800BB15CD /* MeshTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MeshTypes.cpp; sourceTree = "<group>"; };
 		DBF849C30AC76D5800BB15CD /* Quaternion.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Quaternion.cpp; sourceTree = "<group>"; };
 		DBF849C40AC76D5800BB15CD /* Spring.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Spring.cpp; sourceTree = "<group>"; };
@@ -853,7 +851,7 @@
 				8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */,
 				8E9728DD254CBB4B0033415B /* SDL2.framework in Frameworks */,
 				8E9728DC254CBB4B0033415B /* SDL2_image.framework in Frameworks */,
-				8E9728DF254CBBAF0033415B /* SDL2_ttf.framework in Frameworks */,
+				8E9728DF254CBBAF0033415B /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -966,10 +964,6 @@
 		DB00EF5011A9CF86007DFB32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8E9728DE254CBBAF0033415B /* SDL2_ttf.framework */,
-				8E9728DA254CBB4B0033415B /* SDL2_image.framework */,
-				8E9728DB254CBB4B0033415B /* SDL2.framework */,
-				8E84AA0C254CB3D2000EA53C /* Cg.framework */,
 				DB00EF5711A9CFD9007DFB32 /* dependencies */,
 				DB00EF5111A9CFB9007DFB32 /* OALWrapper.xcodeproj */,
 				DB00F0BB11A9D025007DFB32 /* OpenAL.framework */,
@@ -991,11 +985,15 @@
 		DB00EF5711A9CFD9007DFB32 /* dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				8E9728DE254CBBAF0033415B /* SDL2.framework */,
+				8E9728DA254CBB4B0033415B /* SDL2_image.framework */,
+				8E9728DB254CBB4B0033415B /* SDL2.framework */,
+				8E84AA0C254CB3D2000EA53C /* Cg.framework */,
 				DB00EF5C11A9CFD9007DFB32 /* libangelscript.a */,
 				DB00EF5E11A9CFD9007DFB32 /* libnewton.a */,
 			);
 			name = dependencies;
-			path = ../dependencies;
+			path = ../dependencies/lib/macosx;
 			sourceTree = SOURCE_ROOT;
 		};
 		DB27F0170ACB9AB90054ACA3 /* ai */ = {
@@ -1647,7 +1645,6 @@
 				DBF849BE0AC76D5800BB15CD /* BoundingVolume.cpp */,
 				DBF849BF0AC76D5800BB15CD /* Frustum.cpp */,
 				DBF849C00AC76D5800BB15CD /* Math.cpp */,
-				DBF849C10AC76D5800BB15CD /* MathTypes.cpp */,
 				DBF849C20AC76D5800BB15CD /* MeshTypes.cpp */,
 				DBF849C30AC76D5800BB15CD /* Quaternion.cpp */,
 				DBF849C40AC76D5800BB15CD /* Spring.cpp */,
@@ -1998,7 +1995,6 @@
 				DBF84B040AC76F1E00BB15CD /* MaterialHandler.cpp in Sources */,
 				DBF84B050AC76F1E00BB15CD /* MaterialManager.cpp in Sources */,
 				DBF84B060AC76F1E00BB15CD /* Math.cpp in Sources */,
-				DBF84B070AC76F1E00BB15CD /* MathTypes.cpp in Sources */,
 				DBF84B080AC76F1E00BB15CD /* Mesh.cpp in Sources */,
 				DBF84B090AC76F1E00BB15CD /* Mesh2d.cpp in Sources */,
 				DBF84B0A0AC76F1E00BB15CD /* MeshCreator.cpp in Sources */,
@@ -2248,6 +2244,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = ../dependencies/lib/macosx;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2297,6 +2294,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = ../dependencies/lib/macosx;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
