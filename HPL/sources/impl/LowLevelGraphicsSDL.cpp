@@ -192,7 +192,10 @@ namespace hpl {
 
 		unsigned int mlFlags = SDL_WINDOW_OPENGL;
 
-		if(abFullscreen) mlFlags |= SDL_WINDOW_FULLSCREEN;
+		if(abFullscreen)
+			mlFlags |= SDL_WINDOW_FULLSCREEN;
+		else
+			mlFlags |= SDL_WINDOW_SHOWN;
 
 		Log(" Creating display: %d x %d - %d bpp\n",alWidth, alHeight, alBpp);
 		mpWindow = SDL_CreateWindow(asWindowCaption.c_str(),
