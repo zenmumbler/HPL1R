@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8E972904254DB06E0033415B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB15511111E64EBE005799BB /* OpenAL.framework */; };
-		8E972907254DB0720033415B /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E972905254DB0720033415B /* libvorbisfile.a */; };
-		8E972908254DB0720033415B /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E972906254DB0720033415B /* libvorbis.a */; };
-		8E97290E254DB1250033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E97290D254DB1250033415B /* SDL2.framework */; };
-		8E97290F254DB1250033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E97290D254DB1250033415B /* SDL2.framework */; };
+		8EB7C3BF254F55C000277667 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3BC254F55BF00277667 /* SDL2.framework */; };
+		8EB7C3C0254F55C000277667 /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3BD254F55C000277667 /* libvorbisfile.a */; };
+		8EB7C3C1254F55C000277667 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3BE254F55C000277667 /* libvorbis.a */; };
 		DB1550E411E64CE7005799BB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB1550D711E64C5E005799BB /* main.cpp */; };
 		DB1550E511E64CEC005799BB /* libOALWrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF9A2D9119A601600CCFDC9 /* libOALWrapper.a */; };
 		DB15511211E64EBE005799BB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB15511111E64EBE005799BB /* OpenAL.framework */; };
@@ -52,9 +51,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8E972905254DB0720033415B /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = lib/macosx/libvorbisfile.a; sourceTree = "<group>"; };
-		8E972906254DB0720033415B /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = lib/macosx/libvorbis.a; sourceTree = "<group>"; };
-		8E97290D254DB1250033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = lib/macosx/SDL2.framework; sourceTree = "<group>"; };
+		8EB7C3BC254F55BF00277667 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
+		8EB7C3BD254F55C000277667 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbisfile.a; sourceTree = "<group>"; };
+		8EB7C3BE254F55C000277667 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbis.a; sourceTree = "<group>"; };
 		DB1550D711E64C5E005799BB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DB1550DB11E64C8E005799BB /* SimpleTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SimpleTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB15511111E64EBE005799BB /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -118,7 +117,6 @@
 				DB1550E511E64CEC005799BB /* libOALWrapper.a in Frameworks */,
 				DB15511211E64EBE005799BB /* OpenAL.framework in Frameworks */,
 				DB15512D11E64F8A005799BB /* Cocoa.framework in Frameworks */,
-				8E97290F254DB1250033415B /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,16 +124,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EB7C3C0254F55C000277667 /* libvorbisfile.a in Frameworks */,
+				8EB7C3C1254F55C000277667 /* libvorbis.a in Frameworks */,
 				8E972904254DB06E0033415B /* OpenAL.framework in Frameworks */,
-				8E972907254DB0720033415B /* libvorbisfile.a in Frameworks */,
-				8E972908254DB0720033415B /* libvorbis.a in Frameworks */,
-				8E97290E254DB1250033415B /* SDL2.framework in Frameworks */,
+				8EB7C3BF254F55C000277667 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8EB7C3BB254F559300277667 /* dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				8EB7C3BE254F55C000277667 /* libvorbis.a */,
+				8EB7C3BD254F55C000277667 /* libvorbisfile.a */,
+				8EB7C3BC254F55BF00277667 /* SDL2.framework */,
+			);
+			name = dependencies;
+			path = ../dependencies/lib/macosx;
+			sourceTree = "<group>";
+		};
 		DB1550D511E64C5E005799BB /* tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,9 +166,7 @@
 		DBF4974211A0411400C8A45D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8E972906254DB0720033415B /* libvorbis.a */,
-				8E972905254DB0720033415B /* libvorbisfile.a */,
-				8E97290D254DB1250033415B /* SDL2.framework */,
+				8EB7C3BB254F559300277667 /* dependencies */,
 				DB15511111E64EBE005799BB /* OpenAL.framework */,
 				DB15512C11E64F8A005799BB /* Cocoa.framework */,
 			);
@@ -422,6 +429,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -472,6 +480,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -530,11 +539,14 @@
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
-				HEADER_SEARCH_PATHS = include;
+				HEADER_SEARCH_PATHS = (
+					include,
+					../dependencies/include,
+				);
 				INSTALL_PATH = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = (
+					../dependencies/lib/macosx,
 					"$(inherited)",
-					"$(PROJECT_DIR)/lib/macosx",
 				);
 				PRODUCT_NAME = OALWrapper;
 			};
@@ -551,11 +563,14 @@
 					"$(PROJECT_DIR)/lib/macosx",
 				);
 				GCC_MODEL_TUNING = G5;
-				HEADER_SEARCH_PATHS = include;
+				HEADER_SEARCH_PATHS = (
+					include,
+					../dependencies/include,
+				);
 				INSTALL_PATH = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = (
+					../dependencies/lib/macosx,
 					"$(inherited)",
-					"$(PROJECT_DIR)/lib/macosx",
 				);
 				PRODUCT_NAME = OALWrapper;
 				ZERO_LINK = NO;
