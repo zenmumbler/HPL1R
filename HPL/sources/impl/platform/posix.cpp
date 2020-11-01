@@ -51,7 +51,7 @@ namespace hpl {
 			return !string[0];
 
 	  case _W('*') :
-			return patiMatch(pattern+1, string) || string[0] && patiMatch(pattern, string+1);
+			return patiMatch(pattern+1, string) || (string[0] && patiMatch(pattern, string+1));
 
 	  case _W('?') :
 			return string[0] && patiMatch(pattern+1, string+1);

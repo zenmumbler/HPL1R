@@ -575,7 +575,7 @@ namespace hpl {
 		bool start = false;
 		tString c = "";
 
-		for(int i=0;i<(int)asData.length();i++)
+		for(size_t i=0;i < asData.length();i++)
 		{
 			c = asData.substr(i,1);
 			bool bNewWord = false;
