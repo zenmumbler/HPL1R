@@ -626,6 +626,7 @@
 					"$(BUILD_DIR)/$(CONFIGURATION)",
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
 				);
+				OBJROOT = build;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -633,6 +634,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = PenumbraOverture;
+				SYMROOT = redist;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -657,6 +659,7 @@
 					"$(BUILD_DIR)/$(CONFIGURATION)",
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
 				);
+				OBJROOT = build;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -664,6 +667,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = PenumbraOverture;
+				SYMROOT = redist;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -688,6 +692,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SYMROOT = "";
 			};
 			name = Debug;
 		};
@@ -712,6 +717,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SYMROOT = "";
 			};
 			name = Release;
 		};
