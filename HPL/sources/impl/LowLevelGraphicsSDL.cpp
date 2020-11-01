@@ -132,12 +132,15 @@ namespace hpl {
 		//	if(mhKeyTrapper) FreeLibrary(mhKeyTrapper);
 		//#endif
 
-
-		SDL_SetGammaRamp(mvStartGammaArray[0],mvStartGammaArray[1],mvStartGammaArray[2]);
-
 		hplFree(mpVertexArray);
 		hplFree(mpIndexArray);
 		for(int i=0;i<MAX_TEXTUREUNITS;i++)	hplFree(mpTexCoordArray[i]);
+
+		if (mpWindow) {
+			SDL_SetWindowGammaRamp(mpWindow, mvStartGammaArray[0],mvStartGammaArray[1],mvStartGammaArray[2]);
+			SDL_DestroyWindow(mpWindow);
+			mpWindow = NULL;
+		}
 
 		//Exit extra stuff
 		ExitCG();
@@ -187,17 +190,22 @@ namespace hpl {
 			}
 		}
 
-		unsigned int mlFlags = SDL_OPENGL;
+		unsigned int mlFlags = SDL_WINDOW_OPENGL;
 
-		if(abFullscreen) mlFlags |= SDL_FULLSCREEN;
+		if(abFullscreen) mlFlags |= SDL_WINDOW_FULLSCREEN;
 
-		Log(" Setting video mode: %d x %d - %d bpp\n",alWidth, alHeight, alBpp);
-		mpScreen = SDL_SetVideoMode( alWidth, alHeight, alBpp, mlFlags);
-		if(mpScreen==NULL){
+		Log(" Creating display: %d x %d - %d bpp\n",alWidth, alHeight, alBpp);
+		mpWindow = SDL_CreateWindow(asWindowCaption.c_str(),
+									SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+									alWidth, alHeight, mlFlags);
+		if(mpWindow == NULL) {
 			Error("Could not set display mode setting a lower one!\n");
 			mvScreenSize = cVector2l(640,480);
-			mpScreen = SDL_SetVideoMode( mvScreenSize.x, mvScreenSize.y, alBpp, mlFlags);
-			if(mpScreen==NULL)
+			mpWindow = SDL_CreateWindow(asWindowCaption.c_str(),
+										SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+										mvScreenSize.x, mvScreenSize.y, mlFlags);
+
+			if(mpWindow == NULL)
 			{
 				FatalError("Unable to initialize display!\n");
 				return false;
@@ -242,16 +250,16 @@ namespace hpl {
 
 		//Gamma
 		mfGammaCorrection = 1.0f;
-		SDL_GetGammaRamp(mvStartGammaArray[0],mvStartGammaArray[1],mvStartGammaArray[2]);
+		SDL_GetWindowGammaRamp(mpWindow, mvStartGammaArray[0],mvStartGammaArray[1],mvStartGammaArray[2]);
 
-		SDL_SetGamma(mfGammaCorrection,mfGammaCorrection,mfGammaCorrection);
+		SDL_SetWindowBrightness(mpWindow, mfGammaCorrection);
 
 		//GL
 		Log(" Setting up OpenGL\n");
 		SetupGL();
 
 		//Set the clear color
-		SDL_GL_SwapBuffers();
+		SDL_GL_SwapWindow(mpWindow);
 
 		return true;
 	}
@@ -497,7 +505,7 @@ namespace hpl {
 
 		mfGammaCorrection = afX;
 
-		SDL_SetGamma(mfGammaCorrection,mfGammaCorrection,mfGammaCorrection);
+		SDL_SetWindowBrightness(mpWindow, mfGammaCorrection);
 
 		/*Uint16 GammaArray[3][256];
 
@@ -904,7 +912,7 @@ namespace hpl {
 	void cLowLevelGraphicsSDL::SwapBuffers()
 	{
 		glFlush();
-		SDL_GL_SwapBuffers();
+		SDL_GL_SwapWindow(mpWindow);
 	}
 
 	//-----------------------------------------------------------------------

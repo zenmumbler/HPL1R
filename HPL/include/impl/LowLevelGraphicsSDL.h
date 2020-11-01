@@ -257,7 +257,7 @@ namespace hpl {
 		cPlanef mvClipPlanes[kMaxClipPlanes];
 
 		//SDL Variables
-		SDL_Surface *mpScreen;
+		SDL_Window *mpWindow;
 
 		//Vertex Array variables
 		//The vertex arrays used:
