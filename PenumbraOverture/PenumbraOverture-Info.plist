@@ -9,7 +9,7 @@
 	<key>CFBundleGetInfoString</key>
 	<string>Penumbra: Overture Version 1.0.3013, Copyright 2006-2010 Frictional Games.</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.frictionalgames.PenumbraOverture</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
