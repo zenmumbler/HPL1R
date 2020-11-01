@@ -41,7 +41,7 @@
 
 #include <SDL2/SDL.h>
 
-#include "impl/stdstring.h"
+#include "impl/scriptstdstring.h"
 #include "impl/scriptstring.h"
 
 #include "system/String.h"
@@ -107,7 +107,7 @@ namespace hpl {
 
 		if(mpFile)
 		{
-			fprintf(mpFile, asMessage.c_str());
+			fprintf(mpFile, "%s", asMessage.c_str());
 			fflush(mpFile);
 		}
 	}
@@ -629,7 +629,8 @@ namespace hpl {
 	{
 	// Symbolic Links Not Supported under Windows
 	#ifndef WIN32
-		return (symlink(cString::To8Char(asPointsTo).c_str(), cString::To8Char(asLink).c_str()) == 0);
+		tWString cmd = _W("ln -s \"") + asPointsTo + _W("\" \"") + asLink + _W("\"");
+		return (system(cString::To8Char(cmd).c_str()) == 0);
 	#else
 		return false;
 	#endif
