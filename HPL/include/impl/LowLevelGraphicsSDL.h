@@ -59,11 +59,10 @@ namespace hpl {
 
 		void SetVsyncActive(bool abX);
 
-		void SetMultisamplingActive(bool abX);
-
 		void SetGammaCorrection(float afX);
 		float GetGammaCorrection();
 
+		void SetMultisamplingActive(bool abX);
 		int GetMultisampling(){ return mlMultisampling;}
 
 		void SetClipPlane(int alIdx, const cPlanef& aPlane);
