@@ -198,9 +198,10 @@ namespace hpl {
 		case ePhysicsMaterialCombMode_Min: return std::min(afX, afY);
 		case ePhysicsMaterialCombMode_Max: return std::max(afX, afY);
 		case ePhysicsMaterialCombMode_Multiply: return afX * afY;
+		default: return (afX + afY) /2;
 		}
 
-		return (afX + afY) /2;
+		
 	}
 
 	//////////////////////////////////////////////////////////////////////////

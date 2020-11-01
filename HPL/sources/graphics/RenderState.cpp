@@ -62,9 +62,8 @@ namespace hpl {
 		case eRenderStateType_VertexBuffer:		return CompareVtxBuff(apState);
 		case eRenderStateType_Matrix:			return CompareMatrix(apState);
 		case eRenderStateType_Render:			return CompareRender(apState);
+		default: return 0;
 		}
-
-		return 0;
 	}
 
 	//-----------------------------------------------------------------------
@@ -85,6 +84,7 @@ namespace hpl {
 		case eRenderStateType_VertexBuffer:		SetVtxBuffMode(apSettings); break;
 		case eRenderStateType_Matrix:			SetMatrixMode(apSettings); break;
 		case eRenderStateType_Render:			SetRenderMode(apSettings); break;
+		default: break;
 		}
 	}
 
@@ -136,6 +136,7 @@ namespace hpl {
 
 		case eRenderStateType_Render:			mpObject = apState->mpObject;
 												break;
+		default: break;
 		}
 	}
 
@@ -263,6 +264,9 @@ namespace hpl {
 					apSettings->mpLowLevel->SetBlendFunc(eBlendFunc_DestAlpha,eBlendFunc_One);
 					if(apSettings->mbLog)Log("DestAlphaAdd");
 					break;
+				default:
+					if(apSettings->mbLog)Log("Invalid Blend Mode !");
+					break;
 				}
 			}
 
@@ -291,6 +295,9 @@ namespace hpl {
 			case eMaterialChannelMode_Z:
 				apSettings->mpLowLevel->SetColorWriteActive(false, false, false, false);
 				if(apSettings->mbLog)Log("Z");
+				break;
+			default:
+				if(apSettings->mbLog)Log("Invalid colour channel mode!");
 				break;
 			}
 

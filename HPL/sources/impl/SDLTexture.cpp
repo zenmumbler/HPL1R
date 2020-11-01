@@ -771,9 +771,8 @@ namespace hpl {
 		case eTextureWrap_Repeat: return GL_REPEAT;
 		case eTextureWrap_ClampToEdge: return GL_CLAMP_TO_EDGE;
 		case eTextureWrap_ClampToBorder: return GL_CLAMP_TO_BORDER;
+		default: return GL_REPEAT;
 		}
-
-		return GL_REPEAT;
 	}
 
 
