@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8EB7C3AF254F546300277667 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3AA254F545C00277667 /* Cg.framework */; };
+		8EB7C3B0254F546300277667 /* Cg.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = 8EB7C3AA254F545C00277667 /* Cg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8EB7C3B1254F546600277667 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3A9254F545C00277667 /* SDL2.framework */; };
+		8EB7C3B2254F546600277667 /* SDL2.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = 8EB7C3A9254F545C00277667 /* SDL2.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8EB7C3B3254F546800277667 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3AB254F545C00277667 /* SDL2_image.framework */; };
+		8EB7C3B4254F546800277667 /* SDL2_image.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = 8EB7C3AB254F545C00277667 /* SDL2_image.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8EB7C3B6254F548600277667 /* libHPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3B5254F548600277667 /* libHPL.a */; };
+		8EB7C3CE254F5E3D00277667 /* libangelscript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3CA254F5E3D00277667 /* libangelscript.a */; };
+		8EB7C3CF254F5E3D00277667 /* libnewton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3CB254F5E3D00277667 /* libnewton.a */; };
+		8EB7C3D0254F5E3D00277667 /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3CC254F5E3D00277667 /* libvorbisfile.a */; };
+		8EB7C3D1254F5E3D00277667 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3CD254F5E3D00277667 /* libvorbis.a */; };
+		8EB7C3DE254F60A600277667 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3DD254F60A600277667 /* libogg.a */; };
+		8EB7C3DF254F649C00277667 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7C395254E48A900277667 /* Images.xcassets */; };
 		DB063026111D3E3F0048C5E9 /* AttackHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A1F0AC76D8F00BB15CD /* AttackHandler.cpp */; };
 		DB063027111D3E3F0048C5E9 /* ButtonHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A210AC76D8F00BB15CD /* ButtonHandler.cpp */; };
 		DB063028111D3E3F0048C5E9 /* CharacterMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A230AC76D8F00BB15CD /* CharacterMove.cpp */; };
@@ -51,7 +64,6 @@
 		DB06304F111D3E3F0048C5E9 /* StdAfx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A780AC76D8F00BB15CD /* StdAfx.cpp */; };
 		DB063050111D3E3F0048C5E9 /* TriggerHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A7A0AC76D8F00BB15CD /* TriggerHandler.cpp */; };
 		DB063051111D3E3F0048C5E9 /* Triggers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A7C0AC76D8F00BB15CD /* Triggers.cpp */; };
-		DB063052111D3E3F0048C5E9 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF850000AC7878B00BB15CD /* SDLMain.m */; };
 		DB063053111D3E3F0048C5E9 /* GameEnemy_Spider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB2707770ACCDEE40054ACA3 /* GameEnemy_Spider.cpp */; };
 		DB063054111D3E3F0048C5E9 /* GameDamageArea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE6260B4B365C0088A7E3 /* GameDamageArea.cpp */; };
 		DB063055111D3E3F0048C5E9 /* GameEnemy_Worm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE6280B4B365C0088A7E3 /* GameEnemy_Worm.cpp */; };
@@ -103,6 +115,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				8EB7C3B4254F546800277667 /* SDL2_image.framework in Copy Frameworks into .app */,
+				8EB7C3B0254F546300277667 /* Cg.framework in Copy Frameworks into .app */,
+				8EB7C3B2254F546600277667 /* SDL2.framework in Copy Frameworks into .app */,
 			);
 			name = "Copy Frameworks into .app";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,6 +126,15 @@
 
 /* Begin PBXFileReference section */
 		8EB7C395254E48A900277667 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8EB7C3A9254F545C00277667 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
+		8EB7C3AA254F545C00277667 /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cg.framework; sourceTree = "<group>"; };
+		8EB7C3AB254F545C00277667 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_image.framework; sourceTree = "<group>"; };
+		8EB7C3B5254F548600277667 /* libHPL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libHPL.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EB7C3CA254F5E3D00277667 /* libangelscript.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libangelscript.a; sourceTree = "<group>"; };
+		8EB7C3CB254F5E3D00277667 /* libnewton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libnewton.a; sourceTree = "<group>"; };
+		8EB7C3CC254F5E3D00277667 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbisfile.a; sourceTree = "<group>"; };
+		8EB7C3CD254F5E3D00277667 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbis.a; sourceTree = "<group>"; };
+		8EB7C3DD254F60A600277667 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
 		DB06307A111D3E3F0048C5E9 /* PenumbraOverture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PenumbraOverture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB2707770ACCDEE40054ACA3 /* GameEnemy_Spider.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GameEnemy_Spider.cpp; sourceTree = "<group>"; };
 		DB2707780ACCDEE40054ACA3 /* GameEnemy_Spider.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GameEnemy_Spider.h; sourceTree = "<group>"; };
@@ -229,8 +253,6 @@
 		DBF84A7D0AC76D8F00BB15CD /* Triggers.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Triggers.h; sourceTree = "<group>"; };
 		DBF84AA40AC76EEE00BB15CD /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		DBF84FF80AC7873A00BB15CD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		DBF84FFF0AC7878B00BB15CD /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
-		DBF850000AC7878B00BB15CD /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
 		DBF9A34F119A649000CCFDC9 /* PenumbraOverture-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PenumbraOverture-Info.plist"; sourceTree = "<group>"; };
 		DBF9A3C5119A658A00CCFDC9 /* OALWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OALWrapper.xcodeproj; path = ../OALWrapper/OALWrapper.xcodeproj; sourceTree = SOURCE_ROOT; };
 		DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HPL.xcodeproj; path = ../HPL/HPL.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -249,7 +271,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EB7C3D1254F5E3D00277667 /* libvorbis.a in Frameworks */,
+				8EB7C3D0254F5E3D00277667 /* libvorbisfile.a in Frameworks */,
+				8EB7C3CF254F5E3D00277667 /* libnewton.a in Frameworks */,
+				8EB7C3CE254F5E3D00277667 /* libangelscript.a in Frameworks */,
 				DBF9A3D8119A65AB00CCFDC9 /* libOALWrapper.a in Frameworks */,
+				8EB7C3B6254F548600277667 /* libHPL.a in Frameworks */,
+				8EB7C3AF254F546300277667 /* Cg.framework in Frameworks */,
+				8EB7C3DE254F60A600277667 /* libogg.a in Frameworks */,
+				8EB7C3B3254F546800277667 /* SDL2_image.framework in Frameworks */,
+				8EB7C3B1254F546600277667 /* SDL2.framework in Frameworks */,
 				DB063068111D3E3F0048C5E9 /* OpenGL.framework in Frameworks */,
 				DB063069111D3E3F0048C5E9 /* OpenAL.framework in Frameworks */,
 			);
@@ -376,8 +407,6 @@
 				DBF84A750AC76D8F00BB15CD /* SaveHandler.h */,
 				DBF84A760AC76D8F00BB15CD /* SaveTypes.cpp */,
 				DBF84A770AC76D8F00BB15CD /* SaveTypes.h */,
-				DBF84FFF0AC7878B00BB15CD /* SDLMain.h */,
-				DBF850000AC7878B00BB15CD /* SDLMain.m */,
 				DBF84A780AC76D8F00BB15CD /* StdAfx.cpp */,
 				DBF84A790AC76D8F00BB15CD /* StdAfx.h */,
 				DBF84A7A0AC76D8F00BB15CD /* TriggerHandler.cpp */,
@@ -411,14 +440,23 @@
 		DBF84A9A0AC76E5E00BB15CD /* dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				8EB7C3DD254F60A600277667 /* libogg.a */,
+				8EB7C3CA254F5E3D00277667 /* libangelscript.a */,
+				8EB7C3CB254F5E3D00277667 /* libnewton.a */,
+				8EB7C3CD254F5E3D00277667 /* libvorbis.a */,
+				8EB7C3CC254F5E3D00277667 /* libvorbisfile.a */,
+				8EB7C3AA254F545C00277667 /* Cg.framework */,
+				8EB7C3AB254F545C00277667 /* SDL2_image.framework */,
+				8EB7C3A9254F545C00277667 /* SDL2.framework */,
 			);
 			name = dependencies;
-			path = ../dependencies;
+			path = ../dependencies/lib/macosx;
 			sourceTree = "<group>";
 		};
 		DBF84A9B0AC76E7E00BB15CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8EB7C3B5254F548600277667 /* libHPL.a */,
 				DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */,
 				DBF9A3C5119A658A00CCFDC9 /* OALWrapper.xcodeproj */,
 				DBF84A9A0AC76E5E00BB15CD /* dependencies */,
@@ -523,6 +561,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EB7C3DF254F649C00277667 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,7 +616,6 @@
 				DB06304F111D3E3F0048C5E9 /* StdAfx.cpp in Sources */,
 				DB063050111D3E3F0048C5E9 /* TriggerHandler.cpp in Sources */,
 				DB063051111D3E3F0048C5E9 /* Triggers.cpp in Sources */,
-				DB063052111D3E3F0048C5E9 /* SDLMain.m in Sources */,
 				DB063053111D3E3F0048C5E9 /* GameEnemy_Spider.cpp in Sources */,
 				DB063054111D3E3F0048C5E9 /* GameDamageArea.cpp in Sources */,
 				DB063055111D3E3F0048C5E9 /* GameEnemy_Worm.cpp in Sources */,
@@ -613,18 +651,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
-					../HPL1Engine/include,
+					../HPL/include,
 					../dependencies/include,
 					../OALWrapper/include,
 				);
 				INFOPLIST_FILE = "PenumbraOverture-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILD_DIR)/$(CONFIGURATION)",
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
@@ -638,7 +679,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.frictionalgames.PenumbraOverture;
 				PRODUCT_NAME = PenumbraOverture;
-				SYMROOT = redist;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -649,18 +690,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
-					../HPL1Engine/include,
+					../HPL/include,
 					../dependencies/include,
 					../OALWrapper/include,
 				);
 				INFOPLIST_FILE = "PenumbraOverture-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(BUILD_DIR)/$(CONFIGURATION)",
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
@@ -674,7 +718,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.frictionalgames.PenumbraOverture;
 				PRODUCT_NAME = PenumbraOverture;
-				SYMROOT = redist;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
