@@ -381,6 +381,11 @@ bool cInit::Init(tString asCommandLine)
 	//mbForceGenericSoundDevice = mpConfig->GetBool("Sound", "ForceGeneric", false);
 	mlStreamUpdateFreq = mpConfig->GetInt("Sound","StreamUpdateFreq",10);
 	mbUseSoundThreading = mpConfig->GetBool("Sound","UseThreading",true);
+#if __APPLE__
+	// TODO: once we fix/replace OAL wrapper, look at this again
+	// Override to false for macOS as threaded OAL is broken there
+	mbUseSoundThreading = false;
+#endif
 	//mbUseVoiceManagement = mpConfig->GetBool("Sound","UseVoiceManagement", true);
 	mlMaxMonoChannelsHint = mpConfig->GetInt("Sound","MaxMonoChannelsHint",0);
 	mlMaxStereoChannelsHint = mpConfig->GetInt("Sound","MaxStereoChannelsHint",0);
