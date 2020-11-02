@@ -137,6 +137,11 @@ namespace hpl {
 		hplFree(mpVertexArray);
 		hplFree(mpIndexArray);
 		for(int i=0;i<MAX_TEXTUREUNITS;i++)	hplFree(mpTexCoordArray[i]);
+		
+		if (mpGLContext) {
+			SDL_GL_DeleteContext(mpGLContext);
+			mpGLContext = NULL;
+		}
 
 		if (mpWindow) {
 			SDL_SetWindowGammaRamp(mpWindow, mvStartGammaArray[0],mvStartGammaArray[1],mvStartGammaArray[2]);
@@ -196,8 +201,6 @@ namespace hpl {
 
 		if(abFullscreen)
 			mlFlags |= SDL_WINDOW_FULLSCREEN;
-		else
-			mlFlags |= SDL_WINDOW_SHOWN;
 
 		Log(" Creating display: %d x %d - %d bpp\n",alWidth, alHeight, alBpp);
 		mpWindow = SDL_CreateWindow(asWindowCaption.c_str(),
@@ -220,6 +223,13 @@ namespace hpl {
 				CreateMessageBoxW(_W("Warning!"),
 									_W("Could not set displaymode and 640x480 is used instead!\n"));
 			}
+		}
+		
+		mpGLContext = SDL_GL_CreateContext(mpWindow);
+		if(mpGLContext == NULL) {
+			Error(SDL_GetError());
+			FatalError("Unable to create GL context!\n");
+			return false;
 		}
 
 		Log(" Init Glew...");

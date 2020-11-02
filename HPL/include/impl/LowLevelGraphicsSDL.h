@@ -256,6 +256,7 @@ namespace hpl {
 
 		//SDL Variables
 		SDL_Window *mpWindow;
+		SDL_GLContext mpGLContext;
 
 		//Vertex Array variables
 		//The vertex arrays used:
