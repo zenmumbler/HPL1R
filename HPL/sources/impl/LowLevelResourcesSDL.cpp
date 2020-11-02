@@ -71,42 +71,35 @@ namespace hpl {
 
 	iBitmap2D* cLowLevelResourcesSDL::LoadBitmap2D(tString asFilePath, tString asType)
 	{
+		Log((tString("Loading image: ") + asFilePath + "\n").c_str());
+
 		tString tType;
 		if(asType != "")
 			asFilePath = cString::SetFileExt(asFilePath,asType);
 
 		tType = cString::GetFileExt(asFilePath);
-		SDL_Surface* pSurface = NULL;
+		SDL_Surface* pSurface = IMG_Load(asFilePath.c_str());
+		
+		if (pSurface == NULL) {
+			Error("Failed to load image!\n");
+			return NULL;
+		}
 
-		if (tType=="bmp") {
-			#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-			SDL_PixelFormat RGBAFormat;
-			RGBAFormat.palette = 0; RGBAFormat.colorkey = 0; RGBAFormat.alpha = 0;
-			RGBAFormat.BitsPerPixel = 32; RGBAFormat.BytesPerPixel = 4;
+		if (tType == "bmp") {
+			/*
+			Log("Flipping BMP colour channels\n");
 
-			RGBAFormat.Rmask = 0xFF000000; RGBAFormat.Rshift = 0; RGBAFormat.Rloss = 0;
-			RGBAFormat.Gmask = 0x00FF0000; RGBAFormat.Gshift = 8; RGBAFormat.Gloss = 0;
-			RGBAFormat.Bmask = 0x0000FF00; RGBAFormat.Bshift = 16; RGBAFormat.Bloss = 0;
-			RGBAFormat.Amask = 0x000000FF; RGBAFormat.Ashift = 24; RGBAFormat.Aloss = 0;
-
-			SDL_Surface* orig = NULL;
-			orig = IMG_Load(asFilePath.c_str());
-
-			if(orig==NULL){
-				//Error handling stuff?
+			SDL_Surface* pConverted = SDL_ConvertSurfaceFormat(pSurface, SDL_PIXELFORMAT_BGR888, 0);
+			if (pConverted == NULL) {
+				Error("Failed to convert surface: ");
+				Log(SDL_GetError());
+				Log("\n");
+				SDL_FreeSurface(pSurface);
 				return NULL;
 			}
-			pSurface = SDL_ConvertSurface(orig, &RGBAFormat, SDL_SWSURFACE);
-			SDL_FreeSurface(orig);
-			#else
-			pSurface = IMG_Load(asFilePath.c_str());
-			#endif
-		} else {
-			pSurface= IMG_Load(asFilePath.c_str());
-		}
-		if(pSurface==NULL){
-			//Error handling stuff?
-			return NULL;
+			SDL_FreeSurface(pSurface);
+			pSurface = pConverted;
+			*/
 		}
 
 		iBitmap2D* pBmp = mpLowLevelGraphics->CreateBitmap2DFromSurface(pSurface,
