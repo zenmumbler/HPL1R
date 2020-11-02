@@ -71,6 +71,7 @@ class iHudModel
 friend class cPlayerHands;
 public:
 	iHudModel(ePlayerHandType aType);
+	virtual ~iHudModel() {}
 
 	cMeshEntity *GetEntity(){return mpEntity;}
 
