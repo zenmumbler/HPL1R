@@ -108,15 +108,15 @@ namespace hpl {
 
 		Uint32 col =
 #if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
-		(static_cast<Uint8>(aColor.r * 255.0f) << 24) |
-		(static_cast<Uint8>(aColor.g * 255.0f) << 16) |
-		(static_cast<Uint8>(aColor.b * 255.0f) << 8) |
-		(static_cast<Uint8>(aColor.a * 255.0f));
-#else
 		(static_cast<Uint8>(aColor.a * 255.0f) << 24) |
 		(static_cast<Uint8>(aColor.b * 255.0f) << 16) |
 		(static_cast<Uint8>(aColor.g * 255.0f) << 8) |
 		(static_cast<Uint8>(aColor.r * 255.0f));
+#else
+		(static_cast<Uint8>(aColor.r * 255.0f) << 24) |
+		(static_cast<Uint8>(aColor.g * 255.0f) << 16) |
+		(static_cast<Uint8>(aColor.b * 255.0f) << 8) |
+		(static_cast<Uint8>(aColor.a * 255.0f));
 #endif
 
 		SDL_FillRect(mpSurface, &rect, col);
@@ -133,10 +133,7 @@ namespace hpl {
 
 	bool cSDLBitmap2D::Create(cVector2l avSize, unsigned int alBpp)
 	{
-		Uint32 format = SDL_PIXELFORMAT_ABGR32;
-		if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
-			format = SDL_PIXELFORMAT_RGBA32;
-		}
+		Uint32 format = SDL_PIXELFORMAT_RGBA32;
 		mpSurface = SDL_CreateRGBSurfaceWithFormat(SDL_SWSURFACE, avSize.x, avSize.y, 32, format);
 
 		if(mpSurface==NULL) return false;

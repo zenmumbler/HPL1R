@@ -728,34 +728,19 @@ namespace hpl {
 	{
 		SDL_Surface *pSurface =  apSrc->GetSurface();
 		alChannels = pSurface->format->BytesPerPixel;
-		aFormat = GL_RGBA;
+		aFormat = GL_BGRA;
 
 		tString sType = cString::ToLowerCase(apSrc->msType);
 
 		if(alChannels==4)
 		{
-			if(sType == "tga")
-			{
-				aFormat = GL_BGRA_EXT;
-			}
-			else
-			{
-				aFormat = GL_RGBA;
-			}
-
+			aFormat = GL_BGRA;
 		}
-		if(alChannels==3)
+		else if(alChannels==3)
 		{
-			if(sType == "tga")
-			{
-				aFormat = GL_BGR_EXT;
-			}
-			else
-			{
-				aFormat = GL_RGB;
-			}
+			aFormat = GL_BGR;
 		}
-		if(alChannels==1)
+		else if(alChannels==1)
 		{
 			aFormat = GL_ALPHA;
 		}
