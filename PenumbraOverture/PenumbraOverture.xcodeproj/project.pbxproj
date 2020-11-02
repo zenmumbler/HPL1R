@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E48B43325503E29009EF3DB /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E48B43225503E29009EF3DB /* libGLEW.a */; };
 		8EB7C3AF254F546300277667 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3AA254F545C00277667 /* Cg.framework */; };
 		8EB7C3B0254F546300277667 /* Cg.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = 8EB7C3AA254F545C00277667 /* Cg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8EB7C3B1254F546600277667 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3A9254F545C00277667 /* SDL2.framework */; };
@@ -125,6 +126,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8E48B43225503E29009EF3DB /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGLEW.a; sourceTree = "<group>"; };
 		8EB7C395254E48A900277667 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8EB7C3A9254F545C00277667 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		8EB7C3AA254F545C00277667 /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cg.framework; sourceTree = "<group>"; };
@@ -272,13 +274,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EB7C3D1254F5E3D00277667 /* libvorbis.a in Frameworks */,
+				8EB7C3DE254F60A600277667 /* libogg.a in Frameworks */,
 				8EB7C3D0254F5E3D00277667 /* libvorbisfile.a in Frameworks */,
 				8EB7C3CF254F5E3D00277667 /* libnewton.a in Frameworks */,
 				8EB7C3CE254F5E3D00277667 /* libangelscript.a in Frameworks */,
+				8E48B43325503E29009EF3DB /* libGLEW.a in Frameworks */,
 				DBF9A3D8119A65AB00CCFDC9 /* libOALWrapper.a in Frameworks */,
 				8EB7C3B6254F548600277667 /* libHPL.a in Frameworks */,
 				8EB7C3AF254F546300277667 /* Cg.framework in Frameworks */,
-				8EB7C3DE254F60A600277667 /* libogg.a in Frameworks */,
 				8EB7C3B3254F546800277667 /* SDL2_image.framework in Frameworks */,
 				8EB7C3B1254F546600277667 /* SDL2.framework in Frameworks */,
 				DB063068111D3E3F0048C5E9 /* OpenGL.framework in Frameworks */,
@@ -440,6 +443,7 @@
 		DBF84A9A0AC76E5E00BB15CD /* dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				8E48B43225503E29009EF3DB /* libGLEW.a */,
 				8EB7C3DD254F60A600277667 /* libogg.a */,
 				8EB7C3CA254F5E3D00277667 /* libangelscript.a */,
 				8EB7C3CB254F5E3D00277667 /* libnewton.a */,

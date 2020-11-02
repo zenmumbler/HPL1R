@@ -17,9 +17,7 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "impl/OcclusionQueryOGL.h"
-
-#include <GL/GLee.h>
-
+#include <glew/glew.h>
 
 namespace hpl {
 

@@ -21,9 +21,7 @@
 #include "math/Math.h"
 
 #include <memory.h>
-
-#include <GL/GLee.h>
-
+#include <glew/glew.h>
 
 namespace hpl {
 

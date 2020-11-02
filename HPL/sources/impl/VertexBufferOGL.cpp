@@ -20,9 +20,8 @@
 #include "system/LowLevelSystem.h"
 #include "math/Math.h"
 
-#include <GL/GLee.h>
-
 #include <string.h>
+#include <glew/glew.h>
 
 namespace hpl {
 

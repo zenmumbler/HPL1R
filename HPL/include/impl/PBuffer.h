@@ -19,7 +19,6 @@
 #ifndef HPL_P_BUFFER_H
 #define HPL_P_BUFFER_H
 
-#include <GL/GLee.h>
 #include <vector>
 
 
