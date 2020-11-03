@@ -12,6 +12,7 @@
 		8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84AA0C254CB3D2000EA53C /* Cg.framework */; };
 		8E9728DC254CBB4B0033415B /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DA254CBB4B0033415B /* SDL2_image.framework */; };
 		8E9728DF254CBBAF0033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DE254CBBAF0033415B /* SDL2.framework */; };
+		8E9F748F2551E732000324E8 /* SDLBMPFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */; };
 		8EB7C3D9254F603E00277667 /* scripthelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7C3D8254F603E00277667 /* scripthelper.cpp */; };
 		8EB7C3DA254F603E00277667 /* scripthelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7C3D8254F603E00277667 /* scripthelper.cpp */; };
 		DB00EF3511A9CEA1007DFB32 /* libHPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF8484B0AC76D1A00BB15CD /* libHPL.a */; };
@@ -284,6 +285,8 @@
 		8E9728CF254CB92F0033415B /* scripthelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripthelper.h; sourceTree = "<group>"; };
 		8E9728DA254CBB4B0033415B /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_image.framework; sourceTree = "<group>"; };
 		8E9728DE254CBBAF0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
+		8E9F748B2551E54E000324E8 /* SDLBMPFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLBMPFile.h; sourceTree = "<group>"; };
+		8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDLBMPFile.cpp; sourceTree = "<group>"; };
 		8EB7C3D8254F603E00277667 /* scripthelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripthelper.cpp; sourceTree = "<group>"; };
 		DB00EF0911A9CE84007DFB32 /* SimpleCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleCamera.cpp; sourceTree = "<group>"; };
 		DB00EF0A11A9CE84007DFB32 /* SimpleCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleCamera.h; sourceTree = "<group>"; };
@@ -1124,6 +1127,7 @@
 				DB27F07B0ACB9AB90054ACA3 /* PhysicsMaterialNewton.h */,
 				DB27F07C0ACB9AB90054ACA3 /* PhysicsWorldNewton.h */,
 				DB27F07D0ACB9AB90054ACA3 /* Platform.h */,
+				8E9F748B2551E54E000324E8 /* SDLBMPFile.h */,
 				DB27F07E0ACB9AB90054ACA3 /* SDLBitmap2D.h */,
 				DB27F07F0ACB9AB90054ACA3 /* SDLFontData.h */,
 				DB27F0800ACB9AB90054ACA3 /* SDLGameSetup.h */,
@@ -1573,6 +1577,7 @@
 				DBF849A10AC76D5800BB15CD /* PhysicsMaterialNewton.cpp */,
 				DBF849A20AC76D5800BB15CD /* PhysicsWorldNewton.cpp */,
 				DBF849A30AC76D5800BB15CD /* platform */,
+				8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */,
 				DBF849A60AC76D5800BB15CD /* SDLBitmap2D.cpp */,
 				DBF849A70AC76D5800BB15CD /* SDLFontData.cpp */,
 				DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */,
@@ -1932,6 +1937,7 @@
 				DBF84ACF0AC76F1E00BB15CD /* FrameTexture.cpp in Sources */,
 				DBF84AD00AC76F1E00BB15CD /* Frustum.cpp in Sources */,
 				DBF84AD10AC76F1E00BB15CD /* Game.cpp in Sources */,
+				8E9F748F2551E732000324E8 /* SDLBMPFile.cpp in Sources */,
 				DBF84AD20AC76F1E00BB15CD /* GameTypes.cpp in Sources */,
 				DBF84AD30AC76F1E00BB15CD /* GfxObject.cpp in Sources */,
 				DBF84AD50AC76F1E00BB15CD /* GPUProgram.cpp in Sources */,
