@@ -21,6 +21,7 @@
 
 #include "resources/ResourceBase.h"
 #include <angelscript.h>
+#include <aswrappedcall.h>
 
 #ifdef __GNUC__
 	#ifdef __APPLE__
@@ -29,193 +30,52 @@
 		#define __stdcall __attribute__((stdcall))
 	#endif
 #endif
-// Script Macros to build Generic wrappers if necessary
-	#define SCRIPT_DEFINE_FUNC(return, funcname) \
-			SCRIPT_FUNC_BEGIN(funcname, return, "") \
-			SCRIPT_RETURN_CALL_##return funcname(); \
-			SCRIPT_FUNC_END(funcname,return)
-	#define SCRIPT_DEFINE_FUNC_1(return, funcname, arg0) \
-			SCRIPT_FUNC_BEGIN(funcname, return, #arg0) \
-			SCRIPT_ARG_##arg0(0); \
-			SCRIPT_RETURN_CALL_##return funcname(_arg0); \
-			SCRIPT_FUNC_END(funcname,return)
-	#define SCRIPT_DEFINE_FUNC_2(return, funcname, arg0, arg1) \
-			SCRIPT_FUNC_BEGIN(funcname, return, #arg0","#arg1) \
-			SCRIPT_ARG_##arg0(0); \
-			SCRIPT_ARG_##arg1(1); \
-			SCRIPT_RETURN_CALL_##return funcname(_arg0,_arg1); \
-			SCRIPT_FUNC_END(funcname,return)
-	#define SCRIPT_DEFINE_FUNC_3(return, funcname, arg0, arg1, arg2) \
-			SCRIPT_FUNC_BEGIN(funcname, return, #arg0","#arg1","#arg2) \
-			SCRIPT_ARG_##arg0(0); \
-			SCRIPT_ARG_##arg1(1); \
-			SCRIPT_ARG_##arg2(2); \
-			SCRIPT_RETURN_CALL_##return funcname(_arg0,_arg1,_arg2); \
-			SCRIPT_FUNC_END(funcname,return)
-	#define SCRIPT_DEFINE_FUNC_4(return, funcname, arg0, arg1, arg2, arg3) \
-			SCRIPT_FUNC_BEGIN(funcname, return, #arg0","#arg1","#arg2","#arg3) \
-			SCRIPT_ARG_##arg0(0); \
-			SCRIPT_ARG_##arg1(1); \
-			SCRIPT_ARG_##arg2(2); \
-			SCRIPT_ARG_##arg3(3); \
-			SCRIPT_RETURN_CALL_##return funcname(_arg0,_arg1,_arg2,_arg3); \
-			SCRIPT_FUNC_END(funcname,return)
-	#define SCRIPT_DEFINE_FUNC_5(return, funcname, arg0, arg1, arg2, arg3, arg4) \
-			SCRIPT_FUNC_BEGIN(funcname, return, #arg0","#arg1","#arg2","#arg3","#arg4) \
-			SCRIPT_ARG_##arg0(0); \
-			SCRIPT_ARG_##arg1(1); \
-			SCRIPT_ARG_##arg2(2); \
-			SCRIPT_ARG_##arg3(3); \
-			SCRIPT_ARG_##arg4(4); \
-			SCRIPT_RETURN_CALL_##return funcname(_arg0,_arg1,_arg2,_arg3,_arg4); \
-			SCRIPT_FUNC_END(funcname,return)
-	#define SCRIPT_DEFINE_FUNC_6(return, funcname, arg0, arg1, arg2, arg3, arg4, arg5) \
-			SCRIPT_FUNC_BEGIN(funcname, return, #arg0","#arg1","#arg2","#arg3","#arg4","#arg5) \
-			SCRIPT_ARG_##arg0(0); \
-			SCRIPT_ARG_##arg1(1); \
-			SCRIPT_ARG_##arg2(2); \
-			SCRIPT_ARG_##arg3(3); \
-			SCRIPT_ARG_##arg4(4); \
-			SCRIPT_ARG_##arg5(5); \
-			SCRIPT_RETURN_CALL_##return funcname(_arg0,_arg1,_arg2,_arg3,_arg4,_arg5); \
-			SCRIPT_FUNC_END(funcname,return)
-	#define SCRIPT_DEFINE_FUNC_7(return, funcname, arg0, arg1, arg2, arg3, arg4, arg5, arg6) \
-			SCRIPT_FUNC_BEGIN(funcname, return, #arg0","#arg1","#arg2","#arg3","#arg4","#arg5","#arg6) \
-			SCRIPT_ARG_##arg0(0); \
-			SCRIPT_ARG_##arg1(1); \
-			SCRIPT_ARG_##arg2(2); \
-			SCRIPT_ARG_##arg3(3); \
-			SCRIPT_ARG_##arg4(4); \
-			SCRIPT_ARG_##arg5(5); \
-			SCRIPT_ARG_##arg6(6); \
-			SCRIPT_RETURN_CALL_##return funcname(_arg0,_arg1,_arg2,_arg3,_arg4,_arg5,_arg6); \
-			SCRIPT_FUNC_END(funcname,return)
-	#define SCRIPT_DEFINE_FUNC_8(return, funcname, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) \
-			SCRIPT_FUNC_BEGIN(funcname, return, #arg0","#arg1","#arg2","#arg3","#arg4","#arg5","#arg6","#arg7) \
-			SCRIPT_ARG_##arg0(0); \
-			SCRIPT_ARG_##arg1(1); \
-			SCRIPT_ARG_##arg2(2); \
-			SCRIPT_ARG_##arg3(3); \
-			SCRIPT_ARG_##arg4(4); \
-			SCRIPT_ARG_##arg5(5); \
-			SCRIPT_ARG_##arg6(6); \
-			SCRIPT_ARG_##arg7(7); \
-			SCRIPT_RETURN_CALL_##return funcname(_arg0,_arg1,_arg2,_arg3,_arg4,_arg5,_arg6,_arg7); \
-			SCRIPT_FUNC_END(funcname,return)
-	#define SCRIPT_DEFINE_FUNC_9(return, funcname, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8) \
-			SCRIPT_FUNC_BEGIN(funcname, return, #arg0","#arg1","#arg2","#arg3","#arg4","#arg5","#arg6","#arg7","#arg8) \
-			SCRIPT_ARG_##arg0(0); \
-			SCRIPT_ARG_##arg1(1); \
-			SCRIPT_ARG_##arg2(2); \
-			SCRIPT_ARG_##arg3(3); \
-			SCRIPT_ARG_##arg4(4); \
-			SCRIPT_ARG_##arg5(5); \
-			SCRIPT_ARG_##arg6(6); \
-			SCRIPT_ARG_##arg7(7); \
-			SCRIPT_ARG_##arg8(8); \
-			SCRIPT_RETURN_CALL_##return funcname(_arg0,_arg1,_arg2,_arg3,_arg4,_arg5,_arg6,_arg7,_arg8); \
-			SCRIPT_FUNC_END(funcname,return)
 
-	#define SCRIPT_DEFINE_FUNC_10(return, funcname, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) \
-			SCRIPT_FUNC_BEGIN(funcname, return, #arg0","#arg1","#arg2","#arg3","#arg4","#arg5","#arg6","#arg7","#arg8","#arg9) \
-			SCRIPT_ARG_##arg0(0); \
-			SCRIPT_ARG_##arg1(1); \
-			SCRIPT_ARG_##arg2(2); \
-			SCRIPT_ARG_##arg3(3); \
-			SCRIPT_ARG_##arg4(4); \
-			SCRIPT_ARG_##arg5(5); \
-			SCRIPT_ARG_##arg6(6); \
-			SCRIPT_ARG_##arg7(7); \
-			SCRIPT_ARG_##arg8(8); \
-			SCRIPT_ARG_##arg9(9); \
-			SCRIPT_RETURN_CALL_##return funcname(_arg0,_arg1,_arg2,_arg3,_arg4,_arg5,_arg6,_arg7,_arg8,_arg9); \
-			SCRIPT_FUNC_END(funcname,return)
+// Macros to generate signatures and generic function wrappers for AS entrypoints
 
-	#define SCRIPT_DEFINE_FUNC_12(return, funcname, arg0, arg1, arg2, arg3, arg4, arg5, arg6, \
-				arg7, arg8, arg9, arg10, arg11) \
-			SCRIPT_FUNC_BEGIN(funcname, return, #arg0","#arg1","#arg2","#arg3","#arg4","#arg5","#arg6 \
-				","#arg7","#arg8","#arg9","#arg10","#arg11) \
-			SCRIPT_ARG_##arg0(0); \
-			SCRIPT_ARG_##arg1(1); \
-			SCRIPT_ARG_##arg2(2); \
-			SCRIPT_ARG_##arg3(3); \
-			SCRIPT_ARG_##arg4(4); \
-			SCRIPT_ARG_##arg5(5); \
-			SCRIPT_ARG_##arg6(6); \
-			SCRIPT_ARG_##arg7(7); \
-			SCRIPT_ARG_##arg8(8); \
-			SCRIPT_ARG_##arg9(9); \
-			SCRIPT_ARG_##arg10(10); \
-			SCRIPT_ARG_##arg11(11); \
-			SCRIPT_RETURN_CALL_##return funcname(_arg0,_arg1,_arg2,_arg3,_arg4,_arg5,_arg6, \
-					_arg7,_arg8,_arg9,_arg10,_arg11); \
-			SCRIPT_FUNC_END(funcname,return)
-	#define SCRIPT_DEFINE_FUNC_17(return, funcname, arg0, arg1, arg2, arg3, arg4, arg5, arg6, \
-				arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16) \
-			SCRIPT_FUNC_BEGIN(funcname, return, #arg0","#arg1","#arg2","#arg3","#arg4","#arg5","#arg6 \
-				","#arg7","#arg8","#arg9","#arg10","#arg11","#arg12","#arg13","#arg14","#arg15","#arg16) \
-			SCRIPT_ARG_##arg0(0); \
-			SCRIPT_ARG_##arg1(1); \
-			SCRIPT_ARG_##arg2(2); \
-			SCRIPT_ARG_##arg3(3); \
-			SCRIPT_ARG_##arg4(4); \
-			SCRIPT_ARG_##arg5(5); \
-			SCRIPT_ARG_##arg6(6); \
-			SCRIPT_ARG_##arg7(7); \
-			SCRIPT_ARG_##arg8(8); \
-			SCRIPT_ARG_##arg9(9); \
-			SCRIPT_ARG_##arg10(10); \
-			SCRIPT_ARG_##arg11(11); \
-			SCRIPT_ARG_##arg12(12); \
-			SCRIPT_ARG_##arg13(13); \
-			SCRIPT_ARG_##arg14(14); \
-			SCRIPT_ARG_##arg15(15); \
-			SCRIPT_ARG_##arg16(16); \
-			SCRIPT_RETURN_CALL_##return funcname(_arg0,_arg1,_arg2,_arg3,_arg4,_arg5,_arg6, \
-					_arg7,_arg8,_arg9,_arg10,_arg11,_arg12,_arg13,_arg14,_arg15,_arg16); \
-			SCRIPT_FUNC_END(funcname,return)
+#define SCRIPT_DEFINE_FUNC(ret, name) \
+	static const char* name##_proto = #ret" "#name"()"; \
+	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+#define SCRIPT_DEFINE_FUNC_1(ret, name, a0) \
+	static const char* name##_proto = #ret" "#name"("#a0" a0)"; \
+	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+#define SCRIPT_DEFINE_FUNC_2(ret, name, a0,a1) \
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1)"; \
+	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+#define SCRIPT_DEFINE_FUNC_3(ret, name, a0,a1,a2) \
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2)"; \
+	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+#define SCRIPT_DEFINE_FUNC_4(ret, name, a0,a1,a2,a3) \
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3)"; \
+	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+#define SCRIPT_DEFINE_FUNC_5(ret, name, a0,a1,a2,a3,a4) \
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4)"; \
+	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+#define SCRIPT_DEFINE_FUNC_6(ret, name, a0,a1,a2,a3,a4,a5) \
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5)"; \
+	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+#define SCRIPT_DEFINE_FUNC_7(ret, name, a0,a1,a2,a3,a4,a5,a6) \
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6)"; \
+	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+#define SCRIPT_DEFINE_FUNC_8(ret, name, a0,a1,a2,a3,a4,a5,a6,a7) \
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7)"; \
+	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+#define SCRIPT_DEFINE_FUNC_9(ret, name, a0,a1,a2,a3,a4,a5,a6,a7,a8) \
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7,"#a8" a8)"; \
+	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+#define SCRIPT_DEFINE_FUNC_12(ret, name, a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) \
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7,"#a8" a8,"#a9" a9,"#a10" a10,"#a11" a11)"; \
+	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+#define SCRIPT_DEFINE_FUNC_17(ret, name, a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16) \
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7,"#a8" a8,"#a9" a9,"#a10" a10,"#a11" a11,"#a12" a12,"#a13" a13,"#a14" a14,"#a15" a15,"#a16" a16)"; \
+	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
 
-	#define SCRIPT_FUNC_BEGIN(funcname, return, args) \
-		namespace GenericScript { \
-			static std::string funcname##_return = #return; \
-			static std::string funcname##_arg = args; \
-			void funcname##_Generic(asIScriptGeneric *gen) { \
-				SCRIPT_RETURN_##return;
-
-	#define SCRIPT_FUNC_END(funcname, return) \
-				SCRIPT_SET_RETURN_##return; \
-			} \
-		}
-
-	// Parameter Macros
-	#define SCRIPT_ARG_string(n) std::string _arg##n = *(std::string *)gen->GetArgObject(n)
-	#define SCRIPT_ARG_float(n) float _arg##n = gen->GetArgFloat(n)
-	#define SCRIPT_ARG_int(n) int _arg##n = gen->GetArgDWord(n)
-	#define SCRIPT_ARG_bool(n) bool _arg##n = gen->GetArgDWord(n)
-	// Return Value Macros
-	#define SCRIPT_RETURN_string std::string _ret
-	#define SCRIPT_RETURN_CALL_string _ret =
-	#define SCRIPT_SET_RETURN_string gen->SetReturnObject(&_ret)
-	#define SCRIPT_RETURN_bool bool _ret
-	#define SCRIPT_RETURN_CALL_bool _ret =
-	#define SCRIPT_SET_RETURN_bool gen->SetReturnDWord(_ret ? -1 : 0)
-	#define SCRIPT_RETURN_int int _ret
-	#define SCRIPT_RETURN_CALL_int _ret =
-	#define SCRIPT_SET_RETURN_int gen->SetReturnDWord(_ret)
-	#define SCRIPT_RETURN_float float _ret
-	#define SCRIPT_RETURN_CALL_float _ret =
-	#define SCRIPT_SET_RETURN_float gen->SetReturnFloat(_ret)
-	#define SCRIPT_RETURN_void
-	#define SCRIPT_RETURN_CALL_void
-	#define SCRIPT_SET_RETURN_void
-
-#if defined(AS_MAX_PORTABILITY)
-	#define SCRIPT_REGISTER_FUNC(funcname) \
-		GenericScript::funcname##_return+" "#funcname" ("+GenericScript::funcname##_arg+")", (void *)GenericScript::funcname##_Generic, asCALL_GENERIC
+#ifdef AS_MAX_PORTABILITY
+	#define SCRIPT_REGISTER_FUNC(func) func##_proto, reinterpret_cast<void*>(func##_Generic), asCALL_GENERIC
 #else
-	#define SCRIPT_REGISTER_FUNC(funcname) \
-		GenericScript::funcname##_return+" "#funcname" ("+GenericScript::funcname##_arg+")", (void *)funcname, asCALL_STDCALL
+	#define SCRIPT_REGISTER_FUNC(func) func##_proto, reinterpret_cast<void*>(func), asCALL_STDCALL
 #endif
+
 
 namespace hpl {
 

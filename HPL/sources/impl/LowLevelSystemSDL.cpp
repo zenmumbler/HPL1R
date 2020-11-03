@@ -779,10 +779,22 @@ namespace hpl {
 
 	bool cLowLevelSystemSDL::AddScriptFunc(const tString& asFuncDecl, void* pFunc, int callConv)
 	{
-		if(mpScriptEngine->RegisterGlobalFunction(asFuncDecl.c_str(),
-												asFUNCTION(pFunc),callConv)<0)
+		int iResult;
+		
+#ifdef AS_MAX_PORTABILITY
+		// the asFunctionPtr func overloads on type and will yield the proper func wrapper
+		iResult = mpScriptEngine->RegisterGlobalFunction(asFuncDecl.c_str(),
+														 asFUNCTION(reinterpret_cast<asGENFUNC_t>(pFunc)),
+														 callConv);
+#else
+		iResult = mpScriptEngine->RegisterGlobalFunction(asFuncDecl.c_str(),
+														 asFUNCTION(pFunc),
+														 callConv);
+#endif
+
+		if(iResult < 0)
 		{
-			Error("Couldn't add func '%s'\n",asFuncDecl.c_str());
+			Error("Couldn't add func (%d) '%s'\n", iResult ,asFuncDecl.c_str());
 			return false;
 		}
 
