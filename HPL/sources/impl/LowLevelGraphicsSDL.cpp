@@ -481,7 +481,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	void cLowLevelGraphicsSDL::SetInputGrab(bool abX) {
-		SDL_SetWindowGrab(mpWindow, abX ? SDL_TRUE : SDL_FALSE);
+//		SDL_SetWindowGrab(mpWindow, abX ? SDL_TRUE : SDL_FALSE);
 		SDL_SetRelativeMouseMode(abX ? SDL_TRUE : SDL_FALSE);
 	}
 
