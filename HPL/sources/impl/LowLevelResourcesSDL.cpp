@@ -22,6 +22,7 @@
 
 #include "impl/LowLevelResourcesSDL.h"
 #include "impl/SDLBitmap2D.h"
+#include "impl/SDLBMPFile.h"
 #include "impl/MeshLoaderMSH.h"
 #include "impl/MeshLoaderCollada.h"
 #ifdef INCLUDE_THEORA
@@ -74,33 +75,25 @@ namespace hpl {
 		Log((tString("Loading image: ") + asFilePath + "\n").c_str());
 
 		tString tType;
-		if(asType != "")
+		if(asType != "") {
 			asFilePath = cString::SetFileExt(asFilePath,asType);
-
+		}
 		tType = cString::GetFileExt(asFilePath);
-		SDL_Surface* pSurface = IMG_Load(asFilePath.c_str());
+		
+		SDL_Surface* pSurface;
+		if (tType == "bmp") {
+			pSurface = LoadBMPFile(asFilePath);
+		}
+		else {
+			pSurface = IMG_Load(asFilePath.c_str());
+		}
 		
 		if (pSurface == NULL) {
 			Error("Failed to load image!\n");
 			return NULL;
 		}
-
-		if (tType == "bmp") {
-			/*
-			Log("Flipping BMP colour channels\n");
-
-			SDL_Surface* pConverted = SDL_ConvertSurfaceFormat(pSurface, SDL_PIXELFORMAT_BGR888, 0);
-			if (pConverted == NULL) {
-				Error("Failed to convert surface: ");
-				Log(SDL_GetError());
-				Log("\n");
-				SDL_FreeSurface(pSurface);
-				return NULL;
-			}
-			SDL_FreeSurface(pSurface);
-			pSurface = pConverted;
-			*/
-		}
+		
+		Log("    Format = %s\n", SDL_GetPixelFormatName(pSurface->format->format));
 
 		iBitmap2D* pBmp = mpLowLevelGraphics->CreateBitmap2DFromSurface(pSurface,
 													cString::GetFileExt(asFilePath));
