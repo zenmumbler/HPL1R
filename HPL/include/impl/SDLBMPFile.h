@@ -14,7 +14,7 @@
 
 namespace hpl {
 
-	SDL_Surface* LoadBMPFileUsingSDL(const tString& asFilePath);
+	SDL_Surface* LoadBMPFileUsingSDLImage(const tString& asFilePath);
 	SDL_Surface* LoadBMPFile(const tString& asFilePath);
 
 }
