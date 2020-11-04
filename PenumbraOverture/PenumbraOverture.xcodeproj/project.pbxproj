@@ -93,6 +93,20 @@
 			remoteGlobalIDString = DB1550DB11E64C8E005799BB;
 			remoteInfo = SimpleTest;
 		};
+		8E9F74DD25522A70000324E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DBF8484B0AC76D1A00BB15CD;
+			remoteInfo = HPL;
+		};
+		8E9F74DF25522A70000324E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DB00EF3111A9CE93007DFB32;
+			remoteInfo = PhysicsTest;
+		};
 		DBF9A3CC119A658A00CCFDC9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBF9A3C5119A658A00CCFDC9 /* OALWrapper.xcodeproj */;
@@ -292,6 +306,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E9F74D725522A70000324E8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E9F74DE25522A70000324E8 /* libHPL.a */,
+				8E9F74E025522A70000324E8 /* PhysicsTest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		DB4AFD910D7261AC00809E03 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -532,6 +555,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 8E9F74D725522A70000324E8 /* Products */;
+					ProjectRef = DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */;
+				},
+				{
 					ProductGroup = DBF9A3C6119A658A00CCFDC9 /* Products */;
 					ProjectRef = DBF9A3C5119A658A00CCFDC9 /* OALWrapper.xcodeproj */;
 				},
@@ -549,6 +576,20 @@
 			fileType = "compiled.mach-o.executable";
 			path = SimpleTest;
 			remoteRef = 8E84A9CB254C9975000EA53C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8E9F74DE25522A70000324E8 /* libHPL.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libHPL.a;
+			remoteRef = 8E9F74DD25522A70000324E8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8E9F74E025522A70000324E8 /* PhysicsTest */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = PhysicsTest;
+			remoteRef = 8E9F74DF25522A70000324E8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		DBF9A3CD119A658A00CCFDC9 /* libOALWrapper.a */ = {
