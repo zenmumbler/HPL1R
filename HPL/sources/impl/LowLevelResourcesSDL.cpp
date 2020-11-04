@@ -23,6 +23,7 @@
 #include "impl/LowLevelResourcesSDL.h"
 #include "impl/SDLBitmap2D.h"
 #include "impl/SDLBMPFile.h"
+#include "impl/SDLTGAFile.h"
 #include "impl/MeshLoaderMSH.h"
 #include "impl/MeshLoaderCollada.h"
 #ifdef INCLUDE_THEORA
@@ -83,6 +84,9 @@ namespace hpl {
 		SDL_Surface* pSurface;
 		if (tType == "bmp") {
 			pSurface = LoadBMPFile(asFilePath);
+		}
+		else if (tType == "tga") {
+			pSurface = LoadTGAFile(asFilePath);
 		}
 		else {
 			pSurface = IMG_Load(asFilePath.c_str());
