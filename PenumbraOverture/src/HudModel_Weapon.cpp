@@ -564,7 +564,7 @@ void cHudModel_WeaponMelee::Attack()
 		{
 			/*if(pPhysicsWorld->CheckShapeCollision(pBody->GetShape(),pBody->GetLocalMatrix(),
 				mvAttacks[mlCurrentAttack].mpCollider,
-				mtxDamage,collideData,1)==false)
+				mtxDamage,collideData,1,false)==false)
 			{
 				continue;
 			}*/
@@ -655,7 +655,7 @@ void cHudModel_WeaponMelee::Attack()
 		{
 			if(pPhysicsWorld->CheckShapeCollision(pBody->GetShape(),pBody->GetLocalMatrix(),
 											mvAttacks[mlCurrentAttack].mpCollider,
-											mtxDamage,collideData,1)==false)
+											mtxDamage,collideData,1,false)==false)
 			{
 				continue;
 			}

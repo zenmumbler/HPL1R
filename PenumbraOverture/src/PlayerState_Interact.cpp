@@ -995,7 +995,7 @@ bool cPlayerState_Push::OnMoveForwards(float afMul, float afTimeStep)
 			collData.SetMaxSize(32);
 			bool bCollide = pPhysicsWorld->CheckShapeCollision(
 				pPlayerBody->GetShape(), cMath::MatrixTranslate(pPlayerBody->GetPosition()),
-				mpPushBody->GetShape(), mtxBodyMove,collData,32);
+				mpPushBody->GetShape(), mtxBodyMove,collData,32,false);
 
 			if(bCollide)
 			{

@@ -1203,7 +1203,7 @@ void cPlayer::Update(float afTimeStep)
 				bCollide = pPhysicsWorld->CheckShapeCollision(pParentBody->GetShape(), 
 															pParentBody->GetLocalMatrix(),
 															pChildBody->GetShape(), 
-															pChildBody->GetLocalMatrix(),collideData,1);
+															pChildBody->GetLocalMatrix(),collideData,1,false);
 			}
 													
 			if(bCollide) break;

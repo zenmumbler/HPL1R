@@ -1156,7 +1156,7 @@ namespace hpl {
 			bool bRet = apWorld->CheckShapeCollision(pBody->GetShape(),
 												pBody->GetLocalMatrix(),
 												apShape,a_mtxShape,
-												collideData,1);
+												collideData, 1, false);
 
 			if(bRet)
 			{

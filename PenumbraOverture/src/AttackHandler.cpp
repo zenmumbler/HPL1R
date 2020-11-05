@@ -227,7 +227,7 @@ bool cAttackHandler::CreateShapeAttack(	iCollideShape *apShape, const cMatrixf& 
 			///////////////////////////////
 			//Check for collision
 			if(pPhysicsWorld->CheckShapeCollision(pBody->GetShape(),pBody->GetLocalMatrix(),
-				apShape, a_mtxOffset,collideData,1)==false)
+				apShape, a_mtxOffset,collideData,1,false)==false)
 			{
 				continue;
 			}

@@ -195,7 +195,7 @@ void cGameLiquidArea::Update(float afTimeStep)
 			///////////////////////////////
 			//Check for collision
 			if(pPhysicsWorld->CheckShapeCollision(pBody->GetShape(),pBody->GetLocalMatrix(),
-				pAreaBody->GetShape(), pAreaBody->GetLocalMatrix(),collideData,1)==false)
+				pAreaBody->GetShape(), pAreaBody->GetLocalMatrix(),collideData,1,false)==false)
 			{
 				pBody->SetBuoyancyActive(false);
 				continue;

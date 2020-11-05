@@ -972,7 +972,7 @@ bool cPlayerState_WeaponMeleeHaptX::CheckAttack(const cMatrixf& a_mtxTransform, 
 		if(cMath::CheckCollisionBV(tempBV, *pBody->GetBV()))
 		{
 			if(pPhysicsWorld->CheckShapeCollision(pBody->GetShape(),pBody->GetLocalMatrix(),
-				mpCollider,a_mtxTransform,collideData,1)==false)
+				mpCollider,a_mtxTransform,collideData,1,false)==false)
 			{
 				continue;
 			}

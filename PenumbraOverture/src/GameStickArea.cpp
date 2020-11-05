@@ -258,7 +258,7 @@ void cGameStickArea::Update(float afTimeStep)
 														pAreaBody->GetLocalMatrix(),
 														pBody->GetShape(), 
 														pBody->GetLocalMatrix(),
-														collideData,1);
+														collideData,1,false);
 			if(bCollide)
 			{
 				if(msAttachFunction!="")

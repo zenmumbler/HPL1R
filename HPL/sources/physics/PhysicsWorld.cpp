@@ -414,7 +414,7 @@ namespace hpl {
 
 			collideData.SetMaxSize(32);
 			bool bRet = CheckShapeCollision(apShape,a_mtxTransform, pBody->GetShape(),pBody->GetLocalMatrix(),
-											collideData, 32);
+											collideData, 32, true);
 
 			if(bRet)
 			{

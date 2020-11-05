@@ -565,7 +565,7 @@ void iGameEntity::OnUpdate(float afTimeStep)
 																pParentBody->GetLocalMatrix(),
 																pChildBody->GetShape(), 
 																pChildBody->GetLocalMatrix(),
-																collideData,1);
+																collideData,1,false);
 				}
 				//if(msName == "liftclose") Log("end it\n");
 				if(bCollide) break;

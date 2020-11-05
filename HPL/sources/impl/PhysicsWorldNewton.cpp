@@ -458,9 +458,20 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	static inline void CorrectNormalDirection(cVector3f& avNormal, const cVector3f& avCollidePoint, const cVector3f& avShapeACenter)
+	{
+		cVector3f vCenterToCollidePoint = avCollidePoint - avShapeACenter;
+		//A check if the normal points in the wrong direction.
+		if(cMath::Vector3Dot(vCenterToCollidePoint,avNormal)>0)
+		{
+			avNormal = avNormal *-1;
+		}
+	}
+
 	bool cPhysicsWorldNewton::CheckShapeCollision(	iCollideShape* apShapeA, const cMatrixf& a_mtxA,
 										iCollideShape* apShapeB, const cMatrixf& a_mtxB,
-										cCollideData & aCollideData, int alMaxPoints)
+										cCollideData & aCollideData, int alMaxPoints,
+										bool abCorrectNormalDirection)
 	{
 		cCollideShapeNewton *pNewtonShapeA = static_cast<cCollideShapeNewton*>(apShapeA);
 		cCollideShapeNewton *pNewtonShapeB = static_cast<cCollideShapeNewton*>(apShapeB);
@@ -518,6 +529,12 @@ namespace hpl {
 						CollPoint.mvPoint.x = mpTempPoints[lVertex+0];
 						CollPoint.mvPoint.y = mpTempPoints[lVertex+1];
 						CollPoint.mvPoint.z = mpTempPoints[lVertex+2];
+
+						/////////
+						//Correct the normal
+						if(abCorrectNormalDirection && apShapeA->GetType() != eCollideShapeType_Mesh)
+							CorrectNormalDirection(CollPoint.mvNormal,CollPoint.mvPoint, a_mtxA.GetTranslation());
+
 					}
 
 					lCollideDataStart += lNum;
@@ -556,6 +573,11 @@ namespace hpl {
 				CollPoint.mvPoint.x = mpTempPoints[lVertex+0];
 				CollPoint.mvPoint.y = mpTempPoints[lVertex+1];
 				CollPoint.mvPoint.z = mpTempPoints[lVertex+2];
+
+				/////////
+				//Correct the normal
+				if(abCorrectNormalDirection && apShapeA->GetType() != eCollideShapeType_Mesh)
+					CorrectNormalDirection(CollPoint.mvNormal,CollPoint.mvPoint, a_mtxA.GetTranslation());
 			}
 
 			aCollideData.mlNumOfPoints = lNum;

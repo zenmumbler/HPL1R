@@ -164,7 +164,7 @@ void cGameForceArea::Update(float afTimeStep)
 			int lCollideNum = mbForceAtPoint ? 4: 1;
 
 			if(	pPhysicsWorld->CheckShapeCollision(pBody->GetShape(),pBody->GetLocalMatrix(),
-				pAreaBody->GetShape(), pAreaBody->GetLocalMatrix(),collideData,1)==false)
+				pAreaBody->GetShape(), pAreaBody->GetLocalMatrix(),collideData,1,false)==false)
 			{
 				continue;
 			}

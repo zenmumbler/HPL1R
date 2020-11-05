@@ -110,7 +110,7 @@ void cPlayerState_NormalHaptX::OnUpdate(float afTimeStep)
 		if(pPhysicsWorld->CheckShapeCollision(	mpPlayer->GetHapticCamera()->GetHandShape(),
 												cMath::MatrixTranslate(vProxyPos),
 												pBody->GetShape(), pBody->GetWorldMatrix(),
-												collideData,1))
+												collideData,1,false))
 		{
 			pickedType = type;
 
