@@ -35,9 +35,12 @@ cPlayerState_Grab::cPlayerState_Grab(cInit *apInit,cPlayer *apPlayer) : iPlayerS
 	mpPushBody = NULL;
 
 	//Init controllers
-	mGrabPid.SetErrorNum(10);
-	mRotatePid.SetErrorNum(10);
+	mGrabPid.SetErrorNum(20);
 
+	mRotatePid.SetErrorNum(20);
+	mRotatePid.p = 0.8f;
+	mRotatePid.i = 0.0f;
+	mRotatePid.d = 0.0f;
 	
 	//Get variables
 	mfMaxPidForce =  mpInit->mpGameConfig->GetFloat("Interaction_Grab","MaxPidForce",0);
@@ -176,28 +179,21 @@ void cPlayerState_Grab::OnUpdate(float afTimeStep)
 	//Set speed to 0
 	if(std::abs(mfYRotation) < 0.001f || mbRotateWithPlayer==false)
 	{
-		mRotatePid.p = 0.8f;
-		mRotatePid.i = 0.0f;
-		mRotatePid.d = 0.0f;
-
 		cVector3f vTorque = mRotatePid.Output(cVector3f(0,0,0) - vOmega, afTimeStep);
-		vTorque = vTorque - vOmega * 0.1f;
+		vTorque = vTorque / 5.0f;//vTorque = vTorque - vOmega;
 		
-		mpPushBody->AddTorque(vTorque * mpPushBody->GetMass());
+		mpPushBody->AddTorque(vTorque * std::powf(mpPushBody->GetMass(), 1.8));
 		//vTorque = cMath::MatrixMul(mpPushBody->GetInertiaMatrix(),vTorque);
 		//mpPushBody->AddTorque(vTorque);
 	}
 	else
 	{
-		mRotatePid.p = 0.8f;
-		mRotatePid.i = 0.0f;
-		mRotatePid.d = 0.0f;
-
-		float fWantedSpeed = mfYRotation*6;
+		float fWantedSpeed = mfYRotation * 6;
 
 		cVector3f vTorque = mRotatePid.Output(cVector3f(0,fWantedSpeed,0) - vOmega, afTimeStep);
+		vTorque = vTorque / 5.0f;//added
 
-		mpPushBody->AddTorque(vTorque * mpPushBody->GetMass());
+		mpPushBody->AddTorque(vTorque * std::powf(mpPushBody->GetMass(), 1.8));
 		//vTorque = cMath::MatrixMul(mpPushBody->GetInertiaMatrix(),vTorque);
 		//mpPushBody->AddTorque(vTorque);
 
