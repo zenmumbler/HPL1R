@@ -308,12 +308,12 @@ namespace hpl {
 			z = apVec[2];
 		}
 
-		inline T Length()
+		inline T Length() const
 		{
 			return sqrt( x * x + y * y +  z * z);
 		}
 
-		inline T SqrLength()
+		inline T SqrLength() const
 		{
 			return x * x + y * y +  z * z;
 		}
