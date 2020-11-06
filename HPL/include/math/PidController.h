@@ -75,7 +75,7 @@ namespace hpl {
 
 		void SetErrorNum(int alErrorNum)
 		{
-			mvErrors.resize(alErrorNum);
+			mvErrors.resize(alErrorNum,0);
 			mvTimeSteps.resize(alErrorNum,0);
 		}
 
