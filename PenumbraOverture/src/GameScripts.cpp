@@ -50,7 +50,6 @@
 #include "MainMenu.h"
 #include "GameMusicHandler.h"
 #include "Credits.h"
-#include "DemoEndText.h"
 
 #include "GlobalInit.h"
 
@@ -130,12 +129,6 @@ static void __stdcall StartCredits()
 	gpInit->mpCredits->SetActive(true);
 }
 SCRIPT_DEFINE_FUNC(void, StartCredits)
-
-static void __stdcall StartDemoEndText()
-{
-	gpInit->mpDemoEndText->SetActive(true);
-}
-SCRIPT_DEFINE_FUNC(void, StartDemoEndText)
 
 //-----------------------------------------------------------------------
 
@@ -1737,7 +1730,6 @@ void cGameScripts::Init()
 	//Game general
 	pLowLevelSystem->AddScriptFunc(SCRIPT_REGISTER_FUNC(ResetGame));
 	pLowLevelSystem->AddScriptFunc(SCRIPT_REGISTER_FUNC(StartCredits));
-	pLowLevelSystem->AddScriptFunc(SCRIPT_REGISTER_FUNC(StartDemoEndText));
 	pLowLevelSystem->AddScriptFunc(SCRIPT_REGISTER_FUNC(ClearSavedMaps));
 	pLowLevelSystem->AddScriptFunc(SCRIPT_REGISTER_FUNC(GetActionKeyString));
 	

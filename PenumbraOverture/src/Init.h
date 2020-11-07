@@ -44,7 +44,6 @@ class cRadioHandler;
 class cMapLoadText;
 class cPreMenu;
 class cCredits;
-class cDemoEndText;
 
 class cIntroStory;
 
@@ -71,10 +70,6 @@ class cMainMenu;
 	#define PERSONAL_RELATIVEGAME_PARENT _W("Penumbra/")
 	#define PERSONAL_RELATIVEGAME _W("Penumbra/Overture/")
 #endif
-
-//--------------------------------------------------------
-
-//#define DEMO_VERSION
 
 //--------------------------------------------------------
 
@@ -156,8 +151,6 @@ public:
 
 	tWString msErrorMessage;
 
-	tString msWebPageOnExit;
-
 	bool mbDebugInteraction;
 	float mfMaxPhysicsTimeStep;
 	bool mbDestroyGraphics; //If graphics should be destroyed by the entities. Set to false at map change.
@@ -192,7 +185,6 @@ public:
 	cMapLoadText *mpMapLoadText;
 	cPreMenu *mpPreMenu;
 	cCredits *mpCredits;
-	cDemoEndText *mpDemoEndText;
 	
 	cMainMenu *mpMainMenu;
 

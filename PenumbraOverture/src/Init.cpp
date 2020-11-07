@@ -53,7 +53,6 @@
 #include "MapLoadText.h"
 #include "PreMenu.h"
 #include "Credits.h"
-#include "DemoEndText.h"
 #include "HapticGameCamera.h"
 
 #include "MainMenu.h"
@@ -330,8 +329,6 @@ bool cInit::Init(tString asCommandLine)
 	mbVsync = mpConfig->GetBool("Screen", "Vsync", false);
 	mbLogResources = mpConfig->GetBool("Debug", "LogResources", false);
 	mbDebugInteraction = mpConfig->GetBool("Debug", "DebugInteraction", false);
-
-	msWebPageOnExit = mpConfig->GetString("Demo","WebPageOnExit","http://www.Penumbra-Overture.com");
 	
 	mbSubtitles  = mpConfig->GetBool("Game","Subtitles",true); 
 	mbSimpleWeaponSwing  = mpConfig->GetBool("Game","SimpleWeaponSwing",false); 
@@ -475,14 +472,12 @@ bool cInit::Init(tString asCommandLine)
     mpGame->GetResources()->AddArea3DLoader(hplNew( cAreaLoader_GameArea,("script",this)) );
 	mpGame->GetResources()->AddArea3DLoader(hplNew( cAreaLoader_GameLink,("link",this)) );
 	
-#ifndef DEMO_VERSION
 	mpGame->GetResources()->AddArea3DLoader(hplNew( cAreaLoader_GameSaveArea,("save",this)) );
 	mpGame->GetResources()->AddArea3DLoader(hplNew( cAreaLoader_GameLadder,("ladder",this)) );
 	mpGame->GetResources()->AddArea3DLoader(hplNew( cAreaLoader_GameDamageArea,("damage",this)) );
 	mpGame->GetResources()->AddArea3DLoader(hplNew( cAreaLoader_GameForceArea,("force",this)) );
 	mpGame->GetResources()->AddArea3DLoader(hplNew( cAreaLoader_GameLiquidArea,("liquid",this)) );
 	mpGame->GetResources()->AddArea3DLoader(hplNew( cAreaLoader_GameStickArea,("stick",this)) );
-#endif
 
 		
 	/// FIRST LOADING SCREEN ////////////////////////////////////
@@ -549,7 +544,6 @@ bool cInit::Init(tString asCommandLine)
 	mpMapLoadText = hplNew( cMapLoadText,(this) );
 	mpPreMenu = hplNew( cPreMenu,(this) );
 	mpCredits = hplNew( cCredits,(this) );
-	mpDemoEndText = hplNew( cDemoEndText,(this) );
     
 	mpIntroStory = hplNew( cIntroStory,(this) );
 
@@ -598,10 +592,6 @@ bool cInit::Init(tString asCommandLine)
 	mpGame->GetUpdater()->AddContainer("Credits");
 	mpGame->GetUpdater()->AddUpdate("Credits", mpCredits);
 
-	//Add to demo end text state
-	mpGame->GetUpdater()->AddContainer("DemoEndText");
-	mpGame->GetUpdater()->AddUpdate("DemoEndText", mpDemoEndText);
-
 	mpGame->GetUpdater()->SetContainer("Default");
 	
 	// SCRIPT INIT /////////////////////
@@ -622,7 +612,6 @@ bool cInit::Init(tString asCommandLine)
 
 	//mpIntroStory->SetActive(true);
 	//mpCredits->SetActive(true);
-	//mpDemoEndText->SetActive(true);
 
 	//mpGame->SetRenderOnce(true);
 	//mpGame->GetGraphics()->GetRenderer3D()->SetDebugFlags(eRendererDebugFlag_LogRendering);
@@ -783,8 +772,6 @@ void cInit::Exit()
 	hplDelete( mpPreMenu );
 	Log(" Exit Credits\n");
 	hplDelete( mpCredits );
-	Log(" Exit Demo end text\n");
-	hplDelete( mpDemoEndText );
 
     Log(" Saving config\n");
 	//Save engine stuff.
@@ -832,8 +819,6 @@ void cInit::Exit()
 	mpConfig->SetInt("Screen","Height",mvScreenSize.y);
 	mpConfig->SetBool("Screen", "FullScreen", mbFullScreen);
 	mpConfig->SetBool("Screen", "Vsync", mbVsync);
-
-	mpConfig->SetString("Demo","WebPageOnExit",msWebPageOnExit);
 	
 	mpConfig->SetString("Map","GlobalScript",msGlobalScriptFile);
 	
@@ -867,12 +852,6 @@ void cInit::Exit()
 	hplDelete( mpConfig );
 
 	hplDelete( mpGameConfig );
-
-	
-#ifdef DEMO_VERSION
-	if(msWebPageOnExit != "")
-		OpenBrowserWindow(cString::To16Char(msWebPageOnExit));
-#endif
 }
 
 //-----------------------------------------------------------------------

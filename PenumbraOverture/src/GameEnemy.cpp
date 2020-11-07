@@ -1637,7 +1637,6 @@ void cEntityLoader_GameEnemy::AfterLoad(TiXmlElement *apRootElem, const cMatrixf
 	{
 		pEnemy = hplNew( cGameEnemy_Dog, (mpInit,mpEntity->GetName(),pGameElem) );
 	}
-#ifndef DEMO_VERSION
 	else if(sSubtype == "Spider")
 	{
 		pEnemy = hplNew( cGameEnemy_Spider, (mpInit,mpEntity->GetName(),pGameElem) );
@@ -1646,7 +1645,6 @@ void cEntityLoader_GameEnemy::AfterLoad(TiXmlElement *apRootElem, const cMatrixf
 	{
 		pEnemy = hplNew( cGameEnemy_Worm, (mpInit,mpEntity->GetName(),pGameElem) );
 	}
-#endif
 	
 	pEnemy->msSubType = sSubtype;
 	pEnemy->msEnemyType = msName;

@@ -319,10 +319,6 @@ cMapHandler::~cMapHandler(void)
 
 //-----------------------------------------------------------------------
 
-#ifdef DEMO_VERSION
-	static int glNumOfLoads = 0;
-#endif
-
 bool cMapHandler::Load(const tString &asFile,const tString& asStartPos)
 {
 	tString sMapName = cString::ToLowerCase(cString::SetFileExt(asFile,""));
@@ -330,15 +326,6 @@ bool cMapHandler::Load(const tString &asFile,const tString& asStartPos)
 	cWorld3D *pLastMap = NULL;
 	bool bFirstTime = false;
 	double fTimeSinceVisit=0;
-
-#ifdef DEMO_VERSION
-	glNumOfLoads++;
-	if(glNumOfLoads > 5){
-		CreateMessageBoxW(	_W("Demo not playable any more!\n"),
-							_W("The limits of the demo have been exceeded!\n"));
-		exit(0);
-	}
-#endif
 	
 	unsigned long lStartTime = mpInit->mpGame->GetSystem()->GetLowLevel()->GetTime();
 
@@ -1437,10 +1424,6 @@ void cMapHandler::Update(float afTimeStep)
 
 void cMapHandler::Reset()
 {
-#ifdef DEMO_VERSION
-	glNumOfLoads = 0;
-#endif
-
 	mMapChanger.mbActive = false;
 	msCurrentMap = "";
 

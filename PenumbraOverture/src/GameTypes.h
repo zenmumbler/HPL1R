@@ -44,7 +44,6 @@ enum eButtonHandlerState
 	eButtonHandlerState_MapLoadText,
 	eButtonHandlerState_PreMenu,
 	eButtonHandlerState_Credits,
-	eButtonHandlerState_DemoEndText,
 	eButtonHandlerState_Intro
 };
 

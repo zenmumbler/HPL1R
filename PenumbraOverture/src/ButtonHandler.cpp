@@ -30,7 +30,6 @@
 #include "MapLoadText.h"
 #include "PreMenu.h"
 #include "Credits.h"
-#include "DemoEndText.h"
 
 #include "MainMenu.h"
 
@@ -234,21 +233,9 @@ void cButtonHandler::Update(float afTimeStep)
 #endif
 	}
 	///////////////////////////////////
-	// DEMO END TEXT
-	///////////////////////////////////
-	if(mState == eButtonHandlerState_DemoEndText)
-	{
-		if(	mpInput->BecameTriggerd("Escape"))	
-			mpInit->mpDemoEndText->OnButtonDown();
-		if(mpInput->BecameTriggerd("LeftClick"))
-			mpInit->mpDemoEndText->OnMouseDown(eMButton_Left);
-		if(mpInput->BecameTriggerd("RightClick"))
-			mpInit->mpDemoEndText->OnMouseDown(eMButton_Right);
-	}
-	///////////////////////////////////
 	// CREDITS STATE
 	///////////////////////////////////
-	else if(mState == eButtonHandlerState_Credits)
+	if(mState == eButtonHandlerState_Credits)
 	{
 		if(	mpInput->BecameTriggerd("Escape"))	
 			mpInit->mpCredits->OnButtonDown();
