@@ -177,12 +177,12 @@ namespace hpl {
 		switch(mAccuracy)
 		{
 		case ePhysicsAccuracy_Low:
-									NewtonSetSolverModel(mpNewtonWorld,8);
+									NewtonSetSolverModel(mpNewtonWorld,1);
 									NewtonSetFrictionModel(mpNewtonWorld,1);
 									Log("SETTING LOW!\n");
 									break;
 		case ePhysicsAccuracy_Medium:
-									NewtonSetSolverModel(mpNewtonWorld,1);
+									NewtonSetSolverModel(mpNewtonWorld,2);
 									NewtonSetFrictionModel(mpNewtonWorld,1);
 									break;
 		case ePhysicsAccuracy_High:
