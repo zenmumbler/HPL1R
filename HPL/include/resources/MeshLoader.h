@@ -52,6 +52,7 @@ namespace hpl {
 	{
 	friend class cMeshLoaderHandler;
 	public:
+		virtual ~iMeshLoader() {}
 		iMeshLoader(iLowLevelGraphics *apLowLevelGraphics)
 					: mpLowLevelGraphics(apLowLevelGraphics){}
 

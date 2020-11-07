@@ -391,6 +391,7 @@ namespace hpl {
 	class iMaterialType
 	{
 	public:
+		virtual ~iMaterialType() {}
 		virtual bool IsCorrect(tString asName)=0;
 		virtual iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,

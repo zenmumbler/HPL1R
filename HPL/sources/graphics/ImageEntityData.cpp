@@ -228,7 +228,7 @@ namespace hpl {
 			tTextureTypeList lstTypes = pMaterial->GetTextureTypes();
 			for(tTextureTypeListIt it = lstTypes.begin(); it!= lstTypes.end(); it++)
 			{
-				if(avImageHandle[it->mType]==-1){
+				if(avImageHandle[it->mType] == static_cast<unsigned int>(-1)){
 					avImageHandle[it->mType] = mpResources->GetImageManager()->CreateFrame(mvFrameSize);
 				}
 

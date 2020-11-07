@@ -78,7 +78,7 @@ namespace hpl {
 
 		////////////////////////////////////
 		//Update character bodies
-		unsigned int lTime = GetApplicationTime();
+		unsigned long lTime = GetApplicationTime();
 		tCharacterBodyListIt CharIt = mlstCharBodies.begin();
 		for(; CharIt != mlstCharBodies.end(); ++CharIt)
 		{

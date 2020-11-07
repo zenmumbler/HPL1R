@@ -373,11 +373,11 @@ namespace hpl {
 			//Update logic.
 			while(mpLogicTimer->WantUpdate() && !mbGameIsDone)
 			{
-				unsigned int lUpdateTime = GetApplicationTime();
+				unsigned long lUpdateTime = GetApplicationTime();
 
 				mpUpdater->Update(GetStepSize());
 
-				unsigned int lDeltaTime = GetApplicationTime() - lUpdateTime;
+				unsigned long lDeltaTime = GetApplicationTime() - lUpdateTime;
 				mfUpdateTime = (float)(lDeltaTime) / 1000.0f;
 
 				mbIsUpdated = true;

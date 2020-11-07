@@ -561,7 +561,7 @@ cGameEnemy_Worm_MeshCallback::cGameEnemy_Worm_MeshCallback(cGameEnemy_Worm *apWo
 
 /*OLD CALC MATRIX VERSION:
 cMatrixf mtxRot = cMatrixf::Identity;
-mtxRot.SetRight(mpWorm->mvRootRight*-1); //*-1 = straange
+mtxRot.SetRight(mpWorm->mvRootRight*-1); // *-1 = straange
 mtxRot.SetUp(mpWorm->mvRootUp);
 mtxRot.SetForward(mpWorm->mvRootForward);
 
@@ -612,7 +612,7 @@ void cGameEnemy_Worm_MeshCallback::AfterAnimationUpdate(cMeshEntity *apMeshEntit
 		//Change orientation according to forward
 		cMatrixf mtxTrans = cMatrixf::Identity;
 		{
-			/*mtxTrans.SetRight(pSegment->mvRight*-1); //*-1 = straaange
+			/*mtxTrans.SetRight(pSegment->mvRight*-1); // *-1 = straaange
 			mtxTrans.SetUp(pSegment->mvUp);
 			mtxTrans.SetForward(pSegment->mvForward);
 
@@ -771,8 +771,8 @@ void cGameEnemy_Worm::OnUpdate(float afTimeStep)
 	// Calculate direction vectors 
 	if(vMovement.SqrLength()>0.00001f)
 		mvRootGoalForward = cMath::Vector3Normalize(vMovement);
-	else
-		mvRootGoalForward = mvRootGoalForward;
+	//else
+	//	mvRootGoalForward = mvRootGoalForward;
 
 	
 	//Rotate vectors to get closer to goal

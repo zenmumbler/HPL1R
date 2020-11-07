@@ -154,6 +154,7 @@ public:
 class iGameEnemyState
 {
 public:
+	virtual ~iGameEnemyState() {}
 	iGameEnemyState(int alId, cInit *apInit, iGameEnemy *apEnemy);
 
 	virtual void OnEnterState(iGameEnemyState *apPrevState)=0;
