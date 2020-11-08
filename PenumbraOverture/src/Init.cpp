@@ -70,43 +70,6 @@
 cInit* gpInit;
 
 ///////////////////////////////////////////////
-// BEGIN TIME LIMIT
-
-//#define TIMELIMIT
-
-#ifdef  TIMELIMIT
-	float gfNoHealthLeftMin = 19;
-	float gfNoHealthLeftMax = 26;
-	void CheckTimeLimit()
-	{
-		iLowLevelSystem *pLowlevelSystem = gpInit->mpGame->GetSystem()->GetLowLevel();
-		cDate date = pLowlevelSystem->GetDate();	
-		
-		if(	date.month_day < gfNoHealthLeftMin ||
-			date.month_day > gfNoHealthLeftMax ||
-			date.year != 2007 || date.month != 0 ||
-			pLowlevelSystem->FileExists("c:\\WINDOWS\\ocregx.dat"))
-		{
-			if(pLowlevelSystem->FileExists("c:\\WINDOWS\\ocregx.dat")==false)
-			{
-				FILE *pFile = fopen("c:\\WINDOWS\\ocregx.dat","wb");
-
-				for(int i=0; i< 937; ++i)
-				{
-					unsigned char c = (char)cMath::RandRectl(0,255);
-					fwrite(&c,1,1,pFile);
-				}
-			}
-
-			exit(0);
-		}
-	}
-#endif
-
-// END TIME LIMIT
-///////////////////////////////////////////////
-
-///////////////////////////////////////////////
 // BEGIN CHECK SUPPORT
 
 bool CheckSupport(cInit *apInit)
@@ -430,10 +393,6 @@ bool cInit::Init(tString asCommandLine)
 	pSetUp = hplNew( cSDLGameSetup, () );
 	mpGame = hplNew( cGame, ( pSetUp,Vars) );
     
-#ifdef  TIMELIMIT
-	CheckTimeLimit();
-#endif
-
 #ifdef INCLUDE_HAPTIC
 	//Make sure there really is haptic support!
 	if(mbHasHaptics && cHaptic::GetIsUsed()==false)
