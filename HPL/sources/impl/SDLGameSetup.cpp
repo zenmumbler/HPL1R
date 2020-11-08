@@ -31,7 +31,7 @@
 #include "impl/LowLevelSoundOpenAL.h"
 #include "impl/LowLevelPhysicsNewton.h"
 #ifdef INCLUDE_HAPTIC
-#include "impl/LowLevelHapticHaptX.h"
+#include "impl/LowLevelHapticSDL.h"
 #endif
 #include "haptic/Haptic.h"
 
@@ -64,7 +64,7 @@ namespace hpl {
 		mpLowLevelPhysics = hplNew( cLowLevelPhysicsNewton,() );
 
 #ifdef INCLUDE_HAPTIC
-		mpLowLevelHaptic = hplNew( cLowLevelHapticHaptX,() );
+		mpLowLevelHaptic = hplNew( cLowLevelHapticSDL,() );
 #else
 		mpLowLevelHaptic = NULL;
 #endif
