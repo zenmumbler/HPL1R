@@ -29,7 +29,9 @@
 #include "GameItem.h"
 
 #include "PlayerState_Weapon.h"
+#ifdef INCLUDE_HAPTIC
 #include "PlayerState_WeaponHaptX.h"
+#endif
 #include "HudModel_Weapon.h"
 #include "HudModel_Throw.h"
 
@@ -371,8 +373,10 @@ bool cGameItemType_WeaponMelee::OnAction(cInventoryItem *apItem, int alActionNum
 				Error("Hud model with name '%s' does not exist!\n",apItem->GetHudModelName().c_str());
 				return true;
 			}
-			
+
+#ifdef INCLUDE_HAPTIC
             if(mpInit->mbHasHaptics==false) mpInit->mpPlayerHands->SetCurrentModel(1, apItem->GetHudModelName());
+#endif
 
 			//////////////////////////
 			//Set up the melee state
@@ -391,6 +395,8 @@ bool cGameItemType_WeaponMelee::OnAction(cInventoryItem *apItem, int alActionNum
 	return true;
 }
 
+
+#ifdef INCLUDE_HAPTIC
 
 //-----------------------------------------------------------------------
 
@@ -465,6 +471,7 @@ bool cGameItemType_WeaponMeleeHaptX::OnAction(cInventoryItem *apItem, int alActi
 	return true;
 }
 
+#endif
 
 //-----------------------------------------------------------------------
 

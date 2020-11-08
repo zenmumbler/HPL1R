@@ -398,9 +398,11 @@ bool cMapHandler::Load(const tString &asFile,const tString& asStartPos)
 		mpInit->mpGame->GetSound()->GetSoundHandler()->StopAll(eSoundDest_World);
 		mpInit->mpGame->GetSound()->Update(1.0f/60.0f);
 
+#ifdef INCLUDE_HAPTIC
 		//Destroy Haptic shapes
 		if(mpInit->mbHasHaptics)
 			mpInit->mpGame->GetHaptic()->GetLowLevel()->DestroyAllShapes();
+#endif
 		
 		////////////////////////////////////////
 		// LOAD THE MAP ////////////////////////
@@ -551,9 +553,11 @@ bool cMapHandler::LoadSimple(const tString &asFile, bool abLoadEntities)
 	
 	cWorld3D *pOldWorld = mpScene->GetWorld3D();
 
+#ifdef INCLUDE_HAPTIC
 	//Haptic
 	if(mpInit->mbHasHaptics)
 		mpInit->mpGame->GetHaptic()->GetLowLevel()->DestroyAllShapes();
+#endif
 
 	//Delete all sound entities
 	if(pOldWorld)
@@ -1436,12 +1440,14 @@ void cMapHandler::Reset()
 
 	DestroyAll();
 
+#ifdef INCLUDE_HAPTIC
 	//Haptic
 	if(mpInit->mbHasHaptics)
 	{
 		mpInit->mpGame->GetHaptic()->GetLowLevel()->DestroyAllShapes();
 		mpInit->mpGame->GetHaptic()->GetLowLevel()->StopAllForces();
 	}
+#endif
 
 	//World3D
 	if(mpScene->GetWorld3D()) mpScene->DestroyWorld3D(mpScene->GetWorld3D());

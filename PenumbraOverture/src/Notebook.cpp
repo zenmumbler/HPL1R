@@ -23,7 +23,9 @@
 #include "Inventory.h"
 #include "SaveHandler.h"
 #include "EffectHandler.h"
+#ifdef INCLUDE_HAPTIC
 #include "HapticGameCamera.h"
+#endif
 
 //////////////////////////////////////////////////////////////////////////
 // FRONT STATE
@@ -1168,8 +1170,10 @@ void cNotebook::SetActive(bool abX)
 	mbActive = abX;
 	if(mbActive)
 	{
+#ifdef INCLUDE_HAPTIC
 		if(mpInit->mbHasHaptics)
 			mpInit->mpPlayer->GetHapticCamera()->SetActive(false);
+#endif
 
 		mLastCrossHairState = mpInit->mpPlayer->GetCrossHairState();
 
@@ -1192,8 +1196,10 @@ void cNotebook::SetActive(bool abX)
 	}
 	else
 	{
+#ifdef INCLUDE_HAPTIC
 		if(mpInit->mbHasHaptics)
 			mpInit->mpPlayer->GetHapticCamera()->SetActive(true);
+#endif
 
 		if(mbInventoryWasActive)
 		{

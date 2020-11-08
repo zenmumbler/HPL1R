@@ -181,10 +181,12 @@ public:
 	void SetBillboards(std::vector<cBillboard*> &avBillboards){mvBillboards = avBillboards;}
 	void SetBeams(std::vector<cBeam*> &avBeams){mvBeams = avBeams;}
 	void SetSoundEntities(std::vector<cSoundEntity*> &avSoundEntities){mvSoundEntities = avSoundEntities;}
-	
+
+#ifdef INCLUDE_HAPTIC
 	size_t GetHapticShapeNum(){ return mvHapticShapes.size();}
 	iHapticShape* GetHapticShape(size_t alNum){ return mvHapticShapes[alNum];}
 	void SetHapticShapes(std::vector<iHapticShape*> &avShapes){mvHapticShapes = avShapes;}
+#endif
 
 	void DestroyLight(iLight3D *apLight);
 	void DestroyParticleSystem(cParticleSystem3D* apPS);

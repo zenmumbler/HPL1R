@@ -65,7 +65,9 @@ iGameEntity::iGameEntity(cInit *apInit, const tString &asName)
 
 	mfMaxExamineDist = 6.0f;
 	mfMaxInteractDist = 1.5f;
+#ifdef INCLUDE_HAPTIC
 	if(mpInit->mbHasHaptics) mfMaxInteractDist = mpInit->mfHapticMaxInteractDist;
+#endif
 
 	mbHasInteraction = false;
 
@@ -113,6 +115,7 @@ iGameEntity::~iGameEntity()
 		}
 	}
 
+#ifdef INCLUDE_HAPTIC
 	////////////////////////////////////////////
 	// Destroy haptic
 	for(size_t i=0; i< mvHapticShapes.size(); ++i)
@@ -122,6 +125,7 @@ iGameEntity::~iGameEntity()
 			mpInit->mpGame->GetHaptic()->GetLowLevel()->DestroyShape(mvHapticShapes[i]);
 		}
 	}
+#endif
 	
 	//////////////////////////////////////////////
 	// Destroy all graphics in the entity!
@@ -335,9 +339,14 @@ void iGameEntity::PlayerInteract()
 {
 	//////////////////////
 	// Script stuff
+
+#ifdef INCLUDE_HAPTIC
 	if(GetPickedDistance() <= mfMaxInteractDist &&
 		(mpInit->mbHasHaptics==false || mpInit->mpPlayer->mbProxyTouching || 
 		 mType == eGameEntityType_Area))
+#else
+	if(GetPickedDistance() <= mfMaxInteractDist)
+#endif
 	{
 		cWorld3D *pWorld = mpInit->mpGame->GetScene()->GetWorld3D();
 		if(mvCallbackScripts[eGameEntityScriptType_PlayerInteract])
@@ -397,7 +406,9 @@ void iGameEntity::Damage(float afDamage, int alStrength)
 		{
 			//if(mpInit->mDifficulty== eGameDifficulty_Easy) afDamage *= 2.0f;
 			if(mpInit->mDifficulty== eGameDifficulty_Hard) afDamage /= 2.0f;
+#ifdef INCLUDE_HAPTIC
 			if(mpInit->mbHasHaptics) afDamage *= 2.0f;
+#endif
 		}
 		
 		int lDiff = mlToughness - alStrength;

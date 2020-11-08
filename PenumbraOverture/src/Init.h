@@ -119,7 +119,8 @@ public:
 	bool mbShowIntro;
 	int mlFSAA;
 	eGameDifficulty mDifficulty;
-	
+
+#ifdef INCLUDE_HAPTIC
 	bool mbHasHaptics;
 	bool mbHasHapticsOnRestart;
 	bool mbHapticsAvailable;
@@ -129,7 +130,11 @@ public:
 	float mfHapticProxyRadius;
 	float mfHapticOffsetZ;
 	float mfHapticMaxInteractDist;
-		
+
+	bool mbSimpleWeaponSwing;
+	bool mbSimpleSwingInOptions;
+#endif
+
 	int mlMaxSoundChannels;
     int mlStreamUpdateFreq;
 	bool mbUseSoundHardware;
@@ -145,11 +150,9 @@ public:
 	tString msStartLink;
 	
 	bool mbSubtitles;
-	bool mbSimpleWeaponSwing;
 	bool mbDisablePersonalNotes;
 	bool mbAllowQuickSave;
 	bool mbFlashItems;
-	bool mbSimpleSwingInOptions;
 	bool mbShowCrossHair;
 
 	tWString msErrorMessage;

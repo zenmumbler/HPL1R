@@ -142,6 +142,7 @@ public:
 	bool OnAction(cInventoryItem *apItem, int alActionNum);
 };
 
+#ifdef INCLUDE_HAPTIC
 //----------------------------------------------
 
 // WEAPON MELEE HAPTX
@@ -154,6 +155,7 @@ public:
 	bool OnAction(cInventoryItem *apItem, int alActionNum);
 };
 
+#endif
 //----------------------------------------------
 
 

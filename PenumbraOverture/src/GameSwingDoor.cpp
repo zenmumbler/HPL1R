@@ -66,7 +66,9 @@ void cEntityLoader_GameSwingDoor::AfterLoad(TiXmlElement *apRootElem, const cMat
 	pObject->SetBodies(mvBodies);
 	pObject->SetJoints(mvJoints);
 	pObject->SetMeshEntity(mpEntity);
+#ifdef INCLUDE_HAPTIC
 	pObject->SetHapticShapes(mvHapticShapes);
+#endif
 
 	///////////////////////////////////
 	// Load game properties
@@ -203,7 +205,9 @@ void cGameSwingDoor::OnPlayerInteract()
 	float fDist = mpInit->mpPlayer->GetPickedDist();
 
 	if(fDist > mfMaxInteractDist) return;
+#ifdef INCLUDE_HAPTIC
 	if(mpInit->mbHasHaptics && mpInit->mpPlayer->mbProxyTouching==false) return;
+#endif
 
 	//Set some properties
 	mpInit->mpPlayer->mfForwardUpMul = 1.0f;
@@ -214,22 +218,21 @@ void cGameSwingDoor::OnPlayerInteract()
 
 	mpInit->mpPlayer->mfCurrentMaxInteractDist = mfMaxInteractDist;
 
+#ifdef INCLUDE_HAPTIC
 	if(!mpInit->mbHasHaptics)
 	{
 		mpInit->mpPlayer->SetPushBody(mpInit->mpPlayer->GetPickedBody());
 		mpInit->mpPlayer->ChangeState(ePlayerState_Move);
 	}
 	else
+#endif
 	{
 		mpInit->mpPlayer->mbPickAtPoint = true;
 		mpInit->mpPlayer->mbRotateWithPlayer = false;
 		mpInit->mpPlayer->mbUseNormalMass = false;
 		mpInit->mpPlayer->mfGrabMassMul = 1;
 
-		mpInit->mpPlayer->mfHapticTorqueMul = 1.0f;
-
 		mpInit->mpPlayer->mbCanBeThrown = true;
-		mpInit->mpPlayer->mbGrabbingMoveBody = true;
 
 		mpInit->mpPlayer->SetPushBody(mpInit->mpPlayer->GetPickedBody());
 		mpInit->mpPlayer->ChangeState(ePlayerState_Grab);

@@ -24,7 +24,9 @@
 #include "GraphicsHelper.h"
 #include "SaveHandler.h"
 #include "MainMenu.h"
+#ifdef INCLUDE_HAPTIC
 #include "HapticGameCamera.h"
+#endif
 
 //////////////////////////////////////////////////////////////////////////
 // BUTTON
@@ -334,8 +336,10 @@ void cDeathMenu::SetActive(bool abX)
 
 	if(mbActive)
 	{
+#ifdef INCLUDE_HAPTIC
 		if(mpInit->mbHasHaptics)
 			mpInit->mpPlayer->GetHapticCamera()->SetActive(false);
+#endif
 
 		mLastCrossHairState = mpInit->mpPlayer->GetCrossHairState();
 
@@ -357,8 +361,10 @@ void cDeathMenu::SetActive(bool abX)
 	}
 	else
 	{
+#ifdef INCLUDE_HAPTIC
 		if(mpInit->mbHasHaptics)
 			mpInit->mpPlayer->GetHapticCamera()->SetActive(true);
+#endif
 
 		mpInit->mpPlayer->SetCrossHairState(mLastCrossHairState);
 		mpInit->mpPlayer->SetCrossHairPos(cVector2f(400,300));

@@ -50,7 +50,9 @@ class cPlayerAmbientLight;
 
 class cPlayerBodyCallback;
 
+#ifdef INCLUDE_HAPTIC
 class cHapticGameCamera;
+#endif
 
 
 typedef std::vector<iPlayerState*> tPlayerStateVec;
@@ -307,7 +309,9 @@ public:
 
 	cPlayerHidden* GetHidden(){ return mpHidden;}
 
+#ifdef INCLUDE_HAPTIC
 	cHapticGameCamera* GetHapticCamera(){ return mpHapticCamera;}
+#endif
 
 	float GetHeightAdd(){ return mfHeightAdd;}
 	void SetHeightAdd(float afX){ mfHeightAdd = afX;}
@@ -360,10 +364,12 @@ public:
 
 	float mfCurrentMaxInteractDist;
 
+#ifdef INCLUDE_HAPTIC
 	//Haptic
 	bool mbGrabbingMoveBody;
 	bool mbProxyTouching;
 	float mfHapticTorqueMul;
+#endif
 
 	bool mbDamageFromPos;
 	cVector3f mvDamagePos;
@@ -379,7 +385,6 @@ private:
 	cGraphics *mpGraphics;
 	cResources *mpResources;
 	cGraphicsDrawer *mpGfxDrawer;
-	iLowLevelHaptic *mpLowLevelHaptic;
 
 	iFontData *mpFont;
 
@@ -391,7 +396,13 @@ private:
 	float mfLookSpeed;
 	float mfCameraHeightAdd;
 
+#ifdef INCLUDE_HAPTIC
+	iLowLevelHaptic *mpLowLevelHaptic;
 	cHapticGameCamera* mpHapticCamera;
+
+	iHapticForce *mpDamageForce;
+	iHapticForce *mpDamageDirForce;
+#endif
 
 	cVector3f mvSize;
 	float mfCrouchHeight;
@@ -425,9 +436,6 @@ private:
 	iPhysicsBody *mpPushBody;
 
 	std::vector<cGfxObject*> mvCrossHairs;
-
-	iHapticForce *mpDamageForce;
-	iHapticForce *mpDamageDirForce;
 
 	cVector2f mvMaxPushHeadMovement;
 	cVector2f mvMinPushHeadMovement;

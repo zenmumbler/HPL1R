@@ -72,16 +72,14 @@ cHudModel_WeaponMelee::cHudModel_WeaponMelee() : iHudModel(ePlayerHandType_Weapo
 {
 	ResetExtraData();
 
+#ifdef INCLUDE_HAPTIC
 	if(gpInit->mbHasHaptics)
 	{
 		mpLowLevelHaptic = gpInit->mpGame->GetHaptic()->GetLowLevel();
 		mpHHitForce = mpLowLevelHaptic->CreateSinusWaveForce(cVector3f(0,1,0),0.63f,5);
 		mpHHitForce->SetActive(false);
 	}
-	else
-	{
-		mpLowLevelHaptic = NULL;
-	}
+#endif
 }
 
 //-----------------------------------------------------------------------
@@ -96,6 +94,7 @@ void cHudModel_WeaponMelee::LoadData(TiXmlElement *apRootElem)
 		return;
 	}
 
+#ifdef INCLUDE_HAPTIC
 	mvHapticSize = cString::ToVector3f(pMeleeElem->Attribute("HapticSize"),0);
 	mvHapticRot = cString::ToVector3f(pMeleeElem->Attribute("HapticRotate"),0);
 	mfHapticScale = cString::ToFloat(pMeleeElem->Attribute("HapticScale"),2);
@@ -103,7 +102,7 @@ void cHudModel_WeaponMelee::LoadData(TiXmlElement *apRootElem)
 	mvHapticRot.x = cMath::ToRad(mvHapticRot.x);
 	mvHapticRot.y = cMath::ToRad(mvHapticRot.y);
 	mvHapticRot.z = cMath::ToRad(mvHapticRot.z);
-
+#endif
 	
 	mbDrawDebug = cString::ToBool(pMeleeElem->Attribute("DrawDebug"),false);
 
@@ -237,11 +236,13 @@ void cHudModel_WeaponMelee::OnAttackDown()
 
 void cHudModel_WeaponMelee::OnAttackUp()
 {
+#ifdef INCLUDE_HAPTIC
 	if(mpInit->mbSimpleWeaponSwing)
 	{
 
 	}
 	else
+#endif
 	{
 		if(mlAttackState != 0 && mlAttackState != 4 && mlAttackState != 5)
 		{
@@ -263,8 +264,14 @@ void cHudModel_WeaponMelee::OnAttackUp()
 bool cHudModel_WeaponMelee::OnMouseMove(const cVector2f &avMovement)
 {
 	float fMinMovement = 0.015f;
+	
+#ifdef INCLUDE_HAPTIC
+	bool bSimpleWeaponSwing = mpInit->mbSimpleWeaponSwing;
+#else
+	bool bSimpleWeaponSwing = false;
+#endif
 
-	if(mlAttackState ==0 || (mbButtonDown==false && mpInit->mbSimpleWeaponSwing==false))
+	if(mlAttackState ==0 || (mbButtonDown==false && bSimpleWeaponSwing==false))
 	{
 		return true;
 	}
@@ -274,7 +281,7 @@ bool cHudModel_WeaponMelee::OnMouseMove(const cVector2f &avMovement)
 		//Check for charge
 		if(mlAttackState == 1)
 		{
-			if(mpInit->mbSimpleWeaponSwing)
+			if(bSimpleWeaponSwing)
 			{
 				//if(avMovement.y < -0.03f)
 				//	mlCurrentAttack = 2;
@@ -324,7 +331,7 @@ bool cHudModel_WeaponMelee::OnMouseMove(const cVector2f &avMovement)
 			cInput *pInput = mpInit->mpGame->GetInput();
 			if(pInput->IsTriggerd("Examine")) return true;
 			
-			if(mpInit->mbSimpleWeaponSwing)
+			if(bSimpleWeaponSwing)
 			{
 				if(mlCurrentAttack != 2 && pInput->IsTriggerd("Interact")==false)
 				{
@@ -382,7 +389,7 @@ bool cHudModel_WeaponMelee::OnMouseMove(const cVector2f &avMovement)
 			}
 		}
 		
-		return mpInit->mbSimpleWeaponSwing;
+		return bSimpleWeaponSwing;
 	}
 }
 
@@ -761,6 +768,7 @@ void cHudModel_WeaponMelee::Attack()
 	{
 		PlaySound(mvAttacks[mlCurrentAttack].msHitSound);
 
+#ifdef INCLUDE_HAPTIC
 		if(mpInit->mbHasHaptics)
 		{
 			if(mpHHitForce->IsActive())	mpHHitForce->SetActive(false);
@@ -768,6 +776,7 @@ void cHudModel_WeaponMelee::Attack()
 			mpHHitForce->SetActive(true);
 			mpHHitForce->SetTimeControl(false,0.3f, 0.2f, 0,0.1f);
 		}
+#endif
 	}
 
 	mpInit->mbWeaponAttacking = false;

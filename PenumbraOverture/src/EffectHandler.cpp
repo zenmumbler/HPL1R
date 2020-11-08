@@ -93,16 +93,13 @@ cEffect_ShakeScreen::cEffect_ShakeScreen(cInit *apInit)
 {
 	mpInit = apInit;
 
+#ifdef INCLUDE_HAPTIC
 	if(mpInit->mbHasHaptics)
 	{
 		mpForce = mpInit->mpGame->GetHaptic()->GetLowLevel()->CreateSinusWaveForce(
 																cVector3f(0,1,0),0.1f,5);
 	}
-	else
-	{
-		mpForce = NULL;
-	}
-	
+#endif
 }
 
 cEffect_ShakeScreen::~cEffect_ShakeScreen()
@@ -169,6 +166,7 @@ void cEffect_ShakeScreen::Update(float afTimeStep)
 	mvAdd.y = cMath::RandRectf(-fLargest,fLargest);
 	mvAdd.z = cMath::RandRectf(-fLargest,fLargest);
 
+#ifdef INCLUDE_HAPTIC
 	if(mpForce)
 	{
 		if(mlstShakes.empty()==false)
@@ -181,6 +179,7 @@ void cEffect_ShakeScreen::Update(float afTimeStep)
 			mpForce->SetActive(false);
 		}
 	}
+#endif
 }
 
 void cEffect_ShakeScreen::Reset()

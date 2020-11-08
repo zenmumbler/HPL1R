@@ -101,10 +101,11 @@ public:
 
 	bool IsAttacking();
 
+#ifdef INCLUDE_HAPTIC
 	cVector3f GetHapticSize(){ return mvHapticSize;}
 	float GetHapticScale(){ return mfHapticScale;}
 	cVector3f GetHapticRot(){ return mvHapticRot;}
-
+#endif
 
 	cMeleeWeaponAttack* GetAttack(int alX){return  &mvAttacks[alX];}
 private:
@@ -124,9 +125,11 @@ private:
 	int mlAttackState;
 	float mfTime;
 
+#ifdef INCLUDE_HAPTIC
 	float mfHapticScale;
 	cVector3f mvHapticSize;
 	cVector3f mvHapticRot;
+#endif
 
 	cMatrixf m_mtxPrevPose;
 	cMatrixf m_mtxNextPose;
@@ -140,8 +143,10 @@ private:
 	
 	std::vector<cMeleeWeaponAttack> mvAttacks;
 
+#ifdef INCLUDE_HAPTIC
 	iLowLevelHaptic *mpLowLevelHaptic;
 	iHapticForce *mpHHitForce;
+#endif
 };
 
 //-------------------------------------------

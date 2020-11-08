@@ -75,13 +75,9 @@
 		DB06305A111D3E3F0048C5E9 /* GameLiquidArea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBFBA01C0B65E4660021DAE2 /* GameLiquidArea.cpp */; };
 		DB06305B111D3E3F0048C5E9 /* MapLoadText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBFBA01E0B65E4660021DAE2 /* MapLoadText.cpp */; };
 		DB06305C111D3E3F0048C5E9 /* PreMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBFBA0200B65E4660021DAE2 /* PreMenu.cpp */; };
-		DB06305F111D3E3F0048C5E9 /* HapticGameCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB150D70708200809E03 /* HapticGameCamera.cpp */; };
-		DB063060111D3E3F0048C5E9 /* PlayerState_InteractHaptX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB170D70708200809E03 /* PlayerState_InteractHaptX.cpp */; };
-		DB063061111D3E3F0048C5E9 /* PlayerState_MiscHaptX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB190D70708200809E03 /* PlayerState_MiscHaptX.cpp */; };
 		DB063068111D3E3F0048C5E9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF84AA40AC76EEE00BB15CD /* OpenGL.framework */; };
 		DB063069111D3E3F0048C5E9 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCEE71E0B4B53550088A7E3 /* OpenAL.framework */; };
 		DBF9A3D8119A65AB00CCFDC9 /* libOALWrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF9A3CD119A658A00CCFDC9 /* libOALWrapper.a */; };
-		DBF9A455119A6B5E00CCFDC9 /* PlayerState_WeaponHaptX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB1B0D70708200809E03 /* PlayerState_WeaponHaptX.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,14 +151,6 @@
 		DB2707780ACCDEE40054ACA3 /* GameEnemy_Spider.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GameEnemy_Spider.h; sourceTree = "<group>"; };
 		DB294DD00C11D2B2005DA55C /* Version.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		DB2AFF4D0B9E75FD00E872A8 /* resource.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = resource.h; sourceTree = "<group>"; };
-		DB4AFB150D70708200809E03 /* HapticGameCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = HapticGameCamera.cpp; sourceTree = "<group>"; };
-		DB4AFB160D70708200809E03 /* HapticGameCamera.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = HapticGameCamera.h; sourceTree = "<group>"; };
-		DB4AFB170D70708200809E03 /* PlayerState_InteractHaptX.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerState_InteractHaptX.cpp; sourceTree = "<group>"; };
-		DB4AFB180D70708200809E03 /* PlayerState_InteractHaptX.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PlayerState_InteractHaptX.h; sourceTree = "<group>"; };
-		DB4AFB190D70708200809E03 /* PlayerState_MiscHaptX.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerState_MiscHaptX.cpp; sourceTree = "<group>"; };
-		DB4AFB1A0D70708200809E03 /* PlayerState_MiscHaptX.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PlayerState_MiscHaptX.h; sourceTree = "<group>"; };
-		DB4AFB1B0D70708200809E03 /* PlayerState_WeaponHaptX.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerState_WeaponHaptX.cpp; sourceTree = "<group>"; };
-		DB4AFB1C0D70708200809E03 /* PlayerState_WeaponHaptX.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PlayerState_WeaponHaptX.h; sourceTree = "<group>"; };
 		DBCEE6260B4B365C0088A7E3 /* GameDamageArea.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GameDamageArea.cpp; sourceTree = "<group>"; };
 		DBCEE6270B4B365C0088A7E3 /* GameDamageArea.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GameDamageArea.h; sourceTree = "<group>"; };
 		DBCEE6280B4B365C0088A7E3 /* GameEnemy_Worm.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GameEnemy_Worm.cpp; sourceTree = "<group>"; };
@@ -376,8 +364,6 @@
 				DBF84A4F0AC76D8F00BB15CD /* GlobalInit.h */,
 				DBF84A500AC76D8F00BB15CD /* GraphicsHelper.cpp */,
 				DBF84A510AC76D8F00BB15CD /* GraphicsHelper.h */,
-				DB4AFB150D70708200809E03 /* HapticGameCamera.cpp */,
-				DB4AFB160D70708200809E03 /* HapticGameCamera.h */,
 				DBF84A520AC76D8F00BB15CD /* HudModel_Throw.cpp */,
 				DBF84A530AC76D8F00BB15CD /* HudModel_Throw.h */,
 				DBF84A540AC76D8F00BB15CD /* HudModel_Weapon.cpp */,
@@ -409,16 +395,10 @@
 				DBF84A730AC76D8F00BB15CD /* PlayerState.h */,
 				DBF84A6D0AC76D8F00BB15CD /* PlayerState_Interact.cpp */,
 				DBF84A6E0AC76D8F00BB15CD /* PlayerState_Interact.h */,
-				DB4AFB170D70708200809E03 /* PlayerState_InteractHaptX.cpp */,
-				DB4AFB180D70708200809E03 /* PlayerState_InteractHaptX.h */,
 				DBF84A6F0AC76D8F00BB15CD /* PlayerState_Misc.cpp */,
 				DBF84A700AC76D8F00BB15CD /* PlayerState_Misc.h */,
-				DB4AFB190D70708200809E03 /* PlayerState_MiscHaptX.cpp */,
-				DB4AFB1A0D70708200809E03 /* PlayerState_MiscHaptX.h */,
 				DBF84A710AC76D8F00BB15CD /* PlayerState_Weapon.cpp */,
 				DBF84A720AC76D8F00BB15CD /* PlayerState_Weapon.h */,
-				DB4AFB1B0D70708200809E03 /* PlayerState_WeaponHaptX.cpp */,
-				DB4AFB1C0D70708200809E03 /* PlayerState_WeaponHaptX.h */,
 				DBFBA0200B65E4660021DAE2 /* PreMenu.cpp */,
 				DBFBA0210B65E4660021DAE2 /* PreMenu.h */,
 				DBCEE62E0B4B365C0088A7E3 /* RadioHandler.cpp */,
@@ -666,10 +646,6 @@
 				DB06305A111D3E3F0048C5E9 /* GameLiquidArea.cpp in Sources */,
 				DB06305B111D3E3F0048C5E9 /* MapLoadText.cpp in Sources */,
 				DB06305C111D3E3F0048C5E9 /* PreMenu.cpp in Sources */,
-				DB06305F111D3E3F0048C5E9 /* HapticGameCamera.cpp in Sources */,
-				DB063060111D3E3F0048C5E9 /* PlayerState_InteractHaptX.cpp in Sources */,
-				DB063061111D3E3F0048C5E9 /* PlayerState_MiscHaptX.cpp in Sources */,
-				DBF9A455119A6B5E00CCFDC9 /* PlayerState_WeaponHaptX.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
