@@ -44,8 +44,10 @@ int hplMain(const tString& asCommandLine)
 	pInit->Exit();
 
 	hplDelete( pInit );
-	
+
+#ifdef MEMORY_MANAGER_ACTIVE
 	cMemoryManager::LogResults();
+#endif
 
 	return 0;
 }

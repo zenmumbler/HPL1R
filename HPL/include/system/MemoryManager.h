@@ -19,10 +19,16 @@
 #ifndef HPL_MEMORY_MANAGER_H
 #define HPL_MEMORY_MANAGER_H
 
+//#define MEMORY_MANAGER_ACTIVE
+
+#ifdef MEMORY_MANAGER_ACTIVE
 #include <map>
 #include <string>
+#endif
 
 namespace hpl {
+
+#ifdef MEMORY_MANAGER_ACTIVE
 
 	//------------------------------------
 
@@ -92,8 +98,6 @@ namespace hpl {
 
 	//------------------------------------
 
-//#define MEMORY_MANAGER_ACTIVE
-#ifdef MEMORY_MANAGER_ACTIVE
 
 	#define hplNew(classType, constructor) \
 			( classType *)hpl::cMemoryManager::AddPointer(hpl::cAllocatedPointer(new classType constructor ,__FILE__,__LINE__,sizeof(classType)))

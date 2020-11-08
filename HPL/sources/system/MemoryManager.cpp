@@ -22,6 +22,7 @@
 
 namespace hpl {
 
+#ifdef MEMORY_MANAGER_ACTIVE
 
 	tAllocatedPointerMap cMemoryManager::m_mapPointers;
 	size_t cMemoryManager::mlTotalMemoryUsage=0;
@@ -152,5 +153,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+#endif
 
 }
