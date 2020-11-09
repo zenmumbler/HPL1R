@@ -251,8 +251,8 @@ namespace hpl {
 		//													pContactBody2->GetName().c_str());
 
 		//Thread lock
-		cNewtonLockBodyUntilReturn criticalLock1(apBody1);
-		cNewtonLockBodyUntilReturn criticalLock2(apBody2);
+//		cNewtonLockBodyUntilReturn criticalLock1(apBody1);
+//		cNewtonLockBodyUntilReturn criticalLock2(apBody2);
 
 		if(pContactBody1->OnBeginCollision(pContactBody2)==false) return 0;
 		if(pContactBody2->OnBeginCollision(pContactBody1)==false) return 0;
@@ -315,7 +315,7 @@ namespace hpl {
 			if(pContactBody1->GetWorld()->GetSaveContactPoints())
 			{
 				//Thread lock
-				NewtonWorldCriticalSectionLock (NewtonBodyGetWorld (pBody0));
+//				NewtonWorldCriticalSectionLock (NewtonBodyGetWorld (pBody0));
 
 				cCollidePoint collidePoint;
 				collidePoint.mfDepth = 1;
@@ -324,7 +324,7 @@ namespace hpl {
 				pContactBody1->GetWorld()->GetContactPoints()->push_back(collidePoint);
 
 				//Thread unlock
-				NewtonWorldCriticalSectionUnlock (NewtonBodyGetWorld (pBody0));
+//				NewtonWorldCriticalSectionUnlock (NewtonBodyGetWorld (pBody0));
 			}
 
 			lContactNum++;
@@ -343,8 +343,8 @@ namespace hpl {
 		contactData.mvContactPosition = contactData.mvContactPosition / (float)lContactNum;
 
 		//Thread lock
-		NewtonWorldCriticalSectionLock (NewtonBodyGetWorld (pBody0));
-		NewtonWorldCriticalSectionLock (NewtonBodyGetWorld (pBody1));
+//		NewtonWorldCriticalSectionLock (NewtonBodyGetWorld (pBody0));
+//		NewtonWorldCriticalSectionLock (NewtonBodyGetWorld (pBody1));
 
 		////////////////////////////
 		//Surface data stuff
@@ -389,8 +389,8 @@ namespace hpl {
 		pContactBody2->OnCollide(pContactBody1,&contactData);
 
 		//Thread unlock
-		NewtonWorldCriticalSectionUnlock (NewtonBodyGetWorld (pBody0));
-		NewtonWorldCriticalSectionUnlock (NewtonBodyGetWorld (pBody1));
+//		NewtonWorldCriticalSectionUnlock (NewtonBodyGetWorld (pBody0));
+//		NewtonWorldCriticalSectionUnlock (NewtonBodyGetWorld (pBody1));
 
 
 	}
