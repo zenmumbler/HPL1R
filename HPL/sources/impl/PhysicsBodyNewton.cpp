@@ -492,7 +492,8 @@ namespace hpl {
 		//Create some gravity
 		if (pRigidBody->mbGravity)
 		{
-			float fMass = pRigidBody->mfMass;
+			float fMass, fX, fY, fZ;
+			NewtonBodyGetMassMatrix(apBody, &fMass, &fX, &fY, &fZ);
 			float fForce[3] = { fMass * vGravity.x, fMass * vGravity.y, fMass * vGravity.z};
 
 			NewtonBodyAddForce(apBody, &fForce[0]);

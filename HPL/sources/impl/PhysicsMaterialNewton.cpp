@@ -285,8 +285,8 @@ namespace hpl {
 		{
 			NewtonMaterial* pMaterial =  NewtonContactGetMaterial (pContact);
 			
-			//Log(" Process contact between body '%s' and '%s'.\n",mpContactBody1->GetName().c_str(),
-			//													mpContactBody2->GetName().c_str());
+			//Log(" Process contact between body '%s' and '%s'.\n",pContactBody1->GetName().c_str(),
+			//													pContactBody2->GetName().c_str());
 
 			//Normal speed
 			float fNormSpeed = NewtonMaterialGetContactNormalSpeed(pMaterial);
@@ -306,12 +306,8 @@ namespace hpl {
 			//Position and normal
 			cVector3f vPos, vNormal;
 			NewtonMaterialGetContactPositionAndNormal(pMaterial,vPos.v, vNormal.v);
-
 			contactData.mvContactNormal += vNormal;
 			contactData.mvContactPosition += vPos;
-
-			//cVector3f vForce;
-			//NewtonMaterialGetContactForce(apMaterial,vForce.v);
 
 			//Log(" Norm: %f Tan0: %f Tan1: %f\n",fNormSpeed, fTanSpeed0, fTanSpeed1);
 			//Log("Force: %s\n",vForce.ToString().c_str());
@@ -333,7 +329,11 @@ namespace hpl {
 
 			lContactNum++;
 		}
-
+		
+		if (lContactNum <= 0) {
+			return;
+		}
+		
 		////////////////////////////////
 		//End contact process
 		iPhysicsMaterial *pMaterial1 = pContactBody1->GetMaterial();
@@ -349,10 +349,10 @@ namespace hpl {
 		////////////////////////////
 		//Surface data stuff
 		//Only do the effects if both bodies uses surfaces effects!
-		if(	pMaterial1->GetSurfaceData() && pMaterial2->GetSurfaceData() &&
-// HPL2 only			pContactBody1->GetUseSurfaceEffects() && pContactBody2->GetUseSurfaceEffects() &&
-			pContactBody1->GetBuoyancyActive()==false && pContactBody2->GetBuoyancyActive()==false)
-		{
+//		if(	pMaterial1->GetSurfaceData() && pMaterial2->GetSurfaceData() &&
+//			pContactBody1->GetUseSurfaceEffects() && pContactBody2->GetUseSurfaceEffects() &&
+//			pContactBody1->GetBuoyancyActive()==false && pContactBody2->GetBuoyancyActive()==false)
+//		{
 			pMaterial1->GetSurfaceData()->CreateImpactEffect(contactData.mfMaxContactNormalSpeed,
 																contactData.mvContactPosition,
 																lContactNum,pMaterial2->GetSurfaceData());
@@ -383,7 +383,7 @@ namespace hpl {
 															contactData.mvContactPosition,
 															lContactNum,pContactBody2,pContactBody1);
 			}
-		}
+//		}
 
 		pContactBody1->OnCollide(pContactBody2,&contactData);
 		pContactBody2->OnCollide(pContactBody1,&contactData);
