@@ -635,7 +635,7 @@ namespace hpl {
 		SetAttachedBody(NULL);
 
 		//Update the move matrix.
-		UpdateMoveMarix();
+		UpdateMoveMatrix();
 
 		mvLastPosition = mvPosition;
 
@@ -1131,7 +1131,7 @@ namespace hpl {
 	//////////////////////////////////////////////////////////////////////////
 
 	//-----------------------------------------------------------------------
-	void iCharacterBody::UpdateMoveMarix()
+	void iCharacterBody::UpdateMoveMatrix()
 	{
 		m_mtxMove = cMath::MatrixRotateY(-mfYaw);
 		m_mtxMove = cMath::MatrixMul(cMath::MatrixRotateX(-mfPitch),m_mtxMove);
