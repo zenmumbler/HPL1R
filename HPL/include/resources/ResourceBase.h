@@ -19,9 +19,8 @@
 #ifndef HPL_RESOURCEBASE_H
 #define HPL_RESOURCEBASE_H
 
-#include <time.h>
 #include "system/SystemTypes.h"
-#include "system/LowLevelSystem.h"
+//#include "system/LowLevelSystem.h"
 
 namespace hpl {
 
