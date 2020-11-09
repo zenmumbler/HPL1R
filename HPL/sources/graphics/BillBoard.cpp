@@ -20,6 +20,7 @@
 
 #include "impl/tinyXML/tinyxml.h"
 
+#include "system/LowLevelSystem.h"
 #include "resources/Resources.h"
 #include "resources/MaterialManager.h"
 #include "resources/FileSearcher.h"

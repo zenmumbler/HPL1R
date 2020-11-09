@@ -30,15 +30,6 @@
 
 namespace hpl {
 
-	enum eParticleEmitterType
-	{
-		eParticleEmitterType_2D,
-		eParticleEmitterType_3D,
-		eParticleEmitterType_LastEnum,
-	};
-
-	// NEW
-
 	enum ePENoiseType
 	{
 		ePENoiseType_LowFreq,
@@ -139,8 +130,6 @@ namespace hpl {
 		void Update(float afTimeStep);
 
 		virtual void Render()=0;
-
-		virtual eParticleEmitterType GetType()=0;
 
 		tString GetEntityType(){ return "ParticleEmitter"; }
 

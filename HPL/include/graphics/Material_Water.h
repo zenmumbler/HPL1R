@@ -28,7 +28,7 @@ namespace hpl {
 	public:
 		cMaterial_Water(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
 
 		virtual ~cMaterial_Water();
@@ -63,18 +63,6 @@ namespace hpl {
 		bool GetRefractionSkipsStandardTrans(){ return true;}
 		bool GetRefractionUsesTime(){ return true;}
 
-		//////////////////////////////////////////////////////////////////
-		// Old and worthless stuff, only used by 2D renderer
-		void Compile(){}
-		bool StartRendering(eMaterialRenderType aType,iCamera* apCam,iLight *pLight){return false;}
-		void EndRendering(eMaterialRenderType aType){}
-		tVtxBatchFlag GetBatchFlags(eMaterialRenderType aType){return 0;}
-		bool NextPass(eMaterialRenderType aType){return false;}
-		bool HasMultiplePasses(eMaterialRenderType aType){return false;}
-		eMaterialType GetType(eMaterialRenderType aType){ return eMaterialType_Diffuse;}
-		void EditVertexes(eMaterialRenderType aType, iCamera* apCam, iLight *pLight,
-			tVertexVec *apVtxVec,cVector3f *apTransform,unsigned int alIndexAdd){}
-
 	private:
 		iGpuProgram *mpFogVtxProg;
 
@@ -93,11 +81,11 @@ namespace hpl {
 
 		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
 		{
 			return hplNew( cMaterial_Water, (asName,apLowLevelGraphics,
-				apImageManager,apTextureManager,apRenderer,
+				apImageManager,apTextureManager,
 				apProgramManager,aPicture,apRenderer3D) );
 		}
 	};

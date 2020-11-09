@@ -28,7 +28,7 @@ namespace hpl {
 	public:
 		cMaterial_BumpSpec(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
 		~cMaterial_BumpSpec();
 
@@ -44,7 +44,7 @@ namespace hpl {
 
 		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
 	};
 

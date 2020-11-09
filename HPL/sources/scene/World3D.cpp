@@ -51,7 +51,6 @@
 #include "scene/Light3DPoint.h"
 #include "scene/Light3DSpot.h"
 #include "scene/PortalContainer.h"
-#include "scene/SoundSource.h"
 #include "scene/MeshEntity.h"
 #include "scene/ColliderEntity.h"
 #include "scene/SoundEntity.h"

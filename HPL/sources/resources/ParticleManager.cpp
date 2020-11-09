@@ -71,31 +71,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iParticleSystem2D* cParticleManager::CreatePS2D(const tString& asName, cVector3f avSize)
-	{
-		/*tParticleSystemDataMapIt it = m_mapData.find(asName);
-		if(it == m_mapData.end()) return NULL;
-
-		iParticleSystemData *pData = it->second;
-
-		//Is name needed?..nahh
-		iParticleSystem* pPart = pData->Create("",avSize);
-		pPart->SetDataName(asName);
-		pPart->SetDataSize(avSize);
-
-		if(pPart->GetType() == eParticleSystemType_2D)
-			return static_cast<iParticleSystem2D*>(pPart);
-		else
-		{
-			hplDelete(pPart);
-			return NULL;
-		}*/
-
-		return NULL;
-	}
-
-	//-----------------------------------------------------------------------
-
 	cParticleSystem3D* cParticleManager::CreatePS3D(const tString& asName,const tString& asType,
 												cVector3f avSize,const cMatrixf& a_mtxTransform)
 	{

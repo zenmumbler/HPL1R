@@ -102,8 +102,6 @@ namespace hpl {
 
 		void Render(){}
 
-		eParticleEmitterType GetType(){return eParticleEmitterType_3D;}
-
 		void SetSubDivUV(const cVector2l &avSubDiv);
 
 		void SetWorld(cWorld3D *apWorld) { mpWorld = apWorld;}

@@ -367,8 +367,6 @@ namespace hpl {
 
 		hplDelete(pDoc);
 
-		pMat->Compile();
-
 		return pMat;
 	}
 

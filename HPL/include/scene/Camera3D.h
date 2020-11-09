@@ -164,8 +164,6 @@ namespace hpl {
 		void SetProjectionMatrix(iLowLevelGraphics* apLowLevel);
 		cVector3f GetEyePosition();
 
-		eCameraType GetType(){ return eCameraType_3D;}
-
 		cVector3f GetForward();
 		cVector3f GetRight();
 		cVector3f GetUp();

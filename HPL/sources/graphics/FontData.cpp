@@ -24,6 +24,7 @@
 
 #include "graphics/GraphicsDrawer.h"
 #include "graphics/GfxObject.h"
+#include "graphics/Material.h"
 
 #include "resources/ResourceImage.h"
 

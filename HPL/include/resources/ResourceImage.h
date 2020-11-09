@@ -20,9 +20,7 @@
 #define HPL_RESOURCE_IMAGE_H
 
 #include <vector>
-
 #include "resources/ResourceBase.h"
-
 #include "graphics/GraphicsTypes.h"
 #include "math/MathTypes.h"
 

@@ -28,7 +28,7 @@ namespace hpl {
 	public:
 		cMaterial_Additive(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
 
 		virtual ~cMaterial_Additive();
@@ -54,18 +54,6 @@ namespace hpl {
 
 		int GetNumOfPasses(eMaterialRenderType aType, iLight3D *apLight){ return 1;}
 
-		//////////////////////////////////////////////////////////////////
-		// Old and worthless stuff, only used by 2D renderer
-		void Compile(){}
-		bool StartRendering(eMaterialRenderType aType,iCamera* apCam,iLight *pLight){return false;}
-		void EndRendering(eMaterialRenderType aType){}
-		tVtxBatchFlag GetBatchFlags(eMaterialRenderType aType){return 0;}
-		bool NextPass(eMaterialRenderType aType){return false;}
-		bool HasMultiplePasses(eMaterialRenderType aType){return false;}
-		eMaterialType GetType(eMaterialRenderType aType){ return eMaterialType_Diffuse;}
-		void EditVertexes(eMaterialRenderType aType, iCamera* apCam, iLight *pLight,
-			tVertexVec *apVtxVec,cVector3f *apTransform,unsigned int alIndexAdd){}
-
 	private:
 		iGpuProgram *mpFogVtxProg;
 		iGpuProgram *mpFogFragProg;
@@ -80,11 +68,11 @@ namespace hpl {
 
 		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
 		{
 			return hplNew( cMaterial_Additive, (asName,apLowLevelGraphics,
-				apImageManager,apTextureManager,apRenderer,
+				apImageManager,apTextureManager,
 				apProgramManager,aPicture,apRenderer3D) );
 		}
 	};

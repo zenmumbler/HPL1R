@@ -18,6 +18,7 @@
  */
 #include "impl/SDLFontData.h"
 #include "graphics/GraphicsDrawer.h"
+#include "graphics/LowLevelGraphics.h"
 #include "system/LowLevelSystem.h"
 #include "impl/SDLBitmap2D.h"
 #include "impl/tinyXML/tinyxml.h"

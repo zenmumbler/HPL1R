@@ -27,7 +27,6 @@ namespace hpl {
 
 	class cGraphics;
 	class cResources;
-	class iParticleSystem2D;
 	class cParticleSystem3D;
 	class cParticleSystemData3D;
 
@@ -52,8 +51,6 @@ namespace hpl {
 		 * \return
 		 */
 		iResourceBase* Create(const tString& asName);
-
-		iParticleSystem2D* CreatePS2D(const tString& asName, cVector3f avSize);
 
 		cParticleSystem3D* CreatePS3D(const tString& asName,const tString& asType, cVector3f avSize,
 										const cMatrixf& a_mtxTransform);

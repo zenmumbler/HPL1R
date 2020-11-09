@@ -88,4 +88,4 @@ namespace hpl {
 	typedef cSTLIterator<iEntity*,tEntityList,tEntityListIt> cEntityIterator;
 
 };
-#endif // HPL_ENTITY2D_H
+#endif // HPL_ENTITY_H

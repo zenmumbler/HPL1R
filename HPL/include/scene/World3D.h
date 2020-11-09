@@ -23,7 +23,6 @@
 #include "graphics/GraphicsTypes.h"
 #include "math/MathTypes.h"
 
-#include "scene/SoundSource.h"
 #include "scene/Entity3D.h"
 
 #include "game/GameTypes.h"

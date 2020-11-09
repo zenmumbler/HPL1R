@@ -36,6 +36,7 @@
 #include <SDL2_image/SDL_image.h>
 #include "resources/MeshLoaderHandler.h"
 #include "resources/VideoManager.h"
+#include "system/LowLevelSystem.h"
 
 namespace hpl {
 

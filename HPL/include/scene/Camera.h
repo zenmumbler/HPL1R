@@ -25,13 +25,6 @@ namespace hpl {
 
 	class iLowLevelGraphics;
 
-	enum eCameraType
-	{
-		eCameraType_2D,
-		eCameraType_3D,
-		eCameraType_LastEnum
-	};
-
 	class iCamera
 	{
 	public:
@@ -40,8 +33,6 @@ namespace hpl {
 		virtual void SetModelViewMatrix(iLowLevelGraphics* apLowLevel)=0;
 		virtual void SetProjectionMatrix(iLowLevelGraphics* apLowLevel)=0;
 		virtual cVector3f GetEyePosition()=0;
-
-		virtual eCameraType GetType()=0;
 	};
 
 };

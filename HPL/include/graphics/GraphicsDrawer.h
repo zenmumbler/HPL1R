@@ -21,7 +21,7 @@
 
 #include <vector>
 #include "graphics/GraphicsTypes.h"
-#include "graphics/BackgroundImage.h"
+#include "graphics/Bitmap2D.h"
 
 namespace hpl {
 
@@ -125,14 +125,6 @@ namespace hpl {
 		 */
 		void DestroyGfxObject(cGfxObject* apObject);
 
-		cBackgroundImage* AddBackgroundImage(const tString &asFileName,const tString &asMaterialName,
-							const cVector3f& avPos, bool abTile,
-							const cVector2f& avSize,const cVector2f& avPosPercent, const cVector2f& avVel);
-
-		void UpdateBackgrounds();
-		void DrawBackgrounds(const cRect2f& aCollideRect);
-		void ClearBackgrounds();
-
 	private:
 		iLowLevelGraphics *mpLowLevelGraphics;
 		cMaterialHandler* mpMaterialHandler;
@@ -141,8 +133,6 @@ namespace hpl {
 		tGfxBufferSet m_setGfxBuffer;
 
 		tGfxObjectList mlstGfxObjects;
-
-		tBackgroundImageMap m_mapBackgroundImages;
 	};
 
 };

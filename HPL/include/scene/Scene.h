@@ -38,12 +38,9 @@ namespace hpl {
 	class cSound;
 	class cPhysics;
 	class cHaptic;
-	class cCollider2D;
 	class iCamera;
-	class cCamera2D;
 	class cUpdater;
 	class cWorld3D;
-	class cWorld2D;
 
 	typedef std::list<iCamera*> tCameraList;
 	typedef tCameraList::iterator tCameraListIt;
@@ -69,10 +66,6 @@ namespace hpl {
 		 */
 		void Render(cUpdater* apUpdater, float afFrameTime);
 
-		bool LoadMap2D(tString asFile);
-
-		void RenderWorld2D(cCamera2D *apCam,cWorld2D* apWorld);
-
 		void Update(float afTimeStep);
 
 		void ClearLoadedMaps(){m_setLoadedMaps.clear();}
@@ -90,22 +83,18 @@ namespace hpl {
 		cScriptVar* GetGlobalVar(const tString& asName);
 		tScriptVarMap* GetGlobalVarMap();
 
-		///// CAMERA 2D METHODS ////////////////////
+		///// CAMERA METHODS ////////////////////
 
-
-		cCamera2D* CreateCamera2D(unsigned int alW,unsigned int alH);
 		cCamera3D* CreateCamera3D(eCameraMoveMode aMoveMode);
 
 		void DestroyCamera(iCamera* apCam);
 
 		/**
-		 * This sets the current camera, depending on this one is 2D or 3D a 2D or 3D world will be rendered.
+		 * This sets the current camera
 		 * \param pCam
 		 */
 		void SetCamera(iCamera* pCam);
 		iCamera* GetCamera(){ return mpActiveCamera; }
-		void SetCameraPosition(const cVector3f& avPos);
-		cVector3f GetCameraPosition();
 
 		void SetCameraIsListener(bool abX){ mbCameraIsListener = abX; }
 
@@ -119,9 +108,6 @@ namespace hpl {
 		cWorld3D* GetWorld3D(){ return mpCurrentWorld3D;}
 
 		bool HasLoadedWorld(const tString &asFile);
-
-		cWorld2D* GetWorld2D(){ return mpCurrentWorld2D;}
-		cCollider2D* GetCollider2D(){return mpCollider2D;}
 
 		void SetUpdateMap(bool abX){ mbUpdateMap = abX;}
 		bool GetUpdateMap(){return mbUpdateMap;}
@@ -137,15 +123,12 @@ namespace hpl {
 		cAI *mpAI;
 		cHaptic *mpHaptic;
 
-		cCollider2D *mpCollider2D;
-
 		bool mbDrawScene;
 		bool mbUpdateMap;
 
 		tWorld3DList mlstWorld3D;
 		cWorld3D* mpCurrentWorld3D;
 
-		cWorld2D* mpCurrentWorld2D;
 		tCameraList mlstCamera;
 		iCamera *mpActiveCamera;
 		bool mbCameraIsListener;

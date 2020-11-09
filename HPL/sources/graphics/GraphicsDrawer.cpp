@@ -16,17 +16,14 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "graphics/GraphicsDrawer.h"
 
+#include "graphics/GraphicsDrawer.h"
 #include "system/LowLevelSystem.h"
 #include "graphics/LowLevelGraphics.h"
-#include "resources/ResourceImage.h"
 #include "resources/FrameBitmap.h"
 #include "graphics/GfxObject.h"
 #include "graphics/MaterialHandler.h"
-#include "graphics/Material.h"
 #include "resources/TextureManager.h"
-
 
 #include "math/Math.h"
 
@@ -34,7 +31,6 @@
 #include "resources/ImageManager.h"
 
 namespace hpl {
-
 
 	//////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
@@ -54,8 +50,6 @@ namespace hpl {
 
 	cGraphicsDrawer::~cGraphicsDrawer()
 	{
-		ClearBackgrounds();
-
 		STLDeleteAll(mlstGfxObjects);
 	}
 
@@ -378,79 +372,6 @@ namespace hpl {
 	void cGraphicsDrawer::DestroyGfxObject(cGfxObject* apObject)
 	{
 		STLFindAndDelete(mlstGfxObjects,apObject);
-	}
-
-	//-----------------------------------------------------------------------
-
-	cBackgroundImage* cGraphicsDrawer::AddBackgroundImage(const tString &asFileName,
-		const tString &asMaterialName,
-		const cVector3f& avPos,
-		bool abTile,const cVector2f& avSize, const cVector2f& avPosPercent, const cVector2f& avVel)
-	{
-		cResourceImage* pImage = mpResources->GetImageManager()->CreateImage(asFileName);
-		if(pImage==NULL){
-			FatalError("Couldn't load image '%s'!\n", asFileName.c_str());
-			return NULL;
-		}
-
-		iMaterial* pMat = mpMaterialHandler->Create(asMaterialName, eMaterialPicture_Image);
-		if(pMat==NULL){
-			FatalError("Couldn't create material '%s'!\n", asMaterialName.c_str());
-			return NULL;
-		}
-		//mpResources->GetImageManager()->FlushAll();
-
-		pMat->SetImage(pImage, eMaterialTexture_Diffuse);
-
-		cBackgroundImage *pBG = hplNew( cBackgroundImage, (pMat,avPos,abTile,avSize,avPosPercent,avVel) );
-
-		m_mapBackgroundImages.insert(tBackgroundImageMap::value_type(avPos.z,pBG));
-
-		return pBG;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cGraphicsDrawer::UpdateBackgrounds()
-	{
-		tBackgroundImageMapIt it= m_mapBackgroundImages.begin();
-		for(;it != m_mapBackgroundImages.end();it++)
-		{
-			it->second->Update();
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cGraphicsDrawer::DrawBackgrounds(const cRect2f& aCollideRect)
-	{
-		mpLowLevelGraphics->SetIdentityMatrix(eMatrix_ModelView);
-		mpLowLevelGraphics->SetDepthTestActive(true);
-		mpLowLevelGraphics->SetDepthWriteActive(false);
-		mpLowLevelGraphics->SetAlphaTestFunc(eAlphaTestFunc_Greater,0.1f);
-		mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
-
-
-		tBackgroundImageMapIt it= m_mapBackgroundImages.begin();
-		for(;it != m_mapBackgroundImages.end();it++)
-		{
-			it->second->Draw(aCollideRect,mpLowLevelGraphics);
-		}
-
-		mpLowLevelGraphics->SetAlphaTestFunc(eAlphaTestFunc_Greater,0.05f);
-		mpLowLevelGraphics->SetDepthWriteActive(true);
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cGraphicsDrawer::ClearBackgrounds()
-	{
-		tBackgroundImageMapIt it= m_mapBackgroundImages.begin();
-		for(;it != m_mapBackgroundImages.end();it++)
-		{
-			hplDelete(it->second);
-		}
-		m_mapBackgroundImages.clear();
 	}
 
 	//-----------------------------------------------------------------------

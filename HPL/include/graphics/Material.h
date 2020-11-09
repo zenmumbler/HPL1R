@@ -23,7 +23,6 @@
 #include "graphics/Texture.h"
 #include "system/SystemTypes.h"
 #include "resources/ResourceImage.h"
-#include "resources/ResourceBase.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/GPUProgram.h"
 
@@ -61,11 +60,10 @@ namespace hpl {
 		eMaterialType_Null,
 
 		eMaterialType_Diffuse,
+//		eMaterialType_Diffuse,
 		eMaterialType_DiffuseAlpha,
 		eMaterialType_DiffuseAdditive,
-		eMaterialType_DiffuseNMap,
-		eMaterialType_DiffuseSpecular,
-		eMaterialType_BumpSpec,
+//		eMaterialType_DiffuseNMap,
 		eMaterialType_Smoke,
 
 		eMaterialType_FontNormal,
@@ -119,7 +117,6 @@ namespace hpl {
 
 	//---------------------------------------------------
 
-	class cRenderer2D;
 	class cRenderer3D;
 	class cRenderSettings;
 	class cTextureManager;
@@ -210,7 +207,7 @@ namespace hpl {
 	public:
 		iMaterial(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 				cImageManager* apImageManager, cTextureManager *apTextureManager,
-				cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+				cGpuProgramManager* apProgramManager,
 				eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
 		virtual ~iMaterial();
 
@@ -218,8 +215,6 @@ namespace hpl {
 		bool Reload(){ return false;}
 		void Unload(){}
 		void Destroy(){}
-
-		virtual void Compile()=0;
 
 		virtual void Update(float afTimeStep){}
 
@@ -253,48 +248,6 @@ namespace hpl {
 		void SetValue(float afX) { mfValue = afX;}
 
 		virtual bool LoadData(TiXmlElement* apRootElem){ return true; }
-
-		/**
-		 * Here the set up should be done like setting texture units, blend mode, etc
-		 * \param mType
-		 * \param apCam
-		 * \param *pLight
-		 * \return
-		 */
-		virtual bool StartRendering(eMaterialRenderType aType,iCamera* apCam,iLight *pLight)=0;
-		/**
-		 * Here all stuff should be set back to normal, like unbinding gpu programs
-		 * \param mType
-		 */
-		virtual void EndRendering(eMaterialRenderType mType)=0;
-		/**
-		 * Return the data types needed for rendering.
-		 * \param mType
-		 * \return
-		 */
-		virtual tVtxBatchFlag GetBatchFlags(eMaterialRenderType mType)=0;
-
-		/**
-		 * Set new states and return true for another pass
-		 * \param mType
-		 * \return
-		 */
-		virtual bool NextPass(eMaterialRenderType mType)=0;
-		/**
-		 * return true if the program has multple passes
-		 * \param mType
-		 * \return
-		 */
-		virtual bool HasMultiplePasses(eMaterialRenderType mType)=0;
-
-		/**
-		 * Get type
-		 * \param mType
-		 * \return
-		 */
-		virtual eMaterialType GetType(eMaterialRenderType mType)=0;
-		virtual void EditVertexes(eMaterialRenderType mType, iCamera* apCam, iLight *pLight,
-								tVertexVec *apVtxVec,cVector3f *apTransform,unsigned int alIndexAdd)=0;
 
 		iTexture* GetTexture(eMaterialTexture aType);
 		cRect2f GetTextureOffset(eMaterialTexture aType);
@@ -354,7 +307,6 @@ namespace hpl {
 		iLowLevelGraphics* mpLowLevelGraphics;
 		cImageManager* mpImageManager;
 		cTextureManager* mpTextureManager;
-		cRenderer2D* mpRenderer;
 		cRenderer3D* mpRenderer3D;
 		cRenderSettings *mpRenderSettings;
 		cGpuProgramManager* mpProgramManager;
@@ -395,14 +347,27 @@ namespace hpl {
 		virtual bool IsCorrect(tString asName)=0;
 		virtual iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)=0;
 	};
 
 	typedef std::list<iMaterialType*> tMaterialTypeList;
 	typedef tMaterialTypeList::iterator tMaterialTypeListIt;
 
+	// -----------
 
+	class iOldMaterial : public iMaterial {
+	public:
+		iOldMaterial(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
+				cImageManager* apImageManager, cTextureManager *apTextureManager,
+				cGpuProgramManager* apProgramManager,
+				eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
+
+		virtual bool StartRendering(eMaterialRenderType mType) = 0;
+		virtual void EndRendering(eMaterialRenderType mType) = 0;
+		virtual tVtxBatchFlag GetBatchFlags(eMaterialRenderType mType) = 0;
+		virtual eMaterialType GetType(eMaterialRenderType mType) = 0;
+	};
 
 };
 #endif // HPL_MATERIAL_H

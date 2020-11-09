@@ -32,6 +32,7 @@
 #include "resources/FrameBitmap.h"
 #include "resources/FileSearcher.h"
 
+#include "system/LowLevelSystem.h"
 
 #include "gui/GuiMaterialBasicTypes.h"
 

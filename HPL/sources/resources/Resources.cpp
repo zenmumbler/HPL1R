@@ -22,8 +22,6 @@
 #include "resources/FileSearcher.h"
 #include "resources/ImageManager.h"
 #include "resources/GpuProgramManager.h"
-#include "resources/TileSetManager.h"
-#include "resources/ImageEntityManager.h"
 #include "resources/ParticleManager.h"
 #include "resources/SoundManager.h"
 #include "resources/FontManager.h"
@@ -37,7 +35,6 @@
 #include "resources/VideoManager.h"
 #include "resources/ConfigFile.h"
 #include "resources/LanguageFile.h"
-#include "scene/Area2D.h"
 #include "system/System.h"
 
 #include "system/LowLevelSystem.h"
@@ -75,15 +72,11 @@ namespace hpl {
 
 		STLMapDeleteAll(m_mEntity3DLoaders);
 		STLMapDeleteAll(m_mArea3DLoaders);
-		STLMapDeleteAll(m_mMapEntity2DLoaders);
-		STLMapDeleteAll(m_mMapArea2DLoaders);
 
-		hplDelete(mpTileSetManager);
 		hplDelete(mpFontManager);
 		hplDelete(mpScriptManager);
 		hplDelete(mpParticleManager);
 		hplDelete(mpSoundManager);
-		hplDelete(mpImageEntityManager);
 		hplDelete(mpMeshManager);
 		hplDelete(mpMaterialManager);
 		hplDelete(mpGpuProgramManager);
@@ -126,10 +119,6 @@ namespace hpl {
 		mlstManagers.push_back(mpImageManager);
 		mpGpuProgramManager = hplNew( cGpuProgramManager,(mpFileSearcher,mpLowLevelGraphics,mpLowLevelResources,mpLowLevelSystem) );
 		mlstManagers.push_back(mpGpuProgramManager);
-		mpTileSetManager = hplNew( cTileSetManager,(apGraphics,this) );
-		mlstManagers.push_back(mpTileSetManager);
-		mpImageEntityManager = hplNew( cImageEntityManager,(apGraphics, this) );
-		mlstManagers.push_back(mpImageEntityManager);
 		mpParticleManager = hplNew( cParticleManager,(apGraphics, this) );
 		mlstManagers.push_back(mpParticleManager);
 		mpSoundManager = hplNew( cSoundManager,(apSound, this) );
@@ -233,42 +222,6 @@ namespace hpl {
 		{
 			return mwsEmptyString;
 		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cResources::AddEntity2DLoader(iEntity2DLoader* apLoader)
-	{
-		m_mMapEntity2DLoaders.insert(tEntity2DLoaderMap::value_type(apLoader->GetName(), apLoader));
-	}
-
-	iEntity2DLoader* cResources::GetEntity2DLoader(const tString& asName)
-	{
-		tEntity2DLoaderMapIt it = m_mMapEntity2DLoaders.find(asName);
-		if(it == m_mMapEntity2DLoaders.end()){
-			Warning("No loader for type '%s' found!\n",asName.c_str());
-			return NULL;
-		}
-
-		return it->second;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cResources::AddArea2DLoader(iArea2DLoader* apLoader)
-	{
-		m_mMapArea2DLoaders.insert(tArea2DLoaderMap::value_type(apLoader->GetName(), apLoader));
-	}
-
-	iArea2DLoader* cResources::GetArea2DLoader(const tString& asName)
-	{
-		tArea2DLoaderMapIt it = m_mMapArea2DLoaders.find(asName);
-		if(it == m_mMapArea2DLoaders.end()){
-			Warning("No loader for type '%s' found!\n",asName.c_str());
-			return NULL;
-		}
-
-		return it->second;
 	}
 
 	//-----------------------------------------------------------------------

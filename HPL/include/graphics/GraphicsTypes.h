@@ -37,15 +37,6 @@ namespace hpl {
 		eMatrix_LastEnum
 	};
 
-	enum eTileRotation
-	{
-		eTileRotation_0,
-		eTileRotation_90,
-		eTileRotation_180,
-		eTileRotation_270,
-		eTileRotation_LastEnum
-	};
-
 	enum ePrimitiveType
 	{
 		ePrimitiveType_Tri,

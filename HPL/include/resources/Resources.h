@@ -41,8 +41,6 @@ namespace hpl {
 	class cFileSearcher;
 	class cImageManager;
 	class cGpuProgramManager;
-	class cTileSetManager;
-	class cImageEntityManager;
 	class cParticleManager;
 	class cSoundManager;
 	class cFontManager;
@@ -54,7 +52,7 @@ namespace hpl {
 	class cMeshManager;
 	class cVideoManager;
 	class cConfigFile;
-	class cArea2D;
+
 	class cSound;
 	class cMeshLoaderHandler;
 	class cScene;
@@ -64,44 +62,6 @@ namespace hpl {
 	class iEntity3D;
 	class cLanguageFile;
 	class cGui;
-
-	//-------------------------------------------------------
-
-	class iEntity2DLoader
-	{
-	public:
-		iEntity2DLoader(const tString& asName): msName(asName){}
-		virtual ~iEntity2DLoader(){}
-
-		const tString& GetName(){ return msName;}
-
-		virtual void Load(cImageEntity* apImageEntity)=0;
-
-	protected:
-		tString msName;
-	};
-
-	typedef std::map<tString,iEntity2DLoader*> tEntity2DLoaderMap;
-	typedef tEntity2DLoaderMap::iterator tEntity2DLoaderMapIt;
-
-	//-------------------------------------------------------
-
-	class iArea2DLoader
-	{
-	public:
-		iArea2DLoader(const tString& asName): msName(asName){}
-		virtual ~iArea2DLoader(){}
-
-		const tString& GetName(){ return msName;}
-
-		virtual void Load(cArea2D* apArea)=0;
-
-	protected:
-		tString msName;
-	};
-
-	typedef std::map<tString,iArea2DLoader*> tArea2DLoaderMap;
-	typedef tArea2DLoaderMap::iterator tArea2DLoaderMapIt;
 
 	//-------------------------------------------------------
 
@@ -173,24 +133,16 @@ namespace hpl {
 		bool SetLanguageFile(const tString &asFile);
 		const tWString& Translate(const tString& asCat, const tString& asName);
 
-		void AddEntity2DLoader(iEntity2DLoader* apLoader);
-		iEntity2DLoader* GetEntity2DLoader(const tString& asName);
-
 		void AddEntity3DLoader(iEntity3DLoader* apLoader, bool abSetAsDefault=false);
 		iEntity3DLoader* GetEntity3DLoader(const tString& asName);
 
 		void AddArea3DLoader(iArea3DLoader* apLoader, bool abSetAsDefault=false);
 		iArea3DLoader* GetArea3DLoader(const tString& asName);
 
-		void AddArea2DLoader(iArea2DLoader* apLoader);
-		iArea2DLoader* GetArea2DLoader(const tString& asName);
-
 		bool LoadResourceDirsFile(const tString &asFile);
 
 		cImageManager* GetImageManager(){return mpImageManager;}
 		cGpuProgramManager* GetGpuProgramManager(){return mpGpuProgramManager;}
-		cTileSetManager* GetTileSetManager(){ return mpTileSetManager;}
-		cImageEntityManager* GetImageEntityManager(){ return mpImageEntityManager; }
 		cParticleManager* GetParticleManager(){ return mpParticleManager;}
 		cSoundManager* GetSoundManager(){ return mpSoundManager;}
 		cFontManager* GetFontManager(){ return mpFontManager;}
@@ -214,8 +166,6 @@ namespace hpl {
 		tResourceManagerList mlstManagers;
 		cImageManager *mpImageManager;
 		cGpuProgramManager *mpGpuProgramManager;
-		cTileSetManager* mpTileSetManager;
-		cImageEntityManager* mpImageEntityManager;
 		cParticleManager* mpParticleManager;
 		cSoundManager* mpSoundManager;
 		cFontManager* mpFontManager;
@@ -230,9 +180,6 @@ namespace hpl {
 
 		cMeshManager* mpMeshManager;
 		cMeshLoaderHandler* mpMeshLoaderHandler;
-
-		tEntity2DLoaderMap m_mMapEntity2DLoaders;
-		tArea2DLoaderMap m_mMapArea2DLoaders;
 
 		tEntity3DLoaderMap m_mEntity3DLoaders;
 		iEntity3DLoader* mpDefaultEntity3DLoader;

@@ -20,6 +20,8 @@
 
 #include "scene/MeshEntity.h"
 
+#include "system/LowLevelSystem.h"
+
 #include "resources/MaterialManager.h"
 #include "resources/MeshManager.h"
 #include "graphics/VertexBuffer.h"

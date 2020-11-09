@@ -17,7 +17,7 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "graphics/Material_Fallback01_BaseLight.h"
-#include "graphics/Renderer2D.h"
+#include "system/LowLevelSystem.h"
 #include "scene/Light.h"
 #include "scene/Camera.h"
 #include "resources/GpuProgramManager.h"
@@ -275,9 +275,9 @@ namespace hpl {
 		bool abNormalMap, bool abSpecular,
 		const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 		cImageManager* apImageManager, cTextureManager *apTextureManager,
-		cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+		cGpuProgramManager* apProgramManager,
 		eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-		: iMaterial(asName,apLowLevelGraphics,apImageManager,apTextureManager,apRenderer,apProgramManager,
+		: iMaterial(asName,apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
 					aPicture,apRenderer3D)
 	{
 		gDiffuseGLState.SetUp(mpLowLevelGraphics);

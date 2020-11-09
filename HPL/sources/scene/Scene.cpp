@@ -22,15 +22,11 @@
 
 #include "graphics/Graphics.h"
 #include "resources/Resources.h"
-#include "physics/Collider2D.h"
 #include "sound/Sound.h"
 #include "sound/LowLevelSound.h"
 #include "sound/SoundHandler.h"
-#include "scene/Camera2D.h"
 #include "scene/Camera3D.h"
-#include "scene/World2D.h"
 #include "scene/World3D.h"
-#include "graphics/Renderer2D.h"
 #include "graphics/Renderer3D.h"
 #include "graphics/RendererPostEffects.h"
 #include "graphics/GraphicsDrawer.h"
@@ -63,8 +59,6 @@ namespace hpl {
 		mpAI = apAI;
 		mpHaptic = apHaptic;
 
-		mpCollider2D = hplNew( cCollider2D, () );
-		mpCurrentWorld2D = NULL;
 		mpCurrentWorld3D = NULL;
 
 		mbCameraIsListener = true;
@@ -85,8 +79,6 @@ namespace hpl {
 		STLDeleteAll(mlstWorld3D);
 		STLDeleteAll(mlstCamera);
 
-		hplDelete(mpCollider2D);
-
 		Log("--------------------------------------------------------\n\n");
 
 	}
@@ -96,18 +88,6 @@ namespace hpl {
 	//////////////////////////////////////////////////////////////////////////
 	// PUBLIC METHODS
 	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	cCamera2D* cScene::CreateCamera2D(unsigned int alW,unsigned int alH)
-	{
-		cCamera2D *pCamera =  hplNew( cCamera2D,(alW, alH) );
-
-		//Add Camera to list
-		mlstCamera.push_back(pCamera);
-
-		return pCamera;
-	}
 
 	//-----------------------------------------------------------------------
 
@@ -142,43 +122,6 @@ namespace hpl {
 	void cScene::SetCamera(iCamera* pCam)
 	{
 		mpActiveCamera = pCam;
-
-		if(mbCameraIsListener)
-		{
-			if(mpActiveCamera->GetType() == eCameraType_2D)
-			{
-				cCamera2D* pCamera2D = static_cast<cCamera2D*>(mpActiveCamera);
-
-				mpSound->GetLowLevel()->SetListenerPosition(pCamera2D->GetPosition());
-			}
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cScene::SetCameraPosition(const cVector3f& avPos)
-	{
-		if(mpActiveCamera->GetType() == eCameraType_2D)
-		{
-			cCamera2D* pCamera2D = static_cast<cCamera2D*>(mpActiveCamera);
-
-			pCamera2D->SetPosition(avPos);
-		}
-
-		if(mbCameraIsListener)
-			mpSound->GetLowLevel()->SetListenerPosition(avPos);
-
-	}
-
-	cVector3f cScene::GetCameraPosition()
-	{
-		if(mpActiveCamera->GetType() == eCameraType_2D)
-		{
-			cCamera2D* pCamera2D = static_cast<cCamera2D*>(mpActiveCamera);
-			return pCamera2D->GetPosition();
-		}
-
-		return cVector2f(0);
 	}
 
 	//-----------------------------------------------------------------------
@@ -255,13 +198,10 @@ namespace hpl {
 	{
 		if(mbDrawScene && mpActiveCamera)
 		{
-			if(mpActiveCamera->GetType() == eCameraType_3D)
-			{
-				cCamera3D* pCamera3D = static_cast<cCamera3D*>(mpActiveCamera);
+			cCamera3D* pCamera3D = static_cast<cCamera3D*>(mpActiveCamera);
 
-				if(mpCurrentWorld3D)
-					mpGraphics->GetRenderer3D()->UpdateRenderList(mpCurrentWorld3D, pCamera3D,afFrameTime);
-			}
+			if(mpCurrentWorld3D)
+				mpGraphics->GetRenderer3D()->UpdateRenderList(mpCurrentWorld3D, pCamera3D,afFrameTime);
 		}
 	}
 
@@ -279,29 +219,15 @@ namespace hpl {
 	{
 		if(mbDrawScene && mpActiveCamera)
 		{
-			if(mpActiveCamera->GetType() == eCameraType_2D)
+			cCamera3D* pCamera3D = static_cast<cCamera3D*>(mpActiveCamera);
+
+			if(mpCurrentWorld3D)
 			{
-				cCamera2D* pCamera2D = static_cast<cCamera2D*>(mpActiveCamera);
-
-				//pCamera2D->SetModelViewMatrix(mpGraphics->GetLowLevel());
-
-				if(mpCurrentWorld2D){
-					mpCurrentWorld2D->Render(pCamera2D);
-				}
-
-				mpGraphics->GetRenderer2D()->RenderObjects(pCamera2D,mpCurrentWorld2D->GetGridMapLights(),mpCurrentWorld2D);
+				START_TIMING(RenderWorld)
+				mpGraphics->GetRenderer3D()->RenderWorld(mpCurrentWorld3D, pCamera3D,afFrameTime);
+				STOP_TIMING(RenderWorld)
 			}
-			else
-			{
-				cCamera3D* pCamera3D = static_cast<cCamera3D*>(mpActiveCamera);
 
-				if(mpCurrentWorld3D)
-				{
-					START_TIMING(RenderWorld)
-					mpGraphics->GetRenderer3D()->RenderWorld(mpCurrentWorld3D, pCamera3D,afFrameTime);
-					STOP_TIMING(RenderWorld)
-				}
-			}
 			START_TIMING(PostSceneDraw)
 			apUpdater->OnPostSceneDraw();
 			STOP_TIMING(PostSceneDraw)
@@ -328,40 +254,23 @@ namespace hpl {
 	{
 		if(mpActiveCamera==NULL)return;
 
-		if(mpActiveCamera->GetType() == eCameraType_2D)
+		if(mbCameraIsListener)
 		{
-			if(mbUpdateMap && mpCurrentWorld2D)
-			{
-				mpCurrentWorld2D->Update(afTimeStep);
-
-				if(mpCurrentWorld2D->GetScript())
-				{
-					mpCurrentWorld2D->GetScript()->Run("OnUpdate()");
-				}
-
-				mpGraphics->GetDrawer()->UpdateBackgrounds();
-			}
+			cCamera3D* pCamera3D = static_cast<cCamera3D*>(mpActiveCamera);
+			mpSound->GetLowLevel()->SetListenerAttributes(
+					pCamera3D->GetPosition(),
+					cVector3f(0,0,0),
+					pCamera3D->GetForward()*-1.0f,
+					pCamera3D->GetUp());
 		}
-		else
+
+		if(mbUpdateMap && mpCurrentWorld3D)
 		{
-			if(mbCameraIsListener)
-			{
-				cCamera3D* pCamera3D = static_cast<cCamera3D*>(mpActiveCamera);
-				mpSound->GetLowLevel()->SetListenerAttributes(
-						pCamera3D->GetPosition(),
-						cVector3f(0,0,0),
-						pCamera3D->GetForward()*-1.0f,
-						pCamera3D->GetUp());
-			}
+			mpCurrentWorld3D->Update(afTimeStep);
 
-			if(mbUpdateMap && mpCurrentWorld3D)
+			if(mpCurrentWorld3D->GetScript())
 			{
-				mpCurrentWorld3D->Update(afTimeStep);
-
-				if(mpCurrentWorld3D->GetScript())
-				{
-					mpCurrentWorld3D->GetScript()->Run("OnUpdate()");
-				}
+				mpCurrentWorld3D->GetScript()->Run("OnUpdate()");
 			}
 		}
 	}
@@ -373,17 +282,6 @@ namespace hpl {
 		m_mapLocalVars.clear();
 		m_mapGlobalVars.clear();
 		m_setLoadedMaps.clear();
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cScene::RenderWorld2D(cCamera2D *apCam,cWorld2D* apWorld)
-	{
-		if(apWorld)
-		{
-			apWorld->Render(apCam);
-			mpGraphics->GetRenderer2D()->RenderObjects(apCam,apWorld->GetGridMapLights(),apWorld);
-		}
 	}
 
 	//-----------------------------------------------------------------------
@@ -494,48 +392,6 @@ namespace hpl {
 			return false;
 		else
 			return true;
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cScene::LoadMap2D(tString asFile)
-	{
-		mpGraphics->GetDrawer()->ClearBackgrounds();
-
-		cWorld2D *pTempWorld = NULL;
-		//temporary save the old map
-		if(mpCurrentWorld2D){
-			pTempWorld = mpCurrentWorld2D;
-		}
-
-		//Clear the local script
-		m_mapLocalVars.clear();
-
-		mpCurrentWorld2D = hplNew( cWorld2D, ("",mpGraphics, mpResources,mpSound, mpCollider2D) );
-
-		if(mpCurrentWorld2D->CreateFromFile(asFile)==false)return false;
-
-		if(mpCurrentWorld2D->GetScript())
-		{
-			//Check if the map has been loaded before, if not run OnStart script.
-			tString sName = cString::ToLowerCase(cString::SetFileExt(asFile,""));
-			tStringSetIt it = m_setLoadedMaps.find(sName);
-			if(it == m_setLoadedMaps.end())
-			{
-				m_setLoadedMaps.insert(sName);
-				mpCurrentWorld2D->GetScript()->Run("OnStart()");
-			}
-
-			mpCurrentWorld2D->GetScript()->Run("OnLoad()");
-		}
-
-		mpCollider2D->SetWorld(mpCurrentWorld2D);
-
-		if(pTempWorld){
-			hplDelete(pTempWorld);
-		}
-
-		return true;
 	}
 
 	//-----------------------------------------------------------------------
