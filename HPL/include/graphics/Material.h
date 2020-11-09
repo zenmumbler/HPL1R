@@ -59,11 +59,12 @@ namespace hpl {
 	{
 		eMaterialType_Null,
 
-		eMaterialType_Diffuse,
 //		eMaterialType_Diffuse,
 		eMaterialType_DiffuseAlpha,
 		eMaterialType_DiffuseAdditive,
 //		eMaterialType_DiffuseNMap,
+//		eMaterialType_DiffuseSpecular,
+//		eMaterialType_BumpSpec,
 		eMaterialType_Smoke,
 
 		eMaterialType_FontNormal,

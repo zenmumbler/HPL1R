@@ -24,25 +24,19 @@
 
 namespace hpl {
 
-	class cMaterial_Smoke2D : public iMaterial
+	class cMaterial_Smoke2D : public iOldMaterial
 	{
 	public:
 		cMaterial_Smoke2D(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
 		~cMaterial_Smoke2D();
 
-		void Compile();
-		bool StartRendering(eMaterialRenderType aType,iCamera* apCam,iLight *pLight);
-		void EndRendering(eMaterialRenderType aType);
-		tVtxBatchFlag GetBatchFlags(eMaterialRenderType aType);
-		bool NextPass(eMaterialRenderType aType);
-		bool HasMultiplePasses(eMaterialRenderType aType);
-
-		eMaterialType GetType(eMaterialRenderType aType);
-		void EditVertexes(eMaterialRenderType aType, iCamera* apCam, iLight *pLight,
-			tVertexVec *apVtxVec,cVector3f *apTransform,unsigned int alIndexAdd);
+		bool StartRendering(eMaterialRenderType mType);
+		void EndRendering(eMaterialRenderType mType);
+		tVtxBatchFlag GetBatchFlags(eMaterialRenderType mType);
+		eMaterialType GetType(eMaterialRenderType mType);
 
 	private:
 	};
@@ -56,11 +50,11 @@ namespace hpl {
 
 		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
 		{
 			return hplNew( cMaterial_Smoke2D,(asName,apLowLevelGraphics,
-				apImageManager,apTextureManager,apRenderer,
+				apImageManager,apTextureManager,
 				apProgramManager,aPicture,apRenderer3D) );
 		}
 	};

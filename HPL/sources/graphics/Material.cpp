@@ -154,4 +154,14 @@ namespace hpl {
 
 
 	//-----------------------------------------------------------------------
+
+	iOldMaterial::iOldMaterial(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
+									 cImageManager* apImageManager, cTextureManager *apTextureManager,
+					  cGpuProgramManager* apProgramManager,
+					  eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
+		: iMaterial(asName, apLowLevelGraphics, apImageManager, apTextureManager, apProgramManager, aPicture, apRenderer3D)
+	{
+
+	}
+
 }

@@ -24,27 +24,21 @@
 
 namespace hpl {
 
-	class cMaterial_DiffuseAdditive2D : public iMaterial
+	class cMaterial_DiffuseAdditive2D : public iOldMaterial
 	{
 	public:
 		cMaterial_DiffuseAdditive2D(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
 		~cMaterial_DiffuseAdditive2D();
 
-		void Compile();
-		bool StartRendering(eMaterialRenderType mType,iCamera* apCam,iLight *pLight);
+		bool StartRendering(eMaterialRenderType mType);
 		void EndRendering(eMaterialRenderType mType);
 		tVtxBatchFlag GetBatchFlags(eMaterialRenderType mType);
-		bool NextPass(eMaterialRenderType mType);
-		bool HasMultiplePasses(eMaterialRenderType mType);
+		eMaterialType GetType(eMaterialRenderType mType);
 
 		bool UsesType(eMaterialRenderType aType);
-
-		eMaterialType GetType(eMaterialRenderType mType);
-		void EditVertexes(eMaterialRenderType mType, iCamera* apCam, iLight *pLight,
-			tVertexVec *apVtxVec,cVector3f *apTransform,unsigned int alIndexAdd);
 
 	private:
 	};
@@ -59,14 +53,14 @@ namespace hpl {
 
 		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
 		{
 			return hplNew( cMaterial_DiffuseAdditive2D, (asName,apLowLevelGraphics,
-				apImageManager,apTextureManager,apRenderer,
+				apImageManager,apTextureManager,
 				apProgramManager,aPicture,apRenderer3D) );
 		}
 	};
 
 };
-#endif // HPL_MATERIAL_DIFFUSE_ADDITIVE_H
+#endif // HPL_MATERIAL_DIFFUSE_ADDITIVE2D_H

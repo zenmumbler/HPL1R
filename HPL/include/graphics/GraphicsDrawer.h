@@ -29,7 +29,7 @@ namespace hpl {
 	class cResourceImage;
 	class cGfxObject;
 	class cMaterialHandler;
-	class iMaterial;
+	class iOldMaterial;
 
 	class cGfxBufferObject
 	{
@@ -44,12 +44,13 @@ namespace hpl {
 		bool mbFlipV;
 		float mfAngle;
 
-		iMaterial* GetMaterial() const;
+		iOldMaterial* GetMaterial() const;
 		float GetZ() const { return mvTransform.z;}
 	};
 
 	typedef std::vector<cGfxObject> tGfxObjectVec;
 	typedef tGfxObjectVec::iterator tGfxObjectVecIt;
+
 
 	class cGfxBufferCompare
 	{

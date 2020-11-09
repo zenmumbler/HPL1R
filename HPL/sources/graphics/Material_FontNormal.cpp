@@ -28,10 +28,10 @@ namespace hpl {
 
 	cMaterial_FontNormal::cMaterial_FontNormal(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 		cImageManager* apImageManager, cTextureManager *apTextureManager,
-		cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+		cGpuProgramManager* apProgramManager,
 		eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-	: iMaterial(asName,apLowLevelGraphics,apImageManager,apTextureManager,apRenderer,apProgramManager,
-				aPicture,apRenderer3D)
+	: iOldMaterial(asName,apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
+				   aPicture,apRenderer3D)
 	{
 		mbIsTransperant = true;
 		mbIsGlowing= true;
@@ -53,14 +53,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cMaterial_FontNormal::Compile()
-	{
-
-	}
-
 	//-----------------------------------------------------------------------
 
-	bool cMaterial_FontNormal::StartRendering(eMaterialRenderType aType,iCamera* apCam,iLight *pLight)
+	bool cMaterial_FontNormal::StartRendering(eMaterialRenderType aType)
 	{
 		if(aType == eMaterialRenderType_Diffuse)
 		{
@@ -76,13 +71,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cMaterial_FontNormal::EndRendering(eMaterialRenderType aType)
-	{
-		if(aType == eMaterialRenderType_Diffuse)
-		{
-			//mpLowLevelGraphics->SetTextureParam(eTextureParam_AlphaSource0,eTextureSource_Texture);
-		}
-
+	void cMaterial_FontNormal::EndRendering(eMaterialRenderType mType) {
 	}
 
 	//-----------------------------------------------------------------------
@@ -94,32 +83,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cMaterial_FontNormal::NextPass(eMaterialRenderType aType)
-	{
-		return false;
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cMaterial_FontNormal::HasMultiplePasses(eMaterialRenderType aType)
-	{
-		return false;
-	}
-
-	//-----------------------------------------------------------------------
-
-	eMaterialType cMaterial_FontNormal::GetType(eMaterialRenderType aType)
-	{
+	eMaterialType cMaterial_FontNormal::GetType(eMaterialRenderType aType) {
 		return mType;
 	}
-
-	//-----------------------------------------------------------------------
-
-	void cMaterial_FontNormal::EditVertexes(eMaterialRenderType aType, iCamera* apCam, iLight *pLight,
-		tVertexVec *apVtxVec,cVector3f *apTransform,unsigned int alIndexAdd)
-	{
-
-	}
-
-	//-----------------------------------------------------------------------
 }

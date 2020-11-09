@@ -28,10 +28,10 @@ namespace hpl {
 
 	cMaterial_DiffuseAlpha2D::cMaterial_DiffuseAlpha2D(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 		cImageManager* apImageManager, cTextureManager *apTextureManager,
-		cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+		cGpuProgramManager* apProgramManager,
 		eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-	: iMaterial(asName,apLowLevelGraphics,apImageManager,apTextureManager,apRenderer,apProgramManager,
-				aPicture,apRenderer3D)
+	: iOldMaterial(asName,apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
+				   aPicture,apRenderer3D)
 	{
 		mbIsTransperant = true;
 		mbIsGlowing= true;//Set to false later on
@@ -53,14 +53,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cMaterial_DiffuseAlpha2D::Compile()
-	{
-
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cMaterial_DiffuseAlpha2D::StartRendering(eMaterialRenderType aType,iCamera* apCam,iLight *pLight)
+	bool cMaterial_DiffuseAlpha2D::StartRendering(eMaterialRenderType aType)
 	{
 		if(aType == eMaterialRenderType_Diffuse)
 		{
@@ -95,33 +88,9 @@ namespace hpl {
 		return eVtxBatchFlag_Position |	eVtxBatchFlag_Texture0 | eVtxBatchFlag_Color0;
 	}
 
-	//-----------------------------------------------------------------------
-
-	bool cMaterial_DiffuseAlpha2D::NextPass(eMaterialRenderType aType)
-	{
-		return false;
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cMaterial_DiffuseAlpha2D::HasMultiplePasses(eMaterialRenderType aType)
-	{
-		return false;
-	}
-
-	//-----------------------------------------------------------------------
-
 	eMaterialType cMaterial_DiffuseAlpha2D::GetType(eMaterialRenderType aType)
 	{
 		return mType;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cMaterial_DiffuseAlpha2D::EditVertexes(eMaterialRenderType aType, iCamera* apCam, iLight *pLight,
-		tVertexVec *apVtxVec,cVector3f *apTransform,unsigned int alIndexAdd)
-	{
-
 	}
 
 	//-----------------------------------------------------------------------

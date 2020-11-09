@@ -24,25 +24,19 @@
 
 namespace hpl {
 
-	class cMaterial_FontNormal : public iMaterial
+	class cMaterial_FontNormal : public iOldMaterial
 	{
 	public:
 		cMaterial_FontNormal(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
 		~cMaterial_FontNormal();
 
-		void Compile();
-		bool StartRendering(eMaterialRenderType aType,iCamera* apCam,iLight *pLight);
+		bool StartRendering(eMaterialRenderType aType);
 		void EndRendering(eMaterialRenderType aType);
 		tVtxBatchFlag GetBatchFlags(eMaterialRenderType aType);
-		bool NextPass(eMaterialRenderType aType);
-		bool HasMultiplePasses(eMaterialRenderType aType);
-
 		eMaterialType GetType(eMaterialRenderType aType);
-		void EditVertexes(eMaterialRenderType aType, iCamera* apCam, iLight *pLight,
-			tVertexVec *apVtxVec,cVector3f *apTransform,unsigned int alIndexAdd);
 
 	private:
 	};
@@ -56,14 +50,14 @@ namespace hpl {
 
 		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
 		{
 			return hplNew( cMaterial_FontNormal, (asName,apLowLevelGraphics,
-				apImageManager,apTextureManager,apRenderer,
+				apImageManager,apTextureManager,
 				apProgramManager,aPicture,apRenderer3D) );
 		}
 	};
 
-};
+}
 #endif // HPL_MATERIAL_FONTNORMAL_H

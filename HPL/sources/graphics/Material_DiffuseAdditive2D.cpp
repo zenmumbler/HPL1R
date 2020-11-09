@@ -28,10 +28,10 @@ namespace hpl {
 
 	cMaterial_DiffuseAdditive2D::cMaterial_DiffuseAdditive2D(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 		cImageManager* apImageManager, cTextureManager *apTextureManager,
-		cRenderer2D* apRenderer, cGpuProgramManager* apProgramManager,
+		cGpuProgramManager* apProgramManager,
 		eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-	: iMaterial(asName,apLowLevelGraphics,apImageManager,apTextureManager,apRenderer,apProgramManager,
-				aPicture,apRenderer3D)
+	: iOldMaterial(asName,apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
+				   aPicture,apRenderer3D)
 	{
 		mbIsTransperant = true;
 		mbIsGlowing= true;
@@ -53,14 +53,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cMaterial_DiffuseAdditive2D::Compile()
-	{
-
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cMaterial_DiffuseAdditive2D::StartRendering(eMaterialRenderType aType,iCamera* apCam,iLight *pLight)
+	bool cMaterial_DiffuseAdditive2D::StartRendering(eMaterialRenderType aType)
 	{
 		if(aType == eMaterialRenderType_Diffuse)
 		{
@@ -101,20 +94,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cMaterial_DiffuseAdditive2D::NextPass(eMaterialRenderType aType)
-	{
-		return false;
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cMaterial_DiffuseAdditive2D::HasMultiplePasses(eMaterialRenderType aType)
-	{
-		return false;
-	}
-
-	//-----------------------------------------------------------------------
-
 	eMaterialType cMaterial_DiffuseAdditive2D::GetType(eMaterialRenderType aType)
 	{
 		return mType;
@@ -127,14 +106,6 @@ namespace hpl {
 		if(aType == eMaterialRenderType_Diffuse)return true;
 
 		return false;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cMaterial_DiffuseAdditive2D::EditVertexes(eMaterialRenderType aType, iCamera* apCam, iLight *pLight,
-		tVertexVec *apVtxVec,cVector3f *apTransform,unsigned int alIndexAdd)
-	{
-
 	}
 
 	//-----------------------------------------------------------------------

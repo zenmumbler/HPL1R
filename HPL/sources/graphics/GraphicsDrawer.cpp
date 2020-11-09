@@ -61,9 +61,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iMaterial* cGfxBufferObject::GetMaterial() const
+	iOldMaterial* cGfxBufferObject::GetMaterial() const
 	{
-		return mpObject->GetMaterial();
+		return static_cast<iOldMaterial*>(mpObject->GetMaterial());
 	}
 
 	//-----------------------------------------------------------------------
@@ -80,18 +80,13 @@ namespace hpl {
 			return aObjectA.GetMaterial()->GetTexture(eMaterialTexture_Diffuse) >
 				aObjectB.GetMaterial()->GetTexture(eMaterialTexture_Diffuse);
 		}
-		else if(aObjectA.GetMaterial()->GetType(eMaterialRenderType_Diffuse) !=
-			aObjectB.GetMaterial()->GetType(eMaterialRenderType_Diffuse))
-		{
-			return aObjectA.GetMaterial()->GetType(eMaterialRenderType_Diffuse) >
-				aObjectB.GetMaterial()->GetType(eMaterialRenderType_Diffuse);
-		}
 		else
 		{
 
 		}
 		return false;
 	}
+
 
 	//-----------------------------------------------------------------------
 
@@ -137,6 +132,7 @@ namespace hpl {
 
 		m_setGfxBuffer.insert(BuffObj);
 	}
+
 	//-----------------------------------------------------------------------
 
 	void cGraphicsDrawer::DrawAll()
@@ -148,8 +144,8 @@ namespace hpl {
 		mpLowLevelGraphics->SetOrthoProjection(mpLowLevelGraphics->GetVirtualSize(),-1000,1000);
 
 		int lIdxAdd=0;
-		iMaterial *pPrevMat=NULL;
-		iMaterial *pMat =NULL;
+		iOldMaterial *pPrevMat=NULL;
+		iOldMaterial *pMat =NULL;
 		const cGfxBufferObject* pObj=NULL;
 		tGfxBufferSetIt ObjectIt = m_setGfxBuffer.begin();
 
@@ -158,7 +154,7 @@ namespace hpl {
 
 		while(ObjectIt != m_setGfxBuffer.end())
 		{
-			if(pMat->StartRendering(eMaterialRenderType_Diffuse,NULL,NULL)==false)
+			if(pMat->StartRendering(eMaterialRenderType_Diffuse)==false)
 			{
 				ObjectIt++;
 				if(ObjectIt != m_setGfxBuffer.end())pMat = ObjectIt->GetMaterial();
@@ -267,11 +263,7 @@ namespace hpl {
 
 			lIdxAdd =0;
 
-			do
-			{
-				mpLowLevelGraphics->FlushQuadBatch(pPrevMat->GetBatchFlags(eMaterialRenderType_Diffuse),false);
-			}
-			while(pPrevMat->NextPass(eMaterialRenderType_Diffuse));
+			mpLowLevelGraphics->FlushQuadBatch(pPrevMat->GetBatchFlags(eMaterialRenderType_Diffuse),false);
 
 			mpLowLevelGraphics->ClearBatch();
 
@@ -284,6 +276,7 @@ namespace hpl {
 		//Reset all states
 		mpLowLevelGraphics->SetDepthTestActive(true);
 	}
+
 
 	//-----------------------------------------------------------------------
 
