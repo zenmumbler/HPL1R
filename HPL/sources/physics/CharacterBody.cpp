@@ -668,22 +668,6 @@ namespace hpl {
 		}
 
 
-		////////////////////////////////
-		//Set the postion to the body
-		mpBody->SetPosition(mvPosition);
-
-		//////////////////////////
-		//Enable objects around the character
-		if(mvLastPosition != mvPosition)
-		{
-			cBoundingVolume largeBV = *mpBody->GetBV();
-			largeBV.SetSize(largeBV.GetSize()*1.02f);
-
-			mpWorld->EnableBodiesInBV(&largeBV,true);
-		}
-
-
-
 		/////////////////////////////////////////////////////
 		// If the character is not moving in a direction, apply deacceleration.
 		for(int i=0; i < eCharDir_LastEnum; i++)
@@ -736,11 +720,25 @@ namespace hpl {
 			vPosAdd = vPosAdd * fMaxStep;
 		}
 
+		mvPosition += vPosAdd;
+
+		//Set the postion to the body
+		mpBody->SetPosition(mvPosition);
+
+		//////////////////////////
+		//Enable objects around the character
+		if(mvLastPosition != mvPosition)
+		{
+			cBoundingVolume largeBV = *mpBody->GetBV();
+			largeBV.SetSize(largeBV.GetSize()*1.02f);
+
+			mpWorld->EnableBodiesInBV(&largeBV,true);
+		}
+
+
 		//Check if collision should be tested
 		if(mbTestCollision==false)
 		{
-			mpBody->SetPosition(mvPosition);
-
 			UpdateCamera();
 			UpdateEntity();
 
@@ -752,8 +750,6 @@ namespace hpl {
 		/////////////////////////////////////
 		//Check for collision.
 		//Might wanna test this for x, y and z independently.
-		mvPosition += vPosAdd;
-
 		cVector3f vNewPos;
 		//vNewPos = mvPosition;
 		if(mvLastPosition.x != mvPosition.x || mvLastPosition.z != mvLastPosition.z)
