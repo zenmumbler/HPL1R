@@ -64,10 +64,6 @@ namespace hpl {
 		mfMaxAngularSpeed =0;
 		mfMass =0;
 
-		mfAutoDisableLinearThreshold = 0.01f;
-		mfAutoDisableAngularThreshold = 0.01f;
-		mlAutoDisableNumSteps = 10;
-
 		//Log("Creating newton body '%s' %d\n",msName.c_str(),(size_t)this);
 	}
 
@@ -332,46 +328,6 @@ namespace hpl {
 	bool cPhysicsBodyNewton::GetAutoDisable() const
 	{
 		return NewtonBodyGetAutoSleep(mpNewtonBody) == 0 ? false : true;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cPhysicsBodyNewton::SetAutoDisableLinearThreshold(float afThresold)
-	{
-		mfAutoDisableLinearThreshold = afThresold;
-//		NewtonBodySetFreezeTreshold(mpNewtonBody, mfAutoDisableLinearThreshold,
-//			mfAutoDisableAngularThreshold, mlAutoDisableNumSteps);
-	}
-	float cPhysicsBodyNewton::GetAutoDisableLinearThreshold() const
-	{
-		return mfAutoDisableLinearThreshold;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cPhysicsBodyNewton::SetAutoDisableAngularThreshold(float afThresold)
-	{
-		mfAutoDisableAngularThreshold = afThresold;
-//		NewtonBodySetFreezeTreshold(mpNewtonBody, mfAutoDisableLinearThreshold,
-//			mfAutoDisableAngularThreshold, mlAutoDisableNumSteps);
-	}
-	float cPhysicsBodyNewton::GetAutoDisableAngularThreshold() const
-	{
-		return mfAutoDisableAngularThreshold;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cPhysicsBodyNewton::SetAutoDisableNumSteps(int anNum)
-	{
-		mlAutoDisableNumSteps = anNum;
-//		NewtonBodySetFreezeTreshold(mpNewtonBody, mfAutoDisableLinearThreshold,
-//			mfAutoDisableAngularThreshold, mlAutoDisableNumSteps);
-	}
-
-	int cPhysicsBodyNewton::GetAutoDisableNumSteps() const
-	{
-		return mlAutoDisableNumSteps;
 	}
 
 	//-----------------------------------------------------------------------

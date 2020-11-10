@@ -71,12 +71,6 @@ namespace hpl {
 		bool GetEnabled() const;
 		void SetAutoDisable(bool abEnabled);
 		bool GetAutoDisable() const;
-		void SetAutoDisableLinearThreshold(float afThresold);
-		float GetAutoDisableLinearThreshold() const;
-		void SetAutoDisableAngularThreshold(float afThresold);
-		float GetAutoDisableAngularThreshold() const;
-		void SetAutoDisableNumSteps(int alNum);
-		int GetAutoDisableNumSteps() const;
 		void SetContinuousCollision(bool abOn);
 		bool GetContinuousCollision();
 
@@ -111,10 +105,6 @@ namespace hpl {
 		float mfMaxLinearSpeed;
 		float mfMaxAngularSpeed;
 		float mfMass;
-
-		float mfAutoDisableLinearThreshold;
-		float mfAutoDisableAngularThreshold;
-		int mlAutoDisableNumSteps;
 
 		// Forces that will be set and clear on update callback
 		cVector3f mvTotalForce;
