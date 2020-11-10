@@ -219,13 +219,7 @@ void cGameSwingDoor::OnPlayerInteract()
 	mpInit->mpPlayer->mfCurrentMaxInteractDist = mfMaxInteractDist;
 
 #ifdef INCLUDE_HAPTIC
-	if(!mpInit->mbHasHaptics)
-	{
-		mpInit->mpPlayer->SetPushBody(mpInit->mpPlayer->GetPickedBody());
-		mpInit->mpPlayer->ChangeState(ePlayerState_Move);
-	}
-	else
-#endif
+	if(mpInit->mbHasHaptics)
 	{
 		mpInit->mpPlayer->mbPickAtPoint = true;
 		mpInit->mpPlayer->mbRotateWithPlayer = false;
@@ -237,7 +231,13 @@ void cGameSwingDoor::OnPlayerInteract()
 		mpInit->mpPlayer->SetPushBody(mpInit->mpPlayer->GetPickedBody());
 		mpInit->mpPlayer->ChangeState(ePlayerState_Grab);
 	}
-		
+	else
+#endif
+	{
+		mpInit->mpPlayer->SetPushBody(mpInit->mpPlayer->GetPickedBody());
+		mpInit->mpPlayer->ChangeState(ePlayerState_Move);
+	}
+
 }
 
 //-----------------------------------------------------------------------
