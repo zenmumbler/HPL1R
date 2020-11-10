@@ -419,7 +419,7 @@ bool cMapHandler::Load(const tString &asFile,const tString& asStartPos)
 			if(pWorld)
 				mpScene->SetWorld3D(pWorld);
 			else {
-				Error("Couldn't load map '%s'\n",asFile.c_str());	
+				FatalError("Couldn't load map '%s'\n",asFile.c_str());	
 				return false;
 			}
 			mpInit->mpSaveHandler->LoadData(msCurrentMap);
@@ -436,7 +436,7 @@ bool cMapHandler::Load(const tString &asFile,const tString& asStartPos)
 			if(pWorld)
 				mpScene->SetWorld3D(pWorld);
 			else {
-				Error("Couldn't load map '%s'\n",asFile.c_str());	
+				FatalError("Couldn't load map '%s'\n",asFile.c_str());
 				return false;
 			}
 			bFirstTime = true;
