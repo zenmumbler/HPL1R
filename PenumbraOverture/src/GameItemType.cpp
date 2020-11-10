@@ -375,8 +375,9 @@ bool cGameItemType_WeaponMelee::OnAction(cInventoryItem *apItem, int alActionNum
 			}
 
 #ifdef INCLUDE_HAPTIC
-            if(mpInit->mbHasHaptics==false) mpInit->mpPlayerHands->SetCurrentModel(1, apItem->GetHudModelName());
+            if(mpInit->mbHasHaptics==false)
 #endif
+				mpInit->mpPlayerHands->SetCurrentModel(1, apItem->GetHudModelName());
 
 			//////////////////////////
 			//Set up the melee state
