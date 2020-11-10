@@ -356,7 +356,6 @@
 		DB27F0510ACB9AB90054ACA3 /* ParticleEmitter3D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ParticleEmitter3D.h; sourceTree = "<group>"; };
 		DB27F0520ACB9AB90054ACA3 /* ParticleEmitter3D_UserData.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ParticleEmitter3D_UserData.h; sourceTree = "<group>"; };
 		DB27F0530ACB9AB90054ACA3 /* ParticleSystem3D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ParticleSystem3D.h; sourceTree = "<group>"; };
-		DB27F0540ACB9AB90054ACA3 /* PixelFormat.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PixelFormat.h; sourceTree = "<group>"; };
 		DB27F0550ACB9AB90054ACA3 /* Renderable.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Renderable.h; sourceTree = "<group>"; };
 		DB27F0570ACB9AB90054ACA3 /* Renderer3D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Renderer3D.h; sourceTree = "<group>"; };
 		DB27F0580ACB9AB90054ACA3 /* RendererPostEffects.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = RendererPostEffects.h; sourceTree = "<group>"; };
@@ -982,7 +981,6 @@
 				DB27F0510ACB9AB90054ACA3 /* ParticleEmitter3D.h */,
 				DB27F0520ACB9AB90054ACA3 /* ParticleEmitter3D_UserData.h */,
 				DB27F0530ACB9AB90054ACA3 /* ParticleSystem3D.h */,
-				DB27F0540ACB9AB90054ACA3 /* PixelFormat.h */,
 				DB27F0550ACB9AB90054ACA3 /* Renderable.h */,
 				DB27F0570ACB9AB90054ACA3 /* Renderer3D.h */,
 				DB27F0580ACB9AB90054ACA3 /* RendererPostEffects.h */,
