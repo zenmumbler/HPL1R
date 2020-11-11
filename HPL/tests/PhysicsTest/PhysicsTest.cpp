@@ -59,17 +59,17 @@ public:
 		///////////////////////////////////////////////
 		//Floor
 		pMesh = gpGame->GetResources()->GetMeshManager()->CreateMesh("Floor.dae");
-		if(pMesh==NULL) FatalError("Couldn't load mesh\n");
+		if(pMesh==NULL) FatalError("Couldn't load floor mesh\n");
 
 		mpFloorModel = mpWorld->CreateMeshEntity("Floor",pMesh);
 		pShape = mpPhysicsWorld->CreateMeshShape(pMesh->GetSubMesh(0)->GetVertexBuffer());
 		mpFloorBody = mpPhysicsWorld->CreateBody("Floor",pShape);
-		mpFloorBody->SetGravity(false);
+		mpFloorBody->SetGravity(true);
 
 		/////////////////////////////
 		//Boxes
 		pMesh = gpGame->GetResources()->GetMeshManager()->CreateMesh("Woodbox.dae");
-		if(pMesh==NULL) FatalError("Couldn't load mesh\n");
+		if(pMesh==NULL) FatalError("Couldn't load woodbox mesh\n");
 		int j=0;
 		for(int i=0; i<2; i++)
 		{
@@ -165,7 +165,7 @@ private:
 int hplMain(const tString& asCommandLine)
 {
 	//Init the game engine
-	gpGame = new cGame(new cSDLGameSetup(),800,600,32,false,45);
+	gpGame = new cGame(new cSDLGameSetup(),800,600,32,false,60);
 	gpGame->GetGraphics()->GetLowLevel()->SetVsyncActive(false);
 
 	//Add resources
