@@ -26,5 +26,7 @@
 	<string>Copyright 2006-2010 Frictional Games.</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>StartFolder</key>
+	<string>PARENT</string>
 </dict>
 </plist>

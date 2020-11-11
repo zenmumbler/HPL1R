@@ -18,6 +18,7 @@
 		8EAA07B125588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AE25588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp */; };
 		8EAA07B225588FEA007D7CD0 /* Material_Smoke2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AF25588FEA007D7CD0 /* Material_Smoke2D.cpp */; };
 		8EAA07B325588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07B025588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp */; };
+		8EAA07DD255C64F3007D7CD0 /* LowLevelSystemMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */; };
 		8EB7C3D9254F603E00277667 /* scripthelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7C3D8254F603E00277667 /* scripthelper.cpp */; };
 		8EB7C3DA254F603E00277667 /* scripthelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7C3D8254F603E00277667 /* scripthelper.cpp */; };
 		DB00EF3511A9CEA1007DFB32 /* libHPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF8484B0AC76D1A00BB15CD /* libHPL.a */; };
@@ -268,6 +269,7 @@
 		8EAA07B625589032007D7CD0 /* Material_DiffuseAdditive2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material_DiffuseAdditive2D.h; sourceTree = "<group>"; };
 		8EAA07B725589032007D7CD0 /* Material_DiffuseAlpha2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material_DiffuseAlpha2D.h; sourceTree = "<group>"; };
 		8EAA07B825589032007D7CD0 /* Material_Smoke2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material_Smoke2D.h; sourceTree = "<group>"; };
+		8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LowLevelSystemMac.mm; sourceTree = "<group>"; };
 		8EB7C3D8254F603E00277667 /* scripthelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripthelper.cpp; sourceTree = "<group>"; };
 		DB00EF0911A9CE84007DFB32 /* SimpleCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleCamera.cpp; sourceTree = "<group>"; };
 		DB00EF0A11A9CE84007DFB32 /* SimpleCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleCamera.h; sourceTree = "<group>"; };
@@ -1431,6 +1433,7 @@
 				DBF8498F0AC76D5800BB15CD /* LowLevelInputSDL.cpp */,
 				DBF849900AC76D5800BB15CD /* LowLevelPhysicsNewton.cpp */,
 				DBF849910AC76D5800BB15CD /* LowLevelResourcesSDL.cpp */,
+				8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */,
 				DBF849930AC76D5800BB15CD /* LowLevelSystemSDL.cpp */,
 				DBF849940AC76D5800BB15CD /* MeshLoaderCollada.cpp */,
 				DBF849950AC76D5800BB15CD /* MeshLoaderColladaHelpers.cpp */,
@@ -1767,6 +1770,7 @@
 				DBF84ABD0AC76F1E00BB15CD /* CharacterBody.cpp in Sources */,
 				DBF84ABE0AC76F1E00BB15CD /* CharacterBodyNewton.cpp in Sources */,
 				DBF84AC00AC76F1E00BB15CD /* ColliderEntity.cpp in Sources */,
+				8EAA07DD255C64F3007D7CD0 /* LowLevelSystemMac.mm in Sources */,
 				DBF84AC10AC76F1E00BB15CD /* CollideShapeNewton.cpp in Sources */,
 				DBF84AC20AC76F1E00BB15CD /* Color.cpp in Sources */,
 				DBF84AC30AC76F1E00BB15CD /* ConfigFile.cpp in Sources */,
