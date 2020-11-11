@@ -55,21 +55,16 @@ namespace hpl {
 		eMaterialTexture_LastEnum
 	};
 
-	enum eMaterialType
+	enum eOldMaterialType
 	{
-		eMaterialType_Null,
+		eOldMaterialType_Null,
 
-//		eMaterialType_Diffuse,
-		eMaterialType_DiffuseAlpha,
-		eMaterialType_DiffuseAdditive,
-//		eMaterialType_DiffuseNMap,
-//		eMaterialType_DiffuseSpecular,
-//		eMaterialType_BumpSpec,
-		eMaterialType_Smoke,
+		eOldMaterialType_DiffuseAlpha,
+		eOldMaterialType_DiffuseAdditive,
+		eOldMaterialType_Smoke,
+		eOldMaterialType_FontNormal,
 
-		eMaterialType_FontNormal,
-
-		eMaterialType_LastEnum
+		eOldMaterialType_LastEnum
 	};
 
 	enum eMaterialPicture
@@ -328,7 +323,6 @@ namespace hpl {
 		tTextureVec mvTexture;
 		tResourceImageVec mvImage;
 
-		eMaterialType mType;
 		eMaterialPicture mPicture;
 
 		iGpuProgram *mpProgram[2][kMaxProgramNum];
@@ -359,15 +353,16 @@ namespace hpl {
 
 	class iOldMaterial : public iMaterial {
 	public:
-		iOldMaterial(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
+		iOldMaterial(const tString& asName, eOldMaterialType aiType,
+				iLowLevelGraphics* apLowLevelGraphics,
 				cImageManager* apImageManager, cTextureManager *apTextureManager,
 				cGpuProgramManager* apProgramManager,
 				eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
 
-		virtual bool StartRendering(eMaterialRenderType mType) = 0;
-		virtual void EndRendering(eMaterialRenderType mType) = 0;
-		virtual tVtxBatchFlag GetBatchFlags(eMaterialRenderType mType) = 0;
-		virtual eMaterialType GetType(eMaterialRenderType mType) = 0;
+		virtual void StartRendering() = 0;
+		virtual void EndRendering() = 0;
+		
+		const eOldMaterialType mType;
 	};
 
 };

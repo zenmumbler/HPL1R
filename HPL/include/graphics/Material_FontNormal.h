@@ -31,14 +31,9 @@ namespace hpl {
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
 			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
-		~cMaterial_FontNormal();
 
-		bool StartRendering(eMaterialRenderType aType);
-		void EndRendering(eMaterialRenderType aType);
-		tVtxBatchFlag GetBatchFlags(eMaterialRenderType aType);
-		eMaterialType GetType(eMaterialRenderType aType);
-
-	private:
+		void StartRendering();
+		void EndRendering();
 	};
 
 	class cMaterialType_FontNormal : public iMaterialType

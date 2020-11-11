@@ -154,13 +154,7 @@ namespace hpl {
 
 		while(ObjectIt != m_setGfxBuffer.end())
 		{
-			if(pMat->StartRendering(eMaterialRenderType_Diffuse)==false)
-			{
-				ObjectIt++;
-				if(ObjectIt != m_setGfxBuffer.end())pMat = ObjectIt->GetMaterial();
-
-				continue;
-			}
+			pMat->StartRendering();
 
 			do
 			{
@@ -254,20 +248,18 @@ namespace hpl {
 					pMat = ObjectIt->GetMaterial();
 				}
 			}
-			while(	pMat->GetType(eMaterialRenderType_Diffuse) ==
-					pPrevMat->GetType(eMaterialRenderType_Diffuse)
+			while(	pMat->mType == pPrevMat->mType
 					&&
-					pMat->GetTexture(eMaterialTexture_Diffuse) ==
-					pPrevMat->GetTexture(eMaterialTexture_Diffuse)
+					pMat->GetTexture(eMaterialTexture_Diffuse) == pPrevMat->GetTexture(eMaterialTexture_Diffuse)
 				);
 
 			lIdxAdd =0;
 
-			mpLowLevelGraphics->FlushQuadBatch(pPrevMat->GetBatchFlags(eMaterialRenderType_Diffuse),false);
+			mpLowLevelGraphics->FlushQuadBatch(eVtxBatchFlag_Position |	eVtxBatchFlag_Texture0 | eVtxBatchFlag_Color0,false);
 
 			mpLowLevelGraphics->ClearBatch();
 
-			pPrevMat->EndRendering(eMaterialRenderType_Diffuse);
+			pPrevMat->EndRendering();
 		}
 
 		//Clear the buffer of objects.

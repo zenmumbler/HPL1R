@@ -31,14 +31,9 @@ namespace hpl {
 			cImageManager* apImageManager, cTextureManager *apTextureManager,
 			cGpuProgramManager* apProgramManager,
 			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
-		~cMaterial_DiffuseAlpha2D();
 
-		bool StartRendering(eMaterialRenderType mType);
-		void EndRendering(eMaterialRenderType mType);
-		tVtxBatchFlag GetBatchFlags(eMaterialRenderType mType);
-		eMaterialType GetType(eMaterialRenderType mType);
-
-	private:
+		void StartRendering();
+		void EndRendering();
 	};
 
 	class cMaterialType_DiffuseAlpha2D : public iMaterialType

@@ -51,7 +51,6 @@ namespace hpl {
 			mvTexture.assign(mvTexture.size(), NULL);
 		}
 
-		mType = eMaterialType_Null;
 		mPicture = aPicture;
 
 		mpLowLevelGraphics = apLowLevelGraphics;
@@ -155,13 +154,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iOldMaterial::iOldMaterial(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-									 cImageManager* apImageManager, cTextureManager *apTextureManager,
-					  cGpuProgramManager* apProgramManager,
-					  eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
+	iOldMaterial::iOldMaterial(const tString& asName, eOldMaterialType aiType,
+							   iLowLevelGraphics* apLowLevelGraphics,
+							   cImageManager* apImageManager, cTextureManager *apTextureManager,
+							   cGpuProgramManager* apProgramManager,
+							   eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
 		: iMaterial(asName, apLowLevelGraphics, apImageManager, apTextureManager, apProgramManager, aPicture, apRenderer3D)
+		, mType(aiType)
 	{
-
 	}
 
 }

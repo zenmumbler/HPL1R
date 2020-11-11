@@ -30,19 +30,12 @@ namespace hpl {
 		cImageManager* apImageManager, cTextureManager *apTextureManager,
 		cGpuProgramManager* apProgramManager,
 		eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-	: iOldMaterial(asName,apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
+	: iOldMaterial(asName,eOldMaterialType_DiffuseAdditive,
+				   apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
 				   aPicture,apRenderer3D)
 	{
 		mbIsTransperant = true;
 		mbIsGlowing= true;
-		mType = eMaterialType_DiffuseAdditive;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cMaterial_DiffuseAdditive2D::~cMaterial_DiffuseAdditive2D()
-	{
-
 	}
 
 	//-----------------------------------------------------------------------
@@ -53,59 +46,26 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cMaterial_DiffuseAdditive2D::StartRendering(eMaterialRenderType aType)
+	void cMaterial_DiffuseAdditive2D::StartRendering()
 	{
-		if(aType == eMaterialRenderType_Diffuse)
-		{
-			mpLowLevelGraphics->SetBlendActive(true);
-			mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_One);
+		mpLowLevelGraphics->SetBlendActive(true);
+		mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_One);
 
-			mpLowLevelGraphics->SetActiveTextureUnit(0);
-			//mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Alpha);
-			mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
+		mpLowLevelGraphics->SetActiveTextureUnit(0);
+		//mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Alpha);
+		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 
-			mpLowLevelGraphics->SetTexture(0,GetTexture(eMaterialTexture_Diffuse));
-
-			return true;
-		}
-		return false;
+		mpLowLevelGraphics->SetTexture(0,GetTexture(eMaterialTexture_Diffuse));
 	}
 
 	//-----------------------------------------------------------------------
 
-	void cMaterial_DiffuseAdditive2D::EndRendering(eMaterialRenderType aType)
+	void cMaterial_DiffuseAdditive2D::EndRendering()
 	{
-		if(aType == eMaterialRenderType_Diffuse)
-		{
-			mpLowLevelGraphics->SetTexture(0,NULL);
-			mpLowLevelGraphics->SetActiveTextureUnit(0);
-			mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Color);
-			mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
-		}
-
-	}
-
-	//-----------------------------------------------------------------------
-
-	tVtxBatchFlag cMaterial_DiffuseAdditive2D::GetBatchFlags(eMaterialRenderType aType)
-	{
-		return eVtxBatchFlag_Position |	eVtxBatchFlag_Texture0 | eVtxBatchFlag_Color0;
-	}
-
-	//-----------------------------------------------------------------------
-
-	eMaterialType cMaterial_DiffuseAdditive2D::GetType(eMaterialRenderType aType)
-	{
-		return mType;
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cMaterial_DiffuseAdditive2D::UsesType(eMaterialRenderType aType)
-	{
-		if(aType == eMaterialRenderType_Diffuse)return true;
-
-		return false;
+		mpLowLevelGraphics->SetTexture(0,NULL);
+		mpLowLevelGraphics->SetActiveTextureUnit(0);
+		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Color);
+		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 	}
 
 	//-----------------------------------------------------------------------

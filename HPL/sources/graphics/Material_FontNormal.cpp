@@ -30,19 +30,12 @@ namespace hpl {
 		cImageManager* apImageManager, cTextureManager *apTextureManager,
 		cGpuProgramManager* apProgramManager,
 		eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-	: iOldMaterial(asName,apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
+	: iOldMaterial(asName,eOldMaterialType_FontNormal,
+				   apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
 				   aPicture,apRenderer3D)
 	{
 		mbIsTransperant = true;
 		mbIsGlowing= true;
-		mType = eMaterialType_FontNormal;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cMaterial_FontNormal::~cMaterial_FontNormal()
-	{
-
 	}
 
 	//-----------------------------------------------------------------------
@@ -55,35 +48,18 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cMaterial_FontNormal::StartRendering(eMaterialRenderType aType)
+	void cMaterial_FontNormal::StartRendering()
 	{
-		if(aType == eMaterialRenderType_Diffuse)
-		{
-			mpLowLevelGraphics->SetBlendActive(true);
-			mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha,eBlendFunc_OneMinusSrcAlpha);
+		mpLowLevelGraphics->SetBlendActive(true);
+		mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha,eBlendFunc_OneMinusSrcAlpha);
 
-			mpLowLevelGraphics->SetTexture(0, GetTexture(eMaterialTexture_Diffuse));
-
-			return true;
-		}
-		return false;
+		mpLowLevelGraphics->SetTexture(0, GetTexture(eMaterialTexture_Diffuse));
 	}
 
 	//-----------------------------------------------------------------------
 
-	void cMaterial_FontNormal::EndRendering(eMaterialRenderType mType) {
+	void cMaterial_FontNormal::EndRendering() {
 	}
 
 	//-----------------------------------------------------------------------
-
-	tVtxBatchFlag cMaterial_FontNormal::GetBatchFlags(eMaterialRenderType aType)
-	{
-		return eVtxBatchFlag_Position |	eVtxBatchFlag_Texture0 | eVtxBatchFlag_Color0;
-	}
-
-	//-----------------------------------------------------------------------
-
-	eMaterialType cMaterial_FontNormal::GetType(eMaterialRenderType aType) {
-		return mType;
-	}
 }

@@ -30,19 +30,12 @@ namespace hpl {
 		cImageManager* apImageManager, cTextureManager *apTextureManager,
 		cGpuProgramManager* apProgramManager,
 		eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-	: iOldMaterial(asName,apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
+	: iOldMaterial(asName,eOldMaterialType_DiffuseAlpha,
+				   apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
 				   aPicture,apRenderer3D)
 	{
 		mbIsTransperant = true;
 		mbIsGlowing= true;//Set to false later on
-		mType = eMaterialType_DiffuseAlpha;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cMaterial_DiffuseAlpha2D::~cMaterial_DiffuseAlpha2D()
-	{
-
 	}
 
 	//-----------------------------------------------------------------------
@@ -53,44 +46,22 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cMaterial_DiffuseAlpha2D::StartRendering(eMaterialRenderType aType)
+	void cMaterial_DiffuseAlpha2D::StartRendering()
 	{
-		if(aType == eMaterialRenderType_Diffuse)
-		{
-			mpLowLevelGraphics->SetBlendActive(true);
-			mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_OneMinusSrcAlpha);
+		mpLowLevelGraphics->SetBlendActive(true);
+		mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_OneMinusSrcAlpha);
 
-			mpLowLevelGraphics->SetTexture(0, GetTexture(eMaterialTexture_Diffuse));
-			//mpLowLevelGraphics->SetTextureParam(eTextureParam_ColorOp1,eTextureOp_Alpha);
-			//mpLowLevelGraphics->SetTextureParam(eTextureParam_ColorFunc, eTextureFunc_Modulate);
-
-			return true;
-		}
-		return false;
+		mpLowLevelGraphics->SetTexture(0, GetTexture(eMaterialTexture_Diffuse));
+		//mpLowLevelGraphics->SetTextureParam(eTextureParam_ColorOp1,eTextureOp_Alpha);
+		//mpLowLevelGraphics->SetTextureParam(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 	}
 
 	//-----------------------------------------------------------------------
 
-	void cMaterial_DiffuseAlpha2D::EndRendering(eMaterialRenderType aType)
+	void cMaterial_DiffuseAlpha2D::EndRendering()
 	{
-		if(aType == eMaterialRenderType_Diffuse)
-		{
-			//mpLowLevelGraphics->SetTextureParam(eTextureParam_ColorOp1,eTextureOp_Color);
-			//mpLowLevelGraphics->SetTextureParam(eTextureParam_ColorFunc, eTextureFunc_Modulate);
-		}
-
-	}
-
-	//-----------------------------------------------------------------------
-
-	tVtxBatchFlag cMaterial_DiffuseAlpha2D::GetBatchFlags(eMaterialRenderType aType)
-	{
-		return eVtxBatchFlag_Position |	eVtxBatchFlag_Texture0 | eVtxBatchFlag_Color0;
-	}
-
-	eMaterialType cMaterial_DiffuseAlpha2D::GetType(eMaterialRenderType aType)
-	{
-		return mType;
+		//mpLowLevelGraphics->SetTextureParam(eTextureParam_ColorOp1,eTextureOp_Color);
+		//mpLowLevelGraphics->SetTextureParam(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 	}
 
 	//-----------------------------------------------------------------------
