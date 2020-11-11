@@ -263,7 +263,7 @@ namespace hpl {
 		 * \return
 		 */
 		virtual bool IsTransperant() {return mbIsTransperant;}
-		virtual bool IsGlowing() { return mbIsGlowing; }
+
 		/**
 		 * return true if the material has a light pass
 		 * \return
@@ -310,7 +310,6 @@ namespace hpl {
 		static eMaterialQuality	mQuality;
 
 		bool mbIsTransperant;
-		bool mbIsGlowing;
 		bool mbUsesLights;
 		bool mbHasAlpha;
 		bool mbDepthTest;

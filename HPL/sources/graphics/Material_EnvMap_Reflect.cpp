@@ -102,7 +102,6 @@ namespace hpl {
 		aPicture,apRenderer3D)
 	{
 		mbIsTransperant = false;
-		mbIsGlowing= false;
 		mbUsesLights = false;
 
 		gGLState_EnvMapReflect.SetUp(apLowLevelGraphics);

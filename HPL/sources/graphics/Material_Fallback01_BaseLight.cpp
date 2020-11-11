@@ -294,7 +294,6 @@ namespace hpl {
 		mbUseSpecular = abSpecular;
 
 		mbIsTransperant = false;
-		mbIsGlowing= false;
 		mbUsesLights = true;
 
 		tString asLightVertexProgram1 = "Fallback01_Diffuse_Light_p1_vp.cg";

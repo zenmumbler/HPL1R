@@ -69,7 +69,6 @@ namespace hpl {
 					aPicture,apRenderer3D)
 	{
 		mbIsTransperant = false;
-		mbIsGlowing= false;
 		mbUsesLights = true;
 		mbUseColorSpecular = false;
 

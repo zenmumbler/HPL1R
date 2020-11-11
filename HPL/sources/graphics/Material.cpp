@@ -62,7 +62,6 @@ namespace hpl {
 
 		mbUsesLights = false;
 		mbIsTransperant = false;
-		mbIsGlowing = false;
 		mbHasAlpha = false;
 		mbDepthTest = true;
 		mfValue = 1;

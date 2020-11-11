@@ -63,7 +63,6 @@ namespace hpl {
 					aPicture,apRenderer3D)
 	{
 		mbIsTransperant = true;
-		mbIsGlowing= false;
 		mbUsesLights = false;
 
 		mpFogVtxProg = mpProgramManager->CreateProgram("Fog_Trans_vp.cg","main",eGpuProgramType_Vertex);

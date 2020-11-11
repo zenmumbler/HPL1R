@@ -100,7 +100,6 @@ namespace hpl {
 					aPicture,apRenderer3D)
 	{
 		mbIsTransperant = true;
-		mbIsGlowing= false;
 		mbUsesLights = false;
 
 		gModulateX2Fog.SetUp(apLowLevelGraphics);

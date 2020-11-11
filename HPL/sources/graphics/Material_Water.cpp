@@ -78,7 +78,6 @@ namespace hpl {
 					aPicture,apRenderer3D)
 	{
 		mbIsTransperant = true;
-		mbIsGlowing= false;
 		mbUsesLights = false;
 
 		//gModulateFog.SetUp(apLowLevelGraphics);

@@ -151,7 +151,6 @@ namespace hpl {
 		}
 
 		mbIsTransperant = false;
-		mbIsGlowing= false;
 		mbUsesLights = true;
 
 		tString asLightVertexProgram1 = "Fallback02_Diffuse_Light_p1_vp.cg";
