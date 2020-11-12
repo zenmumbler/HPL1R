@@ -43,9 +43,9 @@ namespace hpl {
 		 * \param mPicType
 		 * \return
 		 */
-		iMaterial* Create(tString asMatName, eMaterialPicture mPicType);
+		iMaterial* Create(tString asMatName);
 
-		iMaterial* Create(const tString& asName,tString asMatName, eMaterialPicture mPicType);
+		iMaterial* Create(const tString& asName,tString asMatName);
 
 	private:
 		tMaterialTypeList mlstMatTypes;
@@ -54,4 +54,5 @@ namespace hpl {
 	};
 
 };
+
 #endif // HPL_MATERIALHANDLER_H

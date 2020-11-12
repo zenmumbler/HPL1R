@@ -265,7 +265,7 @@ namespace hpl {
 		float fValue = cString::ToFloat(pMain->Attribute("Value"), 1);
 		tString sPhysicsMatName = cString::ToString(pMain->Attribute("PhysicsMaterial"),"Default");
 
-		iMaterial* pMat = mpGraphics->GetMaterialHandler()->Create(asName,sType,eMaterialPicture_Texture);
+		iMaterial* pMat = mpGraphics->GetMaterialHandler()->Create(asName,sType);
 		if(pMat==NULL){
 			hplDelete(pDoc);
 			Error("Invalid material type '%s'\n",sType);

@@ -274,11 +274,9 @@ namespace hpl {
 	iMaterial_Fallback01_BaseLight::iMaterial_Fallback01_BaseLight(
 		bool abNormalMap, bool abSpecular,
 		const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-		cImageManager* apImageManager, cTextureManager *apTextureManager,
-		cGpuProgramManager* apProgramManager,
-		eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-		: iMaterial(asName,apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
-					aPicture,apRenderer3D)
+		cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
+		cRenderer3D *apRenderer3D)
+		: iMaterial(asName,apLowLevelGraphics,apTextureManager,apProgramManager,apRenderer3D)
 	{
 		gDiffuseGLState.SetUp(mpLowLevelGraphics);
 		gBumpGLState.SetUp(mpLowLevelGraphics);

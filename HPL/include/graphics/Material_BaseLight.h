@@ -43,9 +43,8 @@ namespace hpl {
 							const tString& asLightFragmentProgram,
 
 			const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
+			cTextureManager *apTextureManager,cGpuProgramManager* apProgramManager,
+			cRenderer3D *apRenderer3D);
 
 		virtual ~iMaterial_BaseLight();
 

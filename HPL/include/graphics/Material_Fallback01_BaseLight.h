@@ -19,7 +19,6 @@
 #ifndef HPL_MATERIAL_FALLBACK01_BASE_LIGHT_H
 #define HPL_MATERIAL_FALLBACK01_BASE_LIGHT_H
 
-#include <vector>
 #include "graphics/Material.h"
 #include "scene/Light3D.h"
 
@@ -34,9 +33,8 @@ namespace hpl {
 	public:
 		iMaterial_Fallback01_BaseLight(bool abNormalMap, bool abSpecular,
 			const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
+			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
+			cRenderer3D *apRenderer3D);
 
 		virtual ~iMaterial_Fallback01_BaseLight();
 
@@ -173,12 +171,10 @@ namespace hpl {
 	{
 	public:
 		cMaterial_Fallback01_Diffuse(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
+			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
+			cRenderer3D *apRenderer3D)
 		: iMaterial_Fallback01_BaseLight(false, false,
-				asName,apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
-				aPicture,apRenderer3D)
+				asName,apLowLevelGraphics,apTextureManager,apProgramManager,apRenderer3D)
 		{
 		}
 	};
@@ -191,12 +187,10 @@ namespace hpl {
 	{
 	public:
 		cMaterial_Fallback01_Bump(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
+			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
+			cRenderer3D *apRenderer3D)
 			: iMaterial_Fallback01_BaseLight(true, false,
-					asName,apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
-					aPicture,apRenderer3D)
+					asName,apLowLevelGraphics,apTextureManager,apProgramManager,apRenderer3D)
 		{
 		}
 	};

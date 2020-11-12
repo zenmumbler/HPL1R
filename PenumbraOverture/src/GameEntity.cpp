@@ -471,7 +471,7 @@ void iGameEntity::SetUpTransMaterials()
 		
 		//create material for the transperancy
 		iMaterial *pTransMaterial = mpInit->mpGame->GetGraphics()->GetMaterialHandler()->Create(
-													"Trans","Modulative",eMaterialPicture_Texture);
+													"Trans","Modulative");
 		
 		//Set texture for the trans material
 		iTexture *pDiffTex = pNormalMaterial->GetTexture(eMaterialTexture_Diffuse);

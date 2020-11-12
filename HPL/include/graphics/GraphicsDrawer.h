@@ -28,7 +28,6 @@ namespace hpl {
 	class iLowLevelGraphics;
 	class cResourceImage;
 	class cGfxObject;
-	class cMaterialHandler;
 	class iOldMaterial;
 
 	class cGfxBufferObject

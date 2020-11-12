@@ -17,7 +17,6 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "graphics/MaterialHandler.h"
-#include "resources/ResourceImage.h"
 #include "graphics/Graphics.h"
 #include "resources/Resources.h"
 
@@ -62,25 +61,24 @@ namespace hpl {
 	}
 
 	//-----------------------------------------------------------------------
-	iMaterial* cMaterialHandler::Create(tString asMatName, eMaterialPicture mPicType)
+	iMaterial* cMaterialHandler::Create(tString asMatName)
 	{
-		return Create("",asMatName,mPicType);
+		return Create("", asMatName);
 	}
 
-	iMaterial* cMaterialHandler::Create(const tString& asName,tString asMatName, eMaterialPicture mPicType)
+	iMaterial* cMaterialHandler::Create(const tString& asName,tString asMatName)
 	{
 		iMaterial* pMat=NULL;
-		cResourceImage* pImage=NULL;
 		unsigned int lIdCount = 1;
 
 		for(tMaterialTypeListIt it = mlstMatTypes.begin(); it!=mlstMatTypes.end();it++)
 		{
 			if((*it)->IsCorrect(asMatName))
 			{
-				pMat = (*it)->Create(asName,mpGraphics->GetLowLevel(),mpResources->GetImageManager(),
+				pMat = (*it)->Create(asName,mpGraphics->GetLowLevel(),
 									mpResources->GetTextureManager(),
 									mpResources->GetGpuProgramManager(),
-									mPicType,mpGraphics->GetRenderer3D());
+									mpGraphics->GetRenderer3D());
 
 				//Set an id to the material for easier rendering later on.
 				pMat->SetId(lIdCount);

@@ -34,9 +34,8 @@ namespace hpl {
 	public:
 		iMaterial_Fallback02_BaseLight(
 			const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
+			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
+			cRenderer3D *apRenderer3D);
 
 		virtual ~iMaterial_Fallback02_BaseLight();
 
@@ -121,12 +120,10 @@ namespace hpl {
 	{
 	public:
 		cMaterial_Fallback02_Diffuse(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
+			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
+			cRenderer3D *apRenderer3D)
 		: iMaterial_Fallback02_BaseLight(
-				asName,apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
-				aPicture,apRenderer3D)
+				asName,apLowLevelGraphics,apTextureManager,apProgramManager,apRenderer3D)
 		{
 		}
 	};

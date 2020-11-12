@@ -62,11 +62,9 @@ namespace hpl {
 	iMaterial_BaseLight::iMaterial_BaseLight(const tString& asLightVertexProgram,
 										const tString& asLightFragmentProgram,
 		const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-		cImageManager* apImageManager, cTextureManager *apTextureManager,
-		cGpuProgramManager* apProgramManager,
-		eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-		: iMaterial(asName,apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
-					aPicture,apRenderer3D)
+		cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
+		cRenderer3D *apRenderer3D)
+		: iMaterial(asName,apLowLevelGraphics,apTextureManager,apProgramManager,apRenderer3D)
 	{
 		mbIsTransperant = false;
 		mbUsesLights = true;

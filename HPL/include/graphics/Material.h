@@ -22,7 +22,6 @@
 #include <vector>
 #include "graphics/Texture.h"
 #include "system/SystemTypes.h"
-#include "resources/ResourceImage.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/GPUProgram.h"
 
@@ -53,13 +52,6 @@ namespace hpl {
 		eMaterialTexture_CubeMap,
 		eMaterialTexture_Refraction,
 		eMaterialTexture_LastEnum
-	};
-
-	enum eMaterialPicture
-	{
-		eMaterialPicture_Image,
-		eMaterialPicture_Texture,
-		eMaterialPicture_LastEnum
 	};
 
 	enum eMaterialRenderType
@@ -104,7 +96,6 @@ namespace hpl {
 	class cRenderer3D;
 	class cRenderSettings;
 	class cTextureManager;
-	class cImageManager;
 	class cGpuProgramManager;
 	class iLight;
 	class iCamera;
@@ -190,9 +181,8 @@ namespace hpl {
 	{
 	public:
 		iMaterial(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-				cImageManager* apImageManager, cTextureManager *apTextureManager,
-				cGpuProgramManager* apProgramManager,
-				eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
+				cTextureManager *apTextureManager,
+				cGpuProgramManager* apProgramManager, cRenderer3D *apRenderer3D);
 		virtual ~iMaterial();
 
 		//resources stuff.
@@ -237,9 +227,6 @@ namespace hpl {
 		cRect2f GetTextureOffset(eMaterialTexture aType);
 
 		void SetTexture(iTexture* apTex,eMaterialTexture aType){ mvTexture[aType] = apTex; }
-		void SetImage(cResourceImage* apImg,eMaterialTexture aType){
-			mvImage[aType] = apImg;	}
-		cResourceImage* GetImage(eMaterialTexture aType){ return mvImage[aType];}
 
 		void SetProgram(iGpuProgram* apProgram, eGpuProgramType aType, unsigned int alNum){
 						mpProgram[aType][alNum] = apProgram;}
@@ -289,7 +276,6 @@ namespace hpl {
 
 	protected:
 		iLowLevelGraphics* mpLowLevelGraphics;
-		cImageManager* mpImageManager;
 		cTextureManager* mpTextureManager;
 		cRenderer3D* mpRenderer3D;
 		cRenderSettings *mpRenderSettings;
@@ -308,9 +294,6 @@ namespace hpl {
 		tString msPhysicsMaterial;
 
 		tTextureVec mvTexture;
-		tResourceImageVec mvImage;
-
-		eMaterialPicture mPicture;
 
 		iGpuProgram *mpProgram[2][kMaxProgramNum];
 
@@ -327,10 +310,9 @@ namespace hpl {
 	public:
 		virtual ~iMaterialType() {}
 		virtual bool IsCorrect(tString asName)=0;
-		virtual iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)=0;
+		virtual iMaterial* Create(const tString& asName, iLowLevelGraphics* apLowLevelGraphics,
+			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
+			cRenderer3D *apRenderer3D)=0;
 	};
 
 	typedef std::list<iMaterialType*> tMaterialTypeList;

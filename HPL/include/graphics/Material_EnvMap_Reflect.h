@@ -51,9 +51,8 @@ namespace hpl {
 	{
 	public:
 		cMaterial_EnvMap_Reflect(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
+			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
+			cRenderer3D *apRenderer3D);
 
 		virtual ~cMaterial_EnvMap_Reflect();
 
@@ -87,13 +86,11 @@ namespace hpl {
 		}
 
 		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
+			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
+			cRenderer3D *apRenderer3D)
 		{
 			return hplNew( cMaterial_EnvMap_Reflect, (asName,apLowLevelGraphics,
-				apImageManager,apTextureManager,
-				apProgramManager,aPicture,apRenderer3D) );
+				apTextureManager,apProgramManager,apRenderer3D) );
 		}
 	};
 

@@ -27,9 +27,8 @@ namespace hpl {
 	{
 	public:
 		cMaterial_Modulative(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
+			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
+			cRenderer3D *apRenderer3D);
 
 		virtual ~cMaterial_Modulative();
 
@@ -66,13 +65,11 @@ namespace hpl {
 		}
 
 		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
+			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
+			cRenderer3D *apRenderer3D)
 		{
 			return hplNew( cMaterial_Modulative, (asName,apLowLevelGraphics,
-				apImageManager,apTextureManager,
-				apProgramManager,aPicture,apRenderer3D) );
+				apTextureManager,apProgramManager,apRenderer3D) );
 		}
 	};
 

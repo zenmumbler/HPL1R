@@ -20,7 +20,6 @@
 #include "graphics/Renderer3D.h"
 #include "system/LowLevelSystem.h"
 #include "resources/TextureManager.h"
-#include "resources/ImageManager.h"
 #include "resources/GpuProgramManager.h"
 #include "graphics/GPUProgram.h"
 #include "scene/Camera.h"
@@ -37,24 +36,14 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	iMaterial::iMaterial(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-		cImageManager* apImageManager, cTextureManager *apTextureManager,
-		cGpuProgramManager* apProgramManager,
-		eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
+		cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
+		cRenderer3D *apRenderer3D)
 		: iResourceBase(asName, 0)
 	{
-		if(aPicture==eMaterialPicture_Image){
-			mvImage.resize(eMaterialTexture_LastEnum);
-			mvImage.assign(mvImage.size(), NULL);
-		}
-		else {
-			mvTexture.resize(eMaterialTexture_LastEnum);
-			mvTexture.assign(mvTexture.size(), NULL);
-		}
-
-		mPicture = aPicture;
+		mvTexture.resize(eMaterialTexture_LastEnum);
+		mvTexture.assign(mvTexture.size(), NULL);
 
 		mpLowLevelGraphics = apLowLevelGraphics;
-		mpImageManager = apImageManager;
 		mpTextureManager = apTextureManager;
 		mpRenderer3D = apRenderer3D;
 		mpRenderSettings = mpRenderer3D->GetRenderSettings();
@@ -78,10 +67,6 @@ namespace hpl {
 	{
 		int i;
 
-		for(i=0;i<(int)mvImage.size();i++){
-			if(mvImage[i])
-				mpImageManager->Destroy(mvImage[i]);
-		}
 		for(i=0;i<(int)mvTexture.size();i++){
 			if(mvTexture[i])
 				mpTextureManager->Destroy(mvTexture[i]);
@@ -113,16 +98,7 @@ namespace hpl {
 
 	iTexture* iMaterial::GetTexture(eMaterialTexture aType)
 	{
-		if(mPicture==eMaterialPicture_Image){
-			if(mvImage[aType]==NULL){
-				Log("2: %d\n", aType);return NULL;
-			}
-			return mvImage[aType]->GetTexture();
-		}
-		else
-		{
-			return mvTexture[aType];
-		}
+		return mvTexture[aType];
 	}
 
 	//-----------------------------------------------------------------------
@@ -131,21 +107,9 @@ namespace hpl {
 	{
 		cRect2f SizeRect;
 
-		if(mPicture==eMaterialPicture_Image)
-		{
-			tVertexVec VtxVec = mvImage[aType]->GetVertexVecCopy(0,0);
-
-			SizeRect.x = VtxVec[0].tex.x;
-			SizeRect.y = VtxVec[0].tex.y;
-			SizeRect.w = VtxVec[2].tex.x - VtxVec[0].tex.x;
-			SizeRect.h = VtxVec[2].tex.y - VtxVec[0].tex.y;
-		}
-		else
-		{
-			SizeRect.x=0;SizeRect.y=0;
-			SizeRect.w = 1;//(float) mvTexture[aType]->GetWidth();
-			SizeRect.h = 1;//(float) mvTexture[aType]->GetHeight();
-		}
+		SizeRect.x=0;SizeRect.y=0;
+		SizeRect.w = 1;//(float) mvTexture[aType]->GetWidth();
+		SizeRect.h = 1;//(float) mvTexture[aType]->GetHeight();
 
 		return SizeRect;
 	}
