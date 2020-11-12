@@ -30,13 +30,7 @@
 #include "game/Updateable.h"
 #include "resources/Resources.h"
 
-//2D Materials (only used for UI)
-#include "graphics/Material_DiffuseAlpha2D.h"
-#include "graphics/Material_DiffuseAdditive2D.h"
-#include "graphics/Material_Smoke2D.h"
-#include "graphics/Material_FontNormal.h"
-
-//3D Materials
+// Materials
 #include "graphics/Material_Alpha.h"
 #include "graphics/Material_Diffuse.h"
 #include "graphics/Material_DiffuseSpec.h"
@@ -112,7 +106,7 @@ namespace hpl {
 
 		Log(" Creating graphic systems\n");
 		mpMaterialHandler = hplNew( cMaterialHandler,(this, apResources));
-		mpDrawer = hplNew( cGraphicsDrawer,(mpLowLevelGraphics,mpMaterialHandler,apResources));
+		mpDrawer = hplNew( cGraphicsDrawer,(mpLowLevelGraphics, apResources->GetImageManager()));
 		mpRenderList = hplNew( cRenderList,(this));
 		mpMeshCreator = hplNew( cMeshCreator,(mpLowLevelGraphics, apResources));
 		mpRenderer3D = hplNew( cRenderer3D,(mpLowLevelGraphics,apResources,mpMeshCreator,mpRenderList));
@@ -123,11 +117,6 @@ namespace hpl {
 
 		//Add all the materials.
 		Log(" Adding engine materials\n");
-		mpMaterialHandler->Add(hplNew( cMaterialType_DiffuseAlpha2D,()) );
-		mpMaterialHandler->Add(hplNew( cMaterialType_DiffuseAdditive2D,()) );
-		mpMaterialHandler->Add(hplNew( cMaterialType_Smoke2D,()) );
-		mpMaterialHandler->Add(hplNew( cMaterialType_FontNormal,()) );
-
 		mpMaterialHandler->Add(hplNew( cMaterialType_Diffuse,()) );
 		mpMaterialHandler->Add(hplNew( cMaterialType_Bump,()) );
 		mpMaterialHandler->Add(hplNew( cMaterialType_DiffuseSpec,()) );

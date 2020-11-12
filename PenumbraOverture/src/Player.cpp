@@ -1494,7 +1494,7 @@ void cPlayer::OnDraw()
 		cGfxObject *pAdditive = mpCurrentItem->GetGfxObjectAdditive();
 		if(pObject)
 		{
-			cVector2l vIntSize = pObject->GetMaterial()->GetImage(eMaterialTexture_Diffuse)->GetSize();
+			cVector2l vIntSize = pObject->GetMaterial()->GetImage()->GetSize();
 			cVector2f vSize((float)vIntSize.x, (float)vIntSize.y);
 
 			cVector2f vPosAdd(((float)vSize.x) / 2.0f, ((float)vSize.y) / 2.0f);
@@ -1525,7 +1525,7 @@ void cPlayer::OnDraw()
 	}
 	else if(mCrossHairState != eCrossHairState_None)
 	{
-		cResourceImage *pImage = mvCrossHairs[mCrossHairState]->GetMaterial()->GetImage(eMaterialTexture_Diffuse);
+		cResourceImage *pImage = mvCrossHairs[mCrossHairState]->GetMaterial()->GetImage();
 		cVector2l vSize = pImage->GetSize();
 		cVector2f vPosAdd(((float)vSize.x) / 2.0f, ((float)vSize.y) / 2.0f);
 		mpGfxDrawer->DrawGfxObject(mvCrossHairs[mCrossHairState],cVector3f(0,0,100)+(mvCrossHairPos - vPosAdd));
@@ -1533,7 +1533,7 @@ void cPlayer::OnDraw()
 	else if(mpInit->mbShowCrossHair)
 	{
 		cVector3f vPos = cVector3f(400,300,0);
-		cResourceImage *pImage = mvCrossHairs[eCrossHairState_Cross]->GetMaterial()->GetImage(eMaterialTexture_Diffuse);
+		cResourceImage *pImage = mvCrossHairs[eCrossHairState_Cross]->GetMaterial()->GetImage();
 		cVector2l vSize = pImage->GetSize();
 		cVector2f vPosAdd(((float)vSize.x) / 2.0f, ((float)vSize.y) / 2.0f);
 		mpGfxDrawer->DrawGfxObject(mvCrossHairs[eCrossHairState_Cross],cVector3f(0,0,100)+(vPos - vPosAdd));

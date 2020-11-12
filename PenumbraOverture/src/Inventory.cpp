@@ -169,7 +169,7 @@ void iInventoryWidget::Draw()
 {
 	if(mpGfxObject==NULL) return;
 	
-	cVector2l vSize = mpGfxObject->GetMaterial()->GetImage(eMaterialTexture_Diffuse)->GetSize();
+	cVector2l vSize = mpGfxObject->GetMaterial()->GetImage()->GetSize();
 	mpDrawer->DrawGfxObject(mpGfxObject, cVector3f(mRect.x,mRect.y,mfZ),
 							cVector2f((float)vSize.x, (float)vSize.y),
 							cColor(1, mpInit->mpInventory->GetAlpha()));
@@ -204,7 +204,7 @@ void cInventorySlot::OnDraw()
 	if(mpItem)
 	{
 		cVector3f vPos(mRect.x + 4,	mRect.y + 4 ,5);
-		cVector2l vSize = mpItem->GetGfxObject()->GetMaterial()->GetImage(eMaterialTexture_Diffuse)->GetSize();
+		cVector2l vSize = mpItem->GetGfxObject()->GetMaterial()->GetImage()->GetSize();
 		
 		mpDrawer->DrawGfxObject(mpItem->GetGfxObject(), vPos,
 								cVector2f((float)vSize.x, (float)vSize.y),
@@ -1101,7 +1101,7 @@ void cInventory::OnDraw()
 	{
 		cVector3f vPos(mvMousePos.x + mvCurrentItemOffset.x, 
 						mvMousePos.y + mvCurrentItemOffset.y,15);
-		cVector2l vSize = mpCurrentItem->GetGfxObject()->GetMaterial()->GetImage(eMaterialTexture_Diffuse)->GetSize();
+		cVector2l vSize = mpCurrentItem->GetGfxObject()->GetMaterial()->GetImage()->GetSize();
 
 		mpDrawer->DrawGfxObject(mpCurrentItem->GetGfxObject(), vPos,
 								cVector2f((float)vSize.x, (float)vSize.y),

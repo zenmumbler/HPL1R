@@ -19,20 +19,54 @@
 #ifndef HPL_GFX_OBJECT_H
 #define HPL_GFX_OBJECT_H
 
-#include <vector>
 #include "graphics/GraphicsTypes.h"
 
 namespace hpl {
 
-	class iMaterial;
+	class iTexture;
+	class cResourceImage;
+	class cImageManager;
+	class iLowLevelGraphics;
+
+	enum eOldMaterialType
+	{
+		eOldMaterialType_Null,
+
+		eOldMaterialType_DiffuseAlpha,
+		eOldMaterialType_DiffuseAdditive,
+		eOldMaterialType_Smoke,
+		eOldMaterialType_FontNormal,
+
+		eOldMaterialType_LastEnum
+   };
+
+	class iOldMaterial {
+	public:
+		iOldMaterial(eOldMaterialType aiType, cImageManager* apImageManager);
+		virtual ~iOldMaterial();
+
+		virtual void StartRendering(iLowLevelGraphics* apLowLevelGraphics) const = 0;
+		virtual void EndRendering(iLowLevelGraphics* apLowLevelGraphics) const = 0;
+
+		void SetImage(cResourceImage* apImage) { mpImage = apImage; }
+		cResourceImage* GetImage() const { return mpImage; }
+		iTexture* GetTexture() const;
+		
+		const eOldMaterialType mType;
+	
+	private:
+		cResourceImage* mpImage;
+		cImageManager* mpImageManager;
+	};
+
 
 	class cGfxObject
 	{
 	public:
-		cGfxObject(iMaterial* apMat,const tString& asFile, bool abIsImage);
+		cGfxObject(iOldMaterial* apMat,const tString& asFile = "", bool abIsImage = true);
 		~cGfxObject();
 
-		iMaterial* GetMaterial() const{ return mpMat;}
+		iOldMaterial* GetMaterial() const{ return mpMat;}
 		cVertex* GetVtxPtr(int alNum){ return &mvVtx[alNum];}
 		tVertexVec* GetVertexVec(){ return &mvVtx;}
 
@@ -42,14 +76,13 @@ namespace hpl {
 
 	private:
 		tVertexVec mvVtx;
-		iMaterial* mpMat;
+		iOldMaterial* mpMat;
 		float mfZ;
 		bool mbIsImage;
 
 		tString msSourceFile;
 	};
 
-	typedef std::vector<cGfxObject> tGfxObjectVec;
-	typedef tGfxObjectVec::iterator tGfxObjectVecIt;
-};
+}
+
 #endif // HPL_GFX_OBJECT_H

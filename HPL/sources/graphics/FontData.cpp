@@ -352,7 +352,7 @@ namespace hpl {
 		//////////////////////////
 		//Gui gfx
 		cGuiGfxElement* pGuiGfx = mpGui->CreateGfxFilledRect(cColor(1,1),eGuiMaterial_FontNormal,false);
-		cResourceImage *pImage = pObject->GetMaterial()->GetImage(eMaterialTexture_Diffuse);
+		cResourceImage *pImage = pObject->GetMaterial()->GetImage();
 		pImage->IncUserCount();
 		pGuiGfx->AddImage(pImage);
 

@@ -150,17 +150,6 @@ namespace hpl {
 		return SizeRect;
 	}
 
-
 	//-----------------------------------------------------------------------
-
-	iOldMaterial::iOldMaterial(const tString& asName, eOldMaterialType aiType,
-							   iLowLevelGraphics* apLowLevelGraphics,
-							   cImageManager* apImageManager, cTextureManager *apTextureManager,
-							   cGpuProgramManager* apProgramManager,
-							   eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-		: iMaterial(asName, apLowLevelGraphics, apImageManager, apTextureManager, apProgramManager, aPicture, apRenderer3D)
-		, mType(aiType)
-	{
-	}
 
 }

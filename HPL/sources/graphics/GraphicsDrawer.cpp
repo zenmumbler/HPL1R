@@ -22,13 +22,16 @@
 #include "graphics/LowLevelGraphics.h"
 #include "resources/FrameBitmap.h"
 #include "graphics/GfxObject.h"
-#include "graphics/MaterialHandler.h"
-#include "resources/TextureManager.h"
 
 #include "math/Math.h"
 
-#include "resources/Resources.h"
+#include "resources/ResourceImage.h"
 #include "resources/ImageManager.h"
+
+#include "graphics/Material_FontNormal.h"
+#include "graphics/Material_Smoke2D.h"
+#include "graphics/Material_DiffuseAdditive2D.h"
+#include "graphics/Material_DiffuseAlpha2D.h"
 
 namespace hpl {
 
@@ -38,12 +41,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cGraphicsDrawer::cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics, cMaterialHandler* apMaterialHandler,
-		cResources* apResources)
+	cGraphicsDrawer::cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics,	cImageManager* apImageManager)
 	{
 		mpLowLevelGraphics = apLowLevelGraphics;
-		mpMaterialHandler = apMaterialHandler;
-		mpResources = apResources;
+		mpImageManager = apImageManager;
 	}
 
 	//-----------------------------------------------------------------------
@@ -74,11 +75,11 @@ namespace hpl {
 		{
 			return aObjectA.GetZ() < aObjectB.GetZ();
 		}
-		else if(aObjectA.GetMaterial()->GetTexture(eMaterialTexture_Diffuse) !=
-			aObjectB.GetMaterial()->GetTexture(eMaterialTexture_Diffuse))
+		else if(aObjectA.GetMaterial()->GetTexture() !=
+			aObjectB.GetMaterial()->GetTexture())
 		{
-			return aObjectA.GetMaterial()->GetTexture(eMaterialTexture_Diffuse) >
-				aObjectB.GetMaterial()->GetTexture(eMaterialTexture_Diffuse);
+			return aObjectA.GetMaterial()->GetTexture() >
+				aObjectB.GetMaterial()->GetTexture();
 		}
 		else
 		{
@@ -94,7 +95,7 @@ namespace hpl {
 	{
 		if(apObject->IsImage())
 		{
-			cResourceImage *pImage = apObject->GetMaterial()->GetImage(eMaterialTexture_Diffuse);
+			cResourceImage *pImage = apObject->GetMaterial()->GetImage();
 			pImage->GetFrameBitmap()->FlushToTexture();
 		}
 	}
@@ -154,7 +155,7 @@ namespace hpl {
 
 		while(ObjectIt != m_setGfxBuffer.end())
 		{
-			pMat->StartRendering();
+			pMat->StartRendering(mpLowLevelGraphics);
 
 			do
 			{
@@ -250,7 +251,7 @@ namespace hpl {
 			}
 			while(	pMat->mType == pPrevMat->mType
 					&&
-					pMat->GetTexture(eMaterialTexture_Diffuse) == pPrevMat->GetTexture(eMaterialTexture_Diffuse)
+					pMat->GetTexture() == pPrevMat->GetTexture()
 				);
 
 			lIdxAdd =0;
@@ -259,7 +260,7 @@ namespace hpl {
 
 			mpLowLevelGraphics->ClearBatch();
 
-			pPrevMat->EndRendering();
+			pPrevMat->EndRendering(mpLowLevelGraphics);
 		}
 
 		//Clear the buffer of objects.
@@ -269,28 +270,48 @@ namespace hpl {
 		mpLowLevelGraphics->SetDepthTestActive(true);
 	}
 
+	//-----------------------------------------------------------------------
+
+	iOldMaterial* cGraphicsDrawer::CreateMaterial(const tString& asMaterialName, cResourceImage* apImage) {
+		iOldMaterial *pMat = NULL;
+
+		if (asMaterialName == "fontnormal") {
+			pMat = hplNew(cMaterial_FontNormal, (mpImageManager));
+		}
+		else if (asMaterialName == "diffadditive2d") {
+			pMat = hplNew(cMaterial_DiffuseAdditive2D, (mpImageManager));
+		}
+		else if (asMaterialName == "diffalpha2d") {
+			pMat = hplNew(cMaterial_DiffuseAlpha2D, (mpImageManager));
+		}
+		else if (asMaterialName == "smoke2d") {
+			pMat = hplNew(cMaterial_Smoke2D, (mpImageManager));
+		}
+		
+		if (pMat != NULL) {
+			pMat->SetImage(apImage);
+		}
+		return pMat;
+	}
 
 	//-----------------------------------------------------------------------
 
 	cGfxObject* cGraphicsDrawer::CreateGfxObject(const tString &asFileName, const tString &asMaterialName,
 												bool abAddToList)
 	{
-		cResourceImage* pImage = mpResources->GetImageManager()->CreateImage(asFileName);
+		cResourceImage* pImage = mpImageManager->CreateImage(asFileName);
 		if(pImage==NULL){
 			FatalError("Couldn't load image '%s'!\n", asFileName.c_str());
 			return NULL;
 		}
 
-		iMaterial* pMat = mpMaterialHandler->Create(asMaterialName, eMaterialPicture_Image);
+		iOldMaterial* pMat = CreateMaterial(asMaterialName, pImage);
 		if(pMat==NULL){
 			FatalError("Couldn't create material '%s'!\n", asMaterialName.c_str());
 			return NULL;
 		}
-		//mpResources->GetImageManager()->FlushAll();
 
-		pMat->SetImage(pImage, eMaterialTexture_Diffuse);
-
-		cGfxObject* pObject = hplNew( cGfxObject,(pMat,asFileName,true));
+		cGfxObject* pObject = hplNew(cGfxObject,(pMat));
 
 		if(abAddToList) mlstGfxObjects.push_back(pObject);
 
@@ -302,50 +323,19 @@ namespace hpl {
 	cGfxObject* cGraphicsDrawer::CreateGfxObject(iBitmap2D *apBmp, const tString &asMaterialName,
 												bool abAddToList)
 	{
-		cResourceImage* pImage = mpResources->GetImageManager()->CreateFromBitmap("",apBmp);
+		cResourceImage* pImage = mpImageManager->CreateFromBitmap("",apBmp);
 		if(pImage==NULL){
 			FatalError("Couldn't create image\n");
 			return NULL;
 		}
 
-		iMaterial* pMat = mpMaterialHandler->Create(asMaterialName, eMaterialPicture_Image);
+		iOldMaterial* pMat = CreateMaterial(asMaterialName, pImage);
 		if(pMat==NULL){
 			FatalError("Couldn't create material '%s'!\n", asMaterialName.c_str());
 			return NULL;
 		}
-		//mpResources->GetImageManager()->FlushAll();
 
-		pMat->SetImage(pImage, eMaterialTexture_Diffuse);
-
-		cGfxObject* pObject = hplNew( cGfxObject,(pMat,"",true));
-
-		if(abAddToList) mlstGfxObjects.push_back(pObject);
-
-		return pObject;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cGfxObject* cGraphicsDrawer::CreateGfxObjectFromTexture(	const tString &asFileName, const tString &asMaterialName,
-																bool abAddToList)
-	{
-		iTexture *pTex = mpResources->GetTextureManager()->Create2D(asFileName,false);
-		if(pTex==NULL)
-		{
-			FatalError("Couldn't create texture '%s'!\n", asFileName.c_str());
-			return NULL;
-		}
-
-		iMaterial* pMat = mpMaterialHandler->Create(asMaterialName, eMaterialPicture_Texture);
-		if(pMat==NULL){
-			FatalError("Couldn't create material '%s'!\n", asMaterialName.c_str());
-			return NULL;
-		}
-		//mpResources->GetImageManager()->FlushAll();
-
-		pMat->SetTexture(pTex, eMaterialTexture_Diffuse);
-
-		cGfxObject* pObject = hplNew( cGfxObject,(pMat,asFileName,false));
+		cGfxObject* pObject = hplNew(cGfxObject,(pMat));
 
 		if(abAddToList) mlstGfxObjects.push_back(pObject);
 

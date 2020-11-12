@@ -16,7 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "graphics/Material_Smoke2D.h"
+#include "graphics/LowLevelGraphics.h"
 
 namespace hpl {
 
@@ -26,15 +28,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMaterial_Smoke2D::cMaterial_Smoke2D(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-		cImageManager* apImageManager, cTextureManager *apTextureManager,
-		cGpuProgramManager* apProgramManager,
-		eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-	: iOldMaterial(asName, eOldMaterialType_Smoke,
-				   apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
-				   aPicture,apRenderer3D)
+	cMaterial_Smoke2D::cMaterial_Smoke2D(cImageManager* apImageManager)
+		: iOldMaterial(eOldMaterialType_Smoke, apImageManager)
 	{
-		mbIsTransperant = true;
 	}
 
 	//-----------------------------------------------------------------------
@@ -45,26 +41,26 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cMaterial_Smoke2D::StartRendering()
+	void cMaterial_Smoke2D::StartRendering(iLowLevelGraphics* apLowLevelGraphics) const
 	{
-		mpLowLevelGraphics->SetBlendActive(true);
-		mpLowLevelGraphics->SetBlendFunc(eBlendFunc_Zero,eBlendFunc_OneMinusSrcColor);
+		apLowLevelGraphics->SetBlendActive(true);
+		apLowLevelGraphics->SetBlendFunc(eBlendFunc_Zero,eBlendFunc_OneMinusSrcColor);
 
-		mpLowLevelGraphics->SetTexture(0, GetTexture(eMaterialTexture_Diffuse));
-		mpLowLevelGraphics->SetActiveTextureUnit(0);
-		//mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Alpha);
-		//mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
-		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Color);
-		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
+		apLowLevelGraphics->SetTexture(0, GetTexture());
+		apLowLevelGraphics->SetActiveTextureUnit(0);
+		//apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Alpha);
+		//apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
+		apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Color);
+		apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 	}
 
 	//-----------------------------------------------------------------------
 
-	void cMaterial_Smoke2D::EndRendering()
+	void cMaterial_Smoke2D::EndRendering(iLowLevelGraphics* apLowLevelGraphics) const
 	{
-		mpLowLevelGraphics->SetActiveTextureUnit(0);
-		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Color);
-		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
+		apLowLevelGraphics->SetActiveTextureUnit(0);
+		apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Color);
+		apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 	}
 
 	//-----------------------------------------------------------------------

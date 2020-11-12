@@ -16,21 +16,49 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "graphics/GfxObject.h"
 
+#include "graphics/LowLevelGraphics.h"
+#include "resources/ResourceImage.h"
+#include "resources/ImageManager.h"
+#include "graphics/GfxObject.h"
 #include "graphics/Material.h"
 
 
 namespace hpl {
+
+	//////////////////////////////////////////////////////////////////////////
+	// iOldMaterial
+	//////////////////////////////////////////////////////////////////////////
+
+	iOldMaterial::iOldMaterial(eOldMaterialType aiType, cImageManager* apImageManager)
+		: mType(aiType), mpImageManager(apImageManager)
+	{
+	}
+
+	iOldMaterial::~iOldMaterial() {
+		if (mpImage) {
+			mpImageManager->Destroy(mpImage);
+		}
+	}
+
+	iTexture* iOldMaterial::GetTexture() const {
+		if (mpImage == NULL) {
+			return NULL;
+		}
+		return mpImage->GetTexture();
+	}
 
 
 	//////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
 	//////////////////////////////////////////////////////////////////////////
 
+	typedef std::vector<cGfxObject> tGfxObjectVec;
+	typedef tGfxObjectVec::iterator tGfxObjectVecIt;
+
 	//-----------------------------------------------------------------------
 
-	cGfxObject::cGfxObject(iMaterial* apMat,const tString& asFile, bool abIsImage)
+	cGfxObject::cGfxObject(iOldMaterial* apMat,const tString& asFile, bool abIsImage)
 	{
 		mpMat = apMat;
 
@@ -40,7 +68,7 @@ namespace hpl {
 
 		if(mbIsImage)
 		{
-			mvVtx = apMat->GetImage(eMaterialTexture_Diffuse)->GetVertexVecCopy(0,-1);
+			mvVtx = apMat->GetImage()->GetVertexVecCopy(0,-1);
 		}
 		else
 		{

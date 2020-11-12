@@ -19,7 +19,7 @@
 #ifndef HPL_MATERIAL_DIFFUSE_ADDITIVE2D_H
 #define HPL_MATERIAL_DIFFUSE_ADDITIVE2D_H
 
-#include "graphics/Material.h"
+#include "graphics/GfxObject.h"
 
 
 namespace hpl {
@@ -27,32 +27,11 @@ namespace hpl {
 	class cMaterial_DiffuseAdditive2D : public iOldMaterial
 	{
 	public:
-		cMaterial_DiffuseAdditive2D(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
+		cMaterial_DiffuseAdditive2D(cImageManager* apImageManager);
+		// diffadditive2d
 
-		void StartRendering();
-		void EndRendering();
-	};
-
-	class cMaterialType_DiffuseAdditive2D : public iMaterialType
-	{
-	public:
-		bool IsCorrect(tString asName){
-			if(cString::ToLowerCase(asName)=="diffadditive2d")return true;
-			return false;
-		}
-
-		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-		{
-			return hplNew( cMaterial_DiffuseAdditive2D, (asName,apLowLevelGraphics,
-				apImageManager,apTextureManager,
-				apProgramManager,aPicture,apRenderer3D) );
-		}
+		void StartRendering(iLowLevelGraphics* apLowLevelGraphics) const;
+		void EndRendering(iLowLevelGraphics* apLowLevelGraphics) const;
 	};
 
 };

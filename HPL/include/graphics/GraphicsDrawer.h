@@ -19,7 +19,7 @@
 #ifndef HPL_GRAPHICSDRAWER_H
 #define HPL_GRAPHICSDRAWER_H
 
-#include <vector>
+#include "resources/ImageManager.h"
 #include "graphics/GraphicsTypes.h"
 #include "graphics/Bitmap2D.h"
 
@@ -48,9 +48,6 @@ namespace hpl {
 		float GetZ() const { return mvTransform.z;}
 	};
 
-	typedef std::vector<cGfxObject> tGfxObjectVec;
-	typedef tGfxObjectVec::iterator tGfxObjectVecIt;
-
 
 	class cGfxBufferCompare
 	{
@@ -69,8 +66,7 @@ namespace hpl {
 	class cGraphicsDrawer
 	{
 	public:
-		cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics,cMaterialHandler* apMaterialHandler,
-						cResources* apResources);
+		cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics, cImageManager* apImageManager);
 		~cGraphicsDrawer();
 
 		/**
@@ -98,6 +94,8 @@ namespace hpl {
 		 * Draw all gfx obejcts, Called after world is rendered by cScene.
 		 */
 		void DrawAll();
+		
+		iOldMaterial* CreateMaterial(const tString& asMaterialName, cResourceImage* apImage);
 
 		/**
 		 * Create Gfx object from file
@@ -117,10 +115,6 @@ namespace hpl {
 		 */
 		cGfxObject* CreateGfxObject(iBitmap2D *apBmp, const tString &asMaterialName,
 									bool abAddToList=true);
-
-
-		cGfxObject* CreateGfxObjectFromTexture(const tString &asFileName, const tString &asMaterialName,
-												bool abAddToList=true);
 		/**
 		 * Destroys a gfx object.
 		 */
@@ -128,11 +122,8 @@ namespace hpl {
 
 	private:
 		iLowLevelGraphics *mpLowLevelGraphics;
-		cMaterialHandler* mpMaterialHandler;
-		cResources *mpResources;
-
+		cImageManager *mpImageManager;
 		tGfxBufferSet m_setGfxBuffer;
-
 		tGfxObjectList mlstGfxObjects;
 	};
 

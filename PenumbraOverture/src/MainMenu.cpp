@@ -2177,7 +2177,7 @@ void cMainMenu::OnDraw()
 	////////////////////////////////
 	// Draw mouse
 	if(mpCurrentActionText) return;
-	cResourceImage *pImage = mpGfxMouse->GetMaterial()->GetImage(eMaterialTexture_Diffuse);
+	cResourceImage *pImage = mpGfxMouse->GetMaterial()->GetImage();
 	cVector2l vSize = pImage->GetSize();
 	cVector2f vPosAdd(((float)vSize.x) / 2.0f, ((float)vSize.y) / 2.0f);
 	mpDrawer->DrawGfxObject(mpGfxMouse,cVector3f(0,0,100)+(mvMousePos - vPosAdd));

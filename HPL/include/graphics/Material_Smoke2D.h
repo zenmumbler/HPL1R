@@ -19,39 +19,18 @@
 #ifndef HPL_MATERIAL_SMOKE2D_H
 #define HPL_MATERIAL_SMOKE2D_H
 
-#include "graphics/Material.h"
-
+#include "graphics/GfxObject.h"
 
 namespace hpl {
 
 	class cMaterial_Smoke2D : public iOldMaterial
 	{
 	public:
-		cMaterial_Smoke2D(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
+		cMaterial_Smoke2D(cImageManager* apImageManager);
+		//smoke2d
 
-		void StartRendering();
-		void EndRendering();
-	};
-
-	class cMaterialType_Smoke2D : public iMaterialType
-	{
-	public:
-		bool IsCorrect(tString asName){
-			return cString::ToLowerCase(asName)=="smoke2d";
-		}
-
-		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-		{
-			return hplNew( cMaterial_Smoke2D,(asName,apLowLevelGraphics,
-				apImageManager,apTextureManager,
-				apProgramManager,aPicture,apRenderer3D) );
-		}
+		void StartRendering(iLowLevelGraphics* apLowLevelGraphics) const;
+		void EndRendering(iLowLevelGraphics* apLowLevelGraphics) const;
 	};
 
 };

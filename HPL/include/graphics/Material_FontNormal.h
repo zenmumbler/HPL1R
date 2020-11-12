@@ -19,39 +19,18 @@
 #ifndef HPL_MATERIAL_FONTNORMAL_H
 #define HPL_MATERIAL_FONTNORMAL_H
 
-#include "graphics/Material.h"
-
+#include "graphics/GfxObject.h"
 
 namespace hpl {
 
 	class cMaterial_FontNormal : public iOldMaterial
 	{
 	public:
-		cMaterial_FontNormal(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
+		cMaterial_FontNormal(cImageManager* apImageManager);
+		// fontnormal
 
-		void StartRendering();
-		void EndRendering();
-	};
-
-	class cMaterialType_FontNormal : public iMaterialType
-	{
-	public:
-		bool IsCorrect(tString asName){
-			return cString::ToLowerCase(asName)=="fontnormal";
-		}
-
-		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-		{
-			return hplNew( cMaterial_FontNormal, (asName,apLowLevelGraphics,
-				apImageManager,apTextureManager,
-				apProgramManager,aPicture,apRenderer3D) );
-		}
+		void StartRendering(iLowLevelGraphics* apLowLevelGraphics) const;
+		void EndRendering(iLowLevelGraphics* apLowLevelGraphics) const;
 	};
 
 }

@@ -16,7 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "graphics/Material_FontNormal.h"
+#include "graphics/LowLevelGraphics.h"
 
 namespace hpl {
 
@@ -26,15 +28,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMaterial_FontNormal::cMaterial_FontNormal(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-		cImageManager* apImageManager, cTextureManager *apTextureManager,
-		cGpuProgramManager* apProgramManager,
-		eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-	: iOldMaterial(asName,eOldMaterialType_FontNormal,
-				   apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
-				   aPicture,apRenderer3D)
+	cMaterial_FontNormal::cMaterial_FontNormal(cImageManager* apImageManager)
+		: iOldMaterial(eOldMaterialType_FontNormal, apImageManager)
 	{
-		mbIsTransperant = true;
 	}
 
 	//-----------------------------------------------------------------------
@@ -47,17 +43,17 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cMaterial_FontNormal::StartRendering()
+	void cMaterial_FontNormal::StartRendering(iLowLevelGraphics* apLowLevelGraphics) const
 	{
-		mpLowLevelGraphics->SetBlendActive(true);
-		mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha,eBlendFunc_OneMinusSrcAlpha);
+		apLowLevelGraphics->SetBlendActive(true);
+		apLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha,eBlendFunc_OneMinusSrcAlpha);
 
-		mpLowLevelGraphics->SetTexture(0, GetTexture(eMaterialTexture_Diffuse));
+		apLowLevelGraphics->SetTexture(0, GetTexture());
 	}
 
 	//-----------------------------------------------------------------------
 
-	void cMaterial_FontNormal::EndRendering() {
+	void cMaterial_FontNormal::EndRendering(iLowLevelGraphics* apLowLevelGraphics) const {
 	}
 
 	//-----------------------------------------------------------------------

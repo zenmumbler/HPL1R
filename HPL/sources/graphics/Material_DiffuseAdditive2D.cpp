@@ -16,7 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "graphics/Material_DiffuseAdditive2D.h"
+#include "graphics/LowLevelGraphics.h"
 
 namespace hpl {
 
@@ -26,15 +28,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMaterial_DiffuseAdditive2D::cMaterial_DiffuseAdditive2D(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-		cImageManager* apImageManager, cTextureManager *apTextureManager,
-		cGpuProgramManager* apProgramManager,
-		eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-	: iOldMaterial(asName,eOldMaterialType_DiffuseAdditive,
-				   apLowLevelGraphics,apImageManager,apTextureManager,apProgramManager,
-				   aPicture,apRenderer3D)
+	cMaterial_DiffuseAdditive2D::cMaterial_DiffuseAdditive2D(cImageManager* apImageManager)
+		: iOldMaterial(eOldMaterialType_DiffuseAdditive, apImageManager)
 	{
-		mbIsTransperant = true;
 	}
 
 	//-----------------------------------------------------------------------
@@ -45,26 +41,26 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cMaterial_DiffuseAdditive2D::StartRendering()
+	void cMaterial_DiffuseAdditive2D::StartRendering(iLowLevelGraphics* apLowLevelGraphics) const
 	{
-		mpLowLevelGraphics->SetBlendActive(true);
-		mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_One);
+		apLowLevelGraphics->SetBlendActive(true);
+		apLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_One);
 
-		mpLowLevelGraphics->SetActiveTextureUnit(0);
-		//mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Alpha);
-		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
+		apLowLevelGraphics->SetActiveTextureUnit(0);
+		//apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Alpha);
+		apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 
-		mpLowLevelGraphics->SetTexture(0,GetTexture(eMaterialTexture_Diffuse));
+		apLowLevelGraphics->SetTexture(0, GetTexture());
 	}
 
 	//-----------------------------------------------------------------------
 
-	void cMaterial_DiffuseAdditive2D::EndRendering()
+	void cMaterial_DiffuseAdditive2D::EndRendering(iLowLevelGraphics* apLowLevelGraphics) const
 	{
-		mpLowLevelGraphics->SetTexture(0,NULL);
-		mpLowLevelGraphics->SetActiveTextureUnit(0);
-		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Color);
-		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
+		apLowLevelGraphics->SetTexture(0,NULL);
+		apLowLevelGraphics->SetActiveTextureUnit(0);
+		apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Color);
+		apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 	}
 
 	//-----------------------------------------------------------------------

@@ -19,7 +19,7 @@
 #ifndef HPL_MATERIAL_DIFFUSE_ALPHA2D_H
 #define HPL_MATERIAL_DIFFUSE_ALPHA2D_H
 
-#include "graphics/Material.h"
+#include "graphics/GfxObject.h"
 
 
 namespace hpl {
@@ -27,31 +27,11 @@ namespace hpl {
 	class cMaterial_DiffuseAlpha2D : public iOldMaterial
 	{
 	public:
-		cMaterial_DiffuseAlpha2D(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
+		cMaterial_DiffuseAlpha2D(cImageManager* apImageManager);
+		//diffalpha2d
 
-		void StartRendering();
-		void EndRendering();
-	};
-
-	class cMaterialType_DiffuseAlpha2D : public iMaterialType
-	{
-	public:
-		bool IsCorrect(tString asName){
-			return cString::ToLowerCase(asName)=="diffalpha2d";
-		}
-
-		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cImageManager* apImageManager, cTextureManager *apTextureManager,
-			cGpuProgramManager* apProgramManager,
-			eMaterialPicture aPicture, cRenderer3D *apRenderer3D)
-		{
-			return hplNew( cMaterial_DiffuseAlpha2D, (asName,apLowLevelGraphics,
-				apImageManager,apTextureManager,
-				apProgramManager,aPicture,apRenderer3D) );
-		}
+		void StartRendering(iLowLevelGraphics* apLowLevelGraphics) const;
+		void EndRendering(iLowLevelGraphics* apLowLevelGraphics) const;
 	};
 
 };

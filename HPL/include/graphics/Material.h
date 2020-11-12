@@ -55,18 +55,6 @@ namespace hpl {
 		eMaterialTexture_LastEnum
 	};
 
-	enum eOldMaterialType
-	{
-		eOldMaterialType_Null,
-
-		eOldMaterialType_DiffuseAlpha,
-		eOldMaterialType_DiffuseAdditive,
-		eOldMaterialType_Smoke,
-		eOldMaterialType_FontNormal,
-
-		eOldMaterialType_LastEnum
-	};
-
 	enum eMaterialPicture
 	{
 		eMaterialPicture_Image,
@@ -347,22 +335,6 @@ namespace hpl {
 
 	typedef std::list<iMaterialType*> tMaterialTypeList;
 	typedef tMaterialTypeList::iterator tMaterialTypeListIt;
-
-	// -----------
-
-	class iOldMaterial : public iMaterial {
-	public:
-		iOldMaterial(const tString& asName, eOldMaterialType aiType,
-				iLowLevelGraphics* apLowLevelGraphics,
-				cImageManager* apImageManager, cTextureManager *apTextureManager,
-				cGpuProgramManager* apProgramManager,
-				eMaterialPicture aPicture, cRenderer3D *apRenderer3D);
-
-		virtual void StartRendering() = 0;
-		virtual void EndRendering() = 0;
-		
-		const eOldMaterialType mType;
-	};
 
 };
 #endif // HPL_MATERIAL_H
