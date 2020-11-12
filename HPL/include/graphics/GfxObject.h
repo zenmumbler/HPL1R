@@ -40,6 +40,7 @@ namespace hpl {
 		eOldMaterialType_LastEnum
    };
 
+
 	class iOldMaterial {
 	public:
 		iOldMaterial(eOldMaterialType aiType, cImageManager* apImageManager);
@@ -63,24 +64,19 @@ namespace hpl {
 	class cGfxObject
 	{
 	public:
-		cGfxObject(iOldMaterial* apMat,const tString& asFile = "", bool abIsImage = true);
+		cGfxObject(iOldMaterial* apMat, const tString& asFile);
 		~cGfxObject();
 
-		iOldMaterial* GetMaterial() const{ return mpMat;}
-		cVertex* GetVtxPtr(int alNum){ return &mvVtx[alNum];}
-		tVertexVec* GetVertexVec(){ return &mvVtx;}
+		iOldMaterial* GetMaterial() const{ return mpMat; }
+		cVertex* GetVtxPtr(int alNum){ return &mvVtx[alNum]; }
+		tVertexVec* GetVertexVec(){ return &mvVtx; }
 
-		const tString& GetSourceFile(){ return msSourceFile;}
-
-		bool IsImage(){ return mbIsImage;}
+		const tString& GetSourceFile(){ return msSourceFile; }
 
 	private:
-		tVertexVec mvVtx;
 		iOldMaterial* mpMat;
-		float mfZ;
-		bool mbIsImage;
-
 		tString msSourceFile;
+		tVertexVec mvVtx;
 	};
 
 }

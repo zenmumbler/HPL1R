@@ -93,11 +93,8 @@ namespace hpl {
 
 	static void FlushImage(cGfxObject* apObject)
 	{
-		if(apObject->IsImage())
-		{
-			cResourceImage *pImage = apObject->GetMaterial()->GetImage();
-			pImage->GetFrameBitmap()->FlushToTexture();
-		}
+		cResourceImage *pImage = apObject->GetMaterial()->GetImage();
+		pImage->GetFrameBitmap()->FlushToTexture();
 	}
 
 	void cGraphicsDrawer::DrawGfxObject(cGfxObject* apObject, const cVector3f& avPos,
@@ -311,7 +308,7 @@ namespace hpl {
 			return NULL;
 		}
 
-		cGfxObject* pObject = hplNew(cGfxObject,(pMat));
+		cGfxObject* pObject = hplNew(cGfxObject,(pMat, asFileName));
 
 		if(abAddToList) mlstGfxObjects.push_back(pObject);
 
@@ -335,7 +332,7 @@ namespace hpl {
 			return NULL;
 		}
 
-		cGfxObject* pObject = hplNew(cGfxObject,(pMat));
+		cGfxObject* pObject = hplNew(cGfxObject,(pMat, ""));
 
 		if(abAddToList) mlstGfxObjects.push_back(pObject);
 
