@@ -95,11 +95,6 @@ namespace hpl {
 		mvVirtualSize.x = 800;
 		mvVirtualSize.y = 600;
 
-
-		#ifdef WIN32
-			mhKeyTrapper = NULL;
-		#endif
-
 		mpRenderTarget=NULL;
 
 		for(int i=0;i<MAX_TEXTUREUNITS;i++)
@@ -130,10 +125,6 @@ namespace hpl {
 
 	cLowLevelGraphicsSDL::~cLowLevelGraphicsSDL()
 	{
-		//#ifdef WIN32
-		//	if(mhKeyTrapper) FreeLibrary(mhKeyTrapper);
-		//#endif
-
 		hplFree(mpVertexArray);
 		hplFree(mpIndexArray);
 		for(int i=0;i<MAX_TEXTUREUNITS;i++)	hplFree(mpTexCoordArray[i]);

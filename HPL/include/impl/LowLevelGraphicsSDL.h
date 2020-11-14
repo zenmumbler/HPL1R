@@ -240,7 +240,6 @@ namespace hpl {
 		#if defined(WIN32)
 			HGLRC mGLContext;
 			HDC   mDeviceContext;
-			HINSTANCE mhKeyTrapper;
 		#elif defined(__linux__)
 			Display *gDpy;
 			GLXContext glCtx;
