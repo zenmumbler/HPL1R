@@ -57,7 +57,7 @@ namespace hpl {
 			return NULL;
 		}
 		if (header.bpp != 32 || header.type != TGA_TYPE_RGB) {
-			Log("Not a 32-bit linear TGA format, deferring to SDL2_image\n");
+			// Log("Not a 32-bit linear TGA format, deferring to SDL2_image\n");
 			SDL_RWclose(rw);
 			return LoadTGAFileUsingSDLImage(asFilePath);
 		}
@@ -84,7 +84,7 @@ namespace hpl {
 
 		SDL_RWclose(rw);
 		
-		Log("***** USING TGA LOADER\n");
+		// Log("***** USING TGA LOADER\n");
 		
 		SDL_Surface* pSurface = SDL_CreateRGBSurfaceWithFormat(0, header.width, header.height, 32, SDL_PIXELFORMAT_RGBA32);
 

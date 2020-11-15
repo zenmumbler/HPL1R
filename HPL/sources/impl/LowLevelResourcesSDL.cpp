@@ -74,7 +74,7 @@ namespace hpl {
 
 	iBitmap2D* cLowLevelResourcesSDL::LoadBitmap2D(tString asFilePath, tString asType)
 	{
-		Log((tString("Loading image: ") + asFilePath + "\n").c_str());
+		// Log((tString("Loading image: ") + asFilePath + "\n").c_str());
 
 		tString tType;
 		if(asType != "") {
@@ -98,7 +98,7 @@ namespace hpl {
 			return NULL;
 		}
 		
-		Log("    Format = %s\n", SDL_GetPixelFormatName(pSurface->format->format));
+		// Log("    Format = %s\n", SDL_GetPixelFormatName(pSurface->format->format));
 
 		iBitmap2D* pBmp = mpLowLevelGraphics->CreateBitmap2DFromSurface(pSurface,
 													cString::GetFileExt(asFilePath));

@@ -80,7 +80,7 @@ namespace hpl {
 			return NULL;
 		}
 		if (imgHeader.biBitCount != 32 || imgHeader.biCompression != 0) {
-			Log("Not a 32-bit BMP or weird format, deferring to SDL2_image\n");
+			// Log("Not a 32-bit BMP or weird format, deferring to SDL2_image\n");
 			SDL_RWclose(rw);
 			return LoadBMPFileUsingSDLImage(asFilePath);
 		}
