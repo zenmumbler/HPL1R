@@ -71,7 +71,7 @@ private:
 	tStringVec mvTexNames;
 
 	iTexture* mpLogoTexture;
-	iTexture* mpEpTexture;
+	// iTexture* mpEpTexture;
 
 	iFontData *mpFont;
 	iFontData *mpTextFont;

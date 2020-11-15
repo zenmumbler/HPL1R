@@ -194,7 +194,7 @@ void cPreMenu::OnPostSceneDraw()
 	if (mlState == 4)
 	{
 		mpInit->mpGraphicsHelper->DrawTexture(mpLogoTexture,cVector3f(400,300,-10)-(mvecLogoSize/2),mvecLogoSize, cColor(mfLogoFade,1));
-		mpInit->mpGraphicsHelper->DrawTexture(mpEpTexture,cVector3f(276,440,-10), cVector3f(248,46,0), cColor(mfEpFade,1));
+		// mpInit->mpGraphicsHelper->DrawTexture(mpEpTexture,cVector3f(276,440,-10), cVector3f(248,46,0), cColor(mfEpFade,1));
 		if (mbFlash)
 			mpInit->mpGame->GetGraphics()->GetDrawer()->DrawGfxObject( mpFlashGfx, cVector3f(0,0,10), cVector2f(800,600), cColor(1,0.9f));
 	}
@@ -686,7 +686,7 @@ void cPreMenu::SetActive(bool abX)
 		}
 
 		mpLogoTexture = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("title_logo.jpg",false);
-		mpEpTexture = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("title_ep1.jpg",false);
+		// mpEpTexture = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("title_ep1.jpg",false);
 
 
 		mfAlpha =0;
@@ -704,11 +704,11 @@ void cPreMenu::SetActive(bool abX)
 
 		if (mpLogoTexture)
 			mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mpLogoTexture);
-		if (mpEpTexture)
-			mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mpEpTexture);
+		//if (mpEpTexture)
+		//	mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mpEpTexture);
 
 		mpLogoTexture = NULL;
-		mpEpTexture = NULL;
+		// mpEpTexture = NULL;
 
 		for(size_t i=0; i< mvTextures.size(); ++i)
 		{
