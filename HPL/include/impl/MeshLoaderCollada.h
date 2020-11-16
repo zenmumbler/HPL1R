@@ -593,6 +593,7 @@ namespace hpl {
 		cVector3f GetVectorPos(const cVector3f &avVec);
 		cVector3f GetVectorPosFromPtr(float *apVec);
 		cVector3f GetVectorScaleFromPtr(float *apVec);
+		cMatrixf GetMatrixFromPtr(float *apVec);
 	};
 
 };

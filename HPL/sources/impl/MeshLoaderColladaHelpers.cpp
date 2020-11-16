@@ -81,6 +81,10 @@ namespace hpl {
 		}
 	}
 
+	cMatrixf cMeshLoaderCollada::GetMatrixFromPtr(float *apVec) {
+		return cMatrixf(apVec);
+	}
+
 	//-----------------------------------------------------------------------
 
 	class cTempAnimData
@@ -838,8 +842,12 @@ namespace hpl {
 
 			cString::GetFloatVec(pText->Value(), vValVec);
 
+			// Full Matrix
+			if (sVal == "matrix") {
+				mtxTransform = GetMatrixFromPtr(&vValVec[0]);
+			}
 			// Translation
-			if(sVal == "translate")
+			else if(sVal == "translate")
 			{
 				cVector3f vTrans = GetVectorPosFromPtr(&vValVec[0]);
 
