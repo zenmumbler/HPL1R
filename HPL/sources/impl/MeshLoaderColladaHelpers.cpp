@@ -876,7 +876,8 @@ namespace hpl {
 				//Colliders do not use scale.
 				else if(cString::ToLowerCase(cString::Sub(pNode->msName,1,8))=="collider"
 					|| cString::ToLowerCase(cString::Sub(pNode->msName,1,12))=="charcollider"
-					||  cString::ToLowerCase(cString::Sub(pNode->msName,1,4))=="area")
+					||  cString::ToLowerCase(cString::Sub(pNode->msName,1,4))=="area"
+					||  cString::ToLowerCase(cString::Sub(pNode->msName,1,3))=="ref")
 				{
 
 				}
