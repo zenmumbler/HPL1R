@@ -788,7 +788,7 @@ namespace hpl {
 
 		//Vector to save transform values in later on.
 		tFloatVec vValVec;
-		vValVec.reserve(5);
+		vValVec.reserve(16);
 
 		///////////////////////////////////////////
 		//Get properties

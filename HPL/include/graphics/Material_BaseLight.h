@@ -19,7 +19,6 @@
 #ifndef HPL_MATERIAL_BASE_LIGHT_H
 #define HPL_MATERIAL_BASE_LIGHT_H
 
-#include <vector>
 #include "graphics/Material.h"
 #include "scene/Light3D.h"
 
