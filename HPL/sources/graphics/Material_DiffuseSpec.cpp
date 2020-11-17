@@ -61,7 +61,7 @@ namespace hpl {
 		cRenderer3D *apRenderer3D)
 	{
 		if(	apLowLevelGraphics->GetCaps(eGraphicCaps_GL_FragmentProgram) &&
-			iMaterial::GetQuality() >= eMaterialQuality_High)
+			iMaterial::GetQuality() >= eMaterialQuality_Classic)
 		{
 			return hplNew( cMaterial_DiffuseSpec, (asName,apLowLevelGraphics,
 				apTextureManager,apProgramManager,apRenderer3D) );

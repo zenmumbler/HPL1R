@@ -31,7 +31,7 @@ namespace hpl {
 	// CONSTRUCTORS
 	//////////////////////////////////////////////////////////////////////////
 
-	eMaterialQuality iMaterial::mQuality = eMaterialQuality_High;
+	eMaterialQuality iMaterial::mQuality = eMaterialQuality_Classic;
 
 	//-----------------------------------------------------------------------
 

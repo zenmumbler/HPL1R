@@ -63,7 +63,7 @@ namespace hpl {
 		cRenderer3D *apRenderer3D)
 	{
 		if(apLowLevelGraphics->GetCaps(eGraphicCaps_GL_FragmentProgram) &&
-			iMaterial::GetQuality() >= eMaterialQuality_High)
+			iMaterial::GetQuality() >= eMaterialQuality_Classic)
 		{
 			if(apLowLevelGraphics->GetCaps(eGraphicCaps_MaxTextureImageUnits) >= 7)
 			{

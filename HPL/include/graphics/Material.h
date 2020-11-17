@@ -37,7 +37,7 @@ namespace hpl {
 		eMaterialQuality_VeryLow=0,
 		eMaterialQuality_Low=1,
 		eMaterialQuality_Medium=2,
-		eMaterialQuality_High=3,
+		eMaterialQuality_Classic=3,
 		eMaterialQuality_VeryHigh=4,
 		eMaterialQuality_LastEnum=5
 	};
