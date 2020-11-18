@@ -1388,17 +1388,25 @@ public:
 
 	void OnMouseDown(eMButton aButton)
 	{
-		if(aButton  == eMButton_Left)
+		int iNextFile = mlCurrentFile;
+		if(aButton == eMButton_Left)
 		{
-			mlCurrentFile++;
-			if(mlCurrentFile >= (int)mvFiles.size()) mlCurrentFile=0;
+			iNextFile++;
+			if(iNextFile >= (int)mvFiles.size()) iNextFile=0;
 		}
-		else if(aButton  == eMButton_Right)
+		else if(aButton == eMButton_Right)
 		{
-			mlCurrentFile--;
-			if(mlCurrentFile < 0) mlCurrentFile= (int)mvFiles.size()-1;
+			iNextFile--;
+			if(iNextFile < 0) iNextFile= (int)mvFiles.size()-1;
+		}
+		
+		if (iNextFile == mlCurrentFile) {
+			// [ZM] this is almost always the case as Penumbra did not come with bundled translations
+			// prevents a user DoSing the game by repeat clicking on Language
+			return;
 		}
 
+		mlCurrentFile = iNextFile;
 		gpLanguageText->msText = cString::SetFileExtW(mvFiles[mlCurrentFile],_W(""));
 		mpInit->msLanguageFile = cString::To8Char(mvFiles[mlCurrentFile]);
 
