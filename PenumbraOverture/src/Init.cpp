@@ -416,7 +416,7 @@ bool cInit::Init(tString asCommandLine)
 	cMath::Randomize();
 
 	// RESOURCE INIT /////////////////////
-	mpGame->GetResources()->LoadResourceDirsFile("resources.cfg");
+	mpGame->GetResources()->SetupResourceDirsWithFile("resources.cfg");
 
 	// LANGUAGE ////////////////////////////////
 	mpGame->GetResources()->SetLanguageFile(msLanguageFile);

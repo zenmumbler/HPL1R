@@ -1416,11 +1416,7 @@ public:
 		}
 		else
 		{
-			mpInit->mpGame->GetResources()->ClearResourceDirs();
-			mpInit->mpGame->GetResources()->AddResourceDir("core/programs");
-			mpInit->mpGame->GetResources()->AddResourceDir("core/textures");
-			mpInit->mpGame->GetResources()->LoadResourceDirsFile("resources.cfg");
-			
+			mpInit->mpGame->GetResources()->SetupResourceDirsWithFile("resources.cfg");
 			mpInit->mpGame->GetResources()->SetLanguageFile(mpInit->msLanguageFile);
 
 			mpInit->mpMainMenu->UpdateWidgets();

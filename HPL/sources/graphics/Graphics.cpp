@@ -97,10 +97,6 @@ namespace hpl {
 		Log("Initializing Graphics Module\n");
 		Log("--------------------------------------------------------\n");
 
-		//Setup the graphic directories:
-		apResources->AddResourceDir("core/programs");
-		apResources->AddResourceDir("core/textures");
-
 		Log(" Init low level graphics\n");
 		mpLowLevelGraphics->Init(alWidth,alHeight,alBpp,abFullscreen,alMultisampling,asWindowCaption);
 

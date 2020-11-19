@@ -113,6 +113,9 @@ namespace hpl {
 
 		mpLowLevelSystem = apSystem->GetLowLevel();
 
+		Log(" Setting default directories\n");
+		AddBaseDirectories();
+
 		Log(" Creating resource managers\n");
 
 		mpImageManager = hplNew( cImageManager,(mpFileSearcher,mpLowLevelGraphics,mpLowLevelResources,mpLowLevelSystem) );
@@ -172,6 +175,36 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	bool cResources::LoadResourceDirsFile(const tString &asFile)
+	{
+		TiXmlDocument* pXmlDoc = hplNew( TiXmlDocument, (asFile.c_str()) );
+		if(pXmlDoc->LoadFile()==false)
+		{
+			Error("Couldn't load XML file '%s'!\n",asFile.c_str());
+			hplDelete( pXmlDoc);
+			return false;
+		}
+
+		//Get the root.
+		TiXmlElement* pRootElem = pXmlDoc->RootElement();
+
+		TiXmlElement* pChildElem = pRootElem->FirstChildElement();
+		for(; pChildElem != NULL; pChildElem = pChildElem->NextSiblingElement())
+		{
+			tString sPath = cString::ToString(pChildElem->Attribute("Path"),"");
+			if(sPath==""){
+				continue;
+			}
+
+			if(sPath[0]=='/' || sPath[0]=='\\') sPath = sPath.substr(1);
+
+			AddResourceDir(sPath);
+		}
+
+		hplDelete(pXmlDoc);
+		return true;
+	}
+
 	/**
 	 * \todo File searcher should check so if the dir is allready added and if so return false and not add
 	 * \param &asDir
@@ -186,9 +219,26 @@ namespace hpl {
 		return true;
 	}
 
-	void cResources::ClearResourceDirs()
+	void cResources::AddBaseDirectories() {
+		// graphics internal files
+		AddResourceDir("core/programs");
+		AddResourceDir("core/textures");
+
+		// rehatched overrides and extensions
+		AddResourceDir("rehatched/config");
+	}
+
+	/**
+	 * Reset resource directory search paths to built-ins + game specific
+	 * paths specified in a resources.cfg file.
+	 * Ideally resource paths would be grouped and individually reset
+	 * but that is not the HPL1 way.
+	 */
+	void cResources::SetupResourceDirsWithFile(const tString &asFile)
 	{
 		mpFileSearcher->ClearDirectories();
+		AddBaseDirectories();
+		LoadResourceDirsFile(asFile);
 	}
 
 	//-----------------------------------------------------------------------
@@ -281,38 +331,6 @@ namespace hpl {
 		}
 
 		return it->second;
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cResources::LoadResourceDirsFile(const tString &asFile)
-	{
-		TiXmlDocument* pXmlDoc = hplNew( TiXmlDocument, (asFile.c_str()) );
-		if(pXmlDoc->LoadFile()==false)
-		{
-			Error("Couldn't load XML file '%s'!\n",asFile.c_str());
-			hplDelete( pXmlDoc);
-			return false;
-		}
-
-		//Get the root.
-		TiXmlElement* pRootElem = pXmlDoc->RootElement();
-
-		TiXmlElement* pChildElem = pRootElem->FirstChildElement();
-		for(; pChildElem != NULL; pChildElem = pChildElem->NextSiblingElement())
-		{
-			tString sPath = cString::ToString(pChildElem->Attribute("Path"),"");
-			if(sPath==""){
-				continue;
-			}
-
-			if(sPath[0]=='/' || sPath[0]=='\\') sPath = sPath.substr(1);
-
-			AddResourceDir(sPath);
-		}
-
-		hplDelete(pXmlDoc);
-		return true;
 	}
 
 	//-----------------------------------------------------------------------

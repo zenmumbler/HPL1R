@@ -127,8 +127,8 @@ namespace hpl {
 		iLowLevelResources* GetLowLevel();
 		cFileSearcher* GetFileSearcher();
 
+		void SetupResourceDirsWithFile(const tString &asFile);
 		bool AddResourceDir(const tString &asDir, const tString &asMask = "*.*");
-		void ClearResourceDirs();
 
 		bool SetLanguageFile(const tString &asFile);
 		const tWString& Translate(const tString& asCat, const tString& asName);
@@ -138,8 +138,6 @@ namespace hpl {
 
 		void AddArea3DLoader(iArea3DLoader* apLoader, bool abSetAsDefault=false);
 		iArea3DLoader* GetArea3DLoader(const tString& asName);
-
-		bool LoadResourceDirsFile(const tString &asFile);
 
 		cImageManager* GetImageManager(){return mpImageManager;}
 		cGpuProgramManager* GetGpuProgramManager(){return mpGpuProgramManager;}
@@ -158,6 +156,9 @@ namespace hpl {
 		iLowLevelSystem* GetLowLevelSystem(){ return mpLowLevelSystem;}
 
 	private:
+		void AddBaseDirectories();
+		bool LoadResourceDirsFile(const tString &asFile);
+
 		iLowLevelResources *mpLowLevelResources;
 		iLowLevelGraphics *mpLowLevelGraphics;
 		iLowLevelSystem *mpLowLevelSystem;
