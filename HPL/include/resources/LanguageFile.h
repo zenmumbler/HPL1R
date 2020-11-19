@@ -28,13 +28,7 @@ namespace hpl {
 
 	//--------------------------------
 
-	class cLanguageEntry
-	{
-	public:
-		tWString mwsText;
-	};
-
-	typedef std::map<tString, cLanguageEntry*> tLanguageEntryMap;
+	typedef std::map<tString, tWString> tLanguageEntryMap;
 	typedef tLanguageEntryMap::iterator tLanguageEntryMapIt;
 
 	//--------------------------------
@@ -42,10 +36,6 @@ namespace hpl {
 	class cLanguageCategory
 	{
 	public:
-		~cLanguageCategory(){
-			STLMapDeleteAll(m_mapEntries);
-		}
-
 		tLanguageEntryMap m_mapEntries;
 	};
 

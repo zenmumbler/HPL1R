@@ -19,11 +19,8 @@
 #include "resources/LanguageFile.h"
 #include "system/String.h"
 #include "system/LowLevelSystem.h"
-#include "resources/FileSearcher.h"
 #include "impl/tinyXML/tinyxml.h"
-
 #include "resources/Resources.h"
-#include "resources/FileSearcher.h"
 
 namespace hpl {
 
@@ -106,12 +103,12 @@ namespace hpl {
 			TiXmlElement *pEntryElem = pCatElem->FirstChildElement("Entry");
 			for(; pEntryElem != NULL; pEntryElem = pEntryElem->NextSiblingElement("Entry"))
 			{
-				cLanguageEntry *pEntry = hplNew( cLanguageEntry, () );
+				tWString sEntry = _W("");
 				tString sEntryName = pEntryElem->Attribute("Name");
 
 				if(pEntryElem->FirstChild()==NULL)
 				{
-					pEntry->mwsText = _W("");
+					Warning("Language entry '%s' in category '%s' is empty!\n",sEntryName.c_str(), sCatName.c_str());
 				}
 				else
 				{
@@ -122,7 +119,6 @@ namespace hpl {
 						//pEntry->msText = cString::ReplaceStringTo(pEntry->msText,"[br]","\n");
 
 						tString sString = pTextNode->Value();
-						pEntry->mwsText = _W("");
 
 						//if(sCatName == "TEST") Log("String: '%s' %d\n",sString.c_str(),sString.size());
 
@@ -143,12 +139,12 @@ namespace hpl {
 
 								if(sCommand=="br")
 								{
-									pEntry->mwsText += _W('\n');
+									sEntry += _W('\n');
 								}
 								else if(sCommand[0]=='u')
 								{
 									int lNum = cString::ToInt(sCommand.substr(1).c_str(),0);
-									pEntry->mwsText += (wchar_t)lNum;
+									sEntry += (wchar_t)lNum;
 								}
 								else
 								{
@@ -162,7 +158,7 @@ namespace hpl {
 								}
 								else
 								{
-									pEntry->mwsText += sString[i];
+									sEntry += sString[i];
 								}
 							}
 							//Decode UTF-8!
@@ -174,14 +170,14 @@ namespace hpl {
 								lNum = lNum << 6;
 								lNum = lNum | (c2 & 0x3f);// c AND 0011 1111
 
-								pEntry->mwsText += (wchar_t)lNum;
+								sEntry += (wchar_t)lNum;
 								++i;
 								//Log(" %d: (%x %x) -> %d\n",i,c,c2,(wchar_t)lNum);
 							}
 							else
 							{
 								//if(sCatName == "TEST") Log(" %d: %c | %d\n",i,c,c);
-								pEntry->mwsText += c;
+								sEntry += c;
 								//if(sCatName == "TEST") Log(" '%s'\n",cString::To8Char(pEntry->mwsText).c_str());
 							}
 						}
@@ -191,7 +187,7 @@ namespace hpl {
 
 				//if(sE == "Motion blur:") Log("After String: '%s'\n",cString::To8Char(pEntry->mwsText).c_str());
 
-				std::pair<tLanguageEntryMap::iterator,bool> ret = pCategory->m_mapEntries.insert(tLanguageEntryMap::value_type(sEntryName,pEntry));
+				std::pair<tLanguageEntryMap::iterator,bool> ret = pCategory->m_mapEntries.insert(tLanguageEntryMap::value_type(sEntryName,sEntry));
 				if(ret.second==false){
 					Warning("Language entry '%s' in category '%s' already exists!\n",sEntryName.c_str(), sCatName.c_str());
 					hplDelete(pEntry);
@@ -246,9 +242,7 @@ namespace hpl {
 			return mwsEmpty;
 		}
 
-		cLanguageEntry *pEntry = EntryIt->second;
-
-		return pEntry->mwsText;
+		return EntryIt->second;
 	}
 
 	//-----------------------------------------------------------------------
