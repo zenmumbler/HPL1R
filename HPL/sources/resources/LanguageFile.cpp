@@ -88,10 +88,18 @@ namespace hpl {
 		TiXmlElement *pCatElem = pRootElem->FirstChildElement("CATEGORY");
 		for(; pCatElem != NULL; pCatElem = pCatElem->NextSiblingElement("CATEGORY"))
 		{
-			cLanguageCategory *pCategory = hplNew( cLanguageCategory, () );
 			tString sCatName = pCatElem->Attribute("Name");
+			cLanguageCategory *pCategory;
 
-			m_mapCategories.insert(tLanguageCategoryMap::value_type(sCatName, pCategory));
+			tLanguageCategoryMap::iterator existing = m_mapCategories.find(sCatName);
+			
+			if (existing != m_mapCategories.end()) {
+				pCategory = existing->second;
+			}
+			else {
+				pCategory = hplNew( cLanguageCategory, () );
+				m_mapCategories.insert(tLanguageCategoryMap::value_type(sCatName, pCategory));
+			}
 
 			///////////////////////////
 			//Iterate the entries
