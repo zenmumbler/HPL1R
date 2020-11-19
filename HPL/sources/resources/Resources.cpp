@@ -226,6 +226,7 @@ namespace hpl {
 
 		// rehatched overrides and extensions
 		AddResourceDir("rehatched/config");
+		AddResourceDir("rehatched/core/programs");
 	}
 
 	/**
