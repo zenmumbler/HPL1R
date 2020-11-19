@@ -1,6 +1,0 @@
-<Material>
-  <Main Type="Modulative" PhysicsMaterial="" UseAlpha="False" DepthTest="True" />
-  <TextureUnits>
-    <Diffuse File="test.jpg" Compress="false" Type="2D" Mipmaps="true" Wrap="Repeat" />
-  </TextureUnits>
-</Material>
