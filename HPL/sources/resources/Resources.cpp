@@ -245,21 +245,46 @@ namespace hpl {
 
 	bool cResources::SetLanguageFile(const tString &asFile)
 	{
-		if(mpLanguageFile){
-			hplDelete(mpLanguageFile);
-			mpLanguageFile = NULL;
+		tString sPath = mpFileSearcher->GetFilePath(asFile);
+		tString sExtraFile = cString::ReplaceStringTo(asFile, ".lang", "_extra.lang");
+		tString sExtraPath = mpFileSearcher->GetFilePath(sExtraFile);
+
+		if(sPath=="")
+		{
+			Error("Couldn't find language file '%s'\n",asFile.c_str());
+			return false;
+		}
+		if(sExtraPath=="")
+		{
+			sExtraPath = mpFileSearcher->GetFilePath("English_extra.lang");
+			if(sExtraPath=="") {
+				Error("Couldn't load language extensions file '%s'\n", sExtraFile.c_str());
+				return false;
+			}
+			
+			Warning("No localised language extensions file found '%s', using English fallback\n", sExtraFile.c_str());
 		}
 
-		tString asPath = mpFileSearcher->GetFilePath(asFile);
-		if(asPath=="")
-		{
-			Error("Couldn't load language file '%s'\n",asFile.c_str());
+		cLanguageFile *pNewLangFile = hplNew( cLanguageFile, (this) );
+
+		bool bSuccess = pNewLangFile->LoadFromFile(sPath);
+		if (bSuccess==false) {
+			hplDelete(pNewLangFile);
+			return false;
+		}
+		bSuccess = pNewLangFile->LoadFromFile(sExtraPath);
+		if (bSuccess==false) {
+			hplDelete(pNewLangFile);
 			return false;
 		}
 
-		mpLanguageFile = hplNew( cLanguageFile, (this) );
+		// everything loaded, exchange old for new
+		if(mpLanguageFile){
+			hplDelete(mpLanguageFile);
+		}
+		mpLanguageFile = pNewLangFile;
 
-		return mpLanguageFile->LoadFromFile(asPath);
+		return true;
 	}
 
 	const tWString& cResources::Translate(const tString& asCat, const tString& asName)
