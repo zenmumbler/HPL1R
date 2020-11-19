@@ -47,7 +47,7 @@ more of a preservation effort than a live project.
 
 Licence and Copyright
 ---------------------
-Penumbra, Penumbra: Overture and HPL are all Copyright Frictional Games. 
+Penumbra, Penumbra: Overture and HPL are all Copyright [Frictional Games](https://frictionalgames.com/). 
 All code and assets included in this repo are licensed under GPL3, see the LICENSE file for details.
 
 The Penumbra games and all their assets are not included with this project,
