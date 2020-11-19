@@ -256,6 +256,9 @@ namespace hpl {
 	void MacOSAlertBox(eMsgBoxType eType, tString caption, tString message);
 #endif
 
+// [ZM] define this to have all log, warning and error messages go to stdout/stderr as well
+#define STD_LOGGING
+
 	void FatalError(const char* fmt,... )
 	{
 		char text[2048];
@@ -265,6 +268,10 @@ namespace hpl {
 		va_start(ap, fmt);
 			vsprintf(text, fmt, ap);
 		va_end(ap);
+
+#ifdef STD_LOGGING
+		fprintf(stderr, "FATAL ERROR: %s", text);
+#endif
 
 		tString sMess = "FATAL ERROR: ";
 		sMess += text;
@@ -289,6 +296,10 @@ namespace hpl {
 			vsprintf(text, fmt, ap);
 		va_end(ap);
 
+#ifdef STD_LOGGING
+		fprintf(stderr, "ERROR: %s", text);
+#endif
+
 		tString sMess = "ERROR: ";
 		sMess += text;
 		gLogWriter.Write(sMess);
@@ -304,6 +315,10 @@ namespace hpl {
 			vsprintf(text, fmt, ap);
 		va_end(ap);
 
+#ifdef STD_LOGGING
+		fprintf(stdout, "WARNING: %s", text);
+#endif
+
 		tString sMess = "WARNING: ";
 		sMess += text;
 		gLogWriter.Write(sMess);
@@ -318,6 +333,10 @@ namespace hpl {
 		va_start(ap, fmt);
 		vsprintf(text, fmt, ap);
 		va_end(ap);
+		
+#ifdef STD_LOGGING
+		fprintf(stdout, "%s", text);
+#endif
 
 		tString sMess = "";
 		sMess += text;
