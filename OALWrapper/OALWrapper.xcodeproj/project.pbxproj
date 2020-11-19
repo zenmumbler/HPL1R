@@ -321,11 +321,11 @@
 			};
 			buildConfigurationList = DBF8483B0AC76CC500BB15CD /* Build configuration list for PBXProject "OALWrapper" */;
 			compatibilityVersion = "Xcode 3.1";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = DBF848380AC76CC500BB15CD;
 			productRefGroup = DBF8484C0AC76D1A00BB15CD /* Products */;
