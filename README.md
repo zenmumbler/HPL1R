@@ -5,23 +5,26 @@ A project to create a modernised version of Frictional Games' HPL1 game engine a
 
 Building
 --------
-Build instructions will appear here once we get it to build and run.
 
-Goals
------
+All dependencies are included in the repository. This is mostly because many of them are (very) old versions.
 
-### Current
-* Create a working codebase with updated dependencies
-* Deploy Penumbra: Overture on 64-bit only macOS (10.15 and later)
-	* Keep backcompat to 10.13 or so
+### macOS
 
-### Next (all tentative)
+* Open the Xcode project
+* Select Penumbra Overture target
+* Build the target
+* Copy the generated application into your pre-existing Penumbra game directory
+* Run the app (macOS 10.13.6 High Sierra or newer required)
+
+Upcoming Goals
+--------------
+
+There are still some outstanding physics and game reliability issues. These will be
+resolved as the project progresses. Upcoming big ticket items include:
+
+* Modernise graphics backend to core OpenGL profile (3.3+)
 * Windows and Linux builds
-* Add modern macOS gamepad support (for PS4 and Xbox controllers) and Xinput for Win
-* Modernise graphics backend, first to recent OpenGL, then Metal/DX12/Vulkan
-* Re-encode assets as glTF2, basisu textures, etc.
-* Link to or integrate with upscaled asset mods
-* etc...
+* Gamepad support
 
 Project Links
 -------------
@@ -41,9 +44,8 @@ more of a preservation effort than a live project.
 
 Licence and Copyright
 ---------------------
-Penumbra, Penumbra: Overture and HPL are all Copyright Frictional Games, see the various
-licenses in the project folders. The base licence is GPL3 so this project falls under that
-as well.
+Penumbra, Penumbra: Overture and HPL are all Copyright Frictional Games. 
+All code and assets included in this repo are licensed under GPL3, see the LICENSE file for details.
 
-The non open-sourced or free assets of the Penumbra games are not included with this
-project, you need a pre-existing installation of the game.
+The Penumbra games and all their assets are not included with this project,
+you need a pre-existing installation of the game.

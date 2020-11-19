@@ -1,21 +1,28 @@
 HPL1 Engine
+===========
 
 This product includes the following 3rd party products which are covered under their respective licenses.
+
+AngelScript
+-----------
+AngelScript is covered under the zlib license
+
+https://www.angelcode.com/
+
+Newton Dynamics
+---------------
+Newton Dynamic is covered under the zlib license
+
+http://newtondynamics.com/
 
 tinyXML
 -------
 tinyXML is covered under the zlib/libpng license
 
-http://www.sourceforge.net/projects/tinyxml
+http://www.grinninglizard.com/tinyxml/
 
-GLee
+SDL2
 ----
-GLee is covered under the the Simplified BSD License
+SDL 2.0 and SDL2_image are covered under the zlib license
 
-http://elf-stone.com/glee.php
-
-Angelscript
------------
-The add_on implementations of stdstring and scriptstring implementatations for Angelscript are included
-
-http://www.angelcode.com/
+https://libsdl.org/
