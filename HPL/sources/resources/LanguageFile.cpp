@@ -189,8 +189,8 @@ namespace hpl {
 
 				std::pair<tLanguageEntryMap::iterator,bool> ret = pCategory->m_mapEntries.insert(tLanguageEntryMap::value_type(sEntryName,sEntry));
 				if(ret.second==false){
-					Warning("Language entry '%s' in category '%s' already exists!\n",sEntryName.c_str(), sCatName.c_str());
-					hplDelete(pEntry);
+					pCategory->m_mapEntries.at(sEntryName).assign(sEntry);
+					Log("Overriding language entry '%s' in category '%s'\n",sEntryName.c_str(), sCatName.c_str());
 				}
 			}
 		}
