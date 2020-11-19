@@ -1,0 +1,7 @@
+<LANGUAGE>
+  <RESOURCES>
+  </RESOURCES>
+  <CATEGORY Name="MainMenu">
+  	<Entry Name="Classic">Classic</Entry>
+  </CATEGORY>
+</LANGUAGE>
