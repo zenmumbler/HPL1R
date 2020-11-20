@@ -2080,6 +2080,7 @@
 					../OALWrapper/include,
 				);
 				LIBRARY_SEARCH_PATHS = " $(PROJECT_DIR)/lib/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -2142,6 +2143,7 @@
 					../OALWrapper/include,
 				);
 				LIBRARY_SEARCH_PATHS = " $(PROJECT_DIR)/lib/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
