@@ -454,6 +454,11 @@ namespace hpl {
 				if(GLEW_ATI_fragment_shader) return 1;
 				else return 0;
 			}
+
+		case eGraphicCaps_GL_CoreProfile:
+			{
+				return 1;
+			}
 		}
 
 		return 0;

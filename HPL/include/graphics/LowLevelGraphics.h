@@ -182,6 +182,8 @@ namespace hpl {
 		eGraphicCaps_GL_NVRegisterCombiners,
 		eGraphicCaps_GL_NVRegisterCombiners_MaxStages,
 		eGraphicCaps_GL_ATIFragmentShader,
+		
+		eGraphicCaps_GL_CoreProfile,
 
 		eGraphicCaps_LastEnum
 	};
