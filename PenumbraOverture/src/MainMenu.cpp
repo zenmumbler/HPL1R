@@ -1740,10 +1740,12 @@ public:
 			if(iCurrent < miShaderMinQuality) iCurrent = miShaderMaxQuality;
 		}
 
-		gpShaderQualityText->msText = kTranslate("MainMenu",gvShaderQuality[iCurrent]);
-		iMaterial::SetQuality((eMaterialQuality) iCurrent);
+		if (iCurrent != iMaterial::GetQuality()) {
+			gpShaderQualityText->msText = kTranslate("MainMenu",gvShaderQuality[iCurrent]);
+			iMaterial::SetQuality(static_cast<eMaterialQuality>(iCurrent));
 
-		if(mpInit->mpMapHandler->GetCurrentMapName() != "") gbMustRestart = true;
+			if(mpInit->mpMapHandler->GetCurrentMapName() != "") gbMustRestart = true;
+		}
 	}
 };
 
