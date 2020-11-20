@@ -363,14 +363,11 @@ bool cInit::Init(tString asCommandLine)
 	
 	cMath::Randomize();
 
-	// RESOURCE INIT /////////////////////
-	mpGame->GetResources()->SetupResourceDirsWithFile("resources.cfg");
-
-	// LANGUAGE ////////////////////////////////
-	mpGame->GetResources()->SetLanguageFile(msLanguageFile);
+	// RESOURCE AND LANGUAGE INIT //////////////////
+	mpGame->GetResources()->SetupResourceDirsForLanguage(msLanguageFile);
 
 	Log("Initializing " PRODUCT_NAME "\n  Version\t" PRODUCT_VERSION "\n  Date\t" PRODUCT_DATE "\n");
-	//////////////////////////////////////////////7
+	///////////////////////////////////////////////
 	// Check if computer supports game
 	if(CheckSupport(this)==false) return false;
 

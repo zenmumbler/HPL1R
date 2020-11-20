@@ -187,9 +187,9 @@ namespace hpl {
 
 				//if(sE == "Motion blur:") Log("After String: '%s'\n",cString::To8Char(pEntry->mwsText).c_str());
 
-				std::pair<tLanguageEntryMap::iterator,bool> ret = pCategory->m_mapEntries.insert(tLanguageEntryMap::value_type(sEntryName,sEntry));
-				if(ret.second==false){
-					pCategory->m_mapEntries.at(sEntryName).assign(sEntry);
+				const auto [itElement, bInserted] = pCategory->m_mapEntries.insert(tLanguageEntryMap::value_type(sEntryName,sEntry));
+				if (bInserted == false){
+					itElement->second.assign(sEntry);
 					Log("Overriding language entry '%s' in category '%s'\n",sEntryName.c_str(), sCatName.c_str());
 				}
 			}

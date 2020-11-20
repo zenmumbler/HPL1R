@@ -1416,9 +1416,7 @@ public:
 		}
 		else
 		{
-			mpInit->mpGame->GetResources()->SetupResourceDirsWithFile("resources.cfg");
-			mpInit->mpGame->GetResources()->SetLanguageFile(mpInit->msLanguageFile);
-
+			mpInit->mpGame->GetResources()->SetupResourceDirsForLanguage(mpInit->msLanguageFile);
 			mpInit->mpMainMenu->UpdateWidgets();
 		}
 	}

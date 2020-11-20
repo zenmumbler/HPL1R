@@ -220,13 +220,13 @@ namespace hpl {
 	}
 
 	void cResources::AddBaseDirectories() {
-		// graphics internal files
+		// core graphics files
 		AddResourceDir("core/programs");
 		AddResourceDir("core/textures");
 
-		// rehatched overrides and extensions
-		AddResourceDir("rehatched/config");
+		// rehatched core graphics overrides
 		AddResourceDir("rehatched/core/programs");
+		AddResourceDir("rehatched/core/textures");
 	}
 
 	/**
@@ -235,45 +235,49 @@ namespace hpl {
 	 * Ideally resource paths would be grouped and individually reset
 	 * but that is not the HPL1 way.
 	 */
-	void cResources::SetupResourceDirsWithFile(const tString &asFile)
+	void cResources::SetupResourceDirsForLanguage(const tString &asLangFile)
 	{
 		mpFileSearcher->ClearDirectories();
 		AddBaseDirectories();
-		LoadResourceDirsFile(asFile);
+		LoadResourceDirsFile("resources.cfg");
+		LoadResourceDirsFile("rehatched/resources.cfg");
+		SetLanguageFile(asLangFile);
 	}
 
 	//-----------------------------------------------------------------------
 
 	bool cResources::SetLanguageFile(const tString &asFile)
 	{
-		tString sPath = mpFileSearcher->GetFilePath(asFile);
-		tString sExtraFile = cString::ReplaceStringTo(asFile, ".lang", "_extra.lang");
-		tString sExtraPath = mpFileSearcher->GetFilePath(sExtraFile);
+		// [ZM] made the decision to not use the file searcher for language files.
+		// /config was already the de-facto only position for them and with resource
+		// overloading this makes path handling setup less awkward.
+		tString sOrigPath = "config/" + asFile;
+		tString sRehatchedPath = "rehatched/config/" + asFile;
 
-		if(sPath=="")
+		if (FileExists(cString::To16Char(sOrigPath)) == false)
 		{
 			Error("Couldn't find language file '%s'\n",asFile.c_str());
 			return false;
 		}
-		if(sExtraPath=="")
+		if (FileExists(cString::To16Char(sRehatchedPath)) == false)
 		{
-			sExtraPath = mpFileSearcher->GetFilePath("English_extra.lang");
-			if(sExtraPath=="") {
-				Error("Couldn't load language extensions file '%s'\n", sExtraFile.c_str());
+			sRehatchedPath = "rehatched/config/English.lang";
+			if(FileExists(cString::To16Char(sRehatchedPath)) == false) {
+				Error("Couldn't load language extensions file '%s'\n", sRehatchedPath.c_str());
 				return false;
 			}
 			
-			Warning("No localised language extensions file found '%s', using English fallback\n", sExtraFile.c_str());
+			Warning("No localised language extensions file found for language '%s', using English fallback\n", asFile.c_str());
 		}
 
 		cLanguageFile *pNewLangFile = hplNew( cLanguageFile, (this) );
 
-		bool bSuccess = pNewLangFile->LoadFromFile(sPath);
+		bool bSuccess = pNewLangFile->LoadFromFile(sOrigPath);
 		if (bSuccess==false) {
 			hplDelete(pNewLangFile);
 			return false;
 		}
-		bSuccess = pNewLangFile->LoadFromFile(sExtraPath);
+		bSuccess = pNewLangFile->LoadFromFile(sRehatchedPath);
 		if (bSuccess==false) {
 			hplDelete(pNewLangFile);
 			return false;
