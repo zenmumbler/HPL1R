@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8E84AA02254CACE0000EA53C /* scriptstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */; };
-		8E84AA03254CACE0000EA53C /* scriptstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */; };
 		8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84AA0C254CB3D2000EA53C /* Cg.framework */; };
 		8E9728DC254CBB4B0033415B /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DA254CBB4B0033415B /* SDL2_image.framework */; };
 		8E9728DF254CBBAF0033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DE254CBBAF0033415B /* SDL2.framework */; };
@@ -18,24 +17,8 @@
 		8EAA07B125588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AE25588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp */; };
 		8EAA07B225588FEA007D7CD0 /* Material_Smoke2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AF25588FEA007D7CD0 /* Material_Smoke2D.cpp */; };
 		8EAA07B325588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07B025588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp */; };
-		8EAA07BD255C55DB007D7CD0 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DE254CBBAF0033415B /* SDL2.framework */; };
-		8EAA07BE255C55DB007D7CD0 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DA254CBB4B0033415B /* SDL2_image.framework */; };
-		8EAA07C1255C55F8007D7CD0 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84AA0C254CB3D2000EA53C /* Cg.framework */; };
-		8EAA07C4255C561B007D7CD0 /* libHPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF8484B0AC76D1A00BB15CD /* libHPL.a */; };
-		8EAA07C9255C5655007D7CD0 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EAA07C7255C5655007D7CD0 /* libGLEW.a */; };
-		8EAA07D7255C5759007D7CD0 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EAA07D6255C5759007D7CD0 /* libogg.a */; };
 		8EAA07DD255C64F3007D7CD0 /* LowLevelSystemMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */; };
 		8EB7C3D9254F603E00277667 /* scripthelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7C3D8254F603E00277667 /* scripthelper.cpp */; };
-		8EB7C3DA254F603E00277667 /* scripthelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7C3D8254F603E00277667 /* scripthelper.cpp */; };
-		DB00EF3811A9CEAD007DFB32 /* PhysicsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB00EF1311A9CE84007DFB32 /* PhysicsTest.cpp */; };
-		DB00EF3E11A9CEC8007DFB32 /* SimpleCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB00EF0911A9CE84007DFB32 /* SimpleCamera.cpp */; };
-		DB00EF3F11A9CEC9007DFB32 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB00EF0B11A9CE84007DFB32 /* stdafx.cpp */; };
-		DB00EF6D11A9CFE1007DFB32 /* libangelscript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00EF5C11A9CFD9007DFB32 /* libangelscript.a */; };
-		DB00EF6E11A9CFE2007DFB32 /* libnewton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00EF5E11A9CFD9007DFB32 /* libnewton.a */; };
-		DB00EF7111A9CFFA007DFB32 /* libOALWrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00EF5611A9CFB9007DFB32 /* libOALWrapper.a */; };
-		DB00F0C111A9D025007DFB32 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00F0BB11A9D025007DFB32 /* OpenAL.framework */; };
-		DB00F0C311A9D025007DFB32 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00F0BD11A9D025007DFB32 /* OpenGL.framework */; };
-		DB00F0D411A9D080007DFB32 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB00F0D211A9D080007DFB32 /* Cocoa.framework */; };
 		DB019B210D7462DE00FADC2C /* VideoManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB9F0D7076B200809E03 /* VideoManager.cpp */; };
 		DB294E100C11DC6E005DA55C /* CRC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB294E0F0C11DC6E005DA55C /* CRC.cpp */; };
 		DB4AFB470D7075B900809E03 /* Haptic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB450D7075B900809E03 /* Haptic.cpp */; };
@@ -237,13 +220,6 @@
 			remoteGlobalIDString = DB1550DB11E64C8E005799BB;
 			remoteInfo = SimpleTest;
 		};
-		DB00EF3611A9CEA5007DFB32 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DBF8483A0AC76CC500BB15CD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DBF8484A0AC76D1A00BB15CD;
-			remoteInfo = HPL;
-		};
 		DB00EF5511A9CFB9007DFB32 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DB00EF5111A9CFB9007DFB32 /* OALWrapper.xcodeproj */;
@@ -275,37 +251,6 @@
 		8EAA07D6255C5759007D7CD0 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
 		8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LowLevelSystemMac.mm; sourceTree = "<group>"; };
 		8EB7C3D8254F603E00277667 /* scripthelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripthelper.cpp; sourceTree = "<group>"; };
-		DB00EF0911A9CE84007DFB32 /* SimpleCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleCamera.cpp; sourceTree = "<group>"; };
-		DB00EF0A11A9CE84007DFB32 /* SimpleCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleCamera.h; sourceTree = "<group>"; };
-		DB00EF0B11A9CE84007DFB32 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
-		DB00EF0C11A9CE84007DFB32 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
-		DB00EF0E11A9CE84007DFB32 /* GuiTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiTest.cpp; sourceTree = "<group>"; };
-		DB00EF0F11A9CE84007DFB32 /* GuiTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuiTest.h; sourceTree = "<group>"; };
-		DB00EF1011A9CE84007DFB32 /* GuiTest.sln */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GuiTest.sln; sourceTree = "<group>"; };
-		DB00EF1111A9CE84007DFB32 /* GuiTest.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = GuiTest.vcproj; sourceTree = "<group>"; };
-		DB00EF1311A9CE84007DFB32 /* PhysicsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsTest.cpp; sourceTree = "<group>"; };
-		DB00EF1411A9CE84007DFB32 /* PhysicsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsTest.h; sourceTree = "<group>"; };
-		DB00EF1511A9CE84007DFB32 /* PhysicsTest.sln */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PhysicsTest.sln; sourceTree = "<group>"; };
-		DB00EF1611A9CE84007DFB32 /* PhysicsTest.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PhysicsTest.vcproj; sourceTree = "<group>"; };
-		DB00EF1811A9CE84007DFB32 /* RenderTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderTest.cpp; sourceTree = "<group>"; };
-		DB00EF1911A9CE85007DFB32 /* RenderTest.sln */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RenderTest.sln; sourceTree = "<group>"; };
-		DB00EF1A11A9CE85007DFB32 /* RenderTest.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RenderTest.vcproj; sourceTree = "<group>"; };
-		DB00EF1C11A9CE85007DFB32 /* SceneCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneCamera.cpp; sourceTree = "<group>"; };
-		DB00EF1D11A9CE85007DFB32 /* SceneCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneCamera.h; sourceTree = "<group>"; };
-		DB00EF1E11A9CE85007DFB32 /* SceneTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneTest.cpp; sourceTree = "<group>"; };
-		DB00EF1F11A9CE85007DFB32 /* SceneTest.sln */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SceneTest.sln; sourceTree = "<group>"; };
-		DB00EF2011A9CE85007DFB32 /* SceneTest.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SceneTest.vcproj; sourceTree = "<group>"; };
-		DB00EF2211A9CE85007DFB32 /* SerializeTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerializeTest.cpp; sourceTree = "<group>"; };
-		DB00EF2311A9CE85007DFB32 /* SerializeTest.sln */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SerializeTest.sln; sourceTree = "<group>"; };
-		DB00EF2411A9CE85007DFB32 /* SerializeTest.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SerializeTest.vcproj; sourceTree = "<group>"; };
-		DB00EF2611A9CE85007DFB32 /* SpotLightTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpotLightTest.cpp; sourceTree = "<group>"; };
-		DB00EF2711A9CE85007DFB32 /* SpotLightTest.sln */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SpotLightTest.sln; sourceTree = "<group>"; };
-		DB00EF2811A9CE85007DFB32 /* SpotLightTest.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SpotLightTest.vcproj; sourceTree = "<group>"; };
-		DB00EF2A11A9CE85007DFB32 /* VideoTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoTest.cpp; sourceTree = "<group>"; };
-		DB00EF2B11A9CE85007DFB32 /* VideoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTest.h; sourceTree = "<group>"; };
-		DB00EF2C11A9CE85007DFB32 /* VideoTest.sln */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VideoTest.sln; sourceTree = "<group>"; };
-		DB00EF2D11A9CE85007DFB32 /* VideoTest.vcproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = VideoTest.vcproj; sourceTree = "<group>"; };
-		DB00EF3111A9CE93007DFB32 /* PhysicsTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PhysicsTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB00EF5111A9CFB9007DFB32 /* OALWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OALWrapper.xcodeproj; path = ../OALWrapper/OALWrapper.xcodeproj; sourceTree = SOURCE_ROOT; };
 		DB00EF5C11A9CFD9007DFB32 /* libangelscript.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libangelscript.a; sourceTree = "<group>"; };
 		DB00EF5E11A9CFD9007DFB32 /* libnewton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libnewton.a; sourceTree = "<group>"; };
@@ -741,25 +686,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		DB00EF2F11A9CE93007DFB32 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8EAA07C4255C561B007D7CD0 /* libHPL.a in Frameworks */,
-				DB00EF6D11A9CFE1007DFB32 /* libangelscript.a in Frameworks */,
-				DB00EF6E11A9CFE2007DFB32 /* libnewton.a in Frameworks */,
-				DB00EF7111A9CFFA007DFB32 /* libOALWrapper.a in Frameworks */,
-				8EAA07C9255C5655007D7CD0 /* libGLEW.a in Frameworks */,
-				DB00F0C111A9D025007DFB32 /* OpenAL.framework in Frameworks */,
-				DB00F0C311A9D025007DFB32 /* OpenGL.framework in Frameworks */,
-				8EAA07D7255C5759007D7CD0 /* libogg.a in Frameworks */,
-				DB00F0D411A9D080007DFB32 /* Cocoa.framework in Frameworks */,
-				8EAA07BD255C55DB007D7CD0 /* SDL2.framework in Frameworks */,
-				8EAA07BE255C55DB007D7CD0 /* SDL2_image.framework in Frameworks */,
-				8EAA07C1255C55F8007D7CD0 /* Cg.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		DBF848490AC76D1A00BB15CD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -773,107 +699,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DB00EF0711A9CE84007DFB32 /* tests */ = {
-			isa = PBXGroup;
-			children = (
-				DB00EF0811A9CE84007DFB32 /* Common */,
-				DB00EF0D11A9CE84007DFB32 /* GuiTest */,
-				DB00EF1211A9CE84007DFB32 /* PhysicsTest */,
-				DB00EF1711A9CE84007DFB32 /* RenderTest */,
-				DB00EF1B11A9CE85007DFB32 /* SceneTest */,
-				DB00EF2111A9CE85007DFB32 /* SerializeTest */,
-				DB00EF2511A9CE85007DFB32 /* SpotLightTest */,
-				DB00EF2911A9CE85007DFB32 /* VideoTest */,
-			);
-			path = tests;
-			sourceTree = "<group>";
-		};
-		DB00EF0811A9CE84007DFB32 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				DB00EF0911A9CE84007DFB32 /* SimpleCamera.cpp */,
-				DB00EF0A11A9CE84007DFB32 /* SimpleCamera.h */,
-				DB00EF0B11A9CE84007DFB32 /* stdafx.cpp */,
-				DB00EF0C11A9CE84007DFB32 /* stdafx.h */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		DB00EF0D11A9CE84007DFB32 /* GuiTest */ = {
-			isa = PBXGroup;
-			children = (
-				DB00EF0E11A9CE84007DFB32 /* GuiTest.cpp */,
-				DB00EF0F11A9CE84007DFB32 /* GuiTest.h */,
-				DB00EF1011A9CE84007DFB32 /* GuiTest.sln */,
-				DB00EF1111A9CE84007DFB32 /* GuiTest.vcproj */,
-			);
-			path = GuiTest;
-			sourceTree = "<group>";
-		};
-		DB00EF1211A9CE84007DFB32 /* PhysicsTest */ = {
-			isa = PBXGroup;
-			children = (
-				DB00EF1311A9CE84007DFB32 /* PhysicsTest.cpp */,
-				DB00EF1411A9CE84007DFB32 /* PhysicsTest.h */,
-				DB00EF1511A9CE84007DFB32 /* PhysicsTest.sln */,
-				DB00EF1611A9CE84007DFB32 /* PhysicsTest.vcproj */,
-			);
-			path = PhysicsTest;
-			sourceTree = "<group>";
-		};
-		DB00EF1711A9CE84007DFB32 /* RenderTest */ = {
-			isa = PBXGroup;
-			children = (
-				DB00EF1811A9CE84007DFB32 /* RenderTest.cpp */,
-				DB00EF1911A9CE85007DFB32 /* RenderTest.sln */,
-				DB00EF1A11A9CE85007DFB32 /* RenderTest.vcproj */,
-			);
-			path = RenderTest;
-			sourceTree = "<group>";
-		};
-		DB00EF1B11A9CE85007DFB32 /* SceneTest */ = {
-			isa = PBXGroup;
-			children = (
-				DB00EF1C11A9CE85007DFB32 /* SceneCamera.cpp */,
-				DB00EF1D11A9CE85007DFB32 /* SceneCamera.h */,
-				DB00EF1E11A9CE85007DFB32 /* SceneTest.cpp */,
-				DB00EF1F11A9CE85007DFB32 /* SceneTest.sln */,
-				DB00EF2011A9CE85007DFB32 /* SceneTest.vcproj */,
-			);
-			path = SceneTest;
-			sourceTree = "<group>";
-		};
-		DB00EF2111A9CE85007DFB32 /* SerializeTest */ = {
-			isa = PBXGroup;
-			children = (
-				DB00EF2211A9CE85007DFB32 /* SerializeTest.cpp */,
-				DB00EF2311A9CE85007DFB32 /* SerializeTest.sln */,
-				DB00EF2411A9CE85007DFB32 /* SerializeTest.vcproj */,
-			);
-			path = SerializeTest;
-			sourceTree = "<group>";
-		};
-		DB00EF2511A9CE85007DFB32 /* SpotLightTest */ = {
-			isa = PBXGroup;
-			children = (
-				DB00EF2611A9CE85007DFB32 /* SpotLightTest.cpp */,
-				DB00EF2711A9CE85007DFB32 /* SpotLightTest.sln */,
-				DB00EF2811A9CE85007DFB32 /* SpotLightTest.vcproj */,
-			);
-			path = SpotLightTest;
-			sourceTree = "<group>";
-		};
-		DB00EF2911A9CE85007DFB32 /* VideoTest */ = {
-			isa = PBXGroup;
-			children = (
-				DB00EF2A11A9CE85007DFB32 /* VideoTest.cpp */,
-				DB00EF2B11A9CE85007DFB32 /* VideoTest.h */,
-				DB00EF2C11A9CE85007DFB32 /* VideoTest.sln */,
-				DB00EF2D11A9CE85007DFB32 /* VideoTest.vcproj */,
-			);
-			path = VideoTest;
-			sourceTree = "<group>";
-		};
 		DB00EF5011A9CF86007DFB32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1299,7 +1124,6 @@
 		DBF848380AC76CC500BB15CD = {
 			isa = PBXGroup;
 			children = (
-				DB00EF0711A9CE84007DFB32 /* tests */,
 				DBF848500AC76D3700BB15CD /* CoreSource */,
 				DBF84CDF0AC7803700BB15CD /* CoreInclude */,
 				DB00EF5011A9CF86007DFB32 /* Frameworks */,
@@ -1311,7 +1135,6 @@
 			isa = PBXGroup;
 			children = (
 				DBF8484B0AC76D1A00BB15CD /* libHPL.a */,
-				DB00EF3111A9CE93007DFB32 /* PhysicsTest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1646,23 +1469,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DB00EF3011A9CE93007DFB32 /* PhysicsTest */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DB00EF4611A9CEF2007DFB32 /* Build configuration list for PBXNativeTarget "PhysicsTest" */;
-			buildPhases = (
-				DB00EF2E11A9CE93007DFB32 /* Sources */,
-				DB00EF2F11A9CE93007DFB32 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DB00EF3711A9CEA5007DFB32 /* PBXTargetDependency */,
-			);
-			name = PhysicsTest;
-			productName = PhysicsTest;
-			productReference = DB00EF3111A9CE93007DFB32 /* PhysicsTest */;
-			productType = "com.apple.product-type.tool";
-		};
 		DBF8484A0AC76D1A00BB15CD /* HPL */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBF8484D0AC76D1B00BB15CD /* Build configuration list for PBXNativeTarget "HPL" */;
@@ -1707,7 +1513,6 @@
 			projectRoot = "";
 			targets = (
 				DBF8484A0AC76D1A00BB15CD /* HPL */,
-				DB00EF3011A9CE93007DFB32 /* PhysicsTest */,
 			);
 		};
 /* End PBXProject section */
@@ -1730,18 +1535,6 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
-		DB00EF2E11A9CE93007DFB32 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DB00EF3811A9CEAD007DFB32 /* PhysicsTest.cpp in Sources */,
-				DB00EF3E11A9CEC8007DFB32 /* SimpleCamera.cpp in Sources */,
-				8E84AA03254CACE0000EA53C /* scriptstring_utils.cpp in Sources */,
-				DB00EF3F11A9CEC9007DFB32 /* stdafx.cpp in Sources */,
-				8EB7C3DA254F603E00277667 /* scripthelper.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		DBF848480AC76D1A00BB15CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1951,79 +1744,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		DB00EF3711A9CEA5007DFB32 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DBF8484A0AC76D1A00BB15CD /* HPL */;
-			targetProxy = DB00EF3611A9CEA5007DFB32 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		DB00EF3311A9CE94007DFB32 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				HEADER_SEARCH_PATHS = (
-					include,
-					../dependencies/include,
-				);
-				INSTALL_PATH = /usr/local/bin;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
-					"$(PROJECT_DIR)/lib/macosx",
-				);
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PRODUCT_NAME = PhysicsTest;
-			};
-			name = Debug;
-		};
-		DB00EF3411A9CE94007DFB32 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				HEADER_SEARCH_PATHS = (
-					include,
-					../dependencies/include,
-				);
-				INSTALL_PATH = /usr/local/bin;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
-					"$(PROJECT_DIR)/lib/macosx",
-				);
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PRODUCT_NAME = PhysicsTest;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		DBF8483C0AC76CC500BB15CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2196,15 +1917,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DB00EF4611A9CEF2007DFB32 /* Build configuration list for PBXNativeTarget "PhysicsTest" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DB00EF3311A9CE94007DFB32 /* Debug */,
-				DB00EF3411A9CE94007DFB32 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		DBF8483B0AC76CC500BB15CD /* Build configuration list for PBXProject "HPL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
