@@ -49,6 +49,8 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	static std::set<tString> g_setIgnoredFiles = { ".ds_store", "thumbs.db" };
+
 	void cFileSearcher::AddDirectory(tString asPath, tString asMask)
 	{
 		tWStringList lstFileNames;
@@ -57,7 +59,7 @@ namespace hpl {
 
 		tStringSetIt it = m_setLoadedDirs.find(asPath);
 		//If the path is not allready added, add it!
-		if(it==m_setLoadedDirs.end())
+		if(it == m_setLoadedDirs.end())
 		{
 			m_setLoadedDirs.insert(asPath);
 
@@ -67,9 +69,19 @@ namespace hpl {
 			for(tWStringListIt it = lstFileNames.begin();it!=lstFileNames.end();it++)
 			{
 				tString sFile = cString::To8Char(*it);
-				m_mapFiles.insert(tFilePathMap::value_type(
-													cString::ToLowerCase(sFile),
-													cString::SetFilePath(sFile,asPath)));
+				tString sFileAllLower = cString::ToLowerCase(sFile);
+				tString sFilePath = cString::SetFilePath(sFile, asPath);
+				
+				if (g_setIgnoredFiles.find(sFileAllLower) != g_setIgnoredFiles.end()) {
+					// skip ignored files
+					continue;
+				}
+
+				const auto [itElement, bInserted] = m_mapFiles.insert({ sFileAllLower, sFilePath });
+				if (bInserted == false) {
+					Log("Overriding resource '%s' from '%s' to '%s'\n", sFile.c_str(), cString::GetFilePath(itElement->second).c_str(), asPath.c_str());
+					itElement->second.assign(sFilePath);
+				}
 			}
 		}
 	}
