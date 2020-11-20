@@ -74,67 +74,8 @@ cInit* gpInit;
 
 bool CheckSupport(cInit *apInit)
 {
-	iLowLevelGraphics *pLowLevelGraphics = apInit->mpGame->GetGraphics()->GetLowLevel();
-	cInit *mpInit = apInit;
-
-	//Vertex shader support.
-	if(pLowLevelGraphics->GetCaps(eGraphicCaps_GL_VertexProgram)==0)
-	{
-		apInit->msErrorMessage =	kTranslate("StartUp", "Error_NoVertexShader") + _W("\n") +
-									kTranslate("StartUp", "ErrorAdd01") + _W("\n") +
-									kTranslate("StartUp", "ErrorAdd02");
-        return false;
-	}
-	//Texture units
-	if(pLowLevelGraphics->GetCaps(eGraphicCaps_MaxTextureImageUnits)<=1)
-	{
-		apInit->msErrorMessage =	kTranslate("StartUp", "Error_FewTextureUnits") + _W("\n") +
-									kTranslate("StartUp", "ErrorAdd01") + _W("\n") +
-									kTranslate("StartUp", "ErrorAdd02");
-		return false;
-	}
-	Log("Checking Supported Profiles\n");
-	#define CG_CHECK(p) if (cgGLIsProfileSupported(p)) Log("  Profile " #p " is supported\n")
-	CG_CHECK(CG_PROFILE_VP20);
-	CG_CHECK(CG_PROFILE_FP20);
-
-	CG_CHECK(CG_PROFILE_VP30);
-	CG_CHECK(CG_PROFILE_FP30);
-
-	CG_CHECK(CG_PROFILE_VP40);
-	CG_CHECK(CG_PROFILE_FP40);
-
-	CG_CHECK(CG_PROFILE_ARBVP1);
-	CG_CHECK(CG_PROFILE_ARBFP1);
-
-	CG_CHECK(CG_PROFILE_GLSLV);
-	CG_CHECK(CG_PROFILE_GLSLF);
-	CG_CHECK(CG_PROFILE_GLSLC);
-	#undef CG_CHECK
-
-	//Try compiling vertex shader
-	Log("Trying to load vertex program!\n");
-	iGpuProgram *pTestVtxProg = pLowLevelGraphics->CreateGpuProgram("Test",eGpuProgramType_Vertex);
-	if(	pTestVtxProg->CreateFromFile("core/programs/Fallback01_Diffuse_Light_p1_vp.cg","main")==false)
-	{
-		Log("Did not succeed!\n");
-		if(iMaterial::GetQuality() != eMaterialQuality_VeryLow)
-		{
-			apInit->msErrorMessage =	kTranslate("StartUp", "Error_BadVertexShader") + _W("\n") +
-										kTranslate("StartUp", "Error_BadVertexShader02") + _W("\n") +
-										kTranslate("StartUp", "Error_BadVertexShader03") + _W("\n") +
-										kTranslate("StartUp", "Error_BadVertexShader04") + _W("\n") +
-										kTranslate("StartUp", "ErrorAdd02");
-			hplDelete( pTestVtxProg );
-			
-			mpInit->mpConfig->SetInt("Graphics","ShaderQuality",eMaterialQuality_VeryLow);
-			mpInit->mpConfig->Save();
-
-			return false;
-		}
-	}
+//	iLowLevelGraphics *pLowLevelGraphics = apInit->mpGame->GetGraphics()->GetLowLevel();
 	Log("Success!\n");
-	hplDelete( pTestVtxProg );
 
 	return true;
 }
@@ -339,7 +280,7 @@ bool cInit::Init(tString asCommandLine)
 	mbPostEffects = mpConfig->GetBool("Graphics","PostEffects",true);
 	
 	// Rehatched: High is now Classic, lower than Classic is no longer supported
-	auto iQuality = static_cast<eMaterialQuality>(mpConfig->GetInt("Graphics","ShaderQuality",eMaterialQuality_Classic));
+	eMaterialQuality iQuality = static_cast<eMaterialQuality>(mpConfig->GetInt("Graphics","ShaderQuality",eMaterialQuality_Classic));
 	if (iQuality != eMaterialQuality_Classic) {
 		// until we do the work, _higher_ than classic is also not supported
 		iQuality = eMaterialQuality_Classic;
