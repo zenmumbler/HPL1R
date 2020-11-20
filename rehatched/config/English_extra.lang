@@ -4,7 +4,7 @@
   <CATEGORY Name="MainMenu">
   	<Entry Name="Classic">Classic</Entry>
   	<Entry Name="Modern">Modern</Entry>
-    <Entry Name="TipGraphicsShaderQuality">Quality of rendering. Choose Classic for the original look and Modern for more contemporary look.</Entry>
     <Entry Name="TipGraphicsTextureQuality">The resolution of textures in the game. Choose classic or an upscaled size. Requires restart.</Entry>
+    <Entry Name="TipGraphicsShaderQuality">Quality of rendering. Choose Classic for the original 2006 look or Modern for a more contemporary look.</Entry>
   </CATEGORY>
 </LANGUAGE>

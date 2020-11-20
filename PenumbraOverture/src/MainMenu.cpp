@@ -1466,9 +1466,6 @@ int glResolutionNum = 17;
 
 tString gvTextureQuality[] = {"High","Medium","Low"};
 int glTextureQualityNum = 3;
-tString gvShaderQuality[] = {"Very Low","Low","Medium","High"};
-int glShaderQualityNum = 4;
-
 
 cMainMenuWidget_Text *gpNoiseFilterText=NULL;
 
@@ -1717,8 +1714,14 @@ public:
 
 //------------------------------------------------------------
 
+const tString gvShaderQuality[] = {"","","","Classic","Modern"};
+
 class cMainMenuWidget_ShaderQuality : public cMainMenuWidget_Button
 {
+	// Rehatched, Classic (High) is for now the only supported setting
+	int miShaderMinQuality = 3;
+	int miShaderMaxQuality = 3;
+
 public:
 	cMainMenuWidget_ShaderQuality(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment)
 		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
@@ -1728,20 +1731,20 @@ public:
 
 	void OnMouseDown(eMButton aButton)
 	{
-		int lCurrent = iMaterial::GetQuality();
+		int iCurrent = iMaterial::GetQuality();
 		if(aButton == eMButton_Left)
 		{
-			lCurrent++;
-			if(lCurrent >= glShaderQualityNum) lCurrent =0;
+			iCurrent++;
+			if(iCurrent > miShaderMaxQuality) iCurrent = miShaderMinQuality;
 		}
 		else if(aButton == eMButton_Right)
 		{
-			lCurrent--;
-			if(lCurrent < 0) lCurrent =glShaderQualityNum-1;
+			iCurrent--;
+			if(iCurrent < miShaderMinQuality) iCurrent = miShaderMaxQuality;
 		}
 
-		gpShaderQualityText->msText = kTranslate("MainMenu",gvShaderQuality[lCurrent]);
-		iMaterial::SetQuality((eMaterialQuality) lCurrent);
+		gpShaderQualityText->msText = kTranslate("MainMenu",gvShaderQuality[iCurrent]);
+		iMaterial::SetQuality((eMaterialQuality) iCurrent);
 
 		if(mpInit->mpMapHandler->GetCurrentMapName() != "") gbMustRestart = true;
 	}
