@@ -18,11 +18,6 @@
  */
 #include "graphics/Material_BumpSpec.h"
 
-#include "graphics/Material_Fallback01_BaseLight.h"
-#include "graphics/Material_Fallback02_BaseLight.h"
-#include "graphics/Material_Flat.h"
-#include "graphics/Material_Alpha.h"
-
 namespace hpl {
 
 	//////////////////////////////////////////////////////////////////////////
@@ -61,29 +56,7 @@ namespace hpl {
 		cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
 		cRenderer3D *apRenderer3D)
 	{
-		if(	apLowLevelGraphics->GetCaps(eGraphicCaps_GL_FragmentProgram) &&
-			iMaterial::GetQuality() >= eMaterialQuality_Classic)
-		{
-			return hplNew( cMaterial_BumpSpec, (asName,apLowLevelGraphics,
-										apTextureManager,apProgramManager,apRenderer3D) );
-		}
-		else if(apLowLevelGraphics->GetCaps(eGraphicCaps_MaxTextureImageUnits)>=3 &&
-				iMaterial::GetQuality() >= eMaterialQuality_Medium)
-		{
-			return hplNew( cMaterial_Fallback01_Bump, (asName,apLowLevelGraphics,
-				apTextureManager,apProgramManager,apRenderer3D) );
-		}
-		else if(apLowLevelGraphics->GetCaps(eGraphicCaps_GL_VertexProgram) &&
-			iMaterial::GetQuality() >= eMaterialQuality_Low)
-		{
-			return hplNew( cMaterial_Fallback02_Diffuse, (asName,apLowLevelGraphics,
-				apTextureManager,apProgramManager,apRenderer3D) );
-		}
-		else
-		{
-			return hplNew( cMaterial_Flat, (asName,apLowLevelGraphics,
-				apTextureManager,apProgramManager,apRenderer3D) );
-		}
+		return hplNew( cMaterial_BumpSpec, (asName,apLowLevelGraphics,apTextureManager,apProgramManager,apRenderer3D) );
 	}
 
 	//-----------------------------------------------------------------------

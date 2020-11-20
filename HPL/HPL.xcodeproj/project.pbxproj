@@ -66,7 +66,6 @@
 		DB6E15BC0B6B174B00203538 /* scriptstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB6E15BB0B6B174B00203538 /* scriptstring.cpp */; };
 		DBCEE59F0B4B33190088A7E3 /* Beam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE59C0B4B33190088A7E3 /* Beam.cpp */; };
 		DBCEE5A00B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE59D0B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp */; };
-		DBCEE5A10B4B33190088A7E3 /* Material_Fallback02_BaseLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE59E0B4B33190088A7E3 /* Material_Fallback02_BaseLight.cpp */; };
 		DBCEE5B50B4B33BC0088A7E3 /* LowLevelSoundOpenAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE5B20B4B33BC0088A7E3 /* LowLevelSoundOpenAL.cpp */; };
 		DBCEE5B60B4B33BC0088A7E3 /* OpenALSoundChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE5B30B4B33BC0088A7E3 /* OpenALSoundChannel.cpp */; };
 		DBCEE5B70B4B33BC0088A7E3 /* OpenALSoundData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE5B40B4B33BC0088A7E3 /* OpenALSoundData.cpp */; };
@@ -136,7 +135,6 @@
 		DBF84AF70AC76F1E00BB15CD /* Material_BumpSpec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849670AC76D5700BB15CD /* Material_BumpSpec.cpp */; };
 		DBF84AF90AC76F1E00BB15CD /* Material_Diffuse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849690AC76D5700BB15CD /* Material_Diffuse.cpp */; };
 		DBF84AFD0AC76F1E00BB15CD /* Material_DiffuseSpec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8496D0AC76D5700BB15CD /* Material_DiffuseSpec.cpp */; };
-		DBF84AFE0AC76F1E00BB15CD /* Material_Fallback01_BaseLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8496E0AC76D5700BB15CD /* Material_Fallback01_BaseLight.cpp */; };
 		DBF84AFF0AC76F1E00BB15CD /* Material_Flat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8496F0AC76D5700BB15CD /* Material_Flat.cpp */; };
 		DBF84B010AC76F1E00BB15CD /* Material_Modulative.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849710AC76D5700BB15CD /* Material_Modulative.cpp */; };
 		DBF84B020AC76F1E00BB15CD /* Material_ModulativeX2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849720AC76D5700BB15CD /* Material_ModulativeX2.cpp */; };
@@ -350,7 +348,6 @@
 		DB27F03D0ACB9AB90054ACA3 /* Material_BumpSpec.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Material_BumpSpec.h; sourceTree = "<group>"; };
 		DB27F03F0ACB9AB90054ACA3 /* Material_Diffuse.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Material_Diffuse.h; sourceTree = "<group>"; };
 		DB27F0430ACB9AB90054ACA3 /* Material_DiffuseSpec.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Material_DiffuseSpec.h; sourceTree = "<group>"; };
-		DB27F0440ACB9AB90054ACA3 /* Material_Fallback01_BaseLight.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Material_Fallback01_BaseLight.h; sourceTree = "<group>"; };
 		DB27F0450ACB9AB90054ACA3 /* Material_Flat.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Material_Flat.h; sourceTree = "<group>"; };
 		DB27F0470ACB9AB90054ACA3 /* Material_Modulative.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Material_Modulative.h; sourceTree = "<group>"; };
 		DB27F0480ACB9AB90054ACA3 /* Material_ModulativeX2.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Material_ModulativeX2.h; sourceTree = "<group>"; };
@@ -570,10 +567,8 @@
 		DB6E15BB0B6B174B00203538 /* scriptstring.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstring.cpp; sourceTree = "<group>"; };
 		DBCEE59C0B4B33190088A7E3 /* Beam.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Beam.cpp; sourceTree = "<group>"; };
 		DBCEE59D0B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Material_EnvMap_Reflect.cpp; sourceTree = "<group>"; };
-		DBCEE59E0B4B33190088A7E3 /* Material_Fallback02_BaseLight.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Material_Fallback02_BaseLight.cpp; sourceTree = "<group>"; };
 		DBCEE5A20B4B332E0088A7E3 /* Beam.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Beam.h; sourceTree = "<group>"; };
 		DBCEE5A30B4B332E0088A7E3 /* Material_EnvMap_Reflect.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Material_EnvMap_Reflect.h; sourceTree = "<group>"; };
-		DBCEE5A40B4B332E0088A7E3 /* Material_Fallback02_BaseLight.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Material_Fallback02_BaseLight.h; sourceTree = "<group>"; };
 		DBCEE5B20B4B33BC0088A7E3 /* LowLevelSoundOpenAL.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = LowLevelSoundOpenAL.cpp; sourceTree = "<group>"; };
 		DBCEE5B30B4B33BC0088A7E3 /* OpenALSoundChannel.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = OpenALSoundChannel.cpp; sourceTree = "<group>"; };
 		DBCEE5B40B4B33BC0088A7E3 /* OpenALSoundData.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = OpenALSoundData.cpp; sourceTree = "<group>"; };
@@ -612,7 +607,6 @@
 		DBF849670AC76D5700BB15CD /* Material_BumpSpec.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Material_BumpSpec.cpp; sourceTree = "<group>"; };
 		DBF849690AC76D5700BB15CD /* Material_Diffuse.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Material_Diffuse.cpp; sourceTree = "<group>"; };
 		DBF8496D0AC76D5700BB15CD /* Material_DiffuseSpec.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Material_DiffuseSpec.cpp; sourceTree = "<group>"; };
-		DBF8496E0AC76D5700BB15CD /* Material_Fallback01_BaseLight.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Material_Fallback01_BaseLight.cpp; sourceTree = "<group>"; };
 		DBF8496F0AC76D5700BB15CD /* Material_Flat.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Material_Flat.cpp; sourceTree = "<group>"; };
 		DBF849710AC76D5700BB15CD /* Material_Modulative.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Material_Modulative.cpp; sourceTree = "<group>"; };
 		DBF849720AC76D5700BB15CD /* Material_ModulativeX2.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Material_ModulativeX2.cpp; sourceTree = "<group>"; };
@@ -955,7 +949,6 @@
 				DB4AFBE10D70773700809E03 /* VideoStream.h */,
 				DBCEE5A20B4B332E0088A7E3 /* Beam.h */,
 				DBCEE5A30B4B332E0088A7E3 /* Material_EnvMap_Reflect.h */,
-				DBCEE5A40B4B332E0088A7E3 /* Material_Fallback02_BaseLight.h */,
 				DB27F0260ACB9AB90054ACA3 /* Animation.h */,
 				DB27F0270ACB9AB90054ACA3 /* AnimationTrack.h */,
 				DB27F0290ACB9AB90054ACA3 /* BillBoard.h */,
@@ -980,7 +973,6 @@
 				DB27F03D0ACB9AB90054ACA3 /* Material_BumpSpec.h */,
 				DB27F03F0ACB9AB90054ACA3 /* Material_Diffuse.h */,
 				DB27F0430ACB9AB90054ACA3 /* Material_DiffuseSpec.h */,
-				DB27F0440ACB9AB90054ACA3 /* Material_Fallback01_BaseLight.h */,
 				DB27F0450ACB9AB90054ACA3 /* Material_Flat.h */,
 				DB27F0470ACB9AB90054ACA3 /* Material_Modulative.h */,
 				DB27F0480ACB9AB90054ACA3 /* Material_ModulativeX2.h */,
@@ -1379,7 +1371,6 @@
 				DBFBA0180B65E42A0021DAE2 /* Material_Water.cpp */,
 				DBCEE59C0B4B33190088A7E3 /* Beam.cpp */,
 				DBCEE59D0B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp */,
-				DBCEE59E0B4B33190088A7E3 /* Material_Fallback02_BaseLight.cpp */,
 				DBF849540AC76D5700BB15CD /* Animation.cpp */,
 				DBF849550AC76D5700BB15CD /* AnimationTrack.cpp */,
 				DBF849570AC76D5700BB15CD /* BillBoard.cpp */,
@@ -1401,7 +1392,6 @@
 				DBF849670AC76D5700BB15CD /* Material_BumpSpec.cpp */,
 				DBF849690AC76D5700BB15CD /* Material_Diffuse.cpp */,
 				DBF8496D0AC76D5700BB15CD /* Material_DiffuseSpec.cpp */,
-				DBF8496E0AC76D5700BB15CD /* Material_Fallback01_BaseLight.cpp */,
 				DBF8496F0AC76D5700BB15CD /* Material_Flat.cpp */,
 				DBF849710AC76D5700BB15CD /* Material_Modulative.cpp */,
 				DBF849720AC76D5700BB15CD /* Material_ModulativeX2.cpp */,
@@ -1825,7 +1815,6 @@
 				DBF84AF70AC76F1E00BB15CD /* Material_BumpSpec.cpp in Sources */,
 				DBF84AF90AC76F1E00BB15CD /* Material_Diffuse.cpp in Sources */,
 				DBF84AFD0AC76F1E00BB15CD /* Material_DiffuseSpec.cpp in Sources */,
-				DBF84AFE0AC76F1E00BB15CD /* Material_Fallback01_BaseLight.cpp in Sources */,
 				DBF84AFF0AC76F1E00BB15CD /* Material_Flat.cpp in Sources */,
 				DBF84B010AC76F1E00BB15CD /* Material_Modulative.cpp in Sources */,
 				8E9F74EC255317F7000324E8 /* SDLTGAFile.cpp in Sources */,
@@ -1922,7 +1911,6 @@
 				DBF84B710AC76F1E00BB15CD /* World3D.cpp in Sources */,
 				DBCEE59F0B4B33190088A7E3 /* Beam.cpp in Sources */,
 				DBCEE5A00B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp in Sources */,
-				DBCEE5A10B4B33190088A7E3 /* Material_Fallback02_BaseLight.cpp in Sources */,
 				DBCEE5B50B4B33BC0088A7E3 /* LowLevelSoundOpenAL.cpp in Sources */,
 				DBCEE5B60B4B33BC0088A7E3 /* OpenALSoundChannel.cpp in Sources */,
 				DBCEE5B70B4B33BC0088A7E3 /* OpenALSoundData.cpp in Sources */,
