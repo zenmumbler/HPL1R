@@ -1,8 +1,16 @@
 build
 *~
 .DS_Store
+Thumbs.db
 xcuserdata
-redist
-assets/*.log
-assets/core/cache/*collcach
 
+# don't commit local overrides due to asset copyright
+rehatched/**/*.jpg
+rehatched/**/*.png
+rehatched/**/*.bmp
+rehatched/**/*.tga
+rehatched/**/*.dds
+rehatched/**/*.mat
+rehatched/**/*.ent
+rehatched/**/*.ogg
+rehatched/**/*.snt
