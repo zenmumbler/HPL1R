@@ -152,7 +152,7 @@ bool cOAL_OggSample::CreateFromBuffer(const void* apBuffer, size_t aSize)
 	}
 
 	// If not an Ogg file, set status and exit
-	OAL_OggMemoryFile fakeFile = { (unsigned char*)apBuffer, aSize, 0 };
+	OAL_OggMemoryFile fakeFile = { (unsigned char*)apBuffer, static_cast<ogg_int64_t>(aSize), 0 };
 	OggVorbis_File ovFileHandle;
 	if((lOpenResult = ov_open_callbacks(&fakeFile, &ovFileHandle, NULL, 0, OAL_CALLBACKS_BUFFER))<0)
 	{
