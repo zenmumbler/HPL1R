@@ -478,7 +478,13 @@ bool cInit::Init(tString asCommandLine)
 
 	mpEffectHandler->GetDepthOfField()->SetDisabled(!mpConfig->GetBool("Graphics", "DepthOfField", true));
 
-	mpGame->GetResources()->GetMaterialManager()->SetTextureSizeLevel(mpConfig->GetInt("Graphics","TextureSizeLevel",0));
+	// Rehatched: restrict texture scale to full original size
+	int iTextureScale = mpConfig->GetInt("Graphics","TextureSizeLevel",0);
+	if (iTextureScale != 0) {
+		iTextureScale = 0;
+	}
+	mpGame->GetResources()->GetMaterialManager()->SetTextureSizeLevel(iTextureScale);
+
 	mpGame->GetResources()->GetMaterialManager()->SetTextureFilter((eTextureFilter)mpConfig->GetInt("Graphics","TextureFilter",0));
 	mpGame->GetResources()->GetMaterialManager()->SetTextureAnisotropy(mpConfig->GetFloat("Graphics","TextureAnisotropy",1.0f));
 

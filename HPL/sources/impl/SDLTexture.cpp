@@ -600,57 +600,6 @@ namespace hpl {
 
 		unsigned char *pPixelSrc = (unsigned char*)pBitmapSrc->GetSurface()->pixels;
 
-		unsigned char *pNewSrc = NULL;
-		if(mlSizeLevel>0 && (int)mlWidth > mvMinLevelSize.x*2)
-		{
-			//Log("OldSize: %d x %d ",mlWidth,mlHeight);
-
-			int lOldW = mlWidth;
-			int lOldH = mlHeight;
-
-			int lSizeDiv = (int)pow((float)2,(int)mlSizeLevel);
-
-			mlWidth /= lSizeDiv;
-			mlHeight /= lSizeDiv;
-
-			while(mlWidth < (unsigned int)mvMinLevelSize.x)
-			{
-				mlWidth*=2;
-				mlHeight*=2;
-				lSizeDiv/=2;
-			}
-
-			//Log("NewSize: %d x %d SizeDiv: %d\n",mlWidth,mlHeight,lSizeDiv);
-
-			pNewSrc = hplNewArray( unsigned char, lChannels * mlWidth * mlHeight);
-
-			int lWidthCount = mlWidth;
-			int lHeightCount = mlHeight;
-			int lOldAdd = lChannels*lSizeDiv;
-			int lOldHeightAdd = lChannels*lOldW*(lSizeDiv-1);
-
-			unsigned char *pOldPixel = pPixelSrc;
-			unsigned char *pNewPixel = pNewSrc;
-
-			while(lHeightCount)
-			{
-				memcpy(pNewPixel, pOldPixel,lChannels);
-
-				pOldPixel += lOldAdd;
-				pNewPixel += lChannels;
-
-				lWidthCount--;
-				if(!lWidthCount)
-				{
-					lWidthCount = mlWidth;
-					lHeightCount--;
-					pOldPixel += lOldHeightAdd;
-				}
-			}
-
-			pPixelSrc = pNewSrc;
-		}
-
 		//Log("Loading %s  %d x %d\n",msName.c_str(), pSrc->GetWidth(), pSrc->GetHeight());
 		//Log("Channels: %d Format: %x\n",lChannels, format);
 
@@ -677,11 +626,6 @@ namespace hpl {
 		}
 
 		PostCreation(GLTarget);
-
-		if(mlSizeLevel>0 && pNewSrc)
-		{
-			hplDeleteArray(pNewSrc);
-		}
 
 		return true;
 	}

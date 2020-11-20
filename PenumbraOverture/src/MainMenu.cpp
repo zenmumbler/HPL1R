@@ -1464,9 +1464,6 @@ cVector2l gvResolutions[] = {cVector2l(640,480), cVector2l(800,600), cVector2l(1
 						};
 int glResolutionNum = 17;
 
-tString gvTextureQuality[] = {"High","Medium","Low"};
-int glTextureQualityNum = 3;
-
 cMainMenuWidget_Text *gpNoiseFilterText=NULL;
 
 //------------------------------------------------------------
@@ -1752,13 +1749,18 @@ public:
 
 //------------------------------------------------------------
 
+// Rehatched: 2x is an aspirational setting for when we include upscaled textures
+const tString gvTextureQuality[] = {"Classic","Upscaled2"};
+
 class cMainMenuWidget_TextureQuality : public cMainMenuWidget_Button
 {
+	int miTextureQualityNum = 1;
+
 public:
 	cMainMenuWidget_TextureQuality(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment)
 		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
 	{
-		mlCurrent = apInit->mpGame->GetResources()->GetMaterialManager()->GetTextureSizeLevel();
+		miCurrent = apInit->mpGame->GetResources()->GetMaterialManager()->GetTextureSizeLevel();
 		msTip = kTranslate("MainMenu", "TipGraphicsTextureQuality");
 	}
 
@@ -1766,22 +1768,22 @@ public:
 	{
 		if(aButton == eMButton_Right)
 		{
-			mlCurrent++;
-			if(mlCurrent >= glTextureQualityNum) mlCurrent =0;
+			miCurrent++;
+			if(miCurrent >= miTextureQualityNum) miCurrent =0;
 		}
 		else if(aButton == eMButton_Left)
 		{
-			mlCurrent--;
-			if(mlCurrent < 0) mlCurrent =glTextureQualityNum-1;
+			miCurrent--;
+			if(miCurrent < 0) miCurrent = miTextureQualityNum-1;
 		}
 
-		gpTextureQualityText->msText = kTranslate("MainMenu",gvTextureQuality[mlCurrent]);
-		mpInit->mpGame->GetResources()->GetMaterialManager()->SetTextureSizeLevel(mlCurrent);
+		gpTextureQualityText->msText = kTranslate("MainMenu",gvTextureQuality[miCurrent]);
+		mpInit->mpGame->GetResources()->GetMaterialManager()->SetTextureSizeLevel(miCurrent);
 
 		gbMustRestart = true;
 	}
 
-	int mlCurrent;
+	int miCurrent;
 };
 
 //------------------------------------------------------------
