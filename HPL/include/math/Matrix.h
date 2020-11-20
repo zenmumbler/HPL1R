@@ -33,6 +33,10 @@ template <class T> 	class cMatrix {
 		T m[4][4];
 		T v[16];
 	};
+	
+	inline T* Data() {
+		return &v[0];
+	}
 
 	//////////////////////////////////////////
 	// Constructors
