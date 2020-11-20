@@ -29,16 +29,11 @@ namespace hpl {
 		cMaterial_Diffuse(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
 			cRenderer3D *apRenderer3D);
-		~cMaterial_Diffuse();
-
-	private:
 	};
 
 	class cMaterialType_Diffuse : public iMaterialType
 	{
 	public:
-		cMaterialType_Diffuse();
-
 		bool IsCorrect(tString asName){
 			return cString::ToLowerCase(asName)=="diffuse";
 		}

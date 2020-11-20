@@ -30,8 +30,6 @@ namespace hpl {
 			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
 			cRenderer3D *apRenderer3D);
 
-		virtual ~cMaterial_Flat();
-
 		tTextureTypeList GetTextureTypes();
 
 		bool UsesType(eMaterialRenderType aType);

@@ -29,9 +29,6 @@ namespace hpl {
 		cMaterial_BumpSpec(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
 			cRenderer3D *apRenderer3D);
-		~cMaterial_BumpSpec();
-
-	private:
 	};
 
 	class cMaterialType_BumpSpec : public iMaterialType

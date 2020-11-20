@@ -39,22 +39,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMaterial_Diffuse::~cMaterial_Diffuse()
-	{
-
-	}
-
-	//-----------------------------------------------------------------------
-
 	//////////////////////////////////////////////////////////////////////////
 	// PUBLIC METHODS
 	//////////////////////////////////////////////////////////////////////////
-
-	cMaterialType_Diffuse::cMaterialType_Diffuse()
-	{
-	}
-
-	//-----------------------------------------------------------------------
 
 	iMaterial* cMaterialType_Diffuse::Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 										cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
