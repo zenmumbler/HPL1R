@@ -307,7 +307,7 @@ bool cInit::Init(tString asCommandLine)
 	//mlStreamBufferCount = mpConfig->GetInt("Sound", "StreamBufferCount", 4);
 	msDeviceName = mpConfig->GetString("Sound","DeviceName","NULL");
 
-	iGpuProgram::SetLogDebugInformation(true);
+	iGpuProgram::SetLogDebugInformation(false);
 	iResourceBase::SetLogCreateAndDelete(mbLogResources);
 
 	cSetupVarContainer Vars;
