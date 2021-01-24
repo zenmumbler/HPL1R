@@ -1068,7 +1068,7 @@ cTempCheckProxy gTempCheckProxy;
 void cPlayer::Update(float afTimeStep)
 {
 	cSystem *pSystem = mpInit->mpGame->GetSystem();
-	unsigned int lTime = pSystem->GetLowLevel()->GetTime();	
+	auto lTime = pSystem->GetLowLevel()->GetTime();	
 	iPhysicsWorld *pPhysicsWorld = mpScene->GetWorld3D()->GetPhysicsWorld();
 
 #ifdef INCLUDE_HAPTIC

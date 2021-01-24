@@ -86,7 +86,7 @@ void cNotebookState_Front::OnLeaveState(int alNextState)
 void cNotebookState_Front::OnUpdate(float afTime)
 {
 	bool bFound=false;
-	for(size_t i=0; i< mvOptions.size(); ++i)
+	for(int i=0; i< static_cast<int>(mvOptions.size()); ++i)
 	{
 		if(cMath::PointBoxCollision(mpNotebook->GetMousePos(),mvOptions[i].mRect))
 		{
@@ -275,7 +275,7 @@ void cNotebookState_TaskList::OnUpdate(float afTime)
 	//////////////////////////////////
 	// Next/Prev Page
 	bool bFound=false;
-	for(size_t i=0; i< mvOptions.size(); ++i)
+	for(int i=0; i< static_cast<int>(mvOptions.size()); ++i)
 	{
 		if(cMath::PointBoxCollision(mpNotebook->GetMousePos(),mvOptions[i].mRect))
 		{
@@ -527,7 +527,7 @@ void cNotebookState_NoteList::OnUpdate(float afTime)
 	//////////////////////////////////
 	// Next/Prev Page
 	bool bFound=false;
-	for(size_t i=0; i< mvOptions.size(); ++i)
+	for(int i=0; i< static_cast<int>(mvOptions.size()); ++i)
 	{
 		if(cMath::PointBoxCollision(mpNotebook->GetMousePos(),mvOptions[i].mRect))
 		{
@@ -788,7 +788,7 @@ void cNotebookState_Note::OnLeaveState(int alNextState)
 void cNotebookState_Note::OnUpdate(float afTime)
 {
 	bool bFound=false;
-	for(size_t i=0; i< mvOptions.size(); ++i)
+	for(int i=0; i< static_cast<int>(mvOptions.size()); ++i)
 	{
 		if(cMath::PointBoxCollision(mpNotebook->GetMousePos(),mvOptions[i].mRect))
 		{
@@ -834,11 +834,10 @@ void cNotebookState_Note::OnDraw()
 	
 	//////////////////////////////////
 	// Draw arrows back and forward
-	for(size_t i=0; i< mvOptions.size(); ++i)
+	for(int i=0; i< static_cast<int>(mvOptions.size()); ++i)
 	{
-		if(i==0 && mlCurrentPage == mvPages.size()-1) continue;
+		if(i==0 && mlCurrentPage == static_cast<int>(mvPages.size())-1) continue;
 		if(i==1 && mlCurrentPage == 0) continue;
-		
 		
 		mpDrawer->DrawGfxObject(mpOptionsImage[i],mvOptions[i].mvPos,
 							cVector2f(mvOptions[i].mRect.w,mvOptions[i].mRect.h),

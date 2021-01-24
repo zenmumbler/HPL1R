@@ -50,7 +50,7 @@ namespace hpl {
 
 	void cCRC::PutByte (unsigned aByte)
 	{
-		unsigned top = mRegister >> 24;
+		unsigned top = static_cast<unsigned int>(mRegister >> 24);
 		top ^= aByte;
 		mRegister = (mRegister << 8) ^ mTable [top];
 	}

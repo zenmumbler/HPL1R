@@ -51,7 +51,7 @@ namespace hpl {
 	class cGfxBufferCompare
 	{
 	public:
-		bool operator()(const cGfxBufferObject& aObjectA,const cGfxBufferObject& aObjectB);
+		bool operator()(const cGfxBufferObject& aObjectA,const cGfxBufferObject& aObjectB) const;
 	};
 
 	typedef std::multiset<cGfxBufferObject,cGfxBufferCompare> tGfxBufferSet;

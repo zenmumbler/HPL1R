@@ -544,7 +544,7 @@ void cMainMenuWidget_List::OnDraw()
 	
 	cVector3f vPos = mvPositon + cVector3f(5,3,0);
 
-	for(size_t i=mlFirstRow; i< mvEntries.size(); ++i)
+	for(int i=mlFirstRow; i< static_cast<int>(mvEntries.size()); ++i)
 	{
 		if((int)i-mlFirstRow >= mlMaxRows) break;
 
@@ -1175,7 +1175,7 @@ public:
 		int lCurrentNum = 0;
 
 		//get current num
-        for(int i=0; i<mlDevices.size(); ++i)
+        for(int i=0; i<static_cast<int>(mlDevices.size()); ++i)
 		{
 			if(mlDevices[i] == mpInit->msDeviceName)
 			{
@@ -1187,12 +1187,12 @@ public:
 		if(aButton == eMButton_Left)
 		{
 			lCurrentNum++;
-			if(lCurrentNum >= mlDevices.size()) lCurrentNum =0;
+			if(lCurrentNum >= static_cast<int>(mlDevices.size())) lCurrentNum =0;
 		}
 		else if(aButton == eMButton_Right)
 		{
 			lCurrentNum--;
-			if(lCurrentNum < 0) lCurrentNum =mlDevices.size()-1;
+			if(lCurrentNum < 0) lCurrentNum = static_cast<int>(mlDevices.size())-1;
 		}
 
 		mpInit->msDeviceName = mlDevices[lCurrentNum];
