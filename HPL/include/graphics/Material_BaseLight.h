@@ -24,13 +24,9 @@
 
 enum eBaseLightProgram
 {
-	eBaseLightProgram_Point1=0,
-	eBaseLightProgram_Point2=1,
-	eBaseLightProgram_Point3=2,
-	eBaseLightProgram_Spot1=3,
-	eBaseLightProgram_Spot2=4,
-	eBaseLightProgram_Spot3=5,
-	eBaseLightProgram_LastEnum = 6
+	eBaseLightProgram_Point = 0,
+	eBaseLightProgram_Spot = 1,
+	eBaseLightProgram_LastEnum = 2
 };
 
 namespace hpl {
@@ -70,8 +66,6 @@ namespace hpl {
 	protected:
 		iTexture *mpNormalizationMap;
 		iTexture *mpSpotNegativeRejectMap;
-
-		bool mbUsesTwoPassSpot;
 
 		//properties to set
 		bool mbUseSpecular;
