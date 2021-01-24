@@ -99,12 +99,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cGpuProgramManager::Unload(iResourceBase* apResource)
-	{
-
-	}
-	//-----------------------------------------------------------------------
-
 	void cGpuProgramManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

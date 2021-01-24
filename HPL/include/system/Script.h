@@ -85,8 +85,6 @@ namespace hpl {
 		iScript(const tString& asName) : iResourceBase(asName,0){}
 		virtual ~iScript(){}
 
-		bool Reload(){ return false;}
-		void Unload(){}
 		void Destroy(){}
 
 		virtual bool CreateFromFile(const tString& asFile)=0;

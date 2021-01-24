@@ -60,7 +60,7 @@ namespace hpl {
 		void Preload(const tString& asFile);
 
 		void Destroy(iResourceBase* apResource);
-		void Unload(iResourceBase* apResource);
+
 	private:
 		cGraphics* mpGraphics;
 		cResources *mpResources;

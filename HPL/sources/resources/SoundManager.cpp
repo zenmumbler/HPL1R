@@ -96,12 +96,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cSoundManager::Unload(iResourceBase* apResource)
-	{
-
-	}
-	//-----------------------------------------------------------------------
-
 	void cSoundManager::Destroy(iResourceBase* apResource)
 	{
 		//Log("Destroying %s users: %d\n",apResource->GetName().c_str(),

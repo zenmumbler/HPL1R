@@ -42,7 +42,6 @@ namespace hpl {
 		iScript* CreateScript(const tString& asName);
 
 		void Destroy(iResourceBase* apResource);
-		void Unload(iResourceBase* apResource);
 
 	private:
 		cSystem* mpSystem;

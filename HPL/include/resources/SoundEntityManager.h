@@ -39,7 +39,6 @@ namespace hpl {
 		cSoundEntityData* CreateSoundEntity(const tString& asName);
 
 		void Destroy(iResourceBase* apResource);
-		void Unload(iResourceBase* apResource);
 
 	private:
 		cSound* mpSound;

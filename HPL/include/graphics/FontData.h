@@ -68,8 +68,6 @@ namespace hpl {
 		virtual bool CreateFromBitmapFile(const tString &asFileName)=0;
 
 
-		bool Reload(){ return false;}
-		void Unload(){}
 		void Destroy(){}
 
 		/**

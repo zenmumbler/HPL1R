@@ -46,8 +46,6 @@ namespace hpl {
 		void SetLoopStream(bool abX){mbLoopStream = abX;}
 		bool GetLoopStream(){ return mbLoopStream;}
 
-		bool Reload(){ return false;}
-		void Unload(){}
 		void Destroy(){}
 
 		void SetSoundManager(cSoundManager* apSoundManager){

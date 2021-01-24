@@ -113,12 +113,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cFontManager::Unload(iResourceBase* apResource)
-	{
-
-	}
-	//-----------------------------------------------------------------------
-
 	void cFontManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

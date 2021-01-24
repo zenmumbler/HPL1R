@@ -104,12 +104,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVideoManager::Unload(iResourceBase* apResource)
-	{
-
-	}
-	//-----------------------------------------------------------------------
-
 	void cVideoManager::Destroy(iResourceBase* apResource)
 	{
 		if(apResource)

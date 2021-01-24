@@ -45,7 +45,6 @@ namespace hpl {
 		iGpuProgram* CreateProgram(const tString& asName,const tString& asEntry,eGpuProgramType aType);
 
 		void Destroy(iResourceBase* apResource);
-		void Unload(iResourceBase* apResource);
 
 	private:
 		iLowLevelGraphics *mpLowLevelGraphics;

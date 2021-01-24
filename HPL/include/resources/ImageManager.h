@@ -47,8 +47,6 @@ namespace hpl {
 
 		void Destroy(iResourceBase* apResource);
 
-		void Unload(iResourceBase* apResource);
-
 		//Image specifc
 		iResourceBase* CreateInFrame(const tString& asName, int alFrameHandle);
 		cResourceImage* CreateImage(const tString& asName, int alFrameHandle=-1);

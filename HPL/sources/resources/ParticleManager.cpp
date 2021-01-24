@@ -163,12 +163,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cParticleManager::Unload(iResourceBase* apResource)
-	{
-
-	}
-	//-----------------------------------------------------------------------
-
 	void cParticleManager::Destroy(iResourceBase* apResource)
 	{
 		if(apResource->HasUsers())

@@ -35,8 +35,6 @@ namespace hpl {
 		cCGProgram(tString asName, CGcontext aContext,eGpuProgramType aType);
 		~cCGProgram();
 
-		bool Reload();
-		void Unload();
 		void Destroy();
 
 		tString GetProgramName(){ return msName; }

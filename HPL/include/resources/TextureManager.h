@@ -67,7 +67,6 @@ namespace hpl {
 		iTexture* CreateAttenuation(const tString& asFallOffName);
 
 		void Destroy(iResourceBase* apResource);
-		void Unload(iResourceBase* apResource);
 
 		void Update(float afTimeStep);
 

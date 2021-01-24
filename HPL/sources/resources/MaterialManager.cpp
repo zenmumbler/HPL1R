@@ -121,12 +121,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cMaterialManager::Unload(iResourceBase* apResource)
-	{
-
-	}
-	//-----------------------------------------------------------------------
-
 	void cMaterialManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

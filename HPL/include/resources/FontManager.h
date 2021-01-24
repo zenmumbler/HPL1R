@@ -47,7 +47,6 @@ namespace hpl {
 								unsigned short alLastChar=255);
 
 		void Destroy(iResourceBase* apResource);
-		void Unload(iResourceBase* apResource);
 
 	private:
 		cGraphics* mpGraphics;

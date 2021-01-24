@@ -37,7 +37,6 @@ namespace hpl {
 		cAnimation* CreateAnimation(const tString& asName);
 
 		void Destroy(iResourceBase* apResource);
-		void Unload(iResourceBase* apResource);
 
 	private:
 		cGraphics* mpGraphics;

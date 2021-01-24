@@ -262,12 +262,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cTextureManager::Unload(iResourceBase* apResource)
-	{
-
-	}
-	//-----------------------------------------------------------------------
-
 	void cTextureManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

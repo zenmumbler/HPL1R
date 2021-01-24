@@ -73,8 +73,6 @@ namespace hpl {
 		int GetPriority(){ return mlPriority;}
 
 		//Resource implementation
-		bool Reload(){ return false;}
-		void Unload(){}
 		void Destroy(){}
 
 	protected:

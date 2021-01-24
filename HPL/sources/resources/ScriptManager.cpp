@@ -96,12 +96,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cScriptManager::Unload(iResourceBase* apResource)
-	{
-
-	}
-	//-----------------------------------------------------------------------
-
 	void cScriptManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

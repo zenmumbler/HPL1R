@@ -137,12 +137,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cAnimationManager::Unload(iResourceBase* apResource)
-	{
-
-	}
-	//-----------------------------------------------------------------------
-
 	void cAnimationManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

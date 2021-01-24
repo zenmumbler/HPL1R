@@ -33,17 +33,6 @@ namespace hpl {
 		virtual ~iResourceBase();
 
 		/**
-		 * virtual bool Reload()=0;
-		 * \return true is reload was succesful, else false.
-		 */
-		virtual bool Reload()=0;
-
-		/**
-		 * Free most the memory, save info to get started again.
-		 */
-		virtual void Unload()=0;
-
-		/**
 		 * Free all memory.
 		 */
 		virtual void Destroy()=0;

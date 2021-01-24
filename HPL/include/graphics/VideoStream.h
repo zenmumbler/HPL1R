@@ -73,8 +73,6 @@ namespace hpl {
 
 		//////////////////////////////////
 		// ResourceBase implementation
-		bool Reload(){ return false;}
-		void Unload(){}
 		void Destroy(){}
 
 

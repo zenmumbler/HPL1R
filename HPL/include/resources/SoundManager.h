@@ -37,7 +37,6 @@ namespace hpl {
 		iSoundData* CreateSoundData(const tString& asName, bool abStream, bool abLoopStream=false);
 
 		void Destroy(iResourceBase* apResource);
-		void Unload(iResourceBase* apResource);
 
 		void DestroyAll();
 

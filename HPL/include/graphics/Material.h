@@ -136,8 +136,6 @@ namespace hpl {
 
 		eGpuProgramType GetType() { return mProgramType;}
 
-		bool Reload(){return false;}
-		void Unload(){}
 		void Destroy(){}
 	protected:
 
@@ -183,8 +181,6 @@ namespace hpl {
 		virtual ~iMaterial();
 
 		//resources stuff.
-		bool Reload(){ return false;}
-		void Unload(){}
 		void Destroy(){}
 
 		virtual void Update(float afTimeStep){}

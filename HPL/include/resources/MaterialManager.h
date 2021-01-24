@@ -41,7 +41,6 @@ namespace hpl {
 		void Update(float afTimeStep);
 
 		void Destroy(iResourceBase* apResource);
-		void Unload(iResourceBase* apResource);
 
 		void SetTextureSizeLevel(unsigned int alLevel){ mlTextureSizeLevel = alLevel;}
 		int GetTextureSizeLevel(){ return mlTextureSizeLevel;}

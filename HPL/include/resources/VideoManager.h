@@ -54,7 +54,6 @@ namespace hpl {
 		void AddVideoLoader(iVideoStreamLoader *apLoader);
 
 		void Destroy(iResourceBase* apResource);
-		void Unload(iResourceBase* apResource);
 
 		void Update(float afTimeStep);
 	private:

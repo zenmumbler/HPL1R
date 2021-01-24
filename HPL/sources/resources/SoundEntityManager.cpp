@@ -124,12 +124,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cSoundEntityManager::Unload(iResourceBase* apResource)
-	{
-
-	}
-	//-----------------------------------------------------------------------
-
 	void cSoundEntityManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

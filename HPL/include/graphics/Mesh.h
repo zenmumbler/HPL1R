@@ -319,8 +319,6 @@ namespace hpl {
 		cNode3D* GetNode(int alIdx);
 
 		//Resources implementation
-		bool Reload(){ return false;}
-		void Unload(){}
 		void Destroy(){}
 
 	private:

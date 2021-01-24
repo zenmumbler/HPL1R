@@ -39,8 +39,6 @@ namespace hpl {
 						cRect2l aRect,
 						cVector2l avSrcSize, int alHandle);
 
-		bool Reload();
-		void Unload();
 		void Destroy();
 
 		//Image specific

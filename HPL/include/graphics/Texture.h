@@ -100,8 +100,6 @@ namespace hpl {
 		void SetSizeLevel(unsigned int alLevel){mlSizeLevel = alLevel;}
 		void SetMinLevelSize(const cVector2l& avSize){ mvMinLevelSize = avSize;}
 
-		bool Reload(){ return false;}
-		void Unload(){}
 		void Destroy(){}
 
 		/**

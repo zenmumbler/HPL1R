@@ -142,11 +142,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cImageManager::Unload(iResourceBase* apResource)
-	{
-
-	}
-
 	void cImageManager::Destroy(iResourceBase* apResource)
 	{
 		//Lower the user num for the the resource. If it is 0 then lower the

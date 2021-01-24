@@ -296,7 +296,7 @@ bool cOAL_OggStream::CreateFromBuffer(const void *apBuffer, size_t aSize)
 
 void cOAL_OggStream::Destroy()
 {
-	DEF_FUNC_NAME("cOAL_OggStream::Unload()");
+	DEF_FUNC_NAME("cOAL_OggStream::Destroy()");
 	
 	// If we loaded a stream, clear the handle to the Ogg Vorbis file
 	if(mbIsValidHandle)

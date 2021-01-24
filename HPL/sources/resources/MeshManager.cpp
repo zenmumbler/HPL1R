@@ -120,12 +120,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cMeshManager::Unload(iResourceBase* apResource)
-	{
-
-	}
-	//-----------------------------------------------------------------------
-
 	void cMeshManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

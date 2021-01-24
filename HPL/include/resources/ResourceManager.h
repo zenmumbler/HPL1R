@@ -60,8 +60,6 @@ namespace hpl {
 		virtual void Destroy(iResourceBase* apResource)=0;
 		virtual void DestroyAll();
 
-		virtual void Unload(iResourceBase* apResource)=0;
-
 		virtual void Update(float afTimeStep){}
 
 	protected:

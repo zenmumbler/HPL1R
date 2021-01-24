@@ -52,8 +52,6 @@ namespace hpl {
 		tString& GetFileName(){ return msFileName;}
 
 		//Resources implementation
-		bool Reload(){ return false;}
-		void Unload(){}
 		void Destroy(){}
 
 	private:
