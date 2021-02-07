@@ -152,6 +152,7 @@ namespace hpl {
 	class iMaterialProgramSetup
 	{
 	public:
+		virtual ~iMaterialProgramSetup() = default;
 		virtual void Setup(iGpuProgram *apProgram,cRenderSettings* apRenderSettings)=0;
 		virtual void SetupMatrix(cMatrixf *apModelMatrix, cRenderSettings* apRenderSettings){}
 	};

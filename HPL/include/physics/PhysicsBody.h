@@ -41,6 +41,7 @@ namespace hpl {
 	class iPhysicsBodyCallback
 	{
 	public:
+		virtual ~iPhysicsBodyCallback() = default;
 		virtual bool OnBeginCollision(iPhysicsBody *apBody, iPhysicsBody *apCollideBody)=0;
 		virtual void OnCollide(iPhysicsBody *apBody, iPhysicsBody *apCollideBody,
 								cPhysicsContactData* apContactData)=0;

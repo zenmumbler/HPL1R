@@ -2130,7 +2130,7 @@ namespace hpl {
 			{
 				//Get number of chars in prefix.
 				int lPrefixChars =1;
-				while(	lPrefixChars < apNode->msName.size() &&
+				while(	lPrefixChars < static_cast<int>(apNode->msName.size()) &&
 						apNode->msName[lPrefixChars]!= '_' &&
 						apNode->msName[lPrefixChars]!='\0') {
 						lPrefixChars++;

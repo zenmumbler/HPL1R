@@ -133,7 +133,7 @@ namespace hpl {
 	friend class cSaveObjectHandler;
 	public:
 		iSaveObject();
-		~iSaveObject();
+		virtual ~iSaveObject();
 
 		/**
 		* Get a unique id for this object.

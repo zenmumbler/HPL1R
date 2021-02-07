@@ -252,6 +252,7 @@ namespace hpl {
 	class iSerializable
 	{
 	public:
+		virtual ~iSerializable() = default;
 		virtual tString Serialize_GetTopClass(){ return "";}
 	};
 
@@ -260,6 +261,7 @@ namespace hpl {
 	class iSerializableType
 	{
 	public:
+		virtual ~iSerializableType() = default;
 		virtual char* ValueToString(void *apVal)=0;
 		virtual void ValueFromString(char* apString, void *apVal)=0;
 	};

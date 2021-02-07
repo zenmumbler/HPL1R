@@ -46,6 +46,7 @@ namespace hpl {
 	{
 	friend class cSerializeClass;
 	public:
+		virtual ~iContainer() = default;
 		virtual size_t Size()=0;
 		virtual void Clear()=0;
 	protected:
@@ -61,6 +62,7 @@ namespace hpl {
 	class iContainerKeyPair
 	{
 	public:
+		virtual ~iContainerKeyPair() = default;
 		virtual size_t Size()=0;
 
 		virtual void AddVoidPtr(void *apKey, void **apClass)=0;

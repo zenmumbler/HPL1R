@@ -30,6 +30,7 @@ namespace hpl {
 	{
 	public:
 		iLight();
+		virtual ~iLight() = default;
 
 		//////////////////////////
 		//Fading

@@ -27,6 +27,7 @@ namespace hpl {
 	{
 	public:
 		iUpdateable(const tString& asName) : msName(asName){}
+		virtual ~iUpdateable() = default;
 
 		virtual void OnDraw(){}
 
