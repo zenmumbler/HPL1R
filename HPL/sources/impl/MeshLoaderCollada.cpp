@@ -450,6 +450,10 @@ namespace hpl {
 					else if(sJointType=="ball") JointType = ePhysicsJointType_Ball;
 					else if(sJointType=="slider") JointType = ePhysicsJointType_Slider;
 					else if(sJointType=="screw") JointType = ePhysicsJointType_Screw;
+					else {
+						Log("Unknown joint type: %s\n", sJointType.c_str());
+						continue;
+					}
 
 					cMeshJoint *pJoint = pMesh->CreatePhysicsJoint(JointType);
 
