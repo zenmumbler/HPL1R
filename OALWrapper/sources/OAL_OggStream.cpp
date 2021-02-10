@@ -41,7 +41,7 @@ struct tMemoryReader {
 size_t memoryRead(void * buff, size_t b, size_t nelts, void *data)
 {
 	tMemoryReader *of = reinterpret_cast<tMemoryReader*>(data);
-	size_t len = b * nelts;
+	auto len = static_cast<ogg_int64_t>(b * nelts);
 	if (of->buff_pos + len > of->buff_size) {
 		len = of->buff_size - of->buff_pos;
 	}
@@ -125,13 +125,13 @@ bool cOAL_OggStream::Stream(cOAL_Buffer* apDestBuffer)
 {
 	DEF_FUNC_NAME("cOAL_OggStream::Stream()");
 
-	long lDataSize = 0;
+	unsigned int lDataSize = 0;
 
 	//hpl::Log("Streaming...\n");
 	double fStartTime = GetTime();
 
 	// Loop which loads chunks of decoded data into a buffer
-	while(lDataSize < (int)mlBufferSize)
+	while(lDataSize < mlBufferSize)
 	{
 		long lChunkSize = ov_read(&movStreamHandle,
 								   mpPCMBuffer+lDataSize,

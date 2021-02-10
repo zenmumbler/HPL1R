@@ -23,7 +23,7 @@ class iOAL_LowLevelObject : public iOAL_LoggerObject
 public:
 
 	iOAL_LowLevelObject(const std::string& asObjType) {}
-	~iOAL_LowLevelObject() {}
+	virtual ~iOAL_LowLevelObject() = default;
 
 	////////////////////////////////////////////
 	// Creation / destruction of OpenAL Objects

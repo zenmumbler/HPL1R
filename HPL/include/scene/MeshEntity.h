@@ -65,6 +65,7 @@ namespace hpl {
 	class cMeshEntityCallback
 	{
 	public:
+		virtual ~cMeshEntityCallback() = default;
 		virtual void AfterAnimationUpdate(cMeshEntity *apMeshEntity, float afTimeStep)=0;
 	};
 

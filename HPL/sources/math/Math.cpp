@@ -500,7 +500,7 @@ namespace hpl {
 			fAns = atan((-fDx)/fDy)+kPif;
 			//Log("3\n");
 		}
-		else if(fDx<0 && fDy<0)
+		else // if(fDx<0 && fDy<0)
 		{
 			fAns = atan((-fDy)/(-fDx))+kPi2f+kPif;
 			//Log("4\n");

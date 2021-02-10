@@ -32,7 +32,7 @@ typedef struct
 
 static size_t OAL_OggBufferRead(void* dest, size_t eltSize, size_t nelts, OAL_OggMemoryFile* src)
 {
-	size_t len = eltSize * nelts;
+	auto len = static_cast<ogg_int64_t>(eltSize * nelts);
 	if ( (src->pos + len) > src->size)
 	{
 		len = src->size - src->pos;

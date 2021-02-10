@@ -95,7 +95,7 @@ bool cOAL_Buffer::Feed(ALvoid* apPCMData, size_t alDataSize, double afStartTime)
 	DEF_FUNC_NAME(cOAL_Buffer::Feed);
 	FUNC_USES_AL;
 
-	RUN_AL_FUNC(alBufferData(mlObjectId, mpParent->GetFormat(), apPCMData, static_cast<ALsizei>(alDataSize), mpParent->GetFrequency()));
+	RUN_AL_FUNC(alBufferData(mlObjectId, mpParent->GetFormat(), apPCMData, static_cast<ALsizei>(alDataSize), static_cast<ALsizei>(mpParent->GetFrequency())));
 	mfStartTime = afStartTime;
 
 	if(AL_ERROR_OCCURED==false)

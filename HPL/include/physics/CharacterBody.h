@@ -41,6 +41,7 @@ namespace hpl {
 	class iCharacterBodyCallback
 	{
 	public:
+		virtual ~iCharacterBodyCallback() = default;
 		virtual void OnHitGround(iCharacterBody *apCharBody,const cVector3f &avVel)=0;
 		virtual void OnGravityCollide(iCharacterBody *apCharBody,iPhysicsBody *apCollideBody,
 									cCollideData *apCollideData)=0;
