@@ -814,8 +814,8 @@ namespace hpl {
 					pSliderJoint->SetMaxDistance(fMaxValue/100);
 					break;
 				}
+			default: break;
 			}
-
 		}
 
 		//Load all controllers

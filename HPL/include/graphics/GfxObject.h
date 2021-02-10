@@ -35,9 +35,7 @@ namespace hpl {
 		eOldMaterialType_DiffuseAlpha,
 		eOldMaterialType_DiffuseAdditive,
 		eOldMaterialType_Smoke,
-		eOldMaterialType_FontNormal,
-
-		eOldMaterialType_LastEnum
+		eOldMaterialType_FontNormal
    };
 
 

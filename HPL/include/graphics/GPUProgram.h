@@ -31,8 +31,7 @@ namespace hpl {
 	enum eGpuProgramType
 	{
 		eGpuProgramType_Vertex,
-		eGpuProgramType_Fragment,
-		eGpuProgramType_LastEnum
+		eGpuProgramType_Fragment
 	};
 
 	enum eGpuProgramMatrix
@@ -40,8 +39,7 @@ namespace hpl {
 		eGpuProgramMatrix_View,
 		eGpuProgramMatrix_Projection,
 		eGpuProgramMatrix_Texture,
-		eGpuProgramMatrix_ViewProjection,
-		eGpuProgramMatrix_LastEnum
+		eGpuProgramMatrix_ViewProjection
 	};
 
 	enum eGpuProgramMatrixOp
@@ -49,8 +47,7 @@ namespace hpl {
 		eGpuProgramMatrixOp_Identity,
 		eGpuProgramMatrixOp_Inverse,
 		eGpuProgramMatrixOp_Transpose,
-		eGpuProgramMatrixOp_InverseTranspose,
-		eGpuProgramMatrixOp_LastEnum
+		eGpuProgramMatrixOp_InverseTranspose
 	};
 
 

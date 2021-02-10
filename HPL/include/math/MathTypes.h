@@ -46,8 +46,7 @@ namespace hpl {
 		eEulerRotationOrder_YXZ,
 		eEulerRotationOrder_YZX,
 		eEulerRotationOrder_ZXY,
-		eEulerRotationOrder_ZYX,
-		eEulerRotationOrder_LastEnum,
+		eEulerRotationOrder_ZYX
 	};
 
 	//-------------------------------------------

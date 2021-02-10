@@ -33,15 +33,13 @@ namespace hpl {
 	{
 		eMatrix_ModelView,
 		eMatrix_Projection,
-		eMatrix_Texture,
-		eMatrix_LastEnum
+		eMatrix_Texture
 	};
 
 	enum ePrimitiveType
 	{
 		ePrimitiveType_Tri,
-		ePrimitiveType_Quad,
-		ePrimitiveType_LastEnum
+		ePrimitiveType_Quad
 	};
 
 	typedef tFlag tAnimTransformFlag;
@@ -63,8 +61,7 @@ namespace hpl {
 		eColorDataFormat_RGBA,
 		eColorDataFormat_ALPHA,
 		eColorDataFormat_BGR,
-		eColorDataFormat_BGRA,
-		eColorDataFormat_LastEnum
+		eColorDataFormat_BGRA
 	};
 
 	//---------------------------------------
@@ -73,8 +70,7 @@ namespace hpl {
 	{
 		eFontAlign_Left,
 		eFontAlign_Right,
-		eFontAlign_Center,
-		eFontAlign_LastEnum
+		eFontAlign_Center
 	};
 
 	//---------------------------------------

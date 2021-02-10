@@ -388,6 +388,7 @@ namespace hpl {
 			case eMaterialTexture_Specular: return "Specular";
 			case eMaterialTexture_CubeMap: return "CubeMap";
 			case eMaterialTexture_Refraction: return "Refraction";
+			default: break;
 		}
 
 		return "";

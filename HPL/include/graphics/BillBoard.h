@@ -31,8 +31,7 @@ namespace hpl {
 	enum eBillboardType
 	{
 		eBillboardType_Point,
-		eBillboardType_Axis,
-		eBillboardType_LastEnum
+		eBillboardType_Axis
 	};
 
 	class cMaterialManager;
