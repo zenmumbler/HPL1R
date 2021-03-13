@@ -518,8 +518,7 @@ namespace hpl {
 					if(vShapes.size()>1){
 						pShape = apPhysicsWorld->CreateCompundShape(vShapes);
 					}
-					else if(vShapes.size()==1)
-					{
+					else {
 						pShape = vShapes[0];
 					}
 
@@ -767,9 +766,9 @@ namespace hpl {
 			return apWorld->CreateCylinderShape(pCollider->mvSize.x,pCollider->mvSize.y,&pCollider->m_mtxOffset);
 		case eCollideShapeType_Capsule:
 			return apWorld->CreateCapsuleShape(pCollider->mvSize.x,pCollider->mvSize.y,&pCollider->m_mtxOffset);
+		default:
+			return NULL;
 		}
-
-		return NULL;
 	}
 
 	iCollideShape* cMesh::CreateCollideShape(iPhysicsWorld *apWorld)
