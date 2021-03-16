@@ -48,6 +48,9 @@ enum eMainMenuState
 	eMainMenuState_OptionsKeySetupMove,
 	eMainMenuState_OptionsKeySetupAction,
 	eMainMenuState_OptionsKeySetupMisc,
+	
+	eMainMenuState_Tools,
+	eMainMenuState_ToolsExportModels,
 
 	eMainMenuState_GraphicsRestart,
 
@@ -317,6 +320,16 @@ class cMainMenuWidget_Quit : public cMainMenuWidget_Button
 {
 public:
 	cMainMenuWidget_Quit(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment);
+
+	virtual void OnMouseDown(eMButton aButton);
+};
+
+//---------------------------------------------
+
+class cMainMenuWidget_ExportModels : public cMainMenuWidget_Button
+{
+public:
+	cMainMenuWidget_ExportModels(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment);
 
 	virtual void OnMouseDown(eMButton aButton);
 };

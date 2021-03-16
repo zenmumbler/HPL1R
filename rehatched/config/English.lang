@@ -2,6 +2,8 @@
   <RESOURCES>
   </RESOURCES>
   <CATEGORY Name="MainMenu">
+  	<Entry Name="Tools">Tools</Entry>
+  	<Entry Name="ExportModels">Export Models</Entry>
   	<Entry Name="Classic">Classic</Entry>
   	<Entry Name="Modern">Modern</Entry>
     <Entry Name="Upscaled2">Upscaled (2x)</Entry>
