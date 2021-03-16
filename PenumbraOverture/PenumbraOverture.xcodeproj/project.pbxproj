@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8E48B43325503E29009EF3DB /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E48B43225503E29009EF3DB /* libGLEW.a */; };
+		8E84E76725FD5B7600DC6065 /* ModelExport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E76525FD5B7600DC6065 /* ModelExport.cpp */; };
 		8EB7C3AF254F546300277667 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3AA254F545C00277667 /* Cg.framework */; };
 		8EB7C3B0254F546300277667 /* Cg.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = 8EB7C3AA254F545C00277667 /* Cg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8EB7C3B1254F546600277667 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3A9254F545C00277667 /* SDL2.framework */; };
@@ -129,6 +130,8 @@
 
 /* Begin PBXFileReference section */
 		8E48B43225503E29009EF3DB /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGLEW.a; sourceTree = "<group>"; };
+		8E84E76525FD5B7600DC6065 /* ModelExport.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ModelExport.cpp; sourceTree = "<group>"; };
+		8E84E76625FD5B7600DC6065 /* ModelExport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelExport.h; sourceTree = "<group>"; };
 		8EB7C395254E48A900277667 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8EB7C3A9254F545C00277667 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		8EB7C3AA254F545C00277667 /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cg.framework; sourceTree = "<group>"; };
@@ -407,6 +410,8 @@
 				DBF84A7C0AC76D8F00BB15CD /* Triggers.cpp */,
 				DBF84A7D0AC76D8F00BB15CD /* Triggers.h */,
 				DB294DD00C11D2B2005DA55C /* Version.h */,
+				8E84E76525FD5B7600DC6065 /* ModelExport.cpp */,
+				8E84E76625FD5B7600DC6065 /* ModelExport.h */,
 			);
 			name = Source;
 			path = src;
@@ -626,6 +631,7 @@
 				DB063055111D3E3F0048C5E9 /* GameEnemy_Worm.cpp in Sources */,
 				DB063056111D3E3F0048C5E9 /* RadioHandler.cpp in Sources */,
 				DB063057111D3E3F0048C5E9 /* GameLadder.cpp in Sources */,
+				8E84E76725FD5B7600DC6065 /* ModelExport.cpp in Sources */,
 				DB063058111D3E3F0048C5E9 /* GameForceArea.cpp in Sources */,
 				DB063059111D3E3F0048C5E9 /* Credits.cpp in Sources */,
 				DB06305A111D3E3F0048C5E9 /* GameLiquidArea.cpp in Sources */,

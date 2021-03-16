@@ -27,6 +27,7 @@
 #include "Player.h"
 #include "PlayerHelper.h"
 #include "EffectHandler.h"
+#include "ModelExport.h"
 #ifdef INCLUDE_HAPTIC
 #include "HapticGameCamera.h"
 #endif
@@ -771,6 +772,7 @@ cMainMenuWidget_ExportModels::cMainMenuWidget_ExportModels(cInit *apInit, const 
 
 void cMainMenuWidget_ExportModels::OnMouseDown(eMButton aButton)
 {
+	ExportModels(mpInit->mpGame);
 }
 
 

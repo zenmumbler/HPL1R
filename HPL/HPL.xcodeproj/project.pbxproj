@@ -232,6 +232,10 @@
 /* Begin PBXFileReference section */
 		8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstring_utils.cpp; sourceTree = "<group>"; };
 		8E84AA0C254CB3D2000EA53C /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cg.framework; sourceTree = "<group>"; };
+		8E84E75425FD061400DC6065 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = ../dependencies/lib/macosx/libvorbisfile.a; sourceTree = "<group>"; };
+		8E84E75525FD061400DC6065 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = ../dependencies/lib/macosx/libvorbis.a; sourceTree = "<group>"; };
+		8E84E75925FD062A00DC6065 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		8E84E75B25FD063100DC6065 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		8E9728CF254CB92F0033415B /* scripthelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripthelper.h; sourceTree = "<group>"; };
 		8E9728DA254CBB4B0033415B /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_image.framework; sourceTree = "<group>"; };
 		8E9728DE254CBBAF0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
@@ -702,6 +706,10 @@
 		DB00EF5011A9CF86007DFB32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E84E75B25FD063100DC6065 /* OpenGL.framework */,
+				8E84E75925FD062A00DC6065 /* OpenAL.framework */,
+				8E84E75525FD061400DC6065 /* libvorbis.a */,
+				8E84E75425FD061400DC6065 /* libvorbisfile.a */,
 				DB00EF5711A9CFD9007DFB32 /* dependencies */,
 				DB00EF5111A9CFB9007DFB32 /* OALWrapper.xcodeproj */,
 				DB00F0BB11A9D025007DFB32 /* OpenAL.framework */,
@@ -1802,7 +1810,7 @@
 					../dependencies/include,
 					../OALWrapper/include,
 				);
-				LIBRARY_SEARCH_PATHS = " $(PROJECT_DIR)/lib/macosx";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../dependencieslib/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -1867,7 +1875,7 @@
 					../dependencies/include,
 					../OALWrapper/include,
 				);
-				LIBRARY_SEARCH_PATHS = " $(PROJECT_DIR)/lib/macosx";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../dependencieslib/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
