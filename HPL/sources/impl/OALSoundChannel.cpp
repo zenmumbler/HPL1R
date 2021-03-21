@@ -138,6 +138,9 @@ namespace hpl {
 
 	void cOALSoundChannel::SetPaused(bool abX)
 	{
+		if (mbStopUsed) {
+			return;
+		}
 		mbPaused = abX;
 		if (abX) {
 			alSourcePause(mSource);
