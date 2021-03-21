@@ -4,7 +4,7 @@
  */
 #include <vector>
 #include <algorithm>
-#include <OpenAL/OpenAL.h>
+#include <AL/al.h>
 
 #include "system/LowLevelSystem.h"
 #include "resources/SoundManager.h"

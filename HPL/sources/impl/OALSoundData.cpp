@@ -2,7 +2,8 @@
  * 2021 by zenmumbler
  * This file is part of Rehatched
  */
-#include <OpenAL/OpenAL.h>
+// #include <AL/al.h>
+// ALvoid alutLoadWAVFile(ALbyte *file,ALenum *format,ALvoid **data,ALsizei *size,ALsizei *freq);
 #include <OpenAL/alut.h>
 
 #include "system/LowLevelSystem.h"
@@ -48,7 +49,7 @@ namespace hpl {
 	{
 		auto ext = cString::GetFileExt(asFile);
 		if (ext == "wav") {
-			alutLoadWAVFile(const_cast<ALbyte*>(asFile.c_str()), &mFormat, (void**)&mSampleData, &mByteSize, &mRate);
+			alutLoadWAVFile((ALbyte*)(asFile.c_str()), &mFormat, (void**)&mSampleData, &mByteSize, &mRate);
 			if (mFormat == AL_FORMAT_STEREO8 || mFormat == AL_FORMAT_STEREO16) {
 				mChannels = 2;
 			}
