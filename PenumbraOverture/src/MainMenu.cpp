@@ -32,8 +32,6 @@
 #include "HapticGameCamera.h"
 #endif
 
-#include "OALWrapper/OAL_Init.h"
-
 float gfMenuFadeAmount;
 bool gbMustRestart=false;
 
@@ -1195,7 +1193,7 @@ public:
 		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
 	{
 		msTip = kTranslate("MainMenu", "TipSoundOutputDevice");
-		mlDevices = OAL_Info_GetOutputDevices();
+		mlDevices = { "Generic" };
 	}
 
 	void OnMouseDown(eMButton aButton)
@@ -3506,7 +3504,8 @@ void cMainMenu::CreateWidgets()
 
 	vPos.y += 29;
 	// Set the default to what's really being used
-	mpInit->msDeviceName = tString(OAL_Info_GetDeviceName());
+//	mpInit->msDeviceName = tString(OAL_Info_GetDeviceName());
+	mpInit->msDeviceName = tString("Generic");
 
 	sText = cString::To16Char(mpInit->msDeviceName);
 	gpSoundOutputDevice = hplNew( cMainMenuWidget_Text, (mpInit,vPos,sText,20,eFontAlign_Left) );
