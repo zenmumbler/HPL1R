@@ -45,6 +45,10 @@ namespace hpl {
 		 * \param &alstFormats
 		 */
 		virtual void GetSupportedFormats(tStringList &alstFormats)=0;
+		
+		virtual void GetOutputDeviceNames(tStringList &alstDevices)=0;
+		
+		virtual tString GetCurrentDeviceName()=0;
 
 		virtual iSoundData* LoadSoundData(const tString& asName,const tString& asFilePath,
 											const tString& asType, bool abStream,bool abLoopStream)=0;
