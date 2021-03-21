@@ -62,8 +62,6 @@ namespace hpl {
 
 		virtual void SetListenerAttenuation (bool abEnabled)=0;
 
-		virtual void SetSetRolloffFactor(float afFactor)=0;
-
 		virtual void SetVolume(float afVolume)=0;
 
 		cVector3f& GetListenerPosition(){ return mvListenerPosition;}

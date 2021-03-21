@@ -31,8 +31,6 @@ namespace hpl
 								const cVector3f &avForward,const cVector3f &avUp) override;
 		void SetListenerPosition(const cVector3f &avPos) override;
 
-		void SetSetRolloffFactor(float afFactor) override;
-
 		void SetListenerAttenuation (bool abEnabled) override;
 
 		void Init ( bool abUseHardware, bool abForceGeneric, bool abUseEnvAudio, int alMaxChannels,

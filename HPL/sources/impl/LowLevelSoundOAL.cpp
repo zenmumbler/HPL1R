@@ -138,12 +138,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelSoundOAL::SetSetRolloffFactor(float afFactor)
-	{
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cLowLevelSoundOAL::SetVolume(float afVolume)
 	{
 		mfVolume = afVolume;
