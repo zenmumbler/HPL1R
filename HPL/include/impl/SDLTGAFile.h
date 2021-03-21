@@ -1,6 +1,6 @@
 //
 //  SDLTGAFile.h
-//  HPL1R - TGA image load wrapper around SDL2_image
+//  Rehatched - TGA image load wrapper around SDL2_image
 //
 //  Created by zenmumbler on 04/11/2020.
 //

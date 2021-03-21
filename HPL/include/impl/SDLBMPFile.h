@@ -1,6 +1,6 @@
 //
 //  SDLBMPFile.h
-//  HPL1R - BMP file reader because SDL2_image does not support 32-bit BMPs
+//  Rehatched - BMP file reader because SDL2_image does not support 32-bit BMPs
 //
 //  Created by zenmumbler on 03/11/2020.
 //
