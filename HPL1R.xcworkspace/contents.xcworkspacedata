@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:OALWrapper/OALWrapper.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:HPL/HPL.xcodeproj">
    </FileRef>
    <FileRef

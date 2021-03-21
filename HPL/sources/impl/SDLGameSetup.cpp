@@ -28,13 +28,12 @@
 #include "impl/LowLevelResourcesSDL.h"
 #include "impl/LowLevelSystemSDL.h"
 #include "impl/LowLevelInputSDL.h"
-#include "impl/LowLevelSoundOpenAL.h"
 #include "impl/LowLevelSoundOAL.h"
 #include "impl/LowLevelPhysicsNewton.h"
 #ifdef INCLUDE_HAPTIC
 #include "impl/LowLevelHapticSDL.h"
-#endif
 #include "haptic/Haptic.h"
+#endif
 
 #include <SDL2/SDL.h>
 
@@ -57,7 +56,6 @@ namespace hpl {
 		mpLowLevelGraphics = hplNew( cLowLevelGraphicsSDL,() );
 		mpLowLevelInput = hplNew( cLowLevelInputSDL,(mpLowLevelGraphics) );
 		mpLowLevelResources = hplNew( cLowLevelResourcesSDL,((cLowLevelGraphicsSDL *)mpLowLevelGraphics) );
-//		mpLowLevelSound	= hplNew( cLowLevelSoundOpenAL,() );
 		mpLowLevelSound	= hplNew( cLowLevelSoundOAL,() );
 		mpLowLevelPhysics = hplNew( cLowLevelPhysicsNewton,() );
 
