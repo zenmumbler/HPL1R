@@ -13,6 +13,7 @@
 		8E84E78C260549B100DC6065 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E78B260549B100DC6065 /* stb_vorbis.c */; };
 		8E84E7922605571100DC6065 /* OALSoundData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E7912605571100DC6065 /* OALSoundData.cpp */; };
 		8E84E79626055B2500DC6065 /* OALSoundChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E79526055B2500DC6065 /* OALSoundChannel.cpp */; };
+		8E84E79C260819F800DC6065 /* WAVFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E79B260819F800DC6065 /* WAVFile.cpp */; };
 		8E9728DC254CBB4B0033415B /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DA254CBB4B0033415B /* SDL2_image.framework */; };
 		8E9728DF254CBBAF0033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DE254CBBAF0033415B /* SDL2.framework */; };
 		8E9F748F2551E732000324E8 /* SDLBMPFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */; };
@@ -226,6 +227,8 @@
 		8E84E7912605571100DC6065 /* OALSoundData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OALSoundData.cpp; sourceTree = "<group>"; };
 		8E84E79426055ABF00DC6065 /* OALSoundChannel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OALSoundChannel.h; sourceTree = "<group>"; };
 		8E84E79526055B2500DC6065 /* OALSoundChannel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OALSoundChannel.cpp; sourceTree = "<group>"; };
+		8E84E79A2608181B00DC6065 /* WAVFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WAVFile.h; sourceTree = "<group>"; };
+		8E84E79B260819F800DC6065 /* WAVFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WAVFile.cpp; sourceTree = "<group>"; };
 		8E9728CF254CB92F0033415B /* scripthelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripthelper.h; sourceTree = "<group>"; };
 		8E9728DA254CBB4B0033415B /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_image.framework; sourceTree = "<group>"; };
 		8E9728DE254CBBAF0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
@@ -842,6 +845,7 @@
 				8E84E78E26054A2F00DC6065 /* stb_vorbis.h */,
 				8E84E790260555F900DC6065 /* OALSoundData.h */,
 				8E84E79426055ABF00DC6065 /* OALSoundChannel.h */,
+				8E84E79A2608181B00DC6065 /* WAVFile.h */,
 			);
 			name = impl;
 			path = include/impl;
@@ -1260,6 +1264,7 @@
 				8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */,
 				8E84E7912605571100DC6065 /* OALSoundData.cpp */,
 				8E84E79526055B2500DC6065 /* OALSoundChannel.cpp */,
+				8E84E79B260819F800DC6065 /* WAVFile.cpp */,
 			);
 			name = impl;
 			path = sources/impl;
@@ -1511,6 +1516,7 @@
 				DBF84ABB0AC76F1E00BB15CD /* Camera3D.cpp in Sources */,
 				DBF84ABC0AC76F1E00BB15CD /* CGProgram.cpp in Sources */,
 				8E84E7892605487F00DC6065 /* LowLevelSoundOAL.cpp in Sources */,
+				8E84E79C260819F800DC6065 /* WAVFile.cpp in Sources */,
 				DBF84ABD0AC76F1E00BB15CD /* CharacterBody.cpp in Sources */,
 				DBF84ABE0AC76F1E00BB15CD /* CharacterBodyNewton.cpp in Sources */,
 				DBF84AC00AC76F1E00BB15CD /* ColliderEntity.cpp in Sources */,
