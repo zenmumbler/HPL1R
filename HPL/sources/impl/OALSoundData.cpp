@@ -2,15 +2,13 @@
  * 2021 by zenmumbler
  * This file is part of Rehatched
  */
-// #include <AL/al.h>
-// ALvoid alutLoadWAVFile(ALbyte *file,ALenum *format,ALvoid **data,ALsizei *size,ALsizei *freq);
-#include <OpenAL/alut.h>
-
+#include <AL/al.h>
 #include "system/LowLevelSystem.h"
 #include "system/String.h"
 #include "impl/OALSoundData.h"
 #include "impl/OALSoundChannel.h"
 #include "impl/stb_vorbis.h"
+#include "impl/WAVFile.h"
 
 namespace hpl {
 
@@ -49,13 +47,13 @@ namespace hpl {
 	{
 		auto ext = cString::GetFileExt(asFile);
 		if (ext == "wav") {
-			alutLoadWAVFile((ALbyte*)(asFile.c_str()), &mFormat, (void**)&mSampleData, &mByteSize, &mRate);
-			if (mFormat == AL_FORMAT_STEREO8 || mFormat == AL_FORMAT_STEREO16) {
-				mChannels = 2;
+			int samples = LoadWAVFile(asFile, &mChannels, &mFormat, &mRate, &mSampleData);
+			if (samples == 0) {
+				Error("Cannot load WAV file '%s'\n", asFile.c_str());
+				return false;
 			}
-			else {
-				mChannels = 1;
-			}
+			mByteSize = samples * sizeof(short);
+
 			mbStream = false;
 		}
 		else if (ext == "ogg") {
@@ -64,7 +62,7 @@ namespace hpl {
 			if (mbStream) {
 				mVorbis = stb_vorbis_open_filename(asFile.c_str(), &error, nullptr);
 				if (mVorbis == nullptr) {
-					Error("Cannot open Ogg file '%s', error code: %d\n", asFile.c_str(), error);
+					Error("Cannot open Ogg file '%s' for streaming, error code: %d\n", asFile.c_str(), error);
 					return false;
 				}
 				
@@ -75,6 +73,10 @@ namespace hpl {
 			}
 			else {
 				int samples = stb_vorbis_decode_filename(asFile.c_str(), &mChannels, &mRate, &mSampleData);
+				if (samples == 0) {
+					Error("Cannot load Ogg file '%s'\n", asFile.c_str());
+					return false;
+				}
 				mByteSize = samples * sizeof(short);
 			}
 			mFormat = mChannels == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16;
