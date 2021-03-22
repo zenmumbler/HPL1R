@@ -82,12 +82,12 @@ namespace hpl {
 		if (header.channels == 0 || header.channels > 2) return 0;
 		if (header.rate < 1 || header.rate > 48000) return 0;
 		if (header.sampleBits != 8 && header.sampleBits != 16) return 0;
-		uint32_t sampleBytes = header.sampleBits == 8 ? 1 : 2;
+		uint32_t sampleBytes = header.sampleBits >> 3;
 		if (header.bytesPerSecond != header.rate * header.channels * sampleBytes) return 0;
 		if (header.bytesPerSample != header.channels * sampleBytes) return 0;
 		
 		if (sampleBytes == 1) {
-			Log("*** 8-bit WAVs not supported\n");
+			Error("*** 8-bit WAVs not supported\n");
 			return 0;
 		}
 
@@ -105,7 +105,7 @@ namespace hpl {
 
 		short *sampleData = static_cast<short *>(malloc(chunkHeader.chunkSize));
 		if (f.read(sampleData, chunkHeader.chunkSize) == false) {
-			Log("*** Could not read WAV sample data?\n");
+			Error("*** Could not read WAV sample data?\n");
 			free(sampleData);
 			return 0;
 		}
