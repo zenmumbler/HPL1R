@@ -207,7 +207,6 @@
 		DBF84B6A0AC76F1E00BB15CD /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B10AC76D5800BB15CD /* tinyxmlerror.cpp */; };
 		DBF84B6B0AC76F1E00BB15CD /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B20AC76D5800BB15CD /* tinyxmlparser.cpp */; };
 		DBF84B6C0AC76F1E00BB15CD /* Updater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849520AC76D5700BB15CD /* Updater.cpp */; };
-		DBF84B6D0AC76F1E00BB15CD /* VertexBufferOGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B30AC76D5800BB15CD /* VertexBufferOGL.cpp */; };
 		DBF84B6E0AC76F1E00BB15CD /* VertexBufferVBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */; };
 		DBF84B710AC76F1E00BB15CD /* World3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A120AC76D5800BB15CD /* World3D.cpp */; };
 		DBFBA0190B65E42A0021DAE2 /* Material_Water.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBFBA0180B65E42A0021DAE2 /* Material_Water.cpp */; };
@@ -339,7 +338,6 @@
 		DB27F0840ACB9AB90054ACA3 /* scriptstdstring.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = scriptstdstring.h; sourceTree = "<group>"; };
 		DB27F0860ACB9AB90054ACA3 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
 		DB27F0870ACB9AB90054ACA3 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
-		DB27F0880ACB9AB90054ACA3 /* VertexBufferOGL.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = VertexBufferOGL.h; sourceTree = "<group>"; };
 		DB27F0890ACB9AB90054ACA3 /* VertexBufferVBO.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = VertexBufferVBO.h; sourceTree = "<group>"; };
 		DB27F08B0ACB9AB90054ACA3 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
 		DB27F08C0ACB9AB90054ACA3 /* ActionKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ActionKeyboard.h; sourceTree = "<group>"; };
@@ -591,7 +589,6 @@
 		DBF849B00AC76D5800BB15CD /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		DBF849B10AC76D5800BB15CD /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
 		DBF849B20AC76D5800BB15CD /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
-		DBF849B30AC76D5800BB15CD /* VertexBufferOGL.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = VertexBufferOGL.cpp; sourceTree = "<group>"; };
 		DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = VertexBufferVBO.cpp; sourceTree = "<group>"; };
 		DBF849B60AC76D5800BB15CD /* Action.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Action.cpp; sourceTree = "<group>"; };
 		DBF849B70AC76D5800BB15CD /* ActionKeyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ActionKeyboard.cpp; sourceTree = "<group>"; };
@@ -839,7 +836,6 @@
 				8E9728CF254CB92F0033415B /* scripthelper.h */,
 				DB27F0840ACB9AB90054ACA3 /* scriptstdstring.h */,
 				DB27F0850ACB9AB90054ACA3 /* tinyXML */,
-				DB27F0880ACB9AB90054ACA3 /* VertexBufferOGL.h */,
 				DB27F0890ACB9AB90054ACA3 /* VertexBufferVBO.h */,
 				8E84E7872605472700DC6065 /* LowLevelSoundOAL.h */,
 				8E84E78E26054A2F00DC6065 /* stb_vorbis.h */,
@@ -1259,7 +1255,6 @@
 				DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */,
 				8EB7C3D8254F603E00277667 /* scripthelper.cpp */,
 				DBF849AE0AC76D5800BB15CD /* tinyXml */,
-				DBF849B30AC76D5800BB15CD /* VertexBufferOGL.cpp */,
 				DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */,
 				8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */,
 				8E84E7912605571100DC6065 /* OALSoundData.cpp */,
@@ -1661,7 +1656,6 @@
 				DBF84B6B0AC76F1E00BB15CD /* tinyxmlparser.cpp in Sources */,
 				8E84E79626055B2500DC6065 /* OALSoundChannel.cpp in Sources */,
 				DBF84B6C0AC76F1E00BB15CD /* Updater.cpp in Sources */,
-				DBF84B6D0AC76F1E00BB15CD /* VertexBufferOGL.cpp in Sources */,
 				DBF84B6E0AC76F1E00BB15CD /* VertexBufferVBO.cpp in Sources */,
 				DBF84B710AC76F1E00BB15CD /* World3D.cpp in Sources */,
 				DBCEE59F0B4B33190088A7E3 /* Beam.cpp in Sources */,

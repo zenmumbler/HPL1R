@@ -40,13 +40,8 @@
 #include "impl/SDLTexture.h"
 #include "impl/CGProgram.h"
 #include "system/LowLevelSystem.h"
-#include "impl/VertexBufferOGL.h"
 #include "impl/VertexBufferVBO.h"
-
 #include "impl/OcclusionQueryOGL.h"
-
-#define GLEW_EXT_stencil_two_side true
-#define GLEW_ATI_separate_stencil true
 
 namespace hpl {
 
@@ -835,18 +830,7 @@ namespace hpl {
 														eVertexBufferUsageType aUsageType,
 														int alReserveVtxSize,int alReserveIdxSize)
 	{
-		//return hplNew( cVertexBufferVBO,(this, aFlags,aDrawType,aUsageType,alReserveVtxSize,alReserveIdxSize) );
-		//return hplNew( cVertexBufferOGL, (this, aFlags,aDrawType,aUsageType,alReserveVtxSize,alReserveIdxSize) );
-
-		if(GetCaps(eGraphicCaps_VertexBufferObject))
-		{
-			return hplNew( cVertexBufferVBO, (this, aFlags,aDrawType,aUsageType,alReserveVtxSize,alReserveIdxSize) );
-		}
-		else
-		{
-			//Error("VBO is not supported, using Vertex array!\n");
-			return hplNew( cVertexBufferOGL, (this, aFlags,aDrawType,aUsageType,alReserveVtxSize,alReserveIdxSize) );
-		}
+		return hplNew( cVertexBufferVBO, (this, aFlags,aDrawType,aUsageType,alReserveVtxSize,alReserveIdxSize) );
 	}
 
 
