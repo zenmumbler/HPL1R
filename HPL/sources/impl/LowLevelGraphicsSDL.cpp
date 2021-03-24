@@ -344,7 +344,7 @@ namespace hpl {
 		//Vertex Buffer Object
 		case eGraphicCaps_VertexBufferObject:
 			{
-				return SDL_GL_ExtensionSupported("ARB_vertex_buffer_object") ? 1 : 0;
+				return SDL_GL_ExtensionSupported("GL_ARB_vertex_buffer_object") ? 1 : 0;
 			}
 
 		//Two Sided Stencil
@@ -380,13 +380,13 @@ namespace hpl {
 			//Texture Anisotropy
 			case eGraphicCaps_AnisotropicFiltering:
 			{
-				return SDL_GL_ExtensionSupported("EXT_texture_filter_anisotropic") ? 1 : 0;
+				return SDL_GL_ExtensionSupported("GL_EXT_texture_filter_anisotropic") ? 1 : 0;
 			}
 
 			//Texture Anisotropy
 			case eGraphicCaps_MaxAnisotropicFiltering:
 			{
-				if (SDL_GL_ExtensionSupported("EXT_texture_filter_anisotropic") == false) {
+				if (SDL_GL_ExtensionSupported("GL_EXT_texture_filter_anisotropic") == false) {
 					return 0;
 				}
 
@@ -398,7 +398,7 @@ namespace hpl {
 			//Multisampling
 			case eGraphicCaps_Multisampling:
 			{
-				return SDL_GL_ExtensionSupported("ARB_multisample") ? 1 : 0;
+				return SDL_GL_ExtensionSupported("GL_ARB_multisample") ? 1 : 0;
 			}
 
 
@@ -407,7 +407,7 @@ namespace hpl {
 			{
 				//Debbug:
 				//return 0;
-				return SDL_GL_ExtensionSupported("ARB_vertex_program") ? 1 : 0;
+				return SDL_GL_ExtensionSupported("GL_ARB_vertex_program") ? 1 : 0;
 			}
 
 			//GL Fragment program
@@ -415,7 +415,7 @@ namespace hpl {
 			{
 				//Debbug:
 				//return 0;
-				return SDL_GL_ExtensionSupported("ARB_fragment_program") ? 1 : 0;
+				return SDL_GL_ExtensionSupported("GL_ARB_fragment_program") ? 1 : 0;
 			}
 
 			case eGraphicCaps_GL_CoreProfile:
