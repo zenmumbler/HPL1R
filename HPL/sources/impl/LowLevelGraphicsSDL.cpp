@@ -24,10 +24,14 @@
 #pragma comment(lib, "CgGL.lib")
 #endif
 
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#else
+#include <GL/gl.h>
+#endif
+
 #include <assert.h>
 #include <stdlib.h>
-
-#include <glew/glew.h>
 
 #include "graphics/FontData.h"
 #include "impl/LowLevelGraphicsSDL.h"
@@ -219,17 +223,6 @@ namespace hpl {
 			Error(SDL_GetError());
 			FatalError("Unable to create GL context!\n");
 			return false;
-		}
-
-		Log(" Init Glew...");
-		if(glewInit() == GLEW_OK)
-		{
-			Log("OK\n");
-		}
-		else
-		{
-			Log("ERROR!\n");
-			Error(" Couldn't init glew!\n");
 		}
 
 		///Setup up windows specifc context:
@@ -470,7 +463,7 @@ namespace hpl {
 
 	void cLowLevelGraphicsSDL::SetMultisamplingActive(bool abX)
 	{
-		if(!GLEW_ARB_multisample || mlMultisampling<=0) return;
+		if(mlMultisampling<=0) return;
 
 		if(abX)
 			glEnable(GL_MULTISAMPLE_ARB);
