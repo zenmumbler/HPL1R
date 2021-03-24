@@ -334,11 +334,6 @@ namespace hpl {
 
 		Log("  Vertex Program: %d\n",GetCaps(eGraphicCaps_GL_VertexProgram));
 		Log("  Fragment Program: %d\n",GetCaps(eGraphicCaps_GL_FragmentProgram));
-
-		Log("  NV Register Combiners: %d\n",GetCaps(eGraphicCaps_GL_NVRegisterCombiners));
-		Log("  NV Register Combiners Stages: %d\n",GetCaps(eGraphicCaps_GL_NVRegisterCombiners_MaxStages));
-
-		Log("  ATI Fragment Shader: %d\n",GetCaps(eGraphicCaps_GL_ATIFragmentShader));
 	}
 	//-----------------------------------------------------------------------
 
@@ -430,28 +425,6 @@ namespace hpl {
 				//return 0;
 
 				if(GLEW_ARB_fragment_program) return 1;
-				else return 0;
-			}
-
-		//GL NV register combiners
-		case eGraphicCaps_GL_NVRegisterCombiners:
-			{
-				if(GLEW_NV_register_combiners) return 1;
-				else return 0;
-			}
-
-		//GL NV register combiners Max stages
-		case eGraphicCaps_GL_NVRegisterCombiners_MaxStages:
-			{
-				int lStages;
-				glGetIntegerv(GL_MAX_GENERAL_COMBINERS_NV,(GLint *)&lStages);
-				return lStages;
-			}
-
-		//GL ATI Fragment Shader
-		case eGraphicCaps_GL_ATIFragmentShader:
-			{
-				if(GLEW_ATI_fragment_shader) return 1;
 				else return 0;
 			}
 
