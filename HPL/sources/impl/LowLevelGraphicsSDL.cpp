@@ -314,7 +314,6 @@ namespace hpl {
 		//Show some info
 		Log("  Max texture image units: %d\n",GetCaps(eGraphicCaps_MaxTextureImageUnits));
 		Log("  Max texture coord units: %d\n",GetCaps(eGraphicCaps_MaxTextureCoordUnits));
-		Log("  Two sided stencil: %d\n",GetCaps(eGraphicCaps_TwoSideStencil));
 		Log("  Vertex Buffer Object: %d\n",GetCaps(eGraphicCaps_VertexBufferObject));
 
 		Log("  Anisotropic filtering: %d\n",GetCaps(eGraphicCaps_AnisotropicFiltering));
@@ -342,6 +341,7 @@ namespace hpl {
 		//Vertex Buffer Object
 		case eGraphicCaps_VertexBufferObject:
 			{
+				return SDL_GL_ExtensionSupported("ARB_vertex_buffer_object") ? 1 : 0;
 			}
 
 		//Two Sided Stencil
@@ -350,10 +350,10 @@ namespace hpl {
 				//DEBUG:
 				//return 0;
 
-				if(GLEW_EXT_stencil_two_side) return 1;
-				else if(GLEW_ATI_separate_stencil) return 1;
-				else return 0;
-				return SDL_GL_ExtensionSupported("ARB_vertex_buffer_object") ? 1 : 0;
+				// if(GLEW_EXT_stencil_two_side) return 1;
+				// else if(GLEW_ATI_separate_stencil) return 1;
+				// else return 0;
+				return 1;
 			}
 
 		//Max Texture Image Units
