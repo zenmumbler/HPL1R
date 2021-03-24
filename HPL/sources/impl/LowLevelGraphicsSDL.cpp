@@ -1189,17 +1189,10 @@ namespace hpl {
 	void cLowLevelGraphicsSDL::SetBlendFuncSeparate(eBlendFunc aSrcFactorColor, eBlendFunc aDestFactorColor,
 		eBlendFunc aSrcFactorAlpha, eBlendFunc aDestFactorAlpha)
 	{
-		if(GLEW_EXT_blend_func_separate)
-		{
-			glBlendFuncSeparateEXT(GetGLBlendEnum(aSrcFactorColor),
-								GetGLBlendEnum(aDestFactorColor),
-								GetGLBlendEnum(aSrcFactorAlpha),
-								GetGLBlendEnum(aDestFactorAlpha));
-		}
-		else
-		{
-			glBlendFunc(GetGLBlendEnum(aSrcFactorColor),GetGLBlendEnum(aDestFactorColor));
-		}
+		glBlendFuncSeparate(GetGLBlendEnum(aSrcFactorColor),
+							GetGLBlendEnum(aDestFactorColor),
+							GetGLBlendEnum(aSrcFactorAlpha),
+							GetGLBlendEnum(aDestFactorAlpha));
 	}
 
 
