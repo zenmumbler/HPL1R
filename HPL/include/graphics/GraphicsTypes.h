@@ -26,14 +26,13 @@
 
 namespace hpl {
 
-	#define MAX_TEXTUREUNITS (8)
-	#define MAX_NUM_OF_LIGHTS (30)
+	const int MAX_TEXTUREUNITS = 8;
+	const int MAX_NUM_OF_LIGHTS = 30;
 
 	enum eMatrix
 	{
 		eMatrix_ModelView,
-		eMatrix_Projection,
-		eMatrix_Texture
+		eMatrix_Projection
 	};
 
 	enum ePrimitiveType

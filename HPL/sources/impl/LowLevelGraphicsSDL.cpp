@@ -1108,42 +1108,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	/*void cLowLevelGraphicsSDL::SetStencilTwoSideActive(bool abX)
-	{
-		if(GLEE_EXT_stencil_two_side)
-		{
-			glEnable(GL_STENCIL_TEST_TWO_SIDE_EXT);
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetStencilFace(eStencilFace aFace)
-	{
-		if(GLEE_EXT_stencil_two_side)
-		{
-			if(aFace == eStencilFace_Front) glActiveStencilFaceEXT(GL_FRONT);
-			else							glActiveStencilFaceEXT(GL_BACK);
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetStencilFunc(eStencilFunc aFunc,int alRef, unsigned int aMask)
-	{
-		glStencilFunc(GetGLStencilFuncEnum(aFunc), alRef, aMask);
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetStencilOp(eStencilOp aFailOp,eStencilOp aZFailOp,eStencilOp aZPassOp)
-	{
-		glStencilOp(GetGLStencilOpEnum(aFailOp), GetGLStencilOpEnum(aZFailOp),
-					GetGLStencilOpEnum(aZPassOp));
-	}*/
-
-	//-----------------------------------------------------------------------
-
 	void cLowLevelGraphicsSDL::SetStencil(eStencilFunc aFunc,int alRef, unsigned int aMask,
 					eStencilOp aFailOp,eStencilOp aZFailOp,eStencilOp aZPassOp)
 	{
@@ -1777,17 +1741,6 @@ namespace hpl {
 				Log("PBuffer::Activate() failed.\n");
 			}
 		}
-
-
-		//Old OGL 1.1 Code:
-		/*FlushRenderTarget();
-
-		mpRenderTarget = pTex;
-
-		if(mpRenderTarget==NULL)
-			glViewport(0,0,mvScreenSize.x,mvScreenSize.y);
-		else
-			glViewport(0,0,pTex->GetWidth(),pTex->GetHeight());*/
 	}
 
 	//-----------------------------------------------------------------------
@@ -2107,7 +2060,6 @@ namespace hpl {
 		{
 			case eMatrix_ModelView: glMatrixMode(GL_MODELVIEW);break;
 			case eMatrix_Projection: glMatrixMode(GL_PROJECTION); break;
-			case eMatrix_Texture: glMatrixMode(GL_TEXTURE); break;
 		}
 	}
 

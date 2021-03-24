@@ -404,8 +404,6 @@ namespace hpl {
 			}
 
 			//Make rendering ready for the objects.
-			//apLowLevelGraphics->SetStencilTwoSideActive(false);
-
 			apLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_Equal);
 
 			apLowLevelGraphics->SetColorWriteActive(true, true, true,true);
