@@ -45,6 +45,9 @@
 
 #include "impl/OcclusionQueryOGL.h"
 
+#define GLEW_EXT_stencil_two_side true
+#define GLEW_ATI_separate_stencil true
+
 namespace hpl {
 
 	//////////////////////////////////////////////////////////////////////////
