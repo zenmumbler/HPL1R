@@ -243,7 +243,6 @@
 		8EAA07B625589032007D7CD0 /* Material_DiffuseAdditive2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material_DiffuseAdditive2D.h; sourceTree = "<group>"; };
 		8EAA07B725589032007D7CD0 /* Material_DiffuseAlpha2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material_DiffuseAlpha2D.h; sourceTree = "<group>"; };
 		8EAA07B825589032007D7CD0 /* Material_Smoke2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material_Smoke2D.h; sourceTree = "<group>"; };
-		8EAA07C7255C5655007D7CD0 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGLEW.a; sourceTree = "<group>"; };
 		8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LowLevelSystemMac.mm; sourceTree = "<group>"; };
 		8EB7C3D8254F603E00277667 /* scripthelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripthelper.cpp; sourceTree = "<group>"; };
 		DB00EF5C11A9CFD9007DFB32 /* libangelscript.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libangelscript.a; sourceTree = "<group>"; };
@@ -697,7 +696,6 @@
 		DB00EF5711A9CFD9007DFB32 /* dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				8EAA07C7255C5655007D7CD0 /* libGLEW.a */,
 				8E9728DE254CBBAF0033415B /* SDL2.framework */,
 				8E9728DA254CBB4B0033415B /* SDL2_image.framework */,
 				8E84AA0C254CB3D2000EA53C /* Cg.framework */,
