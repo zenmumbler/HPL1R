@@ -351,10 +351,7 @@ namespace hpl {
 			apLowLevelGraphics->SetClearDepthActive(true);
 			apLowLevelGraphics->SetClearColorActive(true);
 
-			if(apLowLevelGraphics->GetCaps(eGraphicCaps_TwoSideStencil))
-			{
-				apLowLevelGraphics->SetCullActive(false);
-			}
+			apLowLevelGraphics->SetCullActive(false);
 
 			apLowLevelGraphics->SetDepthWriteActive(false);
 
@@ -650,29 +647,26 @@ namespace hpl {
 		//////////////////////////////////////////
 		//Setup the stencil buffer.
 		//If two sided stencil is not supported, do the set up later on.
-		if(apLowLevelGraphics->GetCaps(eGraphicCaps_TwoSideStencil))
+		if(bZFail)
 		{
-			if(bZFail)
+			if(apRenderSettings->mlLastShadowAlgo!=1)
 			{
-				if(apRenderSettings->mlLastShadowAlgo!=1)
-				{
-					apLowLevelGraphics->SetStencilTwoSide(eStencilFunc_Always,eStencilFunc_Always,0,0x00,
-												eStencilOp_Keep,eStencilOp_DecrementWrap, eStencilOp_Keep,
-												eStencilOp_Keep,eStencilOp_IncrementWrap,eStencilOp_Keep);
+				apLowLevelGraphics->SetStencilTwoSide(eStencilFunc_Always,eStencilFunc_Always,0,0x00,
+											eStencilOp_Keep,eStencilOp_DecrementWrap, eStencilOp_Keep,
+											eStencilOp_Keep,eStencilOp_IncrementWrap,eStencilOp_Keep);
 
-					apRenderSettings->mlLastShadowAlgo =1;
-				}
+				apRenderSettings->mlLastShadowAlgo =1;
 			}
-			else
+		}
+		else
+		{
+			if(apRenderSettings->mlLastShadowAlgo!=2)
 			{
-				if(apRenderSettings->mlLastShadowAlgo!=2)
-				{
-					apLowLevelGraphics->SetStencilTwoSide(eStencilFunc_Always,eStencilFunc_Always,0,0x00,
-						eStencilOp_Keep,eStencilOp_Keep, eStencilOp_IncrementWrap,
-						eStencilOp_Keep,eStencilOp_Keep, eStencilOp_DecrementWrap);
+				apLowLevelGraphics->SetStencilTwoSide(eStencilFunc_Always,eStencilFunc_Always,0,0x00,
+					eStencilOp_Keep,eStencilOp_Keep, eStencilOp_IncrementWrap,
+					eStencilOp_Keep,eStencilOp_Keep, eStencilOp_DecrementWrap);
 
-					apRenderSettings->mlLastShadowAlgo =2;
-				}
+				apRenderSettings->mlLastShadowAlgo =2;
 			}
 		}
 
@@ -855,51 +849,11 @@ namespace hpl {
 		}
 
 		//Draw vertex buffer
-		if(apLowLevelGraphics->GetCaps(eGraphicCaps_TwoSideStencil))
-		{
-			pSubEntity->GetVertexBuffer()->DrawIndices(mpIndexArray, lIndexCount);
-			if(apRenderSettings->mbLog) Log( " Drawing front and back simultaneously.\n");
-		}
-		else
-		{
-			if(apRenderSettings->mbLog)
-				Log( " Drawing front and back separately.\n");
+		pSubEntity->GetVertexBuffer()->DrawIndices(mpIndexArray, lIndexCount);
+		if(apRenderSettings->mbLog) Log( " Drawing front and back simultaneously.\n");
 
-			if(bZFail)
-			{
-				//Front
-				apLowLevelGraphics->SetStencil(eStencilFunc_Always,0,0x0,
-												eStencilOp_Keep,eStencilOp_DecrementWrap, eStencilOp_Keep);
-				pSubEntity->GetVertexBuffer()->DrawIndices(mpIndexArray, lIndexCount);
-
-				//Back
-				apLowLevelGraphics->SetCullMode(eCullMode_Clockwise);
-				apLowLevelGraphics->SetStencil(eStencilFunc_Always,0,0x0,
-												eStencilOp_Keep,eStencilOp_IncrementWrap,eStencilOp_Keep);
-				pSubEntity->GetVertexBuffer()->DrawIndices(mpIndexArray, lIndexCount);
-			}
-			else
-			{
-				//Front
-				apLowLevelGraphics->SetStencil(eStencilFunc_Always,0,0x0,
-												eStencilOp_Keep,eStencilOp_Keep, eStencilOp_IncrementWrap);
-				pSubEntity->GetVertexBuffer()->DrawIndices(mpIndexArray, lIndexCount);
-
-				//Back
-				apLowLevelGraphics->SetCullMode(eCullMode_Clockwise);
-				apLowLevelGraphics->SetStencil(eStencilFunc_Always,0,0x0,
-												eStencilOp_Keep,eStencilOp_Keep, eStencilOp_DecrementWrap);
-				pSubEntity->GetVertexBuffer()->DrawIndices(mpIndexArray, lIndexCount);
-			}
-
-			apLowLevelGraphics->SetCullMode(eCullMode_CounterClockwise);
-		}
-
-		if(apLowLevelGraphics->GetCaps(eGraphicCaps_TwoSideStencil))
-		{
-			apLowLevelGraphics->SetStencilTwoSide(false);
-			apRenderSettings->mlLastShadowAlgo=0;
-		}
+		apLowLevelGraphics->SetStencilTwoSide(false);
+		apRenderSettings->mlLastShadowAlgo=0;
 	}
 
 

@@ -347,18 +347,6 @@ namespace hpl {
 				return SDL_GL_ExtensionSupported("GL_ARB_vertex_buffer_object") ? 1 : 0;
 			}
 
-		//Two Sided Stencil
-		case eGraphicCaps_TwoSideStencil:
-			{
-				//DEBUG:
-				//return 0;
-
-				// if(GLEW_EXT_stencil_two_side) return 1;
-				// else if(GLEW_ATI_separate_stencil) return 1;
-				// else return 0;
-				return 1;
-			}
-
 		//Max Texture Image Units
 		case eGraphicCaps_MaxTextureImageUnits:
 			{

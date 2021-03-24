@@ -167,7 +167,6 @@ namespace hpl {
 	{
 		eGraphicCaps_TextureTargetRectangle,
 		eGraphicCaps_VertexBufferObject,
-		eGraphicCaps_TwoSideStencil,
 
 		eGraphicCaps_MaxTextureImageUnits,
 		eGraphicCaps_MaxTextureCoordUnits,
