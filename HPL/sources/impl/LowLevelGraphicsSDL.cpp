@@ -1060,11 +1060,6 @@ namespace hpl {
 	void cLowLevelGraphicsSDL::SetStencil(eStencilFunc aFunc,int alRef, unsigned int aMask,
 					eStencilOp aFailOp,eStencilOp aZFailOp,eStencilOp aZPassOp)
 	{
-		if(GLEW_EXT_stencil_two_side)
-		{
-			//glDisable(GL_STENCIL_TEST_TWO_SIDE_EXT);//shouldn't be needed..
-			glActiveStencilFaceEXT(GL_FRONT);
-		}
 		glStencilFunc(GetGLStencilFuncEnum(aFunc), alRef, aMask);
 
 		glStencilOp(GetGLStencilOpEnum(aFailOp), GetGLStencilOpEnum(aZFailOp),
@@ -1078,53 +1073,19 @@ namespace hpl {
 					eStencilOp aFrontFailOp,eStencilOp aFrontZFailOp,eStencilOp aFrontZPassOp,
 					eStencilOp aBackFailOp,eStencilOp aBackZFailOp,eStencilOp aBackZPassOp)
 	{
-		//Nvidia implementation
-		if(GLEW_EXT_stencil_two_side)
-		{
-			glEnable(GL_STENCIL_TEST_TWO_SIDE_EXT);
+		glStencilOpSeparate(GL_FRONT, GetGLStencilOpEnum(aFrontFailOp),
+							GetGLStencilOpEnum(aFrontZFailOp),
+							GetGLStencilOpEnum(aFrontZPassOp));
+		glStencilOpSeparate(GL_BACK, GetGLStencilOpEnum(aBackFailOp),
+							GetGLStencilOpEnum(aBackZFailOp),
+							GetGLStencilOpEnum(aBackZPassOp));
 
-			//Front
-			glActiveStencilFaceEXT(GL_FRONT);
-			glStencilFunc(GetGLStencilFuncEnum(aFrontFunc), alRef, aMask);
-
-			glStencilOp(GetGLStencilOpEnum(aFrontFailOp), GetGLStencilOpEnum(aFrontZFailOp),
-						GetGLStencilOpEnum(aFrontZPassOp));
-			//Back
-			glActiveStencilFaceEXT(GL_BACK);
-			glStencilFunc(GetGLStencilFuncEnum(aBackFunc), alRef, aMask);
-
-			glStencilOp(GetGLStencilOpEnum(aBackFailOp), GetGLStencilOpEnum(aBackZFailOp),
-						GetGLStencilOpEnum(aBackZPassOp));
-		}
-		//Ati implementation
-		else if(GLEW_ATI_separate_stencil)
-		{
-			//Front
-			glStencilOpSeparateATI( GL_FRONT, GetGLStencilOpEnum(aFrontFailOp),
-								GetGLStencilOpEnum(aFrontZFailOp),
-								GetGLStencilOpEnum(aFrontZPassOp));
-			//Back
-			glStencilOpSeparateATI( GL_BACK, GetGLStencilOpEnum(aBackFailOp),
-								GetGLStencilOpEnum(aBackZFailOp),
-								GetGLStencilOpEnum(aBackZPassOp));
-
-			//Front and Back function
-			glStencilFuncSeparateATI(GetGLStencilFuncEnum(aFrontFunc),
-									GetGLStencilFuncEnum(aBackFunc),
-									alRef, aMask);
-		}
-		else
-		{
-			FatalError("Only single sided stencil supported!\n");
-		}
-	}
-
-	void cLowLevelGraphicsSDL::SetStencilTwoSide(bool abX)
-	{
-		if(GLEW_EXT_stencil_two_side)
-		{
-			glDisable(GL_STENCIL_TEST_TWO_SIDE_EXT);
-		}
+		glStencilFuncSeparate(GL_FRONT,
+							  GetGLStencilFuncEnum(aBackFunc),
+							  alRef, aMask);
+		glStencilFuncSeparate(GL_BACK,
+							  GetGLStencilFuncEnum(aBackFunc),
+							  alRef, aMask);
 	}
 
 	//-----------------------------------------------------------------------

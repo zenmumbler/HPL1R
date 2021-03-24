@@ -852,7 +852,6 @@ namespace hpl {
 		pSubEntity->GetVertexBuffer()->DrawIndices(mpIndexArray, lIndexCount);
 		if(apRenderSettings->mbLog) Log( " Drawing front and back simultaneously.\n");
 
-		apLowLevelGraphics->SetStencilTwoSide(false);
 		apRenderSettings->mlLastShadowAlgo=0;
 	}
 

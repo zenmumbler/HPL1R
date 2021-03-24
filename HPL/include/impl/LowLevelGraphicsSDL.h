@@ -137,8 +137,6 @@ namespace hpl {
 				int alRef, unsigned int aMask,
 				eStencilOp aFrontFailOp,eStencilOp aFrontZFailOp,eStencilOp aFrontZPassOp,
 				eStencilOp aBackFailOp,eStencilOp aBackZFailOp,eStencilOp aBackZPassOp);
-		void SetStencilTwoSide(bool abX);
-
 
 		//SCISSOR
 		void SetScissorActive(bool abX);

@@ -325,8 +325,6 @@ namespace hpl {
 						int alRef, unsigned int aMask,
 						eStencilOp aFrontFailOp,eStencilOp aFrontZFailOp,eStencilOp aFrontZPassOp,
 						eStencilOp aBackFailOp,eStencilOp aBackZFailOp,eStencilOp aBackZPassOp)=0;
-		virtual void SetStencilTwoSide(bool abX)=0;
-
 
 		//SCISSOR
 		virtual void SetScissorActive(bool abX)=0;
