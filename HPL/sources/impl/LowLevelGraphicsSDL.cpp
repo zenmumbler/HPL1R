@@ -342,14 +342,13 @@ namespace hpl {
 		//Texture Rectangle
 		case eGraphicCaps_TextureTargetRectangle:
 			{
-				return GLEW_ARB_texture_rectangle?1:0;
+				return 1;
 			}
 
 
 		//Vertex Buffer Object
 		case eGraphicCaps_VertexBufferObject:
 			{
-				return GLEW_ARB_vertex_buffer_object?1:0;
 			}
 
 		//Two Sided Stencil
@@ -361,6 +360,7 @@ namespace hpl {
 				if(GLEW_EXT_stencil_two_side) return 1;
 				else if(GLEW_ATI_separate_stencil) return 1;
 				else return 0;
+				return SDL_GL_ExtensionSupported("ARB_vertex_buffer_object") ? 1 : 0;
 			}
 
 		//Max Texture Image Units
@@ -370,69 +370,66 @@ namespace hpl {
 				//return 2;
 
 				int lUnits;
-				glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS_ARB,(GLint *)&lUnits);
+				glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS,(GLint *)&lUnits);
 				return lUnits;
 			}
 
-		//Max Texture Coord Units
-		case eGraphicCaps_MaxTextureCoordUnits:
+			//Max Texture Coord Units
+			case eGraphicCaps_MaxTextureCoordUnits:
 			{
 				int lUnits;
-				glGetIntegerv(GL_MAX_TEXTURE_COORDS_ARB,(GLint *)&lUnits);
+				glGetIntegerv(GL_MAX_TEXTURE_COORDS,(GLint *)&lUnits);
 				return lUnits;
 			}
-		//Texture Anisotropy
-		case eGraphicCaps_AnisotropicFiltering:
+			//Texture Anisotropy
+			case eGraphicCaps_AnisotropicFiltering:
 			{
-				if(GLEW_EXT_texture_filter_anisotropic) return 1;
-				else return 0;
+				return SDL_GL_ExtensionSupported("EXT_texture_filter_anisotropic") ? 1 : 0;
 			}
 
-		//Texture Anisotropy
-		case eGraphicCaps_MaxAnisotropicFiltering:
+			//Texture Anisotropy
+			case eGraphicCaps_MaxAnisotropicFiltering:
 			{
-				if(!GLEW_EXT_texture_filter_anisotropic) return 0;
+				if (SDL_GL_ExtensionSupported("EXT_texture_filter_anisotropic") == false) {
+					return 0;
+				}
 
 				float fMax;
 				glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT,&fMax);
 				return (int)fMax;
 			}
 
-		//Multisampling
-		case eGraphicCaps_Multisampling:
+			//Multisampling
+			case eGraphicCaps_Multisampling:
 			{
-				if(GLEW_ARB_multisample) return 1;
-				return 0;
+				return SDL_GL_ExtensionSupported("ARB_multisample") ? 1 : 0;
 			}
 
 
-		//GL Vertex program
-		case eGraphicCaps_GL_VertexProgram:
-			{
-				//Debbug:
-				//return 0;
-
-				if(GLEW_ARB_vertex_program) return 1;
-				else return 0;
-			}
-
-		//GL Fragment program
-		case eGraphicCaps_GL_FragmentProgram:
+			//GL Vertex program
+			case eGraphicCaps_GL_VertexProgram:
 			{
 				//Debbug:
 				//return 0;
-
-				if(GLEW_ARB_fragment_program) return 1;
-				else return 0;
+				return SDL_GL_ExtensionSupported("ARB_vertex_program") ? 1 : 0;
 			}
 
-		case eGraphicCaps_GL_CoreProfile:
+			//GL Fragment program
+			case eGraphicCaps_GL_FragmentProgram:
+			{
+				//Debbug:
+				//return 0;
+				return SDL_GL_ExtensionSupported("ARB_fragment_program") ? 1 : 0;
+			}
+
+			case eGraphicCaps_GL_CoreProfile:
 			{
 				return 1;
 			}
+		
+			default:
+				return 0;
 		}
-
-		return 0;
 	}
 
 	//-----------------------------------------------------------------------
