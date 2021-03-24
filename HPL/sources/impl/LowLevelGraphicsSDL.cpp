@@ -51,31 +51,28 @@ namespace hpl {
 
 	GLenum ColorFormatToGL(eColorDataFormat aFormat)
 	{
-		switch(aFormat)
-		{
-		case eColorDataFormat_RGB:		return GL_RGB;
-		case eColorDataFormat_RGBA:		return GL_RGBA;
-		case eColorDataFormat_ALPHA:	return GL_ALPHA;
-		case eColorDataFormat_BGR:		return GL_BGR_EXT;
-		case eColorDataFormat_BGRA:		return GL_BGRA_EXT;
-		};
-
-		return 0;
+		switch (aFormat) {
+			case eColorDataFormat_RGB:		return GL_RGB;
+			case eColorDataFormat_RGBA:		return GL_RGBA;
+			case eColorDataFormat_ALPHA:	return GL_ALPHA;
+			case eColorDataFormat_BGR:		return GL_BGR_EXT;
+			case eColorDataFormat_BGRA:		return GL_BGRA_EXT;
+			default:						return 0;
+		}
 	}
 
 	//-------------------------------------------------
 
 	GLenum TextureTargetToGL(eTextureTarget aTarget)
 	{
-		switch(aTarget)
-		{
-		case eTextureTarget_1D:		return GL_TEXTURE_1D;
-		case eTextureTarget_2D:		return GL_TEXTURE_2D;
-		case eTextureTarget_Rect:	return GL_TEXTURE_RECTANGLE_NV;
-		case eTextureTarget_CubeMap:	return GL_TEXTURE_CUBE_MAP_ARB;
-		case eTextureTarget_3D:		return GL_TEXTURE_3D;
+		switch (aTarget) {
+			case eTextureTarget_1D:		return GL_TEXTURE_1D;
+			case eTextureTarget_2D:		return GL_TEXTURE_2D;
+			case eTextureTarget_Rect:	return GL_TEXTURE_RECTANGLE_ARB;
+			case eTextureTarget_CubeMap:	return GL_TEXTURE_CUBE_MAP;
+			case eTextureTarget_3D:		return GL_TEXTURE_3D;
+			default:					return 0;
 		}
-		return 0;
 	}
 
 
@@ -89,16 +86,17 @@ namespace hpl {
 	{
 		mlBatchArraySize = 20000;
 		mlVertexCount = 0;
-		mlIndexCount =0;
-		mlMultisampling =0;
+		mlIndexCount = 0;
+		mlMultisampling = 0;
 
 		mvVirtualSize.x = 800;
 		mvVirtualSize.y = 600;
 
-		mpRenderTarget=NULL;
+		mpRenderTarget = NULL;
 
-		for(int i=0;i<MAX_TEXTUREUNITS;i++)
+		for (int i = 0; i < MAX_TEXTUREUNITS; i++) {
 			mpCurrentTexture[i] = NULL;
+		}
 
 		mbClearColor = true;
 		mbClearDepth = true;
