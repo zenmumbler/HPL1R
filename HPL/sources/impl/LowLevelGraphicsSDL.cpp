@@ -790,10 +790,7 @@ namespace hpl {
 		if(mpCurrentTexture[alUnit])
 			LastTarget = GetGLTextureTargetEnum(mpCurrentTexture[alUnit]->GetTarget());
 
-		//Check if multi texturing is supported.
-		if(GLEW_ARB_multitexture){
-			glActiveTextureARB(GL_TEXTURE0_ARB + alUnit);
-		}
+		glActiveTexture(GL_TEXTURE0_ARB + alUnit);
 
 		//If the current texture in this unit is a render target, unbind it.
 		if(mpCurrentTexture[alUnit]){
