@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E815948260C1127001CBF63 /* GLSLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E815947260C1127001CBF63 /* GLSLProgram.cpp */; };
 		8E84AA02254CACE0000EA53C /* scriptstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */; };
 		8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84AA0C254CB3D2000EA53C /* Cg.framework */; };
 		8E84E7892605487F00DC6065 /* LowLevelSoundOAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */; };
@@ -214,6 +215,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
+		8E815947260C1127001CBF63 /* GLSLProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLProgram.cpp; sourceTree = "<group>"; };
 		8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstring_utils.cpp; sourceTree = "<group>"; };
 		8E84AA0C254CB3D2000EA53C /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cg.framework; sourceTree = "<group>"; };
 		8E84E75925FD062A00DC6065 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -840,6 +843,7 @@
 				8E84E790260555F900DC6065 /* OALSoundData.h */,
 				8E84E79426055ABF00DC6065 /* OALSoundChannel.h */,
 				8E84E79A2608181B00DC6065 /* WAVFile.h */,
+				8E815946260C1036001CBF63 /* GLSLProgram.h */,
 			);
 			name = impl;
 			path = include/impl;
@@ -1258,6 +1262,7 @@
 				8E84E7912605571100DC6065 /* OALSoundData.cpp */,
 				8E84E79526055B2500DC6065 /* OALSoundChannel.cpp */,
 				8E84E79B260819F800DC6065 /* WAVFile.cpp */,
+				8E815947260C1127001CBF63 /* GLSLProgram.cpp */,
 			);
 			name = impl;
 			path = sources/impl;
@@ -1513,6 +1518,7 @@
 				DBF84ABD0AC76F1E00BB15CD /* CharacterBody.cpp in Sources */,
 				DBF84ABE0AC76F1E00BB15CD /* CharacterBodyNewton.cpp in Sources */,
 				DBF84AC00AC76F1E00BB15CD /* ColliderEntity.cpp in Sources */,
+				8E815948260C1127001CBF63 /* GLSLProgram.cpp in Sources */,
 				8EAA07DD255C64F3007D7CD0 /* LowLevelSystemMac.mm in Sources */,
 				DBF84AC10AC76F1E00BB15CD /* CollideShapeNewton.cpp in Sources */,
 				DBF84AC20AC76F1E00BB15CD /* Color.cpp in Sources */,

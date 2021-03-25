@@ -19,7 +19,6 @@
 #ifndef HPL_CGPROGRAM_H
 #define HPL_CGPROGRAM_H
 
-//#include <windows.h>
 #include <Cg/cg.h>
 #include <Cg/cgGL.h>
 
