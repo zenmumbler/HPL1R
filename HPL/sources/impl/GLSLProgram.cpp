@@ -131,28 +131,8 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cGLSLProgram::SetMatrixf(const tString& asName, eGpuProgramMatrix mType,
-		eGpuProgramMatrixOp mOp)
+	bool cGLSLProgram::SetMatrixIdentityf(const tString& asName, eGpuProgramMatrix mType)
 	{
-//		CGparameter Param = GetParam(asName, CG_FLOAT4x4);
-//		if(Param==NULL)return false;
-//
-//		CGGLenum MtxType;
-//		CGGLenum OpType;
-//		switch(mType){
-//			case eGpuProgramMatrix_View:				MtxType=CG_GL_MODELVIEW_MATRIX;break;
-//			case eGpuProgramMatrix_Projection:		MtxType=CG_GL_PROJECTION_MATRIX;break;
-//			case eGpuProgramMatrix_Texture:			MtxType=CG_GL_TEXTURE_MATRIX;break;
-//			case eGpuProgramMatrix_ViewProjection:	MtxType=CG_GL_MODELVIEW_PROJECTION_MATRIX;break;
-//		}
-//		switch(mOp){
-//			case eGpuProgramMatrixOp_Identity:		OpType=CG_GL_MATRIX_IDENTITY; break;
-//			case eGpuProgramMatrixOp_Inverse:		OpType=CG_GL_MATRIX_INVERSE; break;
-//			case eGpuProgramMatrixOp_Transpose:		OpType=CG_GL_MATRIX_TRANSPOSE; break;
-//			case eGpuProgramMatrixOp_InverseTranspose:OpType=CG_GL_MATRIX_INVERSE_TRANSPOSE; break;
-//		}
-//
-//		cgGLSetStateMatrixParameter(Param,MtxType, OpType);
 		return true;
 	}
 
@@ -164,22 +144,10 @@ namespace hpl {
 
 		if(apTexture)
 		{
-//			CGparameter Param = GetParam(asName, textureType);
-//			if(Param==NULL)return false;
-
 			cSDLTexture* pSDLTex = static_cast<cSDLTexture*>(apTexture);
-
-			//Log("Intializing Tex %s(%d): %d\n",cgGetParameterName(Param),
-			//		Param,pSDLTex->GetTextureHandle());
-//			cgGLSetTextureParameter(Param, pSDLTex->GetTextureHandle());
-//			cgGLEnableTextureParameter(Param);
 		}
 		else
 		{
-//			CGparameter Param = GetParam(asName, CG_SAMPLER2D);
-//			if(Param==NULL)return false;
-//
-//			cgGLDisableTextureParameter(Param);
 		}
 
 		return true;
@@ -195,12 +163,9 @@ namespace hpl {
 
 		if(apTexture)
 		{
-			// cgGLSetTextureParameter(mvTexUnitParam[alUnit], pSDLTex->GetTextureHandle());
-			// cgGLEnableTextureParameter(mvTexUnitParam[alUnit]);
 		}
 		else
 		{
-			// cgGLDisableTextureParameter(mvTexUnitParam[alUnit]);
 		}
 
 		return true;

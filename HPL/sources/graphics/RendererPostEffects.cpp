@@ -302,10 +302,10 @@ namespace hpl {
 		{
 			//Setup vertex program
 			mpBlurVP->Bind();
-			mpBlurVP->SetFloat("xOffset",1);
-			mpBlurVP->SetFloat("yOffset",0);
-			mpBlurVP->SetFloat("amount",afBlurAmount);
-			mpBlurVP->SetMatrixf("worldViewProj",eGpuProgramMatrix_ViewProjection,eGpuProgramMatrixOp_Identity);
+			mpBlurVP->SetFloat("xOffset", 1);
+			mpBlurVP->SetFloat("yOffset", 0);
+			mpBlurVP->SetFloat("amount", afBlurAmount);
+			mpBlurVP->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 
 			//Setup fragment program
 			mpBlurRectFP->Bind();
@@ -476,8 +476,7 @@ namespace hpl {
 			{
 				mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,cMath::MatrixMul(pCam->GetViewMatrix(), *pMtx));
 
-				mpDepthOfFieldVP->SetMatrixf("worldViewProj",	eGpuProgramMatrix_ViewProjection,
-															eGpuProgramMatrixOp_Identity);
+				mpDepthOfFieldVP->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 			}
 			//////////////////
 			//NULL Model view matrix (static)
@@ -485,8 +484,7 @@ namespace hpl {
 			{
 				mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,pCam->GetViewMatrix());
 
-				mpDepthOfFieldVP->SetMatrixf("worldViewProj",	eGpuProgramMatrix_ViewProjection,
-					eGpuProgramMatrixOp_Identity);
+				mpDepthOfFieldVP->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 			}
 
 			pObject->GetVertexBuffer()->Bind();
@@ -570,8 +568,7 @@ namespace hpl {
 
 				mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,cMath::MatrixMul(pCam->GetViewMatrix(), *pMtx));
 
-				mpMotionBlurVP->SetMatrixf("worldViewProj",	eGpuProgramMatrix_ViewProjection,
-															eGpuProgramMatrixOp_Identity);
+				mpMotionBlurVP->SetMatrixIdentityf("worldViewProj",	eGpuProgramMatrix_ViewProjection);
 
 				cMatrixf mtxModelView =		cMath::MatrixMul(pCam->GetViewMatrix(), *pMtx);
 				cMatrixf mtxPrevModelView = cMath::MatrixMul(pCam->GetPrevView(),mtxPrev);
@@ -588,8 +585,7 @@ namespace hpl {
 			{
 				mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,pCam->GetViewMatrix());
 
-				mpMotionBlurVP->SetMatrixf("worldViewProj",	eGpuProgramMatrix_ViewProjection,
-															eGpuProgramMatrixOp_Identity);
+				mpMotionBlurVP->SetMatrixIdentityf("worldViewProj",	eGpuProgramMatrix_ViewProjection);
 
 				const cMatrixf &mtxModelView =	pCam->GetViewMatrix();
 				const cMatrixf &mtxPrevModelView = pCam->GetPrevView();
@@ -656,7 +652,7 @@ namespace hpl {
 
 		//Setup vertex program
 		mpBloomVP->Bind();
-		mpBloomVP->SetMatrixf("worldViewProj",eGpuProgramMatrix_ViewProjection,eGpuProgramMatrixOp_Identity);
+		mpBloomVP->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 
 		//Setup fragment program
 		mpBloomFP->Bind();

@@ -479,9 +479,7 @@ namespace hpl {
 		if(apSettings->mpVertexProgram)
 		{
 			//Might be quicker if this is set directly
-			apSettings->mpVertexProgram->SetMatrixf("worldViewProj",
-													eGpuProgramMatrix_ViewProjection,
-													eGpuProgramMatrixOp_Identity);
+			apSettings->mpVertexProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 			if(apSettings->mpVtxProgramSetup)
 			{
 				apSettings->mpVtxProgramSetup->SetupMatrix(	mpModelMatrix,apSettings);

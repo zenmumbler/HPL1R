@@ -1156,9 +1156,7 @@ void cMapHandler::RenderItemEffect()
 			if(pVtxProg)
 			{
 				pVtxProg->Bind();
-				pVtxProg->SetMatrixf("worldViewProj",
-									eGpuProgramMatrix_ViewProjection,
-									eGpuProgramMatrixOp_Identity);
+				pVtxProg->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 			}
 
 			iGpuProgram *pFragProg = pMaterial->GetFragmentProgram(eMaterialRenderType_Z,0,NULL);

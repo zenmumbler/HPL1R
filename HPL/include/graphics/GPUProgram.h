@@ -42,14 +42,6 @@ namespace hpl {
 		eGpuProgramMatrix_ViewProjection
 	};
 
-	enum eGpuProgramMatrixOp
-	{
-		eGpuProgramMatrixOp_Identity,
-		eGpuProgramMatrixOp_Inverse,
-		eGpuProgramMatrixOp_Transpose,
-		eGpuProgramMatrixOp_InverseTranspose
-	};
-
 
 	class iGpuProgram : public iResourceBase
 	{
@@ -103,8 +95,7 @@ namespace hpl {
 		virtual bool SetVec4f(const tString& asName, float afX,float afY,float afZ, float afW)=0;
 
 		virtual bool SetMatrixf(const tString& asName, const cMatrixf& mMtx)=0;
-		virtual bool SetMatrixf(const tString& asName, eGpuProgramMatrix mType,
-			eGpuProgramMatrixOp mOp)=0;
+		virtual bool SetMatrixIdentityf(const tString& asName, eGpuProgramMatrix mType)=0;
 
 		virtual bool SetTexture(const tString& asName,iTexture* apTexture, bool abAutoDisable=true)=0;
 		virtual bool SetTextureToUnit(int alUnit, iTexture* apTexture)=0;

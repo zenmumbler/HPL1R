@@ -659,8 +659,7 @@ namespace hpl {
 				mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,cMath::MatrixMul(apCamera->GetViewMatrix(),
 																				*pMtx));
 
-				mpSolidFogVtxProgram->SetMatrixf("worldViewProj",	eGpuProgramMatrix_ViewProjection,
-																eGpuProgramMatrixOp_Identity);
+				mpSolidFogVtxProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 			}
 			//////////////////
 			//NULL Model view matrix (static)
@@ -668,8 +667,7 @@ namespace hpl {
 			{
 				mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,apCamera->GetViewMatrix());
 
-				mpSolidFogVtxProgram->SetMatrixf("worldViewProj",	eGpuProgramMatrix_ViewProjection,
-																eGpuProgramMatrixOp_Identity);
+				mpSolidFogVtxProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 			}
 
 			pObject->GetVertexBuffer()->Bind();
@@ -834,8 +832,7 @@ namespace hpl {
 				}
 				pPrevMatrix = pObject->mpMatrix;
 				//Set the vertex program matrix.
-				mpDiffuseVtxProgram->SetMatrixf("worldViewProj",eGpuProgramMatrix_ViewProjection,
-																eGpuProgramMatrixOp_Identity);
+				mpDiffuseVtxProgram->SetMatrixIdentityf("worldViewProj",eGpuProgramMatrix_ViewProjection);
 
 				if(mbLog) Log(" Setting matrix %d\n",pObject->mpMatrix);
 			}
@@ -1192,9 +1189,7 @@ namespace hpl {
 					mRenderSettings.mbMatrixWasNULL = true;
 				}
 
-				pRefractVtxProgram->SetMatrixf("worldViewProj",
-												eGpuProgramMatrix_ViewProjection,
-												eGpuProgramMatrixOp_Identity);
+				pRefractVtxProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 
 				//Eye position
 				if(pMaterial->GetRefractionUsesEye())
@@ -1449,9 +1444,7 @@ namespace hpl {
 			if(mRenderSettings.mpVertexProgram && bSetVtxProgMatrix)
 			{
 				//Might be quicker if this is set directly
-				mRenderSettings.mpVertexProgram->SetMatrixf("worldViewProj",
-														eGpuProgramMatrix_ViewProjection,
-														eGpuProgramMatrixOp_Identity);
+				mRenderSettings.mpVertexProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 				if(mRenderSettings.mpVtxProgramSetup)
 				{
 					mRenderSettings.mpVtxProgramSetup->SetupMatrix(pModelMatrix,&mRenderSettings);

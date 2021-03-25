@@ -283,8 +283,7 @@ namespace hpl{
 
 	//-----------------------------------------------------------------------
 
-	bool cCGProgram::SetMatrixf(const tString& asName, eGpuProgramMatrix mType,
-		eGpuProgramMatrixOp mOp)
+	bool cCGProgram::SetMatrixIdentityf(const tString& asName, eGpuProgramMatrix mType)
 	{
 		CGparameter Param = GetParam(asName, CG_FLOAT4x4);
 		if(Param==NULL)return false;
@@ -297,14 +296,7 @@ namespace hpl{
 			case eGpuProgramMatrix_Texture:			MtxType=CG_GL_TEXTURE_MATRIX;break;
 			case eGpuProgramMatrix_ViewProjection:	MtxType=CG_GL_MODELVIEW_PROJECTION_MATRIX;break;
 		}
-		switch(mOp){
-			case eGpuProgramMatrixOp_Identity:		OpType=CG_GL_MATRIX_IDENTITY; break;
-			case eGpuProgramMatrixOp_Inverse:		OpType=CG_GL_MATRIX_INVERSE; break;
-			case eGpuProgramMatrixOp_Transpose:		OpType=CG_GL_MATRIX_TRANSPOSE; break;
-			case eGpuProgramMatrixOp_InverseTranspose:OpType=CG_GL_MATRIX_INVERSE_TRANSPOSE; break;
-		}
-
-		cgGLSetStateMatrixParameter(Param,MtxType, OpType);
+		cgGLSetStateMatrixParameter(Param,MtxType, CG_GL_MATRIX_IDENTITY);
 		return true;
 	}
 
