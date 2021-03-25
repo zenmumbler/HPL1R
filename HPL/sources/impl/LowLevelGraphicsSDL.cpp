@@ -57,8 +57,8 @@ namespace hpl {
 			case eColorDataFormat_RGB:		return GL_RGB;
 			case eColorDataFormat_RGBA:		return GL_RGBA;
 			case eColorDataFormat_ALPHA:	return GL_ALPHA;
-			case eColorDataFormat_BGR:		return GL_BGR_EXT;
-			case eColorDataFormat_BGRA:		return GL_BGRA_EXT;
+			case eColorDataFormat_BGR:		return GL_BGR;
+			case eColorDataFormat_BGRA:		return GL_BGRA;
 			default:						return 0;
 		}
 	}
@@ -452,9 +452,9 @@ namespace hpl {
 		if(mlMultisampling<=0) return;
 
 		if(abX)
-			glEnable(GL_MULTISAMPLE_ARB);
+			glEnable(GL_MULTISAMPLE);
 		else
-			glDisable(GL_MULTISAMPLE_ARB);
+			glDisable(GL_MULTISAMPLE);
 	}
 
 	//-----------------------------------------------------------------------
@@ -737,7 +737,7 @@ namespace hpl {
 		if(mpCurrentTexture[alUnit])
 			LastTarget = GetGLTextureTargetEnum(mpCurrentTexture[alUnit]->GetTarget());
 
-		glActiveTexture(GL_TEXTURE0_ARB + alUnit);
+		glActiveTexture(GL_TEXTURE0 + alUnit);
 
 		//If the current texture in this unit is a render target, unbind it.
 		if(mpCurrentTexture[alUnit]){
@@ -782,7 +782,7 @@ namespace hpl {
 
 	void cLowLevelGraphicsSDL::SetActiveTextureUnit(unsigned int alUnit)
 	{
-		glActiveTextureARB(GL_TEXTURE0_ARB + alUnit);
+		glActiveTexture(GL_TEXTURE0 + alUnit);
 	}
 
 	//-----------------------------------------------------------------------
@@ -791,7 +791,7 @@ namespace hpl {
 	{
 		GLenum lParam = GetGLTextureParamEnum(aParam);
 
-		glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_COMBINE_ARB);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
 
 		if(aParam==eTextureParam_ColorFunc || aParam==eTextureParam_AlphaFunc){
 			glTexEnvi(GL_TEXTURE_ENV,lParam,GetGLTextureFuncEnum((eTextureFunc)alVal));
@@ -919,11 +919,11 @@ namespace hpl {
 		{
 			for(int i=0;i<4;i++)
 			{
-				glMultiTexCoord3fARB(GL_TEXTURE0_ARB,avVtx[i].tex.x,avVtx[i].tex.y,avVtx[i].tex.z);
+				glMultiTexCoord3f(GL_TEXTURE0,avVtx[i].tex.x,avVtx[i].tex.y,avVtx[i].tex.z);
 
 				for(int unit=0; unit<lExtraUnits; ++unit)
 				{
-					glMultiTexCoord3fARB(GL_TEXTURE0_ARB + unit + 1,
+					glMultiTexCoord3f(GL_TEXTURE0 + unit + 1,
 										avExtraUvs[unit*4 + i].x, avExtraUvs[unit*4 + i].y, avExtraUvs[unit*4 + i].z);
 				}
 
@@ -1349,7 +1349,7 @@ namespace hpl {
 
 	void cLowLevelGraphicsSDL::SetBatchTextureUnitActive(unsigned int alUnit,bool abActive)
 	{
-		glClientActiveTextureARB(GL_TEXTURE0_ARB+alUnit);
+		glClientActiveTexture(GL_TEXTURE0 + alUnit);
 
 		if(abActive==false){
 			glTexCoordPointer(3,GL_FLOAT,sizeof(float)*mlBatchStride, &mpVertexArray[7]);
@@ -1692,11 +1692,11 @@ namespace hpl {
 		glColorPointer(4,GL_FLOAT,sizeof(float)*mlBatchStride, &mpVertexArray[3]);
 		glNormalPointer(GL_FLOAT,sizeof(float)*mlBatchStride, &mpVertexArray[10]);
 
-		glClientActiveTextureARB(GL_TEXTURE0_ARB);
+		glClientActiveTexture(GL_TEXTURE0);
 		glTexCoordPointer(3,GL_FLOAT,sizeof(float)*mlBatchStride, &mpVertexArray[7]);
-		glClientActiveTextureARB(GL_TEXTURE1_ARB);
+		glClientActiveTexture(GL_TEXTURE1);
 		glTexCoordPointer(3,GL_FLOAT,sizeof(float)*mlBatchStride, &mpVertexArray[7]);
-		glClientActiveTextureARB(GL_TEXTURE2_ARB);
+		glClientActiveTexture(GL_TEXTURE2);
 		glTexCoordPointer(3,GL_FLOAT,sizeof(float)*mlBatchStride, &mpVertexArray[7]);
 	}
 
@@ -1715,29 +1715,29 @@ namespace hpl {
 
 
 		if(aFlags & eVtxBatchFlag_Texture0){
-			glClientActiveTextureARB(GL_TEXTURE0_ARB);
+			glClientActiveTexture(GL_TEXTURE0);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
 		}
 		else {
-			glClientActiveTextureARB(GL_TEXTURE0_ARB);
+			glClientActiveTexture(GL_TEXTURE0);
 			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
 		}
 
 		if(aFlags & eVtxBatchFlag_Texture1){
-			glClientActiveTextureARB(GL_TEXTURE1_ARB);
+			glClientActiveTexture(GL_TEXTURE1);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
 		}
 		else {
-			glClientActiveTextureARB(GL_TEXTURE1_ARB);
+			glClientActiveTexture(GL_TEXTURE1);
 			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
 		}
 
 		if(aFlags & eVtxBatchFlag_Texture2){
-			glClientActiveTextureARB(GL_TEXTURE2_ARB);
+			glClientActiveTexture(GL_TEXTURE2);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
 		}
 		else {
-			glClientActiveTextureARB(GL_TEXTURE2_ARB);
+			glClientActiveTexture(GL_TEXTURE2);
 			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
 		}
 
@@ -1771,21 +1771,21 @@ namespace hpl {
 	{
 		switch(aType)
 		{
-			case eTextureParam_ColorFunc:		return GL_COMBINE_RGB_ARB;
-			case eTextureParam_AlphaFunc:		return GL_COMBINE_ALPHA_ARB;
-			case eTextureParam_ColorSource0:	return GL_SOURCE0_RGB_ARB;
-			case eTextureParam_ColorSource1:	return GL_SOURCE1_RGB_ARB;
-			case eTextureParam_ColorSource2:	return GL_SOURCE2_RGB_ARB;
-			case eTextureParam_AlphaSource0:	return GL_SOURCE0_ALPHA_ARB;
-			case eTextureParam_AlphaSource1:	return GL_SOURCE1_ALPHA_ARB;
-			case eTextureParam_AlphaSource2:	return GL_SOURCE2_ALPHA_ARB;
-			case eTextureParam_ColorOp0:		return GL_OPERAND0_RGB_ARB;
-			case eTextureParam_ColorOp1:		return GL_OPERAND1_RGB_ARB;
-			case eTextureParam_ColorOp2:		return GL_OPERAND2_RGB_ARB;
-			case eTextureParam_AlphaOp0:		return GL_OPERAND0_ALPHA_ARB;
-			case eTextureParam_AlphaOp1:		return GL_OPERAND1_ALPHA_ARB;
-			case eTextureParam_AlphaOp2:		return GL_OPERAND2_ALPHA_ARB;
-			case eTextureParam_ColorScale:		return GL_RGB_SCALE_ARB;
+			case eTextureParam_ColorFunc:		return GL_COMBINE_RGB;
+			case eTextureParam_AlphaFunc:		return GL_COMBINE_ALPHA;
+			case eTextureParam_ColorSource0:	return GL_SOURCE0_RGB;
+			case eTextureParam_ColorSource1:	return GL_SOURCE1_RGB;
+			case eTextureParam_ColorSource2:	return GL_SOURCE2_RGB;
+			case eTextureParam_AlphaSource0:	return GL_SOURCE0_ALPHA;
+			case eTextureParam_AlphaSource1:	return GL_SOURCE1_ALPHA;
+			case eTextureParam_AlphaSource2:	return GL_SOURCE2_ALPHA;
+			case eTextureParam_ColorOp0:		return GL_OPERAND0_RGB;
+			case eTextureParam_ColorOp1:		return GL_OPERAND1_RGB;
+			case eTextureParam_ColorOp2:		return GL_OPERAND2_RGB;
+			case eTextureParam_AlphaOp0:		return GL_OPERAND0_ALPHA;
+			case eTextureParam_AlphaOp1:		return GL_OPERAND1_ALPHA;
+			case eTextureParam_AlphaOp2:		return GL_OPERAND2_ALPHA;
+			case eTextureParam_ColorScale:		return GL_RGB_SCALE;
 			case eTextureParam_AlphaScale:		return GL_ALPHA_SCALE;
 			default: return 0;
 		}
@@ -1812,9 +1812,9 @@ namespace hpl {
 		switch(aType)
 		{
 			case eTextureSource_Texture:	return GL_TEXTURE;
-			case eTextureSource_Constant:	return GL_CONSTANT_ARB;
-			case eTextureSource_Primary:	return GL_PRIMARY_COLOR_ARB;
-			case eTextureSource_Previous:	return GL_PREVIOUS_ARB;
+			case eTextureSource_Constant:	return GL_CONSTANT;
+			case eTextureSource_Primary:	return GL_PRIMARY_COLOR;
+			case eTextureSource_Previous:	return GL_PREVIOUS;
 			default: return 0;
 		}
 	}
@@ -1842,11 +1842,11 @@ namespace hpl {
 			case eTextureFunc_Modulate:		return GL_MODULATE;
 			case eTextureFunc_Replace:		return GL_REPLACE;
 			case eTextureFunc_Add:			return GL_ADD;
-			case eTextureFunc_Substract:	return GL_SUBTRACT_ARB;
-			case eTextureFunc_AddSigned:	return GL_ADD_SIGNED_ARB;
-			case eTextureFunc_Interpolate:	return GL_INTERPOLATE_ARB;
-			case eTextureFunc_Dot3RGB:		return GL_DOT3_RGB_ARB;
-			case eTextureFunc_Dot3RGBA:		return GL_DOT3_RGBA_ARB;
+			case eTextureFunc_Substract:	return GL_SUBTRACT;
+			case eTextureFunc_AddSigned:	return GL_ADD_SIGNED;
+			case eTextureFunc_Interpolate:	return GL_INTERPOLATE;
+			case eTextureFunc_Dot3RGB:		return GL_DOT3_RGB;
+			case eTextureFunc_Dot3RGBA:		return GL_DOT3_RGBA;
 			default: return 0;
 		}
 	}
@@ -1915,8 +1915,8 @@ namespace hpl {
 			case eStencilOp_Increment:		return GL_INCR;
 			case eStencilOp_Decrement:		return GL_DECR;
 			case eStencilOp_Invert:			return GL_INVERT;
-			case eStencilOp_IncrementWrap:	return GL_INCR_WRAP_EXT;
-			case eStencilOp_DecrementWrap:	return GL_DECR_WRAP_EXT;
+			case eStencilOp_IncrementWrap:	return GL_INCR_WRAP;
+			case eStencilOp_DecrementWrap:	return GL_DECR_WRAP;
 			default: return 0;
 		}
 	}

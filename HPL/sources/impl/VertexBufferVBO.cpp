@@ -76,13 +76,13 @@ namespace hpl {
 			mvVertexArray[i].clear();
 			if(mVertexFlags & kvVertexFlags[i])
 			{
-				glDeleteBuffersARB(1,(GLuint *)&mvArrayHandle[i]);
+				glDeleteBuffers(1,(GLuint *)&mvArrayHandle[i]);
 			}
 		}
 
 		mvIndexArray.clear();
 
-		glDeleteBuffersARB(1,(GLuint *)&mlElementHandle);
+		glDeleteBuffers(1,(GLuint *)&mlElementHandle);
 	}
 
 	//-----------------------------------------------------------------------
@@ -168,33 +168,33 @@ namespace hpl {
 				);
 		}
 
-		GLenum usageType = GL_STATIC_DRAW_ARB;
-		if(mUsageType== eVertexBufferUsageType_Dynamic) usageType = GL_DYNAMIC_DRAW_ARB;
-		else if(mUsageType== eVertexBufferUsageType_Stream) usageType = GL_STREAM_DRAW_ARB;
+		GLenum usageType = GL_STATIC_DRAW;
+		if(mUsageType== eVertexBufferUsageType_Dynamic) usageType = GL_DYNAMIC_DRAW;
+		else if(mUsageType== eVertexBufferUsageType_Stream) usageType = GL_STREAM_DRAW;
 
 		//Create the VBO vertex arrays
 		for(int i=0;i< klNumOfVertexFlags; i++)
 		{
 			if(mVertexFlags & kvVertexFlags[i])
 			{
-				glGenBuffersARB(1,(GLuint *)&mvArrayHandle[i]);
-				glBindBufferARB(GL_ARRAY_BUFFER_ARB, mvArrayHandle[i]);
+				glGenBuffers(1,(GLuint *)&mvArrayHandle[i]);
+				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[i]);
 
-				glBufferDataARB(GL_ARRAY_BUFFER_ARB, mvVertexArray[i].size()*sizeof(float),
+				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[i].size()*sizeof(float),
 						&(mvVertexArray[i][0]), usageType);
 
-				glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+				glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 				//Log("%d-Handle: %d, size: %d \n",i,mvArrayHandle[i], mvVertexArray);
 			}
 		}
 
 		//Create the VBO index array
-		glGenBuffersARB(1,(GLuint *)&mlElementHandle);
-		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB,mlElementHandle);
-		glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, GetIndexNum()*sizeof(unsigned int),
+		glGenBuffers(1,(GLuint *)&mlElementHandle);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mlElementHandle);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum()*sizeof(unsigned int),
 														&mvIndexArray[0], usageType);
-		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB,0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
 
 		//Log("VBO compile done!\n");
 
@@ -206,39 +206,39 @@ namespace hpl {
 
 	void cVertexBufferVBO::UpdateData(tVertexFlag aTypes, bool abIndices)
 	{
-		GLenum usageType = GL_STATIC_DRAW_ARB;
-		if(mUsageType== eVertexBufferUsageType_Dynamic) usageType = GL_DYNAMIC_DRAW_ARB;
-		else if(mUsageType== eVertexBufferUsageType_Stream) usageType = GL_STREAM_DRAW_ARB;
+		GLenum usageType = GL_STATIC_DRAW;
+		if(mUsageType== eVertexBufferUsageType_Dynamic) usageType = GL_DYNAMIC_DRAW;
+		else if(mUsageType== eVertexBufferUsageType_Stream) usageType = GL_STREAM_DRAW;
 
 		//Create the VBO vertex arrays
 		for(int i=0;i< klNumOfVertexFlags; i++)
 		{
 			if((mVertexFlags & kvVertexFlags[i]) && (aTypes & kvVertexFlags[i]))
 			{
-				glBindBufferARB(GL_ARRAY_BUFFER_ARB, mvArrayHandle[i]);
+				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[i]);
 
 				//This was apparently VERY slow.
-				glBufferDataARB(GL_ARRAY_BUFFER_ARB, mvVertexArray[i].size()*sizeof(float),
+				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[i].size()*sizeof(float),
 					NULL, usageType);//Clear memory
 
-				glBufferDataARB(GL_ARRAY_BUFFER_ARB, mvVertexArray[i].size()*sizeof(float),
+				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[i].size()*sizeof(float),
 					&(mvVertexArray[i][0]), usageType);
 			}
 		}
-		glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		//Create the VBO index array
 		if(abIndices)
 		{
-			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB,mlElementHandle);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mlElementHandle);
 
-			//glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB,GetIndexNum()*sizeof(unsigned int),
+			//glBufferData(GL_ELEMENT_ARRAY_BUFFER,GetIndexNum()*sizeof(unsigned int),
 			//	NULL, usageType);
 
-			glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, GetIndexNum()*sizeof(unsigned int),
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum()*sizeof(unsigned int),
 				&mvIndexArray[0], usageType);
 
-			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB,0);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
 		}
 	}
 
@@ -335,14 +335,14 @@ namespace hpl {
 
 		//////////////////////////////////
 		//Bind and draw the buffer
-		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB,mlElementHandle);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mlElementHandle);
 
 		int lSize = mlElementNum;
 		if(mlElementNum<0) lSize = GetIndexNum();
 
 		glDrawElements(mode,lSize,GL_UNSIGNED_INT, (char*) NULL);
 
-		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB,0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
 	}
 
 	//-----------------------------------------------------------------------
@@ -374,7 +374,7 @@ namespace hpl {
 
 	void cVertexBufferVBO::UnBind()
 	{
-		glBindBufferARB(GL_ARRAY_BUFFER_ARB,0);
+		glBindBuffer(GL_ARRAY_BUFFER,0);
 	}
 
 	//-----------------------------------------------------------------------
@@ -521,7 +521,7 @@ namespace hpl {
 			glEnableClientState(GL_COLOR_ARRAY );
 
 			int idx = cMath::Log2ToInt(eVertexFlag_Color0);
-			glBindBufferARB(GL_ARRAY_BUFFER_ARB,mvArrayHandle[idx]);
+			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 			glColorPointer(kvVertexElements[idx],GL_FLOAT, 0, (char*)NULL);
 		}
 		else
@@ -535,7 +535,7 @@ namespace hpl {
 			glEnableClientState(GL_NORMAL_ARRAY );
 
 			int idx = cMath::Log2ToInt(eVertexFlag_Normal);
-			glBindBufferARB(GL_ARRAY_BUFFER_ARB,mvArrayHandle[idx]);
+			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 			glNormalPointer(GL_FLOAT, 0, (char*)NULL);
 		}
 		else
@@ -546,25 +546,25 @@ namespace hpl {
 		/// TEXTURE 0 /////////////////////////
 		if(aFlags & eVertexFlag_Texture0)
 		{
-			glClientActiveTextureARB(GL_TEXTURE0_ARB);
+			glClientActiveTexture(GL_TEXTURE0);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
 
 			int idx =  cMath::Log2ToInt(eVertexFlag_Texture0);
-			glBindBufferARB(GL_ARRAY_BUFFER_ARB,mvArrayHandle[idx]);
+			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 			glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL );
 		}
 		else {
-			glClientActiveTextureARB(GL_TEXTURE0_ARB);
+			glClientActiveTexture(GL_TEXTURE0);
 			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
 		}
 
 		/// TEXTURE 1 /////////////////////////
 		if(aFlags & eVertexFlag_Texture1){
-			glClientActiveTextureARB(GL_TEXTURE1_ARB);
+			glClientActiveTexture(GL_TEXTURE1);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
 
 			int idx =  cMath::Log2ToInt(eVertexFlag_Texture1);
-			glBindBufferARB(GL_ARRAY_BUFFER_ARB,mvArrayHandle[idx]);
+			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 
 			if(mbTangents)
 				glTexCoordPointer(4,GL_FLOAT,0,(char*)NULL );
@@ -572,49 +572,49 @@ namespace hpl {
 				glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL );
 		}
 		else {
-			glClientActiveTextureARB(GL_TEXTURE1_ARB);
+			glClientActiveTexture(GL_TEXTURE1);
 			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
 		}
 
 		/// TEXTURE 2 /////////////////////////
 		if(aFlags & eVertexFlag_Texture2){
-			glClientActiveTextureARB(GL_TEXTURE2_ARB);
+			glClientActiveTexture(GL_TEXTURE2);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
 
 			int idx =  cMath::Log2ToInt(eVertexFlag_Texture2);
-			glBindBufferARB(GL_ARRAY_BUFFER_ARB,mvArrayHandle[idx]);
+			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 			glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL );
 		}
 		else {
-			glClientActiveTextureARB(GL_TEXTURE2_ARB);
+			glClientActiveTexture(GL_TEXTURE2);
 			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
 		}
 
 		/// TEXTURE 3 /////////////////////////
 		if(aFlags & eVertexFlag_Texture3){
-			glClientActiveTextureARB(GL_TEXTURE3_ARB);
+			glClientActiveTexture(GL_TEXTURE3);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
 
 			int idx =  cMath::Log2ToInt(eVertexFlag_Texture3);
-			glBindBufferARB(GL_ARRAY_BUFFER_ARB,mvArrayHandle[idx]);
+			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 			glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL );
 		}
 		else {
-			glClientActiveTextureARB(GL_TEXTURE3_ARB);
+			glClientActiveTexture(GL_TEXTURE3);
 			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
 		}
 
 		/// TEXTURE 4 /////////////////////////
 		if(aFlags & eVertexFlag_Texture4){
-			glClientActiveTextureARB(GL_TEXTURE4_ARB);
+			glClientActiveTexture(GL_TEXTURE4);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
 
 			int idx =  cMath::Log2ToInt(eVertexFlag_Texture4);
-			glBindBufferARB(GL_ARRAY_BUFFER_ARB,mvArrayHandle[idx]);
+			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 			glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL );
 		}
 		else {
-			glClientActiveTextureARB(GL_TEXTURE4_ARB);
+			glClientActiveTexture(GL_TEXTURE4);
 			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
 		}
 
@@ -623,15 +623,15 @@ namespace hpl {
 			glEnableClientState(GL_VERTEX_ARRAY );
 
 			int idx = cMath::Log2ToInt(eVertexFlag_Position);
-			glBindBufferARB(GL_ARRAY_BUFFER_ARB,mvArrayHandle[idx]);
+			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 			glVertexPointer(kvVertexElements[idx],GL_FLOAT, 0, (char*)NULL);
 		}
 		else
 		{
-			glDisableClientState(GL_VERTEX_ARRAY );
+			glDisableClientState(GL_VERTEX_ARRAY);
 		}
 
-		glBindBufferARB(GL_ARRAY_BUFFER_ARB,0);
+		glBindBuffer(GL_ARRAY_BUFFER,0);
 	}
 
 	//-----------------------------------------------------------------------
