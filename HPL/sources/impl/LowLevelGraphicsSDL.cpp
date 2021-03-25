@@ -223,15 +223,6 @@ namespace hpl {
 			return false;
 		}
 
-		///Setup up windows specifc context:
-		#if defined(WIN32)
-			mGLContext = wglGetCurrentContext();
-			mDeviceContext = wglGetCurrentDC();
-		#elif defined(__linux__)
-		/*gDpy = XOpenDisplay(NULL);
-		glCtx = gPBuffer = 0;*/
-		#endif
-
 		//Check Multisample properties
 		CheckMultisampleCaps();
 
@@ -746,8 +737,6 @@ namespace hpl {
 				cSDLTexture *pSDLTex = static_cast<cSDLTexture *> (mpCurrentTexture[alUnit]);
 
 				glBindTexture(LastTarget, pSDLTex->GetTextureHandle());
-				cPBuffer* pBuffer = pSDLTex->GetPBuffer();
-				pBuffer->UnBind();
 			}
 		}
 
@@ -757,7 +746,7 @@ namespace hpl {
 			glDisable(LastTarget);
 			//glBindTexture(LastTarget,0);
 		}
-		//Enable the unit, set the texture handle and bind the pbuffer
+		//Enable the unit, set the texture handle
 		else
 		{
 			if(NewTarget != LastTarget) glDisable(LastTarget);
@@ -766,13 +755,6 @@ namespace hpl {
 
 			glBindTexture(NewTarget, pSDLTex->GetTextureHandle());
 			glEnable(NewTarget);
-
-			//if it is a render target we need to do some more binding.
-			if(pSDLTex->GetTextureType() == eTextureType_RenderTarget)
-			{
-				cPBuffer* pBuffer = pSDLTex->GetPBuffer();
-				pBuffer->Bind();
-			}
 		}
 
 		mpCurrentTexture[alUnit] = apTex;
@@ -1602,32 +1584,6 @@ namespace hpl {
 	{
 		if(pTex == mpRenderTarget)return;
 		mpRenderTarget = pTex;
-
-		if(pTex==NULL)
-		{
-			#ifdef WIN32
-			if (!wglMakeCurrent(mDeviceContext, mGLContext)){
-				Log("Something went wrong...");
-			}
-			#elif defined(__linux__)
-			/*if (!glXMakeCurrent(dpy, gPBuffer, glCtx)) {
-				Log("Something went wrong...");
-			}*/
-			#endif
-		}
-		else
-		{
-			if(pTex->GetTextureType() != eTextureType_RenderTarget)return;
-
-			cSDLTexture* pSDLTex = static_cast<cSDLTexture*>(pTex);
-			cPBuffer* pPBuffer = pSDLTex->GetPBuffer();
-
-			//pPBuffer->UnBind();//needed?
-
-			if (!pPBuffer->MakeCurrentContext()){
-				Log("PBuffer::Activate() failed.\n");
-			}
-		}
 	}
 
 	//-----------------------------------------------------------------------

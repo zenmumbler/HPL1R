@@ -211,7 +211,6 @@
 		DBF84B6E0AC76F1E00BB15CD /* VertexBufferVBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */; };
 		DBF84B710AC76F1E00BB15CD /* World3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A120AC76D5800BB15CD /* World3D.cpp */; };
 		DBFBA0190B65E42A0021DAE2 /* Material_Water.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBFBA0180B65E42A0021DAE2 /* Material_Water.cpp */; };
-		DBFBA05B0B65EC740021DAE2 /* PBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8499A0AC76D5800BB15CD /* PBuffer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -321,7 +320,6 @@
 		DB27F0700ACB9AB90054ACA3 /* MeshLoaderMSH.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MeshLoaderMSH.h; sourceTree = "<group>"; };
 		DB27F0710ACB9AB90054ACA3 /* MouseSDL.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MouseSDL.h; sourceTree = "<group>"; };
 		DB27F0720ACB9AB90054ACA3 /* OcclusionQueryOGL.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = OcclusionQueryOGL.h; sourceTree = "<group>"; };
-		DB27F0730ACB9AB90054ACA3 /* PBuffer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PBuffer.h; sourceTree = "<group>"; };
 		DB27F0740ACB9AB90054ACA3 /* PhysicsBodyNewton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PhysicsBodyNewton.h; sourceTree = "<group>"; };
 		DB27F0750ACB9AB90054ACA3 /* PhysicsControllerNewton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PhysicsControllerNewton.h; sourceTree = "<group>"; };
 		DB27F0760ACB9AB90054ACA3 /* PhysicsJointBallNewton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PhysicsJointBallNewton.h; sourceTree = "<group>"; };
@@ -570,7 +568,6 @@
 		DBF849970AC76D5800BB15CD /* MeshLoaderMSH.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MeshLoaderMSH.cpp; sourceTree = "<group>"; };
 		DBF849980AC76D5800BB15CD /* MouseSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MouseSDL.cpp; sourceTree = "<group>"; };
 		DBF849990AC76D5800BB15CD /* OcclusionQueryOGL.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = OcclusionQueryOGL.cpp; sourceTree = "<group>"; };
-		DBF8499A0AC76D5800BB15CD /* PBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = PBuffer.cpp; sourceTree = "<group>"; };
 		DBF8499B0AC76D5800BB15CD /* PhysicsBodyNewton.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsBodyNewton.cpp; sourceTree = "<group>"; };
 		DBF8499C0AC76D5800BB15CD /* PhysicsControllerNewton.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsControllerNewton.cpp; sourceTree = "<group>"; };
 		DBF8499D0AC76D5800BB15CD /* PhysicsJointBallNewton.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsJointBallNewton.cpp; sourceTree = "<group>"; };
@@ -816,7 +813,6 @@
 				DB27F0700ACB9AB90054ACA3 /* MeshLoaderMSH.h */,
 				DB27F0710ACB9AB90054ACA3 /* MouseSDL.h */,
 				DB27F0720ACB9AB90054ACA3 /* OcclusionQueryOGL.h */,
-				DB27F0730ACB9AB90054ACA3 /* PBuffer.h */,
 				DB27F0740ACB9AB90054ACA3 /* PhysicsBodyNewton.h */,
 				DB27F0750ACB9AB90054ACA3 /* PhysicsControllerNewton.h */,
 				DB27F0760ACB9AB90054ACA3 /* PhysicsJointBallNewton.h */,
@@ -1236,7 +1232,6 @@
 				DBF849970AC76D5800BB15CD /* MeshLoaderMSH.cpp */,
 				DBF849980AC76D5800BB15CD /* MouseSDL.cpp */,
 				DBF849990AC76D5800BB15CD /* OcclusionQueryOGL.cpp */,
-				DBF8499A0AC76D5800BB15CD /* PBuffer.cpp */,
 				DBF8499B0AC76D5800BB15CD /* PhysicsBodyNewton.cpp */,
 				DBF8499C0AC76D5800BB15CD /* PhysicsControllerNewton.cpp */,
 				DBF8499D0AC76D5800BB15CD /* PhysicsJointBallNewton.cpp */,
@@ -1666,7 +1661,6 @@
 				DBCEE5A00B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp in Sources */,
 				DBCEE7390B4B56440088A7E3 /* MeshLoaderColladaLoader.cpp in Sources */,
 				DBFBA0190B65E42A0021DAE2 /* Material_Water.cpp in Sources */,
-				DBFBA05B0B65EC740021DAE2 /* PBuffer.cpp in Sources */,
 				DB6E15BC0B6B174B00203538 /* scriptstring.cpp in Sources */,
 				DB294E100C11DC6E005DA55C /* CRC.cpp in Sources */,
 				DB4AFB470D7075B900809E03 /* Haptic.cpp in Sources */,

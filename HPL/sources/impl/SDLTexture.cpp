@@ -38,13 +38,6 @@ namespace hpl {
 	{
 		mbContainsData = false;
 
-		mpPBuffer = NULL;
-
-		if(aType==eTextureType_RenderTarget)
-		{
-			mpPBuffer = hplNew( cPBuffer, (mpLowLevelGraphics,true) );
-		}
-
 		//Cubemap does not like mipmaps
 		if(aTarget == eTextureTarget_CubeMap) mbUseMipMaps = false;
 
@@ -61,8 +54,6 @@ namespace hpl {
 
 	cSDLTexture::~cSDLTexture()
 	{
-		if(mpPBuffer)hplDelete(mpPBuffer);
-
 		for(size_t i=0; i<mvTextureHandles.size(); ++i)
 		{
 			glDeleteTextures(1,(GLuint *)&mvTextureHandles[i]);
@@ -190,10 +181,6 @@ namespace hpl {
 
 		if(mType == eTextureType_RenderTarget)
 		{
-			if(!mpPBuffer->Init(alWidth,alHeight,aCol)){
-				return false;
-			}
-
 			mlWidth = alWidth;
 			mlHeight = alHeight;
 

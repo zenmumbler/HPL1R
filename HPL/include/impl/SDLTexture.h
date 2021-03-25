@@ -20,7 +20,6 @@
 #define HPL_SDL_TEXTURE_H
 
 #include "graphics/Texture.h"
-#include "impl/PBuffer.h"
 #include "impl/LowLevelGraphicsSDL.h"
 #include "impl/SDLBitmap2D.h"
 
@@ -79,7 +78,6 @@ namespace hpl {
 		/// SDL / OGL Specific ///////////
 
 		unsigned int GetTextureHandle();
-		cPBuffer* GetPBuffer(){ return mpPBuffer; }
 
 	private:
 		bool CreateFromBitmapToHandle(iBitmap2D* pBmp, int alHandleIdx);
@@ -98,8 +96,6 @@ namespace hpl {
 		float mfTimeCount;
 		int mlTextureIndex;
 		float mfTimeDir;
-
-		cPBuffer *mpPBuffer;
 	};
 
 };

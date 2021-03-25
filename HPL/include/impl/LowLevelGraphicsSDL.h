@@ -230,16 +230,6 @@ namespace hpl {
 		int mlMultisampling;
 		int mlBpp;
 
-		//Windows stuff
-		#if defined(WIN32)
-			HGLRC mGLContext;
-			HDC   mDeviceContext;
-		#elif defined(__linux__)
-			Display *gDpy;
-			GLXContext glCtx;
-			GLXPbuffer gPBuffer;
-		#endif
-
 		//Gamma
 		Uint16 mvStartGammaArray[3][256];
 		float mfGammaCorrection;
