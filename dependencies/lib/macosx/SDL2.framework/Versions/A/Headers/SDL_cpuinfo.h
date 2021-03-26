@@ -28,7 +28,7 @@
 #ifndef SDL_cpuinfo_h_
 #define SDL_cpuinfo_h_
 
-#include <SDL2/SDL_stdinc.h>
+#include "SDL_stdinc.h"
 
 /* Need to do this here because intrin.h has C++ code in it */
 /* Visual Studio 2005 has a bug where intrin.h conflicts with winnt.h */
@@ -100,7 +100,7 @@
 #endif /* HAVE_IMMINTRIN_H */
 #endif /* compiler version */
 
-#include <SDL2/begin_code.h>
+#include "begin_code.h"
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -246,9 +246,32 @@ extern DECLSPEC size_t SDLCALL SDL_SIMDGetAlignment(void);
  * \return Pointer to newly-allocated block, NULL if out of memory.
  *
  * \sa SDL_SIMDAlignment
+ * \sa SDL_SIMDRealloc
  * \sa SDL_SIMDFree
  */
 extern DECLSPEC void * SDLCALL SDL_SIMDAlloc(const size_t len);
+
+/**
+ * \brief Reallocate memory obtained from SDL_SIMDAlloc
+ *
+ * It is not valid to use this function on a pointer from anything but
+ *  SDL_SIMDAlloc(). It can't be used on pointers from malloc, realloc,
+ *  SDL_malloc, memalign, new[], etc.
+ *
+ *  \param mem The pointer obtained from SDL_SIMDAlloc. This function also
+ *             accepts NULL, at which point this function is the same as
+ *             calling SDL_realloc with a NULL pointer.
+ *  \param len The length, in bytes, of the block to allocated. The actual
+ *             allocated block might be larger due to padding, etc. Passing 0
+ *             will return a non-NULL pointer, assuming the system isn't out of
+ *             memory.
+ * \return Pointer to newly-reallocated block, NULL if out of memory.
+ *
+ * \sa SDL_SIMDAlignment
+ * \sa SDL_SIMDAlloc
+ * \sa SDL_SIMDFree
+ */
+extern DECLSPEC void * SDLCALL SDL_SIMDRealloc(void *mem, const size_t len);
 
 /**
  * \brief Deallocate memory obtained from SDL_SIMDAlloc
@@ -260,6 +283,7 @@ extern DECLSPEC void * SDLCALL SDL_SIMDAlloc(const size_t len);
  * However, SDL_SIMDFree(NULL) is a legal no-op.
  *
  * \sa SDL_SIMDAlloc
+ * \sa SDL_SIMDRealloc
  */
 extern DECLSPEC void SDLCALL SDL_SIMDFree(void *ptr);
 
@@ -268,7 +292,7 @@ extern DECLSPEC void SDLCALL SDL_SIMDFree(void *ptr);
 #ifdef __cplusplus
 }
 #endif
-#include <SDL2/close_code.h>
+#include "close_code.h"
 
 #endif /* SDL_cpuinfo_h_ */
 

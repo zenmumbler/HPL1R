@@ -59,10 +59,10 @@
 #ifndef SDL_atomic_h_
 #define SDL_atomic_h_
 
-#include <SDL2/SDL_stdinc.h>
-#include <SDL2/SDL_platform.h>
+#include "SDL_stdinc.h"
+#include "SDL_platform.h"
 
-#include <SDL2/begin_code.h>
+#include "begin_code.h"
 
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
@@ -288,7 +288,7 @@ extern DECLSPEC void* SDLCALL SDL_AtomicGetPtr(void **a);
 }
 #endif
 
-#include <SDL2/close_code.h>
+#include "close_code.h"
 
 #endif /* SDL_atomic_h_ */
 

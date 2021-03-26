@@ -22,7 +22,7 @@
 #ifndef SDL_config_h_
 #define SDL_config_h_
 
-#include <SDL2/SDL_platform.h>
+#include "SDL_platform.h"
 
 /**
  *  \file SDL_config.h
@@ -34,7 +34,7 @@
 #elif defined(__WINRT__)
 #include "SDL_config_winrt.h"
 #elif defined(__MACOSX__)
-#include <SDL2/SDL_config_macosx.h>
+#include "SDL_config_macosx.h"
 #elif defined(__IPHONEOS__)
 #include "SDL_config_iphoneos.h"
 #elif defined(__ANDROID__)

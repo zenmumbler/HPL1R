@@ -28,12 +28,12 @@
 #ifndef SDL_system_h_
 #define SDL_system_h_
 
-#include <SDL2/SDL_stdinc.h>
-#include <SDL2/SDL_keyboard.h>
-#include <SDL2/SDL_render.h>
-#include <SDL2/SDL_video.h>
+#include "SDL_stdinc.h"
+#include "SDL_keyboard.h"
+#include "SDL_render.h"
+#include "SDL_video.h"
 
-#include <SDL2/begin_code.h>
+#include "begin_code.h"
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -123,6 +123,7 @@ extern DECLSPEC void * SDLCALL SDL_AndroidGetActivity(void);
 /**
    \brief Return API level of the current device
 
+    API level 30: Android 11
     API level 29: Android 10
     API level 28: Android 9
     API level 27: Android 8.1
@@ -197,6 +198,14 @@ extern DECLSPEC int SDLCALL SDL_AndroidGetExternalStorageState(void);
    written to by other applications.
  */
 extern DECLSPEC const char * SDLCALL SDL_AndroidGetExternalStoragePath(void);
+
+/**
+   \brief Request permissions at runtime.
+
+   This blocks the calling thread until the permission is granted or
+   denied. Returns SDL_TRUE if the permission was granted.
+ */
+extern DECLSPEC SDL_bool SDLCALL SDL_AndroidRequestPermission(const char *permission);
 
 #endif /* __ANDROID__ */
 
@@ -309,7 +318,7 @@ extern DECLSPEC void SDLCALL SDL_OnApplicationDidChangeStatusBarOrientation(void
 #ifdef __cplusplus
 }
 #endif
-#include <SDL2/close_code.h>
+#include "close_code.h"
 
 #endif /* SDL_system_h_ */
 

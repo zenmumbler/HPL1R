@@ -29,10 +29,10 @@
 #ifndef SDL_rwops_h_
 #define SDL_rwops_h_
 
-#include <SDL2/SDL_stdinc.h>
-#include <SDL2/SDL_error.h>
+#include "SDL_stdinc.h"
+#include "SDL_error.h"
 
-#include <SDL2/begin_code.h>
+#include "begin_code.h"
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -96,15 +96,7 @@ typedef struct SDL_RWops
 #if defined(__ANDROID__)
         struct
         {
-            void *fileNameRef;
-            void *inputStreamRef;
-            void *readableByteChannelRef;
-            void *readMethod;
-            void *assetFileDescriptorRef;
-            long position;
-            long size;
-            long offset;
-            int fd;
+            void *asset;
         } androidio;
 #elif defined(__WIN32__)
         struct
@@ -284,7 +276,7 @@ extern DECLSPEC size_t SDLCALL SDL_WriteBE64(SDL_RWops * dst, Uint64 value);
 #ifdef __cplusplus
 }
 #endif
-#include <SDL2/close_code.h>
+#include "close_code.h"
 
 #endif /* SDL_rwops_h_ */
 

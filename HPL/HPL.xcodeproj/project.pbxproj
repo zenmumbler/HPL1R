@@ -666,7 +666,7 @@
 		DBF848380AC76CC500BB15CD = {
 			isa = PBXGroup;
 			children = (
-				DBF848500AC76D3700BB15CD /* Sources */,
+				DBF848500AC76D3700BB15CD /* Source */,
 				DB00EF5011A9CF86007DFB32 /* Frameworks */,
 				DBF8484C0AC76D1A00BB15CD /* Products */,
 			);
@@ -680,7 +680,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DBF848500AC76D3700BB15CD /* Sources */ = {
+		DBF848500AC76D3700BB15CD /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				DB27F0600ACB9AB90054ACA3 /* hpl.h */,
@@ -697,7 +697,7 @@
 				DBF84A130AC76D5800BB15CD /* sound */,
 				DBF84A180AC76D5800BB15CD /* system */,
 			);
-			name = Sources;
+			name = Source;
 			sourceTree = "<group>";
 		};
 		DBF849470AC76D5700BB15CD /* ai */ = {

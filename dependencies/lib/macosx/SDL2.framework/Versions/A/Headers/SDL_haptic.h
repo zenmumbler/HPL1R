@@ -107,11 +107,11 @@
 #ifndef SDL_haptic_h_
 #define SDL_haptic_h_
 
-#include <SDL2/SDL_stdinc.h>
-#include <SDL2/SDL_error.h>
-#include <SDL2/SDL_joystick.h>
+#include "SDL_stdinc.h"
+#include "SDL_error.h"
+#include "SDL_joystick.h"
 
-#include <SDL2/begin_code.h>
+#include "begin_code.h"
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -336,6 +336,14 @@ typedef struct _SDL_Haptic SDL_Haptic;
  */
 #define SDL_HAPTIC_SPHERICAL  2
 
+/**
+ *  \brief Use this value to play an effect on the steering wheel axis. This 
+ *  provides better compatibility across platforms and devices as SDL will guess 
+ *  the correct axis.
+ *  \sa SDL_HapticDirection
+ */
+#define SDL_HAPTIC_STEERING_AXIS 3
+
 /* @} *//* Direction encodings */
 
 /* @} *//* Haptic features */
@@ -444,6 +452,7 @@ typedef struct _SDL_Haptic SDL_Haptic;
  *  \sa SDL_HAPTIC_POLAR
  *  \sa SDL_HAPTIC_CARTESIAN
  *  \sa SDL_HAPTIC_SPHERICAL
+ *  \sa SDL_HAPTIC_STEERING_AXIS
  *  \sa SDL_HapticEffect
  *  \sa SDL_HapticNumAxes
  */
@@ -1231,7 +1240,7 @@ extern DECLSPEC int SDLCALL SDL_HapticRumbleStop(SDL_Haptic * haptic);
 #ifdef __cplusplus
 }
 #endif
-#include <SDL2/close_code.h>
+#include "close_code.h"
 
 #endif /* SDL_haptic_h_ */
 

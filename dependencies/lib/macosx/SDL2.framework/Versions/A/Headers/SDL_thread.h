@@ -28,14 +28,14 @@
  *  Header for the SDL thread management routines.
  */
 
-#include <SDL2/SDL_stdinc.h>
-#include <SDL2/SDL_error.h>
+#include "SDL_stdinc.h"
+#include "SDL_error.h"
 
 /* Thread synchronization primitives */
-#include <SDL2/SDL_atomic.h>
-#include <SDL2/SDL_mutex.h>
+#include "SDL_atomic.h"
+#include "SDL_mutex.h"
 
-#include <SDL2/begin_code.h>
+#include "begin_code.h"
 /* Set up for C function definitions, even when using C++ */
 #ifdef __cplusplus
 extern "C" {
@@ -53,6 +53,11 @@ typedef unsigned int SDL_TLSID;
 
 /**
  *  The SDL thread priority.
+ *
+ *  SDL will make system changes as necessary in order to apply the thread priority.
+ *  Code which attempts to control thread state related to priority should be aware
+ *  that calling SDL_SetThreadPriority may alter such state.
+ *  SDL_HINT_THREAD_PRIORITY_POLICY can be used to control aspects of this behavior.
  *
  *  \note On many systems you require special privileges to set high or time critical priority.
  */
@@ -354,7 +359,7 @@ extern DECLSPEC int SDLCALL SDL_TLSSet(SDL_TLSID id, const void *value, void (SD
 #ifdef __cplusplus
 }
 #endif
-#include <SDL2/close_code.h>
+#include "close_code.h"
 
 #endif /* SDL_thread_h_ */
 
