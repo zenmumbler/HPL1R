@@ -20,8 +20,8 @@
 #define HPL_SCRIPT_H
 
 #include "resources/ResourceBase.h"
-#include <angelscript.h>
-#include <aswrappedcall.h>
+#include "angelscript.h"
+#include "aswrappedcall.h"
 
 #ifdef __GNUC__
 	#ifdef __APPLE__

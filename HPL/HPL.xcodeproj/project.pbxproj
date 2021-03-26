@@ -287,7 +287,7 @@
 		DB27F05D0ACB9AB90054ACA3 /* SubMesh.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SubMesh.h; sourceTree = "<group>"; };
 		DB27F05E0ACB9AB90054ACA3 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		DB27F05F0ACB9AB90054ACA3 /* VertexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = VertexBuffer.h; sourceTree = "<group>"; };
-		DB27F0600ACB9AB90054ACA3 /* hpl.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hpl.h; path = include/hpl.h; sourceTree = "<group>"; };
+		DB27F0600ACB9AB90054ACA3 /* hpl.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hpl.h; path = sources/hpl.h; sourceTree = "<group>"; };
 		DB27F0620ACB9AB90054ACA3 /* CGProgram.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CGProgram.h; sourceTree = "<group>"; };
 		DB27F0630ACB9AB90054ACA3 /* CharacterBodyNewton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CharacterBodyNewton.h; sourceTree = "<group>"; };
 		DB27F0640ACB9AB90054ACA3 /* CollideShapeNewton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CollideShapeNewton.h; sourceTree = "<group>"; };
@@ -647,342 +647,26 @@
 			path = ../dependencies/lib/macosx;
 			sourceTree = SOURCE_ROOT;
 		};
-		DB27F0170ACB9AB90054ACA3 /* ai */ = {
-			isa = PBXGroup;
-			children = (
-				DB27F0180ACB9AB90054ACA3 /* AI.h */,
-				DB27F0190ACB9AB90054ACA3 /* AINodeContainer.h */,
-				DB27F01A0ACB9AB90054ACA3 /* AINodeGenerator.h */,
-				DB27F01B0ACB9AB90054ACA3 /* AStar.h */,
-				DB27F01C0ACB9AB90054ACA3 /* StateMachine.h */,
-			);
-			name = ai;
-			path = include/ai;
-			sourceTree = "<group>";
-		};
-		DB27F01D0ACB9AB90054ACA3 /* game */ = {
-			isa = PBXGroup;
-			children = (
-				DB27F01E0ACB9AB90054ACA3 /* Game.h */,
-				DB27F01F0ACB9AB90054ACA3 /* GameTypes.h */,
-				DB27F0200ACB9AB90054ACA3 /* LowLevelGameSetup.h */,
-				DB27F0210ACB9AB90054ACA3 /* SaveGame.h */,
-				DB27F0220ACB9AB90054ACA3 /* ScriptFuncs.h */,
-				DB27F0230ACB9AB90054ACA3 /* Updateable.h */,
-				DB27F0240ACB9AB90054ACA3 /* Updater.h */,
-			);
-			name = game;
-			path = include/game;
-			sourceTree = "<group>";
-		};
-		DB27F0250ACB9AB90054ACA3 /* graphics */ = {
-			isa = PBXGroup;
-			children = (
-				8EAA07B625589032007D7CD0 /* Material_DiffuseAdditive2D.h */,
-				8EAA07B725589032007D7CD0 /* Material_DiffuseAlpha2D.h */,
-				8EAA07B825589032007D7CD0 /* Material_Smoke2D.h */,
-				8EAA07A725588A9A007D7CD0 /* Material_FontNormal.h */,
-				DB4AFBE00D70773700809E03 /* Material_Water.h */,
-				DB4AFBE10D70773700809E03 /* VideoStream.h */,
-				DBCEE5A20B4B332E0088A7E3 /* Beam.h */,
-				DBCEE5A30B4B332E0088A7E3 /* Material_EnvMap_Reflect.h */,
-				DB27F0260ACB9AB90054ACA3 /* Animation.h */,
-				DB27F0270ACB9AB90054ACA3 /* AnimationTrack.h */,
-				DB27F0290ACB9AB90054ACA3 /* BillBoard.h */,
-				DB27F02A0ACB9AB90054ACA3 /* Bitmap2D.h */,
-				DB27F02B0ACB9AB90054ACA3 /* Bone.h */,
-				DB27F02C0ACB9AB90054ACA3 /* BoneState.h */,
-				DB27F02D0ACB9AB90054ACA3 /* Color.h */,
-				DB27F02E0ACB9AB90054ACA3 /* FontData.h */,
-				DB27F02F0ACB9AB90054ACA3 /* GfxObject.h */,
-				DB27F0300ACB9AB90054ACA3 /* GPUProgram.h */,
-				DB27F0310ACB9AB90054ACA3 /* Graphics.h */,
-				DB27F0320ACB9AB90054ACA3 /* GraphicsDrawer.h */,
-				DB27F0330ACB9AB90054ACA3 /* GraphicsTypes.h */,
-				DB27F0350ACB9AB90054ACA3 /* LowLevelGraphics.h */,
-				DB27F0360ACB9AB90054ACA3 /* LowLevelPicture.h */,
-				DB27F0370ACB9AB90054ACA3 /* Material.h */,
-				DB27F0380ACB9AB90054ACA3 /* Material_Additive.h */,
-				DB27F0390ACB9AB90054ACA3 /* Material_Alpha.h */,
-				DB27F03A0ACB9AB90054ACA3 /* Material_BaseLight.h */,
-				DB27F03B0ACB9AB90054ACA3 /* Material_Bump.h */,
-				DB27F03C0ACB9AB90054ACA3 /* Material_BumpColorSpec.h */,
-				DB27F03D0ACB9AB90054ACA3 /* Material_BumpSpec.h */,
-				DB27F03F0ACB9AB90054ACA3 /* Material_Diffuse.h */,
-				DB27F0430ACB9AB90054ACA3 /* Material_DiffuseSpec.h */,
-				DB27F0450ACB9AB90054ACA3 /* Material_Flat.h */,
-				DB27F0470ACB9AB90054ACA3 /* Material_Modulative.h */,
-				DB27F0480ACB9AB90054ACA3 /* Material_ModulativeX2.h */,
-				DB27F04A0ACB9AB90054ACA3 /* MaterialHandler.h */,
-				DB27F04B0ACB9AB90054ACA3 /* Mesh.h */,
-				DB27F04D0ACB9AB90054ACA3 /* MeshCreator.h */,
-				DB27F04E0ACB9AB90054ACA3 /* OcclusionQuery.h */,
-				DB27F04F0ACB9AB90054ACA3 /* ParticleEmitter.h */,
-				DB27F0510ACB9AB90054ACA3 /* ParticleEmitter3D.h */,
-				DB27F0520ACB9AB90054ACA3 /* ParticleEmitter3D_UserData.h */,
-				DB27F0530ACB9AB90054ACA3 /* ParticleSystem3D.h */,
-				DB27F0550ACB9AB90054ACA3 /* Renderable.h */,
-				DB27F0570ACB9AB90054ACA3 /* Renderer3D.h */,
-				DB27F0580ACB9AB90054ACA3 /* RendererPostEffects.h */,
-				DB27F0590ACB9AB90054ACA3 /* RenderList.h */,
-				DB27F05B0ACB9AB90054ACA3 /* RenderState.h */,
-				DB27F05C0ACB9AB90054ACA3 /* Skeleton.h */,
-				DB27F05D0ACB9AB90054ACA3 /* SubMesh.h */,
-				DB27F05E0ACB9AB90054ACA3 /* Texture.h */,
-				DB27F05F0ACB9AB90054ACA3 /* VertexBuffer.h */,
-			);
-			name = graphics;
-			path = include/graphics;
-			sourceTree = "<group>";
-		};
-		DB27F0610ACB9AB90054ACA3 /* impl */ = {
-			isa = PBXGroup;
-			children = (
-				DBF9A1F7119A58E600CCFDC9 /* VideoStreamTheora.h */,
-				DB4AFBF10D70776800809E03 /* OpenALSoundEnvironment.h */,
-				DB6E15BA0B6B173800203538 /* scriptstring.h */,
-				DB27F0620ACB9AB90054ACA3 /* CGProgram.h */,
-				DB27F0630ACB9AB90054ACA3 /* CharacterBodyNewton.h */,
-				DB27F0640ACB9AB90054ACA3 /* CollideShapeNewton.h */,
-				DB27F0670ACB9AB90054ACA3 /* KeyboardSDL.h */,
-				DB27F0680ACB9AB90054ACA3 /* LowLevelGraphicsSDL.h */,
-				DB27F0690ACB9AB90054ACA3 /* LowLevelInputSDL.h */,
-				DB27F06A0ACB9AB90054ACA3 /* LowLevelPhysicsNewton.h */,
-				DB27F06B0ACB9AB90054ACA3 /* LowLevelResourcesSDL.h */,
-				DB27F06D0ACB9AB90054ACA3 /* LowLevelSystemSDL.h */,
-				DB27F06E0ACB9AB90054ACA3 /* MeshLoaderCollada.h */,
-				DB27F0700ACB9AB90054ACA3 /* MeshLoaderMSH.h */,
-				DB27F0710ACB9AB90054ACA3 /* MouseSDL.h */,
-				DB27F0720ACB9AB90054ACA3 /* OcclusionQueryOGL.h */,
-				DB27F0740ACB9AB90054ACA3 /* PhysicsBodyNewton.h */,
-				DB27F0750ACB9AB90054ACA3 /* PhysicsControllerNewton.h */,
-				DB27F0760ACB9AB90054ACA3 /* PhysicsJointBallNewton.h */,
-				DB27F0770ACB9AB90054ACA3 /* PhysicsJointHingeNewton.h */,
-				DB27F0780ACB9AB90054ACA3 /* PhysicsJointNewton.h */,
-				DB27F0790ACB9AB90054ACA3 /* PhysicsJointScrewNewton.h */,
-				DB27F07A0ACB9AB90054ACA3 /* PhysicsJointSliderNewton.h */,
-				DB27F07B0ACB9AB90054ACA3 /* PhysicsMaterialNewton.h */,
-				DB27F07C0ACB9AB90054ACA3 /* PhysicsWorldNewton.h */,
-				DB27F07D0ACB9AB90054ACA3 /* Platform.h */,
-				8E9F748B2551E54E000324E8 /* SDLBMPFile.h */,
-				8E9F74E8255316E1000324E8 /* SDLTGAFile.h */,
-				DB27F07E0ACB9AB90054ACA3 /* SDLBitmap2D.h */,
-				DB27F07F0ACB9AB90054ACA3 /* SDLFontData.h */,
-				DB27F0800ACB9AB90054ACA3 /* SDLGameSetup.h */,
-				DB27F0820ACB9AB90054ACA3 /* SDLTexture.h */,
-				DB27F0830ACB9AB90054ACA3 /* SqScript.h */,
-				8E9728CF254CB92F0033415B /* scripthelper.h */,
-				DB27F0840ACB9AB90054ACA3 /* scriptstdstring.h */,
-				DB27F0850ACB9AB90054ACA3 /* tinyXML */,
-				DB27F0890ACB9AB90054ACA3 /* VertexBufferVBO.h */,
-				8E84E7872605472700DC6065 /* LowLevelSoundOAL.h */,
-				8E84E78E26054A2F00DC6065 /* stb_vorbis.h */,
-				8E84E790260555F900DC6065 /* OALSoundData.h */,
-				8E84E79426055ABF00DC6065 /* OALSoundChannel.h */,
-				8E84E79A2608181B00DC6065 /* WAVFile.h */,
-				8E815946260C1036001CBF63 /* GLSLProgram.h */,
-			);
-			name = impl;
-			path = include/impl;
-			sourceTree = "<group>";
-		};
-		DB27F0850ACB9AB90054ACA3 /* tinyXML */ = {
-			isa = PBXGroup;
-			children = (
-				DB27F0860ACB9AB90054ACA3 /* tinystr.h */,
-				DB27F0870ACB9AB90054ACA3 /* tinyxml.h */,
-			);
-			path = tinyXML;
-			sourceTree = "<group>";
-		};
-		DB27F08A0ACB9AB90054ACA3 /* input */ = {
-			isa = PBXGroup;
-			children = (
-				DB4AFBF40D70778200809E03 /* ActionHaptic.h */,
-				DB27F08B0ACB9AB90054ACA3 /* Action.h */,
-				DB27F08C0ACB9AB90054ACA3 /* ActionKeyboard.h */,
-				DB27F08D0ACB9AB90054ACA3 /* ActionMouseButton.h */,
-				DB27F08E0ACB9AB90054ACA3 /* Input.h */,
-				DB27F08F0ACB9AB90054ACA3 /* InputDevice.h */,
-				DB27F0900ACB9AB90054ACA3 /* InputTypes.h */,
-				DB27F0910ACB9AB90054ACA3 /* Keyboard.h */,
-				DB27F0920ACB9AB90054ACA3 /* LowLevelInput.h */,
-				DB27F0930ACB9AB90054ACA3 /* Mouse.h */,
-			);
-			name = input;
-			path = include/input;
-			sourceTree = "<group>";
-		};
-		DB27F0940ACB9AB90054ACA3 /* math */ = {
-			isa = PBXGroup;
-			children = (
-				DB294E120C11DC7C005DA55C /* CRC.h */,
-				DB27F0950ACB9AB90054ACA3 /* BoundingVolume.h */,
-				DB27F0960ACB9AB90054ACA3 /* Frustum.h */,
-				DB27F0970ACB9AB90054ACA3 /* Math.h */,
-				DB27F0980ACB9AB90054ACA3 /* MathTypes.h */,
-				DB27F0990ACB9AB90054ACA3 /* Matrix.h */,
-				DB27F09A0ACB9AB90054ACA3 /* MeshTypes.h */,
-				DB27F09B0ACB9AB90054ACA3 /* PidController.h */,
-				DB27F09C0ACB9AB90054ACA3 /* Quaternion.h */,
-				DB27F09D0ACB9AB90054ACA3 /* Spring.h */,
-				DB27F09E0ACB9AB90054ACA3 /* Vector2.h */,
-				DB27F09F0ACB9AB90054ACA3 /* Vector3.h */,
-			);
-			name = math;
-			path = include/math;
-			sourceTree = "<group>";
-		};
-		DB27F0A00ACB9AB90054ACA3 /* physics */ = {
-			isa = PBXGroup;
-			children = (
-				DB27F0A20ACB9AB90054ACA3 /* CharacterBody.h */,
-				DB27F0A30ACB9AB90054ACA3 /* CollideData.h */,
-				DB27F0A60ACB9AB90054ACA3 /* CollideShape.h */,
-				DB27F0A70ACB9AB90054ACA3 /* LowLevelPhysics.h */,
-				DB27F0A80ACB9AB90054ACA3 /* Physics.h */,
-				DB27F0A90ACB9AB90054ACA3 /* PhysicsBody.h */,
-				DB27F0AA0ACB9AB90054ACA3 /* PhysicsController.h */,
-				DB27F0AB0ACB9AB90054ACA3 /* PhysicsJoint.h */,
-				DB27F0AC0ACB9AB90054ACA3 /* PhysicsJointBall.h */,
-				DB27F0AD0ACB9AB90054ACA3 /* PhysicsJointHinge.h */,
-				DB27F0AE0ACB9AB90054ACA3 /* PhysicsJointScrew.h */,
-				DB27F0AF0ACB9AB90054ACA3 /* PhysicsJointSlider.h */,
-				DB27F0B00ACB9AB90054ACA3 /* PhysicsMaterial.h */,
-				DB27F0B10ACB9AB90054ACA3 /* PhysicsWorld.h */,
-				DB27F0B20ACB9AB90054ACA3 /* SurfaceData.h */,
-			);
-			name = physics;
-			path = include/physics;
-			sourceTree = "<group>";
-		};
-		DB27F0B30ACB9AB90054ACA3 /* resources */ = {
-			isa = PBXGroup;
-			children = (
-				DB4AFBF50D70779000809E03 /* VideoManager.h */,
-				DB27F0B40ACB9AB90054ACA3 /* AnimationManager.h */,
-				DB27F0B50ACB9AB90054ACA3 /* ConfigFile.h */,
-				DB27F0B60ACB9AB90054ACA3 /* EntityLoader_Object.h */,
-				DB27F0B70ACB9AB90054ACA3 /* FileSearcher.h */,
-				DB27F0B80ACB9AB90054ACA3 /* FontManager.h */,
-				DB27F0B90ACB9AB90054ACA3 /* FrameBase.h */,
-				DB27F0BA0ACB9AB90054ACA3 /* FrameBitmap.h */,
-				DB27F0BB0ACB9AB90054ACA3 /* FrameTexture.h */,
-				DB27F0BC0ACB9AB90054ACA3 /* GpuProgramManager.h */,
-				DB27F0BE0ACB9AB90054ACA3 /* ImageManager.h */,
-				DB27F0BF0ACB9AB90054ACA3 /* LanguageFile.h */,
-				DB27F0C00ACB9AB90054ACA3 /* LowLevelResources.h */,
-				DB27F0C10ACB9AB90054ACA3 /* MaterialManager.h */,
-				DB27F0C20ACB9AB90054ACA3 /* MeshLoader.h */,
-				DB27F0C30ACB9AB90054ACA3 /* MeshLoaderHandler.h */,
-				DB27F0C40ACB9AB90054ACA3 /* MeshManager.h */,
-				DB27F0C50ACB9AB90054ACA3 /* ParticleManager.h */,
-				DB27F0C60ACB9AB90054ACA3 /* ResourceBase.h */,
-				DB27F0C70ACB9AB90054ACA3 /* ResourceImage.h */,
-				DB27F0C80ACB9AB90054ACA3 /* ResourceManager.h */,
-				DB27F0C90ACB9AB90054ACA3 /* Resources.h */,
-				DB27F0CA0ACB9AB90054ACA3 /* ResourcesTypes.h */,
-				DB27F0CB0ACB9AB90054ACA3 /* ScriptManager.h */,
-				DB27F0CC0ACB9AB90054ACA3 /* SoundEntityManager.h */,
-				DB27F0CD0ACB9AB90054ACA3 /* SoundManager.h */,
-				DB27F0CE0ACB9AB90054ACA3 /* TextureManager.h */,
-			);
-			name = resources;
-			path = include/resources;
-			sourceTree = "<group>";
-		};
-		DB27F0D00ACB9AB90054ACA3 /* scene */ = {
-			isa = PBXGroup;
-			children = (
-				DB27F0D10ACB9AB90054ACA3 /* AnimationState.h */,
-				DB27F0D30ACB9AB90054ACA3 /* Camera.h */,
-				DB27F0D50ACB9AB90054ACA3 /* Camera3D.h */,
-				DB27F0D60ACB9AB90054ACA3 /* ColliderEntity.h */,
-				DB27F0D70ACB9AB90054ACA3 /* Entity.h */,
-				DB27F0D90ACB9AB90054ACA3 /* Entity3D.h */,
-				DB27F0DC0ACB9AB90054ACA3 /* Light.h */,
-				DB27F0DF0ACB9AB90054ACA3 /* Light3D.h */,
-				DB27F0E00ACB9AB90054ACA3 /* Light3DPoint.h */,
-				DB27F0E10ACB9AB90054ACA3 /* Light3DSpot.h */,
-				DB27F0E20ACB9AB90054ACA3 /* MeshEntity.h */,
-				DB27F0E40ACB9AB90054ACA3 /* Node.h */,
-				DB27F0E60ACB9AB90054ACA3 /* Node3D.h */,
-				DB27F0E70ACB9AB90054ACA3 /* NodeState.h */,
-				DB27F0E80ACB9AB90054ACA3 /* PortalContainer.h */,
-				DB27F0E90ACB9AB90054ACA3 /* RenderableContainer.h */,
-				DB27F0EA0ACB9AB90054ACA3 /* Scene.h */,
-				DB27F0EB0ACB9AB90054ACA3 /* SectorVisibility.h */,
-				DB27F0EC0ACB9AB90054ACA3 /* SoundEntity.h */,
-				DB27F0EE0ACB9AB90054ACA3 /* SubMeshEntity.h */,
-				DB27F0F80ACB9AB90054ACA3 /* World3D.h */,
-			);
-			name = scene;
-			path = include/scene;
-			sourceTree = "<group>";
-		};
-		DB27F0F90ACB9AB90054ACA3 /* sound */ = {
-			isa = PBXGroup;
-			children = (
-				DB4AFBF60D7077A100809E03 /* SoundEnvironment.h */,
-				DB27F0FA0ACB9AB90054ACA3 /* LowLevelSound.h */,
-				DB27F0FB0ACB9AB90054ACA3 /* MusicHandler.h */,
-				DB27F0FC0ACB9AB90054ACA3 /* Sound.h */,
-				DB27F0FD0ACB9AB90054ACA3 /* SoundChannel.h */,
-				DB27F0FE0ACB9AB90054ACA3 /* SoundData.h */,
-				DB27F0FF0ACB9AB90054ACA3 /* SoundEntityData.h */,
-				DB27F1000ACB9AB90054ACA3 /* SoundHandler.h */,
-			);
-			name = sound;
-			path = include/sound;
-			sourceTree = "<group>";
-		};
-		DB27F1010ACB9AB90054ACA3 /* system */ = {
-			isa = PBXGroup;
-			children = (
-				DB4AFBF70D7077B000809E03 /* MemoryManager.h */,
-				DB27F1020ACB9AB90054ACA3 /* BinTree.h */,
-				DB27F1030ACB9AB90054ACA3 /* Container.h */,
-				DB27F1040ACB9AB90054ACA3 /* LogicTimer.h */,
-				DB27F1050ACB9AB90054ACA3 /* LowLevelSystem.h */,
-				DB27F1060ACB9AB90054ACA3 /* Script.h */,
-				DB27F1070ACB9AB90054ACA3 /* SerializeClass.h */,
-				DB27F1080ACB9AB90054ACA3 /* String.h */,
-				DB27F1090ACB9AB90054ACA3 /* System.h */,
-				DB27F10A0ACB9AB90054ACA3 /* SystemTypes.h */,
-			);
-			name = system;
-			path = include/system;
-			sourceTree = "<group>";
-		};
 		DB4AFB440D7075B900809E03 /* haptic */ = {
 			isa = PBXGroup;
 			children = (
 				DB4AFB450D7075B900809E03 /* Haptic.cpp */,
-				DB4AFB460D7075B900809E03 /* LowLevelHaptic.cpp */,
-			);
-			name = haptic;
-			path = sources/haptic;
-			sourceTree = "<group>";
-		};
-		DB4AFBBE0D70771600809E03 /* haptic */ = {
-			isa = PBXGroup;
-			children = (
 				DB4AFBBF0D70771600809E03 /* Haptic.h */,
 				DB4AFBC00D70771600809E03 /* HapticForce.h */,
 				DB4AFBC10D70771600809E03 /* HapticShape.h */,
 				DB4AFBC20D70771600809E03 /* HapticSurface.h */,
 				DB4AFBC30D70771600809E03 /* HapticTypes.h */,
+				DB4AFB460D7075B900809E03 /* LowLevelHaptic.cpp */,
 				DB4AFBC40D70771600809E03 /* LowLevelHaptic.h */,
 			);
 			name = haptic;
-			path = include/haptic;
+			path = sources/haptic;
 			sourceTree = "<group>";
 		};
 		DBF848380AC76CC500BB15CD = {
 			isa = PBXGroup;
 			children = (
-				DBF848500AC76D3700BB15CD /* CoreSource */,
-				DBF84CDF0AC7803700BB15CD /* CoreInclude */,
+				DBF848500AC76D3700BB15CD /* Sources */,
 				DB00EF5011A9CF86007DFB32 /* Frameworks */,
 				DBF8484C0AC76D1A00BB15CD /* Products */,
 			);
@@ -996,9 +680,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DBF848500AC76D3700BB15CD /* CoreSource */ = {
+		DBF848500AC76D3700BB15CD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				DB27F0600ACB9AB90054ACA3 /* hpl.h */,
 				DBF849470AC76D5700BB15CD /* ai */,
 				DBF8494D0AC76D5700BB15CD /* game */,
 				DBF849530AC76D5700BB15CD /* graphics */,
@@ -1012,17 +697,22 @@
 				DBF84A130AC76D5800BB15CD /* sound */,
 				DBF84A180AC76D5800BB15CD /* system */,
 			);
-			name = CoreSource;
+			name = Sources;
 			sourceTree = "<group>";
 		};
 		DBF849470AC76D5700BB15CD /* ai */ = {
 			isa = PBXGroup;
 			children = (
 				DBF849480AC76D5700BB15CD /* AI.cpp */,
+				DB27F0180ACB9AB90054ACA3 /* AI.h */,
 				DBF849490AC76D5700BB15CD /* AINodeContainer.cpp */,
+				DB27F0190ACB9AB90054ACA3 /* AINodeContainer.h */,
 				DBF8494A0AC76D5700BB15CD /* AINodeGenerator.cpp */,
+				DB27F01A0ACB9AB90054ACA3 /* AINodeGenerator.h */,
 				DBF8494B0AC76D5700BB15CD /* AStar.cpp */,
+				DB27F01B0ACB9AB90054ACA3 /* AStar.h */,
 				DBF8494C0AC76D5700BB15CD /* StateMachine.cpp */,
+				DB27F01C0ACB9AB90054ACA3 /* StateMachine.h */,
 			);
 			name = ai;
 			path = sources/ai;
@@ -1032,10 +722,17 @@
 			isa = PBXGroup;
 			children = (
 				DBF8494E0AC76D5700BB15CD /* Game.cpp */,
+				DB27F01E0ACB9AB90054ACA3 /* Game.h */,
 				DBF8494F0AC76D5700BB15CD /* GameTypes.cpp */,
+				DB27F01F0ACB9AB90054ACA3 /* GameTypes.h */,
+				DB27F0200ACB9AB90054ACA3 /* LowLevelGameSetup.h */,
 				DBF849500AC76D5700BB15CD /* SaveGame.cpp */,
+				DB27F0210ACB9AB90054ACA3 /* SaveGame.h */,
 				DBF849510AC76D5700BB15CD /* ScriptFuncs.cpp */,
+				DB27F0220ACB9AB90054ACA3 /* ScriptFuncs.h */,
+				DB27F0230ACB9AB90054ACA3 /* Updateable.h */,
 				DBF849520AC76D5700BB15CD /* Updater.cpp */,
+				DB27F0240ACB9AB90054ACA3 /* Updater.h */,
 			);
 			name = game;
 			path = sources/game;
@@ -1044,50 +741,102 @@
 		DBF849530AC76D5700BB15CD /* graphics */ = {
 			isa = PBXGroup;
 			children = (
-				8EAA07B025588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp */,
-				8EAA07AE25588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp */,
-				8EAA07AF25588FEA007D7CD0 /* Material_Smoke2D.cpp */,
-				DBFBA0180B65E42A0021DAE2 /* Material_Water.cpp */,
-				DBCEE59C0B4B33190088A7E3 /* Beam.cpp */,
-				DBCEE59D0B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp */,
 				DBF849540AC76D5700BB15CD /* Animation.cpp */,
+				DB27F0260ACB9AB90054ACA3 /* Animation.h */,
 				DBF849550AC76D5700BB15CD /* AnimationTrack.cpp */,
+				DB27F0270ACB9AB90054ACA3 /* AnimationTrack.h */,
+				DBCEE59C0B4B33190088A7E3 /* Beam.cpp */,
+				DBCEE5A20B4B332E0088A7E3 /* Beam.h */,
 				DBF849570AC76D5700BB15CD /* BillBoard.cpp */,
+				DB27F0290ACB9AB90054ACA3 /* BillBoard.h */,
+				DB27F02A0ACB9AB90054ACA3 /* Bitmap2D.h */,
 				DBF849580AC76D5700BB15CD /* Bone.cpp */,
+				DB27F02B0ACB9AB90054ACA3 /* Bone.h */,
 				DBF849590AC76D5700BB15CD /* BoneState.cpp */,
+				DB27F02C0ACB9AB90054ACA3 /* BoneState.h */,
 				DBF8495A0AC76D5700BB15CD /* Color.cpp */,
+				DB27F02D0ACB9AB90054ACA3 /* Color.h */,
 				DBF8495B0AC76D5700BB15CD /* FontData.cpp */,
+				DB27F02E0ACB9AB90054ACA3 /* FontData.h */,
 				DBF8495C0AC76D5700BB15CD /* GfxObject.cpp */,
+				DB27F02F0ACB9AB90054ACA3 /* GfxObject.h */,
 				DBF8495D0AC76D5700BB15CD /* GPUProgram.cpp */,
+				DB27F0300ACB9AB90054ACA3 /* GPUProgram.h */,
 				DBF8495E0AC76D5700BB15CD /* Graphics.cpp */,
-				8EAA07AA25588AA2007D7CD0 /* Material_FontNormal.cpp */,
+				DB27F0310ACB9AB90054ACA3 /* Graphics.h */,
 				DBF8495F0AC76D5700BB15CD /* GraphicsDrawer.cpp */,
-				DBF849610AC76D5700BB15CD /* Material.cpp */,
+				DB27F0320ACB9AB90054ACA3 /* GraphicsDrawer.h */,
+				DB27F0330ACB9AB90054ACA3 /* GraphicsTypes.h */,
+				DB27F0350ACB9AB90054ACA3 /* LowLevelGraphics.h */,
+				DB27F0360ACB9AB90054ACA3 /* LowLevelPicture.h */,
 				DBF849620AC76D5700BB15CD /* Material_Additive.cpp */,
+				DB27F0380ACB9AB90054ACA3 /* Material_Additive.h */,
 				DBF849630AC76D5700BB15CD /* Material_Alpha.cpp */,
+				DB27F0390ACB9AB90054ACA3 /* Material_Alpha.h */,
 				DBF849640AC76D5700BB15CD /* Material_BaseLight.cpp */,
+				DB27F03A0ACB9AB90054ACA3 /* Material_BaseLight.h */,
 				DBF849650AC76D5700BB15CD /* Material_Bump.cpp */,
+				DB27F03B0ACB9AB90054ACA3 /* Material_Bump.h */,
 				DBF849660AC76D5700BB15CD /* Material_BumpColorSpec.cpp */,
+				DB27F03C0ACB9AB90054ACA3 /* Material_BumpColorSpec.h */,
 				DBF849670AC76D5700BB15CD /* Material_BumpSpec.cpp */,
+				DB27F03D0ACB9AB90054ACA3 /* Material_BumpSpec.h */,
 				DBF849690AC76D5700BB15CD /* Material_Diffuse.cpp */,
+				DB27F03F0ACB9AB90054ACA3 /* Material_Diffuse.h */,
+				8EAA07B025588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp */,
+				8EAA07B625589032007D7CD0 /* Material_DiffuseAdditive2D.h */,
+				8EAA07AE25588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp */,
+				8EAA07B725589032007D7CD0 /* Material_DiffuseAlpha2D.h */,
 				DBF8496D0AC76D5700BB15CD /* Material_DiffuseSpec.cpp */,
+				DB27F0430ACB9AB90054ACA3 /* Material_DiffuseSpec.h */,
+				DBCEE59D0B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp */,
+				DBCEE5A30B4B332E0088A7E3 /* Material_EnvMap_Reflect.h */,
 				DBF8496F0AC76D5700BB15CD /* Material_Flat.cpp */,
+				DB27F0450ACB9AB90054ACA3 /* Material_Flat.h */,
+				8EAA07AA25588AA2007D7CD0 /* Material_FontNormal.cpp */,
+				8EAA07A725588A9A007D7CD0 /* Material_FontNormal.h */,
 				DBF849710AC76D5700BB15CD /* Material_Modulative.cpp */,
+				DB27F0470ACB9AB90054ACA3 /* Material_Modulative.h */,
 				DBF849720AC76D5700BB15CD /* Material_ModulativeX2.cpp */,
+				DB27F0480ACB9AB90054ACA3 /* Material_ModulativeX2.h */,
+				8EAA07AF25588FEA007D7CD0 /* Material_Smoke2D.cpp */,
+				8EAA07B825589032007D7CD0 /* Material_Smoke2D.h */,
+				DBFBA0180B65E42A0021DAE2 /* Material_Water.cpp */,
+				DB4AFBE00D70773700809E03 /* Material_Water.h */,
+				DBF849610AC76D5700BB15CD /* Material.cpp */,
+				DB27F0370ACB9AB90054ACA3 /* Material.h */,
 				DBF849740AC76D5800BB15CD /* MaterialHandler.cpp */,
+				DB27F04A0ACB9AB90054ACA3 /* MaterialHandler.h */,
 				DBF849750AC76D5800BB15CD /* Mesh.cpp */,
+				DB27F04B0ACB9AB90054ACA3 /* Mesh.h */,
 				DBF849770AC76D5800BB15CD /* MeshCreator.cpp */,
+				DB27F04D0ACB9AB90054ACA3 /* MeshCreator.h */,
+				DB27F04E0ACB9AB90054ACA3 /* OcclusionQuery.h */,
 				DBF849780AC76D5800BB15CD /* ParticleEmitter.cpp */,
-				DBF8497A0AC76D5800BB15CD /* ParticleEmitter3D.cpp */,
+				DB27F04F0ACB9AB90054ACA3 /* ParticleEmitter.h */,
 				DBF8497B0AC76D5800BB15CD /* ParticleEmitter3D_UserData.cpp */,
+				DB27F0520ACB9AB90054ACA3 /* ParticleEmitter3D_UserData.h */,
+				DBF8497A0AC76D5800BB15CD /* ParticleEmitter3D.cpp */,
+				DB27F0510ACB9AB90054ACA3 /* ParticleEmitter3D.h */,
 				DBF8497C0AC76D5800BB15CD /* ParticleSystem3D.cpp */,
+				DB27F0530ACB9AB90054ACA3 /* ParticleSystem3D.h */,
 				DBF8497D0AC76D5800BB15CD /* Renderable.cpp */,
+				DB27F0550ACB9AB90054ACA3 /* Renderable.h */,
 				DBF8497F0AC76D5800BB15CD /* Renderer3D.cpp */,
+				DB27F0570ACB9AB90054ACA3 /* Renderer3D.h */,
 				DBF849800AC76D5800BB15CD /* RendererPostEffects.cpp */,
+				DB27F0580ACB9AB90054ACA3 /* RendererPostEffects.h */,
 				DBF849810AC76D5800BB15CD /* RenderList.cpp */,
+				DB27F0590ACB9AB90054ACA3 /* RenderList.h */,
 				DBF849830AC76D5800BB15CD /* RenderState.cpp */,
+				DB27F05B0ACB9AB90054ACA3 /* RenderState.h */,
 				DBF849840AC76D5800BB15CD /* Skeleton.cpp */,
+				DB27F05C0ACB9AB90054ACA3 /* Skeleton.h */,
 				DBF849850AC76D5800BB15CD /* SubMesh.cpp */,
+				DB27F05D0ACB9AB90054ACA3 /* SubMesh.h */,
+				DB27F05E0ACB9AB90054ACA3 /* Texture.h */,
+				DB27F05F0ACB9AB90054ACA3 /* VertexBuffer.h */,
+				DB4AFBE10D70773700809E03 /* VideoStream.h */,
 			);
 			name = graphics;
 			path = sources/graphics;
@@ -1096,52 +845,94 @@
 		DBF849860AC76D5800BB15CD /* impl */ = {
 			isa = PBXGroup;
 			children = (
-				8E84E78B260549B100DC6065 /* stb_vorbis.c */,
-				DBF9A1F6119A58DB00CCFDC9 /* VideoStreamTheora.cpp */,
-				DB4AFB8C0D70768B00809E03 /* OpenALSoundEnvironment.cpp */,
-				DB6E15BB0B6B174B00203538 /* scriptstring.cpp */,
-				DBCEE6250B4B35D50088A7E3 /* MeshLoaderColladaLoader.cpp */,
 				DBF849870AC76D5800BB15CD /* CGProgram.cpp */,
+				DB27F0620ACB9AB90054ACA3 /* CGProgram.h */,
 				DBF849880AC76D5800BB15CD /* CharacterBodyNewton.cpp */,
+				DB27F0630ACB9AB90054ACA3 /* CharacterBodyNewton.h */,
 				DBF849890AC76D5800BB15CD /* CollideShapeNewton.cpp */,
+				DB27F0640ACB9AB90054ACA3 /* CollideShapeNewton.h */,
+				8E815947260C1127001CBF63 /* GLSLProgram.cpp */,
+				8E815946260C1036001CBF63 /* GLSLProgram.h */,
 				DBF8498D0AC76D5800BB15CD /* KeyboardSDL.cpp */,
+				DB27F0670ACB9AB90054ACA3 /* KeyboardSDL.h */,
 				DBF8498E0AC76D5800BB15CD /* LowLevelGraphicsSDL.cpp */,
+				DB27F0680ACB9AB90054ACA3 /* LowLevelGraphicsSDL.h */,
 				DBF8498F0AC76D5800BB15CD /* LowLevelInputSDL.cpp */,
+				DB27F0690ACB9AB90054ACA3 /* LowLevelInputSDL.h */,
 				DBF849900AC76D5800BB15CD /* LowLevelPhysicsNewton.cpp */,
+				DB27F06A0ACB9AB90054ACA3 /* LowLevelPhysicsNewton.h */,
 				DBF849910AC76D5800BB15CD /* LowLevelResourcesSDL.cpp */,
+				DB27F06B0ACB9AB90054ACA3 /* LowLevelResourcesSDL.h */,
+				8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */,
+				8E84E7872605472700DC6065 /* LowLevelSoundOAL.h */,
 				8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */,
 				DBF849930AC76D5800BB15CD /* LowLevelSystemSDL.cpp */,
+				DB27F06D0ACB9AB90054ACA3 /* LowLevelSystemSDL.h */,
 				DBF849940AC76D5800BB15CD /* MeshLoaderCollada.cpp */,
+				DB27F06E0ACB9AB90054ACA3 /* MeshLoaderCollada.h */,
 				DBF849950AC76D5800BB15CD /* MeshLoaderColladaHelpers.cpp */,
+				DBCEE6250B4B35D50088A7E3 /* MeshLoaderColladaLoader.cpp */,
 				DBF849970AC76D5800BB15CD /* MeshLoaderMSH.cpp */,
+				DB27F0700ACB9AB90054ACA3 /* MeshLoaderMSH.h */,
 				DBF849980AC76D5800BB15CD /* MouseSDL.cpp */,
+				DB27F0710ACB9AB90054ACA3 /* MouseSDL.h */,
+				8E84E79526055B2500DC6065 /* OALSoundChannel.cpp */,
+				8E84E79426055ABF00DC6065 /* OALSoundChannel.h */,
+				8E84E7912605571100DC6065 /* OALSoundData.cpp */,
+				8E84E790260555F900DC6065 /* OALSoundData.h */,
 				DBF849990AC76D5800BB15CD /* OcclusionQueryOGL.cpp */,
+				DB27F0720ACB9AB90054ACA3 /* OcclusionQueryOGL.h */,
+				DB4AFB8C0D70768B00809E03 /* OpenALSoundEnvironment.cpp */,
+				DB4AFBF10D70776800809E03 /* OpenALSoundEnvironment.h */,
 				DBF8499B0AC76D5800BB15CD /* PhysicsBodyNewton.cpp */,
+				DB27F0740ACB9AB90054ACA3 /* PhysicsBodyNewton.h */,
 				DBF8499C0AC76D5800BB15CD /* PhysicsControllerNewton.cpp */,
+				DB27F0750ACB9AB90054ACA3 /* PhysicsControllerNewton.h */,
 				DBF8499D0AC76D5800BB15CD /* PhysicsJointBallNewton.cpp */,
+				DB27F0760ACB9AB90054ACA3 /* PhysicsJointBallNewton.h */,
 				DBF8499E0AC76D5800BB15CD /* PhysicsJointHingeNewton.cpp */,
+				DB27F0770ACB9AB90054ACA3 /* PhysicsJointHingeNewton.h */,
+				DB27F0780ACB9AB90054ACA3 /* PhysicsJointNewton.h */,
 				DBF8499F0AC76D5800BB15CD /* PhysicsJointScrewNewton.cpp */,
+				DB27F0790ACB9AB90054ACA3 /* PhysicsJointScrewNewton.h */,
 				DBF849A00AC76D5800BB15CD /* PhysicsJointSliderNewton.cpp */,
+				DB27F07A0ACB9AB90054ACA3 /* PhysicsJointSliderNewton.h */,
 				DBF849A10AC76D5800BB15CD /* PhysicsMaterialNewton.cpp */,
+				DB27F07B0ACB9AB90054ACA3 /* PhysicsMaterialNewton.h */,
 				DBF849A20AC76D5800BB15CD /* PhysicsWorldNewton.cpp */,
+				DB27F07C0ACB9AB90054ACA3 /* PhysicsWorldNewton.h */,
 				DBF849A30AC76D5800BB15CD /* platform */,
-				8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */,
-				8E9F74EB255317F7000324E8 /* SDLTGAFile.cpp */,
-				DBF849A60AC76D5800BB15CD /* SDLBitmap2D.cpp */,
-				DBF849A70AC76D5800BB15CD /* SDLFontData.cpp */,
-				DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */,
-				DBF849AA0AC76D5800BB15CD /* SDLTexture.cpp */,
-				DBF849AC0AC76D5800BB15CD /* SqScript.cpp */,
-				8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */,
-				DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */,
+				DB27F07D0ACB9AB90054ACA3 /* Platform.h */,
 				8EB7C3D8254F603E00277667 /* scripthelper.cpp */,
+				8E9728CF254CB92F0033415B /* scripthelper.h */,
+				DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */,
+				DB27F0840ACB9AB90054ACA3 /* scriptstdstring.h */,
+				8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */,
+				DB6E15BB0B6B174B00203538 /* scriptstring.cpp */,
+				DB6E15BA0B6B173800203538 /* scriptstring.h */,
+				DBF849A60AC76D5800BB15CD /* SDLBitmap2D.cpp */,
+				DB27F07E0ACB9AB90054ACA3 /* SDLBitmap2D.h */,
+				8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */,
+				8E9F748B2551E54E000324E8 /* SDLBMPFile.h */,
+				DBF849A70AC76D5800BB15CD /* SDLFontData.cpp */,
+				DB27F07F0ACB9AB90054ACA3 /* SDLFontData.h */,
+				DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */,
+				DB27F0800ACB9AB90054ACA3 /* SDLGameSetup.h */,
+				DBF849AA0AC76D5800BB15CD /* SDLTexture.cpp */,
+				DB27F0820ACB9AB90054ACA3 /* SDLTexture.h */,
+				8E9F74EB255317F7000324E8 /* SDLTGAFile.cpp */,
+				8E9F74E8255316E1000324E8 /* SDLTGAFile.h */,
+				DBF849AC0AC76D5800BB15CD /* SqScript.cpp */,
+				DB27F0830ACB9AB90054ACA3 /* SqScript.h */,
+				8E84E78B260549B100DC6065 /* stb_vorbis.c */,
+				8E84E78E26054A2F00DC6065 /* stb_vorbis.h */,
 				DBF849AE0AC76D5800BB15CD /* tinyXml */,
 				DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */,
-				8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */,
-				8E84E7912605571100DC6065 /* OALSoundData.cpp */,
-				8E84E79526055B2500DC6065 /* OALSoundChannel.cpp */,
+				DB27F0890ACB9AB90054ACA3 /* VertexBufferVBO.h */,
+				DBF9A1F6119A58DB00CCFDC9 /* VideoStreamTheora.cpp */,
+				DBF9A1F7119A58E600CCFDC9 /* VideoStreamTheora.h */,
 				8E84E79B260819F800DC6065 /* WAVFile.cpp */,
-				8E815947260C1127001CBF63 /* GLSLProgram.cpp */,
+				8E84E79A2608181B00DC6065 /* WAVFile.h */,
 			);
 			name = impl;
 			path = sources/impl;
@@ -1160,7 +951,9 @@
 			isa = PBXGroup;
 			children = (
 				DBF849AF0AC76D5800BB15CD /* tinystr.cpp */,
+				DB27F0860ACB9AB90054ACA3 /* tinystr.h */,
 				DBF849B00AC76D5800BB15CD /* tinyxml.cpp */,
+				DB27F0870ACB9AB90054ACA3 /* tinyxml.h */,
 				DBF849B10AC76D5800BB15CD /* tinyxmlerror.cpp */,
 				DBF849B20AC76D5800BB15CD /* tinyxmlparser.cpp */,
 			);
@@ -1170,14 +963,24 @@
 		DBF849B50AC76D5800BB15CD /* input */ = {
 			isa = PBXGroup;
 			children = (
-				DB4AFB9D0D7076A800809E03 /* ActionHaptic.cpp */,
 				DBF849B60AC76D5800BB15CD /* Action.cpp */,
+				DB27F08B0ACB9AB90054ACA3 /* Action.h */,
+				DB4AFB9D0D7076A800809E03 /* ActionHaptic.cpp */,
+				DB4AFBF40D70778200809E03 /* ActionHaptic.h */,
 				DBF849B70AC76D5800BB15CD /* ActionKeyboard.cpp */,
+				DB27F08C0ACB9AB90054ACA3 /* ActionKeyboard.h */,
 				DBF849B80AC76D5800BB15CD /* ActionMouseButton.cpp */,
+				DB27F08D0ACB9AB90054ACA3 /* ActionMouseButton.h */,
 				DBF849B90AC76D5800BB15CD /* Input.cpp */,
+				DB27F08E0ACB9AB90054ACA3 /* Input.h */,
 				DBF849BA0AC76D5800BB15CD /* InputDevice.cpp */,
+				DB27F08F0ACB9AB90054ACA3 /* InputDevice.h */,
+				DB27F0900ACB9AB90054ACA3 /* InputTypes.h */,
 				DBF849BB0AC76D5800BB15CD /* Keyboard.cpp */,
+				DB27F0910ACB9AB90054ACA3 /* Keyboard.h */,
+				DB27F0920ACB9AB90054ACA3 /* LowLevelInput.h */,
 				DBF849BC0AC76D5800BB15CD /* Mouse.cpp */,
+				DB27F0930ACB9AB90054ACA3 /* Mouse.h */,
 			);
 			name = input;
 			path = sources/input;
@@ -1186,13 +989,25 @@
 		DBF849BD0AC76D5800BB15CD /* math */ = {
 			isa = PBXGroup;
 			children = (
-				DB294E0F0C11DC6E005DA55C /* CRC.cpp */,
 				DBF849BE0AC76D5800BB15CD /* BoundingVolume.cpp */,
+				DB27F0950ACB9AB90054ACA3 /* BoundingVolume.h */,
+				DB294E0F0C11DC6E005DA55C /* CRC.cpp */,
+				DB294E120C11DC7C005DA55C /* CRC.h */,
 				DBF849BF0AC76D5800BB15CD /* Frustum.cpp */,
+				DB27F0960ACB9AB90054ACA3 /* Frustum.h */,
 				DBF849C00AC76D5800BB15CD /* Math.cpp */,
+				DB27F0970ACB9AB90054ACA3 /* Math.h */,
+				DB27F0980ACB9AB90054ACA3 /* MathTypes.h */,
+				DB27F0990ACB9AB90054ACA3 /* Matrix.h */,
 				DBF849C20AC76D5800BB15CD /* MeshTypes.cpp */,
+				DB27F09A0ACB9AB90054ACA3 /* MeshTypes.h */,
+				DB27F09B0ACB9AB90054ACA3 /* PidController.h */,
 				DBF849C30AC76D5800BB15CD /* Quaternion.cpp */,
+				DB27F09C0ACB9AB90054ACA3 /* Quaternion.h */,
 				DBF849C40AC76D5800BB15CD /* Spring.cpp */,
+				DB27F09D0ACB9AB90054ACA3 /* Spring.h */,
+				DB27F09E0ACB9AB90054ACA3 /* Vector2.h */,
+				DB27F09F0ACB9AB90054ACA3 /* Vector3.h */,
 			);
 			name = math;
 			path = sources/math;
@@ -1202,16 +1017,31 @@
 			isa = PBXGroup;
 			children = (
 				DBF849C70AC76D5800BB15CD /* CharacterBody.cpp */,
+				DB27F0A20ACB9AB90054ACA3 /* CharacterBody.h */,
+				DB27F0A30ACB9AB90054ACA3 /* CollideData.h */,
+				DB27F0A60ACB9AB90054ACA3 /* CollideShape.h */,
+				DB27F0A70ACB9AB90054ACA3 /* LowLevelPhysics.h */,
 				DBF849C90AC76D5800BB15CD /* Physics.cpp */,
+				DB27F0A80ACB9AB90054ACA3 /* Physics.h */,
 				DBF849CA0AC76D5800BB15CD /* PhysicsBody.cpp */,
+				DB27F0A90ACB9AB90054ACA3 /* PhysicsBody.h */,
 				DBF849CB0AC76D5800BB15CD /* PhysicsController.cpp */,
+				DB27F0AA0ACB9AB90054ACA3 /* PhysicsController.h */,
 				DBF849CC0AC76D5800BB15CD /* PhysicsJoint.cpp */,
+				DB27F0AB0ACB9AB90054ACA3 /* PhysicsJoint.h */,
 				DBF849CD0AC76D5800BB15CD /* PhysicsJointBall.cpp */,
+				DB27F0AC0ACB9AB90054ACA3 /* PhysicsJointBall.h */,
 				DBF849CE0AC76D5800BB15CD /* PhysicsJointHinge.cpp */,
+				DB27F0AD0ACB9AB90054ACA3 /* PhysicsJointHinge.h */,
 				DBF849CF0AC76D5800BB15CD /* PhysicsJointScrew.cpp */,
+				DB27F0AE0ACB9AB90054ACA3 /* PhysicsJointScrew.h */,
 				DBF849D00AC76D5800BB15CD /* PhysicsJointSlider.cpp */,
+				DB27F0AF0ACB9AB90054ACA3 /* PhysicsJointSlider.h */,
+				DB27F0B00ACB9AB90054ACA3 /* PhysicsMaterial.h */,
 				DBF849D10AC76D5800BB15CD /* PhysicsWorld.cpp */,
+				DB27F0B10ACB9AB90054ACA3 /* PhysicsWorld.h */,
 				DBF849D20AC76D5800BB15CD /* SurfaceData.cpp */,
+				DB27F0B20ACB9AB90054ACA3 /* SurfaceData.h */,
 			);
 			name = physics;
 			path = sources/physics;
@@ -1220,29 +1050,56 @@
 		DBF849D30AC76D5800BB15CD /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				DB4AFB9F0D7076B200809E03 /* VideoManager.cpp */,
 				DBF849D40AC76D5800BB15CD /* AnimationManager.cpp */,
+				DB27F0B40ACB9AB90054ACA3 /* AnimationManager.h */,
 				DBF849D50AC76D5800BB15CD /* ConfigFile.cpp */,
+				DB27F0B50ACB9AB90054ACA3 /* ConfigFile.h */,
 				DBF849D60AC76D5800BB15CD /* EntityLoader_Object.cpp */,
+				DB27F0B60ACB9AB90054ACA3 /* EntityLoader_Object.h */,
 				DBF849D70AC76D5800BB15CD /* FileSearcher.cpp */,
+				DB27F0B70ACB9AB90054ACA3 /* FileSearcher.h */,
 				DBF849D80AC76D5800BB15CD /* FontManager.cpp */,
+				DB27F0B80ACB9AB90054ACA3 /* FontManager.h */,
+				DB27F0B90ACB9AB90054ACA3 /* FrameBase.h */,
 				DBF849D90AC76D5800BB15CD /* FrameBitmap.cpp */,
+				DB27F0BA0ACB9AB90054ACA3 /* FrameBitmap.h */,
 				DBF849DA0AC76D5800BB15CD /* FrameTexture.cpp */,
+				DB27F0BB0ACB9AB90054ACA3 /* FrameTexture.h */,
 				DBF849DB0AC76D5800BB15CD /* GpuProgramManager.cpp */,
+				DB27F0BC0ACB9AB90054ACA3 /* GpuProgramManager.h */,
 				DBF849DD0AC76D5800BB15CD /* ImageManager.cpp */,
+				DB27F0BE0ACB9AB90054ACA3 /* ImageManager.h */,
 				DBF849DE0AC76D5800BB15CD /* LanguageFile.cpp */,
+				DB27F0BF0ACB9AB90054ACA3 /* LanguageFile.h */,
+				DB27F0C00ACB9AB90054ACA3 /* LowLevelResources.h */,
 				DBF849DF0AC76D5800BB15CD /* MaterialManager.cpp */,
+				DB27F0C10ACB9AB90054ACA3 /* MaterialManager.h */,
+				DB27F0C20ACB9AB90054ACA3 /* MeshLoader.h */,
 				DBF849E00AC76D5800BB15CD /* MeshLoaderHandler.cpp */,
+				DB27F0C30ACB9AB90054ACA3 /* MeshLoaderHandler.h */,
 				DBF849E10AC76D5800BB15CD /* MeshManager.cpp */,
+				DB27F0C40ACB9AB90054ACA3 /* MeshManager.h */,
 				DBF849E20AC76D5800BB15CD /* ParticleManager.cpp */,
+				DB27F0C50ACB9AB90054ACA3 /* ParticleManager.h */,
 				DBF849E30AC76D5800BB15CD /* ResourceBase.cpp */,
+				DB27F0C60ACB9AB90054ACA3 /* ResourceBase.h */,
 				DBF849E40AC76D5800BB15CD /* ResourceImage.cpp */,
+				DB27F0C70ACB9AB90054ACA3 /* ResourceImage.h */,
 				DBF849E50AC76D5800BB15CD /* ResourceManager.cpp */,
+				DB27F0C80ACB9AB90054ACA3 /* ResourceManager.h */,
 				DBF849E60AC76D5800BB15CD /* Resources.cpp */,
+				DB27F0C90ACB9AB90054ACA3 /* Resources.h */,
+				DB27F0CA0ACB9AB90054ACA3 /* ResourcesTypes.h */,
 				DBF849E70AC76D5800BB15CD /* ScriptManager.cpp */,
+				DB27F0CB0ACB9AB90054ACA3 /* ScriptManager.h */,
 				DBF849E80AC76D5800BB15CD /* SoundEntityManager.cpp */,
+				DB27F0CC0ACB9AB90054ACA3 /* SoundEntityManager.h */,
 				DBF849E90AC76D5800BB15CD /* SoundManager.cpp */,
+				DB27F0CD0ACB9AB90054ACA3 /* SoundManager.h */,
 				DBF849EA0AC76D5800BB15CD /* TextureManager.cpp */,
+				DB27F0CE0ACB9AB90054ACA3 /* TextureManager.h */,
+				DB4AFB9F0D7076B200809E03 /* VideoManager.cpp */,
+				DB4AFBF50D70779000809E03 /* VideoManager.h */,
 			);
 			name = resources;
 			path = sources/resources;
@@ -1252,24 +1109,45 @@
 			isa = PBXGroup;
 			children = (
 				DBF849ED0AC76D5800BB15CD /* AnimationState.cpp */,
+				DB27F0D10ACB9AB90054ACA3 /* AnimationState.h */,
+				DB27F0D30ACB9AB90054ACA3 /* Camera.h */,
 				DBF849F00AC76D5800BB15CD /* Camera3D.cpp */,
+				DB27F0D50ACB9AB90054ACA3 /* Camera3D.h */,
 				DBF849F10AC76D5800BB15CD /* ColliderEntity.cpp */,
+				DB27F0D60ACB9AB90054ACA3 /* ColliderEntity.h */,
 				DBF849F20AC76D5800BB15CD /* Entity.cpp */,
+				DB27F0D70ACB9AB90054ACA3 /* Entity.h */,
 				DBF849F40AC76D5800BB15CD /* Entity3D.cpp */,
+				DB27F0D90ACB9AB90054ACA3 /* Entity3D.h */,
 				DBF849F80AC76D5800BB15CD /* Light.cpp */,
+				DB27F0DC0ACB9AB90054ACA3 /* Light.h */,
 				DBF849FB0AC76D5800BB15CD /* Light3D.cpp */,
+				DB27F0DF0ACB9AB90054ACA3 /* Light3D.h */,
 				DBF849FC0AC76D5800BB15CD /* Light3DPoint.cpp */,
+				DB27F0E00ACB9AB90054ACA3 /* Light3DPoint.h */,
 				DBF849FD0AC76D5800BB15CD /* Light3DSpot.cpp */,
+				DB27F0E10ACB9AB90054ACA3 /* Light3DSpot.h */,
 				DBF849FE0AC76D5800BB15CD /* MeshEntity.cpp */,
+				DB27F0E20ACB9AB90054ACA3 /* MeshEntity.h */,
 				DBF84A000AC76D5800BB15CD /* Node.cpp */,
+				DB27F0E40ACB9AB90054ACA3 /* Node.h */,
 				DBF84A020AC76D5800BB15CD /* Node3D.cpp */,
+				DB27F0E60ACB9AB90054ACA3 /* Node3D.h */,
 				DBF84A030AC76D5800BB15CD /* NodeState.cpp */,
+				DB27F0E70ACB9AB90054ACA3 /* NodeState.h */,
 				DBF84A040AC76D5800BB15CD /* PortalContainer.cpp */,
+				DB27F0E80ACB9AB90054ACA3 /* PortalContainer.h */,
+				DB27F0E90ACB9AB90054ACA3 /* RenderableContainer.h */,
 				DBF84A050AC76D5800BB15CD /* Scene.cpp */,
+				DB27F0EA0ACB9AB90054ACA3 /* Scene.h */,
 				DBF84A060AC76D5800BB15CD /* SectorVisibility.cpp */,
+				DB27F0EB0ACB9AB90054ACA3 /* SectorVisibility.h */,
 				DBF84A070AC76D5800BB15CD /* SoundEntity.cpp */,
+				DB27F0EC0ACB9AB90054ACA3 /* SoundEntity.h */,
 				DBF84A090AC76D5800BB15CD /* SubMeshEntity.cpp */,
+				DB27F0EE0ACB9AB90054ACA3 /* SubMeshEntity.h */,
 				DBF84A120AC76D5800BB15CD /* World3D.cpp */,
+				DB27F0F80ACB9AB90054ACA3 /* World3D.h */,
 			);
 			name = scene;
 			path = sources/scene;
@@ -1279,10 +1157,18 @@
 			isa = PBXGroup;
 			children = (
 				DB4AFBA10D7076EE00809E03 /* LowLevelSound.cpp */,
+				DB27F0FA0ACB9AB90054ACA3 /* LowLevelSound.h */,
 				DBF84A140AC76D5800BB15CD /* MusicHandler.cpp */,
+				DB27F0FB0ACB9AB90054ACA3 /* MusicHandler.h */,
 				DBF84A150AC76D5800BB15CD /* Sound.cpp */,
+				DB27F0FC0ACB9AB90054ACA3 /* Sound.h */,
+				DB27F0FD0ACB9AB90054ACA3 /* SoundChannel.h */,
+				DB27F0FE0ACB9AB90054ACA3 /* SoundData.h */,
 				DBF84A160AC76D5800BB15CD /* SoundEntityData.cpp */,
+				DB27F0FF0ACB9AB90054ACA3 /* SoundEntityData.h */,
+				DB4AFBF60D7077A100809E03 /* SoundEnvironment.h */,
 				DBF84A170AC76D5800BB15CD /* SoundHandler.cpp */,
+				DB27F1000ACB9AB90054ACA3 /* SoundHandler.h */,
 			);
 			name = sound;
 			path = sources/sound;
@@ -1291,35 +1177,25 @@
 		DBF84A180AC76D5800BB15CD /* system */ = {
 			isa = PBXGroup;
 			children = (
-				DB4AFBA30D7076F900809E03 /* MemoryManager.cpp */,
+				DB27F1020ACB9AB90054ACA3 /* BinTree.h */,
 				DBF84A190AC76D5800BB15CD /* Container.cpp */,
+				DB27F1030ACB9AB90054ACA3 /* Container.h */,
 				DBF84A1A0AC76D5800BB15CD /* LogicTimer.cpp */,
+				DB27F1040ACB9AB90054ACA3 /* LogicTimer.h */,
+				DB27F1050ACB9AB90054ACA3 /* LowLevelSystem.h */,
+				DB4AFBA30D7076F900809E03 /* MemoryManager.cpp */,
+				DB4AFBF70D7077B000809E03 /* MemoryManager.h */,
+				DB27F1060ACB9AB90054ACA3 /* Script.h */,
 				DBF84A1B0AC76D5800BB15CD /* SerializeClass.cpp */,
+				DB27F1070ACB9AB90054ACA3 /* SerializeClass.h */,
 				DBF84A1C0AC76D5800BB15CD /* String.cpp */,
+				DB27F1080ACB9AB90054ACA3 /* String.h */,
 				DBF84A1D0AC76D5800BB15CD /* System.cpp */,
+				DB27F1090ACB9AB90054ACA3 /* System.h */,
+				DB27F10A0ACB9AB90054ACA3 /* SystemTypes.h */,
 			);
 			name = system;
 			path = sources/system;
-			sourceTree = "<group>";
-		};
-		DBF84CDF0AC7803700BB15CD /* CoreInclude */ = {
-			isa = PBXGroup;
-			children = (
-				DB27F0170ACB9AB90054ACA3 /* ai */,
-				DB27F01D0ACB9AB90054ACA3 /* game */,
-				DB27F0250ACB9AB90054ACA3 /* graphics */,
-				DB4AFBBE0D70771600809E03 /* haptic */,
-				DB27F0610ACB9AB90054ACA3 /* impl */,
-				DB27F08A0ACB9AB90054ACA3 /* input */,
-				DB27F0940ACB9AB90054ACA3 /* math */,
-				DB27F0A00ACB9AB90054ACA3 /* physics */,
-				DB27F0B30ACB9AB90054ACA3 /* resources */,
-				DB27F0D00ACB9AB90054ACA3 /* scene */,
-				DB27F0F90ACB9AB90054ACA3 /* sound */,
-				DB27F1010ACB9AB90054ACA3 /* system */,
-				DB27F0600ACB9AB90054ACA3 /* hpl.h */,
-			);
-			name = CoreInclude;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1612,16 +1488,12 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = (
-					include,
-					../dependencies/include,
-					../OALWrapper/include,
-				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../dependencieslib/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/sources ../dependencies/include";
 			};
 			name = Debug;
 		};
@@ -1677,15 +1549,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = (
-					include,
-					../dependencies/include,
-					../OALWrapper/include,
-				);
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../dependencieslib/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/sources ../dependencies/include";
 			};
 			name = Release;
 		};

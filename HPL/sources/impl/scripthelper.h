@@ -1,7 +1,7 @@
 #ifndef SCRIPTHELPER_H
 #define SCRIPTHELPER_H
 
-#include <angelscript.h>
+#include "angelscript.h"
 
 BEGIN_AS_NAMESPACE
 

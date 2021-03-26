@@ -20,7 +20,7 @@
 #define HPL_LOWLEVELSYSTEM_SDL_H
 
 #include "system/LowLevelSystem.h"
-#include <angelscript.h>
+#include "angelscript.h"
 #include <stdio.h>
 
 namespace hpl {

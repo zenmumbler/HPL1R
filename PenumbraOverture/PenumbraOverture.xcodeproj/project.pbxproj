@@ -587,11 +587,6 @@
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					../HPL/include,
-					../dependencies/include,
-					../OALWrapper/include,
-				);
 				INFOPLIST_FILE = "PenumbraOverture-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -609,6 +604,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.frictionalgames.PenumbraOverture;
 				PRODUCT_NAME = PenumbraOverture;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				USER_HEADER_SEARCH_PATHS = "../HPL/sources ../dependencies/include";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -626,11 +622,6 @@
 					"\"$(SRCROOT)/../dependencies/lib/macosx\"",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					../HPL/include,
-					../dependencies/include,
-					../OALWrapper/include,
-				);
 				INFOPLIST_FILE = "PenumbraOverture-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -648,6 +639,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.frictionalgames.PenumbraOverture;
 				PRODUCT_NAME = PenumbraOverture;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				USER_HEADER_SEARCH_PATHS = "../HPL/sources ../dependencies/include";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

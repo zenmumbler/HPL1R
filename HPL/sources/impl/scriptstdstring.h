@@ -11,7 +11,7 @@
 #ifndef SCRIPTSTDSTRING_H
 #define SCRIPTSTDSTRING_H
 
-#include <angelscript.h>
+#include "angelscript.h"
 #include <string>
 
 BEGIN_AS_NAMESPACE

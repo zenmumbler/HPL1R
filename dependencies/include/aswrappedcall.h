@@ -20,7 +20,7 @@
 // **************
 
 #include <new> // placement new
-#include <angelscript.h>
+#include "angelscript.h"
 
 #define asDECLARE_FUNCTION_WRAPPER(wrapper_name,func) \
     static void wrapper_name(asIScriptGeneric *gen)\

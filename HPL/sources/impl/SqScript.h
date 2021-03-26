@@ -21,7 +21,7 @@
 
 #include "system/Script.h"
 #include "impl/LowLevelSystemSDL.h"
-#include <angelscript.h>
+#include "angelscript.h"
 
 
 namespace hpl {
