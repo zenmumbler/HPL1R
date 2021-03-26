@@ -29,25 +29,6 @@
 		DB294E100C11DC6E005DA55C /* CRC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB294E0F0C11DC6E005DA55C /* CRC.cpp */; };
 		DB4AFB470D7075B900809E03 /* Haptic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB450D7075B900809E03 /* Haptic.cpp */; };
 		DB4AFB480D7075B900809E03 /* LowLevelHaptic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB460D7075B900809E03 /* LowLevelHaptic.cpp */; };
-		DB4AFB6C0D70766B00809E03 /* Gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB590D70766B00809E03 /* Gui.cpp */; };
-		DB4AFB6D0D70766B00809E03 /* GuiGfxElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB5A0D70766B00809E03 /* GuiGfxElement.cpp */; };
-		DB4AFB6E0D70766B00809E03 /* GuiMaterialBasicTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB5B0D70766B00809E03 /* GuiMaterialBasicTypes.cpp */; };
-		DB4AFB6F0D70766B00809E03 /* GuiPopUp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB5C0D70766B00809E03 /* GuiPopUp.cpp */; };
-		DB4AFB700D70766B00809E03 /* GuiPopUpMessageBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB5D0D70766B00809E03 /* GuiPopUpMessageBox.cpp */; };
-		DB4AFB710D70766B00809E03 /* GuiSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB5E0D70766B00809E03 /* GuiSet.cpp */; };
-		DB4AFB720D70766B00809E03 /* GuiSkin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB5F0D70766B00809E03 /* GuiSkin.cpp */; };
-		DB4AFB730D70766B00809E03 /* Widget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB600D70766B00809E03 /* Widget.cpp */; };
-		DB4AFB740D70766B00809E03 /* WidgetBaseClasses.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB610D70766B00809E03 /* WidgetBaseClasses.cpp */; };
-		DB4AFB750D70766B00809E03 /* WidgetButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB620D70766B00809E03 /* WidgetButton.cpp */; };
-		DB4AFB760D70766B00809E03 /* WidgetCheckBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB630D70766B00809E03 /* WidgetCheckBox.cpp */; };
-		DB4AFB770D70766B00809E03 /* WidgetComboBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB640D70766B00809E03 /* WidgetComboBox.cpp */; };
-		DB4AFB780D70766B00809E03 /* WidgetFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB650D70766B00809E03 /* WidgetFrame.cpp */; };
-		DB4AFB790D70766B00809E03 /* WidgetImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB660D70766B00809E03 /* WidgetImage.cpp */; };
-		DB4AFB7A0D70766B00809E03 /* WidgetLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB670D70766B00809E03 /* WidgetLabel.cpp */; };
-		DB4AFB7B0D70766B00809E03 /* WidgetListBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB680D70766B00809E03 /* WidgetListBox.cpp */; };
-		DB4AFB7C0D70766B00809E03 /* WidgetSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB690D70766B00809E03 /* WidgetSlider.cpp */; };
-		DB4AFB7D0D70766B00809E03 /* WidgetTextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB6A0D70766B00809E03 /* WidgetTextBox.cpp */; };
-		DB4AFB7E0D70766B00809E03 /* WidgetWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB6B0D70766B00809E03 /* WidgetWindow.cpp */; };
 		DB4AFB9B0D70768B00809E03 /* OpenALSoundEnvironment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB8C0D70768B00809E03 /* OpenALSoundEnvironment.cpp */; };
 		DB4AFB9E0D7076A800809E03 /* ActionHaptic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB9D0D7076A800809E03 /* ActionHaptic.cpp */; };
 		DB4AFBA20D7076EE00809E03 /* LowLevelSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFBA10D7076EE00809E03 /* LowLevelSound.cpp */; };
@@ -441,51 +422,11 @@
 		DB294E120C11DC7C005DA55C /* CRC.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRC.h; sourceTree = "<group>"; };
 		DB4AFB450D7075B900809E03 /* Haptic.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Haptic.cpp; sourceTree = "<group>"; };
 		DB4AFB460D7075B900809E03 /* LowLevelHaptic.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = LowLevelHaptic.cpp; sourceTree = "<group>"; };
-		DB4AFB590D70766B00809E03 /* Gui.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Gui.cpp; sourceTree = "<group>"; };
-		DB4AFB5A0D70766B00809E03 /* GuiGfxElement.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GuiGfxElement.cpp; sourceTree = "<group>"; };
-		DB4AFB5B0D70766B00809E03 /* GuiMaterialBasicTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GuiMaterialBasicTypes.cpp; sourceTree = "<group>"; };
-		DB4AFB5C0D70766B00809E03 /* GuiPopUp.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GuiPopUp.cpp; sourceTree = "<group>"; };
-		DB4AFB5D0D70766B00809E03 /* GuiPopUpMessageBox.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GuiPopUpMessageBox.cpp; sourceTree = "<group>"; };
-		DB4AFB5E0D70766B00809E03 /* GuiSet.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GuiSet.cpp; sourceTree = "<group>"; };
-		DB4AFB5F0D70766B00809E03 /* GuiSkin.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GuiSkin.cpp; sourceTree = "<group>"; };
-		DB4AFB600D70766B00809E03 /* Widget.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Widget.cpp; sourceTree = "<group>"; };
-		DB4AFB610D70766B00809E03 /* WidgetBaseClasses.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = WidgetBaseClasses.cpp; sourceTree = "<group>"; };
-		DB4AFB620D70766B00809E03 /* WidgetButton.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = WidgetButton.cpp; sourceTree = "<group>"; };
-		DB4AFB630D70766B00809E03 /* WidgetCheckBox.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = WidgetCheckBox.cpp; sourceTree = "<group>"; };
-		DB4AFB640D70766B00809E03 /* WidgetComboBox.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = WidgetComboBox.cpp; sourceTree = "<group>"; };
-		DB4AFB650D70766B00809E03 /* WidgetFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = WidgetFrame.cpp; sourceTree = "<group>"; };
-		DB4AFB660D70766B00809E03 /* WidgetImage.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = WidgetImage.cpp; sourceTree = "<group>"; };
-		DB4AFB670D70766B00809E03 /* WidgetLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = WidgetLabel.cpp; sourceTree = "<group>"; };
-		DB4AFB680D70766B00809E03 /* WidgetListBox.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = WidgetListBox.cpp; sourceTree = "<group>"; };
-		DB4AFB690D70766B00809E03 /* WidgetSlider.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = WidgetSlider.cpp; sourceTree = "<group>"; };
-		DB4AFB6A0D70766B00809E03 /* WidgetTextBox.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = WidgetTextBox.cpp; sourceTree = "<group>"; };
-		DB4AFB6B0D70766B00809E03 /* WidgetWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = WidgetWindow.cpp; sourceTree = "<group>"; };
 		DB4AFB8C0D70768B00809E03 /* OpenALSoundEnvironment.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = OpenALSoundEnvironment.cpp; sourceTree = "<group>"; };
 		DB4AFB9D0D7076A800809E03 /* ActionHaptic.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ActionHaptic.cpp; sourceTree = "<group>"; };
 		DB4AFB9F0D7076B200809E03 /* VideoManager.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = VideoManager.cpp; sourceTree = "<group>"; };
 		DB4AFBA10D7076EE00809E03 /* LowLevelSound.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = LowLevelSound.cpp; sourceTree = "<group>"; };
 		DB4AFBA30D7076F900809E03 /* MemoryManager.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryManager.cpp; sourceTree = "<group>"; };
-		DB4AFBA80D70771600809E03 /* Gui.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Gui.h; sourceTree = "<group>"; };
-		DB4AFBA90D70771600809E03 /* GuiGfxElement.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GuiGfxElement.h; sourceTree = "<group>"; };
-		DB4AFBAB0D70771600809E03 /* GuiMaterial.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GuiMaterial.h; sourceTree = "<group>"; };
-		DB4AFBAC0D70771600809E03 /* GuiMaterialBasicTypes.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GuiMaterialBasicTypes.h; sourceTree = "<group>"; };
-		DB4AFBAD0D70771600809E03 /* GuiPopUp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GuiPopUp.h; sourceTree = "<group>"; };
-		DB4AFBAE0D70771600809E03 /* GuiPopUpMessageBox.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GuiPopUpMessageBox.h; sourceTree = "<group>"; };
-		DB4AFBAF0D70771600809E03 /* GuiSet.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GuiSet.h; sourceTree = "<group>"; };
-		DB4AFBB00D70771600809E03 /* GuiSkin.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GuiSkin.h; sourceTree = "<group>"; };
-		DB4AFBB10D70771600809E03 /* GuiTypes.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GuiTypes.h; sourceTree = "<group>"; };
-		DB4AFBB20D70771600809E03 /* Widget.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Widget.h; sourceTree = "<group>"; };
-		DB4AFBB30D70771600809E03 /* WidgetBaseClasses.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WidgetBaseClasses.h; sourceTree = "<group>"; };
-		DB4AFBB40D70771600809E03 /* WidgetButton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WidgetButton.h; sourceTree = "<group>"; };
-		DB4AFBB50D70771600809E03 /* WidgetCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WidgetCheckBox.h; sourceTree = "<group>"; };
-		DB4AFBB60D70771600809E03 /* WidgetComboBox.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WidgetComboBox.h; sourceTree = "<group>"; };
-		DB4AFBB70D70771600809E03 /* WidgetFrame.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WidgetFrame.h; sourceTree = "<group>"; };
-		DB4AFBB80D70771600809E03 /* WidgetImage.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WidgetImage.h; sourceTree = "<group>"; };
-		DB4AFBB90D70771600809E03 /* WidgetLabel.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WidgetLabel.h; sourceTree = "<group>"; };
-		DB4AFBBA0D70771600809E03 /* WidgetListBox.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WidgetListBox.h; sourceTree = "<group>"; };
-		DB4AFBBB0D70771600809E03 /* WidgetSlider.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WidgetSlider.h; sourceTree = "<group>"; };
-		DB4AFBBC0D70771600809E03 /* WidgetTextBox.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WidgetTextBox.h; sourceTree = "<group>"; };
-		DB4AFBBD0D70771600809E03 /* WidgetWindow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WidgetWindow.h; sourceTree = "<group>"; };
 		DB4AFBBF0D70771600809E03 /* Haptic.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Haptic.h; sourceTree = "<group>"; };
 		DB4AFBC00D70771600809E03 /* HapticForce.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = HapticForce.h; sourceTree = "<group>"; };
 		DB4AFBC10D70771600809E03 /* HapticShape.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = HapticShape.h; sourceTree = "<group>"; };
@@ -1023,62 +964,6 @@
 			path = sources/haptic;
 			sourceTree = "<group>";
 		};
-		DB4AFB580D70766B00809E03 /* gui */ = {
-			isa = PBXGroup;
-			children = (
-				DB4AFB590D70766B00809E03 /* Gui.cpp */,
-				DB4AFB5A0D70766B00809E03 /* GuiGfxElement.cpp */,
-				DB4AFB5B0D70766B00809E03 /* GuiMaterialBasicTypes.cpp */,
-				DB4AFB5C0D70766B00809E03 /* GuiPopUp.cpp */,
-				DB4AFB5D0D70766B00809E03 /* GuiPopUpMessageBox.cpp */,
-				DB4AFB5E0D70766B00809E03 /* GuiSet.cpp */,
-				DB4AFB5F0D70766B00809E03 /* GuiSkin.cpp */,
-				DB4AFB600D70766B00809E03 /* Widget.cpp */,
-				DB4AFB610D70766B00809E03 /* WidgetBaseClasses.cpp */,
-				DB4AFB620D70766B00809E03 /* WidgetButton.cpp */,
-				DB4AFB630D70766B00809E03 /* WidgetCheckBox.cpp */,
-				DB4AFB640D70766B00809E03 /* WidgetComboBox.cpp */,
-				DB4AFB650D70766B00809E03 /* WidgetFrame.cpp */,
-				DB4AFB660D70766B00809E03 /* WidgetImage.cpp */,
-				DB4AFB670D70766B00809E03 /* WidgetLabel.cpp */,
-				DB4AFB680D70766B00809E03 /* WidgetListBox.cpp */,
-				DB4AFB690D70766B00809E03 /* WidgetSlider.cpp */,
-				DB4AFB6A0D70766B00809E03 /* WidgetTextBox.cpp */,
-				DB4AFB6B0D70766B00809E03 /* WidgetWindow.cpp */,
-			);
-			name = gui;
-			path = sources/gui;
-			sourceTree = "<group>";
-		};
-		DB4AFBA70D70771600809E03 /* gui */ = {
-			isa = PBXGroup;
-			children = (
-				DB4AFBA80D70771600809E03 /* Gui.h */,
-				DB4AFBA90D70771600809E03 /* GuiGfxElement.h */,
-				DB4AFBAB0D70771600809E03 /* GuiMaterial.h */,
-				DB4AFBAC0D70771600809E03 /* GuiMaterialBasicTypes.h */,
-				DB4AFBAD0D70771600809E03 /* GuiPopUp.h */,
-				DB4AFBAE0D70771600809E03 /* GuiPopUpMessageBox.h */,
-				DB4AFBAF0D70771600809E03 /* GuiSet.h */,
-				DB4AFBB00D70771600809E03 /* GuiSkin.h */,
-				DB4AFBB10D70771600809E03 /* GuiTypes.h */,
-				DB4AFBB20D70771600809E03 /* Widget.h */,
-				DB4AFBB30D70771600809E03 /* WidgetBaseClasses.h */,
-				DB4AFBB40D70771600809E03 /* WidgetButton.h */,
-				DB4AFBB50D70771600809E03 /* WidgetCheckBox.h */,
-				DB4AFBB60D70771600809E03 /* WidgetComboBox.h */,
-				DB4AFBB70D70771600809E03 /* WidgetFrame.h */,
-				DB4AFBB80D70771600809E03 /* WidgetImage.h */,
-				DB4AFBB90D70771600809E03 /* WidgetLabel.h */,
-				DB4AFBBA0D70771600809E03 /* WidgetListBox.h */,
-				DB4AFBBB0D70771600809E03 /* WidgetSlider.h */,
-				DB4AFBBC0D70771600809E03 /* WidgetTextBox.h */,
-				DB4AFBBD0D70771600809E03 /* WidgetWindow.h */,
-			);
-			name = gui;
-			path = include/gui;
-			sourceTree = "<group>";
-		};
 		DB4AFBBE0D70771600809E03 /* haptic */ = {
 			isa = PBXGroup;
 			children = (
@@ -1117,7 +1002,6 @@
 				DBF849470AC76D5700BB15CD /* ai */,
 				DBF8494D0AC76D5700BB15CD /* game */,
 				DBF849530AC76D5700BB15CD /* graphics */,
-				DB4AFB580D70766B00809E03 /* gui */,
 				DB4AFB440D7075B900809E03 /* haptic */,
 				DBF849860AC76D5800BB15CD /* impl */,
 				DBF849B50AC76D5800BB15CD /* input */,
@@ -1424,7 +1308,6 @@
 				DB27F0170ACB9AB90054ACA3 /* ai */,
 				DB27F01D0ACB9AB90054ACA3 /* game */,
 				DB27F0250ACB9AB90054ACA3 /* graphics */,
-				DB4AFBA70D70771600809E03 /* gui */,
 				DB4AFBBE0D70771600809E03 /* haptic */,
 				DB27F0610ACB9AB90054ACA3 /* impl */,
 				DB27F08A0ACB9AB90054ACA3 /* input */,
@@ -1665,26 +1548,7 @@
 				DB294E100C11DC6E005DA55C /* CRC.cpp in Sources */,
 				DB4AFB470D7075B900809E03 /* Haptic.cpp in Sources */,
 				DB4AFB480D7075B900809E03 /* LowLevelHaptic.cpp in Sources */,
-				DB4AFB6C0D70766B00809E03 /* Gui.cpp in Sources */,
-				DB4AFB6D0D70766B00809E03 /* GuiGfxElement.cpp in Sources */,
 				8E84AA02254CACE0000EA53C /* scriptstring_utils.cpp in Sources */,
-				DB4AFB6E0D70766B00809E03 /* GuiMaterialBasicTypes.cpp in Sources */,
-				DB4AFB6F0D70766B00809E03 /* GuiPopUp.cpp in Sources */,
-				DB4AFB700D70766B00809E03 /* GuiPopUpMessageBox.cpp in Sources */,
-				DB4AFB710D70766B00809E03 /* GuiSet.cpp in Sources */,
-				DB4AFB720D70766B00809E03 /* GuiSkin.cpp in Sources */,
-				DB4AFB730D70766B00809E03 /* Widget.cpp in Sources */,
-				DB4AFB740D70766B00809E03 /* WidgetBaseClasses.cpp in Sources */,
-				DB4AFB750D70766B00809E03 /* WidgetButton.cpp in Sources */,
-				DB4AFB760D70766B00809E03 /* WidgetCheckBox.cpp in Sources */,
-				DB4AFB770D70766B00809E03 /* WidgetComboBox.cpp in Sources */,
-				DB4AFB780D70766B00809E03 /* WidgetFrame.cpp in Sources */,
-				DB4AFB790D70766B00809E03 /* WidgetImage.cpp in Sources */,
-				DB4AFB7A0D70766B00809E03 /* WidgetLabel.cpp in Sources */,
-				DB4AFB7B0D70766B00809E03 /* WidgetListBox.cpp in Sources */,
-				DB4AFB7C0D70766B00809E03 /* WidgetSlider.cpp in Sources */,
-				DB4AFB7D0D70766B00809E03 /* WidgetTextBox.cpp in Sources */,
-				DB4AFB7E0D70766B00809E03 /* WidgetWindow.cpp in Sources */,
 				DB4AFB9B0D70768B00809E03 /* OpenALSoundEnvironment.cpp in Sources */,
 				DB4AFB9E0D7076A800809E03 /* ActionHaptic.cpp in Sources */,
 				DB4AFBA20D7076EE00809E03 /* LowLevelSound.cpp in Sources */,

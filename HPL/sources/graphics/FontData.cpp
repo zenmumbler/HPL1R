@@ -28,9 +28,6 @@
 
 #include "resources/ResourceImage.h"
 
-#include "gui/GuiGfxElement.h"
-#include "gui/Gui.h"
-
 namespace hpl {
 
 
@@ -41,11 +38,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cGlyph::cGlyph(	cGfxObject *apObject, cGuiGfxElement *apGuiGfx,const cVector2f &avOffset,
+	cGlyph::cGlyph(	cGfxObject *apObject, const cVector2f &avOffset,
 					const cVector2f &avSize, float afAdvance)
 	{
 		mpGfxObject = apObject;
-		mpGuiGfx = apGuiGfx;
 		mvOffset = avOffset;
 		mvSize = avSize;
 		mfAdvance = afAdvance;
@@ -56,8 +52,6 @@ namespace hpl {
 	cGlyph::~cGlyph()
 	{
 		if(mpGfxObject) hplDelete(mpGfxObject);
-		if(mpGuiGfx) hplDelete(mpGuiGfx);
-
 	}
 
 	//-----------------------------------------------------------------------
@@ -351,10 +345,10 @@ namespace hpl {
 
 		//////////////////////////
 		//Gui gfx
-		cGuiGfxElement* pGuiGfx = mpGui->CreateGfxFilledRect(cColor(1,1),eGuiMaterial_FontNormal,false);
-		cResourceImage *pImage = pObject->GetMaterial()->GetImage();
-		pImage->IncUserCount();
-		pGuiGfx->AddImage(pImage);
+//		cGuiGfxElement* pGuiGfx = mpGui->CreateGfxFilledRect(cColor(1,1),eGuiMaterial_FontNormal,false);
+//		cResourceImage *pImage = pObject->GetMaterial()->GetImage();
+//		pImage->IncUserCount();
+//		pGuiGfx->AddImage(pImage);
 
 		//////////////////////////
 		//Sizes
@@ -368,7 +362,7 @@ namespace hpl {
 
 		float fAdvance = ((float)alAdvance)/((float)avFontSize.x) * mvSizeRatio.x;
 
-		cGlyph* pGlyph = hplNew( cGlyph,(pObject,pGuiGfx,vOffset,vSize,fAdvance));
+		cGlyph* pGlyph = hplNew( cGlyph,(pObject,vOffset,vSize,fAdvance));
 
 		return pGlyph;
 	}

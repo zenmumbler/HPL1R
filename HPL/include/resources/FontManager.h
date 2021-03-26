@@ -25,13 +25,12 @@ namespace hpl {
 
 	class cGraphics;
 	class cResources;
-	class cGui;
 	class iFontData;
 
 	class cFontManager : public iResourceManager
 	{
 	public:
-		cFontManager(cGraphics* apGraphics,cGui *apGui,cResources *apResources);
+		cFontManager(cGraphics* apGraphics, cResources *apResources);
 		~cFontManager();
 
 		iResourceBase* Create(const tString& asName);
@@ -51,7 +50,6 @@ namespace hpl {
 	private:
 		cGraphics* mpGraphics;
 		cResources *mpResources;
-		cGui *mpGui;
 	};
 
 };

@@ -61,7 +61,6 @@ namespace hpl {
 	class cWorld3D;
 	class iEntity3D;
 	class cLanguageFile;
-	class cGui;
 
 	//-------------------------------------------------------
 
@@ -120,7 +119,7 @@ namespace hpl {
 		cResources(iLowLevelResources *apLowLevelResources,iLowLevelGraphics *apLowLevelGraphics);
 		~cResources();
 
-		void Init(cGraphics* apGraphics,cSystem *apSystem, cSound* apSound, cScene *apScene, cGui *apGui);
+		void Init(cGraphics* apGraphics,cSystem *apSystem, cSound* apSound, cScene *apScene);
 
 		void Update(float afTimeStep);
 

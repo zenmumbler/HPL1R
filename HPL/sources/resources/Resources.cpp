@@ -105,8 +105,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cResources::Init(	cGraphics* apGraphics,cSystem *apSystem, cSound* apSound, cScene *apScene,
-							cGui *apGui)
+	void cResources::Init(	cGraphics* apGraphics,cSystem *apSystem, cSound* apSound, cScene *apScene)
 	{
 		Log("Initializing Resources Module\n");
 		Log("--------------------------------------------------------\n");
@@ -126,7 +125,7 @@ namespace hpl {
 		mlstManagers.push_back(mpParticleManager);
 		mpSoundManager = hplNew( cSoundManager,(apSound, this) );
 		mlstManagers.push_back(mpParticleManager);
-		mpFontManager = hplNew( cFontManager,(apGraphics,apGui, this) );
+		mpFontManager = hplNew( cFontManager,(apGraphics, this) );
 		mlstManagers.push_back(mpFontManager);
 		mpScriptManager = hplNew( cScriptManager,(apSystem, this) );
 		mlstManagers.push_back(mpScriptManager);

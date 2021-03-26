@@ -34,20 +34,17 @@ namespace hpl {
 	class cGraphicsDrawer;
 	class cGfxObject;
 	class iBitmap2D;
-	class cGuiGfxElement;
-	class cGui;
 
 	//------------------------------------------------
 
 	class cGlyph
 	{
 	public:
-		cGlyph(	cGfxObject *apObject,cGuiGfxElement *apGuiGfx,const cVector2f &avOffset,
+		cGlyph(	cGfxObject *apObject, const cVector2f &avOffset,
 				const cVector2f &avSize, float afAdvance);
 		~cGlyph();
 
 		cGfxObject *mpGfxObject;
-		cGuiGfxElement *mpGuiGfx;
 		cVector2f mvOffset;
 		cVector2f mvSize;
 		float mfAdvance;
@@ -73,12 +70,10 @@ namespace hpl {
 		/**
 		 * Used internally
 		 */
-		void SetUp(cGraphicsDrawer *apGraphicsDrawer, iLowLevelResources* apLowLevelResources,
-					cGui *apGui)
+		void SetUp(cGraphicsDrawer *apGraphicsDrawer, iLowLevelResources* apLowLevelResources)
 		{
 			mpGraphicsDrawer = apGraphicsDrawer;
 			mpLowLevelResources = apLowLevelResources;
-			mpGui = apGui;
 		}
 
 		/**
@@ -148,7 +143,6 @@ namespace hpl {
 		iLowLevelGraphics* mpLowLevelGraphics;
 		iLowLevelResources* mpLowLevelResources;
 		cGraphicsDrawer *mpGraphicsDrawer;
-		cGui *mpGui;
 
 		tGlyphVec mvGlyphs;
 

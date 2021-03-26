@@ -30,8 +30,6 @@
 #include "game/ScriptFuncs.h"
 #include "graphics/Renderer3D.h"
 
-#include "gui/Gui.h"
-
 #include "system/LowLevelSystem.h"
 #include "game/LowLevelGameSetup.h"
 
@@ -199,9 +197,6 @@ namespace hpl {
 		Log(" Creating ai module\n");
 		mpAI = mpGameSetup->CreateAI();
 
-		Log(" Creating gui module\n");
-		mpGui = hplNew(cGui,());
-
 		Log(" Creating haptic module\n");
 #ifdef INCLUDE_HAPTIC
 		mpHaptic = mpGameSetup->CreateHaptic();
@@ -217,7 +212,7 @@ namespace hpl {
 
 
 		//Init the resources
-		mpResources->Init(mpGraphics,mpSystem, mpSound,mpScene,mpGui);
+		mpResources->Init(mpGraphics,mpSystem, mpSound,mpScene);
 
 		//Init the graphics
 		mpGraphics->Init(aVars.GetInt("ScreenWidth",800),
@@ -249,9 +244,6 @@ namespace hpl {
 		//Init AI
 		mpAI->Init();
 
-		//Init Gui
-		mpGui->Init(mpResources,mpGraphics,mpSound,mpScene);
-
 		//Init haptic
 		if(mpHaptic) mpHaptic->Init(mpResources);
 
@@ -267,7 +259,6 @@ namespace hpl {
 		mpUpdater->AddGlobalUpdate(mpScene);
 		mpUpdater->AddGlobalUpdate(mpSound);
 		mpUpdater->AddGlobalUpdate(mpAI);
-		mpUpdater->AddGlobalUpdate(mpGui);
 		mpUpdater->AddGlobalUpdate(mpResources);
 		if(mpHaptic) mpUpdater->AddGlobalUpdate(mpHaptic);
 
@@ -310,7 +301,6 @@ namespace hpl {
 
 		hplDelete(mpUpdater);
 
-		hplDelete(mpGui);
 		hplDelete(mpScene);
 		if(mpHaptic) hplDelete(mpHaptic);
 		hplDelete(mpInput);
@@ -549,16 +539,7 @@ namespace hpl {
 		return mpAI;
 	}
 
-
 	//-----------------------------------------------------------------------
-
-	cGui* cGame::GetGui()
-	{
-		return mpGui;
-	}
-
-	//-----------------------------------------------------------------------
-
 
 	cHaptic* cGame::GetHaptic()
 	{
