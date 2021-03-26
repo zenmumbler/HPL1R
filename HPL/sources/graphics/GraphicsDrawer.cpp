@@ -98,8 +98,7 @@ namespace hpl {
 	}
 
 	void cGraphicsDrawer::DrawGfxObject(cGfxObject* apObject, const cVector3f& avPos,
-										const cVector2f& avSize, const cColor& aColor,
-										bool abFlipH, bool abFlipV, float afAngle)
+										const cVector2f& avSize, const cColor& aColor)
 	{
 		FlushImage(apObject);
 
@@ -108,9 +107,6 @@ namespace hpl {
 		BuffObj.mvTransform = avPos;
 		BuffObj.mvSize= avSize;
 		BuffObj.mColor = aColor;
-		BuffObj.mbFlipH = abFlipH;
-		BuffObj.mbFlipV = abFlipV;
-		BuffObj.mfAngle = afAngle;
 
 		BuffObj.mbIsColorAndSize = true;
 
@@ -168,58 +164,27 @@ namespace hpl {
 					vPos[2] = cVector3f(fW,fH,0);
 					vPos[3] = cVector3f(-fW,fH,0);
 
-					if (pObj->mfAngle != 0)
-					{
-						cMatrixf mtxRot = cMath::MatrixRotateZ(pObj->mfAngle);
-						vPos[0] = cMath::MatrixMul(mtxRot,vPos[0]);
-						vPos[1] = cMath::MatrixMul(mtxRot,vPos[1]);
-						vPos[2] = cMath::MatrixMul(mtxRot,vPos[2]);
-						vPos[3] = cMath::MatrixMul(mtxRot,vPos[3]);
-					}
-
 					vPos[0] = cMath::MatrixMul(mtxTrans,vPos[0]);
 					vPos[1] = cMath::MatrixMul(mtxTrans,vPos[1]);
 					vPos[2] = cMath::MatrixMul(mtxTrans,vPos[2]);
 					vPos[3] = cMath::MatrixMul(mtxTrans,vPos[3]);
 
-					if(pObj->mbFlipH)
-					{
-						mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(0),
-							&vPos[0],
-							&pObj->mColor,
-							0,0);
-						mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(1),
-							&vPos[1],
-							&pObj->mColor,
-							0,0);
-						mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(2),
-							&vPos[2],
-							&pObj->mColor,
-							0,0);
-						mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(3),
-							&vPos[3],
-							&pObj->mColor,
-							pObj->mvSize.x,pObj->mvSize.y);
-					}
-					else
-					{
-						mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(0),
-																	&vPos[0],
-																	&pObj->mColor,
-																	0,0);
-						mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(1),
-																	&vPos[1],
-																	&pObj->mColor,
-																	0,0);
-						mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(2),
-																	&vPos[2],
-																	&pObj->mColor,
-																	0,0);
-						mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(3),
-																	&vPos[3],
-																	&pObj->mColor,
-																	0,0);
-					}
+					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(0),
+																&vPos[0],
+																&pObj->mColor,
+																0,0);
+					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(1),
+																&vPos[1],
+																&pObj->mColor,
+																0,0);
+					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(2),
+																&vPos[2],
+																&pObj->mColor,
+																0,0);
+					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(3),
+																&vPos[3],
+																&pObj->mColor,
+																0,0);
 
 					for(int i=0;i<4;i++)
 						mpLowLevelGraphics->AddIndexToBatch(lIdxAdd + i);

@@ -206,8 +206,7 @@ void cPreMenu::OnPostSceneDraw()
 			cRaindrop* pRaindrop = &(mvRaindropVector[i]);
 			if (pRaindrop->fColor >= 0)
 			{
-				mpInit->mpGame->GetGraphics()->GetDrawer()->DrawGfxObject( pRaindrop->mpGfx, cVector3f(pRaindrop->vPos) + cVector3f(0,0,5), cVector2f(20,6*pRaindrop->fLength), cColor(pRaindrop->fColor,1),false,false);//, -0.2f - 1.5f*pRaindrop->fAngle );
-				//mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawLine2D(pRaindrop->vPos, pRaindrop->vPos+(pRaindrop->vDir*pRaindrop->fLength),0,cColor(pRaindrop->fColor,pRaindrop->fColor));
+				mpInit->mpGame->GetGraphics()->GetDrawer()->DrawGfxObject( pRaindrop->mpGfx, cVector3f(pRaindrop->vPos) + cVector3f(0,0,5), cVector2f(20,6*pRaindrop->fLength), cColor(pRaindrop->fColor,1));
 			}
 		}
 	}

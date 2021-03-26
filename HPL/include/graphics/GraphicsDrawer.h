@@ -39,9 +39,6 @@ namespace hpl {
 		bool mbIsColorAndSize;
 		cColor mColor;
 		cVector2f mvSize;
-		bool mbFlipH;
-		bool mbFlipV;
-		float mfAngle;
 
 		iOldMaterial* GetMaterial() const;
 		float GetZ() const { return mvTransform.z;}
@@ -81,12 +78,9 @@ namespace hpl {
 		 * \param avPos
 		 * \param avSize Size of object
 		 * \param aColor color to use
-		 * \param abFlipH Flip image horisontally
-		 * \param abFlipV Flip image verically
 		 */
 		void DrawGfxObject(cGfxObject* apObject, const cVector3f& avPos,
-											const cVector2f& avSize, const cColor& aColor,
-											bool abFlipH=false, bool abFlipV=false, float afAngle = 0);
+						   const cVector2f& avSize, const cColor& aColor);
 
 
 		/**

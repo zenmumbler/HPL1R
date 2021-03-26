@@ -71,10 +71,10 @@ void cGraphicsHelper::DrawTexture(iTexture *apTex, const cVector3f& avPos, const
 	mpLowLevelGfx->SetIdentityMatrix(eMatrix_ModelView);
 	mpLowLevelGfx->SetOrthoProjection(mpLowLevelGfx->GetVirtualSize(),-1000,1000);
 	
-	mvVtx[0] = cVertex(avPos + cVector3f(0,0,0),	cVector2f(0.01f,0.01f),aColor );
-	mvVtx[1] = cVertex(avPos + cVector3f(avSize.x,0,0),	cVector2f(0.99f,0.01f),aColor);
-	mvVtx[2] = cVertex(avPos + cVector3f(avSize.x,avSize.y,0),cVector2f(0.99f,0.99f),aColor);
-	mvVtx[3] = cVertex(avPos +  cVector3f(0,avSize.y,0),	cVector2f(0.01f,0.99f),aColor);
+	mvVtx[0] = cVertex(avPos + cVector3f(0,0,0), cVector2f(0.01f,0.01f), aColor);
+	mvVtx[1] = cVertex(avPos + cVector3f(avSize.x,0,0),	cVector2f(0.99f,0.01f), aColor);
+	mvVtx[2] = cVertex(avPos + cVector3f(avSize.x,avSize.y,0), cVector2f(0.99f,0.99f), aColor);
+	mvVtx[3] = cVertex(avPos + cVector3f(0,avSize.y,0),	cVector2f(0.01f,0.99f), aColor);
 
 	mpLowLevelGfx->SetBlendActive(false);
 	
