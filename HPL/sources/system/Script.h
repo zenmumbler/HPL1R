@@ -21,15 +21,7 @@
 
 #include "resources/ResourceBase.h"
 
-#ifdef __GNUC__
-	#if defined (__APPLE__) || defined(__LP64__)
-		#define __stdcall
-	#else
-		#define __stdcall __attribute__((stdcall))
-	#endif
-#endif
-
-// Macros to generate signatures and generic function wrappers for AS entrypoints
+// Macros to generate signatures for AS entrypoints
 
 #define SCRIPT_DEFINE_FUNC(ret, name) \
 	static const char* name##_proto = #ret" "#name"()";

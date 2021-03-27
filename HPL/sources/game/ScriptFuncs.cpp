@@ -113,14 +113,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void __stdcall Print(std::string& asText)
+	static void Print(std::string& asText)
 	{
 		Log("%s", asText.c_str());
 	}
 
 	std::string gsGlobalTemp="";
 
-	static std::string& __stdcall FloatToString(float afX)
+	static std::string& FloatToString(float afX)
 	{
 		char sTemp[30];
 		sprintf(sTemp,"%f",afX);
@@ -128,7 +128,7 @@ namespace hpl {
 		return gsGlobalTemp;
 	}
 
-	static std::string& __stdcall IntToString(int alX)
+	static std::string& IntToString(int alX)
 	{
 		char sTemp[30];
 		sprintf(sTemp,"%d",alX);
@@ -136,22 +136,22 @@ namespace hpl {
 		return gsGlobalTemp;
 	}
 
-	static float __stdcall RandFloat(float afMin, float afMax)
+	static float RandFloat(float afMin, float afMax)
 	{
 		return cMath::RandRectf(afMin,afMax);
 	}
 
-	static int __stdcall RandInt(int alMin, int alMax)
+	static int RandInt(int alMin, int alMax)
 	{
 		return cMath::RandRectl(alMin,alMax);
 	}
 
-	static bool __stdcall StringContains(std::string& asString, std::string& asSubString)
+	static bool StringContains(std::string& asString, std::string& asSubString)
 	{
 		return cString::GetLastStringPos(asString,asSubString)>=0;
 	}
 
-	static void __stdcall ResetLogicTimer()
+	static void ResetLogicTimer()
 	{
 		gpGame->ResetLogicTimer();
 	}
@@ -165,7 +165,7 @@ namespace hpl {
 	/**
 	* Sets ambient light color-
 	**/
-	static void __stdcall SetAmbientColor(float afR, float afG, float afB)
+	static void SetAmbientColor(float afR, float afG, float afB)
 	{
 		gpGraphics->GetRenderer3D()->SetAmbientColor(cColor(afR,afG,afB,1.0f));
 	}
@@ -175,7 +175,7 @@ namespace hpl {
 	/**
 	* Sets if the skybox should be active
 	**/
-	static void __stdcall SetSkyboxActive(bool abX)
+	static void SetSkyboxActive(bool abX)
 	{
 		gpGraphics->GetRenderer3D()->SetSkyBoxActive(abX);
 	}
@@ -185,7 +185,7 @@ namespace hpl {
 	/**
 	* Sets the skybox color.
 	**/
-	static void __stdcall SetSkyboxColor(float afR, float afG, float afB, float afA)
+	static void SetSkyboxColor(float afR, float afG, float afB, float afA)
 	{
 		gpGraphics->GetRenderer3D()->SetSkyBoxColor(cColor(afR,afG,afB,afA));
 	}
@@ -196,7 +196,7 @@ namespace hpl {
 	* Sets the skybox
 	* \param asTexture Name of the cube map texture to use
 	**/
-	static void __stdcall SetSkybox(std::string& asTexture)
+	static void SetSkybox(std::string& asTexture)
 	{
 		if(asTexture!="")
 		{
@@ -216,7 +216,7 @@ namespace hpl {
 	* \param asName Name of particle system
 	* \param asType The type of particle system (file)
 	**/
-	static void __stdcall CreateParticleSystemOnCamera(std::string& asName,std::string& asType)
+	static void CreateParticleSystemOnCamera(std::string& asName,std::string& asType)
 	{
 		cParticleSystem3D *pPS = gpScene->GetWorld3D()->CreateParticleSystem(asName,asType,
 																			1,cMatrixf::Identity);
@@ -233,7 +233,7 @@ namespace hpl {
 	* Sets if fog should be active
 	* \param abX If the fog is active or not.
 	**/
-	static void __stdcall SetFogActive(bool abX)
+	static void SetFogActive(bool abX)
 	{
 		gpGraphics->GetRenderer3D()->SetFogActive(abX);
 	}
@@ -242,7 +242,7 @@ namespace hpl {
 	* Sets if the fog should be used to cull non-visible objects
 	* \param abX If the culling is active or not.
 	**/
-	static void __stdcall SetFogCulling(bool abX)
+	static void SetFogCulling(bool abX)
 	{
 		gpGraphics->GetRenderer3D()->SetFogCulling(abX);
 	}
@@ -253,7 +253,7 @@ namespace hpl {
 	* \param afStart End of fog fade. After this limit all geometry is full fog color.
 	* \param afR, afG, afB Color of Fog.
 	**/
-	static void __stdcall SetFogProperties(float afStart, float afEnd, float afR,float afG, float afB)
+	static void SetFogProperties(float afStart, float afEnd, float afR,float afG, float afB)
 	{
 		gpGraphics->GetRenderer3D()->SetFogStart(afStart);
 		gpGraphics->GetRenderer3D()->SetFogEnd(afEnd);
@@ -262,7 +262,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void __stdcall SetSectorProperties(std::string& asSector, float afAmbR,float afAmbG, float afAmbB)
+	static void SetSectorProperties(std::string& asSector, float afAmbR,float afAmbG, float afAmbB)
 	{
 		cPortalContainer *pContainer = gpScene->GetWorld3D()->GetPortalContainer();
 
@@ -277,7 +277,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void __stdcall SetSectorPortalActive(std::string& asSector, int alPortal, bool abActive)
+	static void SetSectorPortalActive(std::string& asSector, int alPortal, bool abActive)
 	{
 		cPortalContainer *pContainer = gpScene->GetWorld3D()->GetPortalContainer();
 
@@ -307,7 +307,7 @@ namespace hpl {
 	 * \param asCat The translation category
 	 * \param asName The name of the category entry.
 	 **/
-	static std::string& __stdcall Translate(std::string& asCat, std::string& asName)
+	static std::string& Translate(std::string& asCat, std::string& asName)
 	{
 		tWString wsText = gpResources->Translate(asCat,asName);
 		gsGlobalTemp = cString::To8Char(wsText);
@@ -320,7 +320,7 @@ namespace hpl {
 	* Preloads the data for a sound.
 	* \param asFile This can be a wav, ogg, mp3 or snt file.
 	**/
-	static void __stdcall PreloadSound(std::string& asFile)
+	static void PreloadSound(std::string& asFile)
 	{
 		tString sExt = cString::ToLowerCase(cString::GetFileExt(asFile));
 		if(sExt=="snt")
@@ -361,7 +361,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void __stdcall SetMeshActive(std::string& asName, bool abActive)
+	static void SetMeshActive(std::string& asName, bool abActive)
 	{
 		cMeshEntity *pEnt = gpScene->GetWorld3D()->GetMeshEntity(asName);
 		if(pEnt==NULL){
@@ -386,7 +386,7 @@ namespace hpl {
 	* \param asName The name of the particle system.
 	* \param abActive If it should be active or not.
 	**/
-	static void __stdcall SetParticleSystemActive(std::string& asName, bool abActive)
+	static void SetParticleSystemActive(std::string& asName, bool abActive)
 	{
 		cParticleSystem3D *pPS = gpScene->GetWorld3D()->GetParticleSystem(asName);
 		if(pPS==NULL){
@@ -407,7 +407,7 @@ namespace hpl {
 	* \param asArea The name of the area
 	* \param X Y and Z the variables of the particle system.
 	**/
-	static void __stdcall CreateParticleSystem(std::string& asName, std::string& asType, std::string& asArea,
+	static void CreateParticleSystem(std::string& asName, std::string& asType, std::string& asArea,
 												float afX, float afY, float afZ)
 	{
 		cAreaEntity* pArea = gpScene->GetWorld3D()->GetAreaEntity(asArea);
@@ -430,7 +430,7 @@ namespace hpl {
 	* Kill a particle system
 	* \param asName The name of the particle system.
 	**/
-	static void __stdcall KillParticleSystem(std::string& asName)
+	static void KillParticleSystem(std::string& asName)
 	{
 		/*cParticleSystem3D *pPS = gpScene->GetWorld3D()->GetParticleSystem(asName);
 		if(pPS==NULL){
@@ -470,7 +470,7 @@ namespace hpl {
 	 * \param asStartArea
 	 * \param asEndArea
 	 */
-	static void __stdcall CreateBeam(std::string& asName, std::string& asFile,
+	static void CreateBeam(std::string& asName, std::string& asFile,
 									std::string& asStartArea, std::string& asEndArea)
 	{
 		cAreaEntity* pStartArea = gpScene->GetWorld3D()->GetAreaEntity(asStartArea);
@@ -504,7 +504,7 @@ namespace hpl {
 	 * Destroys a beam
 	 * \param asName
 	 */
-	static void __stdcall DestroyBeam(std::string& asName)
+	static void DestroyBeam(std::string& asName)
 	{
 		cBeam* pBeam = gpScene->GetWorld3D()->GetBeam(asName);
 		if(pBeam==NULL)
@@ -534,7 +534,7 @@ namespace hpl {
 	* \param afRadius The radius to fade to.
 	* \param afTime The amount of seconds the fade should last.
 	**/
-	static void __stdcall FadeLight3D(std::string& asName, float afR,float afG, float afB, float afA,
+	static void FadeLight3D(std::string& asName, float afR,float afG, float afB, float afA,
 										float afRadius, float afTime)
 	{
 		iLight3D *pLight = gpScene->GetWorld3D()->GetLight(asName);
@@ -557,7 +557,7 @@ namespace hpl {
 	* \param asLightName The light name
 	* \param abX True if it should be attached, false if you want to remove.
 	**/
-	static void __stdcall AttachBillboardToLight3D(std::string& asBillboardName, std::string& asLightName,bool abX)
+	static void AttachBillboardToLight3D(std::string& asBillboardName, std::string& asLightName,bool abX)
 	{
 		iLight3D *pLight = gpScene->GetWorld3D()->GetLight(asLightName);
 		if(pLight==NULL)
@@ -586,7 +586,7 @@ namespace hpl {
 	* \param asName The light name
 	* \param abX if the light should be on or off.
 	**/
-	static void __stdcall SetLight3DVisible(std::string& asName, bool abX)
+	static void SetLight3DVisible(std::string& asName, bool abX)
 	{
 		iLight3D *pLight = gpScene->GetWorld3D()->GetLight(asName);
 		if(pLight==NULL)
@@ -605,7 +605,7 @@ namespace hpl {
 	* \param asName The light name
 	* \param abX if the light should only affects objects in same sector or not.
 	**/
-	static void __stdcall SetLight3DOnlyAffectInSector(std::string& asName, bool abX)
+	static void SetLight3DOnlyAffectInSector(std::string& asName, bool abX)
 	{
 		iLight3D *pLight = gpScene->GetWorld3D()->GetLight(asName);
 		if(pLight==NULL)
@@ -624,7 +624,7 @@ namespace hpl {
 	* \param asName The light name
 	* \param abX if the light flicker should be on or off.
 	**/
-	static void __stdcall SetLight3DFlickerActive(std::string& asName, bool abX)
+	static void SetLight3DFlickerActive(std::string& asName, bool abX)
 	{
 		iLight3D *pLight = gpScene->GetWorld3D()->GetLight(asName);
 		if(pLight==NULL)
@@ -655,7 +655,7 @@ namespace hpl {
 	* \param afOnFadeLength Fade length from off to on.
 	* \param afOffFadeLength Fade length from on to off.
 	**/
-	static void __stdcall SetLight3DFlicker(std::string& asName,
+	static void SetLight3DFlicker(std::string& asName,
 											float afR,float afG, float afB, float afA,
 											float afRadius,
 
@@ -695,7 +695,7 @@ namespace hpl {
 	 * \param asFile The snt file to load.
 	 * \param asArea The area to create at.
 	 */
-	static void __stdcall CreateSoundEntity(std::string& asName, std::string& asFile,
+	static void CreateSoundEntity(std::string& asName, std::string& asFile,
 												std::string& asArea)
 	{
 		cAreaEntity* pArea = gpScene->GetWorld3D()->GetAreaEntity(asArea);
@@ -721,7 +721,7 @@ namespace hpl {
 	* \param asName The entity name
 	* \param abPlayStart If the start sound should be played.
 	**/
-	static void __stdcall PlaySoundEntity(std::string& asName, bool abPlayStart)
+	static void PlaySoundEntity(std::string& asName, bool abPlayStart)
 	{
 		cSoundEntity *pSound = gpScene->GetWorld3D()->GetSoundEntity(asName);
 		if(pSound==NULL)
@@ -738,7 +738,7 @@ namespace hpl {
 	* \param asName The entity name
 	* \param abPlayEnd If the end sound should be played.
 	**/
-	static void __stdcall StopSoundEntity(std::string& asName, bool abPlayEnd)
+	static void StopSoundEntity(std::string& asName, bool abPlayEnd)
 	{
 		cSoundEntity *pSound = gpScene->GetWorld3D()->GetSoundEntity(asName);
 		if(pSound==NULL)
@@ -757,7 +757,7 @@ namespace hpl {
 	* \param asName The entity name
 	* \param afSpeed Volume increase per second.
 	**/
-	static void __stdcall FadeInSoundEntity(std::string& asName, float afSpeed)
+	static void FadeInSoundEntity(std::string& asName, float afSpeed)
 	{
 		cSoundEntity *pSound = gpScene->GetWorld3D()->GetSoundEntity(asName);
 		if(pSound==NULL)
@@ -774,7 +774,7 @@ namespace hpl {
 	* \param asName The entity name
 	* \param afSpeed Volume decrease per second.
 	**/
-	static void __stdcall FadeOutSoundEntity(std::string& asName, float afSpeed)
+	static void FadeOutSoundEntity(std::string& asName, float afSpeed)
 	{
 		cSoundEntity *pSound = gpScene->GetWorld3D()->GetSoundEntity(asName);
 		if(pSound==NULL)
@@ -788,14 +788,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void __stdcall PlayMusic(std::string& asName, float afVol, float afStepSize, bool abLoop)
+	static void PlayMusic(std::string& asName, float afVol, float afStepSize, bool abLoop)
 	{
 		gpSound->GetMusicHandler()->Play(asName,afVol,afStepSize,abLoop);
 	}
 
 	//-----------------------------------------------------------------------
 
-	static void __stdcall StopMusic(float afStepSize)
+	static void StopMusic(float afStepSize)
 	{
 		gpSound->GetMusicHandler()->Stop(afStepSize);
 	}
@@ -807,7 +807,7 @@ namespace hpl {
 	* \param asName The sound name
 	* \param afVol Volume of the sound
 	**/
-	static void __stdcall PlayGuiSound(std::string& asName, float afVol)
+	static void PlayGuiSound(std::string& asName, float afVol)
 	{
 		gpSound->GetSoundHandler()->PlayGui(asName,false,afVol);
 	}
@@ -825,7 +825,7 @@ namespace hpl {
 	* \param asType The type, can be: "OnMax" or "OnMin".
 	* \param asFunc The script function to be called. Must be in the current script file. "" = disabled.
 	**/
-	static void __stdcall SetJointCallback(std::string& asJointName, std::string& asType,
+	static void SetJointCallback(std::string& asJointName, std::string& asType,
 											std::string& asFunc)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
@@ -859,7 +859,7 @@ namespace hpl {
 	* Breaks a joint.
 	* \param asJointName The joint name
 	**/
-	static void __stdcall BreakJoint(std::string& asJointName)
+	static void BreakJoint(std::string& asJointName)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
 		if(pJoint==NULL){
@@ -877,7 +877,7 @@ namespace hpl {
 	* \param asCtrlName The controller name
 	* \param abActive If the controller is to be active or not.
 	**/
-	static void __stdcall SetJointControllerActive(std::string& asJointName,std::string& asCtrlName, bool abActive)
+	static void SetJointControllerActive(std::string& asJointName,std::string& asCtrlName, bool abActive)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
 		if(pJoint==NULL){
@@ -899,7 +899,7 @@ namespace hpl {
 	* \param asJointName The joint name
 	* \param asCtrlName The controller name
 	**/
-	static void __stdcall ChangeJointController(std::string& asJointName,std::string& asCtrlName)
+	static void ChangeJointController(std::string& asJointName,std::string& asCtrlName)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
 		if(pJoint==NULL){
@@ -922,7 +922,7 @@ namespace hpl {
 	* \param asProperty Property to change, can be "DestValue"
 	* \param afValue Value to set it to.
 	**/
-	static void __stdcall SetJointControllerPropertyFloat(std::string& asJointName,std::string& asCtrlName,
+	static void SetJointControllerPropertyFloat(std::string& asJointName,std::string& asCtrlName,
 													std::string& asProperty, float afValue)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
@@ -956,7 +956,7 @@ namespace hpl {
 	* \param asJointName The joint name
 	* \param asProp The property to get
 	**/
-	static float __stdcall GetJointProperty(std::string& asJointName, std::string& asProp)
+	static float GetJointProperty(std::string& asJointName, std::string& asProp)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
 		if(pJoint==NULL){
@@ -1054,7 +1054,7 @@ namespace hpl {
 	* \param asBodyName The body name
 	* \param asProp The property to get
 	**/
-	static float __stdcall GetBodyProperty(std::string& asBodyName, std::string& asProp)
+	static float GetBodyProperty(std::string& asBodyName, std::string& asProp)
 	{
 		iPhysicsBody *pBody = gpScene->GetWorld3D()->GetPhysicsWorld()->GetBody(asBodyName);
 		if(pBody==NULL){
@@ -1091,7 +1091,7 @@ namespace hpl {
 	* \param asProp The property to get
 	* \param afVal The new value of the property
 	**/
-	static void __stdcall SetBodyProperty(std::string& asBodyName, std::string& asProp, float afVal)
+	static void SetBodyProperty(std::string& asBodyName, std::string& asProp, float afVal)
 	{
 		iPhysicsBody *pBody = gpScene->GetWorld3D()->GetPhysicsWorld()->GetBody(asBodyName);
 		if(pBody==NULL){
@@ -1130,7 +1130,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void __stdcall AttachBodiesWithJoint(std::string& asParentName, std::string& asChildName, std::string& asJointName)
+	static void AttachBodiesWithJoint(std::string& asParentName, std::string& asChildName, std::string& asJointName)
 	{
 		iPhysicsBody *pParent = gpScene->GetWorld3D()->GetPhysicsWorld()->GetBody(asParentName);
 		if(pParent==NULL){
@@ -1164,7 +1164,7 @@ namespace hpl {
 	* \param asProp The property to get
 	* \param afVal The new value of the property
 	**/
-	static void __stdcall SetJointProperty(std::string& asJointName, std::string& asProp, float afVal)
+	static void SetJointProperty(std::string& asJointName, std::string& asProp, float afVal)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
 		if(pJoint==NULL){
@@ -1250,7 +1250,7 @@ namespace hpl {
 	* \param afY force in the y direction. (in newton, kg*m/s^2)
 	* \param afZ force in the z direction. (in newton, kg*m/s^2)
 	**/
-	static void __stdcall AddBodyForce(std::string& asBodyName, std::string& asCoordType,
+	static void AddBodyForce(std::string& asBodyName, std::string& asCoordType,
 										float afX, float afY, float afZ)
 	{
 		iPhysicsBody *pBody = gpScene->GetWorld3D()->GetPhysicsWorld()->GetBody(asBodyName);
@@ -1291,7 +1291,7 @@ namespace hpl {
 	* \param afY velocity in the y direction. (in m/s)
 	* \param afZ velocity in the z direction. (in m/s)
 	**/
-	static void __stdcall AddBodyImpulse(std::string& asBodyName, std::string& asCoordType,
+	static void AddBodyImpulse(std::string& asBodyName, std::string& asCoordType,
 		float afX, float afY, float afZ)
 	{
 		iPhysicsBody *pBody = gpScene->GetWorld3D()->GetPhysicsWorld()->GetBody(asBodyName);
@@ -1328,7 +1328,7 @@ namespace hpl {
 	/////// LOCAL VARS //////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////
 
-	static void __stdcall CreateLocalVar(std::string& asName, int alVal)
+	static void CreateLocalVar(std::string& asName, int alVal)
 	{
 		if(gpScene->GetLocalVar(asName)==NULL)
 		{
@@ -1337,19 +1337,19 @@ namespace hpl {
 		}
 	}
 
-	static void __stdcall SetLocalVar(std::string& asName, int alVal)
+	static void SetLocalVar(std::string& asName, int alVal)
 	{
 		cScriptVar* pVar = gpScene->CreateLocalVar(asName);
 		pVar->mlVal = alVal;
 	}
 
-	static void __stdcall AddLocalVar(std::string& asName, int alVal)
+	static void AddLocalVar(std::string& asName, int alVal)
 	{
 		cScriptVar* pVar = gpScene->CreateLocalVar(asName);
 		pVar->mlVal += alVal;
 	}
 
-	static int __stdcall GetLocalVar(std::string& asName)
+	static int GetLocalVar(std::string& asName)
 	{
 		cScriptVar* pVar = gpScene->GetLocalVar(asName);
 		if(pVar==NULL)
@@ -1365,7 +1365,7 @@ namespace hpl {
 	/////// GLOBAL VARS //////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////
 
-	static void __stdcall CreateGlobalVar(std::string& asName, int alVal)
+	static void CreateGlobalVar(std::string& asName, int alVal)
 	{
 		if(gpScene->GetGlobalVar(asName)==NULL)
 		{
@@ -1374,21 +1374,21 @@ namespace hpl {
 		}
 	}
 
-	static void __stdcall SetGlobalVar(std::string& asName, int alVal)
+	static void SetGlobalVar(std::string& asName, int alVal)
 	{
 		cScriptVar* pVar = gpScene->CreateGlobalVar(asName);
 		pVar->mlVal = alVal;
 	}
 
 
-	static void __stdcall AddGlobalVar(std::string& asName, int alVal)
+	static void AddGlobalVar(std::string& asName, int alVal)
 	{
 		cScriptVar* pVar = gpScene->CreateGlobalVar(asName);
 		pVar->mlVal += alVal;
 	}
 
 
-	static int __stdcall GetGlobalVar(std::string& asName)
+	static int GetGlobalVar(std::string& asName)
 	{
 		cScriptVar* pVar = gpScene->GetGlobalVar(asName);
 		if(pVar==NULL)
