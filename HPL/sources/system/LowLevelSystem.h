@@ -114,7 +114,7 @@ namespace hpl {
 		 * \param asFuncDecl the declaration.
 		 * \return
 		 */
-		virtual bool AddScriptFunc(const tString& asFuncDecl, void* pFunc, int callConv)=0;
+		virtual bool AddScriptFunc(const tString& asFuncDecl, void* pFunc)=0;
 
 		/**
 		 * Add a variable to the script vm. Example: "int MyVar"

@@ -41,7 +41,6 @@
 
 #include <SDL2/SDL.h>
 
-#include "impl/scriptstdstring.h"
 #include "impl/scriptstring.h"
 
 #include "system/String.h"
@@ -208,15 +207,15 @@ namespace hpl {
 	cLowLevelSystemSDL::cLowLevelSystemSDL()
 	{
 		mpScriptEngine = asCreateScriptEngine(ANGELSCRIPT_VERSION);
+		if (mpScriptEngine==NULL)
+		{
+			Error("Failed to start angel script!\n");
+		}
 
 		mpScriptOutput = hplNew( cScriptOutput, () );
 		mpScriptEngine->SetMessageCallback(asMETHOD(cScriptOutput,AddMessage), mpScriptOutput, asCALL_THISCALL);
 
-#ifdef AS_MAX_PORTABILITY
 		RegisterScriptString(mpScriptEngine);
-#else
-		RegisterStdString(mpScriptEngine);
-#endif
 
 		mlHandleCount = 0;
 
@@ -802,6 +801,7 @@ namespace hpl {
 
 		msMessage += sMess;
 	}
+
 	void cScriptOutput::Display()
 	{
 		if(msMessage.size()>500)
@@ -819,6 +819,7 @@ namespace hpl {
 			Log(msMessage.c_str());
 		}
 	}
+
 	void cScriptOutput::Clear()
 	{
 		msMessage = "";
@@ -853,24 +854,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cLowLevelSystemSDL::AddScriptFunc(const tString& asFuncDecl, void* pFunc, int callConv)
+	bool cLowLevelSystemSDL::AddScriptFunc(const tString& asFuncDecl, void* pFunc)
 	{
-		int iResult;
-		
-#ifdef AS_MAX_PORTABILITY
-		// the asFunctionPtr func overloads on type and will yield the proper func wrapper
-		iResult = mpScriptEngine->RegisterGlobalFunction(asFuncDecl.c_str(),
-														 asFUNCTION(reinterpret_cast<asGENFUNC_t>(pFunc)),
-														 callConv);
-#else
-		iResult = mpScriptEngine->RegisterGlobalFunction(asFuncDecl.c_str(),
-														 asFUNCTION(pFunc),
-														 callConv);
-#endif
-
-		if(iResult < 0)
+		if (mpScriptEngine->RegisterGlobalFunction(asFuncDecl.c_str(), asFUNCTION(pFunc), asCALL_STDCALL) < 0)
 		{
-			Error("Couldn't add func (%d) '%s'\n", iResult ,asFuncDecl.c_str());
+			Error("Couldn't add func '%s'\n", asFuncDecl.c_str());
 			return false;
 		}
 
@@ -881,9 +869,9 @@ namespace hpl {
 
 	bool cLowLevelSystemSDL::AddScriptVar(const tString& asVarDecl, void *pVar)
 	{
-		if(mpScriptEngine->RegisterGlobalProperty(asVarDecl.c_str(),pVar)<0)
+		if (mpScriptEngine->RegisterGlobalProperty(asVarDecl.c_str(),pVar)<0)
 		{
-			Error("Couldn't add var '%s'\n",asVarDecl.c_str());
+			Error("Couldn't add var '%s'\n", asVarDecl.c_str());
 			return false;
 		}
 

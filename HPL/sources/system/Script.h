@@ -83,15 +83,13 @@ namespace hpl {
 	{
 	public:
 		iScript(const tString& asName) : iResourceBase(asName,0){}
-		virtual ~iScript(){}
+		virtual ~iScript() = default;
 
 		void Destroy(){}
 
-		virtual bool CreateFromFile(const tString& asFile)=0;
+		virtual bool CreateFromFile(const tString& asFile, tString *apCompileMessages=NULL)=0;
 
 		virtual int GetFuncHandle(const tString& asFunc)=0;
-
-		virtual void AddArg(const tString& asArg)=0;
 
 		/**
 		 * Runs a func in the script, for example "test(15)"

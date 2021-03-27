@@ -44,9 +44,7 @@ namespace hpl {
 		mpContext = mpScriptEngine->CreateContext();
 
 		//Create a unique module name
-		msModuleName = "Module_"+cString::ToString(cMath::RandRectl(0,1000000))+
-						"_"+cString::ToString(mlHandle);
-
+		msModuleName = "Module_" + cString::GetFileName(asName) + "_" + cString::ToString(mlHandle);
 	}
 
 	cSqScript::~cSqScript()
@@ -63,7 +61,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cSqScript::CreateFromFile(const tString& asFileName)
+	bool cSqScript::CreateFromFile(const tString& asFileName, tString *apCompileMessages)
 	{
 		int lLength;
 		char *pCharBuffer = LoadCharBuffer(asFileName,lLength);
@@ -81,6 +79,9 @@ namespace hpl {
 		}
 
 		int lBuildOutput = mpModule->Build();
+		if (apCompileMessages) {
+			*apCompileMessages = mpScriptOutput->GetMessage();
+		}
 
 		if(lBuildOutput < 0)
 		{
@@ -108,17 +109,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cSqScript::AddArg(const tString& asArg)
-	{
-
-	}
-
-	//-----------------------------------------------------------------------
-
 	bool cSqScript::Run(const tString& asFuncLine)
 	{
 		ExecuteString(mpScriptEngine, asFuncLine.c_str(), mpModule);
-
 		return true;
 	}
 
@@ -127,11 +120,7 @@ namespace hpl {
 	bool cSqScript::Run(int alHandle)
 	{
 		mpContext->Prepare(alHandle);
-
-		/* Set all the args here */
-
 		mpContext->Execute();
-
 		return true;
 	}
 

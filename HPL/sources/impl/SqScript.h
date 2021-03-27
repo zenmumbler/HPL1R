@@ -33,10 +33,9 @@ namespace hpl {
 					cScriptOutput *apScriptOutput, int alHandle);
 		~cSqScript();
 
-		bool CreateFromFile(const tString& asFileName);
+		bool CreateFromFile(const tString& asFileName, tString *apCompileMessages=NULL);
 
 		int GetFuncHandle(const tString& asFunc);
-		void AddArg(const tString& asArg);
 
 		bool Run(const tString& asFuncLine);
 		bool Run(int alHandle);
