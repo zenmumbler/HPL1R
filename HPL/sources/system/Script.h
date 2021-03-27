@@ -20,11 +20,9 @@
 #define HPL_SCRIPT_H
 
 #include "resources/ResourceBase.h"
-#include "angelscript.h"
-#include "aswrappedcall.h"
 
 #ifdef __GNUC__
-	#ifdef __APPLE__
+	#if defined (__APPLE__) || defined(__LP64__)
 		#define __stdcall
 	#else
 		#define __stdcall __attribute__((stdcall))
@@ -34,47 +32,31 @@
 // Macros to generate signatures and generic function wrappers for AS entrypoints
 
 #define SCRIPT_DEFINE_FUNC(ret, name) \
-	static const char* name##_proto = #ret" "#name"()"; \
-	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+	static const char* name##_proto = #ret" "#name"()";
 #define SCRIPT_DEFINE_FUNC_1(ret, name, a0) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0)"; \
-	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+	static const char* name##_proto = #ret" "#name"("#a0" a0)";
 #define SCRIPT_DEFINE_FUNC_2(ret, name, a0,a1) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1)"; \
-	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1)";
 #define SCRIPT_DEFINE_FUNC_3(ret, name, a0,a1,a2) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2)"; \
-	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2)";
 #define SCRIPT_DEFINE_FUNC_4(ret, name, a0,a1,a2,a3) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3)"; \
-	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3)";
 #define SCRIPT_DEFINE_FUNC_5(ret, name, a0,a1,a2,a3,a4) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4)"; \
-	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4)";
 #define SCRIPT_DEFINE_FUNC_6(ret, name, a0,a1,a2,a3,a4,a5) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5)"; \
-	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5)";
 #define SCRIPT_DEFINE_FUNC_7(ret, name, a0,a1,a2,a3,a4,a5,a6) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6)"; \
-	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6)";
 #define SCRIPT_DEFINE_FUNC_8(ret, name, a0,a1,a2,a3,a4,a5,a6,a7) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7)"; \
-	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7)";
 #define SCRIPT_DEFINE_FUNC_9(ret, name, a0,a1,a2,a3,a4,a5,a6,a7,a8) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7,"#a8" a8)"; \
-	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7,"#a8" a8)";
 #define SCRIPT_DEFINE_FUNC_12(ret, name, a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7,"#a8" a8,"#a9" a9,"#a10" a10,"#a11" a11)"; \
-	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7,"#a8" a8,"#a9" a9,"#a10" a10,"#a11" a11)";
 #define SCRIPT_DEFINE_FUNC_17(ret, name, a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7,"#a8" a8,"#a9" a9,"#a10" a10,"#a11" a11,"#a12" a12,"#a13" a13,"#a14" a14,"#a15" a15,"#a16" a16)"; \
-	asDECLARE_FUNCTION_WRAPPER(name##_Generic, name);
+	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7,"#a8" a8,"#a9" a9,"#a10" a10,"#a11" a11,"#a12" a12,"#a13" a13,"#a14" a14,"#a15" a15,"#a16" a16)";
 
-#ifdef AS_MAX_PORTABILITY
-	#define SCRIPT_REGISTER_FUNC(func) func##_proto, reinterpret_cast<void*>(func##_Generic), asCALL_GENERIC
-#else
-	#define SCRIPT_REGISTER_FUNC(func) func##_proto, reinterpret_cast<void*>(func), asCALL_STDCALL
-#endif
+#define SCRIPT_REGISTER_FUNC(func) func##_proto, reinterpret_cast<void*>(func)
 
 
 namespace hpl {
