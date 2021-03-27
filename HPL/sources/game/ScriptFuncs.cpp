@@ -115,9 +115,8 @@ namespace hpl {
 
 	static void __stdcall Print(std::string& asText)
 	{
-		Log(asText.c_str());
+		Log("%s", asText.c_str());
 	}
-	SCRIPT_DEFINE_FUNC_1(void, Print, string &in)
 
 	std::string gsGlobalTemp="";
 
@@ -128,7 +127,6 @@ namespace hpl {
 		gsGlobalTemp = sTemp;
 		return gsGlobalTemp;
 	}
-	SCRIPT_DEFINE_FUNC_1(string&, FloatToString, float)
 
 	static std::string& __stdcall IntToString(int alX)
 	{
@@ -137,31 +135,26 @@ namespace hpl {
 		gsGlobalTemp = sTemp;
 		return gsGlobalTemp;
 	}
-	SCRIPT_DEFINE_FUNC_1(string&, IntToString, int)
 
 	static float __stdcall RandFloat(float afMin, float afMax)
 	{
 		return cMath::RandRectf(afMin,afMax);
 	}
-	SCRIPT_DEFINE_FUNC_2(float, RandFloat, float, float)
 
 	static int __stdcall RandInt(int alMin, int alMax)
 	{
 		return cMath::RandRectl(alMin,alMax);
 	}
-	SCRIPT_DEFINE_FUNC_2(int, RandInt, int, int)
 
 	static bool __stdcall StringContains(std::string& asString, std::string& asSubString)
 	{
 		return cString::GetLastStringPos(asString,asSubString)>=0;
 	}
-	SCRIPT_DEFINE_FUNC_2(bool, StringContains, string &in, string &in)
 
 	static void __stdcall ResetLogicTimer()
 	{
 		gpGame->ResetLogicTimer();
 	}
-	SCRIPT_DEFINE_FUNC(void, ResetLogicTimer)
 
 	/////////////////////////////////////////////////////////////////////////
 	/////// RENDERER //////////////////////////////////////////////////////
@@ -176,7 +169,6 @@ namespace hpl {
 	{
 		gpGraphics->GetRenderer3D()->SetAmbientColor(cColor(afR,afG,afB,1.0f));
 	}
-	SCRIPT_DEFINE_FUNC_3(void, SetAmbientColor, float, float, float)
 
 	//-----------------------------------------------------------------------
 
@@ -187,7 +179,6 @@ namespace hpl {
 	{
 		gpGraphics->GetRenderer3D()->SetSkyBoxActive(abX);
 	}
-	SCRIPT_DEFINE_FUNC_1(void, SetSkyboxActive, bool)
 
 	//-----------------------------------------------------------------------
 
@@ -198,10 +189,8 @@ namespace hpl {
 	{
 		gpGraphics->GetRenderer3D()->SetSkyBoxColor(cColor(afR,afG,afB,afA));
 	}
-	SCRIPT_DEFINE_FUNC_4(void, SetSkyboxColor, float, float, float, float)
 
 	//-----------------------------------------------------------------------
-
 
 	/**
 	* Sets the skybox
@@ -219,7 +208,6 @@ namespace hpl {
 			gpGraphics->GetRenderer3D()->SetSkyBox(NULL,false);
 		}
 	}
-	SCRIPT_DEFINE_FUNC_1(void, SetSkybox, string &in)
 
 	//-----------------------------------------------------------------------
 
@@ -238,7 +226,6 @@ namespace hpl {
 			pCam->AttachEntity(pPS);
 		}
 	}
-	SCRIPT_DEFINE_FUNC_2(void, CreateParticleSystemOnCamera, string &in, string &in)
 
 	//-----------------------------------------------------------------------
 
@@ -250,7 +237,6 @@ namespace hpl {
 	{
 		gpGraphics->GetRenderer3D()->SetFogActive(abX);
 	}
-	SCRIPT_DEFINE_FUNC_1(void, SetFogActive, bool)
 
 	/**
 	* Sets if the fog should be used to cull non-visible objects
@@ -260,7 +246,6 @@ namespace hpl {
 	{
 		gpGraphics->GetRenderer3D()->SetFogCulling(abX);
 	}
-	SCRIPT_DEFINE_FUNC_1(void, SetFogCulling, bool)
 
 	/**
 	* Creates a particle system and attaches it to the camera.
@@ -274,7 +259,6 @@ namespace hpl {
 		gpGraphics->GetRenderer3D()->SetFogEnd(afEnd);
 		gpGraphics->GetRenderer3D()->SetFogColor(cColor(afR,afG,afB,1.0f));
 	}
-	SCRIPT_DEFINE_FUNC_5(void, SetFogProperties, float, float, float, float, float)
 
 	//-----------------------------------------------------------------------
 
@@ -290,7 +274,6 @@ namespace hpl {
 
 		pSector->SetAmbientColor(cColor(afAmbR, afAmbG, afAmbB,1));
 	}
-	SCRIPT_DEFINE_FUNC_4(void, SetSectorProperties, string &in, float, float, float)
 
 	//-----------------------------------------------------------------------
 
@@ -313,7 +296,6 @@ namespace hpl {
 
 		pPortal->SetActive(abActive);
 	}
-	SCRIPT_DEFINE_FUNC_3(void, SetSectorPortalActive, string &in, int, bool)
 
 	/////////////////////////////////////////////////////////////////////////
 	/////// RESOURCES //////////////////////////////////////////////////////
@@ -331,7 +313,6 @@ namespace hpl {
 		gsGlobalTemp = cString::To8Char(wsText);
 		return gsGlobalTemp;
 	}
-	SCRIPT_DEFINE_FUNC_2(string&, Translate, string &in, string &in)
 
 	//-----------------------------------------------------------------------
 
@@ -371,7 +352,6 @@ namespace hpl {
 			}
 		}
 	}
-	SCRIPT_DEFINE_FUNC_1(void, PreloadSound, string &in)
 
 	//-----------------------------------------------------------------------
 
@@ -392,7 +372,6 @@ namespace hpl {
 		pEnt->SetActive(abActive);
 		pEnt->SetVisible(abActive);
 	}
-	SCRIPT_DEFINE_FUNC_2(void, SetMeshActive, string &in, bool)
 
 	//-----------------------------------------------------------------------
 
@@ -418,7 +397,6 @@ namespace hpl {
 		pPS->SetActive(abActive);
 		pPS->SetVisible(abActive);
 	}
-	SCRIPT_DEFINE_FUNC_2(void, SetParticleSystemActive, string &in, bool)
 
 	//-----------------------------------------------------------------------
 
@@ -445,7 +423,6 @@ namespace hpl {
 			return;
 		}
 	}
-	SCRIPT_DEFINE_FUNC_6(void, CreateParticleSystem, string &in, string &in, string &in, float, float, float)
 
 	//-----------------------------------------------------------------------
 
@@ -477,7 +454,6 @@ namespace hpl {
 
 		if(!bFound) Warning("Didn't find particle system '%s'\n",asName.c_str());
 	}
-	SCRIPT_DEFINE_FUNC_1(void, KillParticleSystem, string &in)
 
 	//-----------------------------------------------------------------------
 
@@ -486,7 +462,6 @@ namespace hpl {
 	/////////////////////////////////////////////////////////////////////////
 
 	//-----------------------------------------------------------------------
-
 
 	/**
 	 * Creates an a beam between two areas
@@ -522,7 +497,6 @@ namespace hpl {
 		pBeam->SetPosition(pStartArea->m_mtxTransform.GetTranslation());
 		pBeam->GetEnd()->SetPosition(pEndArea->m_mtxTransform.GetTranslation());
 	}
-	SCRIPT_DEFINE_FUNC_4(void, CreateBeam, string &in, string &in, string &in, string &in)
 
 	//-----------------------------------------------------------------------
 
@@ -541,11 +515,8 @@ namespace hpl {
 
 		gpScene->GetWorld3D()->DestroyBeam(pBeam);
 	}
-	SCRIPT_DEFINE_FUNC_1(void, DestroyBeam, string &in)
 
 	//-----------------------------------------------------------------------
-
-
 
 	/////////////////////////////////////////////////////////////////////////
 	/////// LIGHT //////////////////////////////////////////////////////
@@ -577,7 +548,6 @@ namespace hpl {
 		pLight->SetVisible(true);
 		pLight->UpdateLight(2.0f/60.0f);
 	}
-	SCRIPT_DEFINE_FUNC_7(void, FadeLight3D, string &in, float, float, float, float, float, float)
 
 	//-----------------------------------------------------------------------
 
@@ -608,10 +578,8 @@ namespace hpl {
 		else
 			pLight->RemoveBillboard(pBillboard);
 	}
-	SCRIPT_DEFINE_FUNC_3(void, AttachBillboardToLight3D, string &in, string &in, bool)
 
 	//-----------------------------------------------------------------------
-
 
 	/**
 	* Sets on/off a light
@@ -629,9 +597,8 @@ namespace hpl {
 
 		pLight->SetVisible(abX);
 	}
-	SCRIPT_DEFINE_FUNC_2(void, SetLight3DVisible, string &in, bool)
 
-		//-----------------------------------------------------------------------
+	//-----------------------------------------------------------------------
 
 	/**
 	* Sets on/off for affect only in sector where centre is.
@@ -649,7 +616,6 @@ namespace hpl {
 
 		pLight->SetOnlyAffectInSector(abX);
 	}
-	SCRIPT_DEFINE_FUNC_2(void, SetLight3DOnlyAffectInSector, string &in, bool)
 
 	//-----------------------------------------------------------------------
 
@@ -669,7 +635,6 @@ namespace hpl {
 
 		pLight->SetFlickerActive(abX);
 	}
-	SCRIPT_DEFINE_FUNC_2(void, SetLight3DFlickerActive, string &in, bool)
 
 	//-----------------------------------------------------------------------
 
@@ -715,16 +680,12 @@ namespace hpl {
 							afOffMinLength, afOffMaxLength,asOffSound,asOffPS,
 							abFade,afOnFadeLength,afOffFadeLength);
 	}
-	SCRIPT_DEFINE_FUNC_17(void, SetLight3DFlicker, string &in,
-			float, float, float, float,
-			float, float, float, string &in, string &in, float, float, string &in, string &in, bool, float, float)
 
 	//-----------------------------------------------------------------------
 
 	/////////////////////////////////////////////////////////////////////////
 	/////// SOUND //////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////
-
 
 	//-----------------------------------------------------------------------
 
@@ -752,7 +713,7 @@ namespace hpl {
 
 		pSound->SetPosition(pArea->m_mtxTransform.GetTranslation());
 	}
-	SCRIPT_DEFINE_FUNC_3(void, CreateSoundEntity, string &in, string &in, string &in)
+
 	//-----------------------------------------------------------------------
 
 	/**
@@ -771,7 +732,6 @@ namespace hpl {
 
 		pSound->Play(abPlayStart);
 	}
-	SCRIPT_DEFINE_FUNC_2(void, PlaySoundEntity, string &in, bool)
 
 	/**
 	* Stop a sound entity
@@ -789,7 +749,6 @@ namespace hpl {
 
 		pSound->Stop(abPlayEnd);
 	}
-	SCRIPT_DEFINE_FUNC_2(void, StopSoundEntity, string &in, bool)
 
 	//-----------------------------------------------------------------------
 
@@ -809,7 +768,6 @@ namespace hpl {
 
 		pSound->FadeIn(afSpeed);
 	}
-	SCRIPT_DEFINE_FUNC_2(void, FadeInSoundEntity, string &in, float)
 
 	/**
 	* Stop a sound entity fading it
@@ -827,7 +785,6 @@ namespace hpl {
 
 		pSound->FadeOut(afSpeed);
 	}
-	SCRIPT_DEFINE_FUNC_2(void, FadeOutSoundEntity, string &in, float)
 
 	//-----------------------------------------------------------------------
 
@@ -835,7 +792,6 @@ namespace hpl {
 	{
 		gpSound->GetMusicHandler()->Play(asName,afVol,afStepSize,abLoop);
 	}
-	SCRIPT_DEFINE_FUNC_4(void, PlayMusic, string &in, float, float, bool)
 
 	//-----------------------------------------------------------------------
 
@@ -843,7 +799,6 @@ namespace hpl {
 	{
 		gpSound->GetMusicHandler()->Stop(afStepSize);
 	}
-	SCRIPT_DEFINE_FUNC_1(void, StopMusic, float)
 
 	//-----------------------------------------------------------------------
 
@@ -856,7 +811,6 @@ namespace hpl {
 	{
 		gpSound->GetSoundHandler()->PlayGui(asName,false,afVol);
 	}
-	SCRIPT_DEFINE_FUNC_2(void, PlayGuiSound, string &in, float)
 
 	/////////////////////////////////////////////////////////////////////////
 	/////// PHYSICS //////////////////////////////////////////////////////
@@ -898,7 +852,6 @@ namespace hpl {
 		if(lType==1) pCallback->msMaxFunc = asFunc;
 		if(lType==2) pCallback->msMinFunc = asFunc;
 	}
-	SCRIPT_DEFINE_FUNC_3(void, SetJointCallback, string &in, string &in, string &in)
 
 	//-----------------------------------------------------------------------
 
@@ -915,7 +868,6 @@ namespace hpl {
 
 		pJoint->Break();
 	}
-	SCRIPT_DEFINE_FUNC_1(void, BreakJoint, string &in)
 
 	//-----------------------------------------------------------------------
 
@@ -939,7 +891,6 @@ namespace hpl {
 
 		pCtrl->SetActive(abActive);
 	}
-	SCRIPT_DEFINE_FUNC_3(void, SetJointControllerActive, string &in, string &in, bool)
 
 	//-----------------------------------------------------------------------
 
@@ -961,7 +912,6 @@ namespace hpl {
 			return;
 		}
 	}
-	SCRIPT_DEFINE_FUNC_2(void, ChangeJointController, string &in, string &in)
 
 	//-----------------------------------------------------------------------
 
@@ -990,10 +940,8 @@ namespace hpl {
 			pCtrl->SetDestValue(afValue);
 		}
 	}
-	SCRIPT_DEFINE_FUNC_4(void, SetJointControllerPropertyFloat, string &in, string &in, string &in, float)
 
 	//-----------------------------------------------------------------------
-
 
 	/**
 	* Gets a property from the joint.
@@ -1094,7 +1042,6 @@ namespace hpl {
 		Warning("Joint property '%s' does not exist!\n",asProp.c_str());
 		return 0;
 	}
-	SCRIPT_DEFINE_FUNC_2(float, GetJointProperty, string &in, string &in)
 
 	//-----------------------------------------------------------------------
 
@@ -1132,7 +1079,6 @@ namespace hpl {
 		Warning("Body property '%s' does not exist!\n",asProp.c_str());
 		return 0;
 	}
-	SCRIPT_DEFINE_FUNC_2(float, GetBodyProperty, string &in, string &in)
 
 	//-----------------------------------------------------------------------
 
@@ -1181,7 +1127,6 @@ namespace hpl {
 
 		Warning("Body property '%s' does not exist!\n",asProp.c_str());
 	}
-	SCRIPT_DEFINE_FUNC_3(void, SetBodyProperty, string &in, string &in, float)
 
 	//-----------------------------------------------------------------------
 
@@ -1207,7 +1152,6 @@ namespace hpl {
 		pJoint->SetMinDistance(-0.01f);
 		pJoint->SetMaxDistance(0.01f);
 	}
-	SCRIPT_DEFINE_FUNC_3(void, AttachBodiesWithJoint, string &in, string &in, string &in)
 
 	//-----------------------------------------------------------------------
 
@@ -1295,8 +1239,6 @@ namespace hpl {
 			Warning("Joint property '%s' does not exist!\n",asProp.c_str());
 		}
 	}
-	SCRIPT_DEFINE_FUNC_3(void, SetJointProperty, string &in, string &in, float)
-
 
 	//-----------------------------------------------------------------------
 
@@ -1338,7 +1280,6 @@ namespace hpl {
 			pBody->AddForce(vWorldForce);
 		}
 	}
-	SCRIPT_DEFINE_FUNC_5(void, AddBodyForce, string &in, string &in, float, float, float)
 
 	//-----------------------------------------------------------------------
 
@@ -1380,10 +1321,8 @@ namespace hpl {
 			pBody->AddImpulse(vWorldForce);
 		}
 	}
-	SCRIPT_DEFINE_FUNC_5(void, AddBodyImpulse, string &in, string &in, float, float, float)
 
 	//-----------------------------------------------------------------------
-
 
 	/////////////////////////////////////////////////////////////////////////
 	/////// LOCAL VARS //////////////////////////////////////////////////////
@@ -1397,21 +1336,18 @@ namespace hpl {
 			pVar->mlVal = alVal;
 		}
 	}
-	SCRIPT_DEFINE_FUNC_2(void, CreateLocalVar, string &in, int)
 
 	static void __stdcall SetLocalVar(std::string& asName, int alVal)
 	{
 		cScriptVar* pVar = gpScene->CreateLocalVar(asName);
 		pVar->mlVal = alVal;
 	}
-	SCRIPT_DEFINE_FUNC_2(void, SetLocalVar, string &in, int)
 
 	static void __stdcall AddLocalVar(std::string& asName, int alVal)
 	{
 		cScriptVar* pVar = gpScene->CreateLocalVar(asName);
 		pVar->mlVal += alVal;
 	}
-	SCRIPT_DEFINE_FUNC_2(void, AddLocalVar, string &in, int)
 
 	static int __stdcall GetLocalVar(std::string& asName)
 	{
@@ -1423,7 +1359,6 @@ namespace hpl {
 		}
 		return pVar->mlVal;
 	}
-	SCRIPT_DEFINE_FUNC_1(int, GetLocalVar, string &in)
 
 	//-----------------------------------------------------------------------
 	/////////////////////////////////////////////////////////////////////////
@@ -1438,14 +1373,12 @@ namespace hpl {
 			pVar->mlVal = alVal;
 		}
 	}
-	SCRIPT_DEFINE_FUNC_2(void, CreateGlobalVar, string &in, int)
 
 	static void __stdcall SetGlobalVar(std::string& asName, int alVal)
 	{
 		cScriptVar* pVar = gpScene->CreateGlobalVar(asName);
 		pVar->mlVal = alVal;
 	}
-	SCRIPT_DEFINE_FUNC_2(void, SetGlobalVar, string &in, int)
 
 
 	static void __stdcall AddGlobalVar(std::string& asName, int alVal)
@@ -1453,7 +1386,6 @@ namespace hpl {
 		cScriptVar* pVar = gpScene->CreateGlobalVar(asName);
 		pVar->mlVal += alVal;
 	}
-	SCRIPT_DEFINE_FUNC_2(void, AddGlobalVar, string &in, int)
 
 
 	static int __stdcall GetGlobalVar(std::string& asName)
@@ -1466,11 +1398,8 @@ namespace hpl {
 		}
 		return pVar->mlVal;
 	}
-	SCRIPT_DEFINE_FUNC_1(int, GetGlobalVar, string &in)
 
 	//-----------------------------------------------------------------------
-
-
 
 	void cScriptFuncs::Init(	cGraphics* apGraphics,
 				cResources *apResources,
@@ -1489,97 +1418,92 @@ namespace hpl {
 		gpSound = apSound;
 		gpGame = apGame;
 		
+		const auto AddFunc = [](const tString& sig, auto fn) {
+			gpSystem->GetLowLevel()->AddScriptFunc(sig, reinterpret_cast<void*>(fn));
+		};
+		
 		//General
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(Print));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(FloatToString));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(IntToString));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(RandFloat));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(RandInt));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(StringContains));
+		AddFunc("void Print(string &in asText)", Print);
+		AddFunc("string& FloatToString(float afX)", FloatToString);
+		AddFunc("string& IntToString(int aiX)", IntToString);
+		AddFunc("float RandFloat(float afMin, float afMax)", RandFloat);
+		AddFunc("int RandInt(int aiMin, int aiMax)", RandInt);
+		AddFunc("bool StringContains(string &in asHaystack, string &in asNeedle)", StringContains);
+		AddFunc("void ResetLogicTimer()", ResetLogicTimer);
 
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(ResetLogicTimer));
+		// Renderer
+		AddFunc("void SetAmbientColor(float afR, float afG, float afB)", SetAmbientColor);
+		AddFunc("void SetSkyboxActive(bool abX)", SetSkyboxActive);
+		AddFunc("void SetSkyboxColor(float afR, float afG, float afB, float afA)", SetSkyboxColor);
+		AddFunc("void SetSkybox(string &in asTexture)", SetSkybox);
+		AddFunc("void CreateParticleSystemOnCamera(string &in asName,string &in asType)", CreateParticleSystemOnCamera);
+		AddFunc("void SetFogActive(bool abX)", SetFogActive);
+		AddFunc("void SetFogCulling(bool abX)", SetFogCulling);
+		AddFunc("void SetFogProperties(float afStart, float afEnd, float afR,float afG, float afB)", SetFogProperties);
+		AddFunc("void SetSectorProperties(string &in asSector, float afAmbR, float afAmbG, float afAmbB)", SetSectorProperties);
+		AddFunc("void SetSectorPortalActive(string &in asSector, int alPortal, bool abActive)", SetSectorPortalActive);
 
-		//Renderer
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetAmbientColor));
+		// Resources
+		AddFunc("void PreloadSound(string &in asFile)", PreloadSound);
+		AddFunc("string& Translate(string &in asCat, string &in asName)", Translate);
 
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetSkybox));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetSkyboxActive));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetSkyboxColor));
+		// Mesh Entity
+		AddFunc("void SetMeshActive(string &in asName, bool abActive)", SetMeshActive);
 
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(CreateParticleSystemOnCamera));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetFogActive));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetFogCulling));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetFogProperties));
+		// Particle System
+		AddFunc("void SetParticleSystemActive(string &in asName, bool abActive)", SetParticleSystemActive);
+		AddFunc("void CreateParticleSystem(string &in asName, string &in asType, string &in asArea, float afX, float afY, float afZ)", CreateParticleSystem);
+		AddFunc("void KillParticleSystem(string &in asName)", KillParticleSystem);
 
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetSectorProperties));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetSectorPortalActive));
+		// Beam
+		AddFunc("void CreateBeam(string &in asName, string &in asFile, string &in asStartArea, string &in asEndArea)", CreateBeam);
+		AddFunc("void DestroyBeam(string &in asName)", DestroyBeam);
 
+		// Light
+		AddFunc("void FadeLight3D(string &in asName, float afR,float afG, float afB, float afA, float afRadius, float afTime)", FadeLight3D);
+		AddFunc("void AttachBillboardToLight3D(string &in asBillboardName, string &in asLightName,bool abX)", AttachBillboardToLight3D);
+		AddFunc("void SetLight3DVisible(string &in asName, bool abX)", SetLight3DVisible);
+		AddFunc("void SetLight3DOnlyAffectInSector(string &in asName, bool abX)", SetLight3DOnlyAffectInSector);
+		AddFunc("void SetLight3DFlickerActive(string &in asName, bool abX)", SetLight3DFlickerActive);
+		AddFunc("void SetLight3DFlicker(string &in asName, float afR,float afG, float afB, float afA, float afRadius, float afOnMinLength, \
+				float afOnMaxLength, string &in asOnSound, string &in asOnPS, float afOffMinLength, float afOffMaxLength, string &in asOffSound, \
+				string &in asOffPS, bool abFade, float afOnFadeLength, float afOffFadeLength)", SetLight3DFlicker);
 
-		//Resources
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(PreloadSound));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(Translate));
+		// Sound
+		AddFunc("void CreateSoundEntity(string &in asName, string &in asFile, string &in asArea)", CreateSoundEntity);
+		AddFunc("void PlaySoundEntity(string &in asName, bool abPlayStart)", PlaySoundEntity);
+		AddFunc("void StopSoundEntity(string &in asName, bool abPlayEnd)", StopSoundEntity);
+		AddFunc("void FadeInSoundEntity(string &in asName, float afSpeed)", FadeInSoundEntity);
+		AddFunc("void FadeOutSoundEntity(string &in asName, float afSpeed)", FadeOutSoundEntity);
+		AddFunc("void PlayMusic(string &in asName, float afVol, float afStepSize, bool abLoop)", PlayMusic);
+		AddFunc("void StopMusic(float afStepSize)", StopMusic);
+		AddFunc("void PlayGuiSound(string &in asName, float afVol)", PlayGuiSound);
 
-		//Mesh Entity
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetMeshActive));
+		// Physics
+		AddFunc("void SetJointCallback(string &in asJointName, string &in asType, string &in asFunc)", SetJointCallback);
+		AddFunc("float GetJointProperty(string &in asJointName, string &in asProp)", GetJointProperty);
+		AddFunc("float GetBodyProperty(string &in asBodyName, string &in asProp)", GetBodyProperty);
+		AddFunc("void BreakJoint(string &in asJointName)", BreakJoint);
+		AddFunc("void SetJointControllerActive(string &in asJointName,string &in asCtrlName, bool abActive)", SetJointControllerActive);
+		AddFunc("void ChangeJointController(string &in asJointName,string &in asCtrlName)", ChangeJointController);
+		AddFunc("void SetJointControllerPropertyFloat(string &in asJointName,string &in asCtrlName, string &in asProperty, float afValue)", SetJointControllerPropertyFloat);
+		AddFunc("void SetBodyProperty(string &in asBodyName, string &in asProp, float afVal)", SetBodyProperty);
+		AddFunc("void AttachBodiesWithJoint(string &in asParentName, string &in asChildName, string &in asJointName)", AttachBodiesWithJoint);
+		AddFunc("void SetJointProperty(string &in asJointName, string &in asProp, float afVal)", SetJointProperty);
+		AddFunc("void AddBodyForce(string &in asBodyName, string &in asCoordType, float afX, float afY, float afZ)", AddBodyForce);
+		AddFunc("void AddBodyImpulse(string &in asBodyName, string &in asCoordType, float afX, float afY, float afZ)", AddBodyImpulse);
 
-		//Beams
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(CreateBeam));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(DestroyBeam));
+		// Local Vars
+		AddFunc("void CreateLocalVar(string &in asName, int alVal)", CreateLocalVar);
+		AddFunc("void SetLocalVar(string &in asName, int alVal)", SetLocalVar);
+		AddFunc("void AddLocalVar(string &in asName, int alVal)", AddLocalVar);
+		AddFunc("int GetLocalVar(string &in asName)", GetLocalVar);
 
-		//Particle systems
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetParticleSystemActive));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(CreateParticleSystem));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(KillParticleSystem));
-
-		//Light
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(FadeLight3D));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(AttachBillboardToLight3D));
-
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetLight3DVisible));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetLight3DFlickerActive));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetLight3DFlicker));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetLight3DOnlyAffectInSector));
-
-		//Sound
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(PlayMusic));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(StopMusic));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(PlaySoundEntity));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(StopSoundEntity));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(FadeInSoundEntity));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(FadeOutSoundEntity));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(PlayGuiSound));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(CreateSoundEntity));
-
-
-		//Physics
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetJointCallback));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(BreakJoint));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(GetJointProperty));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(GetBodyProperty));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetBodyProperty));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetJointProperty));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(AttachBodiesWithJoint));
-
-
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetJointControllerActive));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(ChangeJointController));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetJointControllerPropertyFloat));
-
-
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(AddBodyForce));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(AddBodyImpulse));
-
-		//Local vars
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(CreateLocalVar));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetLocalVar));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(AddLocalVar));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(GetLocalVar));
-
-		//Global vars
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(CreateGlobalVar));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(SetGlobalVar));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(AddGlobalVar));
-		gpSystem->GetLowLevel()->AddScriptFunc(SCRIPT_REGISTER_FUNC(GetGlobalVar));
+		// Global Vars
+		AddFunc("void CreateGlobalVar(string &in asName, int alVal)", CreateGlobalVar);
+		AddFunc("void SetGlobalVar(string &in asName, int alVal)", SetGlobalVar);
+		AddFunc("void AddGlobalVar(string &in asName, int alVal)", AddGlobalVar);
+		AddFunc("int GetGlobalVar(string &in asName)", GetGlobalVar);
 	}
 
 	//-----------------------------------------------------------------------
