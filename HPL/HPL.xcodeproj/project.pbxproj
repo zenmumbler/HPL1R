@@ -946,7 +946,7 @@
 				DB27F0830ACB9AB90054ACA3 /* SqScript.h */,
 				8E84E78B260549B100DC6065 /* stb_vorbis.c */,
 				8E84E78E26054A2F00DC6065 /* stb_vorbis.h */,
-				DBF849AE0AC76D5800BB15CD /* tinyXml */,
+				DBF849AE0AC76D5800BB15CD /* tinyXML */,
 				DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */,
 				DB27F0890ACB9AB90054ACA3 /* VertexBufferVBO.h */,
 				DBF9A1F6119A58DB00CCFDC9 /* VideoStreamTheora.cpp */,
@@ -967,7 +967,7 @@
 			path = platform;
 			sourceTree = "<group>";
 		};
-		DBF849AE0AC76D5800BB15CD /* tinyXml */ = {
+		DBF849AE0AC76D5800BB15CD /* tinyXML */ = {
 			isa = PBXGroup;
 			children = (
 				DBF849AF0AC76D5800BB15CD /* tinystr.cpp */,
@@ -977,7 +977,7 @@
 				DBF849B10AC76D5800BB15CD /* tinyxmlerror.cpp */,
 				DBF849B20AC76D5800BB15CD /* tinyxmlparser.cpp */,
 			);
-			path = tinyXml;
+			path = tinyXML;
 			sourceTree = "<group>";
 		};
 		DBF849B50AC76D5800BB15CD /* input */ = {
