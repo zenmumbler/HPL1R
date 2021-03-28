@@ -19,6 +19,8 @@
 		8E9F748F2551E732000324E8 /* SDLBMPFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */; };
 		8E9F74EC255317F7000324E8 /* SDLTGAFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F74EB255317F7000324E8 /* SDLTGAFile.cpp */; };
 		8EA48718260FFCD3000D1AB7 /* scriptstdstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */; };
+		8EA4871E2610A67C000D1AB7 /* scriptarray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4871B2610A67B000D1AB7 /* scriptarray.cpp */; };
+		8EA4871F2610A67C000D1AB7 /* scriptstdstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */; };
 		8EAA07AB25588AA2007D7CD0 /* Material_FontNormal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AA25588AA2007D7CD0 /* Material_FontNormal.cpp */; };
 		8EAA07B125588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AE25588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp */; };
 		8EAA07B225588FEA007D7CD0 /* Material_Smoke2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AF25588FEA007D7CD0 /* Material_Smoke2D.cpp */; };
@@ -234,6 +236,9 @@
 		8E9F74E8255316E1000324E8 /* SDLTGAFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLTGAFile.h; sourceTree = "<group>"; };
 		8E9F74EB255317F7000324E8 /* SDLTGAFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDLTGAFile.cpp; sourceTree = "<group>"; };
 		8EA486F6260FF779000D1AB7 /* AngelScript.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AngelScript.xcodeproj; path = ../AngelScript/AngelScript.xcodeproj; sourceTree = "<group>"; };
+		8EA4871B2610A67B000D1AB7 /* scriptarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptarray.cpp; sourceTree = "<group>"; };
+		8EA4871C2610A67B000D1AB7 /* scriptarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptarray.h; sourceTree = "<group>"; };
+		8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstdstring_utils.cpp; sourceTree = "<group>"; };
 		8EAA07A725588A9A007D7CD0 /* Material_FontNormal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Material_FontNormal.h; sourceTree = "<group>"; };
 		8EAA07AA25588AA2007D7CD0 /* Material_FontNormal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material_FontNormal.cpp; sourceTree = "<group>"; };
 		8EAA07AE25588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material_DiffuseAlpha2D.cpp; sourceTree = "<group>"; };
@@ -925,8 +930,11 @@
 				DB27F07C0ACB9AB90054ACA3 /* PhysicsWorldNewton.h */,
 				DBF849A30AC76D5800BB15CD /* platform */,
 				DB27F07D0ACB9AB90054ACA3 /* Platform.h */,
+				8EA4871B2610A67B000D1AB7 /* scriptarray.cpp */,
+				8EA4871C2610A67B000D1AB7 /* scriptarray.h */,
 				8EB7C3D8254F603E00277667 /* scripthelper.cpp */,
 				8E9728CF254CB92F0033415B /* scripthelper.h */,
+				8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */,
 				DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */,
 				DB27F0840ACB9AB90054ACA3 /* scriptstdstring.h */,
 				DB6E15BA0B6B173800203538 /* scriptstring.h */,
@@ -1371,6 +1379,7 @@
 				DBF84B0B0AC76F1E00BB15CD /* MeshEntity.cpp in Sources */,
 				DBF84B0C0AC76F1E00BB15CD /* MeshLoaderCollada.cpp in Sources */,
 				DBF84B0D0AC76F1E00BB15CD /* MeshLoaderColladaHelpers.cpp in Sources */,
+				8EA4871F2610A67C000D1AB7 /* scriptstdstring_utils.cpp in Sources */,
 				8E84E78C260549B100DC6065 /* stb_vorbis.c in Sources */,
 				DBF84B0F0AC76F1E00BB15CD /* MeshLoaderHandler.cpp in Sources */,
 				DBF84B100AC76F1E00BB15CD /* MeshLoaderMSH.cpp in Sources */,
@@ -1443,6 +1452,7 @@
 				DBF84B5A0AC76F1E00BB15CD /* String.cpp in Sources */,
 				DBF84B5B0AC76F1E00BB15CD /* SubMesh.cpp in Sources */,
 				DBF84B5C0AC76F1E00BB15CD /* SubMeshEntity.cpp in Sources */,
+				8EA4871E2610A67C000D1AB7 /* scriptarray.cpp in Sources */,
 				DBF84B5D0AC76F1E00BB15CD /* SurfaceData.cpp in Sources */,
 				DBF84B5E0AC76F1E00BB15CD /* System.cpp in Sources */,
 				DBF84B5F0AC76F1E00BB15CD /* TextureManager.cpp in Sources */,
