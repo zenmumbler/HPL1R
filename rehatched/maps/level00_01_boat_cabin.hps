@@ -1,6 +1,8 @@
 //////////////////////
-/*CALLBACK FUNCTIONS*/
-
+// Script Locals
+int lockerhelp = 0;
+int lockerlesshelp = 0;
+int endlevel = 0;
 
 ///////////////////
 ////INTRO START////
@@ -85,7 +87,7 @@ void Locker01UseKey01(string asItem, string asEntity)
 	GiveItem("padlock","boat_lock.ent",-1);
 	
 	//Partitialy removes help about locked locker, play opened locker but not found map folder
-	SetLocalVar("lockerlesshelp", 1);
+	lockerlesshelp = 1;
 	
 	RemoveUseCallback("Locker01UseKey01");
 	
@@ -121,7 +123,7 @@ void FlashlightTutorial01(string asParent, string asChild)
 //LOCKER HELP
 void LockerHelp01(string asTimer)
 {
-	if(GetLocalVar("lockerlesshelp") == 0)
+	if(lockerlesshelp == 0)
 	{
 		AddMessage(
 			Translate("00_01_boat_cabin", "LockerHelp01") 
@@ -129,7 +131,7 @@ void LockerHelp01(string asTimer)
 			+ Translate("Misc", "ParentDot")
 		);
 	}
-	else if(GetLocalVar("lockerlesshelp") == 1)
+	else if(lockerlesshelp == 1)
 	{
 		AddMessageTrans("00_01_boat_cabin", "LockerHelp02");			
 	}
@@ -193,7 +195,7 @@ void Mapfolder01(string asItem)
 	);
 	
 	//Turns off help message for locker, player managed to open the locker and already found the map folder.		
-	SetLocalVar("lockerhelp", 1);
+	lockerhelp = 1;
 }
 ////PICK UPS STOP////
 /////////////////////
@@ -263,14 +265,6 @@ void OnStart()
 	
 	SetLight3DFlickerActive("parrafinlight_light1",true); 
 	
-	//---- LOCAL VAR INIT -------------------
-	//For extra help with locker ->See OnUpdate
-	CreateLocalVar("lockerhelp", 0);
-	CreateLocalVar("lockerlesshelp", 0);
-	
-	//For end level check ->See OnUpdate
-	CreateLocalVar("endlevel", 0);
-	
 	
 	//----TEXT INIT----------------------
 	SetGameEntityDescriptionOnceTrans("exitdoordesc","00_01_boat_cabin","ExitDoorDesc");
@@ -338,21 +332,18 @@ void OnLoad()
 void OnUpdate()
 {	
 	//ADD TIMER FOR HELP MESSAGE TO OPEN LOCKER, SEE -> CALLBACKS
-	if(HasItem("flashlight") == true && HasItem("notebook")== true 
-			&& GetLocalVar("lockerhelp") == 0)
+	if(HasItem("flashlight") && HasItem("notebook") && lockerhelp == 0)
 	{
 		CreateTimer("LockerTimer1", 0.5f, "LockerHelp01",false);
 			
-		SetLocalVar("lockerhelp", 1);
+		lockerhelp = 1;
 	}
 	
 	//ADD TIMER TO FINSH LEVEL WHEN PLAYER HAS ALL ITEMS, SEE -> CALLBACKS
-	if(HasItem("flashlight") == true && HasItem("notebook") == true && 
-			HasItem("glowstick") == true && GetLocalVar("endlevel") == 0)
+	if(HasItem("flashlight") && HasItem("notebook") && HasItem("glowstick") && endlevel == 0)
 	{
 		CreateTimer("EndLevelTimer1", 6.5f, "EndLevel01",false);
-		
-		SetLocalVar("endlevel", 1);
+		endlevel = 1;
 	}
 }
 
