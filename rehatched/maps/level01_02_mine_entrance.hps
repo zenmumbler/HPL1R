@@ -10,21 +10,14 @@ void FallScene1(string asTimer)
 	
 	PlayGameMusic("mine_intro",0.8,1,false,5);
 	
-	CreateTimer("Fall2", 14.8f, "FallScene2",false);
-	CreateTimer("Fall2whisper", 13.5f, "FallWhipersScene2",false);
+	RunAfter(15.0f, "FallScene2");
+	RunAfter(13.5f, "FallWhipersScene2");
 }
 void FallWhipersScene2(string asTimer) //not really needed
 {
 	PlayGuiSound("horror_1_whisper_entrance", 0.7f);
 }
-void FallScene2(string asTimer) //not really needed
-{
-	//StopMusic
-	//Keep Quiet
-	
-	CreateTimer("Fall3", 0.2f, "FallScene3",false);
-}
-void FallScene3(string asTimer)
+void FallScene2(string asTimer)
 {
 	FadeInSoundEntity("ambient1", 0.1);
 	FadeInSoundEntity("wind1", 0.1);
@@ -39,7 +32,7 @@ void LookScene1(string asTimer)
 	
 	PlayGameMusic("penumbra_music_E1_C4",0.9f,0.1,false,7);
 	
-	CreateTimer("Look2", 1.6f, "LookScene2",false);
+	RunAfter(1.6f, "LookScene2");
 }
 void LookScene2(string asTimer)
 {
@@ -48,7 +41,7 @@ void LookScene2(string asTimer)
 	SetDepthOfFieldActive(true,0.2f);
 	SetupDepthOfField(0,0.1,0.2);
 	
-	CreateTimer("Look3", 1.1f, "LookScene3",false);
+	RunAfter(1.1f, "LookScene3");
 }
 void LookScene3(string asTimer)
 {
@@ -58,7 +51,7 @@ void LookScene3(string asTimer)
 	
 	SetPlayerPose("Stand", false);
 	
-	CreateTimer("Look4", 1.6f, "LookScene4",false);
+	RunAfter(1.6f, "LookScene4");
 }
 void LookScene4(string asTimer)
 {
@@ -80,11 +73,8 @@ void LookScene4(string asTimer)
 void OpenLockedDoor()
 {
 	SetDoorLocked("wooddoor1", false);
-	
 	RemoveNotebookTask("TaskDoor");
-	
 	RemoveEntityCallback("PlayerInteract","wooddoor1");
-	
 	SetGameEntityActive("lockarea",false);
 }
 
@@ -106,7 +96,7 @@ void BreakLockBarrel(string asEntity)
 //START INTERACT WOOD DOOR//
 void InteractWoodDoor01(string asEntity)
 {
-	CreateTimer("messagetimer1", 0.7f, "DelayMessage01",false);
+	RunAfter(0.7f, "DelayMessage01");
 	
 	PlayGuiSound("interact_closed_door_old", 0.4f);
 	
@@ -127,7 +117,7 @@ void DelayMessage01(string asTimer)
 //START WOOD PLANKS//
 void InteractPlanks01(string asEntity)
 {
-	CreateTimer("plankstimer1", 0.3f, "DelayPlanks01",false);
+	RunAfter(0.3f, "DelayPlanks01");
 	
 	RemoveEntityCallback("PlayerInteract","planks1");
 }
@@ -151,7 +141,7 @@ void PlanksBreak01(string asEntity)
 //START RUMBLE//
 void EnterRumbleArea(string asParent, string asChild)
 {
-	CreateTimer("rumbletimer1", 2.4, "RumbleEvent",false);
+	RunAfter(2.4, "RumbleEvent");
 	
 	SetGameEntityActive("rumblearea",false);
 }
@@ -161,7 +151,7 @@ void RumbleEvent(string asTimer)
 	
 	StartScreenShake(0.01f, 0.2,0.8,0.4);
 	
-	CreateTimer("rumbletimer2", 14.8, "RumbleEvent2",false);
+	RunAfter(14.8, "RumbleEvent2");
 }
 void RumbleEvent2(string asTimer)
 {
@@ -237,7 +227,7 @@ void ScareEvent01(string asParent, string asChild)
 	if(GetLocalVar("doscare") == 1)
 	{
 		CreateSoundEntityAt("Entity","eventscareeffect2","scaresound1","mine_entrance_growlbang");
-		CreateTimer("scare2", 0.15f, "ScareEvent02",false);
+		RunAfter(0.15f, "ScareEvent02");
 		RemoveEntityCollideCallback("Enter","Player","eventscare");
 	}
 }
@@ -245,19 +235,19 @@ void ScareEvent02(string asTimer)
 {
 	CreateParticleSystem("scaredust1", "particle_expl_dust_small", "eventscareeffect1",1,1,1);
 	StartScreenShake(0.05f, 0.05,0.5,0.1);
-	CreateTimer("playerbreath1", 1.6f, "PlayerBreath01",false);	
-	CreateTimer("scare3", 0.8f, "ScareEvent03",false);
+	RunAfter(1.6f, "PlayerBreath01");	
+	RunAfter(0.8f, "ScareEvent03");
 }
 void ScareEvent03(string asTimer)
 {
 	CreateSoundEntityAt("Entity","eventscareeffect1","scaresound2","mine_entrance_growlbang");
-	CreateTimer("scare4", 0.15f, "ScareEvent04",false);	
+	RunAfter(0.15f, "ScareEvent04");	
 }
 void ScareEvent04(string asTimer)
 {
 	CreateParticleSystem("scaredust2", "particle_expl_dust_small", "eventscareeffect2",1,1,1);
-	CreateTimer("playerbreath2", 1.4f, "PlayerBreath02",false);	
-	CreateTimer("moveaway1", 1.5f, "MoveAway01",false);
+	RunAfter(1.4f, "PlayerBreath02");	
+	RunAfter(1.5f, "MoveAway01");
 	StartScreenShake(0.05f, 0.05,0.5,0.1);	
 }
 void PlayerBreath01(string asTimer)
@@ -272,7 +262,7 @@ void MoveAway01(string asTimer)
 {
 	CreateSoundEntityAt("Entity","eventscareeffect3","scaresound3","mine_entrance_growl");
 	StartScreenShake(0.01f, 0.5,1,0.5);
-	CreateTimer("moveaway2", 3, "MoveAway02",false);
+	RunAfter(3, "MoveAway02");
 }
 void MoveAway02(string asTimer)
 {
@@ -330,7 +320,6 @@ void OnStart()
 	
 	//---- ENTITY INIT ------------
 	SetDoorLocked("wooddoor1", true);
-	
 	AddBodyImpulse("wooddoor2_minedoorShape", "world" ,-2,0,0);
 	
 	CreateParticleSystem("scaredusthide1", "particle_mist", "eventscareeffect3",1,1,1);
@@ -362,8 +351,8 @@ void OnStart()
 	SetDepthOfFieldActive(true,0);
 	SetupDepthOfField(0,0.1,0.2);
 	
-	CreateTimer("Fall1", 0.1f, "FallScene1",false);
-	CreateTimer("Look1", 19.1f, "LookScene1",false);
+	RunAfter(0.1f, "FallScene1");
+	RunAfter(19.1f, "LookScene1");
 	
 	
 	//---- TEXT INIT ------------

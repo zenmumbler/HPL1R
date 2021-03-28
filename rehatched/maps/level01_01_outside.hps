@@ -67,7 +67,7 @@ void Joint1OnMin(string asJoint)
 	SetJointProperty("hatch_joint1","MaxLimit",-135);
 	
 	//to delay the unlock sound slightly
-	CreateTimer("SoundDelay1", 0.25f, "SoundDelay01",false);
+	RunAfter(0.25f, "SoundDelay01");
 	
 	//Clear callback
 	SetJointCallback("hatch_joint1", "OnMin","");
@@ -108,7 +108,7 @@ void ColdEvent01(string asTimer)
 	SetPlayerActive(false);
 	SetWideScreenActive(true);
 	
-	CreateTimer("ColdMessage1", 3.2f, "ColdMessage01",false);
+	RunAfter(3.2f, "ColdMessage01");
 }
 //Preventing player to click away message during white fade
 void ColdMessage01(string asTimer)
@@ -125,9 +125,9 @@ void ColdEvent02()
 	SetPlayerActive(true);
 
 	//Timer for pain loop
-	CreateTimer("ColdPain1", 3.5f, "ColdPainEvent01",false);
+	RunAfter(3.5f, "ColdPainEvent01");
 	//Timer for howl message
-	CreateTimer("Cold1", 4.8f, "HowlEvent01",false);
+	RunAfter(4.8f, "HowlEvent01");
 	
 	AutoSave();
 }
@@ -138,7 +138,7 @@ void ColdPainEvent01(string asTimer)
 	PlayGuiSound("player_cold_pain", 0.3);
 	
 	//Timer for pain loop
-	CreateTimer("ColdPain2", 7.2f, "ColdPainEvent02",false);
+	RunAfter(7.2f, "ColdPainEvent02");
 }
 void ColdPainEvent02(string asTimer)
 {
@@ -146,7 +146,7 @@ void ColdPainEvent02(string asTimer)
 	PlayGuiSound("player_cold_pain", 0.2);
 
 	//Timer for pain loop
-	CreateTimer("ColdPain1", 5.6f, "ColdPainEvent01",false);
+	RunAfter(5.6f, "ColdPainEvent01");
 }
 //END COLD//
 ////////////
@@ -253,7 +253,7 @@ void OnStart()
 	
 	//---- TIMER INIT-------------------
 	//First message about how cold it is
-	CreateTimer("Cold1", 0.5f, "ColdEvent01",false);
+	RunAfter(0.5f, "ColdEvent01");
 }	
 
 

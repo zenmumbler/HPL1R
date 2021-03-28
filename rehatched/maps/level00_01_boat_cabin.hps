@@ -41,7 +41,7 @@ void HornEvent01(string asTimer)
   	
 	PlayGameMusic("penumbra_music_E1_A6",0.7,0.2,true,0);
 	
-	CreateTimer("Horn2", 1, "HornEvent02",false);
+	RunAfter(1, "HornEvent02");
 }
 void HornEvent02(string asTimer)
 {	
@@ -135,7 +135,6 @@ void LockerHelp01(string asTimer)
 	{
 		AddMessageTrans("00_01_boat_cabin", "LockerHelp02");			
 	}
-	DestroyTimer("LockerTimer1");
 }
 ////LOCKED LOCKER STOP////
 //////////////////////////
@@ -172,7 +171,7 @@ void PickNotebook01(string asItem)
 	//DRAWER TUTORIAL IF PLAYER HAS NOT ALREADY TAKEN FLASHLIGHT
 	if(HasItem("flashlight") == false)
 	{
-		CreateTimer("flashlighttimer1", 0.5f, "DrawerTutorial01",false);
+		RunAfter(0.5f, "DrawerTutorial01");
 	}
 }
 
@@ -281,7 +280,7 @@ void OnStart()
 	
 	
 	//For boat horn event
-	CreateTimer("Horn1", 5.5, "HornEvent01",false);
+	RunAfter(5.5, "HornEvent01");
 	
 	bool bIntro = true;
 		
@@ -296,10 +295,10 @@ void OnStart()
 		StartPlayerLookAt("lookintro1",100, 0.001f);
 
 		//For fade from black at start
-		CreateTimer("Fade1", 0.5, "FadeEffect01",false);
+		RunAfter(0.5, "FadeEffect01");
 		//For wide screen end and view movement
-		CreateTimer("Intro1", 2, "IntroEffect01",false);
-		CreateTimer("Intro2", 6, "IntroEffect02",false);
+		RunAfter(2, "IntroEffect01");
+		RunAfter(6, "IntroEffect02");
 	}
 	
 	//---- PLAYER INIT --------------------	
@@ -334,7 +333,7 @@ void OnUpdate()
 	//ADD TIMER FOR HELP MESSAGE TO OPEN LOCKER, SEE -> CALLBACKS
 	if(HasItem("flashlight") && HasItem("notebook") && lockerhelp == 0)
 	{
-		CreateTimer("LockerTimer1", 0.5f, "LockerHelp01",false);
+		RunAfter(0.5f, "LockerHelp01");
 			
 		lockerhelp = 1;
 	}
@@ -342,7 +341,7 @@ void OnUpdate()
 	//ADD TIMER TO FINSH LEVEL WHEN PLAYER HAS ALL ITEMS, SEE -> CALLBACKS
 	if(HasItem("flashlight") && HasItem("notebook") && HasItem("glowstick") && endlevel == 0)
 	{
-		CreateTimer("EndLevelTimer1", 6.5f, "EndLevel01",false);
+		RunAfter(6.5f, "EndLevel01");
 		endlevel = 1;
 	}
 }
