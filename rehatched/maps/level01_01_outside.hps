@@ -1,5 +1,6 @@
 /////////////
-//CALLBACKS//
+//Script Locals
+int IceNote = 0;
 
 
 ///////////////
@@ -9,10 +10,10 @@ void FoundHatchAreaEnter01(string asParent, string asChild)
 {
 	AddSubTitleTrans("01_01_outside", "FoundHatch", 6.2f);
 	
-	if (GetLocalVar("IceNote") == 0)
+	if (IceNote == 0)
 	{
 		AddNotebookTask("HatchTask", "01_01_outside", "TaskHatch");
-		SetLocalVar("IceNote", 1);
+		IceNote = 1;
 	}
 	
 	RemoveNotebookTask("FindHatchTask");
@@ -28,12 +29,12 @@ void Stone0XEnterHatchArea(string asParent, string asChild)
 		, 5
 	);
 	
-	if (GetLocalVar("IceNote") == 0)
+	if (IceNote == 0)
 	{
 		AddNotebookTask("HatchTask", "01_01_outside", "TaskHatch");
 		RemoveNotebookTask("FindHatchTask");
 		
-		SetLocalVar("IceNote", 1);
+		IceNote = 1;
 	}
 			 		
 	SetGameEntityActive("foundhatcharea",false);
@@ -138,7 +139,6 @@ void ColdPainEvent01(string asTimer)
 	
 	//Timer for pain loop
 	CreateTimer("ColdPain2", 7.2f, "ColdPainEvent02",false);
-	DestroyTimer("ColdPain1");
 }
 void ColdPainEvent02(string asTimer)
 {
@@ -147,7 +147,6 @@ void ColdPainEvent02(string asTimer)
 
 	//Timer for pain loop
 	CreateTimer("ColdPain1", 5.6f, "ColdPainEvent01",false);
-	DestroyTimer("ColdPain2");
 }
 //END COLD//
 ////////////
@@ -255,10 +254,6 @@ void OnStart()
 	//---- TIMER INIT-------------------
 	//First message about how cold it is
 	CreateTimer("Cold1", 0.5f, "ColdEvent01",false);
-	
-	
-	//---- VARIABLE INIT --------------
-	CreateLocalVar("IceNote", 0);
 }	
 
 

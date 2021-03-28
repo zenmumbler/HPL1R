@@ -12,12 +12,10 @@ void FallScene1(string asTimer)
 	
 	CreateTimer("Fall2", 14.8f, "FallScene2",false);
 	CreateTimer("Fall2whisper", 13.5f, "FallWhipersScene2",false);
-	DestroyTimer("Fall1");
 }
 void FallWhipersScene2(string asTimer) //not really needed
 {
 	PlayGuiSound("horror_1_whisper_entrance", 0.7f);
-	DestroyTimer("Fall2whisper");
 }
 void FallScene2(string asTimer) //not really needed
 {
@@ -25,14 +23,11 @@ void FallScene2(string asTimer) //not really needed
 	//Keep Quiet
 	
 	CreateTimer("Fall3", 0.2f, "FallScene3",false);
-	DestroyTimer("Fall2");
 }
 void FallScene3(string asTimer)
 {
 	FadeInSoundEntity("ambient1", 0.1);
 	FadeInSoundEntity("wind1", 0.1);
-	
-	DestroyTimer("Fall3");
 }
 //---- RISING AFTER FALL -------------
 void LookScene1(string asTimer)
@@ -45,7 +40,6 @@ void LookScene1(string asTimer)
 	PlayGameMusic("penumbra_music_E1_C4",0.9f,0.1,false,7);
 	
 	CreateTimer("Look2", 1.6f, "LookScene2",false);
-	DestroyTimer("Look1");
 }
 void LookScene2(string asTimer)
 {
@@ -55,7 +49,6 @@ void LookScene2(string asTimer)
 	SetupDepthOfField(0,0.1,0.2);
 	
 	CreateTimer("Look3", 1.1f, "LookScene3",false);
-	DestroyTimer("Look2");
 }
 void LookScene3(string asTimer)
 {
@@ -66,17 +59,14 @@ void LookScene3(string asTimer)
 	SetPlayerPose("Stand", false);
 	
 	CreateTimer("Look4", 1.6f, "LookScene4",false);
-	DestroyTimer("Look3");
 }
 void LookScene4(string asTimer)
 {
 	StopPlayerLookAt();
-	
+
 	SetPlayerActive(true);
 	
 	AddSubTitleTrans("01_02_mine_entrance", "SceneIntro", 6);
-	
-	DestroyTimer("Look4");
 	
 	AutoSave();
 }
@@ -247,36 +237,27 @@ void ScareEvent01(string asParent, string asChild)
 	if(GetLocalVar("doscare") == 1)
 	{
 		CreateSoundEntityAt("Entity","eventscareeffect2","scaresound1","mine_entrance_growlbang");
-	
 		CreateTimer("scare2", 0.15f, "ScareEvent02",false);
-	
 		RemoveEntityCollideCallback("Enter","Player","eventscare");
 	}
 }
 void ScareEvent02(string asTimer)
 {
 	CreateParticleSystem("scaredust1", "particle_expl_dust_small", "eventscareeffect1",1,1,1);
-	
 	StartScreenShake(0.05f, 0.05,0.5,0.1);
-	
 	CreateTimer("playerbreath1", 1.6f, "PlayerBreath01",false);	
-	
 	CreateTimer("scare3", 0.8f, "ScareEvent03",false);
 }
 void ScareEvent03(string asTimer)
 {
 	CreateSoundEntityAt("Entity","eventscareeffect1","scaresound2","mine_entrance_growlbang");
-	
 	CreateTimer("scare4", 0.15f, "ScareEvent04",false);	
 }
 void ScareEvent04(string asTimer)
 {
 	CreateParticleSystem("scaredust2", "particle_expl_dust_small", "eventscareeffect2",1,1,1);
-	
 	CreateTimer("playerbreath2", 1.4f, "PlayerBreath02",false);	
-	
 	CreateTimer("moveaway1", 1.5f, "MoveAway01",false);
-	
 	StartScreenShake(0.05f, 0.05,0.5,0.1);	
 }
 void PlayerBreath01(string asTimer)
@@ -290,15 +271,12 @@ void PlayerBreath02(string asTimer)
 void MoveAway01(string asTimer)
 {
 	CreateSoundEntityAt("Entity","eventscareeffect3","scaresound3","mine_entrance_growl");
-	
 	StartScreenShake(0.01f, 0.5,1,0.5);
-	
 	CreateTimer("moveaway2", 3, "MoveAway02",false);
 }
 void MoveAway02(string asTimer)
 {
 	StartScreenShake(0.005f, 0.5,1,0.5);
-	
 	CreateSoundEntityAt("Entity","eventscareeffect4","scaresound4","mine_entrance_growl_away");
 }
 //STOP SCARE EVENT//

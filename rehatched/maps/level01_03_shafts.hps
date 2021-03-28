@@ -7,32 +7,25 @@
 void EntranceInteract01(string asEntity)
 {
 	CreateTimer("entrance1", 0.15f, "Entrance01", false);
-	
 	PlayGuiSound("interact_locked_metal_door", 0.8f);
 }
+
 void Entrance01(string asTimer)
 {	
 	AddMessageTrans("01_03_shafts", "EventEntrance01");
-	
-	DestroyTimer("entrance1");
 }
+
 void Shake01(string asTimer)
 {	
 	FadeInSoundEntity("rumble", 8.5f);
-	
 	StartScreenShake(0.02f, 2.5f,0,0);
-	
 	CreateTimer("shake2", 1.2f, "Shake02", false);
-	
-	DestroyTimer("shake1");
 }
+
 void Shake02(string asTimer)
 {
 	AddNotebookTask("01_03_entrance_closed", "PersonalNotes", "01_03_entrance_closed");
-	
 	FadeOutSoundEntity("rumble", 0.5f);
-	
-	DestroyTimer("shake2");
 }
 //STOP ENTRANCE//
 /////////////////
@@ -43,34 +36,25 @@ void Shake02(string asTimer)
 void ShaftDoorUnlock01(string asItem, string asEntity)
 {
 	SetDoorLocked("shaftdoor1", false);
-	
 	CreateSoundEntityAt("Entity","unlock","unlock1","key_unlock.snt");
-	
 	PlayGuiSound("horror_deep_thump", 0.5f);
-	
 	RemoveEntityCallback("PlayerInteract","shaftdoor1");
-	
 	RemoveNotebookTask("01_03_need_key");
-	
 	RemoveItem("oldminekey");
-	
 	AutoSave();
 }
+
 void ShaftDoorInteract01(string asEntity)
 {
 	CreateTimer("delayshaft1", 0.2f, "DelayShaft01", false);
-	
 	PlayGuiSound("interact_closed_door_old", 0.6f);
-	
 	AddNotebookTask("01_03_need_key", "PersonalNotes", "01_03_need_key");
-	
 	RemoveEntityCallback("PlayerInteract","shaftdoor1");
 }
+
 void DelayShaft01(string asTimer)
 {
 	AddSubTitleTrans("01_03_shafts", "EventShaftDoor01", 1.5f);
-	
-	DestroyTimer("delayshaft1");
 }
 //STOP LOCKED DOOR//
 ////////////////////
@@ -93,12 +77,10 @@ void Dog01(string asParent, string asChild)
 	 */
 	//AddSubTitle("DogArea Active",3);
 	SetLocalVar("dogdisable", 1);
-	
 	SetGameEntityActive("triggerdog",false);
-		
 	CreateTimer("dogscene1", 0.2f, "DogScene01", false);
-	//DestroyTimer("dog1");
 }
+
 void DogScene01(string asTimer)
 {
 	SetPlayerActive(false);
@@ -107,31 +89,26 @@ void DogScene01(string asTimer)
 	StartPlayerLookAt("lookdog1",4, 1);
 	
 	CreateTimer("dogscene2", 0.3f, "DogScene02", false);
-	DestroyTimer("dogscene1");
 }
+
 void DogScene02(string asTimer)
 {	
 	AddSubTitleTrans("01_03_shafts", "EventDog01", 1.9f);
-	
 	CreateTimer("dogscene3", 1.9f, "DogScene03", false);
-	DestroyTimer("dogscene2");
 }
+
 void DogScene03(string asTimer)
 {
 	StartPlayerLookAt("lookdog2",1, 4);
-	
 	AddSubTitleTrans("01_03_shafts", "EventDog02", 3);
-	
 	CreateTimer("dogscene4", 1.5f, "DogScene04", false);
-	DestroyTimer("dogscene3");
 }
+
 void DogScene04(string asTimer)
 {
 	StopPlayerLookAt();
 	SetWideScreenActive(false);
 	SetPlayerActive(true);
-	
-	DestroyTimer("dogscene3");
 	
 	CreateTimer("Sneak3", 13, "SneakTutorial03",false);
 }
@@ -160,7 +137,6 @@ void Dog201(string asParent, string asChild)
 	SetGameEntityActive("triggerdog2",false);
 		
 	CreateTimer("dogscene21", 0.2f, "DogScene201", false);
-	//DestroyTimer("dog1");
 }
 void DogScene201(string asTimer)
 {
@@ -170,14 +146,12 @@ void DogScene201(string asTimer)
 	StartPlayerLookAt("lookdog3",4, 1);
 	
 	CreateTimer("dogscene22", 0.3f, "DogScene202", false);
-	DestroyTimer("dogscene21");
 }
 void DogScene202(string asTimer)
 {	
 	AddSubTitleTrans("01_03_shafts", "EventDog01", 1.9f);
 	
 	CreateTimer("dogscene23", 1.9f, "DogScene203", false);
-	DestroyTimer("dogscene22");
 }
 void DogScene203(string asTimer)
 {
@@ -186,7 +160,6 @@ void DogScene203(string asTimer)
 	AddSubTitleTrans("01_03_shafts", "EventDog02", 3);
 	
 	CreateTimer("dogscene24", 1.5f, "DogScene204", false);
-	DestroyTimer("dogscene23");
 }
 void DogScene204(string asTimer)
 {
@@ -195,8 +168,6 @@ void DogScene204(string asTimer)
 	SetPlayerActive(true);
 	
 	CreateTimer("Sneak3", 13, "SneakTutorial03",false);
-	
-	DestroyTimer("dogscene3");
 }
 //STOP DOG INTRODUCTION SECOND//
 ////////////////////////////////
@@ -384,15 +355,12 @@ void FuseScene01(string asTimer)
 	RemoveUseCallback("LightFuse01");
 	
 	//CreateTimer("fusescene2", 4.3f, "FuseScene02", false);
-	DestroyTimer("fusescene1");
 }
 void FuseScene02(string asTimer)
 {
 	FadeIn(1);
 	
 	SetPlayerActive(true);
-	
-	DestroyTimer("fusescene2");
 }
 //Fuse burn
 void LightFuse02(string asItem, string asEntity)
@@ -400,13 +368,9 @@ void LightFuse02(string asItem, string asEntity)
 	PlayGuiSound("lighter_burst", 1);
 	
 	CreateParticleSystem("spark1", "particle_spark", "spark1area",1,1,1);
-	
 	CreateSoundEntityAt("Entity","spark1area","fuse1","item_fuse_loop");
-	
 	AddSubTitleTrans("01_03_shafts", "EventTakeCover", 2.5f);
-	
 	CreateTimer("blow1", 1.8f, "BlowCountDown01", false);
-	
 	RemoveNotebookTask("01_03_found_exit");
 }
 void BlowCountDown01(string asTimer)
@@ -415,7 +379,6 @@ void BlowCountDown01(string asTimer)
 	KillParticleSystem("spark1");
 	
 	CreateTimer("blow2", 1.9f, "BlowCountDown02", false);
-	DestroyTimer("blow1");
 }
 void BlowCountDown02(string asTimer)
 {
@@ -425,7 +388,6 @@ void BlowCountDown02(string asTimer)
 	CreateSoundEntityAt("Entity","spark3area","fuse2","item_fuse_loop");
 	
 	CreateTimer("blow3", 1.4f, "BlowCountDown03", false);
-	DestroyTimer("blow2");
 }
 void BlowCountDown03(string asTimer)
 {
@@ -433,7 +395,6 @@ void BlowCountDown03(string asTimer)
 	KillParticleSystem("spark3");
 	
 	CreateTimer("blow4", 1.8f, "BlowCountDown04", false);
-	DestroyTimer("blow3");
 }
 void BlowCountDown04(string asTimer)
 {
@@ -443,7 +404,6 @@ void BlowCountDown04(string asTimer)
 	CreateSoundEntityAt("Entity","spark4area","fuse3","item_fuse_loop");
 	
 	CreateTimer("blow5", 1.6f, "BlowCountDown05", false);
-	DestroyTimer("blow4");
 }
 void BlowCountDown05(string asTimer)
 {
@@ -477,14 +437,10 @@ void BlowCountDown05(string asTimer)
 				0.3, 0.5);
 	
 	CreateTimer("death1", 0.1f, "DeathCount01", false);
-	
-	DestroyTimer("blow5");
 }
 void DeathCount01(string asTimer)
 {	
 	SetGameEntityActive("dynamitedeath",false);
-	
-	DestroyTimer("death1");
 }
 //STOP BLOW HOLE//
 //////////////////
@@ -527,8 +483,6 @@ void EndLevel01(string asTimer)
 			"mine_event_crawl_exit","", //Stop and end sound.
 			0.1f , 0.5f,//Fade out and in time (seconds).
 			"LoadTexts", "01_03_to_01_07"); //Load text (cat and entry)
-			
-	DestroyTimer("endlevel1");
 }
 //STOP EXIT//
 /////////////
