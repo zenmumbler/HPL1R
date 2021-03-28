@@ -1440,7 +1440,7 @@ namespace hpl {
 
 		// Resources
 		AddFunc("void PreloadSound(const string &in asFile)", PreloadSound);
-		AddFunc("string& Translate(const string &in asCat, const string &in asName)", Translate);
+		AddFunc("string Translate(const string &in asCat, const string &in asName)", Translate);
 
 		// Mesh Entity
 		AddFunc("void SetMeshActive(const string &in asName, bool abActive)", SetMeshActive);
