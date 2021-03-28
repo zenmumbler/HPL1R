@@ -35,7 +35,7 @@
 #ifndef SDL_opengl_h_
 #define SDL_opengl_h_
 
-#include "SDL_config.h"
+#include <SDL2/SDL_config.h>
 
 #ifndef __IPHONEOS__  /* No OpenGL on iOS. */
 
@@ -2102,7 +2102,7 @@ typedef void (APIENTRYP PFNGLMULTITEXCOORD4SVARBPROC) (GLenum target, const GLsh
  * defined in gl.h).  Otherwise, extensions will be included from glext.h.
  */
 #if !defined(NO_SDL_GLEXT) && !defined(GL_GLEXT_LEGACY)
-#include "SDL_opengl_glext.h"
+#include <SDL2/SDL_opengl_glext.h>
 #endif  /* GL_GLEXT_LEGACY */
 
 
