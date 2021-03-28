@@ -21,36 +21,6 @@
 
 #include "resources/ResourceBase.h"
 
-// Macros to generate signatures for AS entrypoints
-
-#define SCRIPT_DEFINE_FUNC(ret, name) \
-	static const char* name##_proto = #ret" "#name"()";
-#define SCRIPT_DEFINE_FUNC_1(ret, name, a0) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0)";
-#define SCRIPT_DEFINE_FUNC_2(ret, name, a0,a1) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1)";
-#define SCRIPT_DEFINE_FUNC_3(ret, name, a0,a1,a2) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2)";
-#define SCRIPT_DEFINE_FUNC_4(ret, name, a0,a1,a2,a3) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3)";
-#define SCRIPT_DEFINE_FUNC_5(ret, name, a0,a1,a2,a3,a4) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4)";
-#define SCRIPT_DEFINE_FUNC_6(ret, name, a0,a1,a2,a3,a4,a5) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5)";
-#define SCRIPT_DEFINE_FUNC_7(ret, name, a0,a1,a2,a3,a4,a5,a6) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6)";
-#define SCRIPT_DEFINE_FUNC_8(ret, name, a0,a1,a2,a3,a4,a5,a6,a7) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7)";
-#define SCRIPT_DEFINE_FUNC_9(ret, name, a0,a1,a2,a3,a4,a5,a6,a7,a8) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7,"#a8" a8)";
-#define SCRIPT_DEFINE_FUNC_12(ret, name, a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7,"#a8" a8,"#a9" a9,"#a10" a10,"#a11" a11)";
-#define SCRIPT_DEFINE_FUNC_17(ret, name, a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16) \
-	static const char* name##_proto = #ret" "#name"("#a0" a0,"#a1" a1,"#a2" a2,"#a3" a3,"#a4" a4,"#a5" a5,"#a6" a6,"#a7" a7,"#a8" a8,"#a9" a9,"#a10" a10,"#a11" a11,"#a12" a12,"#a13" a13,"#a14" a14,"#a15" a15,"#a16" a16)";
-
-#define SCRIPT_REGISTER_FUNC(func) func##_proto, reinterpret_cast<void*>(func)
-
-
 namespace hpl {
 
 	class iScript : public iResourceBase
@@ -71,4 +41,5 @@ namespace hpl {
 		virtual bool Run(const tString& asFuncLine)=0;
 	};
 };
+
 #endif // HPL_SCRIPT_H
