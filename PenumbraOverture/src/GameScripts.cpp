@@ -98,19 +98,14 @@ static void ClearSavedMaps()
 
 //-----------------------------------------------------------------------
 
-std::string gsGameTemp;
-
-static const std::string& GetActionKeyString(const std::string& asAction)
+static std::string GetActionKeyString(const std::string& asAction)
 {
 	iAction *pAction = gpInit->mpGame->GetInput()->GetAction(asAction);
 	if(pAction)
 	{
-		gsGameTemp = pAction->GetInputName();
+		return pAction->GetInputName();
 	}
-	else {
-		gsGameTemp = "ActionNotFound";
-	}
-	return gsGameTemp;
+	return "ActionNotFound";
 }
 
 //-----------------------------------------------------------------------
@@ -1568,7 +1563,7 @@ void cGameScripts::Init()
 	AddFunc("void StartCredits()", StartCredits);
 	AddFunc("void ClearSavedMaps()", ClearSavedMaps);
 
-	AddFunc("string& GetActionKeyString(const string &in asAction)", GetActionKeyString);
+	AddFunc("string GetActionKeyString(const string &in asAction)", GetActionKeyString);
 	AddFunc("void AddMessageTrans(const string &in asTransCat, const string &in asTransName)", AddMessageTrans);
 	AddFunc("void AddMessage(const string &in asMessage)", AddMessage);
 	AddFunc("void AddSubTitleTrans(const string &in asTransCat, const string &in asTransName, float afTime)", AddSubTitleTrans);
