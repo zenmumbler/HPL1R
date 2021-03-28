@@ -216,7 +216,7 @@ namespace hpl {
 		mpScriptOutput = hplNew( cScriptOutput, () );
 		mpScriptEngine->SetMessageCallback(asMETHOD(cScriptOutput,AddMessage), mpScriptOutput, asCALL_THISCALL);
 
-		RegisterScriptArray(mpScriptEngine, false);
+		RegisterScriptArray(mpScriptEngine, true);
 		RegisterStdString(mpScriptEngine);
 		RegisterStdStringUtils(mpScriptEngine);
 
