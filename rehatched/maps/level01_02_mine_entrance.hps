@@ -223,23 +223,17 @@ void EndAreaEnter01(string asParent, string asChild)
 //START HAMMER//
 void PickHammer(string asItem)
 {	
-	AddToTempStringTrans("01_02_mine_entrance", "TutorialHammer01");
-	AddToTempStringAction("Interact");
-	AddToTempStringTrans("01_02_mine_entrance", "TutorialHammer02");
-	AddMessageTempString();
-	
-	AddToTempStringTrans("01_02_mine_entrance", "TutorialHammer03");
-	AddToTempStringAction("Examine");
-	AddToTempStringTrans("01_02_mine_entrance", "TutorialHammer04");
-	AddMessageTempString();
-	
-	/*AddMessage(	Translate("01_02_mine_entrance", "TutorialHammer01") 
-			+ GetActionKeyString("Interact") 
-			+ Translate("01_02_mine_entrance", "TutorialHammer02"));
+	AddMessage(
+		Translate("01_02_mine_entrance", "TutorialHammer01") 
+		+ GetActionKeyString("Interact") 
+		+ Translate("01_02_mine_entrance", "TutorialHammer02")
+	);
 			
-	AddMessage(	Translate("01_02_mine_entrance", "TutorialHammer03") 
-			+ GetActionKeyString("Examine")
-			+ Translate("01_02_mine_entrance", "TutorialHammer04"));*/
+	AddMessage(
+		Translate("01_02_mine_entrance", "TutorialHammer03") 
+		+ GetActionKeyString("Examine")
+		+ Translate("01_02_mine_entrance", "TutorialHammer04")
+	);
 }
 
 //STOP HAMMER//

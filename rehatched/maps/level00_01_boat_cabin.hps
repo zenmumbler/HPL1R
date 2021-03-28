@@ -40,27 +40,16 @@ void HornEvent01(string asTimer)
 	PlayGameMusic("penumbra_music_E1_A6",0.7,0.2,true,0);
 	
 	CreateTimer("Horn2", 1, "HornEvent02",false);
-  	DestroyTimer("Horn1");
 }
 void HornEvent02(string asTimer)
 {	
-	CreateTimer("Horn3", 0.5, "HornEvent03",false);
-	DestroyTimer("Horn2");
-}
-void HornEvent03(string asTimer)
-{	
-	AddToTempStringTrans("00_01_boat_cabin", "BoatHorn01");
-	AddToTempStringAction("Interact");
-	AddToTempStringTrans("00_01_boat_cabin", "BoatHorn02");
-	AddToTempStringAction("Examine");
-	AddToTempStringTrans("Misc", "QuoteDot");
-	AddMessageTempString();
-	
-	/*AddMessage(Translate("00_01_boat_cabin", "BoatHorn01") 
-			+ GetActionKeyString("Interact") 
-			+ Translate("00_01_boat_cabin", "BoatHorn02") 
-			+ GetActionKeyString("Examine") 
-			+ Translate("Misc", "QuoteDot"));*/
+	AddMessage(
+		Translate("00_01_boat_cabin", "BoatHorn01") 
+		+ GetActionKeyString("Interact") 
+		+ Translate("00_01_boat_cabin", "BoatHorn02") 
+		+ GetActionKeyString("Examine") 
+		+ Translate("Misc", "QuoteDot")
+	);
 	
 	SetMessagesOverCallback("HornEvent04");
 	
@@ -80,14 +69,11 @@ void HornEvent04()
 //EXAMINE PADLOCK
 void PadLockAreaExamine01(string asEntity)
 {
-	AddToTempStringTrans("00_01_boat_cabin", "PadLock01");
-	AddToTempStringAction("Inventory");
-	AddToTempStringTrans("Misc", "ParentDot");
-	AddMessageTempString();
-	
-	/*AddMessage(Translate("00_01_boat_cabin", "PadLock01") 
-			+ GetActionKeyString("Inventory") 
-			+ Translate("Misc", "ParentDot"));*/
+	AddMessage(
+		Translate("00_01_boat_cabin", "PadLock01") 
+		+ GetActionKeyString("Inventory") 
+		+ Translate("Misc", "ParentDot")
+	);
 	
 	RemoveEntityCallback("PlayerExamine","padlockarea");
 }
@@ -138,14 +124,12 @@ void FlashlightTutorial01(string asParent, string asChild)
 {
 	if(HasItem("flashlight") == true)
 	{
-		AddToTempStringTrans("00_01_boat_cabin", "TutorialFlashLight01");
-		AddToTempStringAction("Flashlight");
-		AddToTempStringTrans("00_01_boat_cabin", "TutorialFlashLight02");
-		AddSubTitleTempString(4);
-	
-		/*AddSubTitle(Translate("00_01_boat_cabin", "TutorialFlashLight01") 
-				+ GetActionKeyString("Flashlight") 
-				+ Translate("00_01_boat_cabin", "TutorialFlashLight02"), 4);*/
+		AddSubTitle(
+			Translate("00_01_boat_cabin", "TutorialFlashLight01") 
+			+ GetActionKeyString("Flashlight") 
+			+ Translate("00_01_boat_cabin", "TutorialFlashLight02")
+			, 4
+		);
 	}
 	else if(HasItem("flashlight") == false)
 	{
@@ -161,14 +145,11 @@ void LockerHelp01(string asTimer)
 {
 	if(GetLocalVar("lockerlesshelp") == 0)
 	{
-		AddToTempStringTrans("00_01_boat_cabin", "LockerHelp01");
-		AddToTempStringAction("Inventory");
-		AddToTempStringTrans("Misc", "ParentDot");
-		AddMessageTempString();
-	
-		/*AddMessage(Translate("00_01_boat_cabin", "LockerHelp01") 
-				+ GetActionKeyString("Inventory") 
-				+ Translate("Misc", "ParentDot"));*/
+		AddMessage(
+			Translate("00_01_boat_cabin", "LockerHelp01") 
+			+ GetActionKeyString("Inventory") 
+			+ Translate("Misc", "ParentDot")
+		);
 	}
 	else if(GetLocalVar("lockerlesshelp") == 1)
 	{
@@ -184,18 +165,13 @@ void LockerHelp01(string asTimer)
 ////PICK UPS START////
 void PickFlashlight01(string asItem)
 {
-	AddToTempStringTrans("00_01_boat_cabin", "TutorialFlashLight04");
-	AddToTempStringAction("Inventory");
-	AddToTempStringTrans("00_01_boat_cabin", "TutorialFlashLight05");
-	AddToTempStringAction("Flashlight");
-	AddToTempStringTrans("Misc", "QuoteDot");
-	AddMessageTempString();
-		
-	/*AddMessage(Translate("00_01_boat_cabin", "TutorialFlashLight04") 
-			+ GetActionKeyString("Inventory") 
-			+ Translate("00_01_boat_cabin", "TutorialFlashLight05")
-			+ GetActionKeyString("Flashlight")
-			+ Translate("Misc", "QuoteDot"));*/
+	AddMessage(
+		Translate("00_01_boat_cabin", "TutorialFlashLight04") 
+		+ GetActionKeyString("Inventory") 
+		+ Translate("00_01_boat_cabin", "TutorialFlashLight05")
+		+ GetActionKeyString("Flashlight")
+		+ Translate("Misc", "QuoteDot")
+	);
 }
 
 void PickBattery01(string asItem)
@@ -205,47 +181,38 @@ void PickBattery01(string asItem)
 
 void PickNotebook01(string asItem)
 {
-	AddToTempStringTrans("00_01_boat_cabin", "TutorialNotebook01");
-	AddToTempStringAction("NoteBook");
-	AddToTempStringTrans("00_01_boat_cabin", "TutorialNotebook02");
-	AddToTempStringAction("PersonalNotes");
-	AddToTempStringTrans("Misc", "ParentDot");
-	AddMessageTempString();
-	
-	/*AddMessage(Translate("00_01_boat_cabin", "TutorialNotebook01") 
-			+ GetActionKeyString("NoteBook") 
-			+ Translate("00_01_boat_cabin", "TutorialNotebook02")
-			+ GetActionKeyString("PersonalNotes")
-			+ Translate("Misc", "ParentDot"));*/
+	AddMessage(
+		Translate("00_01_boat_cabin", "TutorialNotebook01") 
+		+ GetActionKeyString("NoteBook") 
+		+ Translate("00_01_boat_cabin", "TutorialNotebook02")
+		+ GetActionKeyString("PersonalNotes")
+		+ Translate("Misc", "ParentDot")
+	);
+
 	//DRAWER TUTORIAL IF PLAYER HAS NOT ALREADY TAKEN FLASHLIGHT
 	if(HasItem("flashlight") == false)
 	{
 		CreateTimer("flashlighttimer1", 0.5f, "DrawerTutorial01",false);
 	}
 }
+
 //TUTORIAL FOR OPENING DRAWERS
 void DrawerTutorial01(string asTimer)
 {
-	AddToTempStringTrans("00_01_boat_cabin", "TutorialDrawer01");
-	AddToTempStringAction("Interact");
-	AddToTempStringTrans("00_01_boat_cabin", "TutorialDrawer02");
-	AddMessageTempString();
-	
-	/*AddMessage(Translate("00_01_boat_cabin", "TutorialDrawer01") 
-			+ GetActionKeyString("Interact") 
-			+ Translate("00_01_boat_cabin", "TutorialDrawer02"));*/
+	AddMessage(
+		Translate("00_01_boat_cabin", "TutorialDrawer01") 
+		+ GetActionKeyString("Interact") 
+		+ Translate("00_01_boat_cabin", "TutorialDrawer02")
+	);
 }
 
 void Mapfolder01(string asItem)
 {
-	AddToTempStringTrans("00_01_boat_cabin", "TutorialMapfolder01");
-	AddToTempStringAction("GlowStick");
-	AddToTempStringTrans("Misc", "QuoteDot");
-	AddMessageTempString();
-	
-	/*AddMessage(Translate("00_01_boat_cabin", "TutorialMapfolder01") 
-			+ GetActionKeyString("GlowStick") 
-			+ Translate("Misc", "QuoteDot"));*/
+	AddMessage(
+		Translate("00_01_boat_cabin", "TutorialMapfolder01") 
+		+ GetActionKeyString("GlowStick") 
+		+ Translate("Misc", "QuoteDot")
+	);
 	
 	//Turns off help message for locker, player managed to open the locker and already found the map folder.		
 	SetLocalVar("lockerhelp", 1);

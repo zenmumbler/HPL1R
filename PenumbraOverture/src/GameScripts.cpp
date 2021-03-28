@@ -71,42 +71,6 @@
 
 //-----------------------------------------------------------------------
 
-tWString gsTempString = _W("");
-
-//-----------------------------------------------------------------------
-
-static void AddToTempString(const std::string& asString)
-{
-    gsTempString += cString::To16Char(asString);
-}
-
-static void AddToTempStringTrans(const std::string& asCat,const std::string& asEntry)
-{
-	cInit *mpInit = gpInit;
-	gsTempString += kTranslate(asCat,asEntry);
-}
-
-static void AddToTempStringAction(const std::string& asAction)
-{
-	cInit *mpInit = gpInit;
-	iAction *pAction = gpInit->mpGame->GetInput()->GetAction(asAction);
-	if(pAction)
-	{
-		tWString sString = kTranslate("ButtonNames",pAction->GetInputName());
-		if(sString != _W(""))
-			gsTempString += sString;
-		else 
-			gsTempString += cString::To16Char(pAction->GetInputName());
-	}
-	else
-	{
-		gsTempString += kTranslate("ButtonNames", "None");
-	}
-}
-
-
-//-----------------------------------------------------------------------
-
 
 ///////// GENERAL GAME ////////////////////////////////////
 
@@ -143,8 +107,9 @@ static const std::string& GetActionKeyString(const std::string& asAction)
 	{
 		gsGameTemp = pAction->GetInputName();
 	}
-	
-	gsGameTemp = "ActionNotFound";
+	else {
+		gsGameTemp = "ActionNotFound";
+	}
 	return gsGameTemp;
 }
 
@@ -166,14 +131,6 @@ static void AddMessage(const std::string& asMessage)
 
 //-----------------------------------------------------------------------
 
-static void AddMessageTempString()
-{
-	gpInit->mpGameMessageHandler->Add(gsTempString);
-	gsTempString = _W("");
-}
-
-//-----------------------------------------------------------------------
-
 static void AddSubTitleTrans(const std::string& asTransCat, const std::string& asTransName, float afTime)
 {
 	cInit *mpInit = gpInit;
@@ -185,14 +142,6 @@ static void AddSubTitleTrans(const std::string& asTransCat, const std::string& a
 static void AddSubTitle(const std::string& asMessage, float afTime)
 {
 	gpInit->mpEffectHandler->GetSubTitle()->Add(cString::To16Char(asMessage),afTime,false);
-}
-
-//-----------------------------------------------------------------------
-
-static void AddSubTitleTempString(float afTime)
-{
-	gpInit->mpEffectHandler->GetSubTitle()->Add(gsTempString,afTime,false);
-	gsTempString = _W("");
 }
 
 //-----------------------------------------------------------------------
@@ -866,8 +815,13 @@ static void SetGameEntityDescriptionOnceTrans(const std::string& asName,
 	cInit *mpInit = gpInit;
 	GAME_ENTITY_BEGIN(asName)
 
-	pEntity->SetDescription(kTranslate(asTransCat,asTransName));
-	pEntity->SetShowDescritionOnce(true);
+	if (asTransCat.length() > 0) {
+		pEntity->SetDescription(kTranslate(asTransCat,asTransName));
+		pEntity->SetShowDescritionOnce(true);
+	}
+	else {
+		pEntity->SetDescription(tWString());
+	}
 }
 
 //-----------------------------------------------------------------------
@@ -1609,36 +1563,36 @@ void cGameScripts::Init()
 		pLowLevelSystem->AddScriptFunc(sig, reinterpret_cast<void*>(fn));
 	};
 
-	// Game helper
-	AddFunc("void AddToTempString(const string &in asString)", AddToTempString);
-	AddFunc("void AddToTempStringTrans(const string &in asCat,const string &in asEntry)", AddToTempStringTrans);
-	AddFunc("void AddToTempStringAction(const string &in asAction)", AddToTempStringAction);
-
 	// Game general
 	AddFunc("void ResetGame()", ResetGame);
 	AddFunc("void StartCredits()", StartCredits);
 	AddFunc("void ClearSavedMaps()", ClearSavedMaps);
+
 	AddFunc("string& GetActionKeyString(const string &in asAction)", GetActionKeyString);
 	AddFunc("void AddMessageTrans(const string &in asTransCat, const string &in asTransName)", AddMessageTrans);
 	AddFunc("void AddMessage(const string &in asMessage)", AddMessage);
-	AddFunc("void AddMessageTempString()", AddMessageTempString);
 	AddFunc("void AddSubTitleTrans(const string &in asTransCat, const string &in asTransName, float afTime)", AddSubTitleTrans);
 	AddFunc("void AddSubTitle(const string &in asMessage, float afTime)", AddSubTitle);
-	AddFunc("void AddSubTitleTempString(float afTime)", AddSubTitleTempString);
+
 	AddFunc("void AddRadioMessage(const string &in asTransCat,const string &in asTransName, const string &in asSound)", AddRadioMessage);
 	AddFunc("void SetRadioOnEndCallback(const string &in asFunc)", SetRadioOnEndCallback);
+
 	AddFunc("void SetInventoryMessage(const string &in asMessage)", SetInventoryMessage);
 	AddFunc("void SetInventoryMessageTrans(const string &in asTransCat, const string &in asTransName)", SetInventoryMessageTrans);
 	AddFunc("void SetMessagesOverCallback(const string &in asFunction)", SetMessagesOverCallback);
 	AddFunc("void ChangeMap(const string &in asMapFile, const string &in asMapPos, const string &in asStartSound, const string &in asStopSound, float afFadeOutTime, float afFadeInTime, const string &in asLoadTextCat, const string &in asLoadTextEntry)", ChangeMap);
+
 	AddFunc("void SetMapGameName(const string &in asName)", SetMapGameName);
 	AddFunc("void SetMapGameNameTrans(const string &in asTransCat,const string &in asTransEntry)", SetMapGameNameTrans);
+
 	AddFunc("void AddNotebookTaskText(const string &in asName,const string &in asText)", AddNotebookTaskText);
 	AddFunc("void AddNotebookTask(const string &in asName, const string &in asTransCat, const string &in asTransEntry)", AddNotebookTask);
 	AddFunc("void RemoveNotebookTask(const string &in asName)", RemoveNotebookTask);
 	AddFunc("void AddNotebookNote(const string &in asNameCat, const string &in asNameEntry, const string &in asTextCat, const string &in asTextEntry)", AddNotebookNote);
+
 	AddFunc("void StartNumericalPanel(const string &in asName,int alCode1,int alCode2,int alCode3,int alCode4, float afDifficulty, const string &in asCallback)", StartNumericalPanel);
 	AddFunc("void SetInventoryActive(bool abX)", SetInventoryActive);
+
 	AddFunc("void FadeIn(float afTime)", FadeIn);
 	AddFunc("void FadeOut(float afTime)", FadeOut);
 	AddFunc("bool IsFading()", IsFading);
