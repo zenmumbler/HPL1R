@@ -63,16 +63,12 @@ namespace hpl {
 
 		virtual bool CreateFromFile(const tString& asFile, tString *apCompileMessages=NULL)=0;
 
-		virtual int GetFuncHandle(const tString& asFunc)=0;
-
 		/**
 		 * Runs a func in the script, for example "test(15)"
 		 * \param asFuncLine the line of code
 		 * \return true if everything was ok, else false
 		 */
 		virtual bool Run(const tString& asFuncLine)=0;
-
-		virtual bool Run(int alHandle)=0;
 	};
 };
 #endif // HPL_SCRIPT_H

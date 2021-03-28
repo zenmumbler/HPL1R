@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		8E84E76725FD5B7600DC6065 /* ModelExport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E76525FD5B7600DC6065 /* ModelExport.cpp */; };
+		8EA48713260FFBA9000D1AB7 /* libHPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9F74DE25522A70000324E8 /* libHPL.a */; };
+		8EA48715260FFBB0000D1AB7 /* libangelscript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA48714260FFBB0000D1AB7 /* libangelscript.a */; };
 		8EB7C3AF254F546300277667 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3AA254F545C00277667 /* Cg.framework */; };
 		8EB7C3B0254F546300277667 /* Cg.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = 8EB7C3AA254F545C00277667 /* Cg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8EB7C3B1254F546600277667 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3A9254F545C00277667 /* SDL2.framework */; };
 		8EB7C3B2254F546600277667 /* SDL2.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = 8EB7C3A9254F545C00277667 /* SDL2.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8EB7C3B3254F546800277667 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3AB254F545C00277667 /* SDL2_image.framework */; };
 		8EB7C3B4254F546800277667 /* SDL2_image.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = 8EB7C3AB254F545C00277667 /* SDL2_image.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8EB7C3B6254F548600277667 /* libHPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3B5254F548600277667 /* libHPL.a */; };
-		8EB7C3CE254F5E3D00277667 /* libangelscript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3CA254F5E3D00277667 /* libangelscript.a */; };
 		8EB7C3CF254F5E3D00277667 /* libnewton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3CB254F5E3D00277667 /* libnewton.a */; };
 		8EB7C3DF254F649C00277667 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7C395254E48A900277667 /* Images.xcassets */; };
 		DB063026111D3E3F0048C5E9 /* AttackHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A1F0AC76D8F00BB15CD /* AttackHandler.cpp */; };
@@ -84,6 +84,13 @@
 			remoteGlobalIDString = DBF8484B0AC76D1A00BB15CD;
 			remoteInfo = HPL;
 		};
+		8EA48701260FF80C000D1AB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = DBF8484A0AC76D1A00BB15CD;
+			remoteInfo = HPL;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -105,12 +112,11 @@
 /* Begin PBXFileReference section */
 		8E84E76525FD5B7600DC6065 /* ModelExport.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ModelExport.cpp; sourceTree = "<group>"; };
 		8E84E76625FD5B7600DC6065 /* ModelExport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelExport.h; sourceTree = "<group>"; };
+		8EA48714260FFBB0000D1AB7 /* libangelscript.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libangelscript.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EB7C395254E48A900277667 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8EB7C3A9254F545C00277667 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		8EB7C3AA254F545C00277667 /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cg.framework; sourceTree = "<group>"; };
 		8EB7C3AB254F545C00277667 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_image.framework; sourceTree = "<group>"; };
-		8EB7C3B5254F548600277667 /* libHPL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libHPL.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8EB7C3CA254F5E3D00277667 /* libangelscript.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libangelscript.a; sourceTree = "<group>"; };
 		8EB7C3CB254F5E3D00277667 /* libnewton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libnewton.a; sourceTree = "<group>"; };
 		DB06307A111D3E3F0048C5E9 /* PenumbraOverture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PenumbraOverture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB2707770ACCDEE40054ACA3 /* GameEnemy_Spider.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GameEnemy_Spider.cpp; sourceTree = "<group>"; };
@@ -237,9 +243,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EA48715260FFBB0000D1AB7 /* libangelscript.a in Frameworks */,
 				8EB7C3CF254F5E3D00277667 /* libnewton.a in Frameworks */,
-				8EB7C3CE254F5E3D00277667 /* libangelscript.a in Frameworks */,
-				8EB7C3B6254F548600277667 /* libHPL.a in Frameworks */,
+				8EA48713260FFBA9000D1AB7 /* libHPL.a in Frameworks */,
 				8EB7C3AF254F546300277667 /* Cg.framework in Frameworks */,
 				8EB7C3B3254F546800277667 /* SDL2_image.framework in Frameworks */,
 				8EB7C3B1254F546600277667 /* SDL2.framework in Frameworks */,
@@ -402,7 +408,6 @@
 		DBF84A9A0AC76E5E00BB15CD /* dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				8EB7C3CA254F5E3D00277667 /* libangelscript.a */,
 				8EB7C3CB254F5E3D00277667 /* libnewton.a */,
 				8EB7C3AA254F545C00277667 /* Cg.framework */,
 				8EB7C3AB254F545C00277667 /* SDL2_image.framework */,
@@ -415,7 +420,7 @@
 		DBF84A9B0AC76E7E00BB15CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8EB7C3B5254F548600277667 /* libHPL.a */,
+				8EA48714260FFBB0000D1AB7 /* libangelscript.a */,
 				DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */,
 				DBF84A9A0AC76E5E00BB15CD /* dependencies */,
 				DBCEE71E0B4B53550088A7E3 /* OpenAL.framework */,
@@ -449,6 +454,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8EA48702260FF80C000D1AB7 /* PBXTargetDependency */,
 			);
 			name = PenumbraOverture;
 			productName = Penumbra;
@@ -572,6 +578,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8EA48702260FF80C000D1AB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HPL;
+			targetProxy = 8EA48701260FF80C000D1AB7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		DB063078111D3E3F0048C5E9 /* Debug */ = {

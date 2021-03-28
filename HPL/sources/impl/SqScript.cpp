@@ -102,25 +102,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	int cSqScript::GetFuncHandle(const tString& asFunc)
-	{
-		return mpModule->GetFunctionIdByName(asFunc.c_str());
-	}
-
-	//-----------------------------------------------------------------------
-
 	bool cSqScript::Run(const tString& asFuncLine)
 	{
 		ExecuteString(mpScriptEngine, asFuncLine.c_str(), mpModule);
-		return true;
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cSqScript::Run(int alHandle)
-	{
-		mpContext->Prepare(alHandle);
-		mpContext->Execute();
 		return true;
 	}
 

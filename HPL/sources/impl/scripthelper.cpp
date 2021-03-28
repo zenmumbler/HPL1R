@@ -25,7 +25,7 @@ int ExecuteString(asIScriptEngine *engine, const char *code, asIScriptModule *mo
 
 	// If no context was provided, request a new one from the engine
 	asIScriptContext *execCtx = ctx ? ctx : engine->CreateContext();
-	r = execCtx->Prepare(func->GetId());
+	r = execCtx->Prepare(func);
 	if( r < 0 )
 	{
 		func->Release();

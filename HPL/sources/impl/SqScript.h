@@ -34,11 +34,7 @@ namespace hpl {
 		~cSqScript();
 
 		bool CreateFromFile(const tString& asFileName, tString *apCompileMessages=NULL);
-
-		int GetFuncHandle(const tString& asFunc);
-
 		bool Run(const tString& asFuncLine);
-		bool Run(int alHandle);
 
 	private:
 		asIScriptEngine *mpScriptEngine;

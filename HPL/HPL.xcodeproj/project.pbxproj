@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8E815948260C1127001CBF63 /* GLSLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E815947260C1127001CBF63 /* GLSLProgram.cpp */; };
-		8E84AA02254CACE0000EA53C /* scriptstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */; };
 		8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84AA0C254CB3D2000EA53C /* Cg.framework */; };
 		8E84E7892605487F00DC6065 /* LowLevelSoundOAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */; };
 		8E84E78C260549B100DC6065 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E78B260549B100DC6065 /* stb_vorbis.c */; };
@@ -19,6 +18,7 @@
 		8E9728DF254CBBAF0033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DE254CBBAF0033415B /* SDL2.framework */; };
 		8E9F748F2551E732000324E8 /* SDLBMPFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */; };
 		8E9F74EC255317F7000324E8 /* SDLTGAFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F74EB255317F7000324E8 /* SDLTGAFile.cpp */; };
+		8EA48718260FFCD3000D1AB7 /* scriptstdstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */; };
 		8EAA07AB25588AA2007D7CD0 /* Material_FontNormal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AA25588AA2007D7CD0 /* Material_FontNormal.cpp */; };
 		8EAA07B125588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AE25588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp */; };
 		8EAA07B225588FEA007D7CD0 /* Material_Smoke2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AF25588FEA007D7CD0 /* Material_Smoke2D.cpp */; };
@@ -33,7 +33,6 @@
 		DB4AFB9E0D7076A800809E03 /* ActionHaptic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB9D0D7076A800809E03 /* ActionHaptic.cpp */; };
 		DB4AFBA20D7076EE00809E03 /* LowLevelSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFBA10D7076EE00809E03 /* LowLevelSound.cpp */; };
 		DB4AFBA40D7076F900809E03 /* MemoryManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFBA30D7076F900809E03 /* MemoryManager.cpp */; };
-		DB6E15BC0B6B174B00203538 /* scriptstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB6E15BB0B6B174B00203538 /* scriptstring.cpp */; };
 		DBCEE59F0B4B33190088A7E3 /* Beam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE59C0B4B33190088A7E3 /* Beam.cpp */; };
 		DBCEE5A00B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE59D0B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp */; };
 		DBCEE7390B4B56440088A7E3 /* MeshLoaderColladaLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE6250B4B35D50088A7E3 /* MeshLoaderColladaLoader.cpp */; };
@@ -194,10 +193,26 @@
 		DBFBA0190B65E42A0021DAE2 /* Material_Water.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBFBA0180B65E42A0021DAE2 /* Material_Water.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8EA486FA260FF779000D1AB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8EA486F6260FF779000D1AB7 /* AngelScript.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 39EAA509EACD467ABBCA6EC7;
+			remoteInfo = angelscript;
+		};
+		8EA486FC260FF788000D1AB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8EA486F6260FF779000D1AB7 /* AngelScript.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D35A31B06644CFFA23F1685;
+			remoteInfo = angelscript;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
 		8E815947260C1127001CBF63 /* GLSLProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLProgram.cpp; sourceTree = "<group>"; };
-		8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstring_utils.cpp; sourceTree = "<group>"; };
 		8E84AA0C254CB3D2000EA53C /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cg.framework; sourceTree = "<group>"; };
 		8E84E75925FD062A00DC6065 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		8E84E75B25FD063100DC6065 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -218,6 +233,7 @@
 		8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDLBMPFile.cpp; sourceTree = "<group>"; };
 		8E9F74E8255316E1000324E8 /* SDLTGAFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLTGAFile.h; sourceTree = "<group>"; };
 		8E9F74EB255317F7000324E8 /* SDLTGAFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDLTGAFile.cpp; sourceTree = "<group>"; };
+		8EA486F6260FF779000D1AB7 /* AngelScript.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AngelScript.xcodeproj; path = ../AngelScript/AngelScript.xcodeproj; sourceTree = "<group>"; };
 		8EAA07A725588A9A007D7CD0 /* Material_FontNormal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Material_FontNormal.h; sourceTree = "<group>"; };
 		8EAA07AA25588AA2007D7CD0 /* Material_FontNormal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material_FontNormal.cpp; sourceTree = "<group>"; };
 		8EAA07AE25588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material_DiffuseAlpha2D.cpp; sourceTree = "<group>"; };
@@ -228,7 +244,6 @@
 		8EAA07B825589032007D7CD0 /* Material_Smoke2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material_Smoke2D.h; sourceTree = "<group>"; };
 		8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LowLevelSystemMac.mm; sourceTree = "<group>"; };
 		8EB7C3D8254F603E00277667 /* scripthelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripthelper.cpp; sourceTree = "<group>"; };
-		DB00EF5C11A9CFD9007DFB32 /* libangelscript.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libangelscript.a; sourceTree = "<group>"; };
 		DB00EF5E11A9CFD9007DFB32 /* libnewton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libnewton.a; sourceTree = "<group>"; };
 		DB00F0D211A9D080007DFB32 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		DB27F0180ACB9AB90054ACA3 /* AI.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AI.h; sourceTree = "<group>"; };
@@ -441,7 +456,6 @@
 		DB4AFBF60D7077A100809E03 /* SoundEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SoundEnvironment.h; sourceTree = "<group>"; };
 		DB4AFBF70D7077B000809E03 /* MemoryManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MemoryManager.h; sourceTree = "<group>"; };
 		DB6E15BA0B6B173800203538 /* scriptstring.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = scriptstring.h; sourceTree = "<group>"; };
-		DB6E15BB0B6B174B00203538 /* scriptstring.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstring.cpp; sourceTree = "<group>"; };
 		DBCEE59C0B4B33190088A7E3 /* Beam.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Beam.cpp; sourceTree = "<group>"; };
 		DBCEE59D0B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Material_EnvMap_Reflect.cpp; sourceTree = "<group>"; };
 		DBCEE5A20B4B332E0088A7E3 /* Beam.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Beam.h; sourceTree = "<group>"; };
@@ -623,9 +637,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8EA486F7260FF779000D1AB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8EA486FB260FF779000D1AB7 /* libangelscript.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		DB00EF5011A9CF86007DFB32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8EA486F6260FF779000D1AB7 /* AngelScript.xcodeproj */,
 				8E84E75B25FD063100DC6065 /* OpenGL.framework */,
 				8E84E75925FD062A00DC6065 /* OpenAL.framework */,
 				DB00F0D211A9D080007DFB32 /* Cocoa.framework */,
@@ -640,7 +663,6 @@
 				8E9728DE254CBBAF0033415B /* SDL2.framework */,
 				8E9728DA254CBB4B0033415B /* SDL2_image.framework */,
 				8E84AA0C254CB3D2000EA53C /* Cg.framework */,
-				DB00EF5C11A9CFD9007DFB32 /* libangelscript.a */,
 				DB00EF5E11A9CFD9007DFB32 /* libnewton.a */,
 			);
 			name = dependencies;
@@ -907,8 +929,6 @@
 				8E9728CF254CB92F0033415B /* scripthelper.h */,
 				DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */,
 				DB27F0840ACB9AB90054ACA3 /* scriptstdstring.h */,
-				8E84AA01254CACE0000EA53C /* scriptstring_utils.cpp */,
-				DB6E15BB0B6B174B00203538 /* scriptstring.cpp */,
 				DB6E15BA0B6B173800203538 /* scriptstring.h */,
 				DBF849A60AC76D5800BB15CD /* SDLBitmap2D.cpp */,
 				DB27F07E0ACB9AB90054ACA3 /* SDLBitmap2D.h */,
@@ -1211,6 +1231,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8EA486FD260FF788000D1AB7 /* PBXTargetDependency */,
 			);
 			name = HPL;
 			productName = HPL;
@@ -1236,12 +1257,28 @@
 			mainGroup = DBF848380AC76CC500BB15CD;
 			productRefGroup = DBF8484C0AC76D1A00BB15CD /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8EA486F7260FF779000D1AB7 /* Products */;
+					ProjectRef = 8EA486F6260FF779000D1AB7 /* AngelScript.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				DBF8484A0AC76D1A00BB15CD /* HPL */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		8EA486FB260FF779000D1AB7 /* libangelscript.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libangelscript.a;
+			remoteRef = 8EA486FA260FF779000D1AB7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DBF848480AC76D1A00BB15CD /* Sources */ = {
@@ -1312,6 +1349,7 @@
 				DBF84AED0AC76F1E00BB15CD /* LowLevelPhysicsNewton.cpp in Sources */,
 				DBF84AEE0AC76F1E00BB15CD /* LowLevelResourcesSDL.cpp in Sources */,
 				DBF84AF00AC76F1E00BB15CD /* LowLevelSystemSDL.cpp in Sources */,
+				8EA48718260FFCD3000D1AB7 /* scriptstdstring.cpp in Sources */,
 				DBF84AF10AC76F1E00BB15CD /* Material.cpp in Sources */,
 				DBF84AF20AC76F1E00BB15CD /* Material_Additive.cpp in Sources */,
 				DBF84AF30AC76F1E00BB15CD /* Material_Alpha.cpp in Sources */,
@@ -1420,11 +1458,9 @@
 				DBCEE5A00B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp in Sources */,
 				DBCEE7390B4B56440088A7E3 /* MeshLoaderColladaLoader.cpp in Sources */,
 				DBFBA0190B65E42A0021DAE2 /* Material_Water.cpp in Sources */,
-				DB6E15BC0B6B174B00203538 /* scriptstring.cpp in Sources */,
 				DB294E100C11DC6E005DA55C /* CRC.cpp in Sources */,
 				DB4AFB470D7075B900809E03 /* Haptic.cpp in Sources */,
 				DB4AFB480D7075B900809E03 /* LowLevelHaptic.cpp in Sources */,
-				8E84AA02254CACE0000EA53C /* scriptstring_utils.cpp in Sources */,
 				DB4AFB9B0D70768B00809E03 /* OpenALSoundEnvironment.cpp in Sources */,
 				DB4AFB9E0D7076A800809E03 /* ActionHaptic.cpp in Sources */,
 				DB4AFBA20D7076EE00809E03 /* LowLevelSound.cpp in Sources */,
@@ -1434,6 +1470,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8EA486FD260FF788000D1AB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = angelscript;
+			targetProxy = 8EA486FC260FF788000D1AB7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		DBF8483C0AC76CC500BB15CD /* Debug */ = {
@@ -1565,7 +1609,7 @@
 				HEADER_SEARCH_PATHS = (
 					include,
 					../dependencies/include,
-					../OALWrapper/include,
+					../AngelScript/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1587,7 +1631,7 @@
 				HEADER_SEARCH_PATHS = (
 					include,
 					../dependencies/include,
-					../OALWrapper/include,
+					../AngelScript/include,
 				);
 				INSTALL_PATH = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = (
