@@ -118,22 +118,18 @@ namespace hpl {
 		Log("%s", asText.c_str());
 	}
 
-	std::string gsGlobalTemp="";
-
-	static const std::string& FloatToString(float afX)
+	static std::string FloatToString(float afX)
 	{
 		char sTemp[30];
 		sprintf(sTemp,"%f",afX);
-		gsGlobalTemp = sTemp;
-		return gsGlobalTemp;
+		return sTemp;
 	}
 
-	static const std::string& IntToString(int alX)
+	static std::string IntToString(int alX)
 	{
 		char sTemp[30];
 		sprintf(sTemp,"%d",alX);
-		gsGlobalTemp = sTemp;
-		return gsGlobalTemp;
+		return sTemp;
 	}
 
 	static float RandFloat(float afMin, float afMax)
@@ -307,11 +303,10 @@ namespace hpl {
 	 * \param asCat The translation category
 	 * \param asName The name of the category entry.
 	 **/
-	static const std::string& Translate(const std::string& asCat, const std::string& asName)
+	static std::string Translate(const std::string& asCat, const std::string& asName)
 	{
 		tWString wsText = gpResources->Translate(asCat,asName);
-		gsGlobalTemp = cString::To8Char(wsText);
-		return gsGlobalTemp;
+		return cString::To8Char(wsText);
 	}
 
 	//-----------------------------------------------------------------------
@@ -1424,8 +1419,8 @@ namespace hpl {
 		
 		//General
 		AddFunc("void Print(const string &in asText)", Print);
-		AddFunc("string& FloatToString(float afX)", FloatToString);
-		AddFunc("string& IntToString(int aiX)", IntToString);
+		AddFunc("string FloatToString(float afX)", FloatToString);
+		AddFunc("string IntToString(int aiX)", IntToString);
 		AddFunc("float RandFloat(float afMin, float afMax)", RandFloat);
 		AddFunc("int RandInt(int aiMin, int aiMax)", RandInt);
 		AddFunc("bool StringContains(const string &in asHaystack, const string &in asNeedle)", StringContains);
