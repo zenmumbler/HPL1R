@@ -438,12 +438,12 @@ static void CreateSplashDamage(const std::string& asAreaName, float afRadius,
 
 //-----------------------------------------------------------------------
 
-static void  CreateTimer(const std::string& asName, float afTime, const std::string& asCallback, bool abGlobal)
+static void CreateTimer(const std::string& asName, float afTime, const std::string& asCallback, bool abGlobal)
 {
 	gpInit->mpMapHandler->CreateTimer(asName,afTime,asCallback,abGlobal);
 }
 
-static void  DestroyTimer(const std::string& asName)
+static void DestroyTimer(const std::string& asName)
 {
 	cGameTimer *pTimer = gpInit->mpMapHandler->GetTimer(asName);
 	if(pTimer==NULL){
@@ -454,48 +454,13 @@ static void  DestroyTimer(const std::string& asName)
 	pTimer->mbDeleteMe = true;
 }
 
-static void  SetTimerPaused(const std::string& asName, bool abPaused)
-{
-	cGameTimer *pTimer = gpInit->mpMapHandler->GetTimer(asName);
-	if(pTimer==NULL){
-		Warning("Couldn't find timer '%s'\n",asName.c_str());
-		return;
-	}
+static int siFuncCounter = 0;
 
-	pTimer->mbPaused = abPaused;
-}
-
-static void SetTimerTime(const std::string& asName, float afTime)
-{
-	cGameTimer *pTimer = gpInit->mpMapHandler->GetTimer(asName);
-	if(pTimer==NULL){
-		Warning("Couldn't find timer '%s'\n",asName.c_str());
-		return;
-	}
-
-	pTimer->mfTime = afTime;
-}
-
-static void  AddTimerTime(const std::string& asName, float afTime)
-{
-	cGameTimer *pTimer = gpInit->mpMapHandler->GetTimer(asName);
-	if(pTimer==NULL){
-		Warning("Couldn't find timer '%s'\n",asName.c_str());
-		return;
-	}
-
-	pTimer->mfTime += afTime;
-}
-
-static float   GetTimerTime(const std::string& asName)
-{
-	cGameTimer *pTimer = gpInit->mpMapHandler->GetTimer(asName);
-	if(pTimer==NULL){
-		Warning("Couldn't find timer '%s'\n",asName.c_str());
-		return 0.0f;
-	}
-
-	return pTimer->mfTime;
+static void RunAfter(float afSecs, const std::string& asCallback) {
+	int counter = siFuncCounter;
+	siFuncCounter = (siFuncCounter + 1) & 1023;
+	std::string name = "runafter_" + std::to_string(counter);
+	CreateTimer(name, afSecs, asCallback, false);
 }
 
 //-----------------------------------------------------------------------
@@ -1609,12 +1574,9 @@ void cGameScripts::Init()
 	AddFunc("void CreateSplashDamage(const string &in asAreaName, float afRadius, float afMinDamage, float afMaxDamge, float afMinForce, float afMaxForce, float afMaxImpulse, int alStrength)", CreateSplashDamage);
 
 	// Timers
-	AddFunc("void CreateTimer(const string &in asName, float afTime, const string &in asCallback, bool abGlobal)", CreateTimer);
+	AddFunc("void CreateTimer(const string &in asName, float afTime, const string &in asCallback, bool abGlobal = false)", CreateTimer);
 	AddFunc("void DestroyTimer(const string &in asName)", DestroyTimer);
-	AddFunc("void SetTimerPaused(const string &in asName, bool abPaused)", SetTimerPaused);
-	AddFunc("void SetTimerTime(const string &in asName, float afTime)", SetTimerTime);
-	AddFunc("void AddTimerTime(const string &in asName, float afTime)", AddTimerTime);
-	AddFunc("float GetTimerTime(const string &in asName)", GetTimerTime);
+	AddFunc("void RunAfter(float afSecs, const string &in asCallback)", RunAfter);
 	
 	// Player
 	AddFunc("void GivePlayerDamage(float afAmount, const string &in asType)", GivePlayerDamage);
