@@ -52,8 +52,6 @@ void HornEvent02(string asTimer)
 	);
 	
 	SetMessagesOverCallback("HornEvent04");
-	
-	DestroyTimer("Horn3");
 }
 void HornEvent04()
 {
@@ -79,25 +77,6 @@ void PadLockAreaExamine01(string asEntity)
 }
 
 //USE KEY ON LOCK
-void LockAreaUseKey01(string asItem, string asEntity)
-{	
-	PlayGuiSound("key_unlock", 0.8);
-	
-	GiveItem("padlock","boat_lock.ent",-1);
-	
-	//Partitialy removes help about locked locker, play opened locker but not found map folder
-	SetLocalVar("lockerlesshelp", 1);
-	
-	RemoveUseCallback("LockAreaUseKey01");
-	RemoveUseCallback("Locker01UseKey01");
-	
-	RemoveItem("padlock_key");
-	
-	SetGameEntityDescriptionOnceTrans("locker1", "", "");
-	
-	SetGameEntityActive("lock1",false);
-	SetGameEntityActive("padlockarea",false);
-}
 //TO MAKE IT EASIER, THE WHOLE LOCKER CAN BE USED TO OPEN WITH THE KEY 
 void Locker01UseKey01(string asItem, string asEntity)
 {	
@@ -108,7 +87,6 @@ void Locker01UseKey01(string asItem, string asEntity)
 	//Partitialy removes help about locked locker, play opened locker but not found map folder
 	SetLocalVar("lockerlesshelp", 1);
 	
-	RemoveUseCallback("LockAreaUseKey01");
 	RemoveUseCallback("Locker01UseKey01");
 	
 	RemoveItem("padlock_key");
@@ -266,7 +244,7 @@ void OnStart()
 	AddEntityCallback("PlayerExamine","padlockarea","PadLockAreaExamine01");
 	AddEntityCallback("PlayerInteract","exitdoor","ExitDoorInteract01");
 	
-	AddUseCallback("padlock_key", "padlockarea", "LockAreaUseKey01");
+	AddUseCallback("padlock_key", "padlockarea", "Locker01UseKey01");
 	AddUseCallback("padlock_key", "locker1", "Locker01UseKey01");
 	AddUseCallback("padlock_key", "lock1", "Locker01UseKey01");
 	
@@ -274,19 +252,6 @@ void OnStart()
 	AddPickupCallback("battery1", "PickBattery01");
 	AddPickupCallback("notebook", "PickNotebook01");
 	AddPickupCallback("glowstick", "Mapfolder01");
-	
-	bool bIntro = true;	
-		
-	//---- INTRO INIT ------------------
-	if(bIntro)
-	{
-		FadeOut(0);
-		
-		SetPlayerActive(false);
-		SetWideScreenActive(true);
-		
-		StartPlayerLookAt("lookintro1",100, 0.001f);
-	}
 	
 	//---- LIGHT INIT -------------------
 	SetLight3DFlicker("parrafinlight_light1",
@@ -321,12 +286,21 @@ void OnStart()
 	SetGameEntityDescriptionOnceTrans("descpinup", "00_01_boat_cabin", "DescPoster");
 	
 	
-	//---- TIMER INIT --------------------	
 	//For boat horn event
 	CreateTimer("Horn1", 5.5, "HornEvent01",false);
 	
+	bool bIntro = true;
+		
+	//---- INTRO INIT ------------------
 	if(bIntro)
 	{
+		FadeOut(0);
+		
+		SetPlayerActive(false);
+		SetWideScreenActive(true);
+		
+		StartPlayerLookAt("lookintro1",100, 0.001f);
+
 		//For fade from black at start
 		CreateTimer("Fade1", 0.5, "FadeEffect01",false);
 		//For wide screen end and view movement
@@ -335,7 +309,7 @@ void OnStart()
 	}
 	
 	//---- PLAYER INIT --------------------	
-	GiveItem("padlock_key","item_key01.ent",-1);
+	GiveItem("padlock_key", "item_key01.ent", -1);
 }
 
 
@@ -343,9 +317,6 @@ void OnStart()
 /*This function is run everytime the map is loaded */
 void OnLoad()
 {
-	//SetDepthOfFieldActive(true,0);
-	//SetupDepthOfField(0.3,2.1,15.2);
-	
 	SetAmbientColor(0.25,0.25,0.3);
 	
 	SetSkyboxActive(true);
@@ -353,11 +324,12 @@ void OnLoad()
 	
 	//---- GRAVITY/WAVE EFFECT --------------------
 	SetWaveGravityActive(true);
-	SetupWaveGravity(6, //Max angle
-			8.0f, //Time for each wave
-			9.8, //Gravity size
-			"x" //Axis of wave.
-			);
+	SetupWaveGravity(
+		6, //Max angle
+		8.0f, //Time for each wave
+		9.8, //Gravity size
+		"x" //Axis of wave.
+	);
 }
 
 
