@@ -113,14 +113,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void Print(std::string& asText)
+	static void Print(const std::string& asText)
 	{
 		Log("%s", asText.c_str());
 	}
 
 	std::string gsGlobalTemp="";
 
-	static std::string& FloatToString(float afX)
+	static const std::string& FloatToString(float afX)
 	{
 		char sTemp[30];
 		sprintf(sTemp,"%f",afX);
@@ -128,7 +128,7 @@ namespace hpl {
 		return gsGlobalTemp;
 	}
 
-	static std::string& IntToString(int alX)
+	static const std::string& IntToString(int alX)
 	{
 		char sTemp[30];
 		sprintf(sTemp,"%d",alX);
@@ -146,7 +146,7 @@ namespace hpl {
 		return cMath::RandRectl(alMin,alMax);
 	}
 
-	static bool StringContains(std::string& asString, std::string& asSubString)
+	static bool StringContains(const std::string& asString, const std::string& asSubString)
 	{
 		return cString::GetLastStringPos(asString,asSubString)>=0;
 	}
@@ -196,7 +196,7 @@ namespace hpl {
 	* Sets the skybox
 	* \param asTexture Name of the cube map texture to use
 	**/
-	static void SetSkybox(std::string& asTexture)
+	static void SetSkybox(const std::string& asTexture)
 	{
 		if(asTexture!="")
 		{
@@ -216,7 +216,7 @@ namespace hpl {
 	* \param asName Name of particle system
 	* \param asType The type of particle system (file)
 	**/
-	static void CreateParticleSystemOnCamera(std::string& asName,std::string& asType)
+	static void CreateParticleSystemOnCamera(const std::string& asName,const std::string& asType)
 	{
 		cParticleSystem3D *pPS = gpScene->GetWorld3D()->CreateParticleSystem(asName,asType,
 																			1,cMatrixf::Identity);
@@ -262,7 +262,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void SetSectorProperties(std::string& asSector, float afAmbR,float afAmbG, float afAmbB)
+	static void SetSectorProperties(const std::string& asSector, float afAmbR,float afAmbG, float afAmbB)
 	{
 		cPortalContainer *pContainer = gpScene->GetWorld3D()->GetPortalContainer();
 
@@ -277,7 +277,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void SetSectorPortalActive(std::string& asSector, int alPortal, bool abActive)
+	static void SetSectorPortalActive(const std::string& asSector, int alPortal, bool abActive)
 	{
 		cPortalContainer *pContainer = gpScene->GetWorld3D()->GetPortalContainer();
 
@@ -307,7 +307,7 @@ namespace hpl {
 	 * \param asCat The translation category
 	 * \param asName The name of the category entry.
 	 **/
-	static std::string& Translate(std::string& asCat, std::string& asName)
+	static const std::string& Translate(const std::string& asCat, const std::string& asName)
 	{
 		tWString wsText = gpResources->Translate(asCat,asName);
 		gsGlobalTemp = cString::To8Char(wsText);
@@ -320,7 +320,7 @@ namespace hpl {
 	* Preloads the data for a sound.
 	* \param asFile This can be a wav, ogg, mp3 or snt file.
 	**/
-	static void PreloadSound(std::string& asFile)
+	static void PreloadSound(const std::string& asFile)
 	{
 		tString sExt = cString::ToLowerCase(cString::GetFileExt(asFile));
 		if(sExt=="snt")
@@ -361,7 +361,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void SetMeshActive(std::string& asName, bool abActive)
+	static void SetMeshActive(const std::string& asName, bool abActive)
 	{
 		cMeshEntity *pEnt = gpScene->GetWorld3D()->GetMeshEntity(asName);
 		if(pEnt==NULL){
@@ -386,7 +386,7 @@ namespace hpl {
 	* \param asName The name of the particle system.
 	* \param abActive If it should be active or not.
 	**/
-	static void SetParticleSystemActive(std::string& asName, bool abActive)
+	static void SetParticleSystemActive(const std::string& asName, bool abActive)
 	{
 		cParticleSystem3D *pPS = gpScene->GetWorld3D()->GetParticleSystem(asName);
 		if(pPS==NULL){
@@ -407,7 +407,7 @@ namespace hpl {
 	* \param asArea The name of the area
 	* \param X Y and Z the variables of the particle system.
 	**/
-	static void CreateParticleSystem(std::string& asName, std::string& asType, std::string& asArea,
+	static void CreateParticleSystem(const std::string& asName, const std::string& asType, const std::string& asArea,
 												float afX, float afY, float afZ)
 	{
 		cAreaEntity* pArea = gpScene->GetWorld3D()->GetAreaEntity(asArea);
@@ -430,7 +430,7 @@ namespace hpl {
 	* Kill a particle system
 	* \param asName The name of the particle system.
 	**/
-	static void KillParticleSystem(std::string& asName)
+	static void KillParticleSystem(const std::string& asName)
 	{
 		/*cParticleSystem3D *pPS = gpScene->GetWorld3D()->GetParticleSystem(asName);
 		if(pPS==NULL){
@@ -470,8 +470,8 @@ namespace hpl {
 	 * \param asStartArea
 	 * \param asEndArea
 	 */
-	static void CreateBeam(std::string& asName, std::string& asFile,
-									std::string& asStartArea, std::string& asEndArea)
+	static void CreateBeam(const std::string& asName, const std::string& asFile,
+									const std::string& asStartArea, const std::string& asEndArea)
 	{
 		cAreaEntity* pStartArea = gpScene->GetWorld3D()->GetAreaEntity(asStartArea);
 		if(pStartArea==NULL){
@@ -504,7 +504,7 @@ namespace hpl {
 	 * Destroys a beam
 	 * \param asName
 	 */
-	static void DestroyBeam(std::string& asName)
+	static void DestroyBeam(const std::string& asName)
 	{
 		cBeam* pBeam = gpScene->GetWorld3D()->GetBeam(asName);
 		if(pBeam==NULL)
@@ -534,7 +534,7 @@ namespace hpl {
 	* \param afRadius The radius to fade to.
 	* \param afTime The amount of seconds the fade should last.
 	**/
-	static void FadeLight3D(std::string& asName, float afR,float afG, float afB, float afA,
+	static void FadeLight3D(const std::string& asName, float afR,float afG, float afB, float afA,
 										float afRadius, float afTime)
 	{
 		iLight3D *pLight = gpScene->GetWorld3D()->GetLight(asName);
@@ -557,7 +557,7 @@ namespace hpl {
 	* \param asLightName The light name
 	* \param abX True if it should be attached, false if you want to remove.
 	**/
-	static void AttachBillboardToLight3D(std::string& asBillboardName, std::string& asLightName,bool abX)
+	static void AttachBillboardToLight3D(const std::string& asBillboardName, const std::string& asLightName,bool abX)
 	{
 		iLight3D *pLight = gpScene->GetWorld3D()->GetLight(asLightName);
 		if(pLight==NULL)
@@ -586,7 +586,7 @@ namespace hpl {
 	* \param asName The light name
 	* \param abX if the light should be on or off.
 	**/
-	static void SetLight3DVisible(std::string& asName, bool abX)
+	static void SetLight3DVisible(const std::string& asName, bool abX)
 	{
 		iLight3D *pLight = gpScene->GetWorld3D()->GetLight(asName);
 		if(pLight==NULL)
@@ -605,7 +605,7 @@ namespace hpl {
 	* \param asName The light name
 	* \param abX if the light should only affects objects in same sector or not.
 	**/
-	static void SetLight3DOnlyAffectInSector(std::string& asName, bool abX)
+	static void SetLight3DOnlyAffectInSector(const std::string& asName, bool abX)
 	{
 		iLight3D *pLight = gpScene->GetWorld3D()->GetLight(asName);
 		if(pLight==NULL)
@@ -624,7 +624,7 @@ namespace hpl {
 	* \param asName The light name
 	* \param abX if the light flicker should be on or off.
 	**/
-	static void SetLight3DFlickerActive(std::string& asName, bool abX)
+	static void SetLight3DFlickerActive(const std::string& asName, bool abX)
 	{
 		iLight3D *pLight = gpScene->GetWorld3D()->GetLight(asName);
 		if(pLight==NULL)
@@ -655,15 +655,15 @@ namespace hpl {
 	* \param afOnFadeLength Fade length from off to on.
 	* \param afOffFadeLength Fade length from on to off.
 	**/
-	static void SetLight3DFlicker(std::string& asName,
+	static void SetLight3DFlicker(const std::string& asName,
 											float afR,float afG, float afB, float afA,
 											float afRadius,
 
 											float afOnMinLength, float afOnMaxLength,
-											std::string& asOnSound,std::string& asOnPS,
+											const std::string& asOnSound,const std::string& asOnPS,
 
 											float afOffMinLength, float afOffMaxLength,
-											std::string& asOffSound,std::string& asOffPS,
+											const std::string& asOffSound,const std::string& asOffPS,
 
 											bool abFade,
 											float afOnFadeLength, float afOffFadeLength)
@@ -695,8 +695,8 @@ namespace hpl {
 	 * \param asFile The snt file to load.
 	 * \param asArea The area to create at.
 	 */
-	static void CreateSoundEntity(std::string& asName, std::string& asFile,
-												std::string& asArea)
+	static void CreateSoundEntity(const std::string& asName, const std::string& asFile,
+												const std::string& asArea)
 	{
 		cAreaEntity* pArea = gpScene->GetWorld3D()->GetAreaEntity(asArea);
 		if(pArea==NULL){
@@ -721,7 +721,7 @@ namespace hpl {
 	* \param asName The entity name
 	* \param abPlayStart If the start sound should be played.
 	**/
-	static void PlaySoundEntity(std::string& asName, bool abPlayStart)
+	static void PlaySoundEntity(const std::string& asName, bool abPlayStart)
 	{
 		cSoundEntity *pSound = gpScene->GetWorld3D()->GetSoundEntity(asName);
 		if(pSound==NULL)
@@ -738,7 +738,7 @@ namespace hpl {
 	* \param asName The entity name
 	* \param abPlayEnd If the end sound should be played.
 	**/
-	static void StopSoundEntity(std::string& asName, bool abPlayEnd)
+	static void StopSoundEntity(const std::string& asName, bool abPlayEnd)
 	{
 		cSoundEntity *pSound = gpScene->GetWorld3D()->GetSoundEntity(asName);
 		if(pSound==NULL)
@@ -757,7 +757,7 @@ namespace hpl {
 	* \param asName The entity name
 	* \param afSpeed Volume increase per second.
 	**/
-	static void FadeInSoundEntity(std::string& asName, float afSpeed)
+	static void FadeInSoundEntity(const std::string& asName, float afSpeed)
 	{
 		cSoundEntity *pSound = gpScene->GetWorld3D()->GetSoundEntity(asName);
 		if(pSound==NULL)
@@ -774,7 +774,7 @@ namespace hpl {
 	* \param asName The entity name
 	* \param afSpeed Volume decrease per second.
 	**/
-	static void FadeOutSoundEntity(std::string& asName, float afSpeed)
+	static void FadeOutSoundEntity(const std::string& asName, float afSpeed)
 	{
 		cSoundEntity *pSound = gpScene->GetWorld3D()->GetSoundEntity(asName);
 		if(pSound==NULL)
@@ -788,7 +788,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void PlayMusic(std::string& asName, float afVol, float afStepSize, bool abLoop)
+	static void PlayMusic(const std::string& asName, float afVol, float afStepSize, bool abLoop)
 	{
 		gpSound->GetMusicHandler()->Play(asName,afVol,afStepSize,abLoop);
 	}
@@ -807,7 +807,7 @@ namespace hpl {
 	* \param asName The sound name
 	* \param afVol Volume of the sound
 	**/
-	static void PlayGuiSound(std::string& asName, float afVol)
+	static void PlayGuiSound(const std::string& asName, float afVol)
 	{
 		gpSound->GetSoundHandler()->PlayGui(asName,false,afVol);
 	}
@@ -825,8 +825,8 @@ namespace hpl {
 	* \param asType The type, can be: "OnMax" or "OnMin".
 	* \param asFunc The script function to be called. Must be in the current script file. "" = disabled.
 	**/
-	static void SetJointCallback(std::string& asJointName, std::string& asType,
-											std::string& asFunc)
+	static void SetJointCallback(const std::string& asJointName, const std::string& asType,
+											const std::string& asFunc)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
 		if(pJoint==NULL){
@@ -859,7 +859,7 @@ namespace hpl {
 	* Breaks a joint.
 	* \param asJointName The joint name
 	**/
-	static void BreakJoint(std::string& asJointName)
+	static void BreakJoint(const std::string& asJointName)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
 		if(pJoint==NULL){
@@ -877,7 +877,7 @@ namespace hpl {
 	* \param asCtrlName The controller name
 	* \param abActive If the controller is to be active or not.
 	**/
-	static void SetJointControllerActive(std::string& asJointName,std::string& asCtrlName, bool abActive)
+	static void SetJointControllerActive(const std::string& asJointName,const std::string& asCtrlName, bool abActive)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
 		if(pJoint==NULL){
@@ -899,7 +899,7 @@ namespace hpl {
 	* \param asJointName The joint name
 	* \param asCtrlName The controller name
 	**/
-	static void ChangeJointController(std::string& asJointName,std::string& asCtrlName)
+	static void ChangeJointController(const std::string& asJointName,const std::string& asCtrlName)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
 		if(pJoint==NULL){
@@ -922,8 +922,8 @@ namespace hpl {
 	* \param asProperty Property to change, can be "DestValue"
 	* \param afValue Value to set it to.
 	**/
-	static void SetJointControllerPropertyFloat(std::string& asJointName,std::string& asCtrlName,
-													std::string& asProperty, float afValue)
+	static void SetJointControllerPropertyFloat(const std::string& asJointName,const std::string& asCtrlName,
+													const std::string& asProperty, float afValue)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
 		if(pJoint==NULL){
@@ -956,7 +956,7 @@ namespace hpl {
 	* \param asJointName The joint name
 	* \param asProp The property to get
 	**/
-	static float GetJointProperty(std::string& asJointName, std::string& asProp)
+	static float GetJointProperty(const std::string& asJointName, const std::string& asProp)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
 		if(pJoint==NULL){
@@ -1054,7 +1054,7 @@ namespace hpl {
 	* \param asBodyName The body name
 	* \param asProp The property to get
 	**/
-	static float GetBodyProperty(std::string& asBodyName, std::string& asProp)
+	static float GetBodyProperty(const std::string& asBodyName, const std::string& asProp)
 	{
 		iPhysicsBody *pBody = gpScene->GetWorld3D()->GetPhysicsWorld()->GetBody(asBodyName);
 		if(pBody==NULL){
@@ -1091,7 +1091,7 @@ namespace hpl {
 	* \param asProp The property to get
 	* \param afVal The new value of the property
 	**/
-	static void SetBodyProperty(std::string& asBodyName, std::string& asProp, float afVal)
+	static void SetBodyProperty(const std::string& asBodyName, const std::string& asProp, float afVal)
 	{
 		iPhysicsBody *pBody = gpScene->GetWorld3D()->GetPhysicsWorld()->GetBody(asBodyName);
 		if(pBody==NULL){
@@ -1130,7 +1130,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void AttachBodiesWithJoint(std::string& asParentName, std::string& asChildName, std::string& asJointName)
+	static void AttachBodiesWithJoint(const std::string& asParentName, const std::string& asChildName, const std::string& asJointName)
 	{
 		iPhysicsBody *pParent = gpScene->GetWorld3D()->GetPhysicsWorld()->GetBody(asParentName);
 		if(pParent==NULL){
@@ -1164,7 +1164,7 @@ namespace hpl {
 	* \param asProp The property to get
 	* \param afVal The new value of the property
 	**/
-	static void SetJointProperty(std::string& asJointName, std::string& asProp, float afVal)
+	static void SetJointProperty(const std::string& asJointName, const std::string& asProp, float afVal)
 	{
 		iPhysicsJoint *pJoint = gpScene->GetWorld3D()->GetPhysicsWorld()->GetJoint(asJointName);
 		if(pJoint==NULL){
@@ -1250,7 +1250,7 @@ namespace hpl {
 	* \param afY force in the y direction. (in newton, kg*m/s^2)
 	* \param afZ force in the z direction. (in newton, kg*m/s^2)
 	**/
-	static void AddBodyForce(std::string& asBodyName, std::string& asCoordType,
+	static void AddBodyForce(const std::string& asBodyName, const std::string& asCoordType,
 										float afX, float afY, float afZ)
 	{
 		iPhysicsBody *pBody = gpScene->GetWorld3D()->GetPhysicsWorld()->GetBody(asBodyName);
@@ -1291,7 +1291,7 @@ namespace hpl {
 	* \param afY velocity in the y direction. (in m/s)
 	* \param afZ velocity in the z direction. (in m/s)
 	**/
-	static void AddBodyImpulse(std::string& asBodyName, std::string& asCoordType,
+	static void AddBodyImpulse(const std::string& asBodyName, const std::string& asCoordType,
 		float afX, float afY, float afZ)
 	{
 		iPhysicsBody *pBody = gpScene->GetWorld3D()->GetPhysicsWorld()->GetBody(asBodyName);
@@ -1328,7 +1328,7 @@ namespace hpl {
 	/////// LOCAL VARS //////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////
 
-	static void CreateLocalVar(std::string& asName, int alVal)
+	static void CreateLocalVar(const std::string& asName, int alVal)
 	{
 		if(gpScene->GetLocalVar(asName)==NULL)
 		{
@@ -1337,19 +1337,19 @@ namespace hpl {
 		}
 	}
 
-	static void SetLocalVar(std::string& asName, int alVal)
+	static void SetLocalVar(const std::string& asName, int alVal)
 	{
 		cScriptVar* pVar = gpScene->CreateLocalVar(asName);
 		pVar->mlVal = alVal;
 	}
 
-	static void AddLocalVar(std::string& asName, int alVal)
+	static void AddLocalVar(const std::string& asName, int alVal)
 	{
 		cScriptVar* pVar = gpScene->CreateLocalVar(asName);
 		pVar->mlVal += alVal;
 	}
 
-	static int GetLocalVar(std::string& asName)
+	static int GetLocalVar(const std::string& asName)
 	{
 		cScriptVar* pVar = gpScene->GetLocalVar(asName);
 		if(pVar==NULL)
@@ -1365,7 +1365,7 @@ namespace hpl {
 	/////// GLOBAL VARS //////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////
 
-	static void CreateGlobalVar(std::string& asName, int alVal)
+	static void CreateGlobalVar(const std::string& asName, int alVal)
 	{
 		if(gpScene->GetGlobalVar(asName)==NULL)
 		{
@@ -1374,21 +1374,21 @@ namespace hpl {
 		}
 	}
 
-	static void SetGlobalVar(std::string& asName, int alVal)
+	static void SetGlobalVar(const std::string& asName, int alVal)
 	{
 		cScriptVar* pVar = gpScene->CreateGlobalVar(asName);
 		pVar->mlVal = alVal;
 	}
 
 
-	static void AddGlobalVar(std::string& asName, int alVal)
+	static void AddGlobalVar(const std::string& asName, int alVal)
 	{
 		cScriptVar* pVar = gpScene->CreateGlobalVar(asName);
 		pVar->mlVal += alVal;
 	}
 
 
-	static int GetGlobalVar(std::string& asName)
+	static int GetGlobalVar(const std::string& asName)
 	{
 		cScriptVar* pVar = gpScene->GetGlobalVar(asName);
 		if(pVar==NULL)
@@ -1423,87 +1423,87 @@ namespace hpl {
 		};
 		
 		//General
-		AddFunc("void Print(string &in asText)", Print);
+		AddFunc("void Print(const string &in asText)", Print);
 		AddFunc("string& FloatToString(float afX)", FloatToString);
 		AddFunc("string& IntToString(int aiX)", IntToString);
 		AddFunc("float RandFloat(float afMin, float afMax)", RandFloat);
 		AddFunc("int RandInt(int aiMin, int aiMax)", RandInt);
-		AddFunc("bool StringContains(string &in asHaystack, string &in asNeedle)", StringContains);
+		AddFunc("bool StringContains(const string &in asHaystack, const string &in asNeedle)", StringContains);
 		AddFunc("void ResetLogicTimer()", ResetLogicTimer);
 
 		// Renderer
 		AddFunc("void SetAmbientColor(float afR, float afG, float afB)", SetAmbientColor);
 		AddFunc("void SetSkyboxActive(bool abX)", SetSkyboxActive);
 		AddFunc("void SetSkyboxColor(float afR, float afG, float afB, float afA)", SetSkyboxColor);
-		AddFunc("void SetSkybox(string &in asTexture)", SetSkybox);
-		AddFunc("void CreateParticleSystemOnCamera(string &in asName,string &in asType)", CreateParticleSystemOnCamera);
+		AddFunc("void SetSkybox(const string &in asTexture)", SetSkybox);
+		AddFunc("void CreateParticleSystemOnCamera(const string &in asName,const string &in asType)", CreateParticleSystemOnCamera);
 		AddFunc("void SetFogActive(bool abX)", SetFogActive);
 		AddFunc("void SetFogCulling(bool abX)", SetFogCulling);
 		AddFunc("void SetFogProperties(float afStart, float afEnd, float afR,float afG, float afB)", SetFogProperties);
-		AddFunc("void SetSectorProperties(string &in asSector, float afAmbR, float afAmbG, float afAmbB)", SetSectorProperties);
-		AddFunc("void SetSectorPortalActive(string &in asSector, int alPortal, bool abActive)", SetSectorPortalActive);
+		AddFunc("void SetSectorProperties(const string &in asSector, float afAmbR, float afAmbG, float afAmbB)", SetSectorProperties);
+		AddFunc("void SetSectorPortalActive(const string &in asSector, int alPortal, bool abActive)", SetSectorPortalActive);
 
 		// Resources
-		AddFunc("void PreloadSound(string &in asFile)", PreloadSound);
-		AddFunc("string& Translate(string &in asCat, string &in asName)", Translate);
+		AddFunc("void PreloadSound(const string &in asFile)", PreloadSound);
+		AddFunc("string& Translate(const string &in asCat, const string &in asName)", Translate);
 
 		// Mesh Entity
-		AddFunc("void SetMeshActive(string &in asName, bool abActive)", SetMeshActive);
+		AddFunc("void SetMeshActive(const string &in asName, bool abActive)", SetMeshActive);
 
 		// Particle System
-		AddFunc("void SetParticleSystemActive(string &in asName, bool abActive)", SetParticleSystemActive);
-		AddFunc("void CreateParticleSystem(string &in asName, string &in asType, string &in asArea, float afX, float afY, float afZ)", CreateParticleSystem);
-		AddFunc("void KillParticleSystem(string &in asName)", KillParticleSystem);
+		AddFunc("void SetParticleSystemActive(const string &in asName, bool abActive)", SetParticleSystemActive);
+		AddFunc("void CreateParticleSystem(const string &in asName, const string &in asType, const string &in asArea, float afX, float afY, float afZ)", CreateParticleSystem);
+		AddFunc("void KillParticleSystem(const string &in asName)", KillParticleSystem);
 
 		// Beam
-		AddFunc("void CreateBeam(string &in asName, string &in asFile, string &in asStartArea, string &in asEndArea)", CreateBeam);
-		AddFunc("void DestroyBeam(string &in asName)", DestroyBeam);
+		AddFunc("void CreateBeam(const string &in asName, const string &in asFile, const string &in asStartArea, const string &in asEndArea)", CreateBeam);
+		AddFunc("void DestroyBeam(const string &in asName)", DestroyBeam);
 
 		// Light
-		AddFunc("void FadeLight3D(string &in asName, float afR,float afG, float afB, float afA, float afRadius, float afTime)", FadeLight3D);
-		AddFunc("void AttachBillboardToLight3D(string &in asBillboardName, string &in asLightName,bool abX)", AttachBillboardToLight3D);
-		AddFunc("void SetLight3DVisible(string &in asName, bool abX)", SetLight3DVisible);
-		AddFunc("void SetLight3DOnlyAffectInSector(string &in asName, bool abX)", SetLight3DOnlyAffectInSector);
-		AddFunc("void SetLight3DFlickerActive(string &in asName, bool abX)", SetLight3DFlickerActive);
-		AddFunc("void SetLight3DFlicker(string &in asName, float afR,float afG, float afB, float afA, float afRadius, float afOnMinLength, \
-				float afOnMaxLength, string &in asOnSound, string &in asOnPS, float afOffMinLength, float afOffMaxLength, string &in asOffSound, \
-				string &in asOffPS, bool abFade, float afOnFadeLength, float afOffFadeLength)", SetLight3DFlicker);
+		AddFunc("void FadeLight3D(const string &in asName, float afR,float afG, float afB, float afA, float afRadius, float afTime)", FadeLight3D);
+		AddFunc("void AttachBillboardToLight3D(const string &in asBillboardName, const string &in asLightName,bool abX)", AttachBillboardToLight3D);
+		AddFunc("void SetLight3DVisible(const string &in asName, bool abX)", SetLight3DVisible);
+		AddFunc("void SetLight3DOnlyAffectInSector(const string &in asName, bool abX)", SetLight3DOnlyAffectInSector);
+		AddFunc("void SetLight3DFlickerActive(const string &in asName, bool abX)", SetLight3DFlickerActive);
+		AddFunc("void SetLight3DFlicker(const string &in asName, float afR,float afG, float afB, float afA, float afRadius, float afOnMinLength, \
+				float afOnMaxLength, const string &in asOnSound, const string &in asOnPS, float afOffMinLength, float afOffMaxLength, const string &in asOffSound, \
+				const string &in asOffPS, bool abFade, float afOnFadeLength, float afOffFadeLength)", SetLight3DFlicker);
 
 		// Sound
-		AddFunc("void CreateSoundEntity(string &in asName, string &in asFile, string &in asArea)", CreateSoundEntity);
-		AddFunc("void PlaySoundEntity(string &in asName, bool abPlayStart)", PlaySoundEntity);
-		AddFunc("void StopSoundEntity(string &in asName, bool abPlayEnd)", StopSoundEntity);
-		AddFunc("void FadeInSoundEntity(string &in asName, float afSpeed)", FadeInSoundEntity);
-		AddFunc("void FadeOutSoundEntity(string &in asName, float afSpeed)", FadeOutSoundEntity);
-		AddFunc("void PlayMusic(string &in asName, float afVol, float afStepSize, bool abLoop)", PlayMusic);
+		AddFunc("void CreateSoundEntity(const string &in asName, const string &in asFile, const string &in asArea)", CreateSoundEntity);
+		AddFunc("void PlaySoundEntity(const string &in asName, bool abPlayStart)", PlaySoundEntity);
+		AddFunc("void StopSoundEntity(const string &in asName, bool abPlayEnd)", StopSoundEntity);
+		AddFunc("void FadeInSoundEntity(const string &in asName, float afSpeed)", FadeInSoundEntity);
+		AddFunc("void FadeOutSoundEntity(const string &in asName, float afSpeed)", FadeOutSoundEntity);
+		AddFunc("void PlayMusic(const string &in asName, float afVol, float afStepSize, bool abLoop)", PlayMusic);
 		AddFunc("void StopMusic(float afStepSize)", StopMusic);
-		AddFunc("void PlayGuiSound(string &in asName, float afVol)", PlayGuiSound);
+		AddFunc("void PlayGuiSound(const string &in asName, float afVol)", PlayGuiSound);
 
 		// Physics
-		AddFunc("void SetJointCallback(string &in asJointName, string &in asType, string &in asFunc)", SetJointCallback);
-		AddFunc("float GetJointProperty(string &in asJointName, string &in asProp)", GetJointProperty);
-		AddFunc("float GetBodyProperty(string &in asBodyName, string &in asProp)", GetBodyProperty);
-		AddFunc("void BreakJoint(string &in asJointName)", BreakJoint);
-		AddFunc("void SetJointControllerActive(string &in asJointName,string &in asCtrlName, bool abActive)", SetJointControllerActive);
-		AddFunc("void ChangeJointController(string &in asJointName,string &in asCtrlName)", ChangeJointController);
-		AddFunc("void SetJointControllerPropertyFloat(string &in asJointName,string &in asCtrlName, string &in asProperty, float afValue)", SetJointControllerPropertyFloat);
-		AddFunc("void SetBodyProperty(string &in asBodyName, string &in asProp, float afVal)", SetBodyProperty);
-		AddFunc("void AttachBodiesWithJoint(string &in asParentName, string &in asChildName, string &in asJointName)", AttachBodiesWithJoint);
-		AddFunc("void SetJointProperty(string &in asJointName, string &in asProp, float afVal)", SetJointProperty);
-		AddFunc("void AddBodyForce(string &in asBodyName, string &in asCoordType, float afX, float afY, float afZ)", AddBodyForce);
-		AddFunc("void AddBodyImpulse(string &in asBodyName, string &in asCoordType, float afX, float afY, float afZ)", AddBodyImpulse);
+		AddFunc("void SetJointCallback(const string &in asJointName, const string &in asType, const string &in asFunc)", SetJointCallback);
+		AddFunc("float GetJointProperty(const string &in asJointName, const string &in asProp)", GetJointProperty);
+		AddFunc("float GetBodyProperty(const string &in asBodyName, const string &in asProp)", GetBodyProperty);
+		AddFunc("void BreakJoint(const string &in asJointName)", BreakJoint);
+		AddFunc("void SetJointControllerActive(const string &in asJointName,const string &in asCtrlName, bool abActive)", SetJointControllerActive);
+		AddFunc("void ChangeJointController(const string &in asJointName,const string &in asCtrlName)", ChangeJointController);
+		AddFunc("void SetJointControllerPropertyFloat(const string &in asJointName,const string &in asCtrlName, const string &in asProperty, float afValue)", SetJointControllerPropertyFloat);
+		AddFunc("void SetBodyProperty(const string &in asBodyName, const string &in asProp, float afVal)", SetBodyProperty);
+		AddFunc("void AttachBodiesWithJoint(const string &in asParentName, const string &in asChildName, const string &in asJointName)", AttachBodiesWithJoint);
+		AddFunc("void SetJointProperty(const string &in asJointName, const string &in asProp, float afVal)", SetJointProperty);
+		AddFunc("void AddBodyForce(const string &in asBodyName, const string &in asCoordType, float afX, float afY, float afZ)", AddBodyForce);
+		AddFunc("void AddBodyImpulse(const string &in asBodyName, const string &in asCoordType, float afX, float afY, float afZ)", AddBodyImpulse);
 
 		// Local Vars
-		AddFunc("void CreateLocalVar(string &in asName, int alVal)", CreateLocalVar);
-		AddFunc("void SetLocalVar(string &in asName, int alVal)", SetLocalVar);
-		AddFunc("void AddLocalVar(string &in asName, int alVal)", AddLocalVar);
-		AddFunc("int GetLocalVar(string &in asName)", GetLocalVar);
+		AddFunc("void CreateLocalVar(const string &in asName, int alVal)", CreateLocalVar);
+		AddFunc("void SetLocalVar(const string &in asName, int alVal)", SetLocalVar);
+		AddFunc("void AddLocalVar(const string &in asName, int alVal)", AddLocalVar);
+		AddFunc("int GetLocalVar(const string &in asName)", GetLocalVar);
 
 		// Global Vars
-		AddFunc("void CreateGlobalVar(string &in asName, int alVal)", CreateGlobalVar);
-		AddFunc("void SetGlobalVar(string &in asName, int alVal)", SetGlobalVar);
-		AddFunc("void AddGlobalVar(string &in asName, int alVal)", AddGlobalVar);
-		AddFunc("int GetGlobalVar(string &in asName)", GetGlobalVar);
+		AddFunc("void CreateGlobalVar(const string &in asName, int alVal)", CreateGlobalVar);
+		AddFunc("void SetGlobalVar(const string &in asName, int alVal)", SetGlobalVar);
+		AddFunc("void AddGlobalVar(const string &in asName, int alVal)", AddGlobalVar);
+		AddFunc("int GetGlobalVar(const string &in asName)", GetGlobalVar);
 	}
 
 	//-----------------------------------------------------------------------
