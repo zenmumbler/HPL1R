@@ -196,6 +196,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8E3A729B26165A160086F8ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E3A729726165A160086F8ED /* Newton.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = newton;
+		};
+		8E3A729D26165A1F0086F8ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E3A729726165A160086F8ED /* Newton.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = newton;
+		};
 		8EA486FA260FF779000D1AB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8EA486F6260FF779000D1AB7 /* AngelScript.xcodeproj */;
@@ -215,6 +229,7 @@
 /* Begin PBXFileReference section */
 		8E3A72832611363F0086F8ED /* Script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Script.cpp; path = sources/script/Script.cpp; sourceTree = SOURCE_ROOT; };
 		8E3A72842611363F0086F8ED /* Script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Script.h; path = sources/script/Script.h; sourceTree = SOURCE_ROOT; };
+		8E3A729726165A160086F8ED /* Newton.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Newton.xcodeproj; path = ../Newton/Newton.xcodeproj; sourceTree = "<group>"; };
 		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
 		8E815947260C1127001CBF63 /* GLSLProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLProgram.cpp; sourceTree = "<group>"; };
 		8E84AA0C254CB3D2000EA53C /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cg.framework; sourceTree = "<group>"; };
@@ -251,7 +266,6 @@
 		8EAA07B825589032007D7CD0 /* Material_Smoke2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material_Smoke2D.h; sourceTree = "<group>"; };
 		8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LowLevelSystemMac.mm; sourceTree = "<group>"; };
 		8EB7C3D8254F603E00277667 /* scripthelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripthelper.cpp; sourceTree = "<group>"; };
-		DB00EF5E11A9CFD9007DFB32 /* libnewton.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libnewton.a; sourceTree = "<group>"; };
 		DB00F0D211A9D080007DFB32 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		DB27F0180ACB9AB90054ACA3 /* AI.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AI.h; sourceTree = "<group>"; };
 		DB27F0190ACB9AB90054ACA3 /* AINodeContainer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AINodeContainer.h; sourceTree = "<group>"; };
@@ -672,6 +686,14 @@
 			path = impl;
 			sourceTree = "<group>";
 		};
+		8E3A729826165A160086F8ED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E3A729C26165A160086F8ED /* libnewton_d.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		8EA486F7260FF779000D1AB7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -684,6 +706,7 @@
 			isa = PBXGroup;
 			children = (
 				8EA486F6260FF779000D1AB7 /* AngelScript.xcodeproj */,
+				8E3A729726165A160086F8ED /* Newton.xcodeproj */,
 				8E84E75B25FD063100DC6065 /* OpenGL.framework */,
 				8E84E75925FD062A00DC6065 /* OpenAL.framework */,
 				DB00F0D211A9D080007DFB32 /* Cocoa.framework */,
@@ -698,7 +721,6 @@
 				8E9728DE254CBBAF0033415B /* SDL2.framework */,
 				8E9728DA254CBB4B0033415B /* SDL2_image.framework */,
 				8E84AA0C254CB3D2000EA53C /* Cg.framework */,
-				DB00EF5E11A9CFD9007DFB32 /* libnewton.a */,
 			);
 			name = dependencies;
 			path = ../dependencies/lib/macosx;
@@ -1256,6 +1278,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8E3A729E26165A1F0086F8ED /* PBXTargetDependency */,
 				8EA486FD260FF788000D1AB7 /* PBXTargetDependency */,
 			);
 			name = HPL;
@@ -1287,6 +1310,10 @@
 					ProductGroup = 8EA486F7260FF779000D1AB7 /* Products */;
 					ProjectRef = 8EA486F6260FF779000D1AB7 /* AngelScript.xcodeproj */;
 				},
+				{
+					ProductGroup = 8E3A729826165A160086F8ED /* Products */;
+					ProjectRef = 8E3A729726165A160086F8ED /* Newton.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1296,6 +1323,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		8E3A729C26165A160086F8ED /* libnewton_d.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libnewton_d.a;
+			remoteRef = 8E3A729B26165A160086F8ED /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		8EA486FB260FF779000D1AB7 /* libangelscript.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1499,6 +1533,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8E3A729E26165A1F0086F8ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = newton;
+			targetProxy = 8E3A729D26165A1F0086F8ED /* PBXContainerItemProxy */;
+		};
 		8EA486FD260FF788000D1AB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = angelscript;
