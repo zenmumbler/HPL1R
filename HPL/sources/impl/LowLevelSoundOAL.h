@@ -45,7 +45,7 @@ namespace hpl
 
 		void SetEnvVolume( float afEnvVolume ) override;
 
-		iSoundEnvironment* LoadSoundEnvironment (const tString& asFilePath);
+		iSoundEnvironment* LoadSoundEnvironment (const tString& asFilePath) override;
 		void SetSoundEnvironment ( iSoundEnvironment* apSoundEnv ) override;
 		void FadeSoundEnvironment( iSoundEnvironment* apSourceSoundEnv, iSoundEnvironment* apDestSoundEnv, float afT ) override;
 
