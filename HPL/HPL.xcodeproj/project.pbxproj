@@ -1326,7 +1326,7 @@
 		8E3A729C26165A160086F8ED /* libnewton_d.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libnewton_d.a;
+			path = libnewton.a;
 			remoteRef = 8E3A729B26165A160086F8ED /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -1676,6 +1676,7 @@
 					include,
 					../dependencies/include,
 					../AngelScript/include,
+					../Newton/source/newton,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1698,6 +1699,7 @@
 					include,
 					../dependencies/include,
 					../AngelScript/include,
+					../Newton/source/newton,
 				);
 				INSTALL_PATH = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = (
