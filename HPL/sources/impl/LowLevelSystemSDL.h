@@ -20,7 +20,6 @@
 #define HPL_LOWLEVELSYSTEM_SDL_H
 
 #include "system/LowLevelSystem.h"
-#include "angelscript.h"
 #include <stdio.h>
 
 namespace hpl {
@@ -47,24 +46,6 @@ namespace hpl {
 
 	//------------------------------------------------------
 
-	class cScriptOutput// : public  asIOutputStream
-	{
-	public:
-		cScriptOutput() : msMessage("") {}
-		~cScriptOutput(){}
-
-		void AddMessage(const asSMessageInfo *msg);
-		void Display();
-		void Clear();
-		
-		const tString& GetMessage(){ return msMessage; }
-
-	private:
-		tString msMessage;
-	};
-
-	//------------------------------------------------------
-
 
 	class cLowLevelSystemSDL : public iLowLevelSystem
 	{
@@ -77,17 +58,7 @@ namespace hpl {
 		unsigned long GetTime();
 		cDate GetDate();
 
-		iScript* CreateScript(const tString& asName);
-
-		bool AddScriptFunc(const tString& asFuncDecl, void* pFunc);
-		bool AddScriptVar(const tString& asVarDecl, void *pVar);
-
 		void Sleep ( const unsigned int alMillisecs );
-
-	private:
-		asIScriptEngine *mpScriptEngine;
-		cScriptOutput *mpScriptOutput;
-		int mlHandleCount;
 	};
 
 	//------------------------------------------------------

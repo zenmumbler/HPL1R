@@ -20,7 +20,6 @@
 #define HPL_AI_H
 
 #include "system/SystemTypes.h"
-#include "game/GameTypes.h"
 
 #include "game/Updateable.h"
 

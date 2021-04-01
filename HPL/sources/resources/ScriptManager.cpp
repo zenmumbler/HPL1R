@@ -20,7 +20,6 @@
 #include "system/String.h"
 #include "system/System.h"
 #include "resources/Resources.h"
-#include "system/Script.h"
 #include "system/LowLevelSystem.h"
 
 
@@ -33,11 +32,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cScriptManager::cScriptManager(cSystem* apSystem,cResources *apResources)
+	cScriptManager::cScriptManager(cScript* apScript, cResources *apResources)
 		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevel(),
 							apResources->GetLowLevelSystem())
 	{
-		mpSystem = apSystem;
+		mpScript = apScript;
 		mpResources = apResources;
 	}
 
@@ -55,33 +54,33 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iScript* cScriptManager::CreateScript(const tString& asName)
+	cScriptModule* cScriptManager::CreateScript(const tString& asName)
 	{
 		tString sPath;
-		iScript* pScript;
+		cScriptModule* pScript;
 		tString asNewName;
 
 		BeginLoad(asName);
 
 		asNewName = cString::SetFileExt(asName,"hps");
 
-		pScript = static_cast<iScript*>(this->FindLoadedResource(asNewName,sPath));
+		pScript = static_cast<cScriptModule*>(this->FindLoadedResource(asNewName,sPath));
 
-		if(pScript==NULL && sPath!="")
+		if (pScript == nullptr && sPath!="")
 		{
-			pScript = mpSystem->GetLowLevel()->CreateScript(asNewName);
+			pScript = mpScript->CreateScript(asNewName);
 
-			if(pScript->CreateFromFile(sPath)==false){
+			if (pScript->CreateFromFile(sPath)==false){
 				hplDelete(pScript);
 				EndLoad();
-				return NULL;
+				return nullptr;
 			}
 
 			AddResource(pScript);
 		}
 
-		if(pScript)pScript->IncUserCount();
-		else Error("Couldn't create script '%s'\n",asNewName.c_str());
+		if (pScript) pScript->IncUserCount();
+		else Error("Couldn't create script '%s'\n", asNewName.c_str());
 
 		EndLoad();
 		return pScript;
@@ -100,7 +99,7 @@ namespace hpl {
 	{
 		apResource->DecUserCount();
 
-		if(apResource->HasUsers()==false){
+		if (apResource->HasUsers()==false) {
 			RemoveResource(apResource);
 			hplDelete(apResource);
 		}

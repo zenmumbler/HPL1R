@@ -20,7 +20,6 @@
 #define HPL_AI_NODE_GENERATOR_H
 
 #include "system/SystemTypes.h"
-#include "game/GameTypes.h"
 
 #include "physics/PhysicsWorld.h"
 #include "scene/World3D.h"

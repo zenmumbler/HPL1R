@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "game/ScriptFuncs.h"
+#include "script/ScriptFuncs.h"
 
 #include <stdlib.h>
 #include <math.h>
@@ -51,12 +51,12 @@
 #include "physics/PhysicsJointSlider.h"
 #include "physics/PhysicsBody.h"
 #include "physics/PhysicsController.h"
-#include "system/Script.h"
 #include "graphics/ParticleSystem3D.h"
 #include "scene/MeshEntity.h"
 #include "graphics/BillBoard.h"
 #include "graphics/Beam.h"
 #include "graphics/Renderer3D.h"
+#include "script/Script.h"
 
 namespace hpl {
 
@@ -76,7 +76,7 @@ namespace hpl {
 	{
 		if(msMinFunc!="")
 		{
-			iScript *pScript = mpScene->GetWorld3D()->GetScript();
+			cScriptModule *pScript = mpScene->GetWorld3D()->GetScript();
 
 			tString sCommand = msMinFunc + "(\"" + apJoint->GetName() + "\")";
 			if(pScript->Run(sCommand)==false){
@@ -90,7 +90,7 @@ namespace hpl {
 	{
 		if(msMaxFunc!="")
 		{
-			iScript *pScript = mpScene->GetWorld3D()->GetScript();
+			cScriptModule *pScript = mpScene->GetWorld3D()->GetScript();
 
 			tString sCommand = msMaxFunc + "(\"" + apJoint->GetName() + "\")";
 			if(pScript->Run(sCommand)==false){
@@ -1396,14 +1396,16 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cScriptFuncs::Init(	cGraphics* apGraphics,
-				cResources *apResources,
-				cSystem *apSystem,
-				cInput *apInput,
-				cScene *apScene,
-				cSound *apSound,
-				cGame *apGame
-			)
+	void RegisterCoreFunctions(
+		cScript* apScript,
+		cGraphics* apGraphics,
+		cResources *apResources,
+		cSystem *apSystem,
+		cInput *apInput,
+		cScene *apScene,
+		cSound *apSound,
+		cGame *apGame
+	)
 	{
 		gpGraphics = apGraphics;
 		gpResources = apResources;
@@ -1413,8 +1415,8 @@ namespace hpl {
 		gpSound = apSound;
 		gpGame = apGame;
 		
-		const auto AddFunc = [](const tString& sig, auto fn) {
-			gpSystem->GetLowLevel()->AddScriptFunc(sig, reinterpret_cast<void*>(fn));
+		const auto AddFunc = [apScript](const tString& sig, auto fn) {
+			apScript->AddScriptFunc(sig, reinterpret_cast<void*>(fn));
 		};
 		
 		//General

@@ -23,6 +23,7 @@
 
 namespace hpl {
 
+	class cScript;
 	class cGraphics;
 	class cResources;
 	class cSystem;
@@ -30,8 +31,6 @@ namespace hpl {
 	class cScene;
 	class cInput;
 	class cGame;
-
-
 
 	//---------------------------------------
 
@@ -53,18 +52,16 @@ namespace hpl {
 
 	//---------------------------------------
 
-	class cScriptFuncs
-	{
-	public:
-		static void Init(	cGraphics* apGraphics,
-					cResources *apResources,
-					cSystem *apSystem,
-					cInput *apInput,
-					cScene *apScene,
-					cSound *apSound,
-					cGame *apGame
-					);
-	};
+	void RegisterCoreFunctions(
+		cScript* apScript,
+		cGraphics* apGraphics,
+		cResources *apResources,
+		cSystem *apSystem,
+		cInput *apInput,
+		cScene *apScene,
+		cSound *apSound,
+		cGame *apGame
+	);
 
 };
 #endif // HPL_SCRIPT_FUNCS_H

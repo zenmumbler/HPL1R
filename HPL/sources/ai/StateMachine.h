@@ -20,7 +20,6 @@
 #define HPL_STATE_MACHINE_H
 
 #include "system/SystemTypes.h"
-#include "game/GameTypes.h"
 
 #include <map>
 

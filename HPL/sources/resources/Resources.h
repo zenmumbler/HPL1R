@@ -54,6 +54,7 @@ namespace hpl {
 	class cConfigFile;
 
 	class cSound;
+	class cScript;
 	class cMeshLoaderHandler;
 	class cScene;
 	class cGraphics;
@@ -119,7 +120,7 @@ namespace hpl {
 		cResources(iLowLevelResources *apLowLevelResources,iLowLevelGraphics *apLowLevelGraphics);
 		~cResources();
 
-		void Init(cGraphics* apGraphics,cSystem *apSystem, cSound* apSound, cScene *apScene);
+		void Init(cGraphics* apGraphics, cSystem *apSystem, cSound *apSound, cScript *apScript, cScene *apScene);
 
 		void Update(float afTimeStep);
 

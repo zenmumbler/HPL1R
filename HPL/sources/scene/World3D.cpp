@@ -20,7 +20,6 @@
 
 #include "impl/tinyXML/tinyxml.h"
 
-#include "system/Script.h"
 #include "system/String.h"
 #include "system/LowLevelSystem.h"
 
@@ -54,6 +53,9 @@
 #include "scene/MeshEntity.h"
 #include "scene/ColliderEntity.h"
 #include "scene/SoundEntity.h"
+
+#include "script/Script.h"
+#include "script/ScriptVar.h"
 
 #include "system/System.h"
 

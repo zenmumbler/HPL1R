@@ -20,7 +20,6 @@
 #define HPL_A_STAR_H
 
 #include "system/SystemTypes.h"
-#include "game/GameTypes.h"
 #include "math/MathTypes.h"
 
 namespace hpl {

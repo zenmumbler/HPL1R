@@ -183,37 +183,35 @@ void StringDextrinCombine(string asItem1, string asItem2, int alSlot)
 	RemoveItem("cottonstring");
 	
 	PlayGuiSound("item_string_dextrin_comb",1);
-	
-	CreateTimer("cottondelay1", 0.5f, "@CottonDelay1",true);
-	
 	SetInventoryMessageTrans("Global", "CombineStringDextrin");
-	
+
+	RunAfterGlobal(0.5f, "@CottonDelay1");	
 }
 void CottonDelay1(string asTimer)
 {
 	GiveItem("cottonstringsoaked","item_cottonstringsoaked.ent", -1);
-	
-	DestroyTimer("cottondelay1");
 }
+//STOP FUSE CREATION//
+//////////////////////
+
+/////////////////
+//START LIGHTER//
 void LighterGasZippoCombine(string asItem1, string asItem2, int alSlot)
 {
 	RemoveItem("lightergas1");
 	RemoveItem("zippo");		//Removed to make scripting easier
 	
 	PlayGuiSound("item_string_dextrin_comb",1);
-	
-	CreateTimer("zippodelay1", 0.5f, "@ZippoDelay1",true);
-		
 	SetInventoryMessageTrans("Global", "CombineLighterGasZippo");
+
+	RunAfterGlobal(0.5f, "@ZippoDelay1");
 }
 void ZippoDelay1(string asTimer)
 {
 	GiveItem("zippofire","item_lighter_working.ent", -1);	//Added same item but different name
-	
-	DestroyTimer("zippodelay1");
 }
-//STOP FUSE CREATION//
-//////////////////////
+//STOP LIGHTER//
+////////////////
 
 
 ///////////////////////
@@ -221,16 +219,13 @@ void ZippoDelay1(string asTimer)
 void GasolineHammerCombine(string asItem1, string asItem2, int alSlot)
 {
 	PlayGuiSound("interact_fuel_force_open",1);
-	
-	CreateTimer("gasdelay11", 1.5f, "@GasDelay1",true);
-	
 	SetGlobalVar("gasolinebrute", 1);
+
+	RunAfterGlobal(1.5f, "@GasDelay1");
 }
 void GasDelay1(string asTimer)
 {
 	SetInventoryMessageTrans("Global", "CombineGasolineHammer");
-	
-	DestroyTimer("gasdelay11");
 }
 //STOP OPEN GASOLINE//
 //////////////////////

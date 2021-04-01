@@ -36,7 +36,7 @@
 
 #include "math/Math.h"
 
-#include "game/ScriptFuncs.h"
+#include "script/ScriptFuncs.h"
 
 namespace hpl {
 

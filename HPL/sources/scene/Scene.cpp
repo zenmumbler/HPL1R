@@ -31,7 +31,6 @@
 #include "graphics/RendererPostEffects.h"
 #include "graphics/GraphicsDrawer.h"
 #include "graphics/RenderList.h"
-#include "system/Script.h"
 #include "resources/ScriptManager.h"
 
 #include "physics/Physics.h"
@@ -307,7 +306,7 @@ namespace hpl {
 
 		////////////////////////////////////////////////////////////
 		//Load the script
-		iScript* pScript = NULL;
+		cScriptModule* pScript = NULL;
 		if(abLoadScript)
 		{
 			tString sScriptFile = cString::SetFileExt(asFile,"hps");

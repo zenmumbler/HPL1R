@@ -456,11 +456,18 @@ static void DestroyTimer(const std::string& asName)
 
 static int siFuncCounter = 0;
 
-static void RunAfter(float afSecs, const std::string& asCallback) {
+static std::string NextAnonTimerName() {
 	int counter = siFuncCounter;
 	siFuncCounter = (siFuncCounter + 1) & 1023;
-	std::string name = "runafter_" + std::to_string(counter);
-	CreateTimer(name, afSecs, asCallback, false);
+	return "runafter_" + std::to_string(counter);
+}
+
+static void RunAfter(float afSecs, const std::string& asCallback) {
+	CreateTimer(NextAnonTimerName(), afSecs, asCallback, false);
+}
+
+static void RunAfterGlobal(float afSecs, const std::string& asCallback) {
+	CreateTimer(NextAnonTimerName(), afSecs, asCallback, true);
 }
 
 //-----------------------------------------------------------------------
@@ -1517,10 +1524,10 @@ static void CreateSoundEntityAt(const std::string& asType,const std::string& asD
 
 void cGameScripts::Init()
 {
-	iLowLevelSystem *pLowLevelSystem = gpInit->mpGame->GetSystem()->GetLowLevel();
+	cScript *pScript = gpInit->mpGame->GetScript();
 
 	const auto AddFunc = [=](const tString& sig, auto fn) {
-		pLowLevelSystem->AddScriptFunc(sig, reinterpret_cast<void*>(fn));
+		pScript->AddScriptFunc(sig, reinterpret_cast<void*>(fn));
 	};
 
 	// Game general
@@ -1577,7 +1584,8 @@ void cGameScripts::Init()
 	AddFunc("void CreateTimer(const string &in asName, float afTime, const string &in asCallback, bool abGlobal = false)", CreateTimer);
 	AddFunc("void DestroyTimer(const string &in asName)", DestroyTimer);
 	AddFunc("void RunAfter(float afSecs, const string &in asCallback)", RunAfter);
-	
+	AddFunc("void RunAfterGlobal(float afSecs, const string &in asCallback)", RunAfterGlobal);
+
 	// Player
 	AddFunc("void GivePlayerDamage(float afAmount, const string &in asType)", GivePlayerDamage);
 	AddFunc("void SetPlayerHealth(float afHealth)", SetPlayerHealth);

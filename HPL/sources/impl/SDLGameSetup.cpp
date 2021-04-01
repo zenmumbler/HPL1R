@@ -178,4 +178,12 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	cScript* cSDLGameSetup::CreateScript(cResources *apResources)
+	{
+		cScript *pScript = hplNew( cScript,(apResources) );
+		return pScript;
+	}
+
+	//-----------------------------------------------------------------------
+
 }

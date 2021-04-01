@@ -42,7 +42,7 @@ namespace hpl {
 	#define STOP_TIMING_TAB(x)
 #endif
 
-	class iScript;
+	class cScriptModule;
 
 	extern void SetLogFile(const tWString &asFile);
 	extern void FatalError(const char* fmt,... );
@@ -101,28 +101,6 @@ namespace hpl {
 		* Gets the current date.
 		*/
 		virtual cDate GetDate()=0;
-
-		/**
-		 * Creates a ne script
-		 * \param asName name of the script.
-		 * \return
-		 */
-		virtual iScript* CreateScript(const tString& asName)=0;
-
-		/**
-		 * Add a function to the script vm. Example: "void test(float x)"
-		 * \param asFuncDecl the declaration.
-		 * \return
-		 */
-		virtual bool AddScriptFunc(const tString& asFuncDecl, void* pFunc)=0;
-
-		/**
-		 * Add a variable to the script vm. Example: "int MyVar"
-		 * \param asVarDecl the declartion
-		 * \param *pVar the variable
-		 * \return
-		 */
-		virtual bool AddScriptVar(const tString& asVarDecl, void *pVar)=0;
 
 		/**
 		* Sets the main thread to rest for a number of milliseconds.

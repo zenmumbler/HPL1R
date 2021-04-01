@@ -37,12 +37,8 @@
 #include <string>
 
 #include "impl/LowLevelSystemSDL.h"
-#include "impl/SqScript.h"
 
 #include <SDL2/SDL.h>
-
-#include "impl/scriptarray.h"
-#include "impl/scriptstdstring.h"
 
 #include "system/String.h"
 
@@ -207,21 +203,6 @@ namespace hpl {
 
 	cLowLevelSystemSDL::cLowLevelSystemSDL()
 	{
-		mpScriptEngine = asCreateScriptEngine(ANGELSCRIPT_VERSION);
-		if (mpScriptEngine==NULL)
-		{
-			Error("Failed to start angel script!\n");
-		}
-
-		mpScriptOutput = hplNew( cScriptOutput, () );
-		mpScriptEngine->SetMessageCallback(asMETHOD(cScriptOutput,AddMessage), mpScriptOutput, asCALL_THISCALL);
-
-		RegisterScriptArray(mpScriptEngine, true);
-		RegisterStdString(mpScriptEngine);
-		RegisterStdStringUtils(mpScriptEngine);
-
-		mlHandleCount = 0;
-
 		Log("-------- THE HPL ENGINE LOG ------------\n\n");
 	}
 
@@ -229,11 +210,6 @@ namespace hpl {
 
 	cLowLevelSystemSDL::~cLowLevelSystemSDL()
 	{
-		/*Release all runnings contexts */
-
-		mpScriptEngine->Release();
-		hplDelete(mpScriptOutput);
-
 		//perhaps not the best thing to skip :)
 		//if(gpLogWriter)	hplDelete(gpLogWriter);
 		//gpLogWriter = NULL;
@@ -790,46 +766,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cScriptOutput::AddMessage(const asSMessageInfo *msg)
-	{
-		char sMess[1024];
-
-		tString type = "ERR ";
-		if( msg->type == asMSGTYPE_WARNING )
-			type = "WARN";
-		else if( msg->type == asMSGTYPE_INFORMATION )
-			type = "INFO";
-
-		sprintf(sMess,"%s (%d, %d) : %s : %s\n", msg->section, msg->row, msg->col, type.c_str(), msg->message);
-
-		msMessage += sMess;
-	}
-
-	void cScriptOutput::Display()
-	{
-		if(msMessage.size()>500)
-		{
-			while(msMessage.size() > 500)
-			{
-				tString sSub = msMessage.substr(0,500);
-				msMessage = msMessage.substr(500);
-				Log(sSub.c_str());
-			}
-			Log(msMessage.c_str());
-		}
-		else
-		{
-			Log(msMessage.c_str());
-		}
-	}
-
-	void cScriptOutput::Clear()
-	{
-		msMessage = "";
-	}
-
-	//-----------------------------------------------------------------------
-
 	unsigned long cLowLevelSystemSDL::GetTime()
 	{
 		return SDL_GetTicks();
@@ -846,39 +782,6 @@ namespace hpl {
 		pClock = localtime(&lTime);
 
 		return DateFromGMTIme(pClock);
-	}
-
-	//-----------------------------------------------------------------------
-
-	iScript* cLowLevelSystemSDL::CreateScript(const tString& asName)
-	{
-		return hplNew( cSqScript, (asName,mpScriptEngine,mpScriptOutput,mlHandleCount++) );
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cLowLevelSystemSDL::AddScriptFunc(const tString& asFuncDecl, void* pFunc)
-	{
-		if (mpScriptEngine->RegisterGlobalFunction(asFuncDecl.c_str(), asFUNCTION(pFunc), asCALL_CDECL) < 0)
-		{
-			Error("Couldn't add func '%s'\n", asFuncDecl.c_str());
-			return false;
-		}
-
-		return true;
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cLowLevelSystemSDL::AddScriptVar(const tString& asVarDecl, void *pVar)
-	{
-		if (mpScriptEngine->RegisterGlobalProperty(asVarDecl.c_str(),pVar)<0)
-		{
-			Error("Couldn't add var '%s'\n", asVarDecl.c_str());
-			return false;
-		}
-
-		return true;
 	}
 
 	//-----------------------------------------------------------------------

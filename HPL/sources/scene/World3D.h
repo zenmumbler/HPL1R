@@ -25,7 +25,7 @@
 
 #include "scene/Entity3D.h"
 
-#include "game/GameTypes.h"
+#include "script/ScriptVar.h"
 
 #include "game/SaveGame.h"
 
@@ -51,7 +51,7 @@ namespace hpl {
 	class cImageEntity;
 	class cParticleManager;
 	class cParticleSystem3D;
-	class iScript;
+	class cScriptModule;
 	class cPortalContainer;
 	class iRenderableContainer;
 	class cMeshEntity;
@@ -199,8 +199,8 @@ namespace hpl {
 
 		cVector3f GetWorldSize(){ return mvWorldSize;}
 
-		iScript* GetScript(){ return mpScript;}
-		void SetScript(iScript* apScript){ mpScript = apScript;}
+		cScriptModule* GetScript(){ return mpScript;}
+		void SetScript(cScriptModule* apScript){ mpScript = apScript;}
 
 		iRenderableContainer* GetRenderContainer();
 		cPortalContainer* GetPortalContainer();
@@ -352,7 +352,7 @@ namespace hpl {
 
 		cPortalContainer* mpPortalContainer;
 
-		iScript *mpScript;
+		cScriptModule *mpScript;
 
 		tLight3DList mlstLights;
 		tMeshEntityList mlstMeshEntities;

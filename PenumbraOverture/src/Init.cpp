@@ -377,12 +377,10 @@ bool cInit::Init(tString asCommandLine)
 	mpGame->GetResources()->AddEntity3DLoader(hplNew( cEntityLoader_GameItem,("Item",this)) );
 	mpGame->GetResources()->AddEntity3DLoader(hplNew( cEntityLoader_GameSwingDoor,("SwingDoor",this)) );
 	mpGame->GetResources()->AddEntity3DLoader(hplNew( cEntityLoader_GameLamp,("Lamp",this)) );
-
 	mpGame->GetResources()->AddEntity3DLoader(hplNew( cEntityLoader_GameEnemy,("Enemy",this)) );
 
     mpGame->GetResources()->AddArea3DLoader(hplNew( cAreaLoader_GameArea,("script",this)) );
 	mpGame->GetResources()->AddArea3DLoader(hplNew( cAreaLoader_GameLink,("link",this)) );
-	
 	mpGame->GetResources()->AddArea3DLoader(hplNew( cAreaLoader_GameSaveArea,("save",this)) );
 	mpGame->GetResources()->AddArea3DLoader(hplNew( cAreaLoader_GameLadder,("ladder",this)) );
 	mpGame->GetResources()->AddArea3DLoader(hplNew( cAreaLoader_GameDamageArea,("damage",this)) );

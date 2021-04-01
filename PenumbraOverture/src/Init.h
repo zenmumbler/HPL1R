@@ -103,7 +103,7 @@ public:
 	cConfigFile* mpConfig;
 	cConfigFile* mpGameConfig;
 	cGame *mpGame;
-	iScript *mpGlobalScript;
+	cScriptModule *mpGlobalScript;
 
 	iFontData *mpDefaultFont;
 	

@@ -27,7 +27,7 @@
 #include "graphics/Graphics.h"
 #include "graphics/LowLevelGraphics.h"
 #include "game/Updater.h"
-#include "game/ScriptFuncs.h"
+#include "script/ScriptFuncs.h"
 #include "graphics/Renderer3D.h"
 
 #include "system/LowLevelSystem.h"
@@ -197,13 +197,15 @@ namespace hpl {
 		Log(" Creating ai module\n");
 		mpAI = mpGameSetup->CreateAI();
 
-		Log(" Creating haptic module\n");
 #ifdef INCLUDE_HAPTIC
+		Log(" Creating haptic module\n");
 		mpHaptic = mpGameSetup->CreateHaptic();
 #else
 		mpHaptic = NULL;
 #endif
 
+		Log(" Creating script module\n");
+		mpScript = mpGameSetup->CreateScript(mpResources);
 
 		Log(" Creating scene module\n");
 		mpScene = mpGameSetup->CreateScene(mpGraphics, mpResources, mpSound,mpPhysics,mpSystem,mpAI,mpHaptic);
@@ -212,7 +214,7 @@ namespace hpl {
 
 
 		//Init the resources
-		mpResources->Init(mpGraphics,mpSystem, mpSound,mpScene);
+		mpResources->Init(mpGraphics, mpSystem, mpSound, mpScript, mpScene);
 
 		//Init the graphics
 		mpGraphics->Init(aVars.GetInt("ScreenWidth",800),
@@ -261,6 +263,7 @@ namespace hpl {
 		mpUpdater->AddGlobalUpdate(mpAI);
 		mpUpdater->AddGlobalUpdate(mpResources);
 		if(mpHaptic) mpUpdater->AddGlobalUpdate(mpHaptic);
+		mpUpdater->AddGlobalUpdate(mpScript);
 
 		//Setup the "default" updater container
 		mpUpdater->AddContainer("Default");
@@ -271,7 +274,7 @@ namespace hpl {
 
 		//Init some standard script funcs
 		Log(" Initializing script functions\n");
-		cScriptFuncs::Init(mpGraphics,mpResources,mpSystem,mpInput,mpScene,mpSound,this);
+		RegisterCoreFunctions(mpScript,mpGraphics,mpResources,mpSystem,mpInput,mpScene,mpSound,this);
 
 		//Since game is not done:
 		mbGameIsDone=false;
@@ -544,6 +547,13 @@ namespace hpl {
 	cHaptic* cGame::GetHaptic()
 	{
 		return mpHaptic;
+	}
+
+	//-----------------------------------------------------------------------
+
+	cScript* cGame::GetScript()
+	{
+		return mpScript;
 	}
 
 	//-----------------------------------------------------------------------

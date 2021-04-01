@@ -24,7 +24,6 @@
 #include "system/String.h"
 #include "system/LogicTimer.h"
 #include "system/LowLevelSystem.h"
-#include "system/Script.h"
 #include "system/SerializeClass.h"
 #include "system/Container.h"
 
@@ -42,7 +41,6 @@
 #include "game/Updater.h"
 #include "game/LowLevelGameSetup.h"
 #include "game/Updateable.h"
-#include "game/ScriptFuncs.h"
 #include "game/SaveGame.h"
 
 #include "graphics/Graphics.h"
@@ -145,6 +143,10 @@
 #include "ai/AINodeContainer.h"
 #include "ai/AINodeGenerator.h"
 #include "ai/StateMachine.h"
+
+#include "script/ScriptVar.h"
+#include "script/Script.h"
+#include "script/ScriptFuncs.h" // sigh, this is only for cScriptJointCallback
 
 #include "haptic/Haptic.h"
 #include "haptic/LowLevelHaptic.h"

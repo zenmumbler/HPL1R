@@ -20,17 +20,18 @@
 #define HPL_SCRIPT_MANAGER_H
 
 #include "resources/ResourceManager.h"
+#include "script/Script.h"
 
 namespace hpl {
 
 	class cSystem;
 	class cResources;
-	class iScript;
+	class cScriptModule;
 
 	class cScriptManager : public iResourceManager
 	{
 	public:
-		cScriptManager(cSystem* apSystem,cResources *apResources);
+		cScriptManager(cScript* apScript, cResources *apResources);
 		~cScriptManager();
 
 		iResourceBase* Create(const tString& asName);
@@ -39,12 +40,12 @@ namespace hpl {
 		 * \param asName name of the script.
 		 * \return
 		 */
-		iScript* CreateScript(const tString& asName);
+		cScriptModule* CreateScript(const tString& asName);
 
 		void Destroy(iResourceBase* apResource);
 
 	private:
-		cSystem* mpSystem;
+		cScript* mpScript;
 		cResources *mpResources;
 	};
 
