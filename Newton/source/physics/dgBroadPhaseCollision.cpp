@@ -1442,7 +1442,7 @@ dgUnsigned32 dgBroadPhaseCollision::UpdateContactsBroadPhaseBegin(
 
       bodyArray[cellsBodyCount] = body;
       cellsBodyCount++;
-      if (cellsBodyCount >= dgInt32((sizeof(cellArray) / sizeof(dgBody*))))
+      if (cellsBodyCount >= dgInt32((sizeof(cellArray) / sizeof(dgCellPair))))
       {
 
         if (threadCounts > 1)
