@@ -280,32 +280,32 @@ namespace hpl {
 
 		////////////////////////////////
 		//Iterate all contacts
-		void* pContact = NewtonContactJointGetFirstContact (apContactJoint);
-		for(; pContact != NULL; pContact = NewtonContactJointGetNextContact (apContactJoint, pContact))
+		void* pContact = NewtonContactJointGetFirstContact(apContactJoint);
+		for (; pContact != NULL; pContact = NewtonContactJointGetNextContact(apContactJoint, pContact))
 		{
-			NewtonMaterial* pMaterial =  NewtonContactGetMaterial (pContact);
+			NewtonMaterial* pMaterial = NewtonContactGetMaterial(pContact);
 			
 			//Log(" Process contact between body '%s' and '%s'.\n",pContactBody1->GetName().c_str(),
 			//													pContactBody2->GetName().c_str());
 
 			//Normal speed
 			float fNormSpeed = NewtonMaterialGetContactNormalSpeed(pMaterial);
-			if(contactData.mfMaxContactNormalSpeed < fNormSpeed) contactData.mfMaxContactNormalSpeed = fNormSpeed;
+			if (contactData.mfMaxContactNormalSpeed < fNormSpeed) contactData.mfMaxContactNormalSpeed = fNormSpeed;
 
 			//Tangent speed
-			float fTanSpeed0 = NewtonMaterialGetContactTangentSpeed(pMaterial,0);
-			float fTanSpeed1 = NewtonMaterialGetContactTangentSpeed(pMaterial,1);
+			float fTanSpeed0 = NewtonMaterialGetContactTangentSpeed(pMaterial, 0);
+			float fTanSpeed1 = NewtonMaterialGetContactTangentSpeed(pMaterial, 1);
 			if(std::abs(contactData.mfMaxContactTangentSpeed) < std::abs(fTanSpeed0)) contactData.mfMaxContactTangentSpeed = fTanSpeed0;
 			if(std::abs(contactData.mfMaxContactTangentSpeed) < std::abs(fTanSpeed1)) contactData.mfMaxContactTangentSpeed = fTanSpeed1;
 
 			//Force
 			cVector3f vForce;
-			NewtonMaterialGetContactForce(pMaterial,vForce.v);
+			NewtonMaterialGetContactForce(pMaterial, pBody0, vForce.v);
 			contactData.mvForce += vForce;
 
 			//Position and normal
 			cVector3f vPos, vNormal;
-			NewtonMaterialGetContactPositionAndNormal(pMaterial,vPos.v, vNormal.v);
+			NewtonMaterialGetContactPositionAndNormal(pMaterial, pBody0, vPos.v, vNormal.v);
 			contactData.mvContactNormal += vNormal;
 			contactData.mvContactPosition += vPos;
 
@@ -319,7 +319,7 @@ namespace hpl {
 
 				cCollidePoint collidePoint;
 				collidePoint.mfDepth = 1;
-				NewtonMaterialGetContactPositionAndNormal (pMaterial, collidePoint.mvPoint.v, collidePoint.mvNormal.v);
+				NewtonMaterialGetContactPositionAndNormal(pMaterial, pBody0, collidePoint.mvPoint.v, collidePoint.mvNormal.v);
 
 				pContactBody1->GetWorld()->GetContactPoints()->push_back(collidePoint);
 
