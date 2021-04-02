@@ -29,7 +29,7 @@
 #include "impl/LowLevelSystemSDL.h"
 #include "impl/LowLevelInputSDL.h"
 #include "impl/LowLevelSoundOAL.h"
-#include "impl/LowLevelPhysicsNewton.h"
+#include "physics/impl/LowLevelPhysicsNewton.h"
 #ifdef INCLUDE_HAPTIC
 #include "impl/LowLevelHapticSDL.h"
 #include "haptic/Haptic.h"

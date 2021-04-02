@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "impl/PhysicsJointScrewNewton.h"
+#include "physics/impl/PhysicsJointScrewNewton.h"
 
-#include "impl/PhysicsBodyNewton.h"
-#include "impl/PhysicsWorldNewton.h"
+#include "physics/impl/PhysicsBodyNewton.h"
+#include "physics/impl/PhysicsWorldNewton.h"
 
 namespace hpl {
 

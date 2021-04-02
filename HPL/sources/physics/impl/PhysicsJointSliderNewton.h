@@ -20,7 +20,7 @@
 #define HPL_PHYSICS_JOINT_SLIDER_NEWTON_H
 
 #include "physics/PhysicsJointSlider.h"
-#include "impl/PhysicsJointNewton.h"
+#include "physics/impl/PhysicsJointNewton.h"
 
 namespace hpl {
 

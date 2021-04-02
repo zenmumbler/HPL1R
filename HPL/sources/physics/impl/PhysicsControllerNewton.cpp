@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "impl/PhysicsControllerNewton.h"
+#include "physics/impl/PhysicsControllerNewton.h"
 
 #include "physics/PhysicsWorld.h"
 #include "physics/PhysicsBody.h"

@@ -16,10 +16,11 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "impl/CharacterBodyNewton.h"
+#pragma comment(lib, "newton.lib")
 
-#include "physics/CollideShape.h"
-#include "physics/PhysicsWorld.h"
+#include "physics/impl/LowLevelPhysicsNewton.h"
+
+#include "physics/impl/PhysicsWorldNewton.h"
 #include "system/LowLevelSystem.h"
 
 namespace hpl {
@@ -30,25 +31,32 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cCharacterBodyNewton::cCharacterBodyNewton(const tString &asName,iPhysicsWorld *apWorld, const cVector3f avSize)
-		: iCharacterBody(asName,apWorld, avSize)
+	cLowLevelPhysicsNewton::cLowLevelPhysicsNewton()
 	{
+
 	}
 
 	//-----------------------------------------------------------------------
 
-	cCharacterBodyNewton::~cCharacterBodyNewton()
+	cLowLevelPhysicsNewton::~cLowLevelPhysicsNewton()
 	{
+
 	}
 
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////
-	// PUBLIC METHODS
+	// PUBLIC METHOD
 	//////////////////////////////////////////////////////////////////////////
 
 	//-----------------------------------------------------------------------
 
+
+	iPhysicsWorld* cLowLevelPhysicsNewton::CreateWorld()
+	{
+		cPhysicsWorldNewton* pWorld = hplNew( cPhysicsWorldNewton, () );
+		return pWorld;
+	}
 
 	//-----------------------------------------------------------------------
 

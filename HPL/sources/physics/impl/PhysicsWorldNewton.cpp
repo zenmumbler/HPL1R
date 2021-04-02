@@ -16,19 +16,19 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "impl/PhysicsWorldNewton.h"
+#include "physics/impl/PhysicsWorldNewton.h"
 
-#include "impl/CollideShapeNewton.h"
-#include "impl/PhysicsBodyNewton.h"
-#include "impl/PhysicsMaterialNewton.h"
-#include "impl/CharacterBodyNewton.h"
+#include "physics/impl/CollideShapeNewton.h"
+#include "physics/impl/PhysicsBodyNewton.h"
+#include "physics/impl/PhysicsMaterialNewton.h"
+#include "physics/impl/CharacterBodyNewton.h"
 
-#include "impl/PhysicsJointBallNewton.h"
-#include "impl/PhysicsJointHingeNewton.h"
-#include "impl/PhysicsJointScrewNewton.h"
-#include "impl/PhysicsJointSliderNewton.h"
+#include "physics/impl/PhysicsJointBallNewton.h"
+#include "physics/impl/PhysicsJointHingeNewton.h"
+#include "physics/impl/PhysicsJointScrewNewton.h"
+#include "physics/impl/PhysicsJointSliderNewton.h"
 
-#include "impl/PhysicsControllerNewton.h"
+#include "physics/impl/PhysicsControllerNewton.h"
 
 #include "scene/World3D.h"
 #include "scene/PortalContainer.h"

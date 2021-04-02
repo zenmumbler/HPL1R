@@ -16,25 +16,23 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef HPL_PHYSICS_JOINT_SCREW_NEWTON_H
-#define HPL_PHYSICS_JOINT_SCREW_NEWTON_H
+#ifndef HPL_PHYSICS_JOINT_BALL_NEWTON_H
+#define HPL_PHYSICS_JOINT_BALL_NEWTON_H
 
-#include "physics/PhysicsJointScrew.h"
-#include "impl/PhysicsJointNewton.h"
+#include "physics/PhysicsJointBall.h"
+#include "physics/impl/PhysicsJointNewton.h"
 
 namespace hpl {
 
-	class cPhysicsJointScrewNewton : public iPhysicsJointNewton<iPhysicsJointScrew>
+	class cPhysicsJointBallNewton : public iPhysicsJointNewton<iPhysicsJointBall>
 	{
 	public:
-		cPhysicsJointScrewNewton(const tString &asName, iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
-			iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f avPinDir);
-		~cPhysicsJointScrewNewton();
+		cPhysicsJointBallNewton(const tString &asName, iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
+			iPhysicsWorld *apWorld, const cVector3f &avPivotPoint);
+		~cPhysicsJointBallNewton();
 
-		void SetMaxDistance(float afX);
-		void SetMinDistance(float afX);
-		float GetMaxDistance();
-		float GetMinDistance();
+		void SetConeLimits(const cVector3f& avPin, float afMaxConeAngle, float afMaxTwistAngle);
+		cVector3f GetAngles();
 
 		cVector3f GetVelocity();
 		cVector3f GetAngularVelocity();
@@ -44,7 +42,6 @@ namespace hpl {
 		float GetAngle();
 
 	private:
-		static unsigned LimitCallback(const NewtonJoint* pSlider, NewtonHingeSliderUpdateDesc* pDesc);
 	};
 };
-#endif // HPL_PHYSICS_JOINT_SCREW_NEWTON_H
+#endif // HPL_PHYSICS_JOINT_BALL_NEWTON_H

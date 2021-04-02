@@ -689,9 +689,39 @@
 		8E3A729826165A160086F8ED /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8E3A729C26165A160086F8ED /* libnewton_d.a */,
+				8E3A729C26165A160086F8ED /* libnewton.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8E3A7417261767950086F8ED /* impl */ = {
+			isa = PBXGroup;
+			children = (
+				DBF849880AC76D5800BB15CD /* CharacterBodyNewton.cpp */,
+				DB27F0630ACB9AB90054ACA3 /* CharacterBodyNewton.h */,
+				DBF849890AC76D5800BB15CD /* CollideShapeNewton.cpp */,
+				DB27F0640ACB9AB90054ACA3 /* CollideShapeNewton.h */,
+				DBF849900AC76D5800BB15CD /* LowLevelPhysicsNewton.cpp */,
+				DB27F06A0ACB9AB90054ACA3 /* LowLevelPhysicsNewton.h */,
+				DBF8499B0AC76D5800BB15CD /* PhysicsBodyNewton.cpp */,
+				DB27F0740ACB9AB90054ACA3 /* PhysicsBodyNewton.h */,
+				DBF8499C0AC76D5800BB15CD /* PhysicsControllerNewton.cpp */,
+				DB27F0750ACB9AB90054ACA3 /* PhysicsControllerNewton.h */,
+				DBF8499D0AC76D5800BB15CD /* PhysicsJointBallNewton.cpp */,
+				DB27F0760ACB9AB90054ACA3 /* PhysicsJointBallNewton.h */,
+				DBF8499E0AC76D5800BB15CD /* PhysicsJointHingeNewton.cpp */,
+				DB27F0770ACB9AB90054ACA3 /* PhysicsJointHingeNewton.h */,
+				DB27F0780ACB9AB90054ACA3 /* PhysicsJointNewton.h */,
+				DBF8499F0AC76D5800BB15CD /* PhysicsJointScrewNewton.cpp */,
+				DB27F0790ACB9AB90054ACA3 /* PhysicsJointScrewNewton.h */,
+				DBF849A00AC76D5800BB15CD /* PhysicsJointSliderNewton.cpp */,
+				DB27F07A0ACB9AB90054ACA3 /* PhysicsJointSliderNewton.h */,
+				DBF849A10AC76D5800BB15CD /* PhysicsMaterialNewton.cpp */,
+				DB27F07B0ACB9AB90054ACA3 /* PhysicsMaterialNewton.h */,
+				DBF849A20AC76D5800BB15CD /* PhysicsWorldNewton.cpp */,
+				DB27F07C0ACB9AB90054ACA3 /* PhysicsWorldNewton.h */,
+			);
+			path = impl;
 			sourceTree = "<group>";
 		};
 		8EA486F7260FF779000D1AB7 /* Products */ = {
@@ -923,10 +953,6 @@
 			children = (
 				DBF849870AC76D5800BB15CD /* CGProgram.cpp */,
 				DB27F0620ACB9AB90054ACA3 /* CGProgram.h */,
-				DBF849880AC76D5800BB15CD /* CharacterBodyNewton.cpp */,
-				DB27F0630ACB9AB90054ACA3 /* CharacterBodyNewton.h */,
-				DBF849890AC76D5800BB15CD /* CollideShapeNewton.cpp */,
-				DB27F0640ACB9AB90054ACA3 /* CollideShapeNewton.h */,
 				8E815947260C1127001CBF63 /* GLSLProgram.cpp */,
 				8E815946260C1036001CBF63 /* GLSLProgram.h */,
 				DBF8498D0AC76D5800BB15CD /* KeyboardSDL.cpp */,
@@ -935,8 +961,6 @@
 				DB27F0680ACB9AB90054ACA3 /* LowLevelGraphicsSDL.h */,
 				DBF8498F0AC76D5800BB15CD /* LowLevelInputSDL.cpp */,
 				DB27F0690ACB9AB90054ACA3 /* LowLevelInputSDL.h */,
-				DBF849900AC76D5800BB15CD /* LowLevelPhysicsNewton.cpp */,
-				DB27F06A0ACB9AB90054ACA3 /* LowLevelPhysicsNewton.h */,
 				DBF849910AC76D5800BB15CD /* LowLevelResourcesSDL.cpp */,
 				DB27F06B0ACB9AB90054ACA3 /* LowLevelResourcesSDL.h */,
 				8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */,
@@ -960,23 +984,6 @@
 				DB27F0720ACB9AB90054ACA3 /* OcclusionQueryOGL.h */,
 				DB4AFB8C0D70768B00809E03 /* OpenALSoundEnvironment.cpp */,
 				DB4AFBF10D70776800809E03 /* OpenALSoundEnvironment.h */,
-				DBF8499B0AC76D5800BB15CD /* PhysicsBodyNewton.cpp */,
-				DB27F0740ACB9AB90054ACA3 /* PhysicsBodyNewton.h */,
-				DBF8499C0AC76D5800BB15CD /* PhysicsControllerNewton.cpp */,
-				DB27F0750ACB9AB90054ACA3 /* PhysicsControllerNewton.h */,
-				DBF8499D0AC76D5800BB15CD /* PhysicsJointBallNewton.cpp */,
-				DB27F0760ACB9AB90054ACA3 /* PhysicsJointBallNewton.h */,
-				DBF8499E0AC76D5800BB15CD /* PhysicsJointHingeNewton.cpp */,
-				DB27F0770ACB9AB90054ACA3 /* PhysicsJointHingeNewton.h */,
-				DB27F0780ACB9AB90054ACA3 /* PhysicsJointNewton.h */,
-				DBF8499F0AC76D5800BB15CD /* PhysicsJointScrewNewton.cpp */,
-				DB27F0790ACB9AB90054ACA3 /* PhysicsJointScrewNewton.h */,
-				DBF849A00AC76D5800BB15CD /* PhysicsJointSliderNewton.cpp */,
-				DB27F07A0ACB9AB90054ACA3 /* PhysicsJointSliderNewton.h */,
-				DBF849A10AC76D5800BB15CD /* PhysicsMaterialNewton.cpp */,
-				DB27F07B0ACB9AB90054ACA3 /* PhysicsMaterialNewton.h */,
-				DBF849A20AC76D5800BB15CD /* PhysicsWorldNewton.cpp */,
-				DB27F07C0ACB9AB90054ACA3 /* PhysicsWorldNewton.h */,
 				DBF849A30AC76D5800BB15CD /* platform */,
 				DB27F07D0ACB9AB90054ACA3 /* Platform.h */,
 				DBF849A60AC76D5800BB15CD /* SDLBitmap2D.cpp */,
@@ -1083,6 +1090,7 @@
 		DBF849C50AC76D5800BB15CD /* physics */ = {
 			isa = PBXGroup;
 			children = (
+				8E3A7417261767950086F8ED /* impl */,
 				DBF849C70AC76D5800BB15CD /* CharacterBody.cpp */,
 				DB27F0A20ACB9AB90054ACA3 /* CharacterBody.h */,
 				DB27F0A30ACB9AB90054ACA3 /* CollideData.h */,
@@ -1323,7 +1331,7 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		8E3A729C26165A160086F8ED /* libnewton_d.a */ = {
+		8E3A729C26165A160086F8ED /* libnewton.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libnewton.a;
