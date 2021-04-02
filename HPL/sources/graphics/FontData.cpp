@@ -190,12 +190,12 @@ namespace hpl {
 			first_letter=0;
 			unsigned int i=0;
 
-			for(tUIntListIt it = RowLengthList.begin();it != RowLengthList.end();++it)
+			for (unsigned int rowLen : RowLengthList)
 			{
 				Draw(cVector3f(avPos.x,avPos.y + i*afFontHeight,avPos.z),avSize,aCol,aAlign,
-								_W("%ls"),asString.substr(first_letter,*it-first_letter).c_str());
+								_W("%ls"),asString.substr(first_letter, rowLen - first_letter).c_str());
 				i++;
-				first_letter = *it+1;
+				first_letter = rowLen + 1;
 			}
 			Draw(cVector3f(avPos.x,avPos.y + i*afFontHeight,avPos.z),avSize,aCol,aAlign,
 				_W("%ls"),asString.substr(first_letter).c_str());
@@ -267,14 +267,14 @@ namespace hpl {
 		}
 		else
 		{
-			first_letter=0;
-			unsigned int i=0;
+			first_letter = 0;
+			unsigned int i = 0;
 
-			for(tUIntListIt it = RowLengthList.begin();it != RowLengthList.end();++it)
+			for (unsigned int rowLen : RowLengthList)
 			{
-				apRowVec->push_back(asString.substr(first_letter,*it-first_letter).c_str());
+				apRowVec->push_back(asString.substr(first_letter, rowLen - first_letter).c_str());
 				i++;
-				first_letter = *it+1;
+				first_letter = rowLen + 1;
 			}
 			apRowVec->push_back(asString.substr(first_letter).c_str());
 

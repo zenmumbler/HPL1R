@@ -174,7 +174,7 @@ namespace hpl {
 		 */
 		bool CheckColliderShapeCollision(iPhysicsWorld *apWorld,
 										iCollideShape *apShape, const cMatrixf &a_mtxShape,
-										tVector3fList *apPosList, tIntList *apNumList);
+										tVector3fList *apPosList, tIntVec *apNumVec);
 
 		void ResetGraphicsUpdated();
 

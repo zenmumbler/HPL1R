@@ -1140,7 +1140,7 @@ namespace hpl {
 
 	bool cMeshEntity::CheckColliderShapeCollision(iPhysicsWorld *apWorld,
 						iCollideShape *apShape, const cMatrixf &a_mtxShape,
-						tVector3fList *apPosList, tIntList *apNumList)
+						tVector3fList *apPosList, tIntVec *apNumVec)
 	{
 		bool bCollision = false;
 		cCollideData collideData;
@@ -1163,10 +1163,10 @@ namespace hpl {
 			if(bRet)
 			{
 				bCollision = true;
-				if(!apPosList && !apNumList) break;
+				if(!apPosList && !apNumVec) break;
 
-				if(apPosList) apPosList->push_back(collideData.mvContactPoints[0].mvPoint);
-				if(apNumList) apNumList->push_back((int)i);
+				if (apPosList) apPosList->push_back(collideData.mvContactPoints[0].mvPoint);
+				if (apNumVec) apNumVec->push_back((int)i);
 			}
 		}
 

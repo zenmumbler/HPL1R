@@ -193,9 +193,9 @@ namespace hpl {
 			tString sPath="";
 			for(int i=0;i <6 ;i++)
 			{
-				for(tStringListIt it = mlstFileFormats.begin();it!=mlstFileFormats.end();++it)
+				for(const tString& sExt : mlstFileFormats)
 				{
-					tString sNewName = sName + mvCubeSideSuffixes[i] + "." + *it;
+					tString sNewName = sName + mvCubeSideSuffixes[i] + "." + sExt;
 					sPath = mpFileSearcher->GetFilePath(sNewName);
 
 					if(sPath!="")break;
@@ -307,11 +307,11 @@ namespace hpl {
 		}
 		else
 		{
-			for(tStringListIt it =mlstFileFormats.begin(); it != mlstFileFormats.end(); ++it)
+			for(const tString& sExt : mlstFileFormats)
 			{
-				tString sFileName = cString::SetFileExt(asFallOffName,*it);
+				tString sFileName = cString::SetFileExt(asFallOffName, sExt);
 				sPath = mpFileSearcher->GetFilePath(sFileName);
-				if(sPath!="")break;
+				if (sPath!="") break;
 			}
 		}
 		if(sPath == "")
@@ -441,9 +441,9 @@ namespace hpl {
 
 		if(cString::GetFileExt(asName)=="")
 		{
-			for(tStringListIt it = mlstFileFormats.begin();it!=mlstFileFormats.end();++it)
+			for (const tString& sExt : mlstFileFormats)
 			{
-				tString sNewName = cString::SetFileExt(asName,*it);
+				tString sNewName = cString::SetFileExt(asName, sExt);
 				pTexture = static_cast<iTexture*> (FindLoadedResource(sNewName, asFilePath));
 
 				if((pTexture==NULL && asFilePath!="") || pTexture!=NULL)break;

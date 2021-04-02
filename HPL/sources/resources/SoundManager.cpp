@@ -144,9 +144,9 @@ namespace hpl {
 
 		if(cString::GetFileExt(asName)=="")
 		{
-			for(tStringListIt it = mlstFileFormats.begin();it!=mlstFileFormats.end();++it)
+			for(const tString& sExt : mlstFileFormats)
 			{
-				tString sNewName = cString::SetFileExt(asName,*it);
+				tString sNewName = cString::SetFileExt(asName, sExt);
 				pData = static_cast<iSoundData*> (FindLoadedResource(sNewName, asFilePath));
 
 				if((pData==NULL && asFilePath!="") || pData!=NULL)break;

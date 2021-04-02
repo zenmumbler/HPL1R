@@ -1732,7 +1732,7 @@ void cPlayer::OnDraw()
 	/*tString sPortals = "Portals: ";
 	cPortalContainer *pContainer = mpInit->mpGame->GetScene()->GetWorld3D()->GetPortalContainer();
     tStringList* pStringList = pContainer->GetVisibleSectorsList();
-	for(tStringListIt it=pStringList->begin(); it != pStringList->end(); ++it)
+	for (const tString& sPortal : *pStringList)
 	{
 		sPortals += *it + ", ";
 	}

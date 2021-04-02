@@ -484,11 +484,10 @@ void cSaveHandler::SaveGameToFile(const tWString& asFile)
 	//Save loaded maps in Scene
 	mpSavedGame->mvSceneLoadedMap.Clear();
 	tStringSet* pStringSet = mpInit->mpGame->GetScene()->GetLoadedMapsSet();
-	tStringSetIt it = pStringSet->begin();
-	for(; it != pStringSet->end(); ++it)
+	for (const tString& name : *pStringSet)
 	{
 		cSceneLoadedMap_GlobalSave loadedMap;
-		loadedMap.msName = *it;
+		loadedMap.msName = name;
 		mpSavedGame->mvSceneLoadedMap.Add(loadedMap);
 	}
 	
@@ -733,13 +732,12 @@ void cSaveHandler::DeleteOldestIfMax(const tWString &asDir,const tWString &asMas
 		tWString sOldest = _W("");
 		cDate oldestDate;
 
-		tWStringListIt it = lstFiles.begin();
-		for(; it != lstFiles.end(); ++it)
+		for (const tWString& sFile : lstFiles)
 		{
-			cDate date = FileModifiedDate(sPath + _W("/") +*it);
+			cDate date = FileModifiedDate(sPath + _W("/") + sFile);
 			if(sOldest == _W("") || oldestDate > date)
 			{
-				sOldest = *it;
+				sOldest = sFile;
 				oldestDate = date;
 			}
 		}
@@ -763,14 +761,12 @@ tWString cSaveHandler::GetLatest(const tWString &asDir,const tWString &asMask)
 	tWString sNewest = _W("");
 	cDate newestDate;
 
-	tWStringListIt it = lstFiles.begin();
-	for(; it != lstFiles.end(); ++it)
+	for (const tWString& sFile : lstFiles)
 	{
-		tWString sFile = *it;
-		cDate date = FileModifiedDate(sPath + _W("/") +*it);
+		cDate date = FileModifiedDate(sPath + _W("/") + sFile);
 		if(sNewest == _W("") || newestDate < date)
 		{
-			sNewest = *it;
+			sNewest = sFile;
 			newestDate = date;
 		}
 	}

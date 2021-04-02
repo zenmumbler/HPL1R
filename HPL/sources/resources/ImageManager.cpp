@@ -279,9 +279,9 @@ namespace hpl {
 
 		if(cString::GetFileExt(asName)=="")
 		{
-			for(tStringListIt it = mlstFileFormats.begin();it!=mlstFileFormats.end();++it)
+			for (const tString& sExt : mlstFileFormats)
 			{
-				tString sNewName = cString::SetFileExt(asName,*it);
+				tString sNewName = cString::SetFileExt(asName, sExt);
 				pImage = static_cast<cResourceImage*> (FindLoadedResource(sNewName, asFilePath));
 
 				if((pImage==NULL && asFilePath!="") || pImage!=NULL)break;

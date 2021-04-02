@@ -324,9 +324,9 @@ namespace hpl {
 
 		////////////////////////////
 		//Add to loaded maps
+		
 		tString sName = cString::ToLowerCase(cString::SetFileExt(asFile,""));
-		tStringSetIt it = m_setLoadedMaps.find(sName);
-		if(it == m_setLoadedMaps.end())
+		if (m_setLoadedMaps.find(sName) == m_setLoadedMaps.end()) // when in cpp20 use .contains
 		{
 			m_setLoadedMaps.insert(sName);
 		}
@@ -385,12 +385,7 @@ namespace hpl {
 	bool cScene::HasLoadedWorld(const tString &asFile)
 	{
 		tString sName = cString::ToLowerCase(cString::SetFileExt(asFile,""));
-		tStringSetIt it = m_setLoadedMaps.find(sName);
-
-		if(it == m_setLoadedMaps.end())
-			return false;
-		else
-			return true;
+		return m_setLoadedMaps.find(sName) != m_setLoadedMaps.end();
 	}
 
 	//-----------------------------------------------------------------------

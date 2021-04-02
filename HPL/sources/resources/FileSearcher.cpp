@@ -57,18 +57,18 @@ namespace hpl {
 		//Make the path with only "/" and lower case.
 		asPath = cString::ToLowerCase(cString::ReplaceCharTo(asPath,"\\","/"));
 
-		tStringSetIt it = m_setLoadedDirs.find(asPath);
+		auto it = m_setLoadedDirs.find(asPath);
 		//If the path is not allready added, add it!
-		if(it == m_setLoadedDirs.end())
+		if (it == m_setLoadedDirs.end())
 		{
 			m_setLoadedDirs.insert(asPath);
 
 			mpLowLevelResources->FindFilesInDir(lstFileNames,cString::To16Char(asPath),
 												cString::To16Char(asMask));
 
-			for(tWStringListIt it = lstFileNames.begin();it!=lstFileNames.end();it++)
+			for(const tWString& sExt : lstFileNames)
 			{
-				tString sFile = cString::To8Char(*it);
+				tString sFile = cString::To8Char(sExt);
 				tString sFileAllLower = cString::ToLowerCase(sFile);
 				tString sFilePath = cString::SetFilePath(sFile, asPath);
 				

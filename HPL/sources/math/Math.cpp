@@ -1569,11 +1569,10 @@ namespace hpl {
 			cVertexIndices &Data = VtxIt->second;
 
 			//Iterate the indices and create edges.
-			tUIntListIt it = Data.mlstIndices.begin();
-			for(; it != Data.mlstIndices.end(); ++it)
+			for (unsigned int index : Data.mlstIndices)
 			{
-				int lTriIdx = ((*it)/3)*3;
-				unsigned int lVtx = apIndexArray[*it]; //The num of the vertex this index reference to.
+				int lTriIdx = (index / 3) * 3;
+				unsigned int lVtx = apIndexArray[index]; //The num of the vertex this index reference to.
 
 				//Create edges
 				cTriEdge edge1,edge2;
@@ -1581,7 +1580,7 @@ namespace hpl {
 				edge1.tri1 = lTriIdx/3;	edge2.tri1 = lTriIdx/3;
 
 				//Get the index the vertex has in the tri (0 -2)
-				int lIdxInTri = (*it) % 3;
+				int lIdxInTri = index % 3;
 				//Log("Idx in tri: %d\n",lIdxInTri);
 
 				//Get the end points of the edge.
@@ -1663,225 +1662,6 @@ namespace hpl {
 
 		return true;
 	}
-
-	/*bool cMath::CreateEdges(tTriEdgeVec &avEdges,
-							const unsigned int* apIndexArray,int alIndexNum,
-							const float* apVertexArray, int alVtxStride,int alVertexNum,
-							bool *apIsDoubleSided)
-	{
-		const bool bLog= false;
-
-		//Setup
-		*apIsDoubleSided = false;
-
-		////////////////////////////////////////////////////////////////////////
-		//For each vertex check what triangles reference it and make edges to the
-		//vertices in that triangle.
-		for(int vtx=0; vtx < alVertexNum; vtx++)
-		{
-			if(bLog)Log("Checking vtx: %d\n",vtx);
-			int lCount=0; //The number of times the vertex is referred to.
-			tUIntList mlstIndices;
-			for(int idx=0; idx < alIndexNum; idx++)
-			{
-				if(Vector3Equal(apVertexArray,vtx, apVertexArray, apIndexArray[idx],alVtxStride))
-				{
-					lCount++;
-					mlstIndices.push_back(idx);
-				}
-			}
-			if(lCount==0){
-				Warning("Found unreferenced vertex when building edges!\n");
-			}
-			else
-			{
-				///////////////////////////////////////////
-				//Create the edges
-				//Log("Vertex has %d references!\n",lCount);
-				tUIntListIt it = mlstIndices.begin();
-				for(; it != mlstIndices.end(); ++it)
-				{
-					//Get the triangle start index.
-					int lTriIdx = ((*it)/3)*3;
-
-					//if(bLog)Log("Tri index: %d!\n",lTriIdx);
-					//Create edges
-					cTriEdge edge1,edge2;
-					edge1.point1 = vtx;
-					edge2.point1 = vtx;
-					edge1.tri1 = lTriIdx/3;
-					edge2.tri1 = lTriIdx/3;
-
-					//Get the index the vertex has in the tri (0 -2)
-					int lIdxInTri = (*it) % 3;
-					//Log("Idx in tri: %d\n",lIdxInTri);
-
-					//Get the end points of the edge.
-					int lPoint1 = lIdxInTri+1;
-					if(lPoint1>2) lPoint1 =0;
-					int lPoint2 = lIdxInTri-1;
-					if(lPoint2<0) lPoint2 =2;
-
-					//if(bLog)Log("P1: %d P2: %d!\n",apIndexArray[lTriIdx +lPoint1],
-					//							apIndexArray[lTriIdx +lPoint2]);
-
-					//Set the end points.
-					edge1.point2 = apIndexArray[lTriIdx + lPoint1];
-					edge2.point2 = apIndexArray[lTriIdx + lPoint2];
-
-					avEdges.push_back(edge1);
-					avEdges.push_back(edge2);
-				}
-			}
-		}
-
-		////////////////////////////////////////////////////////////////////////
-		//Check for triangles that share the same edge. Pair these.
-		if(bLog)Log("Looking for shared edges on triangles.\n");
-		tTriEdgeVec vTempEdges;
-
-		//Check for the last element as well incase it has no pair..
-		for(int e1 =0; e1 < (int)avEdges.size(); e1++)
-		{
-			bool bFound = false;
-			cTriEdge edge1 = avEdges[e1];
-
-			if(bLog)Log("Checking p(%d)-p(%d)|(%d)\n",
-				edge1.point1,edge1.point2,
-				edge1.tri1);
-
-			for(int e2 =e1+1; e2 < (int)avEdges.size(); e2++)
-			{
-				cTriEdge edge2 = avEdges[e2];
-
-				//if(bLog)Log("Checking %d to %d\n",e1,e2);
-
-				//Check if the edges has different triangles but the same points.
-				if(edge1.tri1 != edge2.tri1 && EdgePointEqual(apVertexArray,edge1,edge2,alVtxStride))
-				{
-					bFound = true;
-
-					if(bLog)Log("Found a pair: p(%d)-p(%d)|(%d)\n",edge2.point1,edge2.point2,
-														edge2.tri1);
-
-					edge1.tri2 = edge2.tri1;
-					edge1.invert_tri2 = false;
-
-					break;
-				}
-			}
-
-			//If no edge was found it is at a hole.
-			if(bFound == false)
-			{
-				edge1.tri2 = edge1.tri1;
-				edge1.invert_tri2 = true;
-
-				if(bLog) Log("No pair found, at a hole\n");
-			}
-
-			bFound = false;
-
-			//SLOW AS HELL THIS IS...
-			for(size_t i=0; i< vTempEdges.size(); i++)
-			{
-				if(EdgeEqual(apVertexArray,vTempEdges[i],edge1,alVtxStride)){
-					bFound = true;
-					break;
-				}
-
-				//if it is the last edge, don't add it if there is another edge with
-				//the same points and different triangle sides.
-				if(EdgePointEqual(apVertexArray,vTempEdges[i],edge1,alVtxStride) &&
-					vTempEdges[i].tri1 != vTempEdges[i].tri2)
-				{
-					bFound = true;
-					break;
-				}
-			}
-
-			//If not already added, add
-			if(bFound== false){
-
-				//If a face with inverted tri was added, the mesh is double sided.
-				if(edge1.invert_tri2){
-					*apIsDoubleSided = true;
-				}
-
-				vTempEdges.push_back(edge1);
-				if(bLog)Log("Added!\n");
-			}
-			if(bLog)Log("------------\n");
-		}
-
-		////////////////////////////////////////////////////////////////////////
-		//Clear the old list and add the new nice pairs.
-		avEdges.clear();
-		avEdges.reserve(vTempEdges.size());
-
-		//Log("FINAL EDGES:\n");
-		//Create the final edges. This means making sure so that
-		//edge point 1 is before point 2 in triangle 1 and 2 point 2 before
-		//1 in triangle 2.
-		for(size_t edge=0; edge< vTempEdges.size(); edge++)
-		{
-			cTriEdge Edge = vTempEdges[edge];
-			const unsigned int *pTri1 = &apIndexArray[Edge.tri1 * 3];
-			const unsigned int *pTri2 = &apIndexArray[Edge.tri2 * 3];
-
-			if(bLog)Log("Edge %d:\n",edge);
-
-			if(bLog)Log("Tri1: 0:(%.2f %.2f %.2f) 1:(%.2f %.2f %.2f) 2:(%.2f %.2f %.2f)\n",
-						apVertexArray[pTri1[0]*alVtxStride+0],apVertexArray[pTri1[0]*alVtxStride+1],apVertexArray[pTri1[0]*alVtxStride+2],
-						apVertexArray[pTri1[1]*alVtxStride+0],apVertexArray[pTri1[1]*alVtxStride+1],apVertexArray[pTri1[1]*alVtxStride+2],
-						apVertexArray[pTri1[2]*alVtxStride+0],apVertexArray[pTri1[2]*alVtxStride+1],apVertexArray[pTri1[2]*alVtxStride+2]);
-
-			if(bLog)Log("Tri2: 0:(%.2f %.2f %.2f) 1:(%.2f %.2f %.2f) 2:(%.2f %.2f %.2f)\n",
-						apVertexArray[pTri2[0]*alVtxStride+0],apVertexArray[pTri2[0]*alVtxStride+1],apVertexArray[pTri2[0]*alVtxStride+2],
-						apVertexArray[pTri2[1]*alVtxStride+0],apVertexArray[pTri2[1]*alVtxStride+1],apVertexArray[pTri2[1]*alVtxStride+2],
-						apVertexArray[pTri2[2]*alVtxStride+0],apVertexArray[pTri2[2]*alVtxStride+1],apVertexArray[pTri2[2]*alVtxStride+2]);
-
-			if(bLog)Log("Point1: (%.2f %.2f %.2f) Point2: (%.2f %.2f %.2f)\n",
-						apVertexArray[Edge.point1*alVtxStride+0],apVertexArray[Edge.point1*alVtxStride+1],apVertexArray[Edge.point1*alVtxStride+2],
-						apVertexArray[Edge.point2*alVtxStride+0],apVertexArray[Edge.point2*alVtxStride+1],apVertexArray[Edge.point2*alVtxStride+2]);
-
-			//Get position of point1 in triangle
-			int lPoint1InTri=0;
-			for(int i=0; i < 3; i++){
-				if(Vector3Equal(apVertexArray,pTri1[i],apVertexArray, Edge.point1,alVtxStride))
-				{
-					lPoint1InTri = i;
-					break;
-				}
-			}
-			//The next position in the triangle.
-			int lNextInTri = lPoint1InTri +1;
-			if(lNextInTri >=3 ) lNextInTri =0;
-
-			if(bLog)Log("Point in: %d Next: %d\n",lPoint1InTri,lNextInTri);
-
-			//If next point is NOT point 2, then the edge
-			//must be switched.
-			if(Vector3Equal(apVertexArray,pTri1[ lNextInTri],apVertexArray,Edge.point2,alVtxStride))
-			{
-				unsigned int lTemp = Edge.point1;
-				Edge.point1 = Edge.point2;
-				Edge.point2 = lTemp;
-				if(bLog)Log("Switching points\n");
-			}
-
-			if(bLog)Log("%d: p(%d)-p(%d)|(%d)-(%d)\n",edge,
-				Edge.point1,Edge.point2,
-				Edge.tri1, Edge.tri2);
-
-			//Log("-----------\n");
-
-			avEdges.push_back(Edge);
-		}
-
-		return true;
-	}*/
-
 
 	//-----------------------------------------------------------------------
 

@@ -1393,15 +1393,14 @@ public:
 		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
 	{
 		tWStringList lstStrings;
-		apInit->mpGame->GetResources()->GetLowLevel()->FindFilesInDir(lstStrings,_W("config/"),_W("*.lang"));
+		apInit->mpGame->GetResources()->GetLowLevel()->FindFilesInDir(lstStrings, _W("config/"), _W("*.lang"));
 
 		mlCurrentFile =0;
 		int lIdx=0;
-		for(tWStringListIt it = lstStrings.begin(); it != lstStrings.end();++it)
+		for(const tWString& str : lstStrings)
 		{
-			mvFiles.push_back(*it);
-			if(	cString::To16Char(cString::ToLowerCase(apInit->msLanguageFile)) == 
-				cString::ToLowerCaseW(*it))
+			mvFiles.push_back(str);
+			if (cString::To16Char(cString::ToLowerCase(apInit->msLanguageFile)) == cString::ToLowerCaseW(str))
 			{
 				mlCurrentFile = lIdx;
 			}
@@ -3004,10 +3003,8 @@ void cMainMenu::CreateWidgets()
 		tWString sFullPath = mpInit->mpSaveHandler->GetSaveDir() + sDir;
 		pLowLevelResources->FindFilesInDir(lstFiles,sFullPath,_W("*.sav"));
 
-		tWStringListIt fileIt = lstFiles.begin();
-		for(; fileIt != lstFiles.end(); ++fileIt)
+		for (const tWString& sFile : lstFiles)
 		{
-			tWString sFile = *fileIt;
 			cDate date = FileModifiedDate(sFullPath+_W("/")+sFile);
             
 			setTempFiles.insert(cTempFileAndData(sFile,date));

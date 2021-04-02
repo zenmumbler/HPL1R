@@ -183,9 +183,9 @@ namespace hpl {
 			}
 
 			//Go through all and add to set.
-			for(tFloatVecIt it = pValueVec->begin(); it != pValueVec->end(); ++it)
+			for (float val : *pValueVec)
 			{
-				setTempTimes.insert(*it);
+				setTempTimes.insert(val);
 			}
 		}
 
