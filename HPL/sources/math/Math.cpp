@@ -578,25 +578,13 @@ namespace hpl {
 
 	bool cMath::IsPow2(int alX)
 	{
-		switch(alX)
-		{
-		case 0:		return true;
-		case 1:		return true;
-		case 2:		return true;
-		case 4:		return true;
-		case 8:		return true;
-		case 16:	return true;
-		case 32:	return true;
-		case 64:	return true;
-		case 128:	return true;
-		case 256:	return true;
-		case 512:	return true;
-		case 1024:	return true;
-		case 2048:	return true;
-		case 4096:	return true;
-		case 8192:	return true;
-		default: return false;
+		if (alX < 0) {
+			return false;
 		}
+		if (alX == 0) {
+			return true;
+		}
+		return (alX & alX - 1) == 0;
 	}
 
 	//-----------------------------------------------------------------------
