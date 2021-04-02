@@ -773,6 +773,8 @@
 				DB27F07F0ACB9AB90054ACA3 /* SDLFontData.h */,
 				8E9F74EB255317F7000324E8 /* SDLTGAFile.cpp */,
 				8E9F74E8255316E1000324E8 /* SDLTGAFile.h */,
+				DBF9A1F6119A58DB00CCFDC9 /* VideoStreamTheora.cpp */,
+				DBF9A1F7119A58E600CCFDC9 /* VideoStreamTheora.h */,
 			);
 			path = impl;
 			sourceTree = "<group>";
@@ -1035,8 +1037,6 @@
 				DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */,
 				DB27F0800ACB9AB90054ACA3 /* SDLGameSetup.h */,
 				DBF849AE0AC76D5800BB15CD /* tinyXML */,
-				DBF9A1F6119A58DB00CCFDC9 /* VideoStreamTheora.cpp */,
-				DBF9A1F7119A58E600CCFDC9 /* VideoStreamTheora.h */,
 			);
 			name = impl;
 			path = sources/impl;

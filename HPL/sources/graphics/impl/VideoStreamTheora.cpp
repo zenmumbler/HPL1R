@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "impl/VideoStreamTheora.h"
+#include "graphics/impl/VideoStreamTheora.h"
 
 #include "system/LowLevelSystem.h"
 #include "math/Math.h"
