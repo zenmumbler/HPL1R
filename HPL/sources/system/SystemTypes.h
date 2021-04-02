@@ -33,26 +33,6 @@ namespace hpl {
 	///////// TYPES //////////////////////////////////
 	//////////////////////////////////////////////////
 
-	#define eFlagBit_None	(0x00000000)
-	#define eFlagBit_All	(0xFFFFFFFF)
-
-	#define eFlagBit_0		(0x00000001)
-	#define eFlagBit_1		(0x00000002)
-	#define eFlagBit_2		(0x00000004)
-	#define eFlagBit_3		(0x00000008)
-	#define eFlagBit_4		(0x00000010)
-	#define eFlagBit_5		(0x00000020)
-	#define eFlagBit_6		(0x00000040)
-	#define eFlagBit_7		(0x00000080)
-	#define eFlagBit_8		(0x00000100)
-	#define eFlagBit_9		(0x00000200)
-	#define eFlagBit_10		(0x00000400)
-	#define eFlagBit_11		(0x00000800)
-	#define eFlagBit_12		(0x00001000)
-	#define eFlagBit_13		(0x00002000)
-	#define eFlagBit_14		(0x00004000)
-	#define eFlagBit_15		(0x00008000)
-
 	#define _W(t) L ## t
 
 	//--------------------------------------------------------
@@ -95,9 +75,6 @@ namespace hpl {
 	//--------------------------------------------------------
 
 
-	typedef std::vector<unsigned char> tByteVec;
-	typedef tByteVec::iterator tByteVecIt;
-
 	typedef std::vector<unsigned int> tUIntVec;
 	typedef tUIntVec::iterator tUIntVecIt;
 
@@ -109,12 +86,6 @@ namespace hpl {
 
 	typedef std::vector<float> tFloatVec;
 	typedef tFloatVec::iterator tFloatVecIt;
-
-	typedef std::vector<float*> tFloatPtrVec;
-	typedef tFloatPtrVec::iterator tFloatPtrVecIt;
-
-	typedef std::list<float*> tFloatPtrList;
-	typedef tFloatPtrList::iterator tFloatPtrListIt;
 
 	typedef std::list<unsigned int> tUIntList;
 	typedef tUIntList::iterator tUIntListIt;

@@ -32,11 +32,11 @@ namespace hpl {
 
 	//----------------------------------------
 
-	enum eSoundDest
+	enum eSoundDest // bitmask
 	{
-		eSoundDest_World = eFlagBit_0,
-		eSoundDest_Gui = eFlagBit_1,
-		eSoundDest_All = eFlagBit_All
+		eSoundDest_World = 1,
+		eSoundDest_Gui = 2,
+		eSoundDest_All = 3
 	};
 
 	//----------------------------------------
