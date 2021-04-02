@@ -424,8 +424,6 @@
 				DBFBD2690AC8A8A50062EA6B /* Resources */,
 				DBF84A9B0AC76E7E00BB15CD /* Frameworks */,
 				DBF8484C0AC76D1A00BB15CD /* Products */,
-				8E97874E261787E400C4395C /* AngelScript.xcodeproj */,
-				8E978751261787E400C4395C /* Newton.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -451,6 +449,8 @@
 		DBF84A9B0AC76E7E00BB15CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E97874E261787E400C4395C /* AngelScript.xcodeproj */,
+				8E978751261787E400C4395C /* Newton.xcodeproj */,
 				DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */,
 				DBF84A9A0AC76E5E00BB15CD /* dependencies */,
 				DBCEE71E0B4B53550088A7E3 /* OpenAL.framework */,
