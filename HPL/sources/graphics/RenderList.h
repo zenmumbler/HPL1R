@@ -24,6 +24,7 @@
 #include "math/MathTypes.h"
 #include "graphics/GraphicsTypes.h"
 #include "system/SystemTypes.h"
+#include "system/MemoryPool.h"
 #include "scene/Light3D.h"
 #include "graphics/Material.h"
 #include "graphics/OcclusionQuery.h"
