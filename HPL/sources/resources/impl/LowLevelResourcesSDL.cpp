@@ -22,8 +22,6 @@
 
 #include "resources/impl/LowLevelResourcesSDL.h"
 #include "graphics/impl/SDLBitmap2D.h"
-#include "graphics/impl/SDLBMPFile.h"
-#include "graphics/impl/SDLTGAFile.h"
 #include "resources/impl/MeshLoaderMSH.h"
 #include "resources/impl/MeshLoaderCollada.h"
 #ifdef INCLUDE_THEORA
