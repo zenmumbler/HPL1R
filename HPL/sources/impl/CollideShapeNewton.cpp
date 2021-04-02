@@ -65,15 +65,15 @@ namespace hpl {
 												0, pMtx); break;
 
 		case eCollideShapeType_Sphere:		mpNewtonCollision = NewtonCreateSphere(apNewtonWorld,
-												mvSize.x, mvSize.y, mvSize.z,
+												mvSize.x,
 												0, pMtx); break;
 
 		case eCollideShapeType_Cylinder:	mpNewtonCollision = NewtonCreateCylinder(apNewtonWorld,
-												mvSize.x, mvSize.y,
+												mvSize.x, mvSize.x, mvSize.y,
 												0, pMtx); break;
 
 		case eCollideShapeType_Capsule:		mpNewtonCollision = NewtonCreateCapsule(apNewtonWorld,
-												mvSize.x, mvSize.y,
+												mvSize.x, mvSize.x, mvSize.y,
 												0, pMtx); break;
 		}
 
@@ -122,11 +122,12 @@ namespace hpl {
 	cCollideShapeNewton::~cCollideShapeNewton()
 	{
 		//Release Newton Collision
-		if(mpNewtonCollision)
-			NewtonReleaseCollision(mpNewtonWorld,mpNewtonCollision);
+		if (mpNewtonCollision) {
+			NewtonDestroyCollision(mpNewtonCollision);
+		}
 
 		//Release all subshapes (for compound objects)
-		for(int i=0; i < (int)mvSubShapes.size(); i++)
+		for (int i=0; i < (int)mvSubShapes.size(); i++)
 		{
 			mpWorld->DestroyShape(mvSubShapes[i]);
 		}
@@ -235,8 +236,12 @@ namespace hpl {
 			mfVolume += pNewtonShape->GetVolume();
 		}
 
-		mpNewtonCollision = NewtonCreateCompoundCollision(mpNewtonWorld, (int)vNewtonColliders.size(),
-															&vNewtonColliders[0], 0);
+		mpNewtonCollision = NewtonCreateCompoundCollision(mpNewtonWorld, 0);
+		NewtonCompoundCollisionBeginAddRemove(mpNewtonCollision);
+		for (const auto pColl : vNewtonColliders) {
+			NewtonCompoundCollisionBeginAddRemove(pColl);
+		}
+		NewtonCompoundCollisionEndAddRemove(mpNewtonCollision);
 
 		// Create bounding volume
 		cVector3f vFinalMax = avShapes[0]->GetBoundingVolume().GetMax();

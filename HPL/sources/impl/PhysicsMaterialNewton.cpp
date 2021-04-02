@@ -180,11 +180,7 @@ namespace hpl {
 				Combine(frictionMode,mfStaticFriction, pMat->mfStaticFriction),
 				Combine(frictionMode,mfKineticFriction, pMat->mfKineticFriction));
 
-			NewtonMaterialSetContinuousCollisionMode(mpNewtonWorld,mlMaterialId,pMat->mlMaterialId,
-													1);
-
-			NewtonMaterialSetCollisionCallback(mpNewtonWorld,mlMaterialId,pMat->mlMaterialId,
-				(void*)NULL,BeginContactCallback,ProcessContactCallback);
+			NewtonMaterialSetCollisionCallback(mpNewtonWorld, mlMaterialId, pMat->mlMaterialId, nullptr, ProcessContactCallback);
 		}
 	}
 
@@ -213,14 +209,14 @@ namespace hpl {
 	cNewtonLockBodyUntilReturn::cNewtonLockBodyUntilReturn(const NewtonBody* apNewtonBody)
 	{
 		mpNewtonBody = apNewtonBody;
-		NewtonWorldCriticalSectionLock (NewtonBodyGetWorld (mpNewtonBody));
+		NewtonWorldCriticalSectionLock(NewtonBodyGetWorld(mpNewtonBody), 0);
 	}
 	
 	//-----------------------------------------------------------------------
 
 	cNewtonLockBodyUntilReturn::~cNewtonLockBodyUntilReturn()
 	{
-		NewtonWorldCriticalSectionUnlock (NewtonBodyGetWorld (mpNewtonBody));
+		NewtonWorldCriticalSectionUnlock(NewtonBodyGetWorld (mpNewtonBody));
 	}
 
 	//////////////////////////////////////////////////////////////////////////
