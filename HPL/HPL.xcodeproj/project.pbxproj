@@ -17,6 +17,7 @@
 		8E84E79C260819F800DC6065 /* WAVFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E79B260819F800DC6065 /* WAVFile.cpp */; };
 		8E9728DC254CBB4B0033415B /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DA254CBB4B0033415B /* SDL2_image.framework */; };
 		8E9728DF254CBBAF0033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DE254CBBAF0033415B /* SDL2.framework */; };
+		8E9787632617C38E00C4395C /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E9787622617C38E00C4395C /* stb_image.c */; };
 		8E9F748F2551E732000324E8 /* SDLBMPFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */; };
 		8E9F74EC255317F7000324E8 /* SDLTGAFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F74EB255317F7000324E8 /* SDLTGAFile.cpp */; };
 		8EA48718260FFCD3000D1AB7 /* scriptstdstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */; };
@@ -251,6 +252,7 @@
 		8E97874A2617826A00C4395C /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		8E97874C2617840100C4395C /* json.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
 		8E9787602617A35A00C4395C /* MemoryPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemoryPool.h; sourceTree = "<group>"; };
+		8E9787622617C38E00C4395C /* stb_image.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
 		8E9F748B2551E54E000324E8 /* SDLBMPFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLBMPFile.h; sourceTree = "<group>"; };
 		8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDLBMPFile.cpp; sourceTree = "<group>"; };
 		8E9F74E8255316E1000324E8 /* SDLTGAFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLTGAFile.h; sourceTree = "<group>"; };
@@ -821,6 +823,7 @@
 		8E9787492617821F00C4395C /* stb */ = {
 			isa = PBXGroup;
 			children = (
+				8E9787622617C38E00C4395C /* stb_image.c */,
 				8E97874A2617826A00C4395C /* stb_image.h */,
 				8E84E78B260549B100DC6065 /* stb_vorbis.c */,
 				8E84E78E26054A2F00DC6065 /* stb_vorbis.h */,
@@ -1508,6 +1511,7 @@
 				DBF84B110AC76F1E00BB15CD /* MeshManager.cpp in Sources */,
 				DBF84B120AC76F1E00BB15CD /* MeshTypes.cpp in Sources */,
 				DBF84B130AC76F1E00BB15CD /* Mouse.cpp in Sources */,
+				8E9787632617C38E00C4395C /* stb_image.c in Sources */,
 				DBF84B140AC76F1E00BB15CD /* MouseSDL.cpp in Sources */,
 				DBF84B160AC76F1E00BB15CD /* MusicHandler.cpp in Sources */,
 				DBF84B170AC76F1E00BB15CD /* Node.cpp in Sources */,

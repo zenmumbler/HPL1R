@@ -336,6 +336,18 @@ RECENT REVISION HISTORY:
 //    default this is set to (1 << 24), which is 16777216, but that's still
 //    very big.
 
+
+
+// ====REHATCHED CONFIG
+#define STBI_NO_HDR
+#define STBI_NO_PSD
+#define STBI_NO_GIF
+#define STBI_NO_PIC
+#define STBI_NO_PNM
+// ==== END REHATCHED CONFIG
+
+
+
 #ifndef STBI_NO_STDIO
 #include <stdio.h>
 #endif // STBI_NO_STDIO
