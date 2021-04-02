@@ -248,6 +248,7 @@
 		8E9728CF254CB92F0033415B /* scripthelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripthelper.h; sourceTree = "<group>"; };
 		8E9728DA254CBB4B0033415B /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_image.framework; sourceTree = "<group>"; };
 		8E9728DE254CBBAF0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
+		8E97874A2617826A00C4395C /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		8E9F748B2551E54E000324E8 /* SDLBMPFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLBMPFile.h; sourceTree = "<group>"; };
 		8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDLBMPFile.cpp; sourceTree = "<group>"; };
 		8E9F74E8255316E1000324E8 /* SDLTGAFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLTGAFile.h; sourceTree = "<group>"; };
@@ -448,7 +449,6 @@
 		DB27F1030ACB9AB90054ACA3 /* Container.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Container.h; sourceTree = "<group>"; };
 		DB27F1040ACB9AB90054ACA3 /* LogicTimer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LogicTimer.h; sourceTree = "<group>"; };
 		DB27F1050ACB9AB90054ACA3 /* LowLevelSystem.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LowLevelSystem.h; sourceTree = "<group>"; };
-		DB27F1060ACB9AB90054ACA3 /* Script.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Script.h; sourceTree = "<group>"; };
 		DB27F1070ACB9AB90054ACA3 /* SerializeClass.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SerializeClass.h; sourceTree = "<group>"; };
 		DB27F1080ACB9AB90054ACA3 /* String.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = String.h; sourceTree = "<group>"; };
 		DB27F1090ACB9AB90054ACA3 /* System.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
@@ -735,8 +735,6 @@
 				8E84E790260555F900DC6065 /* OALSoundData.h */,
 				DB4AFB8C0D70768B00809E03 /* OpenALSoundEnvironment.cpp */,
 				DB4AFBF10D70776800809E03 /* OpenALSoundEnvironment.h */,
-				8E84E78B260549B100DC6065 /* stb_vorbis.c */,
-				8E84E78E26054A2F00DC6065 /* stb_vorbis.h */,
 				8E84E79B260819F800DC6065 /* WAVFile.cpp */,
 				8E84E79A2608181B00DC6065 /* WAVFile.h */,
 			);
@@ -810,10 +808,21 @@
 		8E3A7428261780940086F8ED /* ext */ = {
 			isa = PBXGroup;
 			children = (
+				8E9787492617821F00C4395C /* stb */,
 				DBF849AE0AC76D5800BB15CD /* tinyXML */,
 			);
 			name = ext;
 			path = sources/ext;
+			sourceTree = "<group>";
+		};
+		8E9787492617821F00C4395C /* stb */ = {
+			isa = PBXGroup;
+			children = (
+				8E97874A2617826A00C4395C /* stb_image.h */,
+				8E84E78B260549B100DC6065 /* stb_vorbis.c */,
+				8E84E78E26054A2F00DC6065 /* stb_vorbis.h */,
+			);
+			path = stb;
 			sourceTree = "<group>";
 		};
 		8EA486F7260FF779000D1AB7 /* Products */ = {
@@ -1046,10 +1055,10 @@
 		DBF849860AC76D5800BB15CD /* impl */ = {
 			isa = PBXGroup;
 			children = (
+				DBF849A30AC76D5800BB15CD /* platform */,
 				8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */,
 				DBF849930AC76D5800BB15CD /* LowLevelSystemSDL.cpp */,
 				DB27F06D0ACB9AB90054ACA3 /* LowLevelSystemSDL.h */,
-				DBF849A30AC76D5800BB15CD /* platform */,
 				DB27F07D0ACB9AB90054ACA3 /* Platform.h */,
 				DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */,
 				DB27F0800ACB9AB90054ACA3 /* SDLGameSetup.h */,
@@ -1309,7 +1318,6 @@
 				DB27F1050ACB9AB90054ACA3 /* LowLevelSystem.h */,
 				DB4AFBA30D7076F900809E03 /* MemoryManager.cpp */,
 				DB4AFBF70D7077B000809E03 /* MemoryManager.h */,
-				DB27F1060ACB9AB90054ACA3 /* Script.h */,
 				DBF84A1B0AC76D5800BB15CD /* SerializeClass.cpp */,
 				DB27F1070ACB9AB90054ACA3 /* SerializeClass.h */,
 				DBF84A1C0AC76D5800BB15CD /* String.cpp */,
