@@ -94,13 +94,31 @@ namespace hpl {
 			Error("Failed to load image: %s!\n", asFilePath.c_str());
 			return nullptr;
 		}
-		SDL_Surface* pSurface = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_BGRA32);
-		memcpy(pSurface->pixels, pixels, width * height * 4);
-		
-		Log("Image: %s - %d x %d - Chans: %d - Format = %s\n", asFilePath.c_str(), width, height, chans, SDL_GetPixelFormatName(pSurface->format->format));
 
-		iBitmap2D* pBmp = mpLowLevelGraphics->CreateBitmap2DFromSurface(pSurface,
-													cString::GetFileExt(asFilePath));
+		SDL_Surface* pSurface = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_RGBA32);
+//		memcpy(pSurface->pixels, pixels, width * height * 4);
+		
+		// [ZM] apply the same hack fix for now until I factor out the SDL_surface nonsense
+		uint32_t* pDst = static_cast<uint32_t*>(pSurface->pixels);
+		uint32_t* pSrc = reinterpret_cast<uint32_t*>(pixels);
+		for (int y = 0; y < height; ++y) {
+			for (int x = 0; x < width; ++x) {
+				auto pixIn = *pSrc;
+				
+				// flip R and G RGBA -> BGRA
+				auto pixOut = (pixIn & 0xff00ff00) | ((pixIn & 0xff) << 16) | ((pixIn & 0xff0000) >> 16);
+				*pDst = pixOut;
+
+				pSrc += 1;
+				pDst += 1;
+			}
+		}
+		
+		stbi_image_free(pixels);
+		
+//		Log("Image: %s - %d x %d - Chans: %d - Format = %s\n", asFilePath.c_str(), width, height, chans, SDL_GetPixelFormatName(pSurface->format->format));
+
+		iBitmap2D* pBmp = mpLowLevelGraphics->CreateBitmap2DFromSurface(pSurface, cString::GetFileExt(asFilePath));
 		pBmp->SetPath(asFilePath);
 
 		return pBmp;
