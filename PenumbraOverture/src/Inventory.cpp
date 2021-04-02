@@ -634,7 +634,7 @@ void cInventoryBattery::OnDraw()
 void cInventoryBattery::OnMouseOver()
 {
 	char sPercent[256];
-	sprintf(sPercent," %.0f%% ",mpInit->mpPlayer->GetPower());
+	snprintf(sPercent, sizeof(sPercent), " %.0f%% ", mpInit->mpPlayer->GetPower());
 	mpInit->mpInventory->SetItemName(kTranslate("Inventory", "BatteryLevel"));
 	mpInit->mpInventory->SetItemDesc(	kTranslate("Inventory", "BatteryLevelDesc1") +
 										cString::To16Char(sPercent) +
@@ -1744,7 +1744,8 @@ bool cInventory::CheckCombineCallback(const tString &asItem1,const tString &asIt
 
 	if(pFinalCallback)
 	{
-		char sString[30];sprintf(sString,"%d",alSlotIndex);
+		char sString[30];
+		snprintf(sString, sizeof(sString), "%d", alSlotIndex);
 
 		tString sCommand = pFinalCallback->msFunction + "(\""+asItem1+"\", \""+asItem2+"\", "+
 														cString::ToString(sString,"")+")";

@@ -314,13 +314,13 @@ namespace hpl {
 
 			switch(lDecimals)
 			{
-			case 0: sprintf(sTemp,"%.0f",apData[i]);break;
-			case 1: sprintf(sTemp,"%.1f",apData[i]);break;
-			case 2: sprintf(sTemp,"%.2f",apData[i]);break;
-			case 3: sprintf(sTemp,"%.3f",apData[i]);break;
-			case 4: sprintf(sTemp,"%.4f",apData[i]);break;
-			case 5: sprintf(sTemp,"%.5f",apData[i]);break;
-			case 6: sprintf(sTemp,"%.6f",apData[i]);break;
+			case 0: snprintf(sTemp,sizeof(sTemp),"%.0f",apData[i]);break;
+			case 1: snprintf(sTemp,sizeof(sTemp),"%.1f",apData[i]);break;
+			case 2: snprintf(sTemp,sizeof(sTemp),"%.2f",apData[i]);break;
+			case 3: snprintf(sTemp,sizeof(sTemp),"%.3f",apData[i]);break;
+			case 4: snprintf(sTemp,sizeof(sTemp),"%.4f",apData[i]);break;
+			case 5: snprintf(sTemp,sizeof(sTemp),"%.5f",apData[i]);break;
+			case 6: snprintf(sTemp,sizeof(sTemp),"%.6f",apData[i]);break;
 			}
 
 			sData += sTemp;
@@ -356,7 +356,7 @@ namespace hpl {
 
 		for(int i=0; i<alSize;i++)
 		{
-			sprintf(sTemp,"%d",apData[i]);
+			snprintf(sTemp,sizeof(sTemp),"%d",apData[i]);
 			sData += sTemp;
 
 			if(i != alSize -1)sData += " ";

@@ -331,7 +331,7 @@ dgCollision* dgWorld::CreateConvexHull(dgInt32 count,
        // hack to save the data that make convex hull fail
        char xxx[32];
        static int aaa  ;
-       sprintf (xxx, "file1__%d.txt", aaa);
+       snprintf (xxx, 32, "file1__%d.txt", aaa);
        aaa ++;
        FILE * file = fopen (xxx, "wb");
        fprintf (file, "float data[][3] = {\n");

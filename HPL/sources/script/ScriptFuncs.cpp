@@ -121,14 +121,14 @@ namespace hpl {
 	static std::string FloatToString(float afX)
 	{
 		char sTemp[30];
-		sprintf(sTemp,"%f",afX);
+		snprintf(sTemp,sizeof(sTemp),"%f",afX);
 		return sTemp;
 	}
 
 	static std::string IntToString(int alX)
 	{
 		char sTemp[30];
-		sprintf(sTemp,"%d",alX);
+		snprintf(sTemp,sizeof(sTemp),"%d",alX);
 		return sTemp;
 	}
 

@@ -103,7 +103,7 @@ namespace hpl {
 	void cConfigFile::SetInt(tString asLevel, tString asName, int alVal)
 	{
 		char sBuffer[40];
-		sprintf(sBuffer,"%d",alVal);
+		snprintf(sBuffer,sizeof(sBuffer),"%d",alVal);
 
 		SetString(asLevel,asName,sBuffer);
 	}
@@ -113,7 +113,7 @@ namespace hpl {
 	void cConfigFile::SetFloat(tString asLevel, tString asName, float afVal)
 	{
 		char sBuffer[40];
-		sprintf(sBuffer,"%f",afVal);
+		snprintf(sBuffer,sizeof(sBuffer),"%f",afVal);
 
 		SetString(asLevel,asName,sBuffer);
 	}

@@ -533,7 +533,7 @@ namespace hpl {
 	{
 		char buff[256];
 
-		sprintf(buff, "%d",alX);
+		snprintf(buff, sizeof(buff), "%d", alX);
 
 		return buff;
 	}
@@ -542,7 +542,7 @@ namespace hpl {
 	{
 		char buff[256];
 
-		sprintf(buff, "%f",afX);
+		snprintf(buff, sizeof(buff), "%f", afX);
 
 		return buff;
 	}
@@ -553,7 +553,7 @@ namespace hpl {
 	{
 		wchar_t buff[256];
 
-		swprintf(buff, 256, _W("%d"),alX);
+		swprintf(buff, 256, _W("%d"), alX);
 
 		return buff;
 	}
@@ -562,7 +562,7 @@ namespace hpl {
 	{
 		wchar_t buff[256];
 
-		swprintf(buff, 256, _W("%f"),afX);
+		swprintf(buff, 256, _W("%f"), afX);
 
 		return buff;
 	}

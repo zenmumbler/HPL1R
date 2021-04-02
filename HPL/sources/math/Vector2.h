@@ -223,14 +223,14 @@ namespace hpl {
 
 			tString ToString() const{
 				char buf[512];
-				sprintf(buf,"%f : %f",x,y);
+				snprintf(buf, sizeof(buf), "%f : %f", x, y);
 				tString str = buf;
 				return str;
 			}
 
 			tString ToFileString() const{
 				char buf[512];
-				sprintf(buf,"%g %g",x,y);
+				snprintf(buf, sizeof(buf), "%g %g", x, y);
 				tString str = buf;
 				return str;
 			}

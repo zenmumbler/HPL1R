@@ -241,7 +241,7 @@ void dgBaseNode::PrintHierarchy(dgFile &file, char *indent) const
   dgBaseNode *node;
   char newIndent[1024];
 
-  sprintf(newIndent, "%s   ", indent);
+  snprintf(newIndent, 1024, "%s   ", indent);
   for (node = child; node; node = node->sibling)
   {
     node->PrintHierarchy(file, newIndent);

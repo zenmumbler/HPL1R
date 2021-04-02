@@ -708,7 +708,7 @@ namespace hpl {
 				sData.reserve(pGeometry->mvVertexVec.size() * 10 * 4);
 				for(size_t j=0; j < pGeometry->mvTangents.size(); ++j)
 				{
-					sprintf(sTemp,"%g ",pGeometry->mvTangents[j]);
+					snprintf(sTemp, sizeof(sTemp), "%g ",pGeometry->mvTangents[j]);
 					sData += sTemp;
 				}
 				pDataElem = CreateXMLChild(pVertexVecElem,"Tangents");
