@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "impl/LowLevelInputSDL.h"
+#include "input/impl/LowLevelInputSDL.h"
 
-#include "impl/MouseSDL.h"
-#include "impl/KeyboardSDL.h"
+#include "input/impl/MouseSDL.h"
+#include "input/impl/KeyboardSDL.h"
 #include "graphics/impl/LowLevelGraphicsSDL.h"
 
 #include "system/LowLevelSystem.h"

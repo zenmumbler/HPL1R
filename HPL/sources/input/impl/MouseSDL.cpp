@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "impl/MouseSDL.h"
+#include "input/impl/MouseSDL.h"
 
 #include <SDL2/SDL.h>
 
 #include "graphics/LowLevelGraphics.h"
-#include "impl/LowLevelInputSDL.h"
+#include "input/impl/LowLevelInputSDL.h"
 
 namespace hpl {
 

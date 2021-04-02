@@ -777,6 +777,19 @@
 			path = impl;
 			sourceTree = "<group>";
 		};
+		8E3A741E2617755A0086F8ED /* impl */ = {
+			isa = PBXGroup;
+			children = (
+				DBF8498D0AC76D5800BB15CD /* KeyboardSDL.cpp */,
+				DB27F0670ACB9AB90054ACA3 /* KeyboardSDL.h */,
+				DBF8498F0AC76D5800BB15CD /* LowLevelInputSDL.cpp */,
+				DB27F0690ACB9AB90054ACA3 /* LowLevelInputSDL.h */,
+				DBF849980AC76D5800BB15CD /* MouseSDL.cpp */,
+				DB27F0710ACB9AB90054ACA3 /* MouseSDL.h */,
+			);
+			path = impl;
+			sourceTree = "<group>";
+		};
 		8EA486F7260FF779000D1AB7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1006,10 +1019,6 @@
 		DBF849860AC76D5800BB15CD /* impl */ = {
 			isa = PBXGroup;
 			children = (
-				DBF8498D0AC76D5800BB15CD /* KeyboardSDL.cpp */,
-				DB27F0670ACB9AB90054ACA3 /* KeyboardSDL.h */,
-				DBF8498F0AC76D5800BB15CD /* LowLevelInputSDL.cpp */,
-				DB27F0690ACB9AB90054ACA3 /* LowLevelInputSDL.h */,
 				DBF849910AC76D5800BB15CD /* LowLevelResourcesSDL.cpp */,
 				DB27F06B0ACB9AB90054ACA3 /* LowLevelResourcesSDL.h */,
 				8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */,
@@ -1021,8 +1030,6 @@
 				DBCEE6250B4B35D50088A7E3 /* MeshLoaderColladaLoader.cpp */,
 				DBF849970AC76D5800BB15CD /* MeshLoaderMSH.cpp */,
 				DB27F0700ACB9AB90054ACA3 /* MeshLoaderMSH.h */,
-				DBF849980AC76D5800BB15CD /* MouseSDL.cpp */,
-				DB27F0710ACB9AB90054ACA3 /* MouseSDL.h */,
 				DBF849A30AC76D5800BB15CD /* platform */,
 				DB27F07D0ACB9AB90054ACA3 /* Platform.h */,
 				DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */,
@@ -1060,6 +1067,7 @@
 		DBF849B50AC76D5800BB15CD /* input */ = {
 			isa = PBXGroup;
 			children = (
+				8E3A741E2617755A0086F8ED /* impl */,
 				DBF849B60AC76D5800BB15CD /* Action.cpp */,
 				DB27F08B0ACB9AB90054ACA3 /* Action.h */,
 				DB4AFB9D0D7076A800809E03 /* ActionHaptic.cpp */,
