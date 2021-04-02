@@ -5,7 +5,7 @@
       location = "group:AngelScript/AngelScript.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Newton/Newton.xcodeproj">
+      location = "group:Newton3/Newton.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:HPL/HPL.xcodeproj">

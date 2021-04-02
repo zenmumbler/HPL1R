@@ -196,18 +196,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8E3A729B26165A160086F8ED /* PBXContainerItemProxy */ = {
+		8E3A740A26167C250086F8ED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 8E3A729726165A160086F8ED /* Newton.xcodeproj */;
+			containerPortal = 8E3A740626167C250086F8ED /* Newton.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteGlobalIDString = 66F07C06F1A146FDB16F82F5;
 			remoteInfo = newton;
 		};
-		8E3A729D26165A1F0086F8ED /* PBXContainerItemProxy */ = {
+		8E3A740C26167C390086F8ED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 8E3A729726165A160086F8ED /* Newton.xcodeproj */;
+			containerPortal = 8E3A740626167C250086F8ED /* Newton.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteGlobalIDString = 9D1BFC7EC4FD4B0E8F296A01;
 			remoteInfo = newton;
 		};
 		8EA486FA260FF779000D1AB7 /* PBXContainerItemProxy */ = {
@@ -229,7 +229,7 @@
 /* Begin PBXFileReference section */
 		8E3A72832611363F0086F8ED /* Script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Script.cpp; path = sources/script/Script.cpp; sourceTree = SOURCE_ROOT; };
 		8E3A72842611363F0086F8ED /* Script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Script.h; path = sources/script/Script.h; sourceTree = SOURCE_ROOT; };
-		8E3A729726165A160086F8ED /* Newton.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Newton.xcodeproj; path = ../Newton/Newton.xcodeproj; sourceTree = "<group>"; };
+		8E3A740626167C250086F8ED /* Newton.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Newton.xcodeproj; path = ../Newton3/Newton.xcodeproj; sourceTree = "<group>"; };
 		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
 		8E815947260C1127001CBF63 /* GLSLProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLProgram.cpp; sourceTree = "<group>"; };
 		8E84AA0C254CB3D2000EA53C /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cg.framework; sourceTree = "<group>"; };
@@ -686,10 +686,10 @@
 			path = impl;
 			sourceTree = "<group>";
 		};
-		8E3A729826165A160086F8ED /* Products */ = {
+		8E3A740726167C250086F8ED /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8E3A729C26165A160086F8ED /* libnewton_d.a */,
+				8E3A740B26167C250086F8ED /* libnewton.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -706,7 +706,7 @@
 			isa = PBXGroup;
 			children = (
 				8EA486F6260FF779000D1AB7 /* AngelScript.xcodeproj */,
-				8E3A729726165A160086F8ED /* Newton.xcodeproj */,
+				8E3A740626167C250086F8ED /* Newton.xcodeproj */,
 				8E84E75B25FD063100DC6065 /* OpenGL.framework */,
 				8E84E75925FD062A00DC6065 /* OpenAL.framework */,
 				DB00F0D211A9D080007DFB32 /* Cocoa.framework */,
@@ -1278,7 +1278,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				8E3A729E26165A1F0086F8ED /* PBXTargetDependency */,
+				8E3A740D26167C390086F8ED /* PBXTargetDependency */,
 				8EA486FD260FF788000D1AB7 /* PBXTargetDependency */,
 			);
 			name = HPL;
@@ -1311,8 +1311,8 @@
 					ProjectRef = 8EA486F6260FF779000D1AB7 /* AngelScript.xcodeproj */;
 				},
 				{
-					ProductGroup = 8E3A729826165A160086F8ED /* Products */;
-					ProjectRef = 8E3A729726165A160086F8ED /* Newton.xcodeproj */;
+					ProductGroup = 8E3A740726167C250086F8ED /* Products */;
+					ProjectRef = 8E3A740626167C250086F8ED /* Newton.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1323,11 +1323,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		8E3A729C26165A160086F8ED /* libnewton_d.a */ = {
+		8E3A740B26167C250086F8ED /* libnewton.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libnewton.a;
-			remoteRef = 8E3A729B26165A160086F8ED /* PBXContainerItemProxy */;
+			remoteRef = 8E3A740A26167C250086F8ED /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		8EA486FB260FF779000D1AB7 /* libangelscript.a */ = {
@@ -1533,10 +1533,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8E3A729E26165A1F0086F8ED /* PBXTargetDependency */ = {
+		8E3A740D26167C390086F8ED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = newton;
-			targetProxy = 8E3A729D26165A1F0086F8ED /* PBXContainerItemProxy */;
+			targetProxy = 8E3A740C26167C390086F8ED /* PBXContainerItemProxy */;
 		};
 		8EA486FD260FF788000D1AB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1602,7 +1602,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/sources ../dependencies/include";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/sources";
 			};
 			name = Debug;
 		};
@@ -1661,7 +1661,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/sources ../dependencies/include";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/sources";
 			};
 			name = Release;
 		};
@@ -1673,10 +1673,9 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				HEADER_SEARCH_PATHS = (
-					include,
 					../dependencies/include,
 					../AngelScript/include,
-					../Newton/source/newton,
+					../Newton3/sdk/dgNewton,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1696,10 +1695,9 @@
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_MODEL_TUNING = G5;
 				HEADER_SEARCH_PATHS = (
-					include,
 					../dependencies/include,
 					../AngelScript/include,
-					../Newton/source/newton,
+					../Newton3/sdk/dgNewton,
 				);
 				INSTALL_PATH = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = (
