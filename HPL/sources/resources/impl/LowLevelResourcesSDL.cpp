@@ -16,10 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifdef WIN32
-#pragma comment(lib, "SDL_image.lib")
-#endif
-
 #include "resources/impl/LowLevelResourcesSDL.h"
 #include "graphics/impl/SDLBitmap2D.h"
 #include "resources/impl/MeshLoaderMSH.h"
@@ -31,7 +27,6 @@
 #include "system/String.h"
 
 #include <SDL2/SDL.h>
-#include <SDL2_image/SDL_image.h>
 #include "resources/MeshLoaderHandler.h"
 #include "resources/VideoManager.h"
 #include "system/LowLevelSystem.h"
@@ -74,17 +69,6 @@ namespace hpl {
 		}
 		tType = cString::GetFileExt(asFilePath);
 		
-		/*
-		SDL_Surface* pSurface;
-		if (tType == "bmp") {
-			pSurface = LoadBMPFile(asFilePath);
-		}
-		else if (tType == "tga") {
-			pSurface = LoadTGAFile(asFilePath);
-		}
-		else {
-			pSurface = IMG_Load(asFilePath.c_str());
-		}*/
 		int width, height, chans;
 		const auto pixels = stbi_load(asFilePath.c_str(), &width, &height, &chans, 4);
 				

@@ -15,7 +15,6 @@
 		8E84E7922605571100DC6065 /* OALSoundData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E7912605571100DC6065 /* OALSoundData.cpp */; };
 		8E84E79626055B2500DC6065 /* OALSoundChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E79526055B2500DC6065 /* OALSoundChannel.cpp */; };
 		8E84E79C260819F800DC6065 /* WAVFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E79B260819F800DC6065 /* WAVFile.cpp */; };
-		8E9728DC254CBB4B0033415B /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DA254CBB4B0033415B /* SDL2_image.framework */; };
 		8E9728DF254CBBAF0033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DE254CBBAF0033415B /* SDL2.framework */; };
 		8E9787632617C38E00C4395C /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E9787622617C38E00C4395C /* stb_image.c */; };
 		8EA48718260FFCD3000D1AB7 /* scriptstdstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */; };
@@ -245,7 +244,6 @@
 		8E84E79A2608181B00DC6065 /* WAVFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WAVFile.h; sourceTree = "<group>"; };
 		8E84E79B260819F800DC6065 /* WAVFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WAVFile.cpp; sourceTree = "<group>"; };
 		8E9728CF254CB92F0033415B /* scripthelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripthelper.h; sourceTree = "<group>"; };
-		8E9728DA254CBB4B0033415B /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_image.framework; sourceTree = "<group>"; };
 		8E9728DE254CBBAF0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		8E97874A2617826A00C4395C /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		8E97874C2617840100C4395C /* json.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
@@ -646,7 +644,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */,
-				8E9728DC254CBB4B0033415B /* SDL2_image.framework in Frameworks */,
 				8E9728DF254CBBAF0033415B /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -846,7 +843,6 @@
 			isa = PBXGroup;
 			children = (
 				8E9728DE254CBBAF0033415B /* SDL2.framework */,
-				8E9728DA254CBB4B0033415B /* SDL2_image.framework */,
 				8E84AA0C254CB3D2000EA53C /* Cg.framework */,
 			);
 			name = dependencies;
