@@ -249,6 +249,7 @@
 		8E9728DA254CBB4B0033415B /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_image.framework; sourceTree = "<group>"; };
 		8E9728DE254CBBAF0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		8E97874A2617826A00C4395C /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		8E97874C2617840100C4395C /* json.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
 		8E9F748B2551E54E000324E8 /* SDLBMPFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLBMPFile.h; sourceTree = "<group>"; };
 		8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SDLBMPFile.cpp; sourceTree = "<group>"; };
 		8E9F74E8255316E1000324E8 /* SDLTGAFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLTGAFile.h; sourceTree = "<group>"; };
@@ -810,6 +811,7 @@
 			children = (
 				8E9787492617821F00C4395C /* stb */,
 				DBF849AE0AC76D5800BB15CD /* tinyXML */,
+				8E97874C2617840100C4395C /* json.hpp */,
 			);
 			name = ext;
 			path = sources/ext;
