@@ -38,6 +38,8 @@
 #include "resources/VideoManager.h"
 #include "system/LowLevelSystem.h"
 
+#include "ext/stb/stb_image.h"
+
 namespace hpl {
 
 	//////////////////////////////////////////////////////////////////////////
@@ -48,12 +50,6 @@ namespace hpl {
 
 	cLowLevelResourcesSDL::cLowLevelResourcesSDL(cLowLevelGraphicsSDL *apLowLevelGraphics)
 	{
-		mvImageFormats[0] = "BMP";mvImageFormats[1] = "LBM";mvImageFormats[2] = "PCX";
-		mvImageFormats[3] = "GIF";mvImageFormats[4] = "JPEG";mvImageFormats[5] = "PNG";
-		mvImageFormats[6] = "JPG";
-		mvImageFormats[7] = "TGA";mvImageFormats[8] = "TIFF";mvImageFormats[9] = "TIF";
-		mvImageFormats[10] =  "";
-
 		mpLowLevelGraphics = apLowLevelGraphics;
 	}
 
@@ -74,14 +70,13 @@ namespace hpl {
 
 	iBitmap2D* cLowLevelResourcesSDL::LoadBitmap2D(tString asFilePath, tString asType)
 	{
-		// Log((tString("Loading image: ") + asFilePath + "\n").c_str());
-
 		tString tType;
 		if(asType != "") {
 			asFilePath = cString::SetFileExt(asFilePath,asType);
 		}
 		tType = cString::GetFileExt(asFilePath);
 		
+		/*
 		SDL_Surface* pSurface;
 		if (tType == "bmp") {
 			pSurface = LoadBMPFile(asFilePath);
@@ -91,14 +86,18 @@ namespace hpl {
 		}
 		else {
 			pSurface = IMG_Load(asFilePath.c_str());
+		}*/
+		int width, height, chans;
+		const auto pixels = stbi_load(asFilePath.c_str(), &width, &height, &chans, 4);
+				
+		if (pixels == nullptr) {
+			Error("Failed to load image: %s!\n", asFilePath.c_str());
+			return nullptr;
 		}
+		SDL_Surface* pSurface = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_BGRA32);
+		memcpy(pSurface->pixels, pixels, width * height * 4);
 		
-		if (pSurface == NULL) {
-			Error("Failed to load image!\n");
-			return NULL;
-		}
-		
-		// Log("    Format = %s\n", SDL_GetPixelFormatName(pSurface->format->format));
+		Log("Image: %s - %d x %d - Chans: %d - Format = %s\n", asFilePath.c_str(), width, height, chans, SDL_GetPixelFormatName(pSurface->format->format));
 
 		iBitmap2D* pBmp = mpLowLevelGraphics->CreateBitmap2DFromSurface(pSurface,
 													cString::GetFileExt(asFilePath));
@@ -111,13 +110,11 @@ namespace hpl {
 
 	void cLowLevelResourcesSDL::GetSupportedImageFormats(tStringList &alstFormats)
 	{
-		int lPos = 0;
-
-		while(mvImageFormats[lPos]!="")
-		{
-			alstFormats.push_back(mvImageFormats[lPos]);
-			lPos++;
-		}
+		alstFormats.push_back("BMP");
+		alstFormats.push_back("JPG");
+		alstFormats.push_back("JPEG");
+		alstFormats.push_back("PNG");
+		alstFormats.push_back("TGA");
 	}
 	//-----------------------------------------------------------------------
 

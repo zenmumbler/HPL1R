@@ -40,7 +40,6 @@ namespace hpl {
 		void AddVideoLoaders(cVideoManager* apManager);
 
 	private:
-		tString mvImageFormats[30];
 		cLowLevelGraphicsSDL *mpLowLevelGraphics;
 	};
 };
