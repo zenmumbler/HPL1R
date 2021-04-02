@@ -24,7 +24,7 @@
 #include "impl/SDLGameSetup.h"
 #include "impl/KeyboardSDL.h"
 #include "impl/MouseSDL.h"
-#include "impl/LowLevelGraphicsSDL.h"
+#include "graphics/impl/LowLevelGraphicsSDL.h"
 #include "impl/LowLevelResourcesSDL.h"
 #include "impl/LowLevelSystemSDL.h"
 #include "impl/LowLevelInputSDL.h"

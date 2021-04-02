@@ -1,12 +1,9 @@
-//
-//  SDLBMPFile.h
-//  Rehatched - BMP file reader because SDL2_image does not support 32-bit BMPs
-//
-//  Created by zenmumbler on 03/11/2020.
-//
-
-#include "SDLBMPFile.h"
-#include "LowLevelSystem.h"
+/*
+ * 2021 by zenmumbler
+ * This file is part of Rehatched
+ */
+#include "graphics/impl/SDLBMPFile.h"
+#include "system/LowLevelSystem.h"
 
 #include <SDL2_image/SDL_image.h>
 

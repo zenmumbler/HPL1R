@@ -34,14 +34,17 @@
 #include <stdlib.h>
 
 #include "graphics/FontData.h"
-#include "impl/LowLevelGraphicsSDL.h"
-#include "impl/SDLBitmap2D.h"
-#include "impl/SDLFontData.h"
-#include "impl/SDLTexture.h"
-#include "impl/CGProgram.h"
+
+#include "graphics/impl/LowLevelGraphicsSDL.h"
+#include "graphics/impl/SDLBitmap2D.h"
+#include "graphics/impl/SDLFontData.h"
+
+#include "graphics/ogl2/SDLTexture.h"
+#include "graphics/ogl2/CGProgram.h"
+#include "graphics/ogl2/VertexBufferVBO.h"
+#include "graphics/ogl2/OcclusionQueryOGL.h"
+
 #include "system/LowLevelSystem.h"
-#include "impl/VertexBufferVBO.h"
-#include "impl/OcclusionQueryOGL.h"
 
 namespace hpl {
 

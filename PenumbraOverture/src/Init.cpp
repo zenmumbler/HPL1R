@@ -17,7 +17,7 @@
  * along with Penumbra Overture.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Init.h"
-#include "impl/CGProgram.h"
+#include "graphics/ogl2/CGProgram.h"
 #include "Player.h"
 #include "ButtonHandler.h"
 #include "MapHandler.h"

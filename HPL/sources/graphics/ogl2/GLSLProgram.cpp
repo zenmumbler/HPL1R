@@ -2,8 +2,8 @@
  * 2021 by zenmumbler
  * This file is part of Rehatched
  */
-#include "impl/GLSLProgram.h"
-#include "impl/SDLTexture.h"
+#include "graphics/ogl2/GLSLProgram.h"
+#include "graphics/ogl2/SDLTexture.h"
 #include "system/LowLevelSystem.h"
 #include "system/String.h"
 

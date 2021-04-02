@@ -1,10 +1,7 @@
-//
-//  SDLTGAFile.h
-//  Rehatched - TGA image load wrapper around SDL2_image
-//
-//  Created by zenmumbler on 04/11/2020.
-//
-
+/*
+ * 2021 by zenmumbler
+ * This file is part of Rehatched
+ */
 #ifndef HPL_SDLTGAFILE_H
 #define HPL_SDLTGAFILE_H
 

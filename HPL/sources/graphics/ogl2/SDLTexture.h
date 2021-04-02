@@ -20,8 +20,8 @@
 #define HPL_SDL_TEXTURE_H
 
 #include "graphics/Texture.h"
-#include "impl/LowLevelGraphicsSDL.h"
-#include "impl/SDLBitmap2D.h"
+#include "graphics/impl/LowLevelGraphicsSDL.h"
+#include "graphics/impl/SDLBitmap2D.h"
 
 #if defined(__APPLE__)&&defined(__MACH__)
 #include <OpenGL/glu.h>

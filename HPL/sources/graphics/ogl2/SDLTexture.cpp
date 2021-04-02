@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "impl/SDLTexture.h"
-#include "impl/SDLBitmap2D.h"
+#include "graphics/impl/SDLBitmap2D.h"
+#include "graphics/ogl2/SDLTexture.h"
 
 #include "system/LowLevelSystem.h"
 #include "math/Math.h"

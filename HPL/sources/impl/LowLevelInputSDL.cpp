@@ -20,7 +20,7 @@
 
 #include "impl/MouseSDL.h"
 #include "impl/KeyboardSDL.h"
-#include "impl/LowLevelGraphicsSDL.h"
+#include "graphics/impl/LowLevelGraphicsSDL.h"
 
 #include "system/LowLevelSystem.h"
 

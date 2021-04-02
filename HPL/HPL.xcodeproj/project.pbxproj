@@ -743,6 +743,40 @@
 			path = impl;
 			sourceTree = "<group>";
 		};
+		8E3A741B26176F0A0086F8ED /* ogl2 */ = {
+			isa = PBXGroup;
+			children = (
+				DBF849870AC76D5800BB15CD /* CGProgram.cpp */,
+				DB27F0620ACB9AB90054ACA3 /* CGProgram.h */,
+				8E815947260C1127001CBF63 /* GLSLProgram.cpp */,
+				8E815946260C1036001CBF63 /* GLSLProgram.h */,
+				DBF849990AC76D5800BB15CD /* OcclusionQueryOGL.cpp */,
+				DB27F0720ACB9AB90054ACA3 /* OcclusionQueryOGL.h */,
+				DBF849AA0AC76D5800BB15CD /* SDLTexture.cpp */,
+				DB27F0820ACB9AB90054ACA3 /* SDLTexture.h */,
+				DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */,
+				DB27F0890ACB9AB90054ACA3 /* VertexBufferVBO.h */,
+			);
+			path = ogl2;
+			sourceTree = "<group>";
+		};
+		8E3A741C261770CC0086F8ED /* impl */ = {
+			isa = PBXGroup;
+			children = (
+				DBF8498E0AC76D5800BB15CD /* LowLevelGraphicsSDL.cpp */,
+				DB27F0680ACB9AB90054ACA3 /* LowLevelGraphicsSDL.h */,
+				DBF849A60AC76D5800BB15CD /* SDLBitmap2D.cpp */,
+				DB27F07E0ACB9AB90054ACA3 /* SDLBitmap2D.h */,
+				8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */,
+				8E9F748B2551E54E000324E8 /* SDLBMPFile.h */,
+				DBF849A70AC76D5800BB15CD /* SDLFontData.cpp */,
+				DB27F07F0ACB9AB90054ACA3 /* SDLFontData.h */,
+				8E9F74EB255317F7000324E8 /* SDLTGAFile.cpp */,
+				8E9F74E8255316E1000324E8 /* SDLTGAFile.h */,
+			);
+			path = impl;
+			sourceTree = "<group>";
+		};
 		8EA486F7260FF779000D1AB7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -866,6 +900,8 @@
 		DBF849530AC76D5700BB15CD /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				8E3A741C261770CC0086F8ED /* impl */,
+				8E3A741B26176F0A0086F8ED /* ogl2 */,
 				DBF849540AC76D5700BB15CD /* Animation.cpp */,
 				DB27F0260ACB9AB90054ACA3 /* Animation.h */,
 				DBF849550AC76D5700BB15CD /* AnimationTrack.cpp */,
@@ -970,14 +1006,8 @@
 		DBF849860AC76D5800BB15CD /* impl */ = {
 			isa = PBXGroup;
 			children = (
-				DBF849870AC76D5800BB15CD /* CGProgram.cpp */,
-				DB27F0620ACB9AB90054ACA3 /* CGProgram.h */,
-				8E815947260C1127001CBF63 /* GLSLProgram.cpp */,
-				8E815946260C1036001CBF63 /* GLSLProgram.h */,
 				DBF8498D0AC76D5800BB15CD /* KeyboardSDL.cpp */,
 				DB27F0670ACB9AB90054ACA3 /* KeyboardSDL.h */,
-				DBF8498E0AC76D5800BB15CD /* LowLevelGraphicsSDL.cpp */,
-				DB27F0680ACB9AB90054ACA3 /* LowLevelGraphicsSDL.h */,
 				DBF8498F0AC76D5800BB15CD /* LowLevelInputSDL.cpp */,
 				DB27F0690ACB9AB90054ACA3 /* LowLevelInputSDL.h */,
 				DBF849910AC76D5800BB15CD /* LowLevelResourcesSDL.cpp */,
@@ -993,25 +1023,11 @@
 				DB27F0700ACB9AB90054ACA3 /* MeshLoaderMSH.h */,
 				DBF849980AC76D5800BB15CD /* MouseSDL.cpp */,
 				DB27F0710ACB9AB90054ACA3 /* MouseSDL.h */,
-				DBF849990AC76D5800BB15CD /* OcclusionQueryOGL.cpp */,
-				DB27F0720ACB9AB90054ACA3 /* OcclusionQueryOGL.h */,
 				DBF849A30AC76D5800BB15CD /* platform */,
 				DB27F07D0ACB9AB90054ACA3 /* Platform.h */,
-				DBF849A60AC76D5800BB15CD /* SDLBitmap2D.cpp */,
-				DB27F07E0ACB9AB90054ACA3 /* SDLBitmap2D.h */,
-				8E9F748E2551E732000324E8 /* SDLBMPFile.cpp */,
-				8E9F748B2551E54E000324E8 /* SDLBMPFile.h */,
-				DBF849A70AC76D5800BB15CD /* SDLFontData.cpp */,
-				DB27F07F0ACB9AB90054ACA3 /* SDLFontData.h */,
 				DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */,
 				DB27F0800ACB9AB90054ACA3 /* SDLGameSetup.h */,
-				DBF849AA0AC76D5800BB15CD /* SDLTexture.cpp */,
-				DB27F0820ACB9AB90054ACA3 /* SDLTexture.h */,
-				8E9F74EB255317F7000324E8 /* SDLTGAFile.cpp */,
-				8E9F74E8255316E1000324E8 /* SDLTGAFile.h */,
 				DBF849AE0AC76D5800BB15CD /* tinyXML */,
-				DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */,
-				DB27F0890ACB9AB90054ACA3 /* VertexBufferVBO.h */,
 				DBF9A1F6119A58DB00CCFDC9 /* VideoStreamTheora.cpp */,
 				DBF9A1F7119A58E600CCFDC9 /* VideoStreamTheora.h */,
 			);
