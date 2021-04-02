@@ -170,38 +170,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cPhysicsWorldNewton::SetAccuracyLevel(ePhysicsAccuracy aAccuracy)
-	{
-		mAccuracy = aAccuracy;
-
-		switch(mAccuracy)
-		{
-		case ePhysicsAccuracy_Low:
-									NewtonSetSolverModel(mpNewtonWorld,1);
-									NewtonSetFrictionModel(mpNewtonWorld,1);
-									Log("SETTING LOW!\n");
-									break;
-		case ePhysicsAccuracy_Medium:
-									NewtonSetSolverModel(mpNewtonWorld,2);
-									NewtonSetFrictionModel(mpNewtonWorld,1);
-									break;
-		case ePhysicsAccuracy_High:
-									NewtonSetSolverModel(mpNewtonWorld,0);
-									NewtonSetFrictionModel(mpNewtonWorld,0);
-									break;
-		default: break;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	ePhysicsAccuracy cPhysicsWorldNewton::GetAccuracyLevel()
-	{
-		return mAccuracy;
-	}
-
-	//-----------------------------------------------------------------------
-
 	iCollideShape* cPhysicsWorldNewton::CreateNullShape()
 	{
 		iCollideShape *pShape = hplNew( cCollideShapeNewton, (eCollideShapeType_Null, 0, NULL,

@@ -45,9 +45,6 @@ namespace hpl {
 		void SetGravity(const cVector3f& avGravity);
 		cVector3f GetGravity();
 
-		void SetAccuracyLevel(ePhysicsAccuracy aAccuracy);
-		ePhysicsAccuracy GetAccuracyLevel();
-
 		iCollideShape* CreateNullShape();
 		iCollideShape* CreateBoxShape(const cVector3f &avSize, cMatrixf* apOffsetMtx);
 		iCollideShape* CreateSphereShape(const cVector3f &avRadii, cMatrixf* apOffsetMtx);
@@ -100,8 +97,6 @@ namespace hpl {
 		cVector3f mvWorldSizeMax;
 		cVector3f mvGravity;
 		float mfMaxTimeStep;
-
-		ePhysicsAccuracy mAccuracy;
 	};
 };
 #endif // HPL_PHYSICS_WORLD_NEWTON_H

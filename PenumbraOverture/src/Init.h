@@ -143,7 +143,6 @@ public:
 	int mlMaxStereoChannelsHint;
 	tString msDeviceName;
 
-	ePhysicsAccuracy mPhysicsAccuracy;
 	float mfPhysicsUpdatesPerSec;
 
 	tString msStartMap;

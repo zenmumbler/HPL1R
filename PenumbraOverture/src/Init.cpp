@@ -287,7 +287,6 @@ bool cInit::Init(tString asCommandLine)
 	}
 	iMaterial::SetQuality(iQuality);
 	
-	mPhysicsAccuracy = (ePhysicsAccuracy)mpConfig->GetInt("Physics","Accuracy",ePhysicsAccuracy_High);
 	mfPhysicsUpdatesPerSec = mpConfig->GetFloat("Physics","UpdatesPerSec",60.0f);
 
 	mlMaxSoundChannels = mpConfig->GetInt("Sound","MaxSoundChannels",32);
@@ -761,9 +760,7 @@ void cInit::Exit()
 	mpConfig->SetBool("Game","ShowMenu",mbShowMenu);
 	mpConfig->SetBool("Game","ShowIntro",mbShowIntro);
 
-	mpConfig->SetInt("Physics","PhysicsAccuracy",mPhysicsAccuracy);
 	mpConfig->SetFloat("Physics","UpdatesPerSec",mfPhysicsUpdatesPerSec);
-
 
 	mpConfig->SetBool("Debug", "LogResources", mbLogResources);
 

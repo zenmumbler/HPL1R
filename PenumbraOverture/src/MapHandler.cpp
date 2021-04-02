@@ -531,9 +531,6 @@ bool cMapHandler::Load(const tString &asFile,const tString& asStartPos)
 	//mpInit->mpGame->GetSound()->GetSoundHandler()->ResumeAll(eSoundDest_World | eSoundDest_Gui);
 	
 	//Log("After load and preupdate:\n");
-
-	//Set physics accuracy
-	pWorld->GetPhysicsWorld()->SetAccuracyLevel(mpInit->mPhysicsAccuracy);
 	
 	return true;
 }
@@ -617,9 +614,6 @@ bool cMapHandler::LoadSimple(const tString &asFile, bool abLoadEntities)
 	mpInit->mpPlayer->OnWorldLoad();
 
 	mpInit->mpGame->ResetLogicTimer();
-	
-	//Physics set up
-	pWorld->GetPhysicsWorld()->SetAccuracyLevel(mpInit->mPhysicsAccuracy);
 
 	return true;
 }

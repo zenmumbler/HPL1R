@@ -72,14 +72,6 @@ namespace hpl {
 	typedef cSTLIterator<iPhysicsBody*, tPhysicsBodyList, tPhysicsBodyListIt> cPhysicsBodyIterator;
 	typedef cSTLIterator<iPhysicsJoint*, tPhysicsJointList, tPhysicsJointListIt> cPhysicsJointIterator;
 
-	enum ePhysicsAccuracy
-	{
-		ePhysicsAccuracy_Low,
-		ePhysicsAccuracy_Medium,
-		ePhysicsAccuracy_High,
-		ePhysicsAccuracy_LastEnum
-	};
-
 	//----------------------------------------------------
 
 	class cPhysicsRayParams
@@ -131,9 +123,6 @@ namespace hpl {
 
 		virtual void SetGravity(const cVector3f& avGravity)=0;
 		virtual cVector3f GetGravity()=0;
-
-		virtual void SetAccuracyLevel(ePhysicsAccuracy aAccuracy)=0;
-		virtual ePhysicsAccuracy GetAccuracyLevel()=0;
 		//! @}
 
 		//########################################################################################
