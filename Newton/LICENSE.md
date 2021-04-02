@@ -1,5 +1,5 @@
-Newton Physics
-==============
+Newton Dynamics
+===============
 
 Newton zlib license<br>
 Copyright (c) <2003-2011> 
