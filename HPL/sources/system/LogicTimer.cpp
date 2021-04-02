@@ -27,20 +27,12 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cLogicTimer::cLogicTimer(int alUpdatesPerSec, iLowLevelSystem *apLowLevelSystem)
+	cLogicTimer::cLogicTimer(int alUpdatesPerSec)
 	{
 		mlMaxUpdates = alUpdatesPerSec;
-		mlUpdateCount =0;
-
-		mpLowLevelSystem = apLowLevelSystem;
+		mlUpdateCount = 0;
 
 		SetUpdatesPerSec(alUpdatesPerSec);
-	}
-
-	//-----------------------------------------------------------------------
-
-	cLogicTimer::~cLogicTimer()
-	{
 	}
 
 	//-----------------------------------------------------------------------
@@ -85,7 +77,7 @@ namespace hpl {
 
 	void cLogicTimer::SetUpdatesPerSec(int alUpdatesPerSec)
 	{
-		mlLocalTimeAdd = 1000.0/((double)alUpdatesPerSec);
+		mlLocalTimeAdd = 1000.0 / ((double)alUpdatesPerSec);
 		Reset();
 	}
 
@@ -120,7 +112,7 @@ namespace hpl {
 
 	void cLogicTimer::Update()
 	{
-		mlLocalTime+=mlLocalTimeAdd;
+		mlLocalTime += mlLocalTimeAdd;
 	}
 
 	//-----------------------------------------------------------------------

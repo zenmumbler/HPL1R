@@ -18,8 +18,6 @@
  */
 #include "system/System.h"
 #include "system/LowLevelSystem.h"
-#include "system/LogicTimer.h"
-#include "system/String.h"
 
 namespace hpl {
 
@@ -49,12 +47,6 @@ namespace hpl {
 	//////////////////////////////////////////////////////////////////////////
 	// PUBLIC METHODS
 	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-	cLogicTimer * cSystem::CreateLogicTimer(unsigned int alUpdatesPerSec)
-	{
-		return hplNew( cLogicTimer, (alUpdatesPerSec, mpLowLevelSystem) );
-	}
 
 	//-----------------------------------------------------------------------
 

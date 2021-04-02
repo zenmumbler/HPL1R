@@ -270,7 +270,7 @@ namespace hpl {
 		mpUpdater->SetContainer("Default");
 
 		//Create the logic timer.
-		mpLogicTimer = mpSystem->CreateLogicTimer(aVars.GetInt("LogicUpdateRate",800));
+		mpLogicTimer = hplNew(cLogicTimer, (aVars.GetInt("LogicUpdateRate", 60)));
 
 		//Init some standard script funcs
 		Log(" Initializing script functions\n");
