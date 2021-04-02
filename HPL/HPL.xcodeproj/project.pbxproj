@@ -724,6 +724,25 @@
 			path = impl;
 			sourceTree = "<group>";
 		};
+		8E3A741926176B3E0086F8ED /* impl */ = {
+			isa = PBXGroup;
+			children = (
+				8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */,
+				8E84E7872605472700DC6065 /* LowLevelSoundOAL.h */,
+				8E84E79526055B2500DC6065 /* OALSoundChannel.cpp */,
+				8E84E79426055ABF00DC6065 /* OALSoundChannel.h */,
+				8E84E7912605571100DC6065 /* OALSoundData.cpp */,
+				8E84E790260555F900DC6065 /* OALSoundData.h */,
+				DB4AFB8C0D70768B00809E03 /* OpenALSoundEnvironment.cpp */,
+				DB4AFBF10D70776800809E03 /* OpenALSoundEnvironment.h */,
+				8E84E78B260549B100DC6065 /* stb_vorbis.c */,
+				8E84E78E26054A2F00DC6065 /* stb_vorbis.h */,
+				8E84E79B260819F800DC6065 /* WAVFile.cpp */,
+				8E84E79A2608181B00DC6065 /* WAVFile.h */,
+			);
+			path = impl;
+			sourceTree = "<group>";
+		};
 		8EA486F7260FF779000D1AB7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -963,8 +982,6 @@
 				DB27F0690ACB9AB90054ACA3 /* LowLevelInputSDL.h */,
 				DBF849910AC76D5800BB15CD /* LowLevelResourcesSDL.cpp */,
 				DB27F06B0ACB9AB90054ACA3 /* LowLevelResourcesSDL.h */,
-				8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */,
-				8E84E7872605472700DC6065 /* LowLevelSoundOAL.h */,
 				8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */,
 				DBF849930AC76D5800BB15CD /* LowLevelSystemSDL.cpp */,
 				DB27F06D0ACB9AB90054ACA3 /* LowLevelSystemSDL.h */,
@@ -976,14 +993,8 @@
 				DB27F0700ACB9AB90054ACA3 /* MeshLoaderMSH.h */,
 				DBF849980AC76D5800BB15CD /* MouseSDL.cpp */,
 				DB27F0710ACB9AB90054ACA3 /* MouseSDL.h */,
-				8E84E79526055B2500DC6065 /* OALSoundChannel.cpp */,
-				8E84E79426055ABF00DC6065 /* OALSoundChannel.h */,
-				8E84E7912605571100DC6065 /* OALSoundData.cpp */,
-				8E84E790260555F900DC6065 /* OALSoundData.h */,
 				DBF849990AC76D5800BB15CD /* OcclusionQueryOGL.cpp */,
 				DB27F0720ACB9AB90054ACA3 /* OcclusionQueryOGL.h */,
-				DB4AFB8C0D70768B00809E03 /* OpenALSoundEnvironment.cpp */,
-				DB4AFBF10D70776800809E03 /* OpenALSoundEnvironment.h */,
 				DBF849A30AC76D5800BB15CD /* platform */,
 				DB27F07D0ACB9AB90054ACA3 /* Platform.h */,
 				DBF849A60AC76D5800BB15CD /* SDLBitmap2D.cpp */,
@@ -998,15 +1009,11 @@
 				DB27F0820ACB9AB90054ACA3 /* SDLTexture.h */,
 				8E9F74EB255317F7000324E8 /* SDLTGAFile.cpp */,
 				8E9F74E8255316E1000324E8 /* SDLTGAFile.h */,
-				8E84E78B260549B100DC6065 /* stb_vorbis.c */,
-				8E84E78E26054A2F00DC6065 /* stb_vorbis.h */,
 				DBF849AE0AC76D5800BB15CD /* tinyXML */,
 				DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */,
 				DB27F0890ACB9AB90054ACA3 /* VertexBufferVBO.h */,
 				DBF9A1F6119A58DB00CCFDC9 /* VideoStreamTheora.cpp */,
 				DBF9A1F7119A58E600CCFDC9 /* VideoStreamTheora.h */,
-				8E84E79B260819F800DC6065 /* WAVFile.cpp */,
-				8E84E79A2608181B00DC6065 /* WAVFile.h */,
 			);
 			name = impl;
 			path = sources/impl;
@@ -1231,6 +1238,7 @@
 		DBF84A130AC76D5800BB15CD /* sound */ = {
 			isa = PBXGroup;
 			children = (
+				8E3A741926176B3E0086F8ED /* impl */,
 				DB4AFBA10D7076EE00809E03 /* LowLevelSound.cpp */,
 				DB27F0FA0ACB9AB90054ACA3 /* LowLevelSound.h */,
 				DBF84A140AC76D5800BB15CD /* MusicHandler.cpp */,

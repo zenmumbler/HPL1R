@@ -3,9 +3,9 @@
  * This file is part of Rehatched
  */
 
-#include "impl/LowLevelSoundOAL.h"
-#include "impl/OALSoundData.h"
-#include "impl/OALSoundChannel.h"
+#include "sound/impl/LowLevelSoundOAL.h"
+#include "sound/impl/OALSoundData.h"
+#include "sound/impl/OALSoundChannel.h"
 #include "math/Math.h"
 
 namespace hpl {

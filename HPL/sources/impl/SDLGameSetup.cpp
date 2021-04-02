@@ -28,7 +28,7 @@
 #include "impl/LowLevelResourcesSDL.h"
 #include "impl/LowLevelSystemSDL.h"
 #include "impl/LowLevelInputSDL.h"
-#include "impl/LowLevelSoundOAL.h"
+#include "sound/impl/LowLevelSoundOAL.h"
 #include "physics/impl/LowLevelPhysicsNewton.h"
 #ifdef INCLUDE_HAPTIC
 #include "impl/LowLevelHapticSDL.h"

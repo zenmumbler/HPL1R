@@ -5,7 +5,7 @@
 
 #include <cstdio>
 #include <AL/al.h>
-#include "impl/WAVFile.h"
+#include "sound/impl/WAVFile.h"
 #include "system/LowLevelSystem.h"
 
 struct WAVHeader {

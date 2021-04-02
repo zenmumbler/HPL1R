@@ -10,9 +10,9 @@
 #include "resources/SoundManager.h"
 #include "math/Math.h"
 
-#include "impl/OALSoundChannel.h"
-#include "impl/OALSoundData.h"
-#include "impl/stb_vorbis.h"
+#include "sound/impl/OALSoundChannel.h"
+#include "sound/impl/OALSoundData.h"
+#include "sound/impl/stb_vorbis.h"
 
 static const int STREAM_BUF_SAMPLES = 22050;
 

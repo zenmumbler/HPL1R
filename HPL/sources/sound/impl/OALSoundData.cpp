@@ -5,10 +5,10 @@
 #include <AL/al.h>
 #include "system/LowLevelSystem.h"
 #include "system/String.h"
-#include "impl/OALSoundData.h"
-#include "impl/OALSoundChannel.h"
-#include "impl/stb_vorbis.h"
-#include "impl/WAVFile.h"
+#include "sound/impl/OALSoundData.h"
+#include "sound/impl/OALSoundChannel.h"
+#include "sound/impl/stb_vorbis.h"
+#include "sound/impl/WAVFile.h"
 
 namespace hpl {
 
