@@ -25,7 +25,7 @@
 #include "input/impl/KeyboardSDL.h"
 #include "input/impl/MouseSDL.h"
 #include "graphics/impl/LowLevelGraphicsSDL.h"
-#include "impl/LowLevelResourcesSDL.h"
+#include "resources/impl/LowLevelResourcesSDL.h"
 #include "impl/LowLevelSystemSDL.h"
 #include "input/impl/LowLevelInputSDL.h"
 #include "sound/impl/LowLevelSoundOAL.h"
