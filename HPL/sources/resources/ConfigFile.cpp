@@ -20,7 +20,7 @@
 #include "system/String.h"
 #include "system/LowLevelSystem.h"
 #include "resources/FileSearcher.h"
-#include "impl/tinyXML/tinyxml.h"
+#include "ext/tinyXML/tinyxml.h"
 
 #include <stdio.h>
 

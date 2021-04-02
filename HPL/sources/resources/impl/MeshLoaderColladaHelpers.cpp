@@ -33,7 +33,7 @@
 #include "graphics/Animation.h"
 #include "graphics/AnimationTrack.h"
 
-#include "impl/tinyXML/tinyxml.h"
+#include "ext/tinyXML/tinyxml.h"
 
 #include "math/Math.h"
 

@@ -18,7 +18,7 @@
  */
 #include "graphics/Beam.h"
 
-#include "impl/tinyXML/tinyxml.h"
+#include "ext/tinyXML/tinyxml.h"
 
 #include "system/LowLevelSystem.h"
 #include "resources/Resources.h"

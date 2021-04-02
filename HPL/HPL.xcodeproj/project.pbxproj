@@ -807,6 +807,15 @@
 			path = impl;
 			sourceTree = "<group>";
 		};
+		8E3A7428261780940086F8ED /* ext */ = {
+			isa = PBXGroup;
+			children = (
+				DBF849AE0AC76D5800BB15CD /* tinyXML */,
+			);
+			name = ext;
+			path = sources/ext;
+			sourceTree = "<group>";
+		};
 		8EA486F7260FF779000D1AB7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -877,6 +886,7 @@
 			children = (
 				DB27F0600ACB9AB90054ACA3 /* hpl.h */,
 				DBF849470AC76D5700BB15CD /* ai */,
+				8E3A7428261780940086F8ED /* ext */,
 				DBF8494D0AC76D5700BB15CD /* game */,
 				DBF849530AC76D5700BB15CD /* graphics */,
 				DB4AFB440D7075B900809E03 /* haptic */,
@@ -1043,7 +1053,6 @@
 				DB27F07D0ACB9AB90054ACA3 /* Platform.h */,
 				DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */,
 				DB27F0800ACB9AB90054ACA3 /* SDLGameSetup.h */,
-				DBF849AE0AC76D5800BB15CD /* tinyXML */,
 			);
 			name = impl;
 			path = sources/impl;
