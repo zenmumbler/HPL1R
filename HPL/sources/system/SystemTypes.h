@@ -45,7 +45,6 @@ namespace hpl {
 
 	//--------------------------------------------------------
 
-
 	typedef unsigned int tFlag;
 
 	typedef std::string tString;
@@ -58,7 +57,6 @@ namespace hpl {
 	typedef std::wstring tWString;
 	typedef std::list<tWString> tWStringList;
 	typedef std::vector<tWString> tWStringVec;
-	typedef std::set<tWString> tWStringSet;
 
 	//--------------------------------------------------------
 
