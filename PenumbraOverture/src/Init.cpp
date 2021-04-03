@@ -64,7 +64,7 @@
 #include "Version.h" // cool version .h that uses SVN revision #s
 
 // MUST include Last as Unix X11 header defined DestroyAll which blows up MapHandler.h class definition
-#include "impl/SDLGameSetup.h"
+#include "game/impl/SDLGameSetup.h"
 
 //Global init...
 cInit* gpInit;

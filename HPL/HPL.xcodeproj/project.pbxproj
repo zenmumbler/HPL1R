@@ -818,6 +818,15 @@
 			path = stb;
 			sourceTree = "<group>";
 		};
+		8E9787682617DAB200C4395C /* impl */ = {
+			isa = PBXGroup;
+			children = (
+				DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */,
+				DB27F0800ACB9AB90054ACA3 /* SDLGameSetup.h */,
+			);
+			path = impl;
+			sourceTree = "<group>";
+		};
 		8EA486F7260FF779000D1AB7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -925,6 +934,7 @@
 		DBF8494D0AC76D5700BB15CD /* game */ = {
 			isa = PBXGroup;
 			children = (
+				8E9787682617DAB200C4395C /* impl */,
 				DBF8494E0AC76D5700BB15CD /* Game.cpp */,
 				DB27F01E0ACB9AB90054ACA3 /* Game.h */,
 				DB27F0200ACB9AB90054ACA3 /* LowLevelGameSetup.h */,
@@ -1052,8 +1062,6 @@
 				DBF849930AC76D5800BB15CD /* LowLevelSystemSDL.cpp */,
 				DB27F06D0ACB9AB90054ACA3 /* LowLevelSystemSDL.h */,
 				DB27F07D0ACB9AB90054ACA3 /* Platform.h */,
-				DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */,
-				DB27F0800ACB9AB90054ACA3 /* SDLGameSetup.h */,
 			);
 			name = impl;
 			path = sources/impl;

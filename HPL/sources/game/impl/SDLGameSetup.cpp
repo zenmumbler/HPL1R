@@ -21,7 +21,7 @@
 #pragma comment(lib, "SDLmain.lib")
 #endif
 
-#include "impl/SDLGameSetup.h"
+#include "game/impl/SDLGameSetup.h"
 #include "input/impl/KeyboardSDL.h"
 #include "input/impl/MouseSDL.h"
 #include "graphics/impl/LowLevelGraphicsSDL.h"
