@@ -1119,36 +1119,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::AddVertexToBatch(const cVertex *apVtx)
-	{
-		//Coord
-		mpVertexArray[mlVertexCount + 0] =	apVtx->pos.x;
-		mpVertexArray[mlVertexCount + 1] =	apVtx->pos.y;
-		mpVertexArray[mlVertexCount + 2] =	apVtx->pos.z;
-		//Color
-		mpVertexArray[mlVertexCount + 3] =	apVtx->col.r;
-		mpVertexArray[mlVertexCount + 4] =	apVtx->col.g;
-		mpVertexArray[mlVertexCount + 5] =	apVtx->col.b;
-		mpVertexArray[mlVertexCount + 6] =	apVtx->col.a;
-		//Texture coord
-		mpVertexArray[mlVertexCount + 7] =	apVtx->tex.x;
-		mpVertexArray[mlVertexCount + 8] =	apVtx->tex.y;
-		mpVertexArray[mlVertexCount + 9] =	apVtx->tex.z;
-		//Normal coord
-		mpVertexArray[mlVertexCount + 10] =	apVtx->norm.x;
-		mpVertexArray[mlVertexCount + 11] =	apVtx->norm.y;
-		mpVertexArray[mlVertexCount + 12] =	apVtx->norm.z;
-
-		mlVertexCount = mlVertexCount + mlBatchStride;
-
-		if(mlVertexCount/mlBatchStride >= mlBatchArraySize)
-		{
-			//Make the array larger.
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cLowLevelGraphicsSDL::AddVertexToBatch(const cVertex *apVtx, const cVector3f* avTransform)
 	{
 		//Coord
@@ -1189,15 +1159,8 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::AddVertexToBatch(const cVertex *apVtx, const cMatrixf* aMtx)
-	{
-
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cLowLevelGraphicsSDL::AddVertexToBatch_Size2D(const cVertex *apVtx, const cVector3f* avTransform,
-		const cColor* apCol,const float& mfW, const float& mfH)
+		const cColor* apCol, float mfW, float mfH)
 	{
 		//Coord
 		mpVertexArray[mlVertexCount + 0] =	avTransform->x + mfW;
@@ -1223,32 +1186,6 @@ namespace hpl {
 			//Make the array larger.
 		}
 	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::AddVertexToBatch_Raw(	const cVector3f& avPos, const cColor &aColor,
-														const cVector3f& avTex)
-	{
-		//Coord
-		mpVertexArray[mlVertexCount + 0] =	avPos.x;
-		mpVertexArray[mlVertexCount + 1] =	avPos.y;
-		mpVertexArray[mlVertexCount + 2] =	avPos.z;
-
-		//Color
-		mpVertexArray[mlVertexCount + 3] =	aColor.r;
-		mpVertexArray[mlVertexCount + 4] =	aColor.g;
-		mpVertexArray[mlVertexCount + 5] =	aColor.b;
-		mpVertexArray[mlVertexCount + 6] =	aColor.a;
-
-		//Texture coord
-		mpVertexArray[mlVertexCount + 7] =	avTex.x;
-		mpVertexArray[mlVertexCount + 8] =	avTex.y;
-		mpVertexArray[mlVertexCount + 9] =	avTex.z;
-
-
-		mlVertexCount = mlVertexCount + mlBatchStride;
-	}
-
 
 	//-----------------------------------------------------------------------
 

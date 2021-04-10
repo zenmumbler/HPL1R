@@ -166,16 +166,9 @@ namespace hpl {
 		void DrawQuad(const tVertexVec &avVtx,const float afZ,const cColor &aCol);
 		void DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs);
 
-		void AddVertexToBatch(const cVertex *apVtx);
 		void AddVertexToBatch(const cVertex *apVtx, const cVector3f* avTransform);
-		void AddVertexToBatch(const cVertex *apVtx, const cMatrixf* aMtx);
-
 		void AddVertexToBatch_Size2D(const cVertex *apVtx, const cVector3f* avTransform,
-										const cColor* apCol,const float& mfW, const float& mfH);
-
-		void AddVertexToBatch_Raw(	const cVector3f& avPos, const cColor &aColor,
-									const cVector3f& avTex);
-
+										const cColor* apCol, float mfW, float mfH);
 
 		void AddTexCoordToBatch(unsigned int alUnit,const cVector3f *apCoord);
 		void SetBatchTextureUnitActive(unsigned int alUnit,bool abActive);

@@ -194,7 +194,7 @@ namespace hpl {
 					for(int i=0;i<(int)pObj->mpObject->GetVertexVec()->size();i++)
 					{
 						mpLowLevelGraphics->AddVertexToBatch(pObj->mpObject->GetVtxPtr(i),
-																&pObj->mvTransform);
+															&pObj->mvTransform);
 						mpLowLevelGraphics->AddIndexToBatch(lIdxAdd + i);
 					}
 				}
