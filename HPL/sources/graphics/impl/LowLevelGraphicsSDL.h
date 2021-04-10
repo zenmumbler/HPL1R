@@ -170,13 +170,9 @@ namespace hpl {
 		void AddVertexToBatch_Size2D(const cVertex *apVtx, const cVector3f* avTransform,
 										const cColor* apCol, float mfW, float mfH);
 
-		void AddTexCoordToBatch(unsigned int alUnit,const cVector3f *apCoord);
-		void SetBatchTextureUnitActive(unsigned int alUnit,bool abActive);
-
 		void AddIndexToBatch(int alIndex);
 
-		void FlushTriBatch(tVtxBatchFlag aTypeFlags, bool abAutoClear=true);
-		void FlushQuadBatch(tVtxBatchFlag aTypeFlags, bool abAutoClear=true);
+		void DrawBatch(tVtxBatchFlag aTypeFlags, eBatchDrawMode aDrawMode);
 		void ClearBatch();
 
 		//PRIMITIVES
@@ -235,11 +231,6 @@ namespace hpl {
 		unsigned int mlIndexCount;
 
 		unsigned int mlBatchStride;
-
-		float *mpTexCoordArray[MAX_TEXTUREUNITS];
-		bool mbTexCoordArrayActive[MAX_TEXTUREUNITS];
-		unsigned int mlTexCoordArrayCount[MAX_TEXTUREUNITS];
-
 		unsigned int mlBatchArraySize;
 
 		//Clearing

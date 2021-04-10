@@ -113,13 +113,6 @@ namespace hpl {
 		mpVertexArray = (float*)hplMalloc(sizeof(float) * mlBatchStride * mlBatchArraySize);
 		mpIndexArray = (unsigned int*)hplMalloc(sizeof(unsigned int) * mlBatchArraySize); //Index is one int.
 
-		for(int i=0;i<MAX_TEXTUREUNITS;i++)
-		{
-			mpTexCoordArray[i] = (float*)hplMalloc(sizeof(float) * 3 * mlBatchArraySize);
-			mbTexCoordArrayActive[i] = false;
-			mlTexCoordArrayCount[i]=0;
-		}
-
 		//Init extra stuff
 		InitCG();
 	}
@@ -130,7 +123,6 @@ namespace hpl {
 	{
 		hplFree(mpVertexArray);
 		hplFree(mpIndexArray);
-		for(int i=0;i<MAX_TEXTUREUNITS;i++)	hplFree(mpTexCoordArray[i]);
 		
 		if (mpGLContext) {
 			SDL_GL_DeleteContext(mpGLContext);
@@ -1202,63 +1194,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::AddTexCoordToBatch(unsigned int alUnit,const cVector3f *apCoord)
-	{
-		unsigned int lCount = mlTexCoordArrayCount[alUnit];
-
-		mpTexCoordArray[alUnit][lCount+0] = apCoord->x;
-		mpTexCoordArray[alUnit][lCount+1] = apCoord->y;
-		mpTexCoordArray[alUnit][lCount+2] = apCoord->z;
-
-		mlTexCoordArrayCount[alUnit]+=3;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetBatchTextureUnitActive(unsigned int alUnit,bool abActive)
-	{
-		glClientActiveTexture(GL_TEXTURE0 + alUnit);
-
-		if(abActive==false){
-			glTexCoordPointer(3,GL_FLOAT,sizeof(float)*mlBatchStride, &mpVertexArray[7]);
-		}
-		else {
-			glTexCoordPointer(3,GL_FLOAT,0, &mpTexCoordArray[alUnit][0]);
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::FlushTriBatch(tVtxBatchFlag aTypeFlags, bool abAutoClear)
+	void cLowLevelGraphicsSDL::DrawBatch(tVtxBatchFlag aTypeFlags, eBatchDrawMode aDrawMode)
 	{
 		SetVtxBatchStates(aTypeFlags);
 		SetUpBatchArrays();
-
-		glDrawElements(GL_TRIANGLES,mlIndexCount,GL_UNSIGNED_INT, mpIndexArray);
-
-		if(abAutoClear){
-			mlIndexCount = 0;
-			mlVertexCount = 0;
-			for(int i=0;i<MAX_TEXTUREUNITS;i++)
-				mlTexCoordArrayCount[i]=0;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::FlushQuadBatch(tVtxBatchFlag aTypeFlags, bool abAutoClear)
-	{
-		SetVtxBatchStates(aTypeFlags);
-		SetUpBatchArrays();
-
-		glDrawElements(GL_QUADS,mlIndexCount,GL_UNSIGNED_INT, mpIndexArray);
-
-		if(abAutoClear){
-			mlIndexCount = 0;
-			mlVertexCount = 0;
-			for(int i=0;i<MAX_TEXTUREUNITS;i++)
-				mlTexCoordArrayCount[i]=0;
-		}
+		
+		GLenum glMode = aDrawMode == eBatchDrawMode_Tris ? GL_TRIANGLES : GL_QUADS;
+		glDrawElements(glMode, mlIndexCount, GL_UNSIGNED_INT, mpIndexArray);
 	}
 
 	//-----------------------------------------------------------------------

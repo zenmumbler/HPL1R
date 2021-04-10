@@ -178,6 +178,12 @@ namespace hpl {
 
 		eGraphicCaps_LastEnum
 	};
+	
+	enum eBatchDrawMode
+	{
+		eBatchDrawMode_Tris,
+		eBatchDrawMode_Quads
+	};
 
 	typedef tFlag tVtxBatchFlag;
 
@@ -355,14 +361,7 @@ namespace hpl {
 
 		virtual void AddIndexToBatch(int alIndex)=0;
 
-		virtual void AddTexCoordToBatch(unsigned int alUnit,const cVector3f *apCoord)=0;
-		virtual void SetBatchTextureUnitActive(unsigned int alUnit,bool abActive)=0;
-
-		//Add more ways to add Vertex to the batch?
-		//Index array, vtxArray, etc perhaps?
-
-		virtual void FlushTriBatch(tVtxBatchFlag aTypeFlags, bool abAutoClear=true)=0;
-		virtual void FlushQuadBatch(tVtxBatchFlag aTypeFlags, bool abAutoClear=true)=0;
+		virtual void DrawBatch(tVtxBatchFlag aTypeFlags, eBatchDrawMode aDrawMode)=0;
 		virtual void ClearBatch()=0;
 
 		//some primitive:

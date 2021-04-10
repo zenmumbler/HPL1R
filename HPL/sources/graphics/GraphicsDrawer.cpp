@@ -218,8 +218,7 @@ namespace hpl {
 
 			lIdxAdd =0;
 
-			mpLowLevelGraphics->FlushQuadBatch(eVtxBatchFlag_Position |	eVtxBatchFlag_Texture0 | eVtxBatchFlag_Color0,false);
-
+			mpLowLevelGraphics->DrawBatch(eVtxBatchFlag_Position | eVtxBatchFlag_Texture0 | eVtxBatchFlag_Color0, eBatchDrawMode_Quads);
 			mpLowLevelGraphics->ClearBatch();
 
 			pPrevMat->EndRendering(mpLowLevelGraphics);
