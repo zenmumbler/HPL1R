@@ -814,21 +814,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::DrawRect(const cVector2f &avPos,const cVector2f &avSize,float afZ)
-	{
-		glColor4f(1,1,1,1);
-		glBegin(GL_QUADS);
-		{
-			glTexCoord2f(0.0, 0.0); glVertex3f(avPos.x, avPos.y,afZ);
-			glTexCoord2f(1.0, 0.0); glVertex3f(avPos.x+avSize.x, avPos.y,afZ);
-			glTexCoord2f(1.0, 1.0); glVertex3f(avPos.x+avSize.x, avPos.y+avSize.y,afZ);
-			glTexCoord2f(0.0, 1.0); glVertex3f(avPos.x, avPos.y+avSize.y,afZ);
-		}
-		glEnd();
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cLowLevelGraphicsSDL::FlushRendering()
 	{
 		glFlush();
@@ -837,38 +822,6 @@ namespace hpl {
 	{
 		glFlush();
 		SDL_GL_SwapWindow(mpWindow);
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::DrawTri(const tVertexVec &avVtx)
-	{
-		assert(avVtx.size()==3);
-
-		glBegin(GL_TRIANGLES);
-		{
-			for(int i=0;i<3;i++){
-				glTexCoord3f(avVtx[i].tex.x,avVtx[i].tex.y,avVtx[i].tex.z);
-				glColor4f(avVtx[i].col.r,avVtx[i].col.g,avVtx[i].col.b,avVtx[i].col.a);
-				glVertex3f(avVtx[i].pos.x,avVtx[i].pos.y,avVtx[i].pos.z);
-			}
-		}
-		glEnd();
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::DrawTri(const cVertex* avVtx)
-	{
-		glBegin(GL_TRIANGLES);
-		{
-			for(int i=0;i<3;i++){
-				glTexCoord3f(avVtx[i].tex.x,avVtx[i].tex.y,avVtx[i].tex.z);
-				glColor4f(avVtx[i].col.r,avVtx[i].col.g,avVtx[i].col.b,avVtx[i].col.a);
-				glVertex3f(avVtx[i].pos.x,avVtx[i].pos.y,avVtx[i].pos.z);
-			}
-		}
-		glEnd();
 	}
 
 	//-----------------------------------------------------------------------

@@ -342,11 +342,6 @@ namespace hpl {
 								eVertexBufferUsageType aUsageType,
 								int alReserveVtxSize=0,int alReserveIdxSize=0)=0;
 
-		virtual void DrawRect(const cVector2f &avPos,const cVector2f &avSize,float afZ)=0;
-
-		virtual void DrawTri(const tVertexVec &avVtx)=0;
-		virtual void DrawTri(const cVertex* avVtx)=0;
-
 		virtual void DrawQuad(const tVertexVec &avVtx)=0;
 		virtual void DrawQuad(const tVertexVec &avVtx, const cColor aCol)=0;
 		virtual void DrawQuad(const tVertexVec &avVtx,const float afZ)=0;
