@@ -208,10 +208,6 @@ namespace hpl {
 			}
 			else
 			{
-				//apSettings->mpLowLevel->SetTextureConstantColor(cColor(0,0));
-				//apSettings->mpLowLevel->SetTextureEnv(eTextureParam_ColorSource1,eTextureSource_Constant);
-
-				//apSettings->mpLowLevel->SetAlphaTestActive(false);
 				apSettings->mpLowLevel->SetAlphaTestActive(true);
 				apSettings->mpLowLevel->SetAlphaTestFunc(eAlphaTestFunc_GreaterOrEqual, 0.6f);
 				if(apSettings->mbLog)Log("Trans");

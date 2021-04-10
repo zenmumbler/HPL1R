@@ -784,7 +784,7 @@ namespace hpl {
 		else if(aParam>=eTextureParam_ColorSource0 && aParam<=eTextureParam_AlphaSource2){
 			glTexEnvi(GL_TEXTURE_ENV,lParam,GetGLTextureSourceEnum((eTextureSource)alVal));
 		}
-		else if(aParam>=eTextureParam_ColorOp0 && aParam<=eTextureParam_AlphaOp2){
+		else if(aParam>=eTextureParam_ColorOp0 && aParam<=eTextureParam_ColorOp2){
 			glTexEnvi(GL_TEXTURE_ENV,lParam,GetGLTextureOpEnum((eTextureOp)alVal));
 		}
 		else {
@@ -1741,11 +1741,6 @@ namespace hpl {
 			case eTextureParam_ColorOp0:		return GL_OPERAND0_RGB;
 			case eTextureParam_ColorOp1:		return GL_OPERAND1_RGB;
 			case eTextureParam_ColorOp2:		return GL_OPERAND2_RGB;
-			case eTextureParam_AlphaOp0:		return GL_OPERAND0_ALPHA;
-			case eTextureParam_AlphaOp1:		return GL_OPERAND1_ALPHA;
-			case eTextureParam_AlphaOp2:		return GL_OPERAND2_ALPHA;
-			case eTextureParam_ColorScale:		return GL_RGB_SCALE;
-			case eTextureParam_AlphaScale:		return GL_ALPHA_SCALE;
 			default: return 0;
 		}
 	}

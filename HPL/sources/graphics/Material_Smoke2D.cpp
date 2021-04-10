@@ -48,8 +48,6 @@ namespace hpl {
 
 		apLowLevelGraphics->SetTexture(0, GetTexture());
 		apLowLevelGraphics->SetActiveTextureUnit(0);
-		//apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Alpha);
-		//apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 		apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Color);
 		apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 	}

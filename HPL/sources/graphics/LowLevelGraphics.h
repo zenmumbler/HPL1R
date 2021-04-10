@@ -58,11 +58,6 @@ namespace hpl {
 		eTextureParam_ColorOp0,
 		eTextureParam_ColorOp1,
 		eTextureParam_ColorOp2,
-		eTextureParam_AlphaOp0,
-		eTextureParam_AlphaOp1,
-		eTextureParam_AlphaOp2,
-		eTextureParam_ColorScale,
-		eTextureParam_AlphaScale,
 		eTextureParam_LastEnum
 	};
 

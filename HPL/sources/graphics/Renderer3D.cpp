@@ -400,8 +400,6 @@ namespace hpl {
 		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorSource0,eTextureSource_Texture);
 		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorSource1,eTextureSource_Constant);
 
-		//mpLowLevelGraphics->SetTextureEnv(eTextureParam_AlphaSource1,eTextureSource_Constant);
-
 		mpLowLevelGraphics->SetTextureConstantColor(mRenderSettings.mAmbientColor);
 
 		if(mbLog) Log("Rendering ZBuffer:\n");
@@ -409,7 +407,6 @@ namespace hpl {
 
 		//reset parameters.
 		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorSource1,eTextureSource_Previous);
-		//mpLowLevelGraphics->SetTextureEnv(eTextureParam_AlphaSource1,eTextureSource_Previous);
 
 		////////////////////////////
 		//Render Occlusion Queries

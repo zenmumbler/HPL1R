@@ -47,7 +47,6 @@ namespace hpl {
 		apLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_One);
 
 		apLowLevelGraphics->SetActiveTextureUnit(0);
-		//apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Alpha);
 		apLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 
 		apLowLevelGraphics->SetTexture(0, GetTexture());
