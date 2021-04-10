@@ -576,8 +576,6 @@ namespace hpl {
 
 		mpLowLevelGraphics->SetMatrix(eMatrix_Projection, apCamera->GetProjectionMatrix());
 
-		mpLowLevelGraphics->SetColor(cColor(1,1,1,1));
-
 		mRenderSettings.mpCamera = apCamera;
 
 		for(int i=0; i<MAX_TEXTUREUNITS; ++i)

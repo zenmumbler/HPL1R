@@ -155,8 +155,6 @@ namespace hpl {
 		void SetTextureEnv(eTextureParam aParam, int alVal);
 		void SetTextureConstantColor(const cColor &aColor);
 
-		void SetColor(const cColor &aColor);
-
 		// POLYGONS
 		iVertexBuffer* CreateVertexBuffer(tVertexFlag aFlags, eVertexBufferDrawType aDrawType,
 										eVertexBufferUsageType aUsageType,

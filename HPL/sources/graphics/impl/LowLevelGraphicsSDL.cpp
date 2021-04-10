@@ -803,13 +803,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::SetColor(const cColor &aColor)
-	{
-		glColor4f(aColor.r, aColor.g, aColor.b, aColor.a);
-	}
-
-	//-----------------------------------------------------------------------
-
 	iVertexBuffer* cLowLevelGraphicsSDL::CreateVertexBuffer(tVertexFlag aFlags,
 														eVertexBufferDrawType aDrawType,
 														eVertexBufferUsageType aUsageType,

@@ -331,9 +331,6 @@ namespace hpl {
 		virtual void SetTextureEnv(eTextureParam aParam, int alVal)=0;
 		virtual void SetTextureConstantColor(const cColor &aColor)=0;
 
-		//COLOR
-		virtual void SetColor(const cColor &aColor)=0;
-
 		//BLENDING
 		virtual void SetBlendActive(bool abX)=0;
 		virtual void SetBlendFunc(eBlendFunc aSrcFactor, eBlendFunc aDestFactor)=0;
