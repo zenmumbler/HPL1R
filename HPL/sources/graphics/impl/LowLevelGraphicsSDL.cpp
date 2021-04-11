@@ -1325,69 +1325,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::DrawLine2D(const cVector2f& avBegin, const cVector2f& avEnd, float afZ, cColor aCol)
-	{
-		SetTexture(0,NULL);
-		SetBlendActive(false);
-		glColor4f(aCol.r,aCol.g,aCol.b,aCol.a);
-		glBegin(GL_LINES);
-		{
-			glVertex3f(avBegin.x,avBegin.y,afZ);
-			glVertex3f(avEnd.x,avEnd.y,afZ);
-		}
-		glEnd();
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::DrawLineRect2D(const cRect2f& aRect, float afZ, cColor aCol)
-	{
-		SetTexture(0, NULL);
-		SetBlendActive(false);
-		glColor4f(aCol.r,aCol.g,aCol.b,aCol.a);
-		glBegin(GL_LINE_STRIP);
-		{
-			glVertex3f(aRect.x,aRect.y,afZ);
-			glVertex3f(aRect.x+aRect.w,aRect.y,afZ);
-			glVertex3f(aRect.x+aRect.w,aRect.y+aRect.h,afZ);
-			glVertex3f(aRect.x,aRect.y+aRect.h,afZ);
-			glVertex3f(aRect.x,aRect.y,afZ);
-		}
-		glEnd();
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::DrawFilledRect2D(const cRect2f& aRect, float afZ, cColor aCol)
-	{
-		SetTexture(0, NULL);
-		glColor4f(aCol.r,aCol.g,aCol.b,aCol.a);
-		glBegin(GL_QUADS);
-		{
-			glVertex3f(aRect.x,aRect.y,afZ);
-			glVertex3f(aRect.x+aRect.w,aRect.y,afZ);
-			glVertex3f(aRect.x+aRect.w,aRect.y+aRect.h,afZ);
-			glVertex3f(aRect.x,aRect.y+aRect.h,afZ);
-		}
-		glEnd();
-	}
-
-	//-----------------------------------------------------------------------
-
-	/**
-	 * \todo Implement this.
-	 * \param avCenter
-	 * \param afRadius
-	 * \param afZ
-	 * \param aCol
-	 */
-	void cLowLevelGraphicsSDL::DrawLineCircle2D(const cVector2f& avCenter, float afRadius, float afZ, cColor aCol)
-	{
-		//Implement later
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cLowLevelGraphicsSDL::CopyContextToTexure(iTexture* apTex, const cVector2l &avPos,
 							const cVector2l &avSize, const cVector2l &avTexOffset)
 	{

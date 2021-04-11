@@ -180,12 +180,6 @@ namespace hpl {
 		void DrawBoxMaxMin(const cVector3f& avMax, const cVector3f& avMin, cColor aCol);
 		void DrawSphere(const cVector3f& avPos, float afRadius, cColor aCol);
 
-		void DrawLine2D(const cVector2f& avBegin, const cVector2f& avEnd, float afZ, cColor aCol);
-		void DrawLineRect2D(const cRect2f& aRect, float afZ, cColor aCol);
-		void DrawLineCircle2D(const cVector2f& avCenter, float afRadius, float afZ, cColor aCol);
-
-		void DrawFilledRect2D(const cRect2f& aRect, float afZ, cColor aCol);
-
 		//FRAMEBUFFER
 		void CopyContextToTexure(iTexture* apTex, const cVector2l &avPos,
 			const cVector2l &avSize, const cVector2l &avTexOffset=0);

@@ -369,12 +369,6 @@ namespace hpl {
 		virtual void DrawBoxMaxMin(const cVector3f& avMax, const cVector3f& avMin, cColor aCol)=0;
 		virtual void DrawSphere(const cVector3f& avPos, float afRadius, cColor aCol)=0;
 
-
-		virtual void DrawLine2D(const cVector2f& avBegin, const cVector2f& avEnd, float afZ, cColor aCol)=0;
-		virtual void DrawLineRect2D(const cRect2f& aRect, float afZ, cColor aCol)=0;
-		virtual void DrawLineCircle2D(const cVector2f& avCenter, float afRadius, float afZ, cColor aCol)=0;
-
-		virtual void DrawFilledRect2D(const cRect2f& aRect, float afZ, cColor aCol)=0;
 		// GENERAL
 		/**
 		 * All further drawing operations are rendered to this texture.
