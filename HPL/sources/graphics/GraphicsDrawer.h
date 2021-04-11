@@ -22,13 +22,12 @@
 #include "resources/ImageManager.h"
 #include "graphics/GraphicsTypes.h"
 #include "graphics/Bitmap2D.h"
+#include "graphics/GfxObject.h"
 
 namespace hpl {
 
 	class iLowLevelGraphics;
 	class cResourceImage;
-	class cGfxObject;
-	class iOldMaterial;
 
 	class cGfxBufferObject
 	{
@@ -88,7 +87,7 @@ namespace hpl {
 		 */
 		void DrawAll();
 		
-		iOldMaterial* CreateMaterial(const tString& asMaterialName, cResourceImage* apImage);
+		iOldMaterial* CreateMaterial(eOldMaterialType type, cResourceImage* apImage);
 
 		/**
 		 * Create Gfx object from file
@@ -97,7 +96,7 @@ namespace hpl {
 		 * \param abAddToList if the engine should delete object at exit, this means DestroyGfxObject must be used. Should almost always be true.
 		 * \return
 		 */
-		cGfxObject* CreateGfxObject(const tString &asFileName, const tString &asMaterialName,
+		cGfxObject* CreateGfxObject(const tString &asFileName, eOldMaterialType type,
 									bool abAddToList=true);
 		/**
 		 * Create gfx object from Bitmap
@@ -106,7 +105,7 @@ namespace hpl {
 		 * \param abAddToList if the engine should delete object at exit, this means DestroyGfxObject must be used. Should almost always be true.
 		 * \return
 		 */
-		cGfxObject* CreateGfxObject(iBitmap2D *apBmp, const tString &asMaterialName,
+		cGfxObject* CreateGfxObject(iBitmap2D *apBmp, const eOldMaterialType type,
 									bool abAddToList=true);
 		/**
 		 * Destroys a gfx object.

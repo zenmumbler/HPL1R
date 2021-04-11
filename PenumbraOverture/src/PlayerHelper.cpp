@@ -548,7 +548,7 @@ cPlayerHealth::cPlayerHealth(cInit *apInit)
 
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
 	
-	mpDamageGfx = mpDrawer->CreateGfxObject("player_hurt.bmp","diffalpha2d");
+	mpDamageGfx = mpDrawer->CreateGfxObject("player_hurt.bmp",eOldMaterialType::DiffuseAlpha);
 
 	mfGfxAlpha =0;
 	mfGfxAlphaAdd =0;
@@ -1039,8 +1039,8 @@ cPlayerDamage::cPlayerDamage(cInit *apInit)
 
 	mType = ePlayerDamageType_BloodSplash;
 
-	mvHitGfx[ePlayerDamageType_BloodSplash] = mpDrawer->CreateGfxObject("player_hit_blood_splash.bmp","diffalpha2d");
-	mvHitGfx[ePlayerDamageType_Ice] = mpDrawer->CreateGfxObject("player_hit_ice.bmp","diffalpha2d");
+	mvHitGfx[ePlayerDamageType_BloodSplash] = mpDrawer->CreateGfxObject("player_hit_blood_splash.bmp",eOldMaterialType::DiffuseAlpha);
+	mvHitGfx[ePlayerDamageType_Ice] = mpDrawer->CreateGfxObject("player_hit_ice.bmp",eOldMaterialType::DiffuseAlpha);
 
 	mvHeadSwingAcc = cVector2f(17.0f, 17.0f);
 }
@@ -1172,8 +1172,8 @@ cPlayerDeath::cPlayerDeath(cInit *apInit)
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
 	mpPostEffects = mpInit->mpGame->GetGraphics()->GetRendererPostEffects();
 
-	mpFadeGfx = mpDrawer->CreateGfxObject("player_death_fade.bmp","smoke2d");
-	mpBlackGfx = mpDrawer->CreateGfxObject("player_death_black.bmp","smoke2d");
+	mpFadeGfx = mpDrawer->CreateGfxObject("player_death_fade.bmp",eOldMaterialType::Smoke);
+	mpBlackGfx = mpDrawer->CreateGfxObject("player_death_black.bmp",eOldMaterialType::Smoke);
 }
 
 cPlayerDeath::~cPlayerDeath()
@@ -1858,7 +1858,7 @@ cPlayerNoiseFilter::cPlayerNoiseFilter(cInit *apInit)
     for(int i=0; i<mlAmount; ++i)
 	{
 		tString sFileName = "effect_noise0"+cString::ToString(i);
-		cGfxObject *pObject = mpDrawer->CreateGfxObject(sFileName,"smoke2d");
+		cGfxObject *pObject = mpDrawer->CreateGfxObject(sFileName,eOldMaterialType::Smoke);
 		if(pObject==NULL)
 		{
 			FatalError("Error loading noise filter!\n");
@@ -2128,7 +2128,7 @@ cPlayerHidden::cPlayerHidden(cInit *apInit)
 	Reset();
 	
 	//Get images
-	mpInShadowGfx =  mpDrawer->CreateGfxObject("player_in_shadow.jpg","diffadditive2d");
+	mpInShadowGfx =  mpDrawer->CreateGfxObject("player_in_shadow.jpg",eOldMaterialType::DiffuseAdditive);
 
 	//Get font
 	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt");

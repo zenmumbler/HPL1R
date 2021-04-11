@@ -341,7 +341,7 @@ namespace hpl {
 
 		//////////////////////////
 		//Gfx object
-		cGfxObject* pObject = mpGraphicsDrawer->CreateGfxObject(apBmp,"diffalpha2d",false);
+		cGfxObject* pObject = mpGraphicsDrawer->CreateGfxObject(apBmp,eOldMaterialType::DiffuseAlpha,false);
 
 		//////////////////////////
 		//Gui gfx

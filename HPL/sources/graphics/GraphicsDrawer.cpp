@@ -224,16 +224,16 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iOldMaterial* cGraphicsDrawer::CreateMaterial(const tString& asMaterialName, cResourceImage* apImage) {
+	iOldMaterial* cGraphicsDrawer::CreateMaterial(eOldMaterialType type, cResourceImage* apImage) {
 		iOldMaterial *pMat = NULL;
 
-		if (asMaterialName == "diffalpha2d") {
+		if (type == eOldMaterialType::DiffuseAlpha) {
 			pMat = hplNew(cMaterial_DiffuseAlpha2D, (mpImageManager));
 		}
-		else if (asMaterialName == "diffadditive2d") {
+		else if (type == eOldMaterialType::DiffuseAdditive) {
 			pMat = hplNew(cMaterial_DiffuseAdditive2D, (mpImageManager));
 		}
-		else if (asMaterialName == "smoke2d") {
+		else if (type == eOldMaterialType::Smoke) {
 			pMat = hplNew(cMaterial_Smoke2D, (mpImageManager));
 		}
 		
@@ -245,7 +245,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cGfxObject* cGraphicsDrawer::CreateGfxObject(const tString &asFileName, const tString &asMaterialName,
+	cGfxObject* cGraphicsDrawer::CreateGfxObject(const tString &asFileName, eOldMaterialType type,
 												bool abAddToList)
 	{
 		cResourceImage* pImage = mpImageManager->CreateImage(asFileName);
@@ -254,9 +254,9 @@ namespace hpl {
 			return NULL;
 		}
 
-		iOldMaterial* pMat = CreateMaterial(asMaterialName, pImage);
+		iOldMaterial* pMat = CreateMaterial(type, pImage);
 		if(pMat==NULL){
-			FatalError("Couldn't create material '%s'!\n", asMaterialName.c_str());
+			FatalError("Couldn't create material '%d'!\n", type);
 			return NULL;
 		}
 
@@ -269,18 +269,18 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cGfxObject* cGraphicsDrawer::CreateGfxObject(iBitmap2D *apBmp, const tString &asMaterialName,
+	cGfxObject* cGraphicsDrawer::CreateGfxObject(iBitmap2D *apBmp, eOldMaterialType type,
 												bool abAddToList)
 	{
-		cResourceImage* pImage = mpImageManager->CreateFromBitmap("",apBmp);
+		cResourceImage* pImage = mpImageManager->CreateFromBitmap(apBmp);
 		if(pImage==NULL){
 			FatalError("Couldn't create image\n");
 			return NULL;
 		}
 
-		iOldMaterial* pMat = CreateMaterial(asMaterialName, pImage);
+		iOldMaterial* pMat = CreateMaterial(type, pImage);
 		if(pMat==NULL){
-			FatalError("Couldn't create material '%s'!\n", asMaterialName.c_str());
+			FatalError("Couldn't create material '%d'!\n", type);
 			return NULL;
 		}
 

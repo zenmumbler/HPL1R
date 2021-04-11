@@ -29,7 +29,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cMaterial_Smoke2D::cMaterial_Smoke2D(cImageManager* apImageManager)
-		: iOldMaterial(eOldMaterialType_Smoke, apImageManager)
+		: iOldMaterial(eOldMaterialType::Smoke, apImageManager)
 	{
 	}
 

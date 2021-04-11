@@ -222,16 +222,16 @@ cPlayer::cPlayer(cInit *apInit)  : iUpdateable("Player")
 
 	for(size_t i=0; i < mvCrossHairs.size(); i++) mvCrossHairs[i] = NULL;
 
-	mvCrossHairs[eCrossHairState_Inactive] = mpGfxDrawer->CreateGfxObject("player_crosshair_inactive","diffalpha2d");
-	mvCrossHairs[eCrossHairState_Active] = mpGfxDrawer->CreateGfxObject("player_crosshair_active","diffalpha2d");
-	mvCrossHairs[eCrossHairState_Invalid] = mpGfxDrawer->CreateGfxObject("player_crosshair_invalid","diffalpha2d");
-	mvCrossHairs[eCrossHairState_Grab] = mpGfxDrawer->CreateGfxObject("player_crosshair_grab","diffalpha2d");
-	mvCrossHairs[eCrossHairState_Examine] = mpGfxDrawer->CreateGfxObject("player_crosshair_examine","diffalpha2d");
-	mvCrossHairs[eCrossHairState_Pointer] = mpGfxDrawer->CreateGfxObject("player_crosshair_pointer","diffalpha2d");
-	mvCrossHairs[eCrossHairState_DoorLink] = mpGfxDrawer->CreateGfxObject("player_crosshair_doorlink","diffalpha2d");
-	mvCrossHairs[eCrossHairState_PickUp] = mpGfxDrawer->CreateGfxObject("player_crosshair_pickup","diffalpha2d");
-	mvCrossHairs[eCrossHairState_Ladder] = mpGfxDrawer->CreateGfxObject("player_crosshair_ladder","diffalpha2d");
-	mvCrossHairs[eCrossHairState_Cross] = mpGfxDrawer->CreateGfxObject("player_crosshair_cross","diffalpha2d");
+	mvCrossHairs[eCrossHairState_Inactive] = mpGfxDrawer->CreateGfxObject("player_crosshair_inactive",eOldMaterialType::DiffuseAlpha);
+	mvCrossHairs[eCrossHairState_Active] = mpGfxDrawer->CreateGfxObject("player_crosshair_active",eOldMaterialType::DiffuseAlpha);
+	mvCrossHairs[eCrossHairState_Invalid] = mpGfxDrawer->CreateGfxObject("player_crosshair_invalid",eOldMaterialType::DiffuseAlpha);
+	mvCrossHairs[eCrossHairState_Grab] = mpGfxDrawer->CreateGfxObject("player_crosshair_grab",eOldMaterialType::DiffuseAlpha);
+	mvCrossHairs[eCrossHairState_Examine] = mpGfxDrawer->CreateGfxObject("player_crosshair_examine",eOldMaterialType::DiffuseAlpha);
+	mvCrossHairs[eCrossHairState_Pointer] = mpGfxDrawer->CreateGfxObject("player_crosshair_pointer",eOldMaterialType::DiffuseAlpha);
+	mvCrossHairs[eCrossHairState_DoorLink] = mpGfxDrawer->CreateGfxObject("player_crosshair_doorlink",eOldMaterialType::DiffuseAlpha);
+	mvCrossHairs[eCrossHairState_PickUp] = mpGfxDrawer->CreateGfxObject("player_crosshair_pickup",eOldMaterialType::DiffuseAlpha);
+	mvCrossHairs[eCrossHairState_Ladder] = mpGfxDrawer->CreateGfxObject("player_crosshair_ladder",eOldMaterialType::DiffuseAlpha);
+	mvCrossHairs[eCrossHairState_Cross] = mpGfxDrawer->CreateGfxObject("player_crosshair_cross",eOldMaterialType::DiffuseAlpha);
 
 #ifdef INCLUDE_HAPTIC
 	///////////////////////////////

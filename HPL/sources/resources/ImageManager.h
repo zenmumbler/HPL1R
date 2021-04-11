@@ -58,7 +58,7 @@ namespace hpl {
 		int FlushAll();
 		void DeleteAllBitmapFrames();
 
-		cResourceImage* CreateFromBitmap(const tString &asName,iBitmap2D* apBmp, int alFrameHandle=-1);
+		cResourceImage* CreateFromBitmap(iBitmap2D* apBmp, int alFrameHandle=-1);
 
 		int CreateFrame(cVector2l avSize);
 		void SetFrameLocked(int alHandle, bool abLocked);

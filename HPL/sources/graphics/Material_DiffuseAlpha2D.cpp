@@ -29,7 +29,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cMaterial_DiffuseAlpha2D::cMaterial_DiffuseAlpha2D(cImageManager* apImageManager)
-		: iOldMaterial(eOldMaterialType_DiffuseAlpha, apImageManager)
+		: iOldMaterial(eOldMaterialType::DiffuseAlpha, apImageManager)
 	{
 	}
 

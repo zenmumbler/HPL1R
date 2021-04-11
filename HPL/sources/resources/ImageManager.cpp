@@ -126,7 +126,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cResourceImage* cImageManager::CreateFromBitmap(const tString &asName,iBitmap2D* apBmp, int alFrameHandle)
+	cResourceImage* cImageManager::CreateFromBitmap(iBitmap2D* apBmp, int alFrameHandle)
 	{
 		if(apBmp==NULL)return NULL;
 

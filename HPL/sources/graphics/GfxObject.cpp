@@ -53,9 +53,6 @@ namespace hpl {
 	// CONSTRUCTORS
 	//////////////////////////////////////////////////////////////////////////
 
-	typedef std::vector<cGfxObject> tGfxObjectVec;
-	typedef tGfxObjectVec::iterator tGfxObjectVecIt;
-
 	//-----------------------------------------------------------------------
 
 	cGfxObject::cGfxObject(iOldMaterial* apMat, const tString& asFile)

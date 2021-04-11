@@ -28,14 +28,13 @@ namespace hpl {
 	class cImageManager;
 	class iLowLevelGraphics;
 
-	enum eOldMaterialType
+	enum class eOldMaterialType
 	{
-		eOldMaterialType_Null,
+		Null,
 
-		eOldMaterialType_DiffuseAlpha,
-		eOldMaterialType_DiffuseAdditive,
-		eOldMaterialType_Smoke,
-		eOldMaterialType_FontNormal
+		DiffuseAlpha,
+		DiffuseAdditive,
+		Smoke
    };
 
 

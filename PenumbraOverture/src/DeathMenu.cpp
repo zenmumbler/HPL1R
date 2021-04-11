@@ -174,7 +174,7 @@ cDeathMenu::cDeathMenu(cInit *apInit)  : iUpdateable("NumericalPanel")
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
 
 	//Load graphics (use notebook background for now).
-	mpGfxBackground = mpDrawer->CreateGfxObject("notebook_background.bmp","diffalpha2d");
+	mpGfxBackground = mpDrawer->CreateGfxObject("notebook_background.bmp",eOldMaterialType::DiffuseAlpha);
 
 	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt");
 

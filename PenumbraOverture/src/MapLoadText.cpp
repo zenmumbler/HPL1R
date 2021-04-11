@@ -34,7 +34,7 @@ cMapLoadText::cMapLoadText(cInit *apInit)  : iUpdateable("MapLoadText")
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
 
 	//Load graphics
-	//mpGfxMouse = mpDrawer->CreateGfxObject("player_crosshair_pointer.bmp","diffalpha2d");
+	//mpGfxMouse = mpDrawer->CreateGfxObject("player_crosshair_pointer.bmp",eOldMaterialType::DiffuseAlpha);
 	
 	//load fonts
 	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt");

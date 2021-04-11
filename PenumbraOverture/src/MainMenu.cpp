@@ -376,14 +376,12 @@ void cMainMenuWidget_Text::OnMouseOver(bool abOver)
 //-----------------------------------------------------------------------
 
 cMainMenuWidget_Image::cMainMenuWidget_Image(cInit *apInit, const cVector3f &avPos,const cVector2f& avSize,
-											 const tString& asImageFile, const tString& asImageMat,
+											 const tString& asImageFile, eOldMaterialType matType,
 											 const cColor& aColor)
 										   : cMainMenuWidget(apInit,avPos,avSize)
 {
-	mpImage = mpDrawer->CreateGfxObject(asImageFile,asImageMat);
-
+	mpImage = mpDrawer->CreateGfxObject(asImageFile, matType);
 	mColor = aColor;
-
 	mvSize = avSize;
 }
 
@@ -413,15 +411,15 @@ cMainMenuWidget_List::cMainMenuWidget_List(cInit *apInit, const cVector3f &avPos
 
 	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt",30);
 
-	mpBackGfx = mpDrawer->CreateGfxObject("effect_white.jpg","diffalpha2d");
+	mpBackGfx = mpDrawer->CreateGfxObject("effect_white.jpg",eOldMaterialType::DiffuseAlpha);
 
-	mpDownGfx = mpDrawer->CreateGfxObject("menu_list_down.bmp","diffalpha2d");
-	mpUpGfx = mpDrawer->CreateGfxObject("menu_list_up.bmp","diffalpha2d");
-	mpSlideGfx = mpDrawer->CreateGfxObject("menu_list_slide.bmp","diffalpha2d");
-	mpBorderLeftGfx = mpDrawer->CreateGfxObject("menu_list_border_left.bmp","diffalpha2d");
-	mpBorderTopGfx = mpDrawer->CreateGfxObject("menu_list_border_top.bmp","diffalpha2d");
-	mpBorderBottomGfx = mpDrawer->CreateGfxObject("menu_list_border_bottom.bmp","diffalpha2d");
-	mpSlideButtonGfx = mpDrawer->CreateGfxObject("menu_list_slider_button.bmp","diffalpha2d");
+	mpDownGfx = mpDrawer->CreateGfxObject("menu_list_down.bmp",eOldMaterialType::DiffuseAlpha);
+	mpUpGfx = mpDrawer->CreateGfxObject("menu_list_up.bmp",eOldMaterialType::DiffuseAlpha);
+	mpSlideGfx = mpDrawer->CreateGfxObject("menu_list_slide.bmp",eOldMaterialType::DiffuseAlpha);
+	mpBorderLeftGfx = mpDrawer->CreateGfxObject("menu_list_border_left.bmp",eOldMaterialType::DiffuseAlpha);
+	mpBorderTopGfx = mpDrawer->CreateGfxObject("menu_list_border_top.bmp",eOldMaterialType::DiffuseAlpha);
+	mpBorderBottomGfx = mpDrawer->CreateGfxObject("menu_list_border_bottom.bmp",eOldMaterialType::DiffuseAlpha);
+	mpSlideButtonGfx = mpDrawer->CreateGfxObject("menu_list_slider_button.bmp",eOldMaterialType::DiffuseAlpha);
 	
 	mvFontSize = avFontSize;
 
@@ -2081,12 +2079,12 @@ cMainMenu::cMainMenu(cInit *apInit)  : iUpdateable("MainMenu")
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
 
 	//Load graphics
-	mpGfxBlackQuad = mpDrawer->CreateGfxObject("effect_black.bmp","diffalpha2d");
-	mpGfxMouse = mpDrawer->CreateGfxObject("player_crosshair_pointer.bmp","diffalpha2d");
+	mpGfxBlackQuad = mpDrawer->CreateGfxObject("effect_black.bmp",eOldMaterialType::DiffuseAlpha);
+	mpGfxMouse = mpDrawer->CreateGfxObject("player_crosshair_pointer.bmp",eOldMaterialType::DiffuseAlpha);
 
-	mpGfxRainDrop = mpDrawer->CreateGfxObject("menu_rain_drop.jpg","diffadditive2d");
-	mpGfxRainSplash = mpDrawer->CreateGfxObject("menu_rain_splash.jpg","diffadditive2d");
-	mpGfxSnowFlake = mpDrawer->CreateGfxObject("menu_snow_flake.jpg","diffadditive2d");
+	mpGfxRainDrop = mpDrawer->CreateGfxObject("menu_rain_drop.jpg",eOldMaterialType::DiffuseAdditive);
+	mpGfxRainSplash = mpDrawer->CreateGfxObject("menu_rain_splash.jpg",eOldMaterialType::DiffuseAdditive);
+	mpGfxSnowFlake = mpDrawer->CreateGfxObject("menu_snow_flake.jpg",eOldMaterialType::DiffuseAdditive);
 	
 	//Init effects
 	mvRainDrops.resize(70);
@@ -2863,7 +2861,7 @@ void cMainMenu::CreateWidgets()
 																			cVector3f(250,vPos.y,30),
 																			cVector2f(300,200),
 																			"menu_gamma.bmp",
-																			"diffalpha2d",
+																			eOldMaterialType::DiffuseAlpha,
 																			cColor(1,1))) );
 		vPos.y+=205;
 		//AddWidgetToState(eMainMenuState_FirstStart,hplNew( cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu", "StartTip4"),15,eFontAlign_Left)); 
@@ -3520,7 +3518,7 @@ void cMainMenu::CreateWidgets()
 													cVector3f(400,vPos.y,30),
 													cVector2f(200,150),
 													"menu_gamma.bmp",
-													"diffalpha2d",
+													eOldMaterialType::DiffuseAlpha,
 													cColor(1,1))) );
 	
 	//Buttons
