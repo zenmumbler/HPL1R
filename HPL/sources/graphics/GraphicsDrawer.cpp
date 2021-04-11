@@ -28,7 +28,6 @@
 #include "resources/ResourceImage.h"
 #include "resources/ImageManager.h"
 
-#include "graphics/Material_FontNormal.h"
 #include "graphics/Material_Smoke2D.h"
 #include "graphics/Material_DiffuseAdditive2D.h"
 #include "graphics/Material_DiffuseAlpha2D.h"
@@ -232,14 +231,11 @@ namespace hpl {
 	iOldMaterial* cGraphicsDrawer::CreateMaterial(const tString& asMaterialName, cResourceImage* apImage) {
 		iOldMaterial *pMat = NULL;
 
-		if (asMaterialName == "fontnormal") {
-			pMat = hplNew(cMaterial_FontNormal, (mpImageManager));
+		if (asMaterialName == "diffalpha2d") {
+			pMat = hplNew(cMaterial_DiffuseAlpha2D, (mpImageManager));
 		}
 		else if (asMaterialName == "diffadditive2d") {
 			pMat = hplNew(cMaterial_DiffuseAdditive2D, (mpImageManager));
-		}
-		else if (asMaterialName == "diffalpha2d") {
-			pMat = hplNew(cMaterial_DiffuseAlpha2D, (mpImageManager));
 		}
 		else if (asMaterialName == "smoke2d") {
 			pMat = hplNew(cMaterial_Smoke2D, (mpImageManager));

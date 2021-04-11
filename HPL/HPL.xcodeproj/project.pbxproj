@@ -20,7 +20,6 @@
 		8EA48718260FFCD3000D1AB7 /* scriptstdstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */; };
 		8EA4871E2610A67C000D1AB7 /* scriptarray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4871B2610A67B000D1AB7 /* scriptarray.cpp */; };
 		8EA4871F2610A67C000D1AB7 /* scriptstdstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */; };
-		8EAA07AB25588AA2007D7CD0 /* Material_FontNormal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AA25588AA2007D7CD0 /* Material_FontNormal.cpp */; };
 		8EAA07B125588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AE25588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp */; };
 		8EAA07B225588FEA007D7CD0 /* Material_Smoke2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AF25588FEA007D7CD0 /* Material_Smoke2D.cpp */; };
 		8EAA07B325588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07B025588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp */; };
@@ -253,8 +252,6 @@
 		8EA4871B2610A67B000D1AB7 /* scriptarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptarray.cpp; sourceTree = "<group>"; };
 		8EA4871C2610A67B000D1AB7 /* scriptarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptarray.h; sourceTree = "<group>"; };
 		8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstdstring_utils.cpp; sourceTree = "<group>"; };
-		8EAA07A725588A9A007D7CD0 /* Material_FontNormal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Material_FontNormal.h; sourceTree = "<group>"; };
-		8EAA07AA25588AA2007D7CD0 /* Material_FontNormal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material_FontNormal.cpp; sourceTree = "<group>"; };
 		8EAA07AE25588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material_DiffuseAlpha2D.cpp; sourceTree = "<group>"; };
 		8EAA07AF25588FEA007D7CD0 /* Material_Smoke2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material_Smoke2D.cpp; sourceTree = "<group>"; };
 		8EAA07B025588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material_DiffuseAdditive2D.cpp; sourceTree = "<group>"; };
@@ -1005,8 +1002,6 @@
 				DBCEE5A30B4B332E0088A7E3 /* Material_EnvMap_Reflect.h */,
 				DBF8496F0AC76D5700BB15CD /* Material_Flat.cpp */,
 				DB27F0450ACB9AB90054ACA3 /* Material_Flat.h */,
-				8EAA07AA25588AA2007D7CD0 /* Material_FontNormal.cpp */,
-				8EAA07A725588A9A007D7CD0 /* Material_FontNormal.h */,
 				DBF849710AC76D5700BB15CD /* Material_Modulative.cpp */,
 				DB27F0470ACB9AB90054ACA3 /* Material_Modulative.h */,
 				DBF849720AC76D5700BB15CD /* Material_ModulativeX2.cpp */,
@@ -1554,7 +1549,6 @@
 				DBF84B490AC76F1E00BB15CD /* SDLGameSetup.cpp in Sources */,
 				DBF84B4A0AC76F1E00BB15CD /* SDLTexture.cpp in Sources */,
 				DBF84B4C0AC76F1E00BB15CD /* SectorVisibility.cpp in Sources */,
-				8EAA07AB25588AA2007D7CD0 /* Material_FontNormal.cpp in Sources */,
 				DBF84B4D0AC76F1E00BB15CD /* SerializeClass.cpp in Sources */,
 				DBF84B4E0AC76F1E00BB15CD /* Skeleton.cpp in Sources */,
 				DBF84B4F0AC76F1E00BB15CD /* Sound.cpp in Sources */,

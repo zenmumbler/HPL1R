@@ -47,16 +47,12 @@ namespace hpl {
 		apLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_OneMinusSrcAlpha);
 
 		apLowLevelGraphics->SetTexture(0, GetTexture());
-		//apLowLevelGraphics->SetTextureParam(eTextureParam_ColorOp1,eTextureOp_Alpha);
-		//apLowLevelGraphics->SetTextureParam(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 	}
 
 	//-----------------------------------------------------------------------
 
 	void cMaterial_DiffuseAlpha2D::EndRendering(iLowLevelGraphics* apLowLevelGraphics) const
 	{
-		//apLowLevelGraphics->SetTextureParam(eTextureParam_ColorOp1,eTextureOp_Color);
-		//apLowLevelGraphics->SetTextureParam(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 	}
 
 	//-----------------------------------------------------------------------
