@@ -357,7 +357,7 @@ namespace hpl {
 		//VERTEX BATCHER
 		virtual void AddVertexToBatch(const cVertex *apVtx, const cVector3f* avTransform)=0;
 		virtual void AddVertexToBatch_Size2D(const cVertex *apVtx, const cVector3f* avTransform,
-									const cColor* apCol, float mfW, float mfH)=0;
+									const cColor* apCol)=0;
 
 		virtual void AddIndexToBatch(int alIndex)=0;
 
@@ -370,22 +370,6 @@ namespace hpl {
 		virtual void DrawSphere(const cVector3f& avPos, float afRadius, cColor aCol)=0;
 
 		// GENERAL
-		/**
-		 * All further drawing operations are rendered to this texture.
-		 * \param pTex Texture to render to. NULL = screen (frame buffer)
-		 */
-		virtual void SetRenderTarget(iTexture* pTex)=0;
-		/**
-		 * Check if the render target uses a z buffer when drawing.
-		 * \return
-		 */
-		virtual bool RenderTargetHasZBuffer()=0;
-		/**
-		 * Makes sure the render target is drawn to the target.
-		 * Not useful for all implementations.
-		 */
-		virtual void FlushRenderTarget()=0;
-
 		/**
 		 * Copies the current frame buffer to a texture.
 		 * \param apTex The texture the framebuffer is copied to.

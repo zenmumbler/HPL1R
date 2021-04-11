@@ -97,8 +97,6 @@ namespace hpl {
 		mvVirtualSize.x = 800;
 		mvVirtualSize.y = 600;
 
-		mpRenderTarget = NULL;
-
 		for (int i = 0; i < MAX_TEXTUREUNITS; i++) {
 			mpCurrentTexture[i] = NULL;
 		}
@@ -1152,11 +1150,11 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	void cLowLevelGraphicsSDL::AddVertexToBatch_Size2D(const cVertex *apVtx, const cVector3f* avTransform,
-		const cColor* apCol, float mfW, float mfH)
+		const cColor* apCol)
 	{
 		//Coord
-		mpVertexArray[mlVertexCount + 0] =	avTransform->x + mfW;
-		mpVertexArray[mlVertexCount + 1] =	avTransform->y + mfH;
+		mpVertexArray[mlVertexCount + 0] =	avTransform->x;
+		mpVertexArray[mlVertexCount + 1] =	avTransform->y;
 		mpVertexArray[mlVertexCount + 2] =	avTransform->z;
 
 		//Color
@@ -1341,39 +1339,6 @@ namespace hpl {
 		glCopyTexSubImage2D(GetGLTextureTargetEnum(apTex->GetTarget()),0,
 							avTexOffset.x, lTexY,
 							avPos.x, lScreenY, avSize.x, avSize.y);
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetRenderTarget(iTexture* pTex)
-	{
-		if(pTex == mpRenderTarget)return;
-		mpRenderTarget = pTex;
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cLowLevelGraphicsSDL::RenderTargetHasZBuffer()
-	{
-		return true;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::FlushRenderTarget()
-	{
-
-
-		//Old OGL 1.1 Code:
-		/*if(mpRenderTarget!=NULL)
-		{
-			SetTexture(0, mpRenderTarget);
-
-			//Log("w: %d\n",mpRenderTarget->GetWidth());
-
-			glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0,
-							mpRenderTarget->GetWidth(), mpRenderTarget->GetHeight(), 0);
-		}*/
 	}
 
 	//-----------------------------------------------------------------------

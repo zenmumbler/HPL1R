@@ -168,7 +168,7 @@ namespace hpl {
 
 		void AddVertexToBatch(const cVertex *apVtx, const cVector3f* avTransform);
 		void AddVertexToBatch_Size2D(const cVertex *apVtx, const cVector3f* avTransform,
-										const cColor* apCol, float mfW, float mfH);
+										const cColor* apCol);
 
 		void AddIndexToBatch(int alIndex);
 
@@ -183,9 +183,6 @@ namespace hpl {
 		//FRAMEBUFFER
 		void CopyContextToTexure(iTexture* apTex, const cVector2l &avPos,
 			const cVector2l &avSize, const cVector2l &avTexOffset=0);
-		void SetRenderTarget(iTexture* pTex);
-		bool RenderTargetHasZBuffer();
-		void FlushRenderTarget();
 
 		void FlushRendering();
 		void SwapBuffers();
@@ -231,9 +228,6 @@ namespace hpl {
 		bool mbClearColor;
 		bool mbClearDepth;
 		bool mbClearStencil;
-
-		//Rendertarget variables
-		iTexture* mpRenderTarget;
 
 		//Texture
 		iTexture* mpCurrentTexture[MAX_TEXTUREUNITS];

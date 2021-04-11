@@ -853,8 +853,6 @@ namespace hpl {
 
 		mRenderSettings.mpVtxBuffer = pPrevBuffer;
 
-		//mpLowLevelGraphics->FlushRendering();
-
 		//if(bPrevDepthTest==false)
 		//	mpLowLevelGraphics->SetDepthTestActive(true);
 	}

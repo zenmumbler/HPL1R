@@ -171,20 +171,16 @@ namespace hpl {
 
 					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(0),
 																&vPos[0],
-																&pObj->mColor,
-																0,0);
+																&pObj->mColor);
 					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(1),
 																&vPos[1],
-																&pObj->mColor,
-																0,0);
+																&pObj->mColor);
 					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(2),
 																&vPos[2],
-																&pObj->mColor,
-																0,0);
+																&pObj->mColor);
 					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(3),
 																&vPos[3],
-																&pObj->mColor,
-																0,0);
+																&pObj->mColor);
 
 					for(int i=0;i<4;i++)
 						mpLowLevelGraphics->AddIndexToBatch(lIdxAdd + i);
