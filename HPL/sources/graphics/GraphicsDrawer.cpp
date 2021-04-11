@@ -154,19 +154,15 @@ namespace hpl {
 				pObj = &(*ObjectIt);
 				if(pObj->mbIsColorAndSize)
 				{
-					cVector3f vPos[4];
-					float fW = pObj->mvSize.x*0.5f;
-					float fH = pObj->mvSize.y*0.5f;
-					cMatrixf mtxTrans = cMath::MatrixTranslate(pObj->mvTransform + cVector3f(fW,fH,0));
-					vPos[0] = cVector3f(-fW,-fH,0);
-					vPos[1] = cVector3f(fW,-fH,0);
-					vPos[2] = cVector3f(fW,fH,0);
-					vPos[3] = cVector3f(-fW,fH,0);
-
-					vPos[0] = cMath::MatrixMul(mtxTrans,vPos[0]);
-					vPos[1] = cMath::MatrixMul(mtxTrans,vPos[1]);
-					vPos[2] = cMath::MatrixMul(mtxTrans,vPos[2]);
-					vPos[3] = cMath::MatrixMul(mtxTrans,vPos[3]);
+					auto [fX, fY, fZ] = pObj->mvTransform.v;
+					float fW = pObj->mvSize.x;
+					float fH = pObj->mvSize.y;
+					cVector3f vPos[4] = {
+						{ fX,      fY,      fZ },
+						{ fX + fW, fY,      fZ },
+						{ fX + fW, fY + fH, fZ },
+						{ fX,      fY + fH, fZ }
+					};
 
 					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(0),
 																&vPos[0],
