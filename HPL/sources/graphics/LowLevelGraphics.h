@@ -26,6 +26,7 @@
 #include "graphics/Texture.h"
 #include "graphics/GPUProgram.h"
 #include "graphics/VertexBuffer.h"
+#include "graphics/GfxBatch.h"
 
 namespace hpl {
 
@@ -178,21 +179,6 @@ namespace hpl {
 
 		eGraphicCaps_LastEnum
 	};
-	
-	enum eBatchDrawMode
-	{
-		eBatchDrawMode_Tris,
-		eBatchDrawMode_Quads
-	};
-
-	typedef tFlag tVtxBatchFlag;
-
-	#define eVtxBatchFlag_Normal		(0x00000001)
-	#define eVtxBatchFlag_Position		(0x00000002)
-	#define eVtxBatchFlag_Color0		(0x00000004)
-	#define eVtxBatchFlag_Texture0		(0x00000008)
-	#define eVtxBatchFlag_Texture1		(0x00000010)
-	#define eVtxBatchFlag_Texture2		(0x00000020)
 
 	#define kMaxClipPlanes (6)
 
@@ -355,14 +341,7 @@ namespace hpl {
 		virtual void DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs)=0;
 
 		//VERTEX BATCHER
-		virtual void AddVertexToBatch(const cVertex &aVtx, const cVector3f &avTransform)=0;
-		virtual void AddVertexToBatch_Size2D(const cVertex &apVtx, const cVector3f &avTransform,
-									const cColor &apCol)=0;
-
-		virtual void AddIndexToBatch(int alIndex)=0;
-
-		virtual void DrawBatch(tVtxBatchFlag aTypeFlags, eBatchDrawMode aDrawMode)=0;
-		virtual void ClearBatch()=0;
+		virtual void DrawBatch(const cGfxBatch &batch, tGfxBatchAttrs attrs, eBatchDrawMode drawMode)=0;
 
 		//some primitive:
 		virtual void DrawLine(const cVector3f& avBegin, const cVector3f& avEnd, cColor aCol)=0;

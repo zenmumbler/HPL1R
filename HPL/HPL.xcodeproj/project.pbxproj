@@ -22,6 +22,7 @@
 		8EA4871F2610A67C000D1AB7 /* scriptstdstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */; };
 		8EAA07DD255C64F3007D7CD0 /* LowLevelSystemMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */; };
 		8EB7C3D9254F603E00277667 /* scripthelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7C3D8254F603E00277667 /* scripthelper.cpp */; };
+		8EE896D1262459E800FFF4C3 /* GfxBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896CF262459E800FFF4C3 /* GfxBatch.cpp */; };
 		DB019B210D7462DE00FADC2C /* VideoManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB9F0D7076B200809E03 /* VideoManager.cpp */; };
 		DB294E100C11DC6E005DA55C /* CRC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB294E0F0C11DC6E005DA55C /* CRC.cpp */; };
 		DB4AFB470D7075B900809E03 /* Haptic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB450D7075B900809E03 /* Haptic.cpp */; };
@@ -250,6 +251,8 @@
 		8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstdstring_utils.cpp; sourceTree = "<group>"; };
 		8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LowLevelSystemMac.mm; sourceTree = "<group>"; };
 		8EB7C3D8254F603E00277667 /* scripthelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripthelper.cpp; sourceTree = "<group>"; };
+		8EE896CF262459E800FFF4C3 /* GfxBatch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GfxBatch.cpp; sourceTree = "<group>"; };
+		8EE896D0262459E800FFF4C3 /* GfxBatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GfxBatch.h; sourceTree = "<group>"; };
 		DB00F0D211A9D080007DFB32 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		DB27F0180ACB9AB90054ACA3 /* AI.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AI.h; sourceTree = "<group>"; };
 		DB27F0190ACB9AB90054ACA3 /* AINodeContainer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AINodeContainer.h; sourceTree = "<group>"; };
@@ -937,7 +940,6 @@
 			isa = PBXGroup;
 			children = (
 				8E3A741C261770CC0086F8ED /* impl */,
-				8E3A741B26176F0A0086F8ED /* ogl2 */,
 				DBF849540AC76D5700BB15CD /* Animation.cpp */,
 				DB27F0260ACB9AB90054ACA3 /* Animation.h */,
 				DBF849550AC76D5700BB15CD /* AnimationTrack.cpp */,
@@ -955,6 +957,8 @@
 				DB27F02D0ACB9AB90054ACA3 /* Color.h */,
 				DBF8495B0AC76D5700BB15CD /* FontData.cpp */,
 				DB27F02E0ACB9AB90054ACA3 /* FontData.h */,
+				8EE896CF262459E800FFF4C3 /* GfxBatch.cpp */,
+				8EE896D0262459E800FFF4C3 /* GfxBatch.h */,
 				DBF8495D0AC76D5700BB15CD /* GPUProgram.cpp */,
 				DB27F0300ACB9AB90054ACA3 /* GPUProgram.h */,
 				DBF8495E0AC76D5700BB15CD /* Graphics.cpp */,
@@ -999,6 +1003,7 @@
 				DBF849770AC76D5800BB15CD /* MeshCreator.cpp */,
 				DB27F04D0ACB9AB90054ACA3 /* MeshCreator.h */,
 				DB27F04E0ACB9AB90054ACA3 /* OcclusionQuery.h */,
+				8E3A741B26176F0A0086F8ED /* ogl2 */,
 				DBF849780AC76D5800BB15CD /* ParticleEmitter.cpp */,
 				DB27F04F0ACB9AB90054ACA3 /* ParticleEmitter.h */,
 				DBF8497B0AC76D5800BB15CD /* ParticleEmitter3D_UserData.cpp */,
@@ -1415,6 +1420,7 @@
 				DBF84AC30AC76F1E00BB15CD /* ConfigFile.cpp in Sources */,
 				DBF84AC40AC76F1E00BB15CD /* Container.cpp in Sources */,
 				DBF84AC50AC76F1E00BB15CD /* Entity.cpp in Sources */,
+				8EE896D1262459E800FFF4C3 /* GfxBatch.cpp in Sources */,
 				DBF84AC70AC76F1E00BB15CD /* Entity3D.cpp in Sources */,
 				8E3A72852611363F0086F8ED /* Script.cpp in Sources */,
 				DBF84AC80AC76F1E00BB15CD /* EntityLoader_Object.cpp in Sources */,

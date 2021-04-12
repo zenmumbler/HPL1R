@@ -166,14 +166,7 @@ namespace hpl {
 		void DrawQuad(const tVertexVec &avVtx,const float afZ,const cColor &aCol);
 		void DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs);
 
-		void AddVertexToBatch(const cVertex &apVtx, const cVector3f &avTransform);
-		void AddVertexToBatch_Size2D(const cVertex &aVtx, const cVector3f &avTransform,
-										const cColor &apCol);
-
-		void AddIndexToBatch(int alIndex);
-
-		void DrawBatch(tVtxBatchFlag aTypeFlags, eBatchDrawMode aDrawMode);
-		void ClearBatch();
+		void DrawBatch(const cGfxBatch &batch, tGfxBatchAttrs attrs, eBatchDrawMode drawMode);
 
 		//PRIMITIVES
 		void DrawLine(const cVector3f& avBegin, const cVector3f& avEnd, cColor aCol);
@@ -214,16 +207,6 @@ namespace hpl {
 		SDL_Window *mpWindow;
 		SDL_GLContext mpGLContext;
 
-		//Vertex Array variables
-		//The vertex arrays used:
-		float* mpVertexArray;
-		unsigned int mlVertexCount;
-		unsigned int* mpIndexArray;
-		unsigned int mlIndexCount;
-
-		unsigned int mlBatchStride;
-		unsigned int mlBatchArraySize;
-
 		//Clearing
 		bool mbClearColor;
 		bool mbClearDepth;
@@ -242,9 +225,8 @@ namespace hpl {
 		void InitCG();
 		void ExitCG();
 
-
 		//Batch helper
-		void SetUpBatchArrays();
+		void PrepareBatchDraw(const cGfxBatch &batch, tGfxBatchAttrs attrs);
 
 		//Depth helper
 		GLenum GetGLDepthTestFuncEnum(eDepthTestFunc aType);
@@ -267,9 +249,6 @@ namespace hpl {
 
 		//Blend helper
 		GLenum GetGLBlendEnum(eBlendFunc aType);
-
-		//Vtx helper
-		void SetVtxBatchStates(tVtxBatchFlag aFlags);
 	};
 };
 #endif // HPL_LOWLEVELGRAPHICS_SDL_H

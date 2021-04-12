@@ -46,20 +46,41 @@ namespace hpl {
 		cVector2f vTexPos = cVector2f((float)mRect.x,(float)mRect.y ) /
 								cVector2f((float)mvSourceSize.x,(float)mvSourceSize.y);
 
-		mvVtx.push_back(cVertex(cVector3f(0,0,0),
-						cVector3f(vTexPos.x+kContractSize, vTexPos.y+kContractSize,0), cColor(1)));
+		mvVtx.push_back(cVertex(
+			cVector3f(0, 0, 0),
+			cVector3f(
+				vTexPos.x + kContractSize,
+				vTexPos.y + kContractSize, 0
+			),
+			cColor(1)
+		));
 
-		mvVtx.push_back(cVertex(cVector3f((float)mRect.w,0,0),
-						cVector3f(vTexPos.x+vTexSize.x-kContractSize, vTexPos.y+kContractSize,0),
-						cColor(1)));
+		mvVtx.push_back(cVertex(
+			cVector3f((float)mRect.w, 0, 0),
+			cVector3f(
+				vTexPos.x + vTexSize.x - kContractSize,
+				vTexPos.y + kContractSize, 0
+			),
+			cColor(1)
+		));
 
-		mvVtx.push_back(cVertex(cVector3f((float)mRect.w,(float)mRect.h,0),
-						cVector3f(vTexPos.x+vTexSize.x-kContractSize, vTexPos.y+vTexSize.y-kContractSize,0),
-						cColor(1)));
+		mvVtx.push_back(cVertex(
+			cVector3f((float)mRect.w, (float)mRect.h, 0),
+			cVector3f(
+				vTexPos.x + vTexSize.x - kContractSize,
+				vTexPos.y + vTexSize.y - kContractSize, 0
+			),
+			cColor(1)
+		));
 
-		mvVtx.push_back(cVertex(cVector3f(0,(float)mRect.h,0),
-						cVector3f(vTexPos.x+kContractSize, vTexPos.y+vTexSize.y-kContractSize,0),
-						cColor(1)));
+		mvVtx.push_back(cVertex(
+			cVector3f(0, (float)mRect.h, 0),
+			cVector3f(
+				vTexPos.x + kContractSize,
+				vTexPos.y + vTexSize.y - kContractSize, 0
+			),
+			cColor(1)
+		));
 	}
 
 	//-----------------------------------------------------------------------

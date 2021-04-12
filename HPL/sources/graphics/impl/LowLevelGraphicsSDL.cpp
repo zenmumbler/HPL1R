@@ -89,9 +89,6 @@ namespace hpl {
 
 	cLowLevelGraphicsSDL::cLowLevelGraphicsSDL()
 	{
-		mlBatchArraySize = 20000;
-		mlVertexCount = 0;
-		mlIndexCount = 0;
 		mlMultisampling = 0;
 
 		mvVirtualSize.x = 800;
@@ -105,12 +102,6 @@ namespace hpl {
 		mbClearDepth = true;
 		mbClearStencil = false;
 
-		//Create the batch arrays:
-		mlBatchStride = 13;
-		//3 Pos floats, 4 color floats, 3 Tex coord floats .
-		mpVertexArray = (float*)hplMalloc(sizeof(float) * mlBatchStride * mlBatchArraySize);
-		mpIndexArray = (unsigned int*)hplMalloc(sizeof(unsigned int) * mlBatchArraySize); //Index is one int.
-
 		//Init extra stuff
 		InitCG();
 	}
@@ -119,9 +110,6 @@ namespace hpl {
 
 	cLowLevelGraphicsSDL::~cLowLevelGraphicsSDL()
 	{
-		hplFree(mpVertexArray);
-		hplFree(mpIndexArray);
-		
 		if (mpGLContext) {
 			SDL_GL_DeleteContext(mpGLContext);
 			mpGLContext = NULL;
@@ -1109,95 +1097,12 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::AddVertexToBatch(const cVertex &aVtx, const cVector3f &avTransform)
+	void cLowLevelGraphicsSDL::DrawBatch(const cGfxBatch &batch, tGfxBatchAttrs attrs, eBatchDrawMode drawMode)
 	{
-		//Coord
-		mpVertexArray[mlVertexCount + 0] =	aVtx.pos.x + avTransform.x;
-		mpVertexArray[mlVertexCount + 1] =	aVtx.pos.y + avTransform.y;
-		mpVertexArray[mlVertexCount + 2] =	aVtx.pos.z + avTransform.z;
-
-		//Color
-		mpVertexArray[mlVertexCount + 3] =	aVtx.col.r;
-		mpVertexArray[mlVertexCount + 4] =	aVtx.col.g;
-		mpVertexArray[mlVertexCount + 5] =	aVtx.col.b;
-		mpVertexArray[mlVertexCount + 6] =	aVtx.col.a;
-
-		//Texture coord
-		mpVertexArray[mlVertexCount + 7] =	aVtx.tex.x;
-		mpVertexArray[mlVertexCount + 8] =	aVtx.tex.y;
-		mpVertexArray[mlVertexCount + 9] =	aVtx.tex.z;
-
-		//Normal coord
-		mpVertexArray[mlVertexCount + 10] =	aVtx.norm.x;
-		mpVertexArray[mlVertexCount + 11] =	aVtx.norm.y;
-		mpVertexArray[mlVertexCount + 12] =	aVtx.norm.z;
-
-		mlVertexCount = mlVertexCount + mlBatchStride;
-
-		if(mlVertexCount/mlBatchStride >= mlBatchArraySize)
-		{
-			//Make the array larger.
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::AddVertexToBatch_Size2D(const cVertex &aVtx, const cVector3f &avTransform, const cColor &aCol)
-	{
-		//Coord
-		mpVertexArray[mlVertexCount + 0] =	avTransform.x;
-		mpVertexArray[mlVertexCount + 1] =	avTransform.y;
-		mpVertexArray[mlVertexCount + 2] =	avTransform.z;
-
-		//Color
-		mpVertexArray[mlVertexCount + 3] =	aCol.r;
-		mpVertexArray[mlVertexCount + 4] =	aCol.g;
-		mpVertexArray[mlVertexCount + 5] =	aCol.b;
-		mpVertexArray[mlVertexCount + 6] =	aCol.a;
-
-		//Texture coord
-		mpVertexArray[mlVertexCount + 7] =	aVtx.tex.x;
-		mpVertexArray[mlVertexCount + 8] =	aVtx.tex.y;
-		mpVertexArray[mlVertexCount + 9] =	aVtx.tex.z;
-
-		mlVertexCount = mlVertexCount + mlBatchStride;
-
-		if(mlVertexCount/mlBatchStride >= mlBatchArraySize)
-		{
-			//Make the array larger.
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::AddIndexToBatch(int alIndex)
-	{
-		mpIndexArray[mlIndexCount] = alIndex;
-		mlIndexCount++;
-
-		if(mlIndexCount>=mlBatchArraySize)
-		{
-			//Make the array larger.
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::DrawBatch(tVtxBatchFlag aTypeFlags, eBatchDrawMode aDrawMode)
-	{
-		SetVtxBatchStates(aTypeFlags);
-		SetUpBatchArrays();
+		PrepareBatchDraw(batch, attrs);
 		
-		GLenum glMode = aDrawMode == eBatchDrawMode_Tris ? GL_TRIANGLES : GL_QUADS;
-		glDrawElements(glMode, mlIndexCount, GL_UNSIGNED_INT, mpIndexArray);
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::ClearBatch()
-	{
-		mlIndexCount = 0;
-		mlVertexCount = 0;
+		GLenum glMode = drawMode == eBatchDrawMode_Tris ? GL_TRIANGLES : GL_QUADS;
+		glDrawElements(glMode, batch.mlIndexCount, GL_UNSIGNED_INT, batch.mpIndexArray);
 	}
 
 	//-----------------------------------------------------------------------
@@ -1362,63 +1267,29 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::SetUpBatchArrays()
+	void cLowLevelGraphicsSDL::PrepareBatchDraw(const cGfxBatch &batch, tGfxBatchAttrs attrs)
 	{
-		//Set the arrays
-		glVertexPointer(3,GL_FLOAT, sizeof(float)*mlBatchStride, mpVertexArray);
-		glColorPointer(4,GL_FLOAT,sizeof(float)*mlBatchStride, &mpVertexArray[3]);
-		glNormalPointer(GL_FLOAT,sizeof(float)*mlBatchStride, &mpVertexArray[10]);
+		glVertexPointer(3, GL_FLOAT, sizeof(float) * batch.mlBatchStride, batch.mpVertexArray);
+		glColorPointer(4, GL_FLOAT, sizeof(float) * batch.mlBatchStride, &batch.mpVertexArray[3]);
 
 		glClientActiveTexture(GL_TEXTURE0);
-		glTexCoordPointer(3,GL_FLOAT,sizeof(float)*mlBatchStride, &mpVertexArray[7]);
-		glClientActiveTexture(GL_TEXTURE1);
-		glTexCoordPointer(3,GL_FLOAT,sizeof(float)*mlBatchStride, &mpVertexArray[7]);
-		glClientActiveTexture(GL_TEXTURE2);
-		glTexCoordPointer(3,GL_FLOAT,sizeof(float)*mlBatchStride, &mpVertexArray[7]);
-	}
+		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * batch.mlBatchStride, &batch.mpVertexArray[7]);
 
-	//-----------------------------------------------------------------------
+		if(attrs & eGfxBatchAttr_Position) glEnableClientState(GL_VERTEX_ARRAY);
+		else glDisableClientState(GL_VERTEX_ARRAY);
 
-	void cLowLevelGraphicsSDL::SetVtxBatchStates(tVtxBatchFlag aFlags)
-	{
-		if(aFlags & eVtxBatchFlag_Position)	glEnableClientState(GL_VERTEX_ARRAY );
-		else glDisableClientState(GL_VERTEX_ARRAY );
-
-		if(aFlags & eVtxBatchFlag_Color0) glEnableClientState(GL_COLOR_ARRAY );
+		if(attrs & eGfxBatchAttr_Color0) glEnableClientState(GL_COLOR_ARRAY );
 		else glDisableClientState(GL_COLOR_ARRAY );
 
-		if(aFlags & eVtxBatchFlag_Normal) glEnableClientState(GL_NORMAL_ARRAY );
-		else glDisableClientState(GL_NORMAL_ARRAY );
+		glDisableClientState(GL_NORMAL_ARRAY);
 
-
-		if(aFlags & eVtxBatchFlag_Texture0){
-			glClientActiveTexture(GL_TEXTURE0);
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
+		glClientActiveTexture(GL_TEXTURE0);
+		if(attrs & eGfxBatchAttr_Texture0){
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		}
 		else {
-			glClientActiveTexture(GL_TEXTURE0);
-			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
+			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		}
-
-		if(aFlags & eVtxBatchFlag_Texture1){
-			glClientActiveTexture(GL_TEXTURE1);
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
-		}
-		else {
-			glClientActiveTexture(GL_TEXTURE1);
-			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
-		}
-
-		if(aFlags & eVtxBatchFlag_Texture2){
-			glClientActiveTexture(GL_TEXTURE2);
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
-		}
-		else {
-			glClientActiveTexture(GL_TEXTURE2);
-			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
-		}
-
-
 	}
 
 	//-----------------------------------------------------------------------

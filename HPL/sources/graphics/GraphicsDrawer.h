@@ -22,6 +22,7 @@
 #include "resources/ImageManager.h"
 #include "graphics/GraphicsTypes.h"
 #include "graphics/Bitmap2D.h"
+#include "graphics/GfxBatch.h"
 
 namespace hpl {
 
@@ -126,6 +127,7 @@ namespace hpl {
 		iLowLevelGraphics *mpLowLevelGraphics;
 		cImageManager *mpImageManager;
 		tGfxBufferSet m_setGfxBuffer;
+		cGfxBatch mBatch;
 		std::vector<const cGfxObject*> mvGfxObjects;
 	};
 

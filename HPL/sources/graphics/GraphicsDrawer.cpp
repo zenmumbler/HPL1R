@@ -74,7 +74,6 @@ namespace hpl {
 		return false;
 	}
 
-
 	//-----------------------------------------------------------------------
 
 	static void FlushImage(const cGfxObject* apObject)
@@ -160,8 +159,8 @@ namespace hpl {
 		const auto renderBatch = [this, &lIdxAdd]() {
 			if (lIdxAdd > 0)
 			{
-				mpLowLevelGraphics->DrawBatch(eVtxBatchFlag_Position | eVtxBatchFlag_Texture0 | eVtxBatchFlag_Color0, eBatchDrawMode_Quads);
-				mpLowLevelGraphics->ClearBatch();
+				mpLowLevelGraphics->DrawBatch(mBatch, eGfxBatchAttr_Position | eGfxBatchAttr_Texture0 | eGfxBatchAttr_Color0, eBatchDrawMode_Quads);
+				mBatch.Clear();
 				lIdxAdd = 0;
 			}
 		};
@@ -200,16 +199,16 @@ namespace hpl {
 
 				for (int i = 0; i < 4; i++)
 				{
-					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj.mpObject->mvVtx[i], vPos[i], pObj.mColor);
-					mpLowLevelGraphics->AddIndexToBatch(lIdxAdd++);
+					mBatch.AddVertexExt(pObj.mpObject->mvVtx[i], vPos[i], pObj.mColor);
+					mBatch.AddIndex(lIdxAdd++);
 				}
 			}
 			else
 			{
 				for (int i = 0; i < 4; i++)
 				{
-					mpLowLevelGraphics->AddVertexToBatch(pObj.mpObject->mvVtx[i], pObj.mvPosition);
-					mpLowLevelGraphics->AddIndexToBatch(lIdxAdd++);
+					mBatch.AddVertex(pObj.mpObject->mvVtx[i], pObj.mvPosition);
+					mBatch.AddIndex(lIdxAdd++);
 				}
 			}
 		}
