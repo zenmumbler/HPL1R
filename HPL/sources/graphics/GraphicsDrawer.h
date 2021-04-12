@@ -113,7 +113,7 @@ namespace hpl {
 		 * \param matType material to use
 		 * \return
 		 */
-		const cGfxObject* CreateUnmanagedGfxObject(iBitmap2D *apBmp, const eGfxMaterialType matType);
+		const cGfxObject* CreateUnmanagedGfxObject(iBitmap2D *apBmp, eGfxMaterialType matType);
 
 		/**
 		 * Destroys a gfx object.
