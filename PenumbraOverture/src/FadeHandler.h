@@ -46,7 +46,7 @@ private:
 	cInit *mpInit;
 	cGraphicsDrawer *mpDrawer;
 
-	cGfxObject *mpBlackGfx;
+	const cGfxObject *mpBlackGfx;
 
 	bool mbActive;
 	float mfAlpha;

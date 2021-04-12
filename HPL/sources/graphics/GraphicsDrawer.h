@@ -22,25 +22,41 @@
 #include "resources/ImageManager.h"
 #include "graphics/GraphicsTypes.h"
 #include "graphics/Bitmap2D.h"
-#include "graphics/GfxObject.h"
 
 namespace hpl {
 
 	class iLowLevelGraphics;
-	class cResourceImage;
+	class iTexture;
 
+	enum class eGfxMaterialType
+	{
+		Null,
+
+		DiffuseAlpha,
+		DiffuseAdditive,
+		Smoke
+   };
+
+	struct cGfxObject {
+		tString msSourceFile;
+		eGfxMaterialType mMatType;
+		cResourceImage* mpImage;
+		tVertexVec mvVtx;
+	};
+	
 	class cGfxBufferObject
 	{
 	public:
-		cGfxObject* mpObject;
-		cVector3f mvTransform;
+		const cGfxObject* mpObject;
+		cVector3f mvPosition;
 
 		bool mbIsColorAndSize;
 		cColor mColor;
 		cVector2f mvSize;
 
-		iOldMaterial* GetMaterial() const;
-		float GetZ() const { return mvTransform.z;}
+		iTexture *GetTexture() const;
+		eGfxMaterialType GetMaterialType() const { return mpObject->mMatType; }
+		float GetZ() const { return mvPosition.z;}
 	};
 
 
@@ -55,9 +71,6 @@ namespace hpl {
 
 	class cResources;
 
-	typedef std::list<cGfxObject*> tGfxObjectList;
-	typedef tGfxObjectList::iterator tGfxObjectListIt;
-
 	class cGraphicsDrawer
 	{
 	public:
@@ -69,7 +82,7 @@ namespace hpl {
 		 * \param apObject
 		 * \param avPos
 		 */
-		void DrawGfxObject(cGfxObject* apObject, const cVector3f& avPos);
+		void DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos);
 
 		/**
 		 * Draw Gfx object during next DrawAll call.
@@ -78,7 +91,7 @@ namespace hpl {
 		 * \param avSize Size of object
 		 * \param aColor color to use
 		 */
-		void DrawGfxObject(cGfxObject* apObject, const cVector3f& avPos,
+		void DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos,
 						   const cVector2f& avSize, const cColor& aColor);
 
 
@@ -86,37 +99,34 @@ namespace hpl {
 		 * Draw all gfx obejcts, Called after world is rendered by cScene.
 		 */
 		void DrawAll();
-		
-		iOldMaterial* CreateMaterial(eOldMaterialType type, cResourceImage* apImage);
 
 		/**
 		 * Create Gfx object from file
 		 * \param &asFileName Filename of image
-		 * \param &asMaterialName material to use
-		 * \param abAddToList if the engine should delete object at exit, this means DestroyGfxObject must be used. Should almost always be true.
+		 * \param matType material to use
 		 * \return
 		 */
-		cGfxObject* CreateGfxObject(const tString &asFileName, eOldMaterialType type,
-									bool abAddToList=true);
+		const cGfxObject* CreateGfxObject(const tString &asFileName, eGfxMaterialType matType);
 		/**
-		 * Create gfx object from Bitmap
+		 * Create unmanaged gfx object from Bitmap
 		 * \param *apBmp bitmap
-		 * \param &asMaterialName material to use
-		 * \param abAddToList if the engine should delete object at exit, this means DestroyGfxObject must be used. Should almost always be true.
+		 * \param matType material to use
 		 * \return
 		 */
-		cGfxObject* CreateGfxObject(iBitmap2D *apBmp, const eOldMaterialType type,
-									bool abAddToList=true);
+		const cGfxObject* CreateUnmanagedGfxObject(iBitmap2D *apBmp, const eGfxMaterialType matType);
+
 		/**
 		 * Destroys a gfx object.
 		 */
-		void DestroyGfxObject(cGfxObject* apObject);
+		void DestroyGfxObject(const cGfxObject* apObject);
 
 	private:
+		void UseMaterialType(eGfxMaterialType matType);
+
 		iLowLevelGraphics *mpLowLevelGraphics;
 		cImageManager *mpImageManager;
 		tGfxBufferSet m_setGfxBuffer;
-		tGfxObjectList mlstGfxObjects;
+		std::vector<const cGfxObject*> mvGfxObjects;
 	};
 
 };

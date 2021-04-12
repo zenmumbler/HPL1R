@@ -53,7 +53,6 @@
 #include "graphics/ParticleEmitter3D_UserData.h"
 #include "graphics/FontData.h"
 #include "graphics/GraphicsDrawer.h"
-#include "graphics/GfxObject.h"
 #include "graphics/FontData.h"
 #include "graphics/Texture.h"
 #include "graphics/GPUProgram.h"

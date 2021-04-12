@@ -36,7 +36,7 @@
 cNotebookState_Front::cNotebookState_Front(cInit *apInit, cNotebook *apNotebook) : iNotebookState(apInit, apNotebook)
 {
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
-	mpTextBack = mpDrawer->CreateGfxObject("notebook_textback.bmp",eOldMaterialType::DiffuseAlpha);
+	mpTextBack = mpDrawer->CreateGfxObject("notebook_textback.bmp",eGfxMaterialType::DiffuseAlpha);
 	
 	mpFrontFont =  mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt");
 
@@ -174,8 +174,8 @@ cNotebookState_TaskList::cNotebookState_TaskList(cInit *apInit, cNotebook *apNot
 	//////////////////
 	//Options
 	mlSelected = -1;
-	mpOptionsImage[0] = mpDrawer->CreateGfxObject("notebook_nextpage.bmp",eOldMaterialType::DiffuseAlpha);
-	mpOptionsImage[1] = mpDrawer->CreateGfxObject("notebook_prevpage.bmp",eOldMaterialType::DiffuseAlpha);
+	mpOptionsImage[0] = mpDrawer->CreateGfxObject("notebook_nextpage.bmp",eGfxMaterialType::DiffuseAlpha);
+	mpOptionsImage[1] = mpDrawer->CreateGfxObject("notebook_prevpage.bmp",eGfxMaterialType::DiffuseAlpha);
 
 	mvOptions.resize(2);
 
@@ -393,8 +393,8 @@ void cNotebookState_TaskList::OnExit()
 cNotebookState_NoteList::cNotebookState_NoteList(cInit *apInit, cNotebook *apNotebook) : iNotebookState(apInit, apNotebook)
 {
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
-	mpTextBack = mpDrawer->CreateGfxObject("notebook_listtextback.bmp",eOldMaterialType::DiffuseAlpha);
-	mpTab = mpDrawer->CreateGfxObject("notebook_tab.bmp",eOldMaterialType::DiffuseAlpha);
+	mpTextBack = mpDrawer->CreateGfxObject("notebook_listtextback.bmp",eGfxMaterialType::DiffuseAlpha);
+	mpTab = mpDrawer->CreateGfxObject("notebook_tab.bmp",eGfxMaterialType::DiffuseAlpha);
 
 	mpTextFont =  mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt",14);
 
@@ -406,8 +406,8 @@ cNotebookState_NoteList::cNotebookState_NoteList(cInit *apInit, cNotebook *apNot
 	mlFirstNote =0;
 	mlSelected = -1;
 
-	mpOptionsImage[0] = mpDrawer->CreateGfxObject("notebook_nextpage.bmp",eOldMaterialType::DiffuseAlpha);
-	mpOptionsImage[1] = mpDrawer->CreateGfxObject("notebook_prevpage.bmp",eOldMaterialType::DiffuseAlpha);
+	mpOptionsImage[0] = mpDrawer->CreateGfxObject("notebook_nextpage.bmp",eGfxMaterialType::DiffuseAlpha);
+	mpOptionsImage[1] = mpDrawer->CreateGfxObject("notebook_prevpage.bmp",eGfxMaterialType::DiffuseAlpha);
 
 	mvOptions.resize(2);
 
@@ -666,8 +666,8 @@ void cNotebookState_NoteList::OnExit()
 cNotebookState_Note::cNotebookState_Note(cInit *apInit, cNotebook *apNotebook) : iNotebookState(apInit, apNotebook)
 {
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
-	mpOptionsImage[0] = mpDrawer->CreateGfxObject("notebook_nextpage.bmp",eOldMaterialType::DiffuseAlpha);
-	mpOptionsImage[1] = mpDrawer->CreateGfxObject("notebook_prevpage.bmp",eOldMaterialType::DiffuseAlpha);
+	mpOptionsImage[0] = mpDrawer->CreateGfxObject("notebook_nextpage.bmp",eGfxMaterialType::DiffuseAlpha);
+	mpOptionsImage[1] = mpDrawer->CreateGfxObject("notebook_prevpage.bmp",eGfxMaterialType::DiffuseAlpha);
 
 	mpTextFont =  mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("cour.fnt",14);
 	mpNavigateFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt");
@@ -896,7 +896,7 @@ cNotebook::cNotebook(cInit *apInit)  : iUpdateable("Notebook")
 
 	Reset();
 
-	mpGfxBackground = mpDrawer->CreateGfxObject("notebook_background.bmp",eOldMaterialType::DiffuseAlpha);
+	mpGfxBackground = mpDrawer->CreateGfxObject("notebook_background.bmp",eGfxMaterialType::DiffuseAlpha);
 	
     mStateMachine.AddState(hplNew( cNotebookState_Front,(mpInit,this) ),"Front",eNotebookState_Front,mpInit->mpGame->GetStepSize());
 	mStateMachine.AddState(hplNew( cNotebookState_TaskList,(mpInit,this) ),"TaskList",eNotebookState_TaskList,mpInit->mpGame->GetStepSize());
@@ -908,12 +908,12 @@ cNotebook::cNotebook(cInit *apInit)  : iUpdateable("Notebook")
 	mvBookTypes.resize(2);
 	
 	//front
-	mvBookTypes[0].mpGfxImage = mpDrawer->CreateGfxObject("notebook_front.bmp",eOldMaterialType::DiffuseAlpha);
+	mvBookTypes[0].mpGfxImage = mpDrawer->CreateGfxObject("notebook_front.bmp",eGfxMaterialType::DiffuseAlpha);
 	mvBookTypes[0].mfAlpha = 1;
 	mvBookTypes[0].mType = eNotebookType_Front;
 
 	//open
-	mvBookTypes[1].mpGfxImage = mpDrawer->CreateGfxObject("notebook_open.bmp",eOldMaterialType::DiffuseAlpha);
+	mvBookTypes[1].mpGfxImage = mpDrawer->CreateGfxObject("notebook_open.bmp",eGfxMaterialType::DiffuseAlpha);
 	mvBookTypes[1].mfAlpha = 0;
 	mvBookTypes[1].mType = eNotebookType_Open;
 }

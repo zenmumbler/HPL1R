@@ -115,7 +115,7 @@ public:
 	void OnExit();
 
 	cGraphicsDrawer *mpDrawer;
-	cGfxObject *mpTextBack;
+	const cGfxObject *mpTextBack;
 
 	iFontData *mpFrontFont;
 	std::vector<cNoteBook_Option> mvOptions;
@@ -160,7 +160,7 @@ public:
 	int mlSelected;
 	std::vector<cNoteBook_Option> mvOptions;
 	cGraphicsDrawer *mpDrawer;
-	cGfxObject *mpOptionsImage[2];
+	const cGfxObject *mpOptionsImage[2];
 };
 
 //--------------------------------------------------------
@@ -179,8 +179,8 @@ public:
 	void OnExit();
 
 	cGraphicsDrawer *mpDrawer;
-	cGfxObject *mpTextBack;
-	cGfxObject *mpTab;
+	const cGfxObject *mpTextBack;
+	const cGfxObject *mpTab;
 
 	int mlMaxNotesPerPage;
 	int mlFirstNote;
@@ -193,7 +193,7 @@ public:
 	cNotebook_Note *mpSelectedNote;
 
 	std::vector<cNoteBook_Option> mvOptions;
-	cGfxObject *mpOptionsImage[2];
+	const cGfxObject *mpOptionsImage[2];
 };
 
 //--------------------------------------------------------
@@ -231,7 +231,7 @@ public:
 	int mlSelected;
 	std::vector<cNoteBook_Option> mvOptions;
 	cGraphicsDrawer *mpDrawer;
-	cGfxObject *mpOptionsImage[2];
+	const cGfxObject *mpOptionsImage[2];
 
 };
 
@@ -240,7 +240,7 @@ public:
 class cNotebook_BookType
 {
 public:
-	cGfxObject *mpGfxImage;
+	const cGfxObject *mpGfxImage;
 	float mfAlpha;
 	eNotebookType mType;
 };
@@ -313,7 +313,7 @@ private:
 	cInit *mpInit;
 	cGraphicsDrawer *mpDrawer;
 
-	cGfxObject *mpGfxBackground;
+	const cGfxObject *mpGfxBackground;
 		
 	cStateMachine mStateMachine;
 	

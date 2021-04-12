@@ -47,7 +47,7 @@ private:
 	cInit *mpInit;
 	cGraphicsDrawer *mpDrawer;
 
-	cGfxObject *mpWhiteGfx;
+	const cGfxObject *mpWhiteGfx;
 
 	bool mbActive;
 
@@ -114,7 +114,7 @@ private:
 	cInit *mpInit;
 	cGraphicsDrawer *mpDrawer;
 
-	cGfxObject *mpFlashGfx;
+	const cGfxObject *mpFlashGfx;
 
 	cGameSaveArea *mpSaveArea;
 
@@ -187,7 +187,7 @@ private:
 	cInit *mpInit;
 	cGraphicsDrawer *mpDrawer;
 
-	cGfxObject *mpWhiteGfx;
+	const cGfxObject *mpWhiteGfx;
 
 	bool mbActive;
 	float mfAlpha;

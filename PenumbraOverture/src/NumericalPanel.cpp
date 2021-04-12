@@ -42,8 +42,8 @@ cNumericalButton::cNumericalButton(cInit *apInit, cNumericalPanel* apPanel, cVec
 	mRect.w = avSize.x;
 	mRect.h = avSize.y;
 
-	mpGfxUp = mpDrawer->CreateGfxObject("numpanel_button_up",eOldMaterialType::DiffuseAlpha);
-	mpGfxDown = mpDrawer->CreateGfxObject("numpanel_button_down",eOldMaterialType::DiffuseAlpha);
+	mpGfxUp = mpDrawer->CreateGfxObject("numpanel_button_up",eGfxMaterialType::DiffuseAlpha);
+	mpGfxDown = mpDrawer->CreateGfxObject("numpanel_button_down",eGfxMaterialType::DiffuseAlpha);
 
 	mlNum = alNum;
 
@@ -137,9 +137,9 @@ cNumericalPanel::cNumericalPanel(cInit *apInit)  : iUpdateable("NumericalPanel")
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
 
 	//Load graphics (use notebook background for now).
-	mpGfxBackground = mpDrawer->CreateGfxObject("notebook_background.bmp",eOldMaterialType::DiffuseAlpha);
+	mpGfxBackground = mpDrawer->CreateGfxObject("notebook_background.bmp",eGfxMaterialType::DiffuseAlpha);
 
-	mpGfxPanel = mpDrawer->CreateGfxObject("numpanel_panel.bmp",eOldMaterialType::DiffuseAlpha);
+	mpGfxPanel = mpDrawer->CreateGfxObject("numpanel_panel.bmp",eGfxMaterialType::DiffuseAlpha);
 	
 	cVector2f vPos(307, 205);
 

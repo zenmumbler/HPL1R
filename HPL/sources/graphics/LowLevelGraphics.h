@@ -355,9 +355,9 @@ namespace hpl {
 		virtual void DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs)=0;
 
 		//VERTEX BATCHER
-		virtual void AddVertexToBatch(const cVertex *apVtx, const cVector3f* avTransform)=0;
-		virtual void AddVertexToBatch_Size2D(const cVertex *apVtx, const cVector3f* avTransform,
-									const cColor* apCol)=0;
+		virtual void AddVertexToBatch(const cVertex &aVtx, const cVector3f &avTransform)=0;
+		virtual void AddVertexToBatch_Size2D(const cVertex &apVtx, const cVector3f &avTransform,
+									const cColor &apCol)=0;
 
 		virtual void AddIndexToBatch(int alIndex)=0;
 

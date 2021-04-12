@@ -37,7 +37,7 @@ typedef tGameItemTypeVec::iterator tGameItemTypeVecIt;
 class iInventoryWidget
 {
 public:
-	iInventoryWidget(cInit *apInit, const cRect2f &aRect, cGfxObject* apGfxObject, float afZ);
+	iInventoryWidget(cInit *apInit, const cRect2f &aRect, const cGfxObject* apGfxObject, float afZ);
 	virtual ~iInventoryWidget()
 	{
 		if(mpGfxObject)
@@ -55,12 +55,12 @@ public:
 	virtual void OnShortcutDown(int alNum){}
 
 	cRect2f& GetRect(){ return mRect;}
-	cGfxObject* GetGfxObject(){ return mpGfxObject;}
+	const cGfxObject* GetGfxObject(){ return mpGfxObject;}
 
 protected:
     cInit *mpInit;
 	cGraphicsDrawer *mpDrawer;
-	cGfxObject* mpGfxObject;
+	const cGfxObject* mpGfxObject;
 	cRect2f mRect;
 	float mfZ;
 };
@@ -102,7 +102,7 @@ private:
 
 	int mlEquipIndex;
 
-	cGfxObject *mpGfxBack;
+	const cGfxObject *mpGfxBack;
 
 	iFontData *mpFont;
 };
@@ -139,8 +139,8 @@ public:
 
 	const tString& GetEntityFile(){ return msEntityFile;}
 
-	cGfxObject* GetGfxObject(){ return mpGfxObject;}
-	cGfxObject* GetGfxObjectAdditive(){ return mpGfxObjectAdditive;}
+	const cGfxObject* GetGfxObject(){ return mpGfxObject;}
+	const cGfxObject* GetGfxObjectAdditive(){ return mpGfxObjectAdditive;}
 
 	eGameItemType GetItemType(){ return mItemType;}
 	
@@ -165,8 +165,8 @@ private:
 	tString msHudModelFile;
 	tString msHudModelName;
 
-	cGfxObject* mpGfxObject;
-	cGfxObject* mpGfxObjectAdditive;
+	const cGfxObject* mpGfxObject;
+	const cGfxObject* mpGfxObjectAdditive;
 	cGraphicsDrawer *mpDrawer;
 
 	cInventoryItem *mpItem;
@@ -184,7 +184,7 @@ typedef tInventoryItemMap::iterator tInventoryItemMapIt;
 class cInventoryBattery : public iInventoryWidget
 {
 public:
-	cInventoryBattery(cInit *apInit, const cRect2f &aRect, cGfxObject* apGfxObject, float afZ);
+	cInventoryBattery(cInit *apInit, const cRect2f &aRect, const cGfxObject* apGfxObject, float afZ);
 	~cInventoryBattery();
 	
 	void OnDraw();
@@ -192,8 +192,8 @@ public:
 	void OnUpdate(float afTimeStep);
 
 private:
-	cGfxObject* mpGfxBatteryMeter;
-	cGfxObject* mpGfxBatteryMeterBar;
+	const cGfxObject* mpGfxBatteryMeter;
+	const cGfxObject* mpGfxBatteryMeterBar;
 };
 
 //-----------------------------------------
@@ -201,7 +201,7 @@ private:
 class cInventoryHealth : public iInventoryWidget
 {
 public:
-	cInventoryHealth(cInit *apInit, const cRect2f &aRect, cGfxObject* apGfxObject, float afZ);
+	cInventoryHealth(cInit *apInit, const cRect2f &aRect, const cGfxObject* apGfxObject, float afZ);
 	~cInventoryHealth();
 
 	void OnDraw();
@@ -209,9 +209,9 @@ public:
 	void OnUpdate(float afTimeStep);
 
 private:
-	cGfxObject* mpGfxFine;
-	cGfxObject* mpGfxCaution;
-	cGfxObject* mpGfxDanger;
+	const cGfxObject* mpGfxFine;
+	const cGfxObject* mpGfxCaution;
+	const cGfxObject* mpGfxDanger;
 };
 
 //-----------------------------------------
@@ -239,15 +239,15 @@ private:
 	cGraphicsDrawer *mpDrawer;
 	iFontData *mpFont;
     	
-	cGfxObject* mpGfxBack;
-	cGfxObject* mpGfxCorner11;
-	cGfxObject* mpGfxCorner12;
-	cGfxObject* mpGfxCorner21;
-	cGfxObject* mpGfxCorner22;
-	cGfxObject* mpGfxRight;
-	cGfxObject* mpGfxLeft;
-	cGfxObject* mpGfxTop;
-	cGfxObject* mpGfxBottom;
+	const cGfxObject* mpGfxBack;
+	const cGfxObject* mpGfxCorner11;
+	const cGfxObject* mpGfxCorner12;
+	const cGfxObject* mpGfxCorner21;
+	const cGfxObject* mpGfxCorner22;
+	const cGfxObject* mpGfxRight;
+	const cGfxObject* mpGfxLeft;
+	const cGfxObject* mpGfxTop;
+	const cGfxObject* mpGfxBottom;
 
 	bool mbActive;
 
@@ -376,17 +376,17 @@ private:
 	cGraphicsDrawer *mpDrawer;
 	cInventoryContext *mpContext;
 
-	cGfxObject *mpGfxBackground;
+	const cGfxObject *mpGfxBackground;
 
-	cGfxObject *mpBatteryMeter;
-	cGfxObject *mpBatteryMeterBar;
+	const cGfxObject *mpBatteryMeter;
+	const cGfxObject *mpBatteryMeterBar;
 
-	cGfxObject *mpHealthMan_Fine;
-	cGfxObject *mpHealthMan_Caution;
-	cGfxObject *mpHealthMan_Danger;
-	cGfxObject *mpHealthTextFrame;
+	const cGfxObject *mpHealthMan_Fine;
+	const cGfxObject *mpHealthMan_Caution;
+	const cGfxObject *mpHealthMan_Danger;
+	const cGfxObject *mpHealthTextFrame;
 
-	cGfxObject *mpBagpack;
+	const cGfxObject *mpBagpack;
 
 	tGameItemTypeVec mvItemTypes;
 
@@ -412,7 +412,7 @@ private:
 	bool mbMessageActive;
 	tWString msMessage;
 	float mfMessageAlpha;
-	cGfxObject *mpMessageBackground;
+	const cGfxObject *mpMessageBackground;
 	
 	cInventoryItem *mpCurrentItem;
 	cVector2f mvCurrentItemOffset;

@@ -1109,35 +1109,28 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::AddVertexToBatch(const cVertex *apVtx, const cVector3f* avTransform)
+	void cLowLevelGraphicsSDL::AddVertexToBatch(const cVertex &aVtx, const cVector3f &avTransform)
 	{
 		//Coord
-		mpVertexArray[mlVertexCount + 0] =	apVtx->pos.x+avTransform->x;
-		mpVertexArray[mlVertexCount + 1] =	apVtx->pos.y+avTransform->y;
-		mpVertexArray[mlVertexCount + 2] =	apVtx->pos.z+avTransform->z;
+		mpVertexArray[mlVertexCount + 0] =	aVtx.pos.x + avTransform.x;
+		mpVertexArray[mlVertexCount + 1] =	aVtx.pos.y + avTransform.y;
+		mpVertexArray[mlVertexCount + 2] =	aVtx.pos.z + avTransform.z;
 
-		/*Log("Trans: %s\n",avTransform->ToString().c_str());
-		Log("Adding: %f:%f:%f\n",mpVertexArray[mlVertexCount + 0],
-									mpVertexArray[mlVertexCount + 1],
-									mpVertexArray[mlVertexCount + 2]);*/
 		//Color
-		mpVertexArray[mlVertexCount + 3] =	apVtx->col.r;
-		mpVertexArray[mlVertexCount + 4] =	apVtx->col.g;
-		mpVertexArray[mlVertexCount + 5] =	apVtx->col.b;
-		mpVertexArray[mlVertexCount + 6] =	apVtx->col.a;
-		//Texture coord
-		mpVertexArray[mlVertexCount + 7] =	apVtx->tex.x;
-		mpVertexArray[mlVertexCount + 8] =	apVtx->tex.y;
-		mpVertexArray[mlVertexCount + 9] =	apVtx->tex.z;
+		mpVertexArray[mlVertexCount + 3] =	aVtx.col.r;
+		mpVertexArray[mlVertexCount + 4] =	aVtx.col.g;
+		mpVertexArray[mlVertexCount + 5] =	aVtx.col.b;
+		mpVertexArray[mlVertexCount + 6] =	aVtx.col.a;
 
-		/*Log("Tex: %f:%f:%f\n",mpVertexArray[mlVertexCount + 7],
-			mpVertexArray[mlVertexCount + 8],
-			mpVertexArray[mlVertexCount + 9]);*/
+		//Texture coord
+		mpVertexArray[mlVertexCount + 7] =	aVtx.tex.x;
+		mpVertexArray[mlVertexCount + 8] =	aVtx.tex.y;
+		mpVertexArray[mlVertexCount + 9] =	aVtx.tex.z;
 
 		//Normal coord
-		mpVertexArray[mlVertexCount + 10] =	apVtx->norm.x;
-		mpVertexArray[mlVertexCount + 11] =	apVtx->norm.y;
-		mpVertexArray[mlVertexCount + 12] =	apVtx->norm.z;
+		mpVertexArray[mlVertexCount + 10] =	aVtx.norm.x;
+		mpVertexArray[mlVertexCount + 11] =	aVtx.norm.y;
+		mpVertexArray[mlVertexCount + 12] =	aVtx.norm.z;
 
 		mlVertexCount = mlVertexCount + mlBatchStride;
 
@@ -1149,25 +1142,23 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::AddVertexToBatch_Size2D(const cVertex *apVtx, const cVector3f* avTransform,
-		const cColor* apCol)
+	void cLowLevelGraphicsSDL::AddVertexToBatch_Size2D(const cVertex &aVtx, const cVector3f &avTransform, const cColor &aCol)
 	{
 		//Coord
-		mpVertexArray[mlVertexCount + 0] =	avTransform->x;
-		mpVertexArray[mlVertexCount + 1] =	avTransform->y;
-		mpVertexArray[mlVertexCount + 2] =	avTransform->z;
+		mpVertexArray[mlVertexCount + 0] =	avTransform.x;
+		mpVertexArray[mlVertexCount + 1] =	avTransform.y;
+		mpVertexArray[mlVertexCount + 2] =	avTransform.z;
 
 		//Color
-		mpVertexArray[mlVertexCount + 3] =	apCol->r;
-		mpVertexArray[mlVertexCount + 4] =	apCol->g;
-		mpVertexArray[mlVertexCount + 5] =	apCol->b;
-		mpVertexArray[mlVertexCount + 6] =	apCol->a;
+		mpVertexArray[mlVertexCount + 3] =	aCol.r;
+		mpVertexArray[mlVertexCount + 4] =	aCol.g;
+		mpVertexArray[mlVertexCount + 5] =	aCol.b;
+		mpVertexArray[mlVertexCount + 6] =	aCol.a;
 
 		//Texture coord
-		mpVertexArray[mlVertexCount + 7] =	apVtx->tex.x;
-		mpVertexArray[mlVertexCount + 8] =	apVtx->tex.y;
-		mpVertexArray[mlVertexCount + 9] =	apVtx->tex.z;
-
+		mpVertexArray[mlVertexCount + 7] =	aVtx.tex.x;
+		mpVertexArray[mlVertexCount + 8] =	aVtx.tex.y;
+		mpVertexArray[mlVertexCount + 9] =	aVtx.tex.z;
 
 		mlVertexCount = mlVertexCount + mlBatchStride;
 

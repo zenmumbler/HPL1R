@@ -122,7 +122,7 @@ private:
 	cInit *mpInit;
 	cGraphicsDrawer *mpDrawer;
 
-	cGfxObject *mpGfxBackground;
+	const cGfxObject *mpGfxBackground;
 
 	bool mbMouseIsDown;
 

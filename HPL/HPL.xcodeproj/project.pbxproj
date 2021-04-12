@@ -20,9 +20,6 @@
 		8EA48718260FFCD3000D1AB7 /* scriptstdstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */; };
 		8EA4871E2610A67C000D1AB7 /* scriptarray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4871B2610A67B000D1AB7 /* scriptarray.cpp */; };
 		8EA4871F2610A67C000D1AB7 /* scriptstdstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */; };
-		8EAA07B125588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AE25588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp */; };
-		8EAA07B225588FEA007D7CD0 /* Material_Smoke2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07AF25588FEA007D7CD0 /* Material_Smoke2D.cpp */; };
-		8EAA07B325588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07B025588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp */; };
 		8EAA07DD255C64F3007D7CD0 /* LowLevelSystemMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */; };
 		8EB7C3D9254F603E00277667 /* scripthelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7C3D8254F603E00277667 /* scripthelper.cpp */; };
 		DB019B210D7462DE00FADC2C /* VideoManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB9F0D7076B200809E03 /* VideoManager.cpp */; };
@@ -71,7 +68,6 @@
 		DBF84AD00AC76F1E00BB15CD /* Frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849BF0AC76D5800BB15CD /* Frustum.cpp */; };
 		DBF84AD10AC76F1E00BB15CD /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8494E0AC76D5700BB15CD /* Game.cpp */; };
 		DBF84AD20AC76F1E00BB15CD /* ScriptVar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8494F0AC76D5700BB15CD /* ScriptVar.cpp */; };
-		DBF84AD30AC76F1E00BB15CD /* GfxObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8495C0AC76D5700BB15CD /* GfxObject.cpp */; };
 		DBF84AD50AC76F1E00BB15CD /* GPUProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8495D0AC76D5700BB15CD /* GPUProgram.cpp */; };
 		DBF84AD60AC76F1E00BB15CD /* GpuProgramManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849DB0AC76D5800BB15CD /* GpuProgramManager.cpp */; };
 		DBF84AD70AC76F1E00BB15CD /* Graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8495E0AC76D5700BB15CD /* Graphics.cpp */; };
@@ -252,12 +248,6 @@
 		8EA4871B2610A67B000D1AB7 /* scriptarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptarray.cpp; sourceTree = "<group>"; };
 		8EA4871C2610A67B000D1AB7 /* scriptarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptarray.h; sourceTree = "<group>"; };
 		8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstdstring_utils.cpp; sourceTree = "<group>"; };
-		8EAA07AE25588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material_DiffuseAlpha2D.cpp; sourceTree = "<group>"; };
-		8EAA07AF25588FEA007D7CD0 /* Material_Smoke2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material_Smoke2D.cpp; sourceTree = "<group>"; };
-		8EAA07B025588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material_DiffuseAdditive2D.cpp; sourceTree = "<group>"; };
-		8EAA07B625589032007D7CD0 /* Material_DiffuseAdditive2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material_DiffuseAdditive2D.h; sourceTree = "<group>"; };
-		8EAA07B725589032007D7CD0 /* Material_DiffuseAlpha2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material_DiffuseAlpha2D.h; sourceTree = "<group>"; };
-		8EAA07B825589032007D7CD0 /* Material_Smoke2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material_Smoke2D.h; sourceTree = "<group>"; };
 		8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LowLevelSystemMac.mm; sourceTree = "<group>"; };
 		8EB7C3D8254F603E00277667 /* scripthelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripthelper.cpp; sourceTree = "<group>"; };
 		DB00F0D211A9D080007DFB32 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -281,7 +271,6 @@
 		DB27F02C0ACB9AB90054ACA3 /* BoneState.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BoneState.h; sourceTree = "<group>"; };
 		DB27F02D0ACB9AB90054ACA3 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		DB27F02E0ACB9AB90054ACA3 /* FontData.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FontData.h; sourceTree = "<group>"; };
-		DB27F02F0ACB9AB90054ACA3 /* GfxObject.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GfxObject.h; sourceTree = "<group>"; };
 		DB27F0300ACB9AB90054ACA3 /* GPUProgram.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GPUProgram.h; sourceTree = "<group>"; };
 		DB27F0310ACB9AB90054ACA3 /* Graphics.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Graphics.h; sourceTree = "<group>"; };
 		DB27F0320ACB9AB90054ACA3 /* GraphicsDrawer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GraphicsDrawer.h; sourceTree = "<group>"; };
@@ -492,7 +481,6 @@
 		DBF849590AC76D5700BB15CD /* BoneState.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = BoneState.cpp; sourceTree = "<group>"; };
 		DBF8495A0AC76D5700BB15CD /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
 		DBF8495B0AC76D5700BB15CD /* FontData.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = FontData.cpp; sourceTree = "<group>"; };
-		DBF8495C0AC76D5700BB15CD /* GfxObject.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GfxObject.cpp; sourceTree = "<group>"; };
 		DBF8495D0AC76D5700BB15CD /* GPUProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GPUProgram.cpp; sourceTree = "<group>"; };
 		DBF8495E0AC76D5700BB15CD /* Graphics.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Graphics.cpp; sourceTree = "<group>"; };
 		DBF8495F0AC76D5700BB15CD /* GraphicsDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GraphicsDrawer.cpp; sourceTree = "<group>"; };
@@ -967,8 +955,6 @@
 				DB27F02D0ACB9AB90054ACA3 /* Color.h */,
 				DBF8495B0AC76D5700BB15CD /* FontData.cpp */,
 				DB27F02E0ACB9AB90054ACA3 /* FontData.h */,
-				DBF8495C0AC76D5700BB15CD /* GfxObject.cpp */,
-				DB27F02F0ACB9AB90054ACA3 /* GfxObject.h */,
 				DBF8495D0AC76D5700BB15CD /* GPUProgram.cpp */,
 				DB27F0300ACB9AB90054ACA3 /* GPUProgram.h */,
 				DBF8495E0AC76D5700BB15CD /* Graphics.cpp */,
@@ -992,10 +978,6 @@
 				DB27F03D0ACB9AB90054ACA3 /* Material_BumpSpec.h */,
 				DBF849690AC76D5700BB15CD /* Material_Diffuse.cpp */,
 				DB27F03F0ACB9AB90054ACA3 /* Material_Diffuse.h */,
-				8EAA07B025588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp */,
-				8EAA07B625589032007D7CD0 /* Material_DiffuseAdditive2D.h */,
-				8EAA07AE25588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp */,
-				8EAA07B725589032007D7CD0 /* Material_DiffuseAlpha2D.h */,
 				DBF8496D0AC76D5700BB15CD /* Material_DiffuseSpec.cpp */,
 				DB27F0430ACB9AB90054ACA3 /* Material_DiffuseSpec.h */,
 				DBCEE59D0B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp */,
@@ -1006,8 +988,6 @@
 				DB27F0470ACB9AB90054ACA3 /* Material_Modulative.h */,
 				DBF849720AC76D5700BB15CD /* Material_ModulativeX2.cpp */,
 				DB27F0480ACB9AB90054ACA3 /* Material_ModulativeX2.h */,
-				8EAA07AF25588FEA007D7CD0 /* Material_Smoke2D.cpp */,
-				8EAA07B825589032007D7CD0 /* Material_Smoke2D.h */,
 				DBFBA0180B65E42A0021DAE2 /* Material_Water.cpp */,
 				DB4AFBE00D70773700809E03 /* Material_Water.h */,
 				DBF849610AC76D5700BB15CD /* Material.cpp */,
@@ -1417,7 +1397,6 @@
 				DBF84AB00AC76F1E00BB15CD /* AnimationState.cpp in Sources */,
 				DBF84AB10AC76F1E00BB15CD /* AnimationTrack.cpp in Sources */,
 				DBF84AB30AC76F1E00BB15CD /* AStar.cpp in Sources */,
-				8EAA07B125588FEA007D7CD0 /* Material_DiffuseAlpha2D.cpp in Sources */,
 				DBF84AB50AC76F1E00BB15CD /* BillBoard.cpp in Sources */,
 				DBF84AB70AC76F1E00BB15CD /* Bone.cpp in Sources */,
 				DBF84AB80AC76F1E00BB15CD /* BoneState.cpp in Sources */,
@@ -1448,7 +1427,6 @@
 				DBF84AD00AC76F1E00BB15CD /* Frustum.cpp in Sources */,
 				DBF84AD10AC76F1E00BB15CD /* Game.cpp in Sources */,
 				DBF84AD20AC76F1E00BB15CD /* ScriptVar.cpp in Sources */,
-				DBF84AD30AC76F1E00BB15CD /* GfxObject.cpp in Sources */,
 				DBF84AD50AC76F1E00BB15CD /* GPUProgram.cpp in Sources */,
 				DBF84AD60AC76F1E00BB15CD /* GpuProgramManager.cpp in Sources */,
 				DBF84AD70AC76F1E00BB15CD /* Graphics.cpp in Sources */,
@@ -1494,7 +1472,6 @@
 				8E84E78C260549B100DC6065 /* stb_vorbis.c in Sources */,
 				DBF84B0F0AC76F1E00BB15CD /* MeshLoaderHandler.cpp in Sources */,
 				DBF84B100AC76F1E00BB15CD /* MeshLoaderMSH.cpp in Sources */,
-				8EAA07B325588FEA007D7CD0 /* Material_DiffuseAdditive2D.cpp in Sources */,
 				DBF84B110AC76F1E00BB15CD /* MeshManager.cpp in Sources */,
 				DBF84B120AC76F1E00BB15CD /* MeshTypes.cpp in Sources */,
 				DBF84B130AC76F1E00BB15CD /* Mouse.cpp in Sources */,
@@ -1533,7 +1510,6 @@
 				DBF84B370AC76F1E00BB15CD /* Renderable.cpp in Sources */,
 				DBF84B390AC76F1E00BB15CD /* Renderer3D.cpp in Sources */,
 				DBF84B3A0AC76F1E00BB15CD /* RendererPostEffects.cpp in Sources */,
-				8EAA07B225588FEA007D7CD0 /* Material_Smoke2D.cpp in Sources */,
 				DBF84B3B0AC76F1E00BB15CD /* RenderList.cpp in Sources */,
 				DBF84B3D0AC76F1E00BB15CD /* RenderState.cpp in Sources */,
 				DBF84B3E0AC76F1E00BB15CD /* ResourceBase.cpp in Sources */,

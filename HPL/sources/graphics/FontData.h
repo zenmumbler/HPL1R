@@ -32,7 +32,7 @@ namespace hpl {
 	class ImageManager;
 	class iLowLevelGraphics;
 	class cGraphicsDrawer;
-	class cGfxObject;
+	struct cGfxObject;
 	class iBitmap2D;
 
 	//------------------------------------------------
@@ -40,11 +40,11 @@ namespace hpl {
 	class cGlyph
 	{
 	public:
-		cGlyph(	cGfxObject *apObject, const cVector2f &avOffset,
+		cGlyph(	const cGfxObject *apObject, const cVector2f &avOffset,
 				const cVector2f &avSize, float afAdvance);
-		~cGlyph();
+		~cGlyph() = default;
 
-		cGfxObject *mpGfxObject;
+		const cGfxObject *mpGfxObject;
 		cVector2f mvOffset;
 		cVector2f mvSize;
 		float mfAdvance;

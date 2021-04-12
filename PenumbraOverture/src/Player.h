@@ -435,7 +435,7 @@ private:
 
 	iPhysicsBody *mpPushBody;
 
-	std::vector<cGfxObject*> mvCrossHairs;
+	std::vector<const cGfxObject*> mvCrossHairs;
 
 	cVector2f mvMaxPushHeadMovement;
 	cVector2f mvMinPushHeadMovement;

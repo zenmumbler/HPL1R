@@ -166,9 +166,9 @@ namespace hpl {
 		void DrawQuad(const tVertexVec &avVtx,const float afZ,const cColor &aCol);
 		void DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs);
 
-		void AddVertexToBatch(const cVertex *apVtx, const cVector3f* avTransform);
-		void AddVertexToBatch_Size2D(const cVertex *apVtx, const cVector3f* avTransform,
-										const cColor* apCol);
+		void AddVertexToBatch(const cVertex &apVtx, const cVector3f &avTransform);
+		void AddVertexToBatch_Size2D(const cVertex &aVtx, const cVector3f &avTransform,
+										const cColor &apCol);
 
 		void AddIndexToBatch(int alIndex);
 

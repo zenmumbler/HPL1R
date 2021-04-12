@@ -18,19 +18,11 @@
  */
 
 #include "graphics/GraphicsDrawer.h"
-#include "system/LowLevelSystem.h"
 #include "graphics/LowLevelGraphics.h"
-#include "resources/FrameBitmap.h"
-#include "graphics/GfxObject.h"
-
-#include "math/Math.h"
-
 #include "resources/ResourceImage.h"
-#include "resources/ImageManager.h"
-
-#include "graphics/Material_Smoke2D.h"
-#include "graphics/Material_DiffuseAdditive2D.h"
-#include "graphics/Material_DiffuseAlpha2D.h"
+#include "resources/FrameBitmap.h"
+#include "system/LowLevelSystem.h"
+#include "math/Math.h"
 
 namespace hpl {
 
@@ -50,7 +42,10 @@ namespace hpl {
 
 	cGraphicsDrawer::~cGraphicsDrawer()
 	{
-		STLDeleteAll(mlstGfxObjects);
+		for (auto pGo : mvGfxObjects) {
+			mpImageManager->Destroy(pGo->mpImage);
+		}
+		STLDeleteAll(mvGfxObjects);
 	}
 
 	//-----------------------------------------------------------------------
@@ -60,29 +55,21 @@ namespace hpl {
 	//////////////////////////////////////////////////////////////////////////
 
 	//-----------------------------------------------------------------------
-
-	iOldMaterial* cGfxBufferObject::GetMaterial() const
+	
+	iTexture *cGfxBufferObject::GetTexture() const
 	{
-		return static_cast<iOldMaterial*>(mpObject->GetMaterial());
+		return mpObject->mpImage->GetTexture();
 	}
 
-	//-----------------------------------------------------------------------
-
-	bool cGfxBufferCompare::operator()(const cGfxBufferObject& aObjectA,const cGfxBufferObject& aObjectB) const
+	bool cGfxBufferCompare::operator()(const cGfxBufferObject& aObjectA, const cGfxBufferObject& aObjectB) const
 	{
-		if(aObjectA.GetZ() != aObjectB.GetZ())
+		if (aObjectA.GetZ() != aObjectB.GetZ())
 		{
 			return aObjectA.GetZ() < aObjectB.GetZ();
 		}
-		else if(aObjectA.GetMaterial()->GetTexture() !=
-			aObjectB.GetMaterial()->GetTexture())
+		else if (aObjectA.GetTexture() != aObjectB.GetTexture())
 		{
-			return aObjectA.GetMaterial()->GetTexture() >
-				aObjectB.GetMaterial()->GetTexture();
-		}
-		else
-		{
-
+			return aObjectA.GetTexture() > aObjectB.GetTexture();
 		}
 		return false;
 	}
@@ -90,20 +77,19 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void FlushImage(cGfxObject* apObject)
+	static void FlushImage(const cGfxObject* apObject)
 	{
-		cResourceImage *pImage = apObject->GetMaterial()->GetImage();
-		pImage->GetFrameBitmap()->FlushToTexture();
+		apObject->mpImage->GetFrameBitmap()->FlushToTexture();
 	}
 
-	void cGraphicsDrawer::DrawGfxObject(cGfxObject* apObject, const cVector3f& avPos,
+	void cGraphicsDrawer::DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos,
 										const cVector2f& avSize, const cColor& aColor)
 	{
 		FlushImage(apObject);
 
 		cGfxBufferObject BuffObj;
 		BuffObj.mpObject = apObject;
-		BuffObj.mvTransform = avPos;
+		BuffObj.mvPosition = avPos;
 		BuffObj.mvSize= avSize;
 		BuffObj.mColor = aColor;
 
@@ -114,188 +100,179 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cGraphicsDrawer::DrawGfxObject(cGfxObject* apObject, const cVector3f& avPos)
+	void cGraphicsDrawer::DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos)
 	{
 		FlushImage(apObject);
 
 		cGfxBufferObject BuffObj;
 		BuffObj.mpObject = apObject;
-		BuffObj.mvTransform = avPos;
+		BuffObj.mvPosition = avPos;
 		BuffObj.mbIsColorAndSize = false;
 
 		m_setGfxBuffer.insert(BuffObj);
 	}
+	
+	//-----------------------------------------------------------------------
 
+	void cGraphicsDrawer::UseMaterialType(eGfxMaterialType matType) {
+		switch (matType) {
+			case eGfxMaterialType::DiffuseAlpha:
+				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_OneMinusSrcAlpha);
+				break;
+
+			case eGfxMaterialType::DiffuseAdditive:
+				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_One);
+				mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
+				break;
+
+			case eGfxMaterialType::Smoke:
+				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_Zero,eBlendFunc_OneMinusSrcColor);
+				mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Color);
+				mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
+				break;
+
+			case eGfxMaterialType::Null:
+				// reset to defaults
+				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_OneMinusSrcAlpha);
+				mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorOp1,eTextureOp_Color);
+				mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
+				break;
+				
+			default:
+				break;
+		}
+	}
+	
 	//-----------------------------------------------------------------------
 
 	void cGraphicsDrawer::DrawAll()
 	{
 		//Set all states
 		mpLowLevelGraphics->SetDepthTestActive(false);
+		mpLowLevelGraphics->SetBlendActive(true);
 		mpLowLevelGraphics->SetIdentityMatrix(eMatrix_ModelView);
+		mpLowLevelGraphics->SetOrthoProjection(mpLowLevelGraphics->GetVirtualSize(), -1000, 1000);
 
-		mpLowLevelGraphics->SetOrthoProjection(mpLowLevelGraphics->GetVirtualSize(),-1000,1000);
-
-		int lIdxAdd=0;
-		iOldMaterial *pPrevMat=NULL;
-		iOldMaterial *pMat =NULL;
-		const cGfxBufferObject* pObj=NULL;
-		tGfxBufferSetIt ObjectIt = m_setGfxBuffer.begin();
-
-		if(ObjectIt != m_setGfxBuffer.end())
-			pMat = ObjectIt->GetMaterial();
-
-		while(ObjectIt != m_setGfxBuffer.end())
-		{
-			pMat->StartRendering(mpLowLevelGraphics);
-
-			do
+		int lIdxAdd = 0;
+		eGfxMaterialType matType = eGfxMaterialType::Null;
+		iTexture *curTexture = nullptr;
+		
+		const auto renderBatch = [this, &lIdxAdd]() {
+			if (lIdxAdd > 0)
 			{
-				pObj = &(*ObjectIt);
-				if(pObj->mbIsColorAndSize)
-				{
-					auto [fX, fY, fZ] = pObj->mvTransform.v;
-					float fW = pObj->mvSize.x;
-					float fH = pObj->mvSize.y;
-					cVector3f vPos[4] = {
-						{ fX,      fY,      fZ },
-						{ fX + fW, fY,      fZ },
-						{ fX + fW, fY + fH, fZ },
-						{ fX,      fY + fH, fZ }
-					};
+				mpLowLevelGraphics->DrawBatch(eVtxBatchFlag_Position | eVtxBatchFlag_Texture0 | eVtxBatchFlag_Color0, eBatchDrawMode_Quads);
+				mpLowLevelGraphics->ClearBatch();
+				lIdxAdd = 0;
+			}
+		};
 
-					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(0),
-																&vPos[0],
-																&pObj->mColor);
-					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(1),
-																&vPos[1],
-																&pObj->mColor);
-					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(2),
-																&vPos[2],
-																&pObj->mColor);
-					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj->mpObject->GetVtxPtr(3),
-																&vPos[3],
-																&pObj->mColor);
+		for (const auto &pObj : m_setGfxBuffer)
+		{
+			// get next settings
+			auto newMatType = pObj.GetMaterialType();
+			auto newTexture = pObj.GetTexture();
 
-					for(int i=0;i<4;i++)
-						mpLowLevelGraphics->AddIndexToBatch(lIdxAdd + i);
+			if (newMatType != matType || newTexture != curTexture) {
+				renderBatch();
+
+				// apply changes to shader
+				if (newTexture != curTexture) {
+					curTexture = newTexture;
+					mpLowLevelGraphics->SetTexture(0, curTexture);
 				}
-				else
-				{
-					for(int i=0;i<(int)pObj->mpObject->GetVertexVec()->size();i++)
-					{
-						mpLowLevelGraphics->AddVertexToBatch(pObj->mpObject->GetVtxPtr(i),
-															&pObj->mvTransform);
-						mpLowLevelGraphics->AddIndexToBatch(lIdxAdd + i);
-					}
-				}
-				lIdxAdd+=(int)pObj->mpObject->GetVertexVec()->size();
-
-				pPrevMat = pMat;
-				ObjectIt++;
-
-				if(ObjectIt == m_setGfxBuffer.end()){
-					pMat=NULL;
-					break;
-				}
-				else{
-					pMat = ObjectIt->GetMaterial();
+				if (newMatType != matType) {
+					matType = newMatType;
+					UseMaterialType(matType);
 				}
 			}
-			while(	pMat->mType == pPrevMat->mType
-					&&
-					pMat->GetTexture() == pPrevMat->GetTexture()
-				);
 
-			lIdxAdd =0;
+			// add quad data
+			if(pObj.mbIsColorAndSize)
+			{
+				auto [fX, fY, fZ] = pObj.mvPosition.v;
+				auto [fW, fH] = pObj.mvSize.v;
+				cVector3f vPos[4] = {
+					{ fX,      fY,      fZ },
+					{ fX + fW, fY,      fZ },
+					{ fX + fW, fY + fH, fZ },
+					{ fX,      fY + fH, fZ }
+				};
 
-			mpLowLevelGraphics->DrawBatch(eVtxBatchFlag_Position | eVtxBatchFlag_Texture0 | eVtxBatchFlag_Color0, eBatchDrawMode_Quads);
-			mpLowLevelGraphics->ClearBatch();
-
-			pPrevMat->EndRendering(mpLowLevelGraphics);
+				for (int i = 0; i < 4; i++)
+				{
+					mpLowLevelGraphics->AddVertexToBatch_Size2D(pObj.mpObject->mvVtx[i], vPos[i], pObj.mColor);
+					mpLowLevelGraphics->AddIndexToBatch(lIdxAdd++);
+				}
+			}
+			else
+			{
+				for (int i = 0; i < 4; i++)
+				{
+					mpLowLevelGraphics->AddVertexToBatch(pObj.mpObject->mvVtx[i], pObj.mvPosition);
+					mpLowLevelGraphics->AddIndexToBatch(lIdxAdd++);
+				}
+			}
 		}
+		
+		// render final batch, if any
+		renderBatch();
 
 		//Clear the buffer of objects.
 		m_setGfxBuffer.clear();
 
 		//Reset all states
 		mpLowLevelGraphics->SetDepthTestActive(true);
+		mpLowLevelGraphics->SetBlendActive(false);
+		UseMaterialType(eGfxMaterialType::Null);
 	}
 
 	//-----------------------------------------------------------------------
 
-	iOldMaterial* cGraphicsDrawer::CreateMaterial(eOldMaterialType type, cResourceImage* apImage) {
-		iOldMaterial *pMat = NULL;
-
-		if (type == eOldMaterialType::DiffuseAlpha) {
-			pMat = hplNew(cMaterial_DiffuseAlpha2D, (mpImageManager));
-		}
-		else if (type == eOldMaterialType::DiffuseAdditive) {
-			pMat = hplNew(cMaterial_DiffuseAdditive2D, (mpImageManager));
-		}
-		else if (type == eOldMaterialType::Smoke) {
-			pMat = hplNew(cMaterial_Smoke2D, (mpImageManager));
-		}
-		
-		if (pMat != NULL) {
-			pMat->SetImage(apImage);
-		}
-		return pMat;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cGfxObject* cGraphicsDrawer::CreateGfxObject(const tString &asFileName, eOldMaterialType type,
-												bool abAddToList)
+	const cGfxObject* cGraphicsDrawer::CreateGfxObject(const tString &asFileName, eGfxMaterialType matType)
 	{
 		cResourceImage* pImage = mpImageManager->CreateImage(asFileName);
-		if(pImage==NULL){
-			FatalError("Couldn't load image '%s'!\n", asFileName.c_str());
-			return NULL;
+		if (pImage == nullptr) {
+			Error("Couldn't load image '%s'!\n", asFileName.c_str());
+			return nullptr;
 		}
 
-		iOldMaterial* pMat = CreateMaterial(type, pImage);
-		if(pMat==NULL){
-			FatalError("Couldn't create material '%d'!\n", type);
-			return NULL;
-		}
-
-		cGfxObject* pObject = hplNew(cGfxObject,(pMat, asFileName));
-
-		if(abAddToList) mlstGfxObjects.push_back(pObject);
-
-		return pObject;
+		cGfxObject *go = hplNew(cGfxObject, ({
+			asFileName,
+			matType,
+			pImage,
+			pImage->GetVertexVecCopy(0, -1)
+		}));
+		mvGfxObjects.push_back(go);
+		return go;
 	}
 
 	//-----------------------------------------------------------------------
 
-	cGfxObject* cGraphicsDrawer::CreateGfxObject(iBitmap2D *apBmp, eOldMaterialType type,
-												bool abAddToList)
+	const cGfxObject* cGraphicsDrawer::CreateUnmanagedGfxObject(iBitmap2D *apBmp, eGfxMaterialType matType)
 	{
 		cResourceImage* pImage = mpImageManager->CreateFromBitmap(apBmp);
-		if(pImage==NULL){
-			FatalError("Couldn't create image\n");
-			return NULL;
+		if(pImage == nullptr){
+			Error("Couldn't create image from bitmap!\n");
+			return nullptr;
 		}
 
-		iOldMaterial* pMat = CreateMaterial(type, pImage);
-		if(pMat==NULL){
-			FatalError("Couldn't create material '%d'!\n", type);
-			return NULL;
-		}
-
-		cGfxObject* pObject = hplNew(cGfxObject,(pMat, ""));
-
-		if(abAddToList) mlstGfxObjects.push_back(pObject);
-
-		return pObject;
+		return hplNew(cGfxObject, ({
+			"",
+			matType,
+			pImage,
+			pImage->GetVertexVecCopy(0, -1)
+		}));
 	}
 
 	//-----------------------------------------------------------------------
 
-	void cGraphicsDrawer::DestroyGfxObject(cGfxObject* apObject)
+	void cGraphicsDrawer::DestroyGfxObject(const cGfxObject* apObject)
 	{
-		STLFindAndDelete(mlstGfxObjects,apObject);
+		mpImageManager->Destroy(apObject->mpImage);
+		
+		if (apObject->msSourceFile.length() > 0) {
+			STLFindAndDelete(mvGfxObjects, apObject);
+		}
 	}
 
 	//-----------------------------------------------------------------------

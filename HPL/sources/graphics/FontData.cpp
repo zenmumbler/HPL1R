@@ -23,7 +23,6 @@
 #include "system/LowLevelSystem.h"
 
 #include "graphics/GraphicsDrawer.h"
-#include "graphics/GfxObject.h"
 #include "graphics/Material.h"
 
 #include "resources/ResourceImage.h"
@@ -38,20 +37,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cGlyph::cGlyph(	cGfxObject *apObject, const cVector2f &avOffset,
+	cGlyph::cGlyph(	const cGfxObject *apObject, const cVector2f &avOffset,
 					const cVector2f &avSize, float afAdvance)
 	{
 		mpGfxObject = apObject;
 		mvOffset = avOffset;
 		mvSize = avSize;
 		mfAdvance = afAdvance;
-	}
-
-
-
-	cGlyph::~cGlyph()
-	{
-		if(mpGfxObject) hplDelete(mpGfxObject);
 	}
 
 	//-----------------------------------------------------------------------
@@ -66,9 +58,16 @@ namespace hpl {
 
 	iFontData::~iFontData()
 	{
-		for(int i=0;i<(int)mvGlyphs.size();i++)
+		for(int i=0; i <(int)mvGlyphs.size(); i++)
 		{
-			if(mvGlyphs[i]) hplDelete(mvGlyphs[i]);
+			if(mvGlyphs[i])
+			{
+				if (mvGlyphs[i]->mpGfxObject) {
+					// [zm] Graphics has already been destroyed at this point...
+					// mpGraphicsDrawer->DestroyGfxObject(mvGlyphs[i]->mpGfxObject);
+				}
+				hplDelete(mvGlyphs[i]);
+			}
 		}
 	}
 
@@ -341,7 +340,7 @@ namespace hpl {
 
 		//////////////////////////
 		//Gfx object
-		cGfxObject* pObject = mpGraphicsDrawer->CreateGfxObject(apBmp,eOldMaterialType::DiffuseAlpha,false);
+		const cGfxObject* pObject = mpGraphicsDrawer->CreateUnmanagedGfxObject(apBmp, eGfxMaterialType::DiffuseAlpha);
 
 		//////////////////////////
 		//Gui gfx

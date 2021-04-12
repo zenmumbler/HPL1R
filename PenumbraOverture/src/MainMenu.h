@@ -214,14 +214,14 @@ class cMainMenuWidget_Image : public cMainMenuWidget
 {
 public:
 	cMainMenuWidget_Image(cInit *apInit, const cVector3f &avPos,const cVector2f& avSize,
-							const tString& asImageFile, eOldMaterialType matType,
+							const tString& asImageFile, eGfxMaterialType matType,
 							const cColor& aColor);
 	~cMainMenuWidget_Image();
 
 	void OnDraw();
 
 protected:
-	cGfxObject *mpImage;
+	const cGfxObject *mpImage;
 	cColor mColor;
 
 	cVector2f mvSize;
@@ -256,15 +256,15 @@ public:
 protected:
 	cGraphicsDrawer *mpDrawer;
 	iFontData *mpFont;
-	cGfxObject *mpBackGfx;
+	const cGfxObject *mpBackGfx;
 
-	cGfxObject *mpDownGfx;
-	cGfxObject *mpUpGfx;
-	cGfxObject *mpSlideGfx;
-	cGfxObject *mpSlideButtonGfx;
-	cGfxObject *mpBorderLeftGfx;
-	cGfxObject *mpBorderTopGfx;
-	cGfxObject *mpBorderBottomGfx;
+	const cGfxObject *mpDownGfx;
+	const cGfxObject *mpUpGfx;
+	const cGfxObject *mpSlideGfx;
+	const cGfxObject *mpSlideButtonGfx;
+	const cGfxObject *mpBorderLeftGfx;
+	const cGfxObject *mpBorderTopGfx;
+	const cGfxObject *mpBorderBottomGfx;
 
 	float mfSlideButtonSize;
 	float mfSlideButtonPos;
@@ -359,7 +359,7 @@ public:
 	cVector2f mvSize;
 	cColor mCol;
 
-	cGfxObject *mpGfx;
+	const cGfxObject *mpGfx;
 };
 
 //---------------------------------------------
@@ -418,12 +418,12 @@ private:
 	cInit *mpInit;
 	cGraphicsDrawer *mpDrawer;
 
-	cGfxObject *mpGfxBlackQuad;
-	cGfxObject *mpGfxMouse;
+	const cGfxObject *mpGfxBlackQuad;
+	const cGfxObject *mpGfxMouse;
 
-	cGfxObject *mpGfxRainDrop;
-	cGfxObject *mpGfxRainSplash;
-	cGfxObject *mpGfxSnowFlake;
+	const cGfxObject *mpGfxRainDrop;
+	const cGfxObject *mpGfxRainSplash;
+	const cGfxObject *mpGfxSnowFlake;
 
 	iTexture *mpLogo;
 	iTexture *mpBackground;

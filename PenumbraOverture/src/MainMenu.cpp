@@ -376,7 +376,7 @@ void cMainMenuWidget_Text::OnMouseOver(bool abOver)
 //-----------------------------------------------------------------------
 
 cMainMenuWidget_Image::cMainMenuWidget_Image(cInit *apInit, const cVector3f &avPos,const cVector2f& avSize,
-											 const tString& asImageFile, eOldMaterialType matType,
+											 const tString& asImageFile, eGfxMaterialType matType,
 											 const cColor& aColor)
 										   : cMainMenuWidget(apInit,avPos,avSize)
 {
@@ -411,15 +411,15 @@ cMainMenuWidget_List::cMainMenuWidget_List(cInit *apInit, const cVector3f &avPos
 
 	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt",30);
 
-	mpBackGfx = mpDrawer->CreateGfxObject("effect_white.jpg",eOldMaterialType::DiffuseAlpha);
+	mpBackGfx = mpDrawer->CreateGfxObject("effect_white.jpg",eGfxMaterialType::DiffuseAlpha);
 
-	mpDownGfx = mpDrawer->CreateGfxObject("menu_list_down.bmp",eOldMaterialType::DiffuseAlpha);
-	mpUpGfx = mpDrawer->CreateGfxObject("menu_list_up.bmp",eOldMaterialType::DiffuseAlpha);
-	mpSlideGfx = mpDrawer->CreateGfxObject("menu_list_slide.bmp",eOldMaterialType::DiffuseAlpha);
-	mpBorderLeftGfx = mpDrawer->CreateGfxObject("menu_list_border_left.bmp",eOldMaterialType::DiffuseAlpha);
-	mpBorderTopGfx = mpDrawer->CreateGfxObject("menu_list_border_top.bmp",eOldMaterialType::DiffuseAlpha);
-	mpBorderBottomGfx = mpDrawer->CreateGfxObject("menu_list_border_bottom.bmp",eOldMaterialType::DiffuseAlpha);
-	mpSlideButtonGfx = mpDrawer->CreateGfxObject("menu_list_slider_button.bmp",eOldMaterialType::DiffuseAlpha);
+	mpDownGfx = mpDrawer->CreateGfxObject("menu_list_down.bmp",eGfxMaterialType::DiffuseAlpha);
+	mpUpGfx = mpDrawer->CreateGfxObject("menu_list_up.bmp",eGfxMaterialType::DiffuseAlpha);
+	mpSlideGfx = mpDrawer->CreateGfxObject("menu_list_slide.bmp",eGfxMaterialType::DiffuseAlpha);
+	mpBorderLeftGfx = mpDrawer->CreateGfxObject("menu_list_border_left.bmp",eGfxMaterialType::DiffuseAlpha);
+	mpBorderTopGfx = mpDrawer->CreateGfxObject("menu_list_border_top.bmp",eGfxMaterialType::DiffuseAlpha);
+	mpBorderBottomGfx = mpDrawer->CreateGfxObject("menu_list_border_bottom.bmp",eGfxMaterialType::DiffuseAlpha);
+	mpSlideButtonGfx = mpDrawer->CreateGfxObject("menu_list_slider_button.bmp",eGfxMaterialType::DiffuseAlpha);
 	
 	mvFontSize = avFontSize;
 
@@ -2079,12 +2079,12 @@ cMainMenu::cMainMenu(cInit *apInit)  : iUpdateable("MainMenu")
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
 
 	//Load graphics
-	mpGfxBlackQuad = mpDrawer->CreateGfxObject("effect_black.bmp",eOldMaterialType::DiffuseAlpha);
-	mpGfxMouse = mpDrawer->CreateGfxObject("player_crosshair_pointer.bmp",eOldMaterialType::DiffuseAlpha);
+	mpGfxBlackQuad = mpDrawer->CreateGfxObject("effect_black.bmp",eGfxMaterialType::DiffuseAlpha);
+	mpGfxMouse = mpDrawer->CreateGfxObject("player_crosshair_pointer.bmp",eGfxMaterialType::DiffuseAlpha);
 
-	mpGfxRainDrop = mpDrawer->CreateGfxObject("menu_rain_drop.jpg",eOldMaterialType::DiffuseAdditive);
-	mpGfxRainSplash = mpDrawer->CreateGfxObject("menu_rain_splash.jpg",eOldMaterialType::DiffuseAdditive);
-	mpGfxSnowFlake = mpDrawer->CreateGfxObject("menu_snow_flake.jpg",eOldMaterialType::DiffuseAdditive);
+	mpGfxRainDrop = mpDrawer->CreateGfxObject("menu_rain_drop.jpg",eGfxMaterialType::DiffuseAdditive);
+	mpGfxRainSplash = mpDrawer->CreateGfxObject("menu_rain_splash.jpg",eGfxMaterialType::DiffuseAdditive);
+	mpGfxSnowFlake = mpDrawer->CreateGfxObject("menu_snow_flake.jpg",eGfxMaterialType::DiffuseAdditive);
 	
 	//Init effects
 	mvRainDrops.resize(70);
@@ -2209,7 +2209,7 @@ void cMainMenu::OnDraw()
 	////////////////////////////////
 	// Draw mouse
 	if(mpCurrentActionText) return;
-	cResourceImage *pImage = mpGfxMouse->GetMaterial()->GetImage();
+	cResourceImage *pImage = mpGfxMouse->mpImage;
 	cVector2l vSize = pImage->GetSize();
 	cVector2f vPosAdd(((float)vSize.x) / 2.0f, ((float)vSize.y) / 2.0f);
 	mpDrawer->DrawGfxObject(mpGfxMouse,cVector3f(0,0,100)+(mvMousePos - vPosAdd));
@@ -2861,7 +2861,7 @@ void cMainMenu::CreateWidgets()
 																			cVector3f(250,vPos.y,30),
 																			cVector2f(300,200),
 																			"menu_gamma.bmp",
-																			eOldMaterialType::DiffuseAlpha,
+																			eGfxMaterialType::DiffuseAlpha,
 																			cColor(1,1))) );
 		vPos.y+=205;
 		//AddWidgetToState(eMainMenuState_FirstStart,hplNew( cMainMenuWidget_Text(mpInit,vPos,kTranslate("MainMenu", "StartTip4"),15,eFontAlign_Left)); 

@@ -33,7 +33,7 @@ public:
 	float		fLength;
 	float		fColor;
 	
-	cGfxObject *mpGfx;
+	const cGfxObject *mpGfx;
 };
 
 class cInit;
@@ -124,8 +124,8 @@ private:
 	iSoundChannel* mpWindSound;
 
 	std::vector<cRaindrop> mvRaindropVector;
-	cGfxObject*		mpRaindropGfx;
-	cGfxObject*		mpFlashGfx;
+	const cGfxObject*		mpRaindropGfx;
+	const cGfxObject*		mpFlashGfx;
 
 };
 
