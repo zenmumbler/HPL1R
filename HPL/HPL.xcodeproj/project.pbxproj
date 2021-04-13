@@ -940,6 +940,7 @@
 			isa = PBXGroup;
 			children = (
 				8E3A741C261770CC0086F8ED /* impl */,
+				8E3A741B26176F0A0086F8ED /* ogl2 */,
 				DBF849540AC76D5700BB15CD /* Animation.cpp */,
 				DB27F0260ACB9AB90054ACA3 /* Animation.h */,
 				DBF849550AC76D5700BB15CD /* AnimationTrack.cpp */,
@@ -1003,7 +1004,6 @@
 				DBF849770AC76D5800BB15CD /* MeshCreator.cpp */,
 				DB27F04D0ACB9AB90054ACA3 /* MeshCreator.h */,
 				DB27F04E0ACB9AB90054ACA3 /* OcclusionQuery.h */,
-				8E3A741B26176F0A0086F8ED /* ogl2 */,
 				DBF849780AC76D5800BB15CD /* ParticleEmitter.cpp */,
 				DB27F04F0ACB9AB90054ACA3 /* ParticleEmitter.h */,
 				DBF8497B0AC76D5800BB15CD /* ParticleEmitter3D_UserData.cpp */,
