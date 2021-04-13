@@ -19,13 +19,13 @@ in there as well, but setting that up is left as an exercise for the reader.
 
 Project Goals
 -------------
-The primary goal is to get Penumbra Overture fully fnctional  as a 64-bit Mac app so that it
+The primary goal is to get Penumbra Overture fully functional as a 64-bit Mac app so that it
 can be enjoyed on macOS 10.15 and newer that have removed 32-bit Intel support. This is ongoing.
 
 There are still some outstanding physics reliability issues,
-these will be resolved as the project progresses. Upcoming big ticket items include:
+which will be resolved as the project progresses. Upcoming big ticket items include:
 
-* Modernise graphics backend to core OpenGL profile (3.3+ / OpeGL ES 3.1)
+* Modernise graphics backend to core OpenGL profile (3.3+ / OpenGL ES 3.1)
 * Windows and Linux builds
 * Gamepad support
 
