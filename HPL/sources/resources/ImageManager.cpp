@@ -42,13 +42,12 @@ namespace hpl {
 
 	   mpLowLevelResources->GetSupportedImageFormats(mlstFileFormats);
 
-	   mvFrameSize = cVector2l(512,512);
+	   mvFrameSize = cVector2l(512, 512);
 	   mlFrameHandle = 0;
 	}
 
 	cImageManager::~cImageManager()
 	{
-		//DeleteAllBitmapFrames();
 		DestroyAll();
 
 		Log(" Done with images\n");
@@ -64,11 +63,12 @@ namespace hpl {
 
 	iResourceBase* cImageManager::Create(const tString& asName)
 	{
-		return CreateInFrame(asName, -1);
+		return CreateImage(asName);
 	}
+
 	//-----------------------------------------------------------------------
 
-	iResourceBase* cImageManager::CreateInFrame(const tString& asName, int alFrameHandle)
+	cResourceImage* cImageManager::CreateImage(const tString& asName)
 	{
 		cResourceImage *pImage = NULL;
 		tString sPath;
@@ -88,7 +88,7 @@ namespace hpl {
 					return NULL;
 				}
 
-				pImage = AddToFrame(pBmp, alFrameHandle);
+				pImage = AddToFrame(pBmp);
 
 				hplDelete(pBmp);
 
@@ -116,21 +116,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cResourceImage* cImageManager::CreateImage(const tString& asName, int alFrameHandle)
-	{
-		iResourceBase* pRes = CreateInFrame(asName, alFrameHandle);
-		cResourceImage* pImage = static_cast<cResourceImage*>(pRes);
-
-		return pImage;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cResourceImage* cImageManager::CreateFromBitmap(iBitmap2D* apBmp, int alFrameHandle)
+	cResourceImage* cImageManager::CreateFromBitmap(iBitmap2D* apBmp)
 	{
 		if(apBmp==NULL)return NULL;
 
-		cResourceImage *pImage = AddToFrame(apBmp, alFrameHandle);
+		cResourceImage *pImage = AddToFrame(apBmp);
 
 		if(pImage){
 			AddResource(pImage, false);
@@ -202,71 +192,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cImageManager::DeleteAllBitmapFrames()
-	{
-		FlushAll();
-		for(tFrameBitmapListIt it=mlstBitmapFrames.begin();it!=mlstBitmapFrames.end();)
-		{
-			hplDelete(*it);
-			it = mlstBitmapFrames.erase(it);
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	int cImageManager::FlushAll()
-	{
-		//Log("Flushing...");
-		int lNum =0;
-		for(tFrameBitmapListIt it=mlstBitmapFrames.begin();it!=mlstBitmapFrames.end();)
-		{
-			if((*it)->FlushToTexture()) lNum++;
-
-			if((*it)->IsFull()){
-				//Do not delete all, probably this struct needs to be here for easy access :S
-				//hplDelete(*it);
-				//it = mlstBitmapFrames.erase(it);
-				it++;
-			}
-			else
-			{
-				it++;
-			}
-		}
-
-		//Log("Done!\n");
-
-		return lNum;
-	}
-
-	//-----------------------------------------------------------------------
-
-	int cImageManager::CreateFrame(cVector2l avSize)
-	{
-		cFrameBitmap *pBFrame = CreateBitmapFrame(avSize);
-
-		if(pBFrame==NULL) return -1;
-
-		return pBFrame->GetHandle();
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cImageManager::SetFrameLocked(int alHandle, bool abLocked)
-	{
-		tFrameBitmapListIt it = mlstBitmapFrames.begin();
-		while(it != mlstBitmapFrames.end())
-		{
-			if((*it)->GetHandle() == alHandle){
-				(*it)->SetLocked(abLocked);
-				break;
-			}
-			it++;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
 	//////////////////////////////////////////////////////////////////////////
 	// PRIVATE METHODS
 	//////////////////////////////////////////////////////////////////////////
@@ -297,63 +222,27 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cResourceImage *cImageManager::AddToFrame(iBitmap2D *apBmp,int alFrameHandle)
+	cResourceImage *cImageManager::AddToFrame(iBitmap2D *apBmp)
 	{
-		bool bFound = false;
-		cResourceImage *pImage=NULL;
+		cResourceImage *pImage = nullptr;
 
-		if(mlstBitmapFrames.size()==0){
-			CreateBitmapFrame(mvFrameSize);
-		}
-
-		if(alFrameHandle<0)
-		{
-			//Search the frames til one is find that fits the bitmap
-			for(tFrameBitmapListIt it=mlstBitmapFrames.begin();it!=mlstBitmapFrames.end();it++)
-			{
-				if(!(*it)->IsFull() && !(*it)->IsLocked()){
-					pImage = (*it)->AddBitmap(apBmp);
-					if(pImage!=NULL)
-					{
-						bFound = true;
-						break;
-					}
-				}
-			}
-
-			//If it fitted in none of the frames, create a new and put it in that.
-			if(!bFound)
-			{
-				//Log("No fit!\n");
-				//not 100% it fits in this one...if so maybe the bitmap size of the frame
-				//should be changed?
-
-				//pImage = CreateBitmapFrame(mvFrameSize)->AddBitmap(apBmp);
-				cFrameBitmap * pFrame = CreateBitmapFrame(mvFrameSize);
-				if(pFrame)
-				{
-					pImage = pFrame->AddBitmap(apBmp);
-					if(pImage==NULL)
-					{
-						Log("No fit in new frame!\n");
-					}
+		for (auto frame : mlstBitmapFrames) {
+			if (! frame->IsFull()) {
+				pImage = frame->AddBitmap(apBmp);
+				if (pImage) {
+					return pImage;
 				}
 			}
 		}
-		else
-		{
-			tFrameBitmapListIt it = mlstBitmapFrames.begin();
-			while(it != mlstBitmapFrames.end())
+
+		// no frames had space, create new one
+		cFrameBitmap *pFrame = CreateBitmapFrame(mvFrameSize);
+		if (pFrame) {
+			pImage = pFrame->AddBitmap(apBmp);
+			if (pImage == nullptr)
 			{
-				if((*it)->GetHandle() == alFrameHandle)
-				{
-					pImage = (*it)->AddBitmap(apBmp);
-					break;
-				}
-				it++;
+				Error("No fit in new frame!\n");
 			}
-			if(pImage==NULL)
-				Error("Image didn't fit frame %d!\n", alFrameHandle);
 		}
 
 		return pImage;

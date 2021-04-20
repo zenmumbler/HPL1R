@@ -44,24 +44,12 @@ namespace hpl {
 		~cImageManager();
 
 		iResourceBase* Create(const tString& asName);
-
 		void Destroy(iResourceBase* apResource);
 
 		//Image specifc
-		iResourceBase* CreateInFrame(const tString& asName, int alFrameHandle);
-		cResourceImage* CreateImage(const tString& asName, int alFrameHandle=-1);
-		/**
-		 * Draws all updated content to textures. THis must be done before a loaded image can be used.
-		 * Use this as unoften as possible.
-		 * \return Number of bitmaps flushes
-		 */
-		int FlushAll();
-		void DeleteAllBitmapFrames();
+		cResourceImage* CreateImage(const tString& asName);
+		cResourceImage* CreateFromBitmap(iBitmap2D* apBmp);
 
-		cResourceImage* CreateFromBitmap(iBitmap2D* apBmp, int alFrameHandle=-1);
-
-		int CreateFrame(cVector2l avSize);
-		void SetFrameLocked(int alHandle, bool abLocked);
 	private:
 		iLowLevelGraphics *mpLowLevelGraphics;
 
@@ -73,7 +61,7 @@ namespace hpl {
 		int mlFrameHandle;
 
 		cResourceImage *FindImage(const tString &asName, tString &asFilePath);
-		cResourceImage *AddToFrame(iBitmap2D *apBmp,int alFrameHandle);
+		cResourceImage *AddToFrame(iBitmap2D *apBmp);
 		cFrameBitmap *CreateBitmapFrame(cVector2l avSize);
 
 	};

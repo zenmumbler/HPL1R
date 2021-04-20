@@ -59,9 +59,6 @@ namespace hpl {
 		bool IsFull();
 		bool IsUpdated();
 
-		bool IsLocked()const { return mbIsLocked;}
-		void SetLocked(bool abX){ mbIsLocked = abX; }
-
 		bool FlushToTexture();
 
 		cFrameTexture* GetFrameTexture(){ return mpFrameTexture;}
@@ -75,7 +72,6 @@ namespace hpl {
 		int mlHandle;
 		bool mbIsFull;
 		bool mbIsUpdated;
-		bool mbIsLocked;
 	};
 
 };

@@ -92,7 +92,6 @@ namespace hpl {
 				return NULL;
 			}
 
-			//mpResources->GetImageManager()->FlushAll();
 			AddResource(pFont);
 		}
 

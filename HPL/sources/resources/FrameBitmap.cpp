@@ -41,7 +41,6 @@ namespace hpl {
 		mlMinHole = 6;
 		mlHandle = alHandle;
 		mbIsFull = false;
-		mbIsLocked = false;
 
 		//Root node in rect tree
 		mRects.Insert(cFBitmapRect(0,0,mpBitmap->GetWidth(), mpBitmap->GetHeight(),-1));
@@ -254,7 +253,6 @@ namespace hpl {
 			mpFrameTexture->GetTexture()->SetWrapS(eTextureWrap_ClampToEdge);
 			mpFrameTexture->GetTexture()->SetWrapT(eTextureWrap_ClampToEdge);
 
-			//mpFrameTexture->SetPicCount(mlPicCount);
 			mbIsUpdated = false;
 			return true;
 		}
