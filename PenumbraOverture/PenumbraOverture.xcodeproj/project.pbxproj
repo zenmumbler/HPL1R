@@ -11,10 +11,10 @@
 		8E97875E261787F700C4395C /* libangelscript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E97875A261787E400C4395C /* libangelscript.a */; };
 		8E97875F261787F700C4395C /* libnewton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E97875D261787E400C4395C /* libnewton.a */; };
 		8EA48713260FFBA9000D1AB7 /* libHPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9F74DE25522A70000324E8 /* libHPL.a */; };
+		8EAA3A3D2641D948005883C9 /* SDL2.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = 8EB7C3A9254F545C00277667 /* SDL2.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8EB7C3AF254F546300277667 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3AA254F545C00277667 /* Cg.framework */; };
 		8EB7C3B0254F546300277667 /* Cg.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = 8EB7C3AA254F545C00277667 /* Cg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8EB7C3B1254F546600277667 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3A9254F545C00277667 /* SDL2.framework */; };
-		8EB7C3B2254F546600277667 /* SDL2.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = 8EB7C3A9254F545C00277667 /* SDL2.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8EB7C3DF254F649C00277667 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7C395254E48A900277667 /* Images.xcassets */; };
 		DB063026111D3E3F0048C5E9 /* AttackHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A1F0AC76D8F00BB15CD /* AttackHandler.cpp */; };
 		DB063027111D3E3F0048C5E9 /* ButtonHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A210AC76D8F00BB15CD /* ButtonHandler.cpp */; };
@@ -112,8 +112,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				8EAA3A3D2641D948005883C9 /* SDL2.framework in Copy Frameworks into .app */,
 				8EB7C3B0254F546300277667 /* Cg.framework in Copy Frameworks into .app */,
-				8EB7C3B2254F546600277667 /* SDL2.framework in Copy Frameworks into .app */,
 			);
 			name = "Copy Frameworks into .app";
 			runOnlyForDeploymentPostprocessing = 0;
