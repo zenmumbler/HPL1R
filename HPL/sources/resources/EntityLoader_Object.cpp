@@ -790,7 +790,7 @@ namespace hpl {
 			case ePhysicsJointType_Ball:
 				{
 					iPhysicsJointBall *pBallJoint = static_cast<iPhysicsJointBall*>(pJoint);
-					pBallJoint->SetConeLimits(pBallJoint->GetPinDir(),cMath::ToRad(fMinValue),cMath::ToRad(fMaxValue));
+					pBallJoint->SetConeLimits(cMath::ToRad(fMinValue),cMath::ToRad(fMaxValue));
 					break;
 				}
 			case ePhysicsJointType_Hinge:

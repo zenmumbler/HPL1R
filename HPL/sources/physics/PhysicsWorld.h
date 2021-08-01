@@ -158,7 +158,7 @@ namespace hpl {
 		//! @{
 
 		virtual iPhysicsJointBall* CreateJointBall(const tString &asName,
-											const cVector3f& avPivotPoint,
+											const cVector3f& avPivotPoint,const cVector3f& avPinDir,
 											iPhysicsBody* apParentBody, iPhysicsBody *apChildBody)=0;
 		virtual iPhysicsJointHinge* CreateJointHinge(const tString &asName,
 											const cVector3f& avPivotPoint,const cVector3f& avPinDir,

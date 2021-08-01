@@ -28,10 +28,10 @@ namespace hpl {
 	{
 	public:
 		cPhysicsJointBallNewton(const tString &asName, iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
-			iPhysicsWorld *apWorld, const cVector3f &avPivotPoint);
+			iPhysicsWorld *apWorld, const cVector3f &avPivotPoint, const cVector3f &avPinDir);
 		~cPhysicsJointBallNewton();
 
-		void SetConeLimits(const cVector3f& avPin, float afMaxConeAngle, float afMaxTwistAngle);
+		void SetConeLimits(float afMaxConeAngle, float afMaxTwistAngle);
 		cVector3f GetAngles();
 
 		cVector3f GetVelocity();

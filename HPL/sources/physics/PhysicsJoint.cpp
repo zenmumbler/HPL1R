@@ -47,7 +47,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	iPhysicsJoint::iPhysicsJoint(const tString &asName, iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
-		iPhysicsWorld *apWorld,const cVector3f &avPivotPoint)
+		iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f &avPinDir)
 		: msName(asName), mpParentBody(apParentBody), mpChildBody(apChildBody), mpWorld(apWorld)
 	{
 		mMaxLimit.msSound = "";
@@ -70,6 +70,8 @@ namespace hpl {
 		cMatrixf m_mtxInvChild = cMath::MatrixInverse(apChildBody->GetLocalMatrix());
 		mvLocalPivot = cMath::MatrixMul(m_mtxInvChild,avPivotPoint);
 		mvStartPivotPoint = avPivotPoint;
+		
+		mvPinDir = avPinDir;
 
 		msMoveSound = "";
 

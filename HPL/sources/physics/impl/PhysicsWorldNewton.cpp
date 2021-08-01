@@ -290,11 +290,11 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	iPhysicsJointBall* cPhysicsWorldNewton::CreateJointBall(const tString &asName,
-										const cVector3f& avPivotPoint,
+										const cVector3f& avPivotPoint, const cVector3f& avPinDir,
 										iPhysicsBody* apParentBody, iPhysicsBody *apChildBody)
 	{
 		iPhysicsJointBall *pJoint = hplNew( cPhysicsJointBallNewton, (asName,apParentBody,apChildBody,this,
-														avPivotPoint) );
+														avPivotPoint, avPinDir) );
 		mlstJoints.push_back(pJoint);
 		return pJoint;
 	}

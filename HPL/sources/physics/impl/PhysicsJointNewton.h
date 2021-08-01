@@ -35,8 +35,8 @@ namespace hpl {
 	{
 	public:
 		iPhysicsJointNewton(const tString &asName, iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
-						iPhysicsWorld *apWorld,const cVector3f &avPivotPoint)
-		: T(asName, apParentBody, apChildBody, apWorld,avPivotPoint)
+						iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f &avPinDir)
+		: T(asName, apParentBody, apChildBody, apWorld, avPivotPoint, avPinDir)
 		{
 			cPhysicsWorldNewton *pNWorld = static_cast<cPhysicsWorldNewton*>(apWorld);
 

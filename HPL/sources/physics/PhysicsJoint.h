@@ -141,7 +141,7 @@ namespace hpl {
 	#endif
 	public:
 		iPhysicsJoint(const tString &asName, iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
-						iPhysicsWorld *apWorld,const cVector3f &avPivotPoint);
+						iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f &avPinDir);
 		virtual ~iPhysicsJoint();
 
 		const tString& GetName(){ return msName;}

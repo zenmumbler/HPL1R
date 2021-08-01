@@ -61,8 +61,8 @@ namespace hpl {
 		pChildBody->SetMatrix(m_mtxChildBodySetup);
 		if(pParentBody) pParentBody->SetMatrix(m_mtxParentBodySetup);
 
-		iPhysicsJointBall *pJoint = apWorld->CreateJointBall(msName,mvStartPivotPoint,pParentBody,pChildBody);
-		pJoint->SetConeLimits(mvConePin,mfMaxConeAngle, mfMaxTwistAngle);
+		iPhysicsJointBall *pJoint = apWorld->CreateJointBall(msName,mvStartPivotPoint,mvPinDir,pParentBody,pChildBody);
+		pJoint->SetConeLimits(mfMaxConeAngle, mfMaxTwistAngle);
 
 		pChildBody->SetMatrix(mtxChildTemp);
 		if(pParentBody) pParentBody->SetMatrix(mtxParentTemp);

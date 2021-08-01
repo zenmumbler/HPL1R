@@ -276,11 +276,11 @@ namespace hpl {
 		else if(apMeshJoint->mType == ePhysicsJointType_Ball)
 		{
 			iPhysicsJointBall *pJoint = apWorld->CreateJointBall(sNamePrefix+apMeshJoint->msName,
-												vPivot,apParentBody,apChildBody);
+												vPivot,vPinDir,apParentBody,apChildBody);
 
 			pJoint->SetCollideBodies(apMeshJoint->mbCollide);
 
-			pJoint->SetConeLimits(vPinDir,cMath::ToRad(apMeshJoint->mfMin),cMath::ToRad(apMeshJoint->mfMax));
+			pJoint->SetConeLimits(cMath::ToRad(apMeshJoint->mfMin),cMath::ToRad(apMeshJoint->mfMax));
 
 			return pJoint;
 		}

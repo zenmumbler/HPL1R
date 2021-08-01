@@ -180,7 +180,7 @@ void cEngineJoint_SaveData::ToJoint(iPhysicsJoint *apJoint)
 	case ePhysicsJointType_Ball:
 		{
 			iPhysicsJointBall *pBallJoint = static_cast<iPhysicsJointBall*>(apJoint);
-			pBallJoint->SetConeLimits(pBallJoint->GetConePin(), mfMaxLimit,mfMinLimit);
+			pBallJoint->SetConeLimits(mfMaxLimit,mfMinLimit);
 			break;
 		}
 	case ePhysicsJointType_Hinge:

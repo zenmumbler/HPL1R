@@ -57,6 +57,7 @@ namespace hpl {
 		iCollideShape* CreateCompundShape(tCollideShapeVec &avShapes);
 
 		iPhysicsJointBall* CreateJointBall(const tString &asName,const cVector3f& avPivotPoint,
+										        const cVector3f& avPinDir,
 												iPhysicsBody* apParentBody, iPhysicsBody *apChildBody);
 		iPhysicsJointHinge* CreateJointHinge(const tString &asName,const cVector3f& avPivotPoint,
 												const cVector3f& avPinDir,

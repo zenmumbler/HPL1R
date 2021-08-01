@@ -34,11 +34,8 @@ namespace hpl {
 	cPhysicsJointSliderNewton::cPhysicsJointSliderNewton(const tString &asName,
 		iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
 		iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f avPinDir)
-		: iPhysicsJointNewton<iPhysicsJointSlider>(asName,apParentBody,apChildBody,apWorld,avPivotPoint)
+		: iPhysicsJointNewton<iPhysicsJointSlider>(asName,apParentBody,apChildBody,apWorld,avPivotPoint,avPinDir)
 	{
-		mvPin = avPinDir;
-		mvPin.Normalise();
-
 		mpNewtonJoint = NewtonConstraintCreateSlider(mpNewtonWorld, avPivotPoint.v, avPinDir.v, mpNewtonChildBody,
 													mpNewtonParentBody);
 		NewtonJointSetUserData(mpNewtonJoint, (void*) this);
@@ -47,7 +44,6 @@ namespace hpl {
 		mfMaxDistance =0;
 		mfMinDistance =0;
 
-		mvPinDir = avPinDir;
 		mvPivotPoint = avPivotPoint;
 	}
 
@@ -88,7 +84,7 @@ namespace hpl {
 	cVector3f cPhysicsJointSliderNewton::GetVelocity()
 	{
 		float fSpeed = NewtonSliderGetJointVeloc(mpNewtonJoint);
-		return mvPin * fSpeed;
+		return GetPinDir() * fSpeed;
 	}
 	cVector3f cPhysicsJointSliderNewton::GetAngularVelocity()
 	{

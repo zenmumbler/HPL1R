@@ -46,8 +46,8 @@ namespace hpl {
 	#endif
 	public:
 		iPhysicsJointSlider(const tString &asName, iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
-			iPhysicsWorld *apWorld,const cVector3f &avPivotPoint)
-			: iPhysicsJoint(asName,apParentBody,apChildBody, apWorld,avPivotPoint){}
+			iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f& avPinDir)
+			: iPhysicsJoint(asName,apParentBody,apChildBody, apWorld,avPivotPoint, avPinDir){}
 			virtual ~iPhysicsJointSlider(){}
 		/**
 		 * Set the maximum distance the bodies can be from each other, relative to the start dist between them

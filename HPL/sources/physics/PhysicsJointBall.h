@@ -46,11 +46,11 @@ namespace hpl {
 	#endif
 	public:
 		iPhysicsJointBall(const tString &asName, iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
-			iPhysicsWorld *apWorld, const cVector3f &avPivotPoint)
-			: iPhysicsJoint(asName,apParentBody,apChildBody, apWorld,avPivotPoint){}
+			iPhysicsWorld *apWorld, const cVector3f &avPivotPoint, const cVector3f &avPinDir)
+			: iPhysicsJoint(asName,apParentBody,apChildBody, apWorld,avPivotPoint, avPinDir){}
 		virtual ~iPhysicsJointBall(){}
 
-		virtual void SetConeLimits(const cVector3f& avPin, float afMaxConeAngle, float afMaxTwistAngle)=0;
+		virtual void SetConeLimits(float afMaxConeAngle, float afMaxTwistAngle)=0;
 		virtual cVector3f GetAngles()=0;
 
 		float GetMaxConeAngle(){ return mfMaxConeAngle;}

@@ -32,7 +32,7 @@ namespace hpl {
 	cPhysicsJointScrewNewton::cPhysicsJointScrewNewton(const tString &asName,
 		iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
 		iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f avPinDir)
-		: iPhysicsJointNewton<iPhysicsJointScrew>(asName,apParentBody,apChildBody,apWorld,avPivotPoint)
+		: iPhysicsJointNewton<iPhysicsJointScrew>(asName,apParentBody,apChildBody,apWorld,avPivotPoint,avPinDir)
 	{
 		mvPin = avPinDir;
 		mvPin.Normalise();
@@ -46,7 +46,6 @@ namespace hpl {
 		mfMaxDistance =0;
 		mfMinDistance =0;
 
-		mvPinDir = avPinDir;
 		mvPivotPoint = avPivotPoint;
 	}
 

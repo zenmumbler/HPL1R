@@ -31,13 +31,12 @@ namespace hpl {
 
 	cPhysicsJointBallNewton::cPhysicsJointBallNewton(const tString &asName,
 						iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
-						iPhysicsWorld *apWorld, const cVector3f &avPivotPoint)
-	: iPhysicsJointNewton<iPhysicsJointBall>(asName,apParentBody,apChildBody,apWorld,avPivotPoint)
+						iPhysicsWorld *apWorld, const cVector3f &avPivotPoint, const cVector3f &avPinDir)
+	: iPhysicsJointNewton<iPhysicsJointBall>(asName,apParentBody,apChildBody,apWorld,avPivotPoint,avPinDir)
 	{
 		mpNewtonJoint = NewtonConstraintCreateBall(mpNewtonWorld,avPivotPoint.v,
 												mpNewtonChildBody, mpNewtonParentBody);
 
-		mvPinDir = cVector3f(0,0,0);
 		mvPivotPoint = avPivotPoint;
 
 		mfMaxConeAngle =0;
@@ -59,11 +58,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cPhysicsJointBallNewton::SetConeLimits(const cVector3f& avPin, float afMaxConeAngle, float afMaxTwistAngle)
+	void cPhysicsJointBallNewton::SetConeLimits(float afMaxConeAngle, float afMaxTwistAngle)
 	{
-		NewtonBallSetConeLimits(mpNewtonJoint, avPin.v,afMaxConeAngle,afMaxTwistAngle);
-		mvConePin = avPin;
-		mvPinDir = mvConePin;
+		NewtonBallSetConeLimits(mpNewtonJoint, mvPinDir.v, afMaxConeAngle, afMaxTwistAngle);
 		mfMaxConeAngle = afMaxConeAngle;
 		mfMaxTwistAngle = afMaxTwistAngle;
 	}

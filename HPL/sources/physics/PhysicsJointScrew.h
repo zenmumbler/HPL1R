@@ -46,8 +46,8 @@ namespace hpl {
 	#endif
 	public:
 		iPhysicsJointScrew(const tString &asName, iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
-			iPhysicsWorld *apWorld,const cVector3f &avPivotPoint)
-			: iPhysicsJoint(asName,apParentBody,apChildBody, apWorld,avPivotPoint){}
+			iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f &avPinDir)
+			: iPhysicsJoint(asName, apParentBody, apChildBody, apWorld, avPivotPoint, avPinDir){}
 		virtual ~iPhysicsJointScrew(){}
 
 		/**
