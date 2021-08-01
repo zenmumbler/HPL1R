@@ -15,6 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 #ifndef HPL_PHYSICS_JOINT_NEWTON_H
 #define HPL_PHYSICS_JOINT_NEWTON_H
@@ -25,7 +26,7 @@
 #include <Newton.h>
 #include "physics/impl/PhysicsWorldNewton.h"
 #include "physics/impl/PhysicsBodyNewton.h"
-
+#include "math/Math.h"
 #include "system/LowLevelSystem.h"
 
 namespace hpl {
@@ -87,6 +88,84 @@ namespace hpl {
 		///////////////////////
 
 	protected:
+		//-------------------------------------------
+
+		cMatrixf GetMatrixFromPinAndPivot(const cVector3f& avPinDir,const cVector3f& avPivot)
+		{
+			cMatrixf mtxPinAndPivot = cMatrixf::Identity;
+			cVector3f vUp = cMath::Vector3Normalize(avPinDir);
+			cVector3f vTemp = cMath::Vector3Normalize(cVector3f(1) - vUp);
+			if(vTemp == vUp) vTemp = cMath::Vector3Normalize(vTemp * cVector3f(1.5f, 0.5f, 2.0f)); //Make sure all does not become wierd in the special case.
+
+			cVector3f vRight = cMath::Vector3Normalize( cMath::Vector3Cross(vUp, vTemp ));
+			cVector3f vForward = cMath::Vector3Normalize(cMath::Vector3Cross(vUp, vRight));
+
+			mtxPinAndPivot.SetUp(vUp);
+			mtxPinAndPivot.SetRight(vRight);
+			mtxPinAndPivot.SetForward(vForward);
+			mtxPinAndPivot = mtxPinAndPivot.GetTranspose();
+
+			mtxPinAndPivot.SetTranslation(avPivot);
+
+			return mtxPinAndPivot;
+		}
+
+
+		//-------------------------------------------
+		
+		void CreateCustomJoint(int alMaxDOF)
+		{
+			mpNewtonJoint = NewtonConstraintCreateUserJoint (mpNewtonWorld, alMaxDOF, StaticSubmitConstraints, StaticGetInfo, mpNewtonChildBody, mpNewtonParentBody);
+
+			NewtonJointSetUserData (mpNewtonJoint, this);
+		}
+
+		//-------------------------------------------
+
+		void CalculateGlobalMatrix (const cMatrixf& a_mtxLocalMatrix0, const cMatrixf& a_mtxLocalMatrix1, cMatrixf& a_mtxMatrix0, cMatrixf& a_mtxMatrix1)
+		{
+			cMatrixf mtxMatrix0 = this->mpChildBody->GetLocalMatrix();
+			cMatrixf mtxMatrix1 = this->mpParentBody ? this->mpParentBody->GetLocalMatrix() : cMatrixf::Identity;
+
+			a_mtxMatrix0 = cMath::MatrixMul(mtxMatrix0, a_mtxLocalMatrix0);
+			a_mtxMatrix1 = cMath::MatrixMul(mtxMatrix1, a_mtxLocalMatrix1);
+		}
+		
+		//-------------------------------------------
+
+		void CalculateLocalMatrix (const cMatrixf& a_mtxPinsAndPivotFrame, cMatrixf& a_mtxLocalMatrix0, cMatrixf& a_mtxLocalMatrix1)
+		{
+			cMatrixf mtxMatrix0 = this->mpChildBody->GetLocalMatrix();
+			cMatrixf mtxMatrix1 = this->mpParentBody ? this->mpParentBody->GetLocalMatrix() : cMatrixf::Identity;
+
+			// calculate the relative matrix of the pin and pivot on each body
+			a_mtxLocalMatrix0 = cMath::MatrixMul( cMath::MatrixInverse(mtxMatrix0), a_mtxPinsAndPivotFrame);
+			a_mtxLocalMatrix1 = cMath::MatrixMul( cMath::MatrixInverse(mtxMatrix1), a_mtxPinsAndPivotFrame);
+		}
+		
+		//-------------------------------------------
+
+		virtual void SubmitConstraints (dFloat afTimestep, int alThreadIndex){}
+		virtual void GetInfo (NewtonJointRecord* apInfo){}
+		
+		//-------------------------------------------
+
+		static void StaticSubmitConstraints (const NewtonJoint* apJoint, dFloat afTimestep, int alThreadIndex)
+		{
+			iPhysicsJointNewton<T> *pJointData = (iPhysicsJointNewton<T>*)NewtonJointGetUserData(apJoint);
+
+			pJointData->SubmitConstraints(afTimestep, alThreadIndex);
+		}
+		
+		static void StaticGetInfo (const NewtonJoint* apJoint, NewtonJointRecord* apInfo)
+		{
+			iPhysicsJointNewton<T> *pJointData = (iPhysicsJointNewton<T>*)NewtonJointGetUserData(apJoint);
+
+			pJointData->GetInfo(apInfo);
+		}
+
+		//-------------------------------------------
+
 		NewtonJoint* mpNewtonJoint;
 		NewtonWorld* mpNewtonWorld;
 		NewtonBody* mpNewtonParentBody;
