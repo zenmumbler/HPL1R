@@ -36,7 +36,7 @@ namespace hpl {
 
 		cVector3f GetVelocity();
 		cVector3f GetAngularVelocity();
-		cVector3f GetForce();
+		float GetForceSize();
 
 		float GetDistance();
 		float GetAngle();

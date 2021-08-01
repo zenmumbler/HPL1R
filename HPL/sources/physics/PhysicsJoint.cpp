@@ -521,7 +521,7 @@ namespace hpl {
 	{
 		if(mbBreakable==false) return false;
 
-		float fForcesSize = GetForce().Length();
+		float fForcesSize = GetForceSize();
 
 		if(fForcesSize >= mfBreakForce || mbBroken)
 		{

@@ -164,7 +164,7 @@ namespace hpl {
 
 		virtual cVector3f GetVelocity()=0;
 		virtual cVector3f GetAngularVelocity()=0;
-		virtual cVector3f GetForce()=0;
+		virtual float GetForceSize()=0;
 
 		virtual float GetDistance()=0;
 		virtual float GetAngle()=0;

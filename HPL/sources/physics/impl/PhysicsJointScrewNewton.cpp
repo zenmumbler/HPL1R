@@ -93,11 +93,11 @@ namespace hpl {
 	{
 		return cVector3f(0,0,0);
 	}
-	cVector3f cPhysicsJointScrewNewton::GetForce()
+	float cPhysicsJointScrewNewton::GetForceSize()
 	{
 		cVector3f vForce;
 		NewtonCorkscrewGetJointForce(mpNewtonJoint,&vForce.v[0]);
-		return vForce;
+		return vForce.Length();
 	}
 	//-----------------------------------------------------------------------
 

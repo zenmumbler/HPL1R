@@ -87,11 +87,11 @@ namespace hpl {
 		NewtonBallGetJointOmega(mpNewtonJoint,&vVel.v[0]);
 		return vVel;
 	}
-	cVector3f cPhysicsJointBallNewton::GetForce()
+	float cPhysicsJointBallNewton::GetForceSize()
 	{
 		cVector3f vForce;
 		NewtonBallGetJointForce(mpNewtonJoint,&vForce.v[0]);
-		return vForce;
+		return vForce.Length();
 	}
 
 	//-----------------------------------------------------------------------

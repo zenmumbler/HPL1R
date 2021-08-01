@@ -978,7 +978,7 @@ namespace hpl {
 		}
 		else if(sLowProp == "force")
 		{
-			return pJoint->GetForce().Length();
+			return pJoint->GetForceSize();
 		}
 		/////////////////////////////
 		// Min Limit
