@@ -35,8 +35,8 @@ namespace hpl {
 
 	cPhysicsJointHingeNewton::cPhysicsJointHingeNewton(const tString &asName,
 		iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
-		iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f avPinDir)
-		: iPhysicsJointNewton<iPhysicsJointHinge>(asName,apParentBody,apChildBody,apWorld,avPivotPoint)
+		iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f &avPinDir)
+		: iPhysicsJointNewton<iPhysicsJointHinge>(asName,apParentBody,apChildBody,apWorld,avPivotPoint,avPinDir)
 	{
 		mpNewtonJoint = NewtonConstraintCreateHinge(mpNewtonWorld, avPivotPoint.v, avPinDir.v,
 											mpNewtonChildBody, mpNewtonParentBody);
@@ -45,7 +45,6 @@ namespace hpl {
 		NewtonJointSetUserData(mpNewtonJoint, (void*) this);
 		NewtonHingeSetUserCallback(mpNewtonJoint, LimitCallback);
 
-		mvPinDir = avPinDir;
 		mvPivotPoint = avPivotPoint;
 
 		mfMaxAngle = 0;
@@ -97,11 +96,11 @@ namespace hpl {
 		float fSpeed = NewtonHingeGetJointOmega(mpNewtonJoint);
 		return mvPinDir * fSpeed;
 	}
-	cVector3f cPhysicsJointHingeNewton::GetForce()
+	float cPhysicsJointHingeNewton::GetForceSize()
 	{
 		cVector3f vForce;
 		NewtonHingeGetJointForce(mpNewtonJoint,&vForce.v[0]);
-		return vForce;
+		return vForce.Length();
 	}
 
 	//-----------------------------------------------------------------------
