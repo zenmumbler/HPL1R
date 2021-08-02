@@ -122,8 +122,6 @@ namespace hpl {
 	{
 		cPhysicsJointScrewNewton* pScrewJoint = (cPhysicsJointScrewNewton*)NewtonJointGetUserData(pScrew);
 
-		//pScrewJoint->OnPhysicsUpdate();
-
 		float fDistance = NewtonCorkscrewGetJointPosit (pScrew);
 		//Log("Dist: %f\n",fDistance);
 

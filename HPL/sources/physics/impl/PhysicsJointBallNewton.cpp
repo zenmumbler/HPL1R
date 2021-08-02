@@ -60,7 +60,7 @@ namespace hpl {
 
 	void cPhysicsJointBallNewton::SetConeLimits(float afMaxConeAngle, float afMaxTwistAngle)
 	{
-		NewtonBallSetConeLimits(mpNewtonJoint, mvPinDir.v, afMaxConeAngle, afMaxTwistAngle);
+		NewtonBallSetConeLimits(mpNewtonJoint, mvStartPinDir.v, afMaxConeAngle, afMaxTwistAngle);
 		mfMaxConeAngle = afMaxConeAngle;
 		mfMaxTwistAngle = afMaxTwistAngle;
 	}

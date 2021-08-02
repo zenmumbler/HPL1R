@@ -67,11 +67,23 @@ namespace hpl {
 		apChildBody->AddJoint(this);
 		m_mtxChildBodySetup = apChildBody->GetLocalMatrix();
 
-		cMatrixf m_mtxInvChild = cMath::MatrixInverse(apChildBody->GetLocalMatrix());
-		mvLocalPivot = cMath::MatrixMul(m_mtxInvChild,avPivotPoint);
+		mvPivotPoint = avPivotPoint;
 		mvStartPivotPoint = avPivotPoint;
 		
 		mvPinDir = avPinDir;
+		mvStartPinDir = avPinDir;
+		
+		if(mpParentBody)
+		{
+			cMatrixf m_mtxInvParent = cMath::MatrixInverse(mpParentBody->GetLocalMatrix());
+			mvLocalPivot = cMath::MatrixMul(m_mtxInvParent,avPivotPoint);
+			mvLocalPinDir = cMath::MatrixMul(m_mtxInvParent.GetRotation(),avPinDir);
+		}
+		else
+		{
+			mvLocalPivot = avPivotPoint;
+			mvLocalPinDir = avPinDir;
+		}
 
 		msMoveSound = "";
 
@@ -332,17 +344,27 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void iPhysicsJoint::OnPhysicsUpdate()
+	bool iPhysicsJoint::OnPhysicsUpdate()
 	{
+		bool bFrozen = true;
+		if(mpParentBody && mpParentBody->GetEnabled())
+			bFrozen = false;
+		else if(mpChildBody->GetEnabled())
+			bFrozen = false;
+		
+		if(bFrozen && mpSound==NULL) return false;
+
 		//Get the pivot point, if there is no parent, it is stuck.
-		if(mpParentBody)
+		if(mpParentBody) {
 			mvPivotPoint = cMath::MatrixMul(mpChildBody->GetLocalMatrix(),mvLocalPivot);
+			mvPinDir = cMath::MatrixMul(mpParentBody->GetLocalMatrix(),mvLocalPinDir);
+		}
 
 		cWorld3D *pWorld3D = mpWorld->GetWorld3D();
-		if(pWorld3D == NULL) return;
-		if(msMoveSound == "") return;
+		if(pWorld3D == NULL) return true;
+		if(msMoveSound == "") return true;
 
-		if(mpWorld->GetWorld3D()->GetSound()->GetSoundHandler()->GetSilent()) return;
+		if(mpWorld->GetWorld3D()->GetSound()->GetSoundHandler()->GetSilent()) return true;
 
 		//////////////////////////////////////
 		//Get the speed
@@ -372,9 +394,9 @@ namespace hpl {
 			}
 		}
 
-
 		//Check so the body is not still
-		if(mpParentBody){
+		if(mpParentBody)
+		{
 			if(	m_mtxPrevChild == mpChildBody->GetLocalMatrix() &&
 				m_mtxPrevParent == mpParentBody->GetLocalMatrix())
 			{
@@ -383,7 +405,8 @@ namespace hpl {
 			m_mtxPrevChild = mpChildBody->GetLocalMatrix();
 			m_mtxPrevParent = mpParentBody->GetLocalMatrix();
 		}
-		else {
+		else
+		{
 			if(m_mtxPrevChild == mpChildBody->GetLocalMatrix())
 			{
 				vVel =0;

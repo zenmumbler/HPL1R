@@ -116,7 +116,11 @@ namespace hpl {
 		{
 			iPhysicsJoint *pJoint = *JointIt;
 
-			pJoint->OnPhysicsUpdate();
+			if(pJoint->OnPhysicsUpdate()==false)
+			{
+				++JointIt;
+				continue;
+			}
 
 			if(pJoint->CheckBreakage())
 			{

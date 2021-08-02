@@ -227,7 +227,7 @@ namespace hpl {
 
 		void SetAllControllersPaused(bool abX);
 
-		void OnPhysicsUpdate();
+		bool OnPhysicsUpdate();
 
 		void SetSound(cSoundEntity *apSound){ mpSound = apSound;}
 		cSoundEntity* GetSound(){ return mpSound;}
@@ -253,6 +253,8 @@ namespace hpl {
 		cVector3f mvStartPivotPoint;
 
 		cVector3f mvLocalPivot;
+		cVector3f mvLocalPinDir;
+		cVector3f mvStartPinDir;
 
 		float mfStickyMinDistance;
 		float mfStickyMaxDistance;

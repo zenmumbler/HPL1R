@@ -120,8 +120,6 @@ namespace hpl {
 	{
 		cPhysicsJointSliderNewton* pSliderJoint = (cPhysicsJointSliderNewton*)NewtonJointGetUserData(pSlider);
 
-		//pSliderJoint->OnPhysicsUpdate();
-
 		float fDistance = NewtonSliderGetJointPosit (pSlider);
 		//Log("Dist: %f\n",fDistance);
 

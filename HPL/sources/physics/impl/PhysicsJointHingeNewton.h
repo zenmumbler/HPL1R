@@ -44,7 +44,14 @@ namespace hpl {
 		float GetAngle();
 
 	private:
+		cMatrixf m_mtxLocalPinPivot0;
+		cMatrixf m_mtxLocalPinPivot1;
+
 		float mfPreviousAngle;
+
+		void SubmitConstraints (dFloat afTimestep, int alThreadIndex);
+		void GetInfo (NewtonJointRecord* apInfo);
+
 		static unsigned LimitCallback(const NewtonJoint* pHinge, NewtonHingeSliderUpdateDesc* pDesc);
 	};
 };
