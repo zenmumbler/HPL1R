@@ -358,8 +358,11 @@ namespace hpl {
 		 */
 		virtual void CopyContextToTexure(iTexture* apTex, const cVector2l &avPos,
 										const cVector2l &avSize, const cVector2l &avTexOffset=0)=0;
+
+		virtual void StartFrame()=0;
 		virtual void FlushRendering()=0;
 		virtual void SwapBuffers()=0;
+		virtual void EndFrame()=0;
 	};
 };
 #endif // HPL_LOWLEVELGRAPHICS_H

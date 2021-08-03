@@ -33,6 +33,9 @@
 #include <assert.h>
 #include <stdlib.h>
 
+#include "ext/imgui/backends/imgui_impl_sdl.h"
+#include "ext/imgui/backends/imgui_impl_opengl2.h"
+
 #include "graphics/FontData.h"
 
 #include "graphics/impl/LowLevelGraphicsSDL.h"
@@ -110,6 +113,12 @@ namespace hpl {
 
 	cLowLevelGraphicsSDL::~cLowLevelGraphicsSDL()
 	{
+		if (mpImGuiContext) {
+			ImGui_ImplSDL2_Shutdown();
+			ImGui_ImplOpenGL2_Shutdown();
+			ImGui::DestroyContext(mpImGuiContext);
+		}
+
 		if (mpGLContext) {
 			SDL_GL_DeleteContext(mpGLContext);
 			mpGLContext = NULL;
@@ -222,6 +231,11 @@ namespace hpl {
 
 		//Set the clear color
 		SDL_GL_SwapWindow(mpWindow);
+		
+		//Setup ImGui
+		mpImGuiContext = ImGui::CreateContext();
+		ImGui_ImplOpenGL2_Init();
+		ImGui_ImplSDL2_InitForOpenGL(mpWindow, mpGLContext);
 
 		return true;
 	}
@@ -792,14 +806,29 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	void cLowLevelGraphicsSDL::StartFrame() {
+		ImGui_ImplOpenGL2_NewFrame();
+		ImGui_ImplSDL2_NewFrame(mpWindow);
+		ImGui::NewFrame();
+	}
+	
 	void cLowLevelGraphicsSDL::FlushRendering()
 	{
 		glFlush();
 	}
+
 	void cLowLevelGraphicsSDL::SwapBuffers()
 	{
 		glFlush();
 		SDL_GL_SwapWindow(mpWindow);
+	}
+	
+	void cLowLevelGraphicsSDL::EndFrame() {
+		// render the debug views last on top of everything else
+		ImGui::Render();
+		ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+		
+		SwapBuffers();
 	}
 
 	//-----------------------------------------------------------------------

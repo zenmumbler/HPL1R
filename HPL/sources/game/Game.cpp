@@ -417,6 +417,7 @@ namespace hpl {
 
 				//Draw this frame
 				//unsigned long lFTime = GetApplicationTime();
+				mpGraphics->GetLowLevel()->StartFrame();
 				mpUpdater->OnDraw();
 				mpScene->Render(mpUpdater,mfFrameTime);
 				//if(mpScene->GetDrawScene()) LogUpdate("FrameTime: %d ms\n", GetApplicationTime() - lFTime);
@@ -425,7 +426,7 @@ namespace hpl {
 				mpFPSCounter->AddFrame();
 
 				//Update the screen.
-				mpGraphics->GetLowLevel()->SwapBuffers();
+				mpGraphics->GetLowLevel()->EndFrame();
 				//Log("Swap done: %d\n", GetApplicationTime());
 				//if(mbRenderOnce)
 				{

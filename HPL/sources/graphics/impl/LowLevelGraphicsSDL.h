@@ -29,7 +29,7 @@
 #include "graphics/LowLevelGraphics.h"
 #include "math/MathTypes.h"
 
-
+struct ImGuiContext;
 
 namespace hpl {
 
@@ -177,9 +177,11 @@ namespace hpl {
 		void CopyContextToTexure(iTexture* apTex, const cVector2l &avPos,
 			const cVector2l &avSize, const cVector2l &avTexOffset=0);
 
-		void FlushRendering();
-		void SwapBuffers();
-
+		void StartFrame() override;
+		void FlushRendering() override;
+		void SwapBuffers() override;
+		void EndFrame() override;
+		
 		///// SDL Specific ////////////////////////////
 
 		iBitmap2D* CreateBitmap2DFromSurface(SDL_Surface* apSurface,const tString& asType);
@@ -217,6 +219,9 @@ namespace hpl {
 
 		//CG Compiler Variables
 		CGcontext mCG_Context;
+		
+		// ImGui Setup
+		ImGuiContext* mpImGuiContext;
 
 		//Multisample
 		void CheckMultisampleCaps();
