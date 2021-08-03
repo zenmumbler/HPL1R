@@ -44,6 +44,7 @@ class cRadioHandler;
 class cMapLoadText;
 class cPreMenu;
 class cCredits;
+class cDebugMenu;
 
 class cIntroStory;
 
@@ -191,6 +192,7 @@ public:
 	cMapLoadText *mpMapLoadText;
 	cPreMenu *mpPreMenu;
 	cCredits *mpCredits;
+	cDebugMenu *mpDebugMenu;
 	
 	cMainMenu *mpMainMenu;
 

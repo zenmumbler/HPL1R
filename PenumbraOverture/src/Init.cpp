@@ -53,6 +53,7 @@
 #include "MapLoadText.h"
 #include "PreMenu.h"
 #include "Credits.h"
+#include "DebugMenu.h"
 #ifdef INCLUDE_HAPTIC
 #include "HapticGameCamera.h"
 #endif
@@ -460,6 +461,7 @@ bool cInit::Init(tString asCommandLine)
 	mpMapLoadText = hplNew( cMapLoadText,(this) );
 	mpPreMenu = hplNew( cPreMenu,(this) );
 	mpCredits = hplNew( cCredits,(this) );
+	mpDebugMenu = hplNew( cDebugMenu,() );
     
 	mpIntroStory = hplNew( cIntroStory,(this) );
 
@@ -469,9 +471,10 @@ bool cInit::Init(tString asCommandLine)
 	//Add to the global state
 	mpGame->GetUpdater()->AddGlobalUpdate(mpButtonHandler);
 	mpGame->GetUpdater()->AddGlobalUpdate(mpSaveHandler);
+	mpGame->GetUpdater()->AddGlobalUpdate(mpDebugMenu);
 
 	//Add to the default state
-	mpGame->GetUpdater()->AddUpdate("Default", mpButtonHandler);
+	// mpGame->GetUpdater()->AddUpdate("Default", mpButtonHandler);
 	mpGame->GetUpdater()->AddUpdate("Default", mpPlayer);
 	mpGame->GetUpdater()->AddUpdate("Default", mpPlayerHands);
 	mpGame->GetUpdater()->AddUpdate("Default", mpMusicHandler);
@@ -690,6 +693,8 @@ void cInit::Exit()
 	hplDelete( mpPreMenu );
 	Log(" Exit Credits\n");
 	hplDelete( mpCredits );
+	Log(" Exit DebugMenu\n");
+	hplDelete( mpDebugMenu );
 
     Log(" Saving config\n");
 	//Save engine stuff.
