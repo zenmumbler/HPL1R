@@ -461,7 +461,7 @@ bool cInit::Init(tString asCommandLine)
 	mpMapLoadText = hplNew( cMapLoadText,(this) );
 	mpPreMenu = hplNew( cPreMenu,(this) );
 	mpCredits = hplNew( cCredits,(this) );
-	mpDebugMenu = hplNew( cDebugMenu,() );
+	mpDebugMenu = hplNew( cDebugMenu,(this) );
     
 	mpIntroStory = hplNew( cIntroStory,(this) );
 

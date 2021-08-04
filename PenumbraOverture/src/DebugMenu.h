@@ -7,10 +7,11 @@
 
 #include "StdAfx.h"
 
+
 class cDebugMenu : public hpl::iUpdateable
 {
 public:
-	cDebugMenu();
+	cDebugMenu(cInit *apInit);
 	void OnDraw() override;
 	
 	bool IsEnabled() { return mbEnabled; }
@@ -18,6 +19,7 @@ public:
 	void ToggleEnabled() { mbEnabled = !mbEnabled; }
 
 private:
+	cInit *mpInit;
 	bool mbEnabled;
 };
 
