@@ -30,6 +30,7 @@
 #include "MapLoadText.h"
 #include "PreMenu.h"
 #include "Credits.h"
+#include "DebugMenu.h"
 
 #include "MainMenu.h"
 
@@ -92,6 +93,7 @@ static cButtonHandlerAction gvDefaultActions[] = {
 {"Nine","Keyboard",eKey_9,false},
 
 //Debug:
+{"DebugMenu","Keyboard",eKey_p,false},
 {"ResetGame","Keyboard",eKey_F1,false},
 {"SaveGame","Keyboard",eKey_F4,false},
 {"LoadGame","Keyboard",eKey_F5,false},
@@ -224,6 +226,10 @@ void cButtonHandler::Update(float afTimeStep)
 		}
 
 		mpInit->mpGame->GetGraphics()->GetLowLevel()->SaveScreenToBMP(sFileName);
+	}
+	if(mpInput->BecameTriggerd("DebugMenu"))
+	{
+		mpInit->mpDebugMenu->ToggleEnabled();
 	}
 	if(mpInput->BecameTriggerd("LockInput"))
 	{
