@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:AngelScript/AngelScript.xcodeproj">
+      location = "group:dependencies/sources/AngelScript/AngelScript.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Newton/Newton.xcodeproj">
+      location = "group:dependencies/sources/Newton/Newton.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:HPL/HPL.xcodeproj">
