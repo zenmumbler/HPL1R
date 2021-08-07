@@ -184,7 +184,7 @@ namespace hpl {
 			float fCosAngle = cMath::Vector3Dot(mtxPinPivot0Inv.GetRight(), mtxPinPivot1Inv.GetRight());
 			float fAngle = atan2(fSinAngle, fCosAngle);
 
-			Log("LIMITS: %.3f, %.3f, %.3f\n", cMath::ToDeg(mfMinAngle), cMath::ToDeg(fAngle), cMath::ToDeg(mfMaxAngle));
+			// Log("LIMITS: %.3f, %.3f, %.3f\n", cMath::ToDeg(mfMinAngle), cMath::ToDeg(fAngle), cMath::ToDeg(mfMaxAngle));
 
 			///////////////////////////
 			//Avoid oscillation

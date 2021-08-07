@@ -38,6 +38,8 @@
 #include "resources/GpuProgramManager.h"
 #include "graphics/GPUProgram.h"
 #include "graphics/RendererPostEffects.h"
+#include "physics/PhysicsWorld.h"
+#include "physics/PhysicsBody.h"
 
 namespace hpl {
 
@@ -455,6 +457,7 @@ namespace hpl {
 		////////////////////////////
 		//Render debug
 		RenderDebug(apCamera);
+		RenderPhysicsDebug(apWorld, apCamera);
 
 		mpLowLevelGraphics->SetDepthWriteActive(true);
 	}
@@ -1464,7 +1467,6 @@ namespace hpl {
 		{
 			mpLowLevelGraphics->SetDepthWriteActive(false);
 
-
 			//Render Debug for objects
 			cRenderableIterator objectIt = mpRenderList->GetObjectIt();
 			while(objectIt.HasNext())
@@ -1556,6 +1558,32 @@ namespace hpl {
 		}
 	}
 
+	//-----------------------------------------------------------------------
+
+	void cRenderer3D::RenderPhysicsDebug(cWorld3D *apWorld, cCamera3D *apCamera) {
+		if ((mDebugFlags & eRendererDebugFlag_DrawPhysicsBox) == 0)
+		{
+			return;
+		}
+
+		mpLowLevelGraphics->SetDepthWriteActive(false);
+		mpLowLevelGraphics->SetDepthTestActive(false);
+
+		auto bodies = apWorld->GetPhysicsWorld()->GetBodyIterator();
+
+		mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,apCamera->GetViewMatrix());
+
+		while (bodies.HasNext()) {
+			auto body = bodies.Next();
+
+			cBoundingVolume *pBV = body->GetBV();
+
+			mpLowLevelGraphics->DrawBoxMaxMin(pBV->GetMax(), pBV->GetMin(),cColor(1, 1, 0, 1));
+		}
+
+		mpLowLevelGraphics->SetDepthTestActive(true);
+		mpLowLevelGraphics->SetDepthWriteActive(true);
+	}
 
 	//-----------------------------------------------------------------------
 

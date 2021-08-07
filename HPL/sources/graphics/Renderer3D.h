@@ -35,6 +35,7 @@ namespace hpl {
 #define eRendererDebugFlag_DrawBoundingSphere	(0x00000020)
 #define eRendererDebugFlag_DrawLightBoundingBox	(0x00000040)
 #define eRendererDebugFlag_RenderLines			(0x00000080)
+#define eRendererDebugFlag_DrawPhysicsBox       (0x00000100)
 
 	typedef tFlag tRendererDebugFlag;
 
@@ -211,9 +212,11 @@ namespace hpl {
 
 		void RenderDebug(cCamera3D *apCamera);
 
-		inline void RenderDebugObject(cCamera3D *apCamera,iRenderable* &apObject, iMaterial* apPrevMat,
+		void RenderDebugObject(cCamera3D *apCamera,iRenderable* &apObject, iMaterial* apPrevMat,
 					int alPrevMatId,iVertexBuffer* apPrevVtxBuff,
 					eMaterialRenderType aRenderType, iLight3D* apLight);
+		
+		void RenderPhysicsDebug(cWorld3D *apWorld, cCamera3D *apCamera);
 
 		iLowLevelGraphics *mpLowLevelGraphics;
 		iLowLevelResources *mpLowLevelResources;

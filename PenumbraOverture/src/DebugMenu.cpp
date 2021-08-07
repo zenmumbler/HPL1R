@@ -40,6 +40,8 @@ void cDebugMenu::OnDraw() {
 			ImGui::Separator();
 			ImGui::CheckboxFlags("Show Light Bounds", &renderFlags, eRendererDebugFlag_DrawLightBoundingBox);
 			ImGui::CheckboxFlags("Disable Lighting", &renderFlags, eRendererDebugFlag_DisableLighting);
+			ImGui::Separator();
+			ImGui::CheckboxFlags("Draw Physics Boxes", &renderFlags, eRendererDebugFlag_DrawPhysicsBox);
 
 			renderer->SetDebugFlags(renderFlags);
 		}
