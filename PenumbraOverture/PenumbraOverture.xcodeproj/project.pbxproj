@@ -668,7 +668,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.frictionalgames.PenumbraOverture;
 				PRODUCT_NAME = PenumbraOverture;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				USER_HEADER_SEARCH_PATHS = "../HPL/sources ../dependencies/include";
+				USER_HEADER_SEARCH_PATHS = "../HPL/sources ../dependencies/include ../dependencies/sources/imgui";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -703,7 +703,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.frictionalgames.PenumbraOverture;
 				PRODUCT_NAME = PenumbraOverture;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				USER_HEADER_SEARCH_PATHS = "../HPL/sources ../dependencies/include";
+				USER_HEADER_SEARCH_PATHS = "../HPL/sources ../dependencies/include ../dependencies/sources/imgui";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

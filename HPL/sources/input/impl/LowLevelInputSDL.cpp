@@ -23,7 +23,7 @@
 #include "graphics/impl/LowLevelGraphicsSDL.h"
 
 #include "system/LowLevelSystem.h"
-#include "ext/imgui/backends/imgui_impl_sdl.h"
+#include "imgui/backends/imgui_impl_sdl.h"
 
 namespace hpl {
 
