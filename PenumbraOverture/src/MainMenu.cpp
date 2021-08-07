@@ -27,7 +27,6 @@
 #include "Player.h"
 #include "PlayerHelper.h"
 #include "EffectHandler.h"
-#include "ModelExport.h"
 #ifdef INCLUDE_HAPTIC
 #include "HapticGameCamera.h"
 #endif
@@ -55,9 +54,6 @@ static eMainMenuState gvMenuBackStates[] = {
 		eMainMenuState_OptionsControls,//eMainMenuState_OptionsKeySetupMove,
 		eMainMenuState_OptionsControls,//eMainMenuState_OptionsKeySetupAction,
 		eMainMenuState_OptionsControls,//eMainMenuState_OptionsKeySetupMisc,
-	
-		eMainMenuState_Start,//eMainMenuState_Tools
-		eMainMenuState_Tools,//eMainMenuState_ToolsExportModels
 
 		eMainMenuState_Options,//eMainMenuState_GraphicsRestart,
 
@@ -747,30 +743,6 @@ void cMainMenuWidget_Quit::OnMouseDown(eMButton aButton)
 {
 	mpInit->mpGame->Exit();
 }
-
-//-----------------------------------------------------------------------
-
-//////////////////////////////////////////////////////////////////////////
-// EXPORT MODELS
-//////////////////////////////////////////////////////////////////////////
-
-//-----------------------------------------------------------------------
-
-cMainMenuWidget_ExportModels::cMainMenuWidget_ExportModels(cInit *apInit, const cVector3f &avPos,
-												 const tWString& asText,
-												 cVector2f avFontSize, eFontAlign aAlignment)
-												 : cMainMenuWidget_Button(apInit,avPos,
-												 asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
-{
-
-}
-//-----------------------------------------------------------------------
-
-void cMainMenuWidget_ExportModels::OnMouseDown(eMButton aButton)
-{
-	ExportModels(mpInit->mpGame);
-}
-
 
 //-----------------------------------------------------------------------
 
@@ -2899,8 +2871,6 @@ void cMainMenu::CreateWidgets()
 	vPos.y += 51;
 	AddWidgetToState(eMainMenuState_Start,hplNew( cMainMenuWidget_MainButton,(mpInit,vPos,kTranslate("MainMenu","Options"),eMainMenuState_Options)) ); 
 	vPos.y += 51;
-	AddWidgetToState(eMainMenuState_Start,hplNew( cMainMenuWidget_MainButton,(mpInit,vPos,kTranslate("MainMenu","Tools"),eMainMenuState_Tools)) );
-	vPos.y += 51;
 	AddWidgetToState(eMainMenuState_Start,hplNew( cMainMenuWidget_MainButton,(mpInit,vPos,kTranslate("MainMenu","Exit"),eMainMenuState_Exit)) );
 	
 	
@@ -3056,12 +3026,6 @@ void cMainMenu::CreateWidgets()
 	AddWidgetToState(eMainMenuState_Exit,hplNew( cMainMenuWidget_Quit,(mpInit,vPos,kTranslate("MainMenu","Yes"),20,eFontAlign_Center)) ); 
 	vPos.y += 29;
 	AddWidgetToState(eMainMenuState_Exit,hplNew( cMainMenuWidget_Button,(mpInit,vPos,kTranslate("MainMenu","No"),eMainMenuState_Start,20,eFontAlign_Center)) );
-
-	///////////////////////////////////
-	// Tools
-	///////////////////////////////////
-	vPos = vTextStart;//cVector3f(400, 260, 40);
-	AddWidgetToState(eMainMenuState_Tools,hplNew( cMainMenuWidget_ExportModels,(mpInit,vPos,kTranslate("MainMenu","ExportModels"),25,eFontAlign_Center)) );
 
 	///////////////////////////////////
 	// Options

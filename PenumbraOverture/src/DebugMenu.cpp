@@ -5,6 +5,7 @@
 #include "DebugMenu.h"
 #include "Init.h"
 #include "GraphicsHelper.h"
+#include "ModelExport.h"
 
 #include "imgui/imgui.h"
 
@@ -44,6 +45,12 @@ void cDebugMenu::OnDraw() {
 			ImGui::CheckboxFlags("Draw Physics Boxes", &renderFlags, eRendererDebugFlag_DrawPhysicsBox);
 
 			renderer->SetDebugFlags(renderFlags);
+		}
+		
+		if (ImGui::CollapsingHeader("Export")) {
+			if (ImGui::Button("Test Model Export")) {
+				ExportModels(mpInit->mpGame);
+			}
 		}
 	}
 	ImGui::End();
