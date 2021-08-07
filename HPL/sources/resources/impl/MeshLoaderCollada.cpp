@@ -63,7 +63,7 @@
 #include "haptic/HapticSurface.h"
 #include "haptic/LowLevelHaptic.h"
 
-#include "ext/tinyXML/tinyxml.h"
+#include "tinyXML/tinyxml.h"
 
 #include "math/Math.h"
 

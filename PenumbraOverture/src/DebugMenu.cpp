@@ -6,7 +6,7 @@
 #include "Init.h"
 #include "GraphicsHelper.h"
 
-#include "imgui.h"
+#include "imgui/imgui.h"
 
 using namespace hpl;
 

@@ -19,7 +19,7 @@
 #include "graphics/ParticleSystem3D.h"
 
 #include "system/LowLevelSystem.h"
-#include "ext/tinyXML/tinyxml.h"
+#include "tinyXML/tinyxml.h"
 
 #include "graphics/ParticleEmitter3D_UserData.h"
 

@@ -26,7 +26,7 @@
 #include "math/Math.h"
 
 
-#include "ext/tinyXML/tinyxml.h"
+#include "tinyXML/tinyxml.h"
 
 #include <algorithm>
 

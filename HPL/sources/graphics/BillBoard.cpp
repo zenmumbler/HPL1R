@@ -18,7 +18,7 @@
  */
 #include "graphics/BillBoard.h"
 
-#include "ext/tinyXML/tinyxml.h"
+#include "tinyXML/tinyxml.h"
 
 #include "system/LowLevelSystem.h"
 #include "resources/Resources.h"

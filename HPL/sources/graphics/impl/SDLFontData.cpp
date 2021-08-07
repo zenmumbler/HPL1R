@@ -21,7 +21,7 @@
 #include "graphics/LowLevelGraphics.h"
 #include "system/LowLevelSystem.h"
 #include "graphics/impl/SDLBitmap2D.h"
-#include "ext/tinyXML/tinyxml.h"
+#include "tinyXML/tinyxml.h"
 
 namespace hpl {
 

@@ -25,7 +25,7 @@
 #include "graphics/ParticleSystem3D.h"
 #include "graphics/RenderList.h"
 
-#include "ext/tinyXML/tinyxml.h"
+#include "tinyXML/tinyxml.h"
 
 #include "resources/Resources.h"
 #include "resources/MaterialManager.h"

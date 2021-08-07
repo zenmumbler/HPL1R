@@ -18,7 +18,7 @@
  */
 #include "scene/Light3D.h"
 
-#include "ext/tinyXML/tinyxml.h"
+#include "tinyXML/tinyxml.h"
 #include "system/LowLevelSystem.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/Renderer3D.h"

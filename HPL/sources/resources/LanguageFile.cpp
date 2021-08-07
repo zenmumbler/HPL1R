@@ -19,7 +19,7 @@
 #include "resources/LanguageFile.h"
 #include "system/String.h"
 #include "system/LowLevelSystem.h"
-#include "ext/tinyXML/tinyxml.h"
+#include "tinyXML/tinyxml.h"
 #include "resources/Resources.h"
 
 namespace hpl {

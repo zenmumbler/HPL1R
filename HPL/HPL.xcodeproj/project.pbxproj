@@ -18,6 +18,10 @@
 		8E11634E26BED7200065E04C /* imgui_impl_opengl2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11632626BED4E00065E04C /* imgui_impl_opengl2.cpp */; };
 		8E11635826BED8DC0065E04C /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E11635426BED8DC0065E04C /* stb_image.c */; };
 		8E11635926BED8DC0065E04C /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E11635526BED8DC0065E04C /* stb_vorbis.c */; };
+		8E11636526BEDA630065E04C /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636126BEDA630065E04C /* tinystr.cpp */; };
+		8E11636626BEDA630065E04C /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636226BEDA630065E04C /* tinyxmlparser.cpp */; };
+		8E11636726BEDA630065E04C /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636326BEDA630065E04C /* tinyxmlerror.cpp */; };
+		8E11636826BEDA630065E04C /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636426BEDA630065E04C /* tinyxml.cpp */; };
 		8E3A72852611363F0086F8ED /* Script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A72832611363F0086F8ED /* Script.cpp */; };
 		8E815948260C1127001CBF63 /* GLSLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E815947260C1127001CBF63 /* GLSLProgram.cpp */; };
 		8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84AA0C254CB3D2000EA53C /* Cg.framework */; };
@@ -188,10 +192,6 @@
 		DBF84B5D0AC76F1E00BB15CD /* SurfaceData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849D20AC76D5800BB15CD /* SurfaceData.cpp */; };
 		DBF84B5E0AC76F1E00BB15CD /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A1D0AC76D5800BB15CD /* System.cpp */; };
 		DBF84B5F0AC76F1E00BB15CD /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849EA0AC76D5800BB15CD /* TextureManager.cpp */; };
-		DBF84B680AC76F1E00BB15CD /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849AF0AC76D5800BB15CD /* tinystr.cpp */; };
-		DBF84B690AC76F1E00BB15CD /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B00AC76D5800BB15CD /* tinyxml.cpp */; };
-		DBF84B6A0AC76F1E00BB15CD /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B10AC76D5800BB15CD /* tinyxmlerror.cpp */; };
-		DBF84B6B0AC76F1E00BB15CD /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B20AC76D5800BB15CD /* tinyxmlparser.cpp */; };
 		DBF84B6C0AC76F1E00BB15CD /* Updater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849520AC76D5700BB15CD /* Updater.cpp */; };
 		DBF84B6E0AC76F1E00BB15CD /* VertexBufferVBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */; };
 		DBF84B710AC76F1E00BB15CD /* World3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A120AC76D5800BB15CD /* World3D.cpp */; };
@@ -251,6 +251,12 @@
 		8E11635526BED8DC0065E04C /* stb_vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_vorbis.c; sourceTree = "<group>"; };
 		8E11635626BED8DC0065E04C /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		8E11635726BED8DC0065E04C /* stb_vorbis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_vorbis.h; sourceTree = "<group>"; };
+		8E11635F26BEDA630065E04C /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		8E11636026BEDA630065E04C /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
+		8E11636126BEDA630065E04C /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
+		8E11636226BEDA630065E04C /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
+		8E11636326BEDA630065E04C /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
+		8E11636426BEDA630065E04C /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
 		8E3A72832611363F0086F8ED /* Script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Script.cpp; path = sources/script/Script.cpp; sourceTree = SOURCE_ROOT; };
 		8E3A72842611363F0086F8ED /* Script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Script.h; path = sources/script/Script.h; sourceTree = SOURCE_ROOT; };
 		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
@@ -362,8 +368,6 @@
 		DB27F0800ACB9AB90054ACA3 /* SDLGameSetup.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SDLGameSetup.h; sourceTree = "<group>"; };
 		DB27F0820ACB9AB90054ACA3 /* SDLTexture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SDLTexture.h; sourceTree = "<group>"; };
 		DB27F0840ACB9AB90054ACA3 /* scriptstdstring.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = scriptstdstring.h; sourceTree = "<group>"; };
-		DB27F0860ACB9AB90054ACA3 /* tinystr.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = tinystr.h; sourceTree = "<group>"; };
-		DB27F0870ACB9AB90054ACA3 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
 		DB27F0890ACB9AB90054ACA3 /* VertexBufferVBO.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = VertexBufferVBO.h; sourceTree = "<group>"; };
 		DB27F08B0ACB9AB90054ACA3 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
 		DB27F08C0ACB9AB90054ACA3 /* ActionKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ActionKeyboard.h; sourceTree = "<group>"; };
@@ -566,10 +570,6 @@
 		DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = SDLGameSetup.cpp; sourceTree = "<group>"; };
 		DBF849AA0AC76D5800BB15CD /* SDLTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = SDLTexture.cpp; sourceTree = "<group>"; };
 		DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstdstring.cpp; sourceTree = "<group>"; };
-		DBF849AF0AC76D5800BB15CD /* tinystr.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = tinystr.cpp; sourceTree = "<group>"; };
-		DBF849B00AC76D5800BB15CD /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
-		DBF849B10AC76D5800BB15CD /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
-		DBF849B20AC76D5800BB15CD /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = VertexBufferVBO.cpp; sourceTree = "<group>"; };
 		DBF849B60AC76D5800BB15CD /* Action.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Action.cpp; sourceTree = "<group>"; };
 		DBF849B70AC76D5800BB15CD /* ActionKeyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ActionKeyboard.cpp; sourceTree = "<group>"; };
@@ -672,6 +672,7 @@
 				8E11633626BED6C60065E04C /* Newton.xcodeproj */,
 				8E11631C26BED4E00065E04C /* imgui */,
 				8E11635326BED8DC0065E04C /* stb */,
+				8E11635E26BEDA630065E04C /* tinyXML */,
 			);
 			name = Dependencies;
 			path = ../dependencies/sources;
@@ -732,6 +733,19 @@
 				8E11635726BED8DC0065E04C /* stb_vorbis.h */,
 			);
 			path = stb;
+			sourceTree = "<group>";
+		};
+		8E11635E26BEDA630065E04C /* tinyXML */ = {
+			isa = PBXGroup;
+			children = (
+				8E11635F26BEDA630065E04C /* tinyxml.h */,
+				8E11636026BEDA630065E04C /* tinystr.h */,
+				8E11636126BEDA630065E04C /* tinystr.cpp */,
+				8E11636226BEDA630065E04C /* tinyxmlparser.cpp */,
+				8E11636326BEDA630065E04C /* tinyxmlerror.cpp */,
+				8E11636426BEDA630065E04C /* tinyxml.cpp */,
+			);
+			path = tinyXML;
 			sourceTree = "<group>";
 		};
 		8E3A7282261135050086F8ED /* script */ = {
@@ -874,7 +888,6 @@
 		8E3A7428261780940086F8ED /* ext */ = {
 			isa = PBXGroup;
 			children = (
-				DBF849AE0AC76D5800BB15CD /* tinyXML */,
 				8E97874C2617840100C4395C /* json.hpp */,
 			);
 			name = ext;
@@ -1120,19 +1133,6 @@
 				DBF849A50AC76D5800BB15CD /* win32.cpp */,
 			);
 			path = platform;
-			sourceTree = "<group>";
-		};
-		DBF849AE0AC76D5800BB15CD /* tinyXML */ = {
-			isa = PBXGroup;
-			children = (
-				DBF849AF0AC76D5800BB15CD /* tinystr.cpp */,
-				DB27F0860ACB9AB90054ACA3 /* tinystr.h */,
-				DBF849B00AC76D5800BB15CD /* tinyxml.cpp */,
-				DB27F0870ACB9AB90054ACA3 /* tinyxml.h */,
-				DBF849B10AC76D5800BB15CD /* tinyxmlerror.cpp */,
-				DBF849B20AC76D5800BB15CD /* tinyxmlparser.cpp */,
-			);
-			path = tinyXML;
 			sourceTree = "<group>";
 		};
 		DBF849B50AC76D5800BB15CD /* input */ = {
@@ -1532,6 +1532,7 @@
 				DBF84AF70AC76F1E00BB15CD /* Material_BumpSpec.cpp in Sources */,
 				DBF84AF90AC76F1E00BB15CD /* Material_Diffuse.cpp in Sources */,
 				DBF84AFD0AC76F1E00BB15CD /* Material_DiffuseSpec.cpp in Sources */,
+				8E11636826BEDA630065E04C /* tinyxml.cpp in Sources */,
 				DBF84AFF0AC76F1E00BB15CD /* Material_Flat.cpp in Sources */,
 				DBF84B010AC76F1E00BB15CD /* Material_Modulative.cpp in Sources */,
 				DBF84B020AC76F1E00BB15CD /* Material_ModulativeX2.cpp in Sources */,
@@ -1541,6 +1542,7 @@
 				8E11634D26BED7200065E04C /* imgui_impl_sdl.cpp in Sources */,
 				DBF84B080AC76F1E00BB15CD /* Mesh.cpp in Sources */,
 				DBF84B0A0AC76F1E00BB15CD /* MeshCreator.cpp in Sources */,
+				8E11636626BEDA630065E04C /* tinyxmlparser.cpp in Sources */,
 				DBF84B0B0AC76F1E00BB15CD /* MeshEntity.cpp in Sources */,
 				DBF84B0C0AC76F1E00BB15CD /* MeshLoaderCollada.cpp in Sources */,
 				DBF84B0D0AC76F1E00BB15CD /* MeshLoaderColladaHelpers.cpp in Sources */,
@@ -1567,6 +1569,7 @@
 				DBF84B250AC76F1E00BB15CD /* PhysicsBodyNewton.cpp in Sources */,
 				DBF84B260AC76F1E00BB15CD /* PhysicsController.cpp in Sources */,
 				DBF84B270AC76F1E00BB15CD /* PhysicsControllerNewton.cpp in Sources */,
+				8E11636726BEDA630065E04C /* tinyxmlerror.cpp in Sources */,
 				DBF84B280AC76F1E00BB15CD /* PhysicsJoint.cpp in Sources */,
 				DBF84B290AC76F1E00BB15CD /* PhysicsJointBall.cpp in Sources */,
 				DBF84B2A0AC76F1E00BB15CD /* PhysicsJointBallNewton.cpp in Sources */,
@@ -1621,10 +1624,7 @@
 				DBF84B5D0AC76F1E00BB15CD /* SurfaceData.cpp in Sources */,
 				DBF84B5E0AC76F1E00BB15CD /* System.cpp in Sources */,
 				DBF84B5F0AC76F1E00BB15CD /* TextureManager.cpp in Sources */,
-				DBF84B680AC76F1E00BB15CD /* tinystr.cpp in Sources */,
-				DBF84B690AC76F1E00BB15CD /* tinyxml.cpp in Sources */,
-				DBF84B6A0AC76F1E00BB15CD /* tinyxmlerror.cpp in Sources */,
-				DBF84B6B0AC76F1E00BB15CD /* tinyxmlparser.cpp in Sources */,
+				8E11636526BEDA630065E04C /* tinystr.cpp in Sources */,
 				8E84E79626055B2500DC6065 /* OALSoundChannel.cpp in Sources */,
 				DBF84B6C0AC76F1E00BB15CD /* Updater.cpp in Sources */,
 				DBF84B6E0AC76F1E00BB15CD /* VertexBufferVBO.cpp in Sources */,
