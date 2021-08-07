@@ -31,7 +31,7 @@
 #include "resources/VideoManager.h"
 #include "system/LowLevelSystem.h"
 
-#include "ext/stb/stb_image.h"
+#include "stb/stb_image.h"
 
 namespace hpl {
 

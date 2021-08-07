@@ -16,16 +16,16 @@
 		8E11634A26BED6FF0065E04C /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11632E26BED4E00065E04C /* imgui_demo.cpp */; };
 		8E11634D26BED7200065E04C /* imgui_impl_sdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11632826BED4E00065E04C /* imgui_impl_sdl.cpp */; };
 		8E11634E26BED7200065E04C /* imgui_impl_opengl2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11632626BED4E00065E04C /* imgui_impl_opengl2.cpp */; };
+		8E11635826BED8DC0065E04C /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E11635426BED8DC0065E04C /* stb_image.c */; };
+		8E11635926BED8DC0065E04C /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E11635526BED8DC0065E04C /* stb_vorbis.c */; };
 		8E3A72852611363F0086F8ED /* Script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A72832611363F0086F8ED /* Script.cpp */; };
 		8E815948260C1127001CBF63 /* GLSLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E815947260C1127001CBF63 /* GLSLProgram.cpp */; };
 		8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84AA0C254CB3D2000EA53C /* Cg.framework */; };
 		8E84E7892605487F00DC6065 /* LowLevelSoundOAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */; };
-		8E84E78C260549B100DC6065 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E78B260549B100DC6065 /* stb_vorbis.c */; };
 		8E84E7922605571100DC6065 /* OALSoundData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E7912605571100DC6065 /* OALSoundData.cpp */; };
 		8E84E79626055B2500DC6065 /* OALSoundChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E79526055B2500DC6065 /* OALSoundChannel.cpp */; };
 		8E84E79C260819F800DC6065 /* WAVFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E79B260819F800DC6065 /* WAVFile.cpp */; };
 		8E9728DF254CBBAF0033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DE254CBBAF0033415B /* SDL2.framework */; };
-		8E9787632617C38E00C4395C /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E9787622617C38E00C4395C /* stb_image.c */; };
 		8EA48718260FFCD3000D1AB7 /* scriptstdstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */; };
 		8EA4871E2610A67C000D1AB7 /* scriptarray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4871B2610A67B000D1AB7 /* scriptarray.cpp */; };
 		8EA4871F2610A67C000D1AB7 /* scriptstdstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */; };
@@ -247,6 +247,10 @@
 		8E11632F26BED4E00065E04C /* imgui_draw.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
 		8E11633326BED6C60065E04C /* AngelScript.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AngelScript.xcodeproj; path = /Users/arthur/Documents/Creations/Frictional/HPL1R/dependencies/sources/AngelScript/AngelScript.xcodeproj; sourceTree = "<absolute>"; };
 		8E11633626BED6C60065E04C /* Newton.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Newton.xcodeproj; path = /Users/arthur/Documents/Creations/Frictional/HPL1R/dependencies/sources/Newton/Newton.xcodeproj; sourceTree = "<absolute>"; };
+		8E11635426BED8DC0065E04C /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
+		8E11635526BED8DC0065E04C /* stb_vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_vorbis.c; sourceTree = "<group>"; };
+		8E11635626BED8DC0065E04C /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		8E11635726BED8DC0065E04C /* stb_vorbis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_vorbis.h; sourceTree = "<group>"; };
 		8E3A72832611363F0086F8ED /* Script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Script.cpp; path = sources/script/Script.cpp; sourceTree = SOURCE_ROOT; };
 		8E3A72842611363F0086F8ED /* Script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Script.h; path = sources/script/Script.h; sourceTree = SOURCE_ROOT; };
 		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
@@ -256,8 +260,6 @@
 		8E84E75B25FD063100DC6065 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		8E84E7872605472700DC6065 /* LowLevelSoundOAL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LowLevelSoundOAL.h; sourceTree = "<group>"; };
 		8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LowLevelSoundOAL.cpp; sourceTree = "<group>"; };
-		8E84E78B260549B100DC6065 /* stb_vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_vorbis.c; sourceTree = "<group>"; };
-		8E84E78E26054A2F00DC6065 /* stb_vorbis.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_vorbis.h; sourceTree = "<group>"; };
 		8E84E790260555F900DC6065 /* OALSoundData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OALSoundData.h; sourceTree = "<group>"; };
 		8E84E7912605571100DC6065 /* OALSoundData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OALSoundData.cpp; sourceTree = "<group>"; };
 		8E84E79426055ABF00DC6065 /* OALSoundChannel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OALSoundChannel.h; sourceTree = "<group>"; };
@@ -266,10 +268,8 @@
 		8E84E79B260819F800DC6065 /* WAVFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WAVFile.cpp; sourceTree = "<group>"; };
 		8E9728CF254CB92F0033415B /* scripthelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripthelper.h; sourceTree = "<group>"; };
 		8E9728DE254CBBAF0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
-		8E97874A2617826A00C4395C /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		8E97874C2617840100C4395C /* json.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
 		8E9787602617A35A00C4395C /* MemoryPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemoryPool.h; sourceTree = "<group>"; };
-		8E9787622617C38E00C4395C /* stb_image.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
 		8EA4871B2610A67B000D1AB7 /* scriptarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptarray.cpp; sourceTree = "<group>"; };
 		8EA4871C2610A67B000D1AB7 /* scriptarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptarray.h; sourceTree = "<group>"; };
 		8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstdstring_utils.cpp; sourceTree = "<group>"; };
@@ -671,6 +671,7 @@
 				8E11633326BED6C60065E04C /* AngelScript.xcodeproj */,
 				8E11633626BED6C60065E04C /* Newton.xcodeproj */,
 				8E11631C26BED4E00065E04C /* imgui */,
+				8E11635326BED8DC0065E04C /* stb */,
 			);
 			name = Dependencies;
 			path = ../dependencies/sources;
@@ -720,6 +721,17 @@
 				8E11634226BED6C60065E04C /* libnewton.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8E11635326BED8DC0065E04C /* stb */ = {
+			isa = PBXGroup;
+			children = (
+				8E11635426BED8DC0065E04C /* stb_image.c */,
+				8E11635526BED8DC0065E04C /* stb_vorbis.c */,
+				8E11635626BED8DC0065E04C /* stb_image.h */,
+				8E11635726BED8DC0065E04C /* stb_vorbis.h */,
+			);
+			path = stb;
 			sourceTree = "<group>";
 		};
 		8E3A7282261135050086F8ED /* script */ = {
@@ -862,23 +874,11 @@
 		8E3A7428261780940086F8ED /* ext */ = {
 			isa = PBXGroup;
 			children = (
-				8E9787492617821F00C4395C /* stb */,
 				DBF849AE0AC76D5800BB15CD /* tinyXML */,
 				8E97874C2617840100C4395C /* json.hpp */,
 			);
 			name = ext;
 			path = sources/ext;
-			sourceTree = "<group>";
-		};
-		8E9787492617821F00C4395C /* stb */ = {
-			isa = PBXGroup;
-			children = (
-				8E9787622617C38E00C4395C /* stb_image.c */,
-				8E97874A2617826A00C4395C /* stb_image.h */,
-				8E84E78B260549B100DC6065 /* stb_vorbis.c */,
-				8E84E78E26054A2F00DC6065 /* stb_vorbis.h */,
-			);
-			path = stb;
 			sourceTree = "<group>";
 		};
 		8E9787682617DAB200C4395C /* impl */ = {
@@ -1472,6 +1472,7 @@
 				DBF84AB50AC76F1E00BB15CD /* BillBoard.cpp in Sources */,
 				DBF84AB70AC76F1E00BB15CD /* Bone.cpp in Sources */,
 				DBF84AB80AC76F1E00BB15CD /* BoneState.cpp in Sources */,
+				8E11635926BED8DC0065E04C /* stb_vorbis.c in Sources */,
 				DBF84AB90AC76F1E00BB15CD /* BoundingVolume.cpp in Sources */,
 				DBF84ABB0AC76F1E00BB15CD /* Camera3D.cpp in Sources */,
 				DBF84ABC0AC76F1E00BB15CD /* CGProgram.cpp in Sources */,
@@ -1545,13 +1546,11 @@
 				DBF84B0D0AC76F1E00BB15CD /* MeshLoaderColladaHelpers.cpp in Sources */,
 				8E11634E26BED7200065E04C /* imgui_impl_opengl2.cpp in Sources */,
 				8EA4871F2610A67C000D1AB7 /* scriptstdstring_utils.cpp in Sources */,
-				8E84E78C260549B100DC6065 /* stb_vorbis.c in Sources */,
 				DBF84B0F0AC76F1E00BB15CD /* MeshLoaderHandler.cpp in Sources */,
 				DBF84B100AC76F1E00BB15CD /* MeshLoaderMSH.cpp in Sources */,
 				DBF84B110AC76F1E00BB15CD /* MeshManager.cpp in Sources */,
 				DBF84B120AC76F1E00BB15CD /* MeshTypes.cpp in Sources */,
 				DBF84B130AC76F1E00BB15CD /* Mouse.cpp in Sources */,
-				8E9787632617C38E00C4395C /* stb_image.c in Sources */,
 				DBF84B140AC76F1E00BB15CD /* MouseSDL.cpp in Sources */,
 				DBF84B160AC76F1E00BB15CD /* MusicHandler.cpp in Sources */,
 				DBF84B170AC76F1E00BB15CD /* Node.cpp in Sources */,
@@ -1587,6 +1586,7 @@
 				8E11634926BED6FF0065E04C /* imgui_widgets.cpp in Sources */,
 				DBF84B390AC76F1E00BB15CD /* Renderer3D.cpp in Sources */,
 				DBF84B3A0AC76F1E00BB15CD /* RendererPostEffects.cpp in Sources */,
+				8E11635826BED8DC0065E04C /* stb_image.c in Sources */,
 				DBF84B3B0AC76F1E00BB15CD /* RenderList.cpp in Sources */,
 				DBF84B3D0AC76F1E00BB15CD /* RenderState.cpp in Sources */,
 				DBF84B3E0AC76F1E00BB15CD /* ResourceBase.cpp in Sources */,
