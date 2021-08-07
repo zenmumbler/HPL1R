@@ -385,12 +385,7 @@ namespace hpl {
 
 	void cPhysicsBodyNewton::RenderDebugGeometry(iLowLevelGraphics *apLowLevel,const cColor &aColor)
 	{
-		// [AL] TODO: this was changed to draw the shape, implement this in world to make it work
-		// mpWorld->RenderShapeDebugGeometry(mpShape,GetLocalMatrix(),apLowLevel, aColor);
-
-//		gpLowLevelGraphics = apLowLevel;
-//		gDebugColor = aColor;
-//		NewtonBodyForEachPolygonDo (mpNewtonBody, RenderDebugPolygon);
+		 mpWorld->RenderShapeDebugGeometry(mpShape, GetLocalMatrix(), apLowLevel, aColor);
 	}
 
 	//-----------------------------------------------------------------------

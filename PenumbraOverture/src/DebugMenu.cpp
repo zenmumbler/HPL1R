@@ -26,8 +26,8 @@ void cDebugMenu::OnDraw() {
 	ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 650, main_viewport->WorkPos.y + 20), ImGuiCond_FirstUseEver);
 	ImGui::SetNextWindowSize(ImVec2(360, 400), ImGuiCond_FirstUseEver);
 	
-	if (ImGui::Begin("Penumbra Debug")) {
-		if (ImGui::CollapsingHeader("Rendering")) {
+	if (ImGui::Begin("Debug Views")) {
+		if (ImGui::CollapsingHeader("Geometry")) {
 			auto renderer = mpInit->mpGame->GetGraphics()->GetRenderer3D();
 			auto renderFlags = renderer->GetDebugFlags();
 

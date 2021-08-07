@@ -231,6 +231,8 @@ namespace hpl {
 							bool abCalcDist, bool abCalcNormal, bool abCalcPoint,
 							bool abUsePrefilter=false)=0;
 
+		virtual void RenderShapeDebugGeometry(iCollideShape *apShape, const cMatrixf& a_mtxTransform,
+											  iLowLevelGraphics *apLowLevel, const cColor& aColor)=0;
 		virtual void RenderDebugGeometry(iLowLevelGraphics *apLowLevel, const cColor& aColor)=0;
 
 		virtual bool CheckShapeCollision(	iCollideShape* apShapeA, const cMatrixf& a_mtxA,

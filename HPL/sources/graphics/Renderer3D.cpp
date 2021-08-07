@@ -1569,17 +1569,9 @@ namespace hpl {
 		mpLowLevelGraphics->SetDepthWriteActive(false);
 		mpLowLevelGraphics->SetDepthTestActive(false);
 
-		auto bodies = apWorld->GetPhysicsWorld()->GetBodyIterator();
-
 		mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,apCamera->GetViewMatrix());
 
-		while (bodies.HasNext()) {
-			auto body = bodies.Next();
-
-			cBoundingVolume *pBV = body->GetBV();
-
-			mpLowLevelGraphics->DrawBoxMaxMin(pBV->GetMax(), pBV->GetMin(),cColor(1, 1, 0, 1));
-		}
+		apWorld->GetPhysicsWorld()->RenderDebugGeometry(mpLowLevelGraphics, cColor(1, 1, 0, 1));
 
 		mpLowLevelGraphics->SetDepthTestActive(true);
 		mpLowLevelGraphics->SetDepthWriteActive(true);

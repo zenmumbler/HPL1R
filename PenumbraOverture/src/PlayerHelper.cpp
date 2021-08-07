@@ -215,9 +215,9 @@ void cPlayerPickRayCallback::OnWorldExit()
 
 //-----------------------------------------------------------------------
 
-bool cPlayerPickRayCallback::OnIntersect(iPhysicsBody *apBody,cPhysicsRayParams *apParams)
+bool cPlayerPickRayCallback::OnIntersect(iPhysicsBody *apBody, cPhysicsRayParams *apParams)
 {
-	float &fDist = apParams->mfDist;
+	float fDist = apParams->mfDist;
 	
 	//Must be positive
 	if(fDist < 0) return true;

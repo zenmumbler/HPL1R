@@ -588,13 +588,50 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cPhysicsWorldNewton::RenderDebugGeometry(iLowLevelGraphics *apLowLevel,const cColor &aColor)
+	static iLowLevelGraphics *gpLowLevelGraphics;
+	static cColor gDebugColor;
+
+	static void RenderDebugPolygon(void* apUserData, int alVertexCount, const dFloat* apFaceArray, int alFaceId)
 	{
-		tPhysicsBodyListIt it = mlstBodies.begin();
-		for(;it != mlstBodies.end(); ++it)
+		int i;
+
+		i = alVertexCount - 1;
+		cVector3f vP0(apFaceArray[i * 3 + 0], apFaceArray[i * 3 + 1], apFaceArray[i * 3 + 2]);
+		for (i = 0; i < alVertexCount; ++i)
 		{
-			iPhysicsBody *pBody = *it;
-			pBody->RenderDebugGeometry(apLowLevel,aColor);
+			cVector3f vP1 (apFaceArray[i * 3 + 0], apFaceArray[i * 3 + 1], apFaceArray[i * 3 + 2]);
+
+			gpLowLevelGraphics->DrawLine(vP0, vP1,gDebugColor);
+
+			vP0 = vP1;
+		}
+
+	}
+
+	//-----------------------------------------------------------------------
+
+	void cPhysicsWorldNewton::RenderShapeDebugGeometry(iCollideShape *apShape, const cMatrixf& a_mtxTransform,
+													   iLowLevelGraphics *apLowLevel, const cColor& aColor)
+	{
+		gpLowLevelGraphics = apLowLevel;
+		gDebugColor = aColor;
+		
+		auto transposed = a_mtxTransform.GetTranspose();
+		
+		cCollideShapeNewton *pNewtonShape = static_cast<cCollideShapeNewton*>(apShape);
+		NewtonCollisionForEachPolygonDo (	pNewtonShape->GetNewtonCollision(),
+											&transposed.m[0][0],
+											RenderDebugPolygon,
+											NULL);
+	}
+
+	//-----------------------------------------------------------------------
+
+	void cPhysicsWorldNewton::RenderDebugGeometry(iLowLevelGraphics *apLowLevel, const cColor &aColor)
+	{
+		for (auto pBody : mlstBodies)
+		{
+			pBody->RenderDebugGeometry(apLowLevel, aColor);
 		}
 	}
 
