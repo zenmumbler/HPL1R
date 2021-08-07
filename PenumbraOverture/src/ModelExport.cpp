@@ -1,7 +1,7 @@
 //  ModelExport.cpp
 
 #include <string>
-#include "ext/json.hpp"
+#include "jmcpp/json.hpp"
 #include "ModelExport.h"
 
 using json = nlohmann::json;
