@@ -74,20 +74,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8E11630326BECD6C0065E04C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8E978751261787E400C4395C /* Newton.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D;
-			remoteInfo = newton;
-		};
-		8E11630D26BECD6C0065E04C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8E97874E261787E400C4395C /* AngelScript.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 39EAA509EACD467ABBCA6EC7;
-			remoteInfo = angelscript;
-		};
 		8E9F74DD25522A70000324E8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */;
@@ -122,12 +108,9 @@
 /* Begin PBXFileReference section */
 		8E84E76525FD5B7600DC6065 /* ModelExport.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ModelExport.cpp; sourceTree = "<group>"; };
 		8E84E76625FD5B7600DC6065 /* ModelExport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelExport.h; sourceTree = "<group>"; };
-		8E97874E261787E400C4395C /* AngelScript.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AngelScript.xcodeproj; path = /Users/arthur/Documents/Creations/Frictional/HPL1R/dependencies/sources/AngelScript/AngelScript.xcodeproj; sourceTree = "<absolute>"; };
-		8E978751261787E400C4395C /* Newton.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Newton.xcodeproj; path = /Users/arthur/Documents/Creations/Frictional/HPL1R/dependencies/sources/Newton/Newton.xcodeproj; sourceTree = "<absolute>"; };
 		8EB7C395254E48A900277667 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8EB7C3A9254F545C00277667 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		8EB7C3AA254F545C00277667 /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cg.framework; sourceTree = "<group>"; };
-		8EB7C3AB254F545C00277667 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_image.framework; sourceTree = "<group>"; };
 		8EC7AEED26B8ABF200193C45 /* DebugMenu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DebugMenu.cpp; sourceTree = "<group>"; };
 		8EC7AEEE26B8ABF200193C45 /* DebugMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugMenu.h; sourceTree = "<group>"; };
 		DB06307A111D3E3F0048C5E9 /* PenumbraOverture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PenumbraOverture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -266,22 +249,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8E11630026BECD6B0065E04C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8E11630426BECD6C0065E04C /* libnewton.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		8E11630726BECD6C0065E04C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8E11630E26BECD6C0065E04C /* libangelscript.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		8E9F74D725522A70000324E8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,7 +403,6 @@
 			isa = PBXGroup;
 			children = (
 				8EB7C3AA254F545C00277667 /* Cg.framework */,
-				8EB7C3AB254F545C00277667 /* SDL2_image.framework */,
 				8EB7C3A9254F545C00277667 /* SDL2.framework */,
 			);
 			name = dependencies;
@@ -446,8 +412,6 @@
 		DBF84A9B0AC76E7E00BB15CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8E97874E261787E400C4395C /* AngelScript.xcodeproj */,
-				8E978751261787E400C4395C /* Newton.xcodeproj */,
 				DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */,
 				DBF84A9A0AC76E5E00BB15CD /* dependencies */,
 				DBCEE71E0B4B53550088A7E3 /* OpenAL.framework */,
@@ -509,16 +473,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 8E11630726BECD6C0065E04C /* Products */;
-					ProjectRef = 8E97874E261787E400C4395C /* AngelScript.xcodeproj */;
-				},
-				{
 					ProductGroup = 8E9F74D725522A70000324E8 /* Products */;
 					ProjectRef = DBF9A3CE119A659300CCFDC9 /* HPL.xcodeproj */;
-				},
-				{
-					ProductGroup = 8E11630026BECD6B0065E04C /* Products */;
-					ProjectRef = 8E978751261787E400C4395C /* Newton.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -529,20 +485,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		8E11630426BECD6C0065E04C /* libnewton.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libnewton.a;
-			remoteRef = 8E11630326BECD6C0065E04C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		8E11630E26BECD6C0065E04C /* libangelscript.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libangelscript.a;
-			remoteRef = 8E11630D26BECD6C0065E04C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		8E9F74DE25522A70000324E8 /* libHPL.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
