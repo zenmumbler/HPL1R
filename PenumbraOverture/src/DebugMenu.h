@@ -7,6 +7,7 @@
 
 #include "StdAfx.h"
 
+class cInit;
 
 class cDebugMenu : public hpl::iUpdateable
 {

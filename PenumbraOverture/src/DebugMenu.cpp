@@ -21,6 +21,28 @@ void cDebugMenu::OnDraw() {
 	if (! mbEnabled) {
 		return;
 	}
+	
+	const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
+	ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 650, main_viewport->WorkPos.y + 20), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowSize(ImVec2(360, 400), ImGuiCond_FirstUseEver);
+	
+	if (ImGui::Begin("Penumbra Debug")) {
+		if (ImGui::CollapsingHeader("Rendering")) {
+			auto renderer = mpInit->mpGame->GetGraphics()->GetRenderer3D();
+			auto renderFlags = renderer->GetDebugFlags();
 
-	ImGui::ShowDemoWindow();
+			ImGui::CheckboxFlags("Show Wireframes", &renderFlags, eRendererDebugFlag_RenderLines);
+			ImGui::CheckboxFlags("Show Normals", &renderFlags, eRendererDebugFlag_DrawNormals);
+			ImGui::CheckboxFlags("Show Tangents", &renderFlags, eRendererDebugFlag_DrawTangents);
+			ImGui::Separator();
+			ImGui::CheckboxFlags("Show Bounding Boxes", &renderFlags, eRendererDebugFlag_DrawBoundingBox);
+			ImGui::CheckboxFlags("Show Bounding Spheres", &renderFlags, eRendererDebugFlag_DrawBoundingSphere);
+			ImGui::Separator();
+			ImGui::CheckboxFlags("Show Light Bounds", &renderFlags, eRendererDebugFlag_DrawLightBoundingBox);
+			ImGui::CheckboxFlags("Disable Lighting", &renderFlags, eRendererDebugFlag_DisableLighting);
+
+			renderer->SetDebugFlags(renderFlags);
+		}
+	}
+	ImGui::End();
 }
