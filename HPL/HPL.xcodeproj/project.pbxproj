@@ -22,6 +22,7 @@
 		8E11636626BEDA630065E04C /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636226BEDA630065E04C /* tinyxmlparser.cpp */; };
 		8E11636726BEDA630065E04C /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636326BEDA630065E04C /* tinyxmlerror.cpp */; };
 		8E11636826BEDA630065E04C /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636426BEDA630065E04C /* tinyxml.cpp */; };
+		8E11637026BF08840065E04C /* cgltf_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636F26BF08840065E04C /* cgltf_write.c */; };
 		8E3A72852611363F0086F8ED /* Script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A72832611363F0086F8ED /* Script.cpp */; };
 		8E815948260C1127001CBF63 /* GLSLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E815947260C1127001CBF63 /* GLSLProgram.cpp */; };
 		8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84AA0C254CB3D2000EA53C /* Cg.framework */; };
@@ -257,6 +258,10 @@
 		8E11636226BEDA630065E04C /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		8E11636326BEDA630065E04C /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
 		8E11636426BEDA630065E04C /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
+		8E11636C26BF06AE0065E04C /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		8E11636D26BF06AE0065E04C /* cgltf_write.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cgltf_write.h; sourceTree = "<group>"; };
+		8E11636E26BF06AE0065E04C /* cgltf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cgltf.h; sourceTree = "<group>"; };
+		8E11636F26BF08840065E04C /* cgltf_write.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cgltf_write.c; sourceTree = "<group>"; };
 		8E3A72832611363F0086F8ED /* Script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Script.cpp; path = sources/script/Script.cpp; sourceTree = SOURCE_ROOT; };
 		8E3A72842611363F0086F8ED /* Script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Script.h; path = sources/script/Script.h; sourceTree = SOURCE_ROOT; };
 		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
@@ -670,6 +675,7 @@
 			children = (
 				8E11633326BED6C60065E04C /* AngelScript.xcodeproj */,
 				8E11633626BED6C60065E04C /* Newton.xcodeproj */,
+				8E11636B26BF06AE0065E04C /* cgltf */,
 				8E11631C26BED4E00065E04C /* imgui */,
 				8E11635326BED8DC0065E04C /* stb */,
 				8E11635E26BEDA630065E04C /* tinyXML */,
@@ -746,6 +752,17 @@
 				8E11636426BEDA630065E04C /* tinyxml.cpp */,
 			);
 			path = tinyXML;
+			sourceTree = "<group>";
+		};
+		8E11636B26BF06AE0065E04C /* cgltf */ = {
+			isa = PBXGroup;
+			children = (
+				8E11636C26BF06AE0065E04C /* LICENSE */,
+				8E11636D26BF06AE0065E04C /* cgltf_write.h */,
+				8E11636E26BF06AE0065E04C /* cgltf.h */,
+				8E11636F26BF08840065E04C /* cgltf_write.c */,
+			);
+			path = cgltf;
 			sourceTree = "<group>";
 		};
 		8E3A7282261135050086F8ED /* script */ = {
@@ -1486,6 +1503,7 @@
 				DBF84AC10AC76F1E00BB15CD /* CollideShapeNewton.cpp in Sources */,
 				DBF84AC20AC76F1E00BB15CD /* Color.cpp in Sources */,
 				DBF84AC30AC76F1E00BB15CD /* ConfigFile.cpp in Sources */,
+				8E11637026BF08840065E04C /* cgltf_write.c in Sources */,
 				DBF84AC40AC76F1E00BB15CD /* Container.cpp in Sources */,
 				DBF84AC50AC76F1E00BB15CD /* Entity.cpp in Sources */,
 				8EE896D1262459E800FFF4C3 /* GfxBatch.cpp in Sources */,
