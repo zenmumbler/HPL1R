@@ -23,6 +23,7 @@
 		8E11636726BEDA630065E04C /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636326BEDA630065E04C /* tinyxmlerror.cpp */; };
 		8E11636826BEDA630065E04C /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636426BEDA630065E04C /* tinyxml.cpp */; };
 		8E11637026BF08840065E04C /* cgltf_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636F26BF08840065E04C /* cgltf_write.c */; };
+		8E11637A26C1FDD40065E04C /* FileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11637926C1FDD40065E04C /* FileReader.cpp */; };
 		8E3A72852611363F0086F8ED /* Script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A72832611363F0086F8ED /* Script.cpp */; };
 		8E815948260C1127001CBF63 /* GLSLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E815947260C1127001CBF63 /* GLSLProgram.cpp */; };
 		8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84AA0C254CB3D2000EA53C /* Cg.framework */; };
@@ -262,6 +263,8 @@
 		8E11636D26BF06AE0065E04C /* cgltf_write.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cgltf_write.h; sourceTree = "<group>"; };
 		8E11636E26BF06AE0065E04C /* cgltf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cgltf.h; sourceTree = "<group>"; };
 		8E11636F26BF08840065E04C /* cgltf_write.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cgltf_write.c; sourceTree = "<group>"; };
+		8E11637826C1FD520065E04C /* FileReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileReader.h; sourceTree = "<group>"; };
+		8E11637926C1FDD40065E04C /* FileReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileReader.cpp; sourceTree = "<group>"; };
 		8E3A72832611363F0086F8ED /* Script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Script.cpp; path = sources/script/Script.cpp; sourceTree = SOURCE_ROOT; };
 		8E3A72842611363F0086F8ED /* Script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Script.h; path = sources/script/Script.h; sourceTree = SOURCE_ROOT; };
 		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
@@ -279,7 +282,6 @@
 		8E84E79B260819F800DC6065 /* WAVFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WAVFile.cpp; sourceTree = "<group>"; };
 		8E9728CF254CB92F0033415B /* scripthelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripthelper.h; sourceTree = "<group>"; };
 		8E9728DE254CBBAF0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
-		8E97874C2617840100C4395C /* json.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
 		8E9787602617A35A00C4395C /* MemoryPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemoryPool.h; sourceTree = "<group>"; };
 		8EA4871B2610A67B000D1AB7 /* scriptarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptarray.cpp; sourceTree = "<group>"; };
 		8EA4871C2610A67B000D1AB7 /* scriptarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptarray.h; sourceTree = "<group>"; };
@@ -902,15 +904,6 @@
 			path = impl;
 			sourceTree = "<group>";
 		};
-		8E3A7428261780940086F8ED /* ext */ = {
-			isa = PBXGroup;
-			children = (
-				8E97874C2617840100C4395C /* json.hpp */,
-			);
-			name = ext;
-			path = sources/ext;
-			sourceTree = "<group>";
-		};
 		8E9787682617DAB200C4395C /* impl */ = {
 			isa = PBXGroup;
 			children = (
@@ -980,7 +973,6 @@
 			children = (
 				DB27F0600ACB9AB90054ACA3 /* hpl.h */,
 				DBF849470AC76D5700BB15CD /* ai */,
-				8E3A7428261780940086F8ED /* ext */,
 				DBF8494D0AC76D5700BB15CD /* game */,
 				DBF849530AC76D5700BB15CD /* graphics */,
 				DB4AFB440D7075B900809E03 /* haptic */,
@@ -1376,6 +1368,8 @@
 				DB27F1020ACB9AB90054ACA3 /* BinTree.h */,
 				DBF84A190AC76D5800BB15CD /* Container.cpp */,
 				DB27F1030ACB9AB90054ACA3 /* Container.h */,
+				8E11637926C1FDD40065E04C /* FileReader.cpp */,
+				8E11637826C1FD520065E04C /* FileReader.h */,
 				DBF84A1A0AC76D5800BB15CD /* LogicTimer.cpp */,
 				DB27F1040ACB9AB90054ACA3 /* LogicTimer.h */,
 				DB27F1050ACB9AB90054ACA3 /* LowLevelSystem.h */,
@@ -1566,6 +1560,7 @@
 				DBF84B0D0AC76F1E00BB15CD /* MeshLoaderColladaHelpers.cpp in Sources */,
 				8E11634E26BED7200065E04C /* imgui_impl_opengl2.cpp in Sources */,
 				8EA4871F2610A67C000D1AB7 /* scriptstdstring_utils.cpp in Sources */,
+				8E11637A26C1FDD40065E04C /* FileReader.cpp in Sources */,
 				DBF84B0F0AC76F1E00BB15CD /* MeshLoaderHandler.cpp in Sources */,
 				DBF84B100AC76F1E00BB15CD /* MeshLoaderMSH.cpp in Sources */,
 				DBF84B110AC76F1E00BB15CD /* MeshManager.cpp in Sources */,

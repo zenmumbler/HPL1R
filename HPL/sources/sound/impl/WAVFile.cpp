@@ -7,6 +7,7 @@
 #include <AL/al.h>
 #include "sound/impl/WAVFile.h"
 #include "system/LowLevelSystem.h"
+#include "system/FileReader.h"
 
 struct WAVHeader {
 	uint32_t wavID; // "RIFF"
@@ -29,39 +30,6 @@ struct ChunkHeader {
 };
 
 namespace hpl {
-
-	struct FileReader {
-		FILE *f;
-		uint32_t sizeBytes = 0;
-
-		FileReader(const tString& filePath) {
-			f = fopen(filePath.c_str(), "rb");
-			if (f) {
-				fseek(f, 0, SEEK_END);
-				sizeBytes = static_cast<uint32_t>(ftell(f));
-				fseek(f, 0, SEEK_SET);
-			}
-		}
-		
-		~FileReader() {
-			if (f) {
-				fclose(f);
-			}
-		}
-		
-		bool valid() {
-			return f != nullptr;
-		}
-		
-		template <typename T>
-		bool read(T *data, uint32_t byteLength = sizeof(T)) {
-			return fread(data, byteLength, 1, f) == 1;
-		}
-		
-		void skip(uint32_t bytesToSkip) {
-			fseek(f, bytesToSkip, SEEK_CUR);
-		}
-	};
 
 	uint32_t LoadWAVFile(const tString& filePath, int *channels, ALint *format, int *rate, short **samples) {
 		FileReader f {filePath};
