@@ -22,6 +22,10 @@ namespace hpl {
 		}
 	}
 	
+	bool FileReader::readBytes(void *into, size_t byteLength) {
+		return fread(into, byteLength, 1, f) == 1;
+	}
+	
 	void FileReader::skip(uint32_t bytesToSkip) {
 		fseek(f, bytesToSkip, SEEK_CUR);
 	}

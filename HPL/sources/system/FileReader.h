@@ -5,7 +5,7 @@
 #ifndef HPL_FILE_READER_H
 #define HPL_FILE_READER_H
 
-#include "system/LowLevelSystem.h"
+#include "system/String.h"
 
 namespace hpl {
 
@@ -24,6 +24,8 @@ namespace hpl {
 		bool read(T *data, uint32_t byteLength = sizeof(T)) {
 			return fread(data, byteLength, 1, f) == 1;
 		}
+		
+		bool readBytes(void *into, size_t byteLength);
 		
 		void skip(uint32_t bytesToSkip);
 	};
