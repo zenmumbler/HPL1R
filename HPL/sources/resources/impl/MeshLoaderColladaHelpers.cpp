@@ -2016,7 +2016,7 @@ namespace hpl {
 		int lArrayCount=0;
 		int lStringCount =0;
 
-		float vValArray[3];
+		float vValArray[4];
 		int lValArrayCount=0;
 		char vTempChar[20];
 		int lTempCharCount=0;
@@ -2045,7 +2045,7 @@ namespace hpl {
 						lValArrayCount =0;
 						cVector3f vVec;
 						vVec.x = vValArray[0];vVec.y = vValArray[1];
-						if(alElements==3) vVec.z = vValArray[2];
+						if(alElements>=3) vVec.z = vValArray[2];
 
 						avVtxVec[lVertexNum] = vVec;
 						lVertexNum++;
