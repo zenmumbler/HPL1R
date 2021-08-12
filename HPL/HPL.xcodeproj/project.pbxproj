@@ -23,6 +23,7 @@
 		8E11636726BEDA630065E04C /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636326BEDA630065E04C /* tinyxmlerror.cpp */; };
 		8E11636826BEDA630065E04C /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636426BEDA630065E04C /* tinyxml.cpp */; };
 		8E11637026BF08840065E04C /* cgltf_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636F26BF08840065E04C /* cgltf_write.c */; };
+		8E11637526C1D4620065E04C /* MeshLoaderGLTF2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11637426C1D4620065E04C /* MeshLoaderGLTF2.cpp */; };
 		8E11637A26C1FDD40065E04C /* FileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11637926C1FDD40065E04C /* FileReader.cpp */; };
 		8E3A72852611363F0086F8ED /* Script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A72832611363F0086F8ED /* Script.cpp */; };
 		8E815948260C1127001CBF63 /* GLSLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E815947260C1127001CBF63 /* GLSLProgram.cpp */; };
@@ -263,6 +264,8 @@
 		8E11636D26BF06AE0065E04C /* cgltf_write.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cgltf_write.h; sourceTree = "<group>"; };
 		8E11636E26BF06AE0065E04C /* cgltf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cgltf.h; sourceTree = "<group>"; };
 		8E11636F26BF08840065E04C /* cgltf_write.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cgltf_write.c; sourceTree = "<group>"; };
+		8E11637326C1D1930065E04C /* MeshLoaderGLTF2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeshLoaderGLTF2.h; sourceTree = "<group>"; };
+		8E11637426C1D4620065E04C /* MeshLoaderGLTF2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MeshLoaderGLTF2.cpp; sourceTree = "<group>"; };
 		8E11637826C1FD520065E04C /* FileReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileReader.h; sourceTree = "<group>"; };
 		8E11637926C1FDD40065E04C /* FileReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileReader.cpp; sourceTree = "<group>"; };
 		8E3A72832611363F0086F8ED /* Script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Script.cpp; path = sources/script/Script.cpp; sourceTree = SOURCE_ROOT; };
@@ -898,6 +901,8 @@
 				DB27F06E0ACB9AB90054ACA3 /* MeshLoaderCollada.h */,
 				DBF849950AC76D5800BB15CD /* MeshLoaderColladaHelpers.cpp */,
 				DBCEE6250B4B35D50088A7E3 /* MeshLoaderColladaLoader.cpp */,
+				8E11637426C1D4620065E04C /* MeshLoaderGLTF2.cpp */,
+				8E11637326C1D1930065E04C /* MeshLoaderGLTF2.h */,
 				DBF849970AC76D5800BB15CD /* MeshLoaderMSH.cpp */,
 				DB27F0700ACB9AB90054ACA3 /* MeshLoaderMSH.h */,
 			);
@@ -1476,6 +1481,7 @@
 				DBF84AAC0AC76F1E00BB15CD /* AINodeContainer.cpp in Sources */,
 				DBF84AAD0AC76F1E00BB15CD /* AINodeGenerator.cpp in Sources */,
 				DBF84AAE0AC76F1E00BB15CD /* Animation.cpp in Sources */,
+				8E11637526C1D4620065E04C /* MeshLoaderGLTF2.cpp in Sources */,
 				DBF84AAF0AC76F1E00BB15CD /* AnimationManager.cpp in Sources */,
 				DBF84AB00AC76F1E00BB15CD /* AnimationState.cpp in Sources */,
 				DBF84AB10AC76F1E00BB15CD /* AnimationTrack.cpp in Sources */,
