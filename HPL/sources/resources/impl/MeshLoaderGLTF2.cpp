@@ -28,6 +28,8 @@ namespace hpl {
 	cMesh* cMeshLoaderGLTF2::LoadMesh(const tString& asFile, tMeshLoadFlag aFlags) {
 		cMesh* pMesh = hplNew( cMesh, (cString::GetFileName(asFile), mpMaterialManager, mpAnimationManager) );
 
+		/////////////////////////////////////////////////
+		// LOAD THE DOCUMENT
 		cgltf_options readOptions {};
 		cgltf_data *model = nullptr;
 		auto loadResult = cgltf_parse_file(&readOptions, asFile.c_str(), &model);
@@ -51,25 +53,75 @@ namespace hpl {
 			memcpy(bufferData, model->buffers->data, bufferSize);
 			Log("gltf2: loaded buffer data glb file");
 		}
-		/*
-		// determine vertexbuffer attributes present in mesh
-		auto curMesh = model->meshes;
-		tVertexFlag vtxFlags = 0;
-		for (size_t x = 0; x < model->meshes_count; ++x) {
-			if(curMesh->primitives->) vtxFlags |= eVertexFlag_Normal;
-			if(pVtxElem->FirstChild("Position")) vtxFlags |= eVertexFlag_Position;
-			if(pVtxElem->FirstChild("Texture")) vtxFlags |= eVertexFlag_Texture0;
-			if(pVtxElem->FirstChild("Color")) vtxFlags |= eVertexFlag_Color0;
-			if(pVtxElem->FirstChild("Tangent")) vtxFlags |= eVertexFlag_Texture1;
-			++curAccessor;
-		}
-*/
-		/*
+
 		/////////////////////////////////////////////////
 		// LOAD SUBMESHES
 
 		//Iterate through the sub meshes
 		
+		auto curMesh = model->meshes;
+		auto curPrim = curMesh->primitives;
+		tString meshName = curMesh->name;
+		if (meshName.length() == 0) {
+			meshName = "mesh";
+		}
+
+		for (size_t primIx = 0; primIx < curMesh->primitives_count; ++primIx) {
+			//////////////////
+			//Create sub mesh
+			cSubMesh *pSubMesh = pMesh->CreateSubMesh(meshName + "_" + std::to_string(primIx));
+
+			//////////////////
+			//Set material
+			iMaterial *pMaterial = mpMaterialManager->CreateMaterial(curPrim->material->name);
+			pSubMesh->SetMaterial(pMaterial);
+
+			////////////////////
+			//Get the vertices
+			tVertexFlag vtxFlags = 0;
+			int lVtxSize = static_cast<int>(curPrim->attributes->data->count);
+
+			//Check what type of vertices are included.
+			auto curAttr = curPrim->attributes;
+			for (size_t attrIx = 0; attrIx < curPrim->attributes_count; ++attrIx) {
+				if (curAttr->type == cgltf_attribute_type_normal) vtxFlags |= eVertexFlag_Normal;
+				if (curAttr->type == cgltf_attribute_type_position) vtxFlags |= eVertexFlag_Position;
+				if (curAttr->type == cgltf_attribute_type_texcoord) vtxFlags |= eVertexFlag_Texture0;
+				if (curAttr->type == cgltf_attribute_type_color) vtxFlags |= eVertexFlag_Color0;
+				if (curAttr->type == cgltf_attribute_type_tangent) vtxFlags |= eVertexFlag_Texture1;
+				curAttr++;
+			}
+
+			//Create the vertex buffer
+			iVertexBuffer* pVtxBuff = mpLowLevelGraphics->CreateVertexBuffer(vtxFlags,
+							eVertexBufferDrawType_Tri,
+							eVertexBufferUsageType_Static,
+							0, 0);
+
+			pVtxBuff->SetTangents((vtxFlags & eVertexFlag_Texture1) != 0);
+
+			//Fill the arrays
+			for (int i = 0; i < klNumOfVertexFlags; i++) {
+				if (kvVertexFlags[i] & vtxFlags) {
+					int lElemPerVtx = 3;
+					if (kvVertexFlags[i] & eVertexFlag_Texture1 || kvVertexFlags[i] & eVertexFlag_Color0) {
+						lElemPerVtx = 4;
+					}
+
+					TiXmlElement* pElem = pVtxElem->FirstChildElement(GetVertexName(kvVertexFlags[i]));
+
+					pVtxBuff->ResizeArray(kvVertexFlags[i], lVtxSize * lElemPerVtx);
+					float *pArray = pVtxBuff->GetArray(kvVertexFlags[i]);
+
+					FillVtxArray(pArray, pElem->Attribute("data"), lVtxSize * lElemPerVtx);
+				}
+			}
+
+
+			++curPrim;
+		}
+
+		/*
 		TiXmlElement* pSubMeshElem = pSubMeshesRootElem->FirstChildElement();
 		while(pSubMeshElem)
 		{
