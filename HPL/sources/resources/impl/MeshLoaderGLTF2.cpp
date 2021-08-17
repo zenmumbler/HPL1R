@@ -108,12 +108,14 @@ namespace hpl {
 						lElemPerVtx = 4;
 					}
 
+					/*
 					TiXmlElement* pElem = pVtxElem->FirstChildElement(GetVertexName(kvVertexFlags[i]));
 
 					pVtxBuff->ResizeArray(kvVertexFlags[i], lVtxSize * lElemPerVtx);
 					float *pArray = pVtxBuff->GetArray(kvVertexFlags[i]);
 
 					FillVtxArray(pArray, pElem->Attribute("data"), lVtxSize * lElemPerVtx);
+					*/
 				}
 			}
 
@@ -211,7 +213,7 @@ namespace hpl {
 
 		*/
 
-		hplDelete(bufferData);
+		hplDeleteArray(bufferData);
 		cgltf_free(model);
 
 		return pMesh;
