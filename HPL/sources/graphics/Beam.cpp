@@ -28,7 +28,7 @@
 #include "graphics/Material.h"
 #include "graphics/Graphics.h"
 #include "graphics/LowLevelGraphics.h"
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 #include "scene/World3D.h"
 #include "scene/Scene.h"
 #include "math/Math.h"
@@ -221,7 +221,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cBeam::UpdateGraphics(cCamera3D *apCamera,float afFrameTime, cRenderList *apRenderList)
+	void cBeam::UpdateGraphics(cCamera *apCamera,float afFrameTime, cRenderList *apRenderList)
 	{
 		if(	mlStartTransformCount == GetTransformUpdateCount() &&
 			mlEndTransformCount == GetTransformUpdateCount())
@@ -293,7 +293,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMatrixf* cBeam::GetModelMatrix(cCamera3D *apCamera)
+	cMatrixf* cBeam::GetModelMatrix(cCamera *apCamera)
 	{
 		if(apCamera==NULL)return &GetWorldMatrix();
 

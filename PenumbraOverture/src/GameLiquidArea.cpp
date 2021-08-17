@@ -142,7 +142,7 @@ void cGameLiquidArea::Update(float afTimeStep)
 	iPhysicsBody *pAreaBody = mvBodies[0];
 	cWorld3D *pWorld = mpInit->mpGame->GetScene()->GetWorld3D();
 	iPhysicsWorld *pPhysicsWorld = pWorld->GetPhysicsWorld();
-	cCamera3D *pCam = mpInit->mpPlayer->GetCamera();
+	auto pCam = mpInit->mpPlayer->GetCamera();
 	float fSurfaceY =	mvBodies[0]->GetWorldPosition().y + 
 						mvBodies[0]->GetShape()->GetSize().y /2;
 	

@@ -208,7 +208,7 @@ void cHapticGameCamera::OnPostSceneDraw()
 	if(mbActive==false) return;
 	if(mpHandEntity->IsVisible()==false) return;
 
-	cCamera3D *pCam = static_cast<cCamera3D*>(mpScene->GetCamera());
+	auto pCam = mpScene->GetCamera();
 	iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
 	eCrossHairState crossHairState = mpPlayer->GetCrossHairState();
 
@@ -318,7 +318,7 @@ void cHapticGameCamera::SetActionModeCameraSpeed(float afSpeed)
 
 void cHapticGameCamera::UpdateCameraOrientation(float afTimeStep)
 {
-	cCamera3D *pCamera = static_cast<cCamera3D*>(mpScene->GetCamera());
+	auto pCamera = mpScene->GetCamera();
 	cVector3f vLocalPoxy = cMath::MatrixMul(pCamera->GetViewMatrix(), 
 											mpLowLevelHaptic->GetProxyPosition());
 	//Log("Local %s\n",vLocalPoxy.ToString().c_str());

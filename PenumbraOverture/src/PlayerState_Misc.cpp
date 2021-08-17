@@ -817,7 +817,7 @@ void cPlayerState_Climb::LeaveState(iPlayerState* apNextState)
 void cPlayerState_Climb::OnUpdate(float afTimeStep)
 {
 	iCharacterBody *pCharBody = mpPlayer->GetCharacterBody();
-	cCamera3D *pCam = mpPlayer->GetCamera();
+	auto pCam = mpPlayer->GetCamera();
 
 	//////////////////////////////////
 	// Attach To Ladder

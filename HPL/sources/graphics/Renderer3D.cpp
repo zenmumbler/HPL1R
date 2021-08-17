@@ -27,7 +27,7 @@
 #include "resources/TextureManager.h"
 #include "graphics/VertexBuffer.h"
 #include "graphics/MeshCreator.h"
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 #include "scene/Entity3D.h"
 #include "graphics/RenderList.h"
 #include "graphics/Renderable.h"
@@ -332,7 +332,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 
-	void cRenderer3D::UpdateRenderList(cWorld3D* apWorld, cCamera3D* apCamera, float afFrameTime)
+	void cRenderer3D::UpdateRenderList(cWorld3D* apWorld, cCamera *apCamera, float afFrameTime)
 	{
 		//Clear all objects to be rendereded
 		mpRenderList->Clear();
@@ -364,7 +364,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::RenderWorld(cWorld3D* apWorld, cCamera3D* apCamera, float afFrameTime)
+	void cRenderer3D::RenderWorld(cWorld3D* apWorld, cCamera *apCamera, float afFrameTime)
 	{
 		mfRenderTime += afFrameTime;
 
@@ -553,7 +553,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::BeginRendering(cCamera3D* apCamera)
+	void cRenderer3D::BeginRendering(cCamera *apCamera)
 	{
 		//////////////////////////////////////////////////
 		/////Setup for clearing the screen
@@ -594,7 +594,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::RenderFog(cCamera3D *apCamera)
+	void cRenderer3D::RenderFog(cCamera *apCamera)
 	{
 		if(mRenderSettings.mbFogActive==false || mpSolidFogVtxProgram==NULL) return;
 		int i;
@@ -679,7 +679,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::RenderSkyBox(cCamera3D *apCamera)
+	void cRenderer3D::RenderSkyBox(cCamera *apCamera)
 	{
 		if(mbSkyBoxActive==false) return;
 
@@ -743,7 +743,7 @@ namespace hpl {
 	}
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::RenderZ(cCamera3D *apCamera)
+	void cRenderer3D::RenderZ(cCamera *apCamera)
 	{
 		cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Normal,
 														eMaterialRenderType_Z, 0);
@@ -754,7 +754,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::RenderOcclusionQueries(cCamera3D *apCamera)
+	void cRenderer3D::RenderOcclusionQueries(cCamera *apCamera)
 	{
 		//////////////////////////////////////////////////
 		// Reset any vertex buffers,fragment or vertex programs.
@@ -862,7 +862,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::RenderLight(cCamera3D *apCamera)
+	void cRenderer3D::RenderLight(cCamera *apCamera)
 	{
 		if(mDebugFlags & eRendererDebugFlag_DisableLighting) return;
 
@@ -898,7 +898,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::RenderDiffuse(cCamera3D *apCamera)
+	void cRenderer3D::RenderDiffuse(cCamera *apCamera)
 	{
 		cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Normal,
 														eMaterialRenderType_Diffuse, 0);
@@ -908,7 +908,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	/*void cRenderer3D::RenderTrans(cCamera3D *apCamera)
+	/*void cRenderer3D::RenderTrans(cCamera *apCamera)
 	{
 		cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Trans,
 														eMaterialRenderType_Diffuse, 0);
@@ -917,7 +917,7 @@ namespace hpl {
 	}*/
 
 
-	void cRenderer3D::RenderTrans(cCamera3D *apCamera)
+	void cRenderer3D::RenderTrans(cCamera *apCamera)
 	{
 		mpLowLevelGraphics->SetColorWriteActive(true, true, true, true);
 		mpLowLevelGraphics->SetDepthWriteActive(false);
@@ -1461,7 +1461,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::RenderDebug(cCamera3D *apCamera)
+	void cRenderer3D::RenderDebug(cCamera *apCamera)
 	{
 		if(mDebugFlags)
 		{
@@ -1504,7 +1504,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::RenderDebugObject(cCamera3D *apCamera,iRenderable* &apObject, iMaterial* apPrevMat,
+	void cRenderer3D::RenderDebugObject(cCamera *apCamera,iRenderable* &apObject, iMaterial* apPrevMat,
 		int alPrevMatId,iVertexBuffer* apPrevVtxBuff,
 		eMaterialRenderType aRenderType, iLight3D* apLight)
 	{
@@ -1560,7 +1560,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::RenderPhysicsDebug(cWorld3D *apWorld, cCamera3D *apCamera) {
+	void cRenderer3D::RenderPhysicsDebug(cWorld3D *apWorld, cCamera *apCamera) {
 		if ((mDebugFlags & eRendererDebugFlag_DrawPhysicsBox) == 0)
 		{
 			return;

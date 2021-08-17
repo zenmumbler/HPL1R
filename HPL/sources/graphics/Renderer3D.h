@@ -43,7 +43,7 @@ namespace hpl {
 	class iLowLevelGraphics;
 	class iLowLevelResources;
 	class iTexture;
-	class cCamera3D;
+	class cCamera;
 	class cWorld3D;
 	class iVertexBuffer;
 	class cMeshCreator;
@@ -84,7 +84,7 @@ namespace hpl {
 
 		//Setting that changes
 		iLight3D* mpLight;
-		cCamera3D* mpCamera;
+		cCamera *mpCamera;
 		cFrustum* mpFrustum;
 
 		cSector *mpSector;
@@ -137,9 +137,9 @@ namespace hpl {
 						cMeshCreator* apMeshCreator, cRenderList *apRenderList);
 		~cRenderer3D();
 
-		void UpdateRenderList(cWorld3D* apWorld, cCamera3D* apCamera, float afFrameTime);
+		void UpdateRenderList(cWorld3D* apWorld, cCamera *apCamera, float afFrameTime);
 
-		void RenderWorld(cWorld3D* apWorld, cCamera3D* apCamera, float afFrameTime);
+		void RenderWorld(cWorld3D* apWorld, cCamera *apCamera, float afFrameTime);
 
 		void SetSkyBox(iTexture *apTexture, bool abAutoDestroy);
 		void SetSkyBoxActive(bool abX);
@@ -191,32 +191,32 @@ namespace hpl {
 		void FetchOcclusionQueries();
 
 	private:
-		inline void BeginRendering(cCamera3D* apCamera);
+		inline void BeginRendering(cCamera *apCamera);
 
 		void InitSkyBox();
 
 		//Render steps
-		void RenderFog(cCamera3D *apCamera);
+		void RenderFog(cCamera *apCamera);
 
-		void RenderSkyBox(cCamera3D *apCamera);
+		void RenderSkyBox(cCamera *apCamera);
 
-		void RenderZ(cCamera3D *apCamera);
+		void RenderZ(cCamera *apCamera);
 
-		void RenderOcclusionQueries(cCamera3D *apCamera);
+		void RenderOcclusionQueries(cCamera *apCamera);
 
-		void RenderLight(cCamera3D *apCamera);
+		void RenderLight(cCamera *apCamera);
 
-		void RenderDiffuse(cCamera3D *apCamera);
+		void RenderDiffuse(cCamera *apCamera);
 
-		void RenderTrans(cCamera3D *apCamera);
+		void RenderTrans(cCamera *apCamera);
 
-		void RenderDebug(cCamera3D *apCamera);
+		void RenderDebug(cCamera *apCamera);
 
-		void RenderDebugObject(cCamera3D *apCamera,iRenderable* &apObject, iMaterial* apPrevMat,
+		void RenderDebugObject(cCamera *apCamera,iRenderable* &apObject, iMaterial* apPrevMat,
 					int alPrevMatId,iVertexBuffer* apPrevVtxBuff,
 					eMaterialRenderType aRenderType, iLight3D* apLight);
 		
-		void RenderPhysicsDebug(cWorld3D *apWorld, cCamera3D *apCamera);
+		void RenderPhysicsDebug(cWorld3D *apWorld, cCamera *apCamera);
 
 		iLowLevelGraphics *mpLowLevelGraphics;
 		iLowLevelResources *mpLowLevelResources;

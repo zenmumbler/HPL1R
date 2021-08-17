@@ -72,7 +72,7 @@ void cPlayerState_GrabHaptX::OnUpdate(float afTimeStep)
 {	
 	/////////////////////////////////
 	// Get needed varaibles
-	cCamera3D *pCamera = mpPlayer->GetCamera();
+	auto pCamera = mpPlayer->GetCamera();
 	iPhysicsWorld *pPhysicsWorld = mpInit->mpGame->GetScene()->GetWorld3D()->GetPhysicsWorld();
 	cInput *pInput = mpInit->mpGame->GetInput();
 
@@ -424,7 +424,7 @@ void cPlayerState_GrabHaptX::EnterState(iPlayerState* apPrevState)
 		}
 	}
 	
-	cCamera3D *pCamera = mpPlayer->GetCamera();
+	auto pCamera = mpPlayer->GetCamera();
 
 	/////////////////////////////////////////
 	//Make sure the player is not running
@@ -841,7 +841,7 @@ void cPlayerState_MoveHaptX::EnterState(iPlayerState* apPrevState)
 		}
 	}
 
-	cCamera3D *pCamera = mpPlayer->GetCamera();
+	auto pCamera = mpPlayer->GetCamera();
 
 	//Change move state so the player is still
 	mPrevMoveState = mpPlayer->GetMoveState();
@@ -995,7 +995,7 @@ void cPlayerState_PushHaptX::OnUpdate(float afTimeStep)
 {	
 	////////////////////////////////////
 	//Alignment
-	cCamera3D *pCamera = mpPlayer->GetCamera();
+	auto pCamera = mpPlayer->GetCamera();
 	cMatrixf mtxProxy = cMath::MatrixRotate(cVector3f(-pCamera->GetPitch(),-pCamera->GetYaw(),0),
 														eEulerRotationOrder_YXZ);
 
@@ -1218,7 +1218,7 @@ void cPlayerState_PushHaptX::EnterState(iPlayerState* apPrevState)
 		}
 	}
 
-	cCamera3D *pCamera = mpPlayer->GetCamera();
+	auto pCamera = mpPlayer->GetCamera();
 
 	mfMaxSpeed = mpPlayer->GetMaxPushSpeed();
 	if(mpPlayer->GetMoveState() == ePlayerMoveState_Crouch) mfMaxSpeed *= 0.5f;

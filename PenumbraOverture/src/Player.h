@@ -243,7 +243,7 @@ public:
 	float GetPower(){ return mfPower;}
 
 	iCharacterBody* GetCharacterBody(){ return mpCharBody;}
-	cCamera3D* GetCamera(){ return mpCamera;}
+	cCamera *GetCamera(){ return mpCamera;}
 	
 	cVector3f GetSize(){ return mvSize;}
 	float GetCrouchHeight(){ return mfCrouchHeight;}
@@ -392,7 +392,7 @@ private:
 
 	bool mbActive;
 
-    cCamera3D *mpCamera;
+    cCamera *mpCamera;
 	float mfLookSpeed;
 	float mfCameraHeightAdd;
 

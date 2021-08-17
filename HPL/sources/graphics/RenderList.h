@@ -33,7 +33,7 @@
 namespace hpl {
 
 	class iRenderable;
-	class cCamera3D;
+	class cCamera;
 	class cGraphics;
 
 	class iRenderState;
@@ -149,8 +149,8 @@ namespace hpl {
 		cRenderList(cGraphics *apGraphics);
 		~cRenderList();
 
-		void SetCamera(cCamera3D* apCamera){ mpCamera = apCamera;}
-		cCamera3D* GetCamera(){ return mpCamera;}
+		void SetCamera(cCamera *apCamera){ mpCamera = apCamera;}
+		cCamera *GetCamera(){ return mpCamera;}
 
 		bool Add(iRenderable* apObject);
 		void Clear();
@@ -216,7 +216,7 @@ namespace hpl {
 		cMemoryPool<iRenderState>* m_poolRenderState;
 		cMemoryPool<cRenderNode>* m_poolRenderNode;
 
-		cCamera3D* mpCamera;
+		cCamera *mpCamera;
 
 		cGraphics *mpGraphics;
 	};

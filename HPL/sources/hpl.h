@@ -100,7 +100,7 @@
 
 #include "scene/Scene.h"
 #include "scene/World3D.h"
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 #include "scene/RenderableContainer.h"
 #include "scene/MeshEntity.h"
 #include "scene/Light3DPoint.h"

@@ -95,7 +95,6 @@ namespace hpl {
 	class cTextureManager;
 	class cGpuProgramManager;
 	class iLight;
-	class iCamera;
 	class iLight3D;
 
 	//---------------------------------------------------

@@ -24,7 +24,7 @@
 #include "graphics/Renderer3D.h"
 #include "graphics/Mesh.h"
 #include "graphics/RenderList.h"
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 #include "math/Math.h"
 #include "scene/MeshEntity.h"
 #include "graphics/SubMesh.h"
@@ -479,7 +479,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMatrixf* iLight3D::GetModelMatrix(cCamera3D* apCamera)
+	cMatrixf* iLight3D::GetModelMatrix(cCamera *apCamera)
 	{
 		mtxTemp = GetWorldMatrix();
 		return &mtxTemp;

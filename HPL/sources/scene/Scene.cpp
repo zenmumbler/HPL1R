@@ -25,7 +25,7 @@
 #include "sound/Sound.h"
 #include "sound/LowLevelSound.h"
 #include "sound/SoundHandler.h"
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 #include "scene/World3D.h"
 #include "graphics/Renderer3D.h"
 #include "graphics/RendererPostEffects.h"
@@ -90,9 +90,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cCamera3D* cScene::CreateCamera3D(eCameraMoveMode aMoveMode)
+	cCamera *cScene::CreateCamera(eCameraMoveMode aMoveMode)
 	{
-		cCamera3D *pCamera = hplNew( cCamera3D, () );
+		auto pCamera = hplNew( cCamera, () );
 		pCamera->SetAspect(mpGraphics->GetLowLevel()->GetScreenSize().x /
 							mpGraphics->GetLowLevel()->GetScreenSize().y);
 
@@ -105,7 +105,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cScene::DestroyCamera(iCamera* apCam)
+	void cScene::DestroyCamera(cCamera* apCam)
 	{
 		for(tCameraListIt it=mlstCamera.begin(); it!=mlstCamera.end();it++)
 		{
@@ -118,7 +118,7 @@ namespace hpl {
 	}
 
 	//-----------------------------------------------------------------------
-	void cScene::SetCamera(iCamera* pCam)
+	void cScene::SetCamera(cCamera* pCam)
 	{
 		mpActiveCamera = pCam;
 	}
@@ -197,10 +197,8 @@ namespace hpl {
 	{
 		if(mbDrawScene && mpActiveCamera)
 		{
-			cCamera3D* pCamera3D = static_cast<cCamera3D*>(mpActiveCamera);
-
 			if(mpCurrentWorld3D)
-				mpGraphics->GetRenderer3D()->UpdateRenderList(mpCurrentWorld3D, pCamera3D,afFrameTime);
+				mpGraphics->GetRenderer3D()->UpdateRenderList(mpCurrentWorld3D, mpActiveCamera, afFrameTime);
 		}
 	}
 
@@ -218,12 +216,10 @@ namespace hpl {
 	{
 		if(mbDrawScene && mpActiveCamera)
 		{
-			cCamera3D* pCamera3D = static_cast<cCamera3D*>(mpActiveCamera);
-
 			if(mpCurrentWorld3D)
 			{
 				START_TIMING(RenderWorld)
-				mpGraphics->GetRenderer3D()->RenderWorld(mpCurrentWorld3D, pCamera3D,afFrameTime);
+				mpGraphics->GetRenderer3D()->RenderWorld(mpCurrentWorld3D, mpActiveCamera, afFrameTime);
 				STOP_TIMING(RenderWorld)
 			}
 
@@ -255,12 +251,11 @@ namespace hpl {
 
 		if(mbCameraIsListener)
 		{
-			cCamera3D* pCamera3D = static_cast<cCamera3D*>(mpActiveCamera);
 			mpSound->GetLowLevel()->SetListenerAttributes(
-					pCamera3D->GetPosition(),
+					mpActiveCamera->GetPosition(),
 					cVector3f(0,0,0),
-					pCamera3D->GetForward()*-1.0f,
-					pCamera3D->GetUp());
+					mpActiveCamera->GetForward()*-1.0f,
+					mpActiveCamera->GetUp());
 		}
 
 		if(mbUpdateMap && mpCurrentWorld3D)

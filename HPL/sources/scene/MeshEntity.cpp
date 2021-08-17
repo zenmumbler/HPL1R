@@ -1259,7 +1259,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cMeshEntity::UpdateGraphics(cCamera3D *apCamera,float afFrameTime, cRenderList *apRenderList)
+	void cMeshEntity::UpdateGraphics(cCamera *apCamera,float afFrameTime, cRenderList *apRenderList)
 	{
 		//Update the bone matrices
 		cSkeleton *pSkeleton = mpMesh->GetSkeleton();
@@ -1391,7 +1391,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMatrixf*  cMeshEntity::GetModelMatrix(cCamera3D *apCamera)
+	cMatrixf*  cMeshEntity::GetModelMatrix(cCamera *apCamera)
 	{
 		mtxTemp = GetWorldMatrix();
 		return &mtxTemp;

@@ -492,7 +492,7 @@ void cPlayerState_WeaponMelee::EnterState(iPlayerState* apPrevState)
 	}
 
 	//Load the data	
-	cCamera3D *pCamera = mpPlayer->GetCamera();
+	auto pCamera = mpPlayer->GetCamera();
 	cWorld3D *pWorld = mpInit->mpGame->GetScene()->GetWorld3D();
 	cResources *pResources = mpInit->mpGame->GetResources();
 
@@ -618,7 +618,7 @@ void OnUpdate(float afTimeStep)
 //Quick fix but works, the OnLeave of the previous states sets an old cross hair state.
 mpPlayer->SetCrossHairState(eCrossHairState_None);
 
-cCamera3D *pCamera = mpPlayer->GetCamera();
+auto pCamera = mpPlayer->GetCamera();
 
 cMatrixf mtxInv = cMath::MatrixInverse(pCamera->GetViewMatrix());
 mpMeshEntity->SetMatrix(cMath::MatrixMul(mtxInv,m_mtxOffset));
@@ -720,7 +720,7 @@ mpPlayer->ChangeState(ePlayerState_Normal);
 }
 
 //Load the data	
-cCamera3D *pCamera = mpPlayer->GetCamera();
+auto pCamera = mpPlayer->GetCamera();
 cWorld3D *pWorld = mpInit->mpGame->GetScene()->GetWorld3D();
 cResources *pResources = mpInit->mpGame->GetResources();
 

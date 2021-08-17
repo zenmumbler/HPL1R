@@ -427,7 +427,7 @@ void cGameEnemyState_Worm_Hunt::OnDraw()
 
 void cGameEnemyState_Worm_Hunt::OnPostSceneDraw()
 {
-	cCamera3D *pCamera = static_cast<cCamera3D*>(mpInit->mpGame->GetScene()->GetCamera());
+	auto pCamera = mpInit->mpGame->GetScene()->GetCamera();
 
 	cVector3f vPos =	mpMover->GetCharBody()->GetPosition() +
 		mpMover->GetCharBody()->GetForward() * 

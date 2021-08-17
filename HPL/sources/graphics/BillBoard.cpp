@@ -29,7 +29,7 @@
 #include "graphics/Graphics.h"
 #include "graphics/MeshCreator.h"
 #include "graphics/LowLevelGraphics.h"
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 #include "scene/World3D.h"
 #include "scene/Scene.h"
 #include "math/Math.h"
@@ -254,7 +254,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cBillboard::UpdateGraphics(cCamera3D *apCamera,float afFrameTime, cRenderList *apRenderList)
+	void cBillboard::UpdateGraphics(cCamera *apCamera,float afFrameTime, cRenderList *apRenderList)
 	{
 		if(mbIsHalo==false) return;
 
@@ -317,7 +317,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMatrixf* cBillboard::GetModelMatrix(cCamera3D *apCamera)
+	cMatrixf* cBillboard::GetModelMatrix(cCamera *apCamera)
 	{
 		if(apCamera==NULL)return &GetWorldMatrix();
 

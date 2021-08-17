@@ -27,7 +27,7 @@ namespace hpl {
 	class iPhysicsWorld;
 	class iCollideShape;
 	class iPhysicsBody;
-	class cCamera3D;
+	class cCamera;
 	class iCharacterBody;
 	class iEntity3D;
 
@@ -250,8 +250,8 @@ namespace hpl {
 
 		///////////////////////////////////////
 		//Other
-		void SetCamera(cCamera3D *apCam);
-		cCamera3D* GetCamera();
+		void SetCamera(cCamera *apCam);
+		cCamera *GetCamera();
 		void SetCameraPosAdd(const cVector3f &avAdd);
 		cVector3f GetCameraPosAdd();
 		void SetCameraSmoothPosNum(int alNum){ mlCameraSmoothPosNum = alNum;}
@@ -372,7 +372,7 @@ namespace hpl {
 
 		cMatrixf m_mtxMove;
 
-		cCamera3D *mpCamera;
+		cCamera *mpCamera;
 		cVector3f mvCameraPosAdd;
 		int mlCameraSmoothPosNum;
 		tVector3fList mlstCameraPos;

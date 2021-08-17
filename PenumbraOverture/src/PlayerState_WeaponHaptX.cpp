@@ -504,7 +504,7 @@ void cPlayerState_WeaponMeleeHaptX::OnUpdate(float afTimeStep)
 	///////////////////////////////////////////////
 	// Check of collsion with any body and add force if there is.
 	// this so weapon does not go into objects.
-	cCamera3D *pCamera = mpInit->mpPlayer->GetCamera(); 
+	auto pCamera = mpInit->mpPlayer->GetCamera(); 
 	iPhysicsWorld *pPhysicsWorld = mpInit->mpGame->GetScene()->GetWorld3D()->GetPhysicsWorld();
 
 	cMatrixf mtxProxy = cMath::MatrixRotate(cVector3f(-pCamera->GetPitch(),-pCamera->GetYaw(),
@@ -612,7 +612,7 @@ void cPlayerState_WeaponMeleeHaptX::OnPostSceneDraw()
 	//Comment out this to see debug info!
 	return;	
 
-    cCamera3D *pCamera = static_cast<cCamera3D*>(mpInit->mpGame->GetScene()->GetCamera());
+    auto pCamera = mpInit->mpGame->GetScene()->GetCamera();
 	
 	mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawLine(mvPushBackPos,mvPushBackPos+mvPushBackVec,cColor(1,1));
 
@@ -861,7 +861,7 @@ bool cPlayerState_WeaponMeleeHaptX::CheckAttack(const cMatrixf& a_mtxTransform, 
 
 	int lStrength = pAttack->mlAttackStrength;
 
-	cCamera3D *pCamera = mpInit->mpPlayer->GetCamera(); 
+	auto pCamera = mpInit->mpPlayer->GetCamera(); 
 
 	cBoundingVolume tempBV = mpCollider->GetBoundingVolume();
 	tempBV.SetTransform(cMath::MatrixMul(a_mtxTransform, tempBV.GetTransform()));
@@ -1050,7 +1050,7 @@ void cPlayerState_WeaponMeleeHaptX::HitBody(iPhysicsBody *apBody, float afMinImp
 
 	if(pEntity && pEntity->GetType() == eGameEntityType_Enemy) return;
 
-	cCamera3D *pCamera =mpInit->mpPlayer->GetCamera(); 
+	auto pCamera =mpInit->mpPlayer->GetCamera(); 
 
 	cVector3f vSpinMul = cVector3f(0,1,0);
 	vSpinMul =	pCamera->GetRight() * vSpinMul.x +

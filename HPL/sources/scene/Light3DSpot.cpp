@@ -25,7 +25,7 @@
 #include "resources/Resources.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/Renderer3D.h"
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 
 #include "scene/World3D.h"
 #include "scene/Scene.h"

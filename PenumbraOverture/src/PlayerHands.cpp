@@ -267,7 +267,7 @@ void cPlayerHands::Update(float afTimeStep)
 	
 	///////////////////////////////////
 	//Get the camera properties
-	cCamera3D *pCam = mpInit->mpPlayer->GetCamera();
+	auto pCam = mpInit->mpPlayer->GetCamera();
 	
 	cVector3f vRot = cVector3f(pCam->GetPitch(), pCam->GetYaw(),pCam->GetRoll());
 	cMatrixf mtxSmoothCam = 	cMath::MatrixRotate(vRot * -1.0f, eEulerRotationOrder_YXZ);
@@ -638,7 +638,7 @@ void cPlayerHands::UpdatePrevPostions()
 {
 	///////////////////////////////////
 	//Get current position
-	cCamera3D *pCam = mpInit->mpPlayer->GetCamera();
+	auto pCam = mpInit->mpPlayer->GetCamera();
 	cVector3f vCamRotation(pCam->GetPitch(),pCam->GetYaw(),0);
 	cVector3f vCamPosition = pCam->GetPosition();
 	

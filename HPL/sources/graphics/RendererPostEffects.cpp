@@ -392,7 +392,7 @@ namespace hpl {
 
 		//////////////////////////////
 		// Setup
-		cCamera3D *pCam = mpRenderList->GetCamera();
+		auto pCam = mpRenderList->GetCamera();
 
 
 		iTexture *pScreenTexture = mpScreenBuffer[mImageTrailData.mlCurrentBuffer==0?1:0];
@@ -531,7 +531,7 @@ namespace hpl {
 		mpLowLevelGraphics->SetDepthTestActive(true);
 		mpLowLevelGraphics->SetBlendActive(false);
 
-		cCamera3D *pCam = mpRenderList->GetCamera();
+		auto pCam = mpRenderList->GetCamera();
 		if(mbMotionBlurFirstTime)
 		{
 			pCam->SetPrevView(pCam->GetViewMatrix());

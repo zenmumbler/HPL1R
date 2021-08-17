@@ -20,7 +20,7 @@
 
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/Renderer3D.h"
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 #include "math/Math.h"
 
 #include "scene/World3D.h"

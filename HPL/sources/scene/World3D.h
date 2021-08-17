@@ -42,8 +42,7 @@ namespace hpl {
 	class cAI;
 	class cHaptic;
 
-	class iCamera;
-	class cCamera3D;
+	class cCamera;
 	class cNode3D;
 	class cLight3DSpot;
 	class cLight3DPoint;

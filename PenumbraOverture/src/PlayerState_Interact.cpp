@@ -61,7 +61,7 @@ cPlayerState_Grab::cPlayerState_Grab(cInit *apInit,cPlayer *apPlayer) : iPlayerS
 
 void cPlayerState_Grab::OnUpdate(float afTimeStep)
 {	
-	cCamera3D *pCamera = mpPlayer->GetCamera();
+	auto pCamera = mpPlayer->GetCamera();
 	iPhysicsWorld *pPhysicsWorld = mpInit->mpGame->GetScene()->GetWorld3D()->GetPhysicsWorld();
 
 	cInput *pInput = mpInit->mpGame->GetInput();
@@ -378,7 +378,7 @@ void cPlayerState_Grab::EnterState(iPlayerState* apPrevState)
 		}
 	}
 	
-	cCamera3D *pCamera = mpPlayer->GetCamera();
+	auto pCamera = mpPlayer->GetCamera();
 
 	//Make sure the player is not running
 	if(mpPlayer->GetMoveState() == ePlayerMoveState_Run || mPrevMoveState == ePlayerMoveState_Jump)
@@ -740,7 +740,7 @@ void cPlayerState_Move::EnterState(iPlayerState* apPrevState)
 		}
 	}
 
-	cCamera3D *pCamera = mpPlayer->GetCamera();
+	auto pCamera = mpPlayer->GetCamera();
 
 	//Change move state so the player is still
 	mPrevMoveState = mpPlayer->GetMoveState();
@@ -1093,7 +1093,7 @@ void cPlayerState_Push::EnterState(iPlayerState* apPrevState)
 		}
 	}
 
-	cCamera3D *pCamera = mpPlayer->GetCamera();
+	auto pCamera = mpPlayer->GetCamera();
 
 	mfMaxSpeed = mpPlayer->GetMaxPushSpeed();
 	if(mpPlayer->GetMoveState() == ePlayerMoveState_Crouch) mfMaxSpeed *= 0.5f;

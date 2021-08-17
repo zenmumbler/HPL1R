@@ -249,7 +249,7 @@ void cGameItem::OnPlayerInteract()
 
 bool cGameItem::IsInView(float afMinDist)
 {
-	cCamera3D *pCam = mpInit->mpPlayer->GetCamera();
+	auto pCam = mpInit->mpPlayer->GetCamera();
 	
 	//Distance
 	float fDistSqr = cMath::Vector3DistSqr(	pCam->GetPosition(), 
@@ -373,7 +373,7 @@ void cGameItem::Update(float afTimeStep)
 void cGameItem::OnPostSceneDraw()
 {
 	/*iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
-	cCamera3D *pCam = mpInit->mpPlayer->GetCamera();
+	auto pCam = mpInit->mpPlayer->GetCamera();
 
 	
 	pLowGfx->SetDepthTestActive(true);

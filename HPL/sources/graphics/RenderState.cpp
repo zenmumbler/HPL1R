@@ -26,7 +26,7 @@
 #include "graphics/LowLevelGraphics.h"
 #include "scene/Light3D.h"
 #include "scene/Light3DSpot.h"
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 #include "scene/PortalContainer.h"
 #include "math/Math.h"
 

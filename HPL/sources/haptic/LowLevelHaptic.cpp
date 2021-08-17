@@ -25,7 +25,7 @@
 #include "system/LowLevelSystem.h"
 #include "system/SystemTypes.h"
 
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 #include "math/Math.h"
 #include "physics/PhysicsBody.h"
 #include "scene/SubMeshEntity.h"

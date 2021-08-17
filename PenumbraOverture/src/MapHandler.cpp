@@ -1115,7 +1115,7 @@ void cMapHandler::RenderItemEffect()
 	}
 	if(bFound==false) return;
 
-	cCamera3D *pCam = static_cast<cCamera3D*>(mpScene->GetCamera());
+	auto pCam = mpScene->GetCamera();
 	iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
 
 	pLowGfx->SetDepthTestActive(true);
@@ -1197,7 +1197,7 @@ void cMapHandler::OnPostSceneDraw()
 	RenderItemEffect();
 
 
-	cCamera3D *pCam = static_cast<cCamera3D*>(mpScene->GetCamera());
+	auto pCam = mpScene->GetCamera();
 	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetMatrix(eMatrix_ModelView, pCam->GetViewMatrix());
 
 	//mpScene->GetWorld3D()->GetPhysicsWorld()->RenderDebugGeometry(

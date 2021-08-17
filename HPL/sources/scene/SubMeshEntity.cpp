@@ -186,7 +186,7 @@ namespace hpl {
 
 	////////////////////////////////////////////////////////////
 
-	void cSubMeshEntity::UpdateGraphics(cCamera3D *apCamera, float afFrameTime, cRenderList *apRenderList)
+	void cSubMeshEntity::UpdateGraphics(cCamera *apCamera, float afFrameTime, cRenderList *apRenderList)
 	{
 		if(mpDynVtxBuffer)
 		{
@@ -385,7 +385,7 @@ namespace hpl {
 		}
 	}
 
-	cMatrixf* cSubMeshEntity::GetModelMatrix(cCamera3D* apCamera)
+	cMatrixf* cSubMeshEntity::GetModelMatrix(cCamera *apCamera)
 	{
 		if(mpMeshEntity->HasNodes())
 		{

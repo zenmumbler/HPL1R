@@ -29,7 +29,7 @@ namespace hpl {
 	class iHapticSurface;
 
 	class iVertexBuffer;
-	class cCamera3D;
+	class cCamera;
 	class cResources;
 	class iPhysicsBody;
 
@@ -60,8 +60,8 @@ namespace hpl {
 
 		virtual bool ShapeIsInContact(iHapticShape *apShape)=0;
 
-		void SetCamera(cCamera3D *apCamera){ mpCamera = apCamera;}
-		cCamera3D* GetCamera(){ return mpCamera;}
+		void SetCamera(cCamera *apCamera){ mpCamera = apCamera;}
+		cCamera* GetCamera(){ return mpCamera;}
 		void SetCameraOffset(const cVector3f &avOffset){ mvCameraOffset = avOffset;}
 		cVector3f GetCameraOffset(){ return mvCameraOffset; }
 
@@ -176,7 +176,7 @@ namespace hpl {
 
 		cResources *mpResources;
 
-		cCamera3D *mpCamera;
+		cCamera *mpCamera;
 		cVector3f mvCameraOffset;
 
 		tHapticSurfaceMap m_mapSurfaces;

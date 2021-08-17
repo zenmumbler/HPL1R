@@ -20,7 +20,7 @@
 #include "graphics/Renderable.h"
 #include "scene/MeshEntity.h"
 #include "graphics/Material.h"
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 #include "math/Math.h"
 #include "graphics/RenderState.h"
 #include "graphics/Renderer3D.h"

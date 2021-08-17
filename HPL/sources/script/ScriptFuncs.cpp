@@ -218,7 +218,7 @@ namespace hpl {
 																			1,cMatrixf::Identity);
 		if(pPS)
 		{
-			cCamera3D *pCam = static_cast<cCamera3D*>(gpScene->GetCamera());
+			auto pCam = gpScene->GetCamera();
 			pCam->AttachEntity(pPS);
 		}
 	}

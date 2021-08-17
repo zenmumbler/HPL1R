@@ -65,7 +65,7 @@
 		DBF84AB70AC76F1E00BB15CD /* Bone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849580AC76D5700BB15CD /* Bone.cpp */; };
 		DBF84AB80AC76F1E00BB15CD /* BoneState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849590AC76D5700BB15CD /* BoneState.cpp */; };
 		DBF84AB90AC76F1E00BB15CD /* BoundingVolume.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849BE0AC76D5800BB15CD /* BoundingVolume.cpp */; };
-		DBF84ABB0AC76F1E00BB15CD /* Camera3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849F00AC76D5800BB15CD /* Camera3D.cpp */; };
+		DBF84ABB0AC76F1E00BB15CD /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849F00AC76D5800BB15CD /* Camera.cpp */; };
 		DBF84ABC0AC76F1E00BB15CD /* CGProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849870AC76D5800BB15CD /* CGProgram.cpp */; };
 		DBF84ABD0AC76F1E00BB15CD /* CharacterBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849C70AC76D5800BB15CD /* CharacterBody.cpp */; };
 		DBF84ABE0AC76F1E00BB15CD /* CharacterBodyNewton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849880AC76D5800BB15CD /* CharacterBodyNewton.cpp */; };
@@ -442,7 +442,6 @@
 		DB27F0CE0ACB9AB90054ACA3 /* TextureManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TextureManager.h; sourceTree = "<group>"; };
 		DB27F0D10ACB9AB90054ACA3 /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AnimationState.h; sourceTree = "<group>"; };
 		DB27F0D30ACB9AB90054ACA3 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
-		DB27F0D50ACB9AB90054ACA3 /* Camera3D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Camera3D.h; sourceTree = "<group>"; };
 		DB27F0D60ACB9AB90054ACA3 /* ColliderEntity.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ColliderEntity.h; sourceTree = "<group>"; };
 		DB27F0D70ACB9AB90054ACA3 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		DB27F0D90ACB9AB90054ACA3 /* Entity3D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Entity3D.h; sourceTree = "<group>"; };
@@ -628,7 +627,7 @@
 		DBF849E90AC76D5800BB15CD /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
 		DBF849EA0AC76D5800BB15CD /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
 		DBF849ED0AC76D5800BB15CD /* AnimationState.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = AnimationState.cpp; sourceTree = "<group>"; };
-		DBF849F00AC76D5800BB15CD /* Camera3D.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Camera3D.cpp; sourceTree = "<group>"; };
+		DBF849F00AC76D5800BB15CD /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		DBF849F10AC76D5800BB15CD /* ColliderEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ColliderEntity.cpp; sourceTree = "<group>"; };
 		DBF849F20AC76D5800BB15CD /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		DBF849F40AC76D5800BB15CD /* Entity3D.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Entity3D.cpp; sourceTree = "<group>"; };
@@ -1303,8 +1302,7 @@
 				DBF849ED0AC76D5800BB15CD /* AnimationState.cpp */,
 				DB27F0D10ACB9AB90054ACA3 /* AnimationState.h */,
 				DB27F0D30ACB9AB90054ACA3 /* Camera.h */,
-				DBF849F00AC76D5800BB15CD /* Camera3D.cpp */,
-				DB27F0D50ACB9AB90054ACA3 /* Camera3D.h */,
+				DBF849F00AC76D5800BB15CD /* Camera.cpp */,
 				DBF849F10AC76D5800BB15CD /* ColliderEntity.cpp */,
 				DB27F0D60ACB9AB90054ACA3 /* ColliderEntity.h */,
 				DBF849F20AC76D5800BB15CD /* Entity.cpp */,
@@ -1491,7 +1489,7 @@
 				DBF84AB80AC76F1E00BB15CD /* BoneState.cpp in Sources */,
 				8E11635926BED8DC0065E04C /* stb_vorbis.c in Sources */,
 				DBF84AB90AC76F1E00BB15CD /* BoundingVolume.cpp in Sources */,
-				DBF84ABB0AC76F1E00BB15CD /* Camera3D.cpp in Sources */,
+				DBF84ABB0AC76F1E00BB15CD /* Camera.cpp in Sources */,
 				DBF84ABC0AC76F1E00BB15CD /* CGProgram.cpp in Sources */,
 				8E84E7892605487F00DC6065 /* LowLevelSoundOAL.cpp in Sources */,
 				8E84E79C260819F800DC6065 /* WAVFile.cpp in Sources */,

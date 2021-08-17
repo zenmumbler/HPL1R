@@ -444,7 +444,7 @@ void cHudModel_WeaponMelee::PostSceneDraw()
 {
 	if(mbDrawDebug==false) return;
 
-	cCamera3D *pCamera = static_cast<cCamera3D*>(mpInit->mpGame->GetScene()->GetCamera());
+	auto pCamera = mpInit->mpGame->GetScene()->GetCamera();
 	float fAttackRange = mvAttacks[mlCurrentAttack].mfAttackRange;	
 
 	cVector3f vPos = pCamera->GetPosition() + pCamera->GetForward()*fAttackRange;
@@ -530,7 +530,7 @@ void cHudModel_WeaponMelee::Attack()
 	float fMinMass = mvAttacks[mlCurrentAttack].mfMinMass;
 
 	
-	cCamera3D *pCamera =mpInit->mpPlayer->GetCamera(); 
+	auto pCamera =mpInit->mpPlayer->GetCamera(); 
 	cVector3f vCenter = pCamera->GetPosition() + pCamera->GetForward()*fDamageRange;
 
 	cBoundingVolume tempBV = mvAttacks[mlCurrentAttack].mBV;
@@ -790,7 +790,7 @@ void cHudModel_WeaponMelee::HitBody(iPhysicsBody *apBody)
 
 	if(pEntity && pEntity->GetType() == eGameEntityType_Enemy) return;
 	
-	cCamera3D *pCamera =mpInit->mpPlayer->GetCamera(); 
+	auto pCamera =mpInit->mpPlayer->GetCamera(); 
 
 	cVector3f vSpinMul = mvAttacks[mlCurrentAttack].mvSpinMul;
 	vSpinMul =	pCamera->GetRight() * vSpinMul.x +

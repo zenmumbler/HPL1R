@@ -63,7 +63,7 @@ cPlayer::cPlayer(cInit *apInit)  : iUpdateable("Player")
 	mpResources = apInit->mpGame->GetResources();
     
 	//Create and setup camera
-	mpCamera = mpScene->CreateCamera3D(eCameraMoveMode_Walk);
+	mpCamera = mpScene->CreateCamera(eCameraMoveMode_Walk);
 	mpScene->SetCamera(mpCamera);
 	
 	//Get Debug variables
@@ -1745,7 +1745,7 @@ void cPlayer::OnDraw()
 
 void cPlayer::OnPostSceneDraw()
 {
-	cCamera3D *pCam = static_cast<cCamera3D*>(mpScene->GetCamera());
+	auto pCam = mpScene->GetCamera();
 	iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
 	pLowGfx->SetMatrix(eMatrix_ModelView, pCam->GetViewMatrix());
 

@@ -195,13 +195,13 @@ namespace hpl {
 		void UpdateLogic(float afTimeStep);
 
 		//Renderable implementation.
-		void UpdateGraphics(cCamera3D *apCamera,float afFrameTime, cRenderList *apRenderList);
+		void UpdateGraphics(cCamera *apCamera,float afFrameTime, cRenderList *apRenderList);
 		void SetRendered(bool abX);
 		iMaterial *GetMaterial();
 		iVertexBuffer* GetVertexBuffer();
 		bool IsShadowCaster();
 		cBoundingVolume* GetBoundingVolume();
-		cMatrixf* GetModelMatrix(cCamera3D *apCamera);
+		cMatrixf* GetModelMatrix(cCamera *apCamera);
 		int GetMatrixUpdateCount();
 		eRenderableType GetRenderType();
 

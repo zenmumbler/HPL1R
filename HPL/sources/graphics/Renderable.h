@@ -33,7 +33,7 @@ namespace hpl {
 	class cFrustum;
 
 	class iLight3D;
-	class cCamera3D;
+	class cCamera;
 
 	class cRenderList;
 
@@ -81,11 +81,11 @@ namespace hpl {
 		virtual bool CollidesWithBV(cBoundingVolume *apBV);
 		virtual bool CollidesWithFrustum(cFrustum *apFrustum);
 
-		virtual cMatrixf* GetModelMatrix(cCamera3D *apCamera)=0;
+		virtual cMatrixf* GetModelMatrix(cCamera *apCamera)=0;
 
 		virtual eRenderableType GetRenderType()=0;
 
-		virtual void UpdateGraphics(cCamera3D *apCamera,float afFrameTime, cRenderList *apRenderList){}
+		virtual void UpdateGraphics(cCamera *apCamera,float afFrameTime, cRenderList *apRenderList){}
 
 		/**
 		 * Should return a different number each time the renderable model matrix is updated. never -1

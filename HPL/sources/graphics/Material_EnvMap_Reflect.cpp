@@ -25,7 +25,6 @@
 #include "graphics/GPUProgram.h"
 #include "math/Math.h"
 #include "system/LowLevelSystem.h"
-#include "scene/Camera3D.h"
 
 
 namespace hpl {

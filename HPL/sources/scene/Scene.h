@@ -25,7 +25,7 @@
 #include "script/ScriptVar.h"
 
 #include "game/Updateable.h"
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 
 #include "resources/MeshLoader.h"
 
@@ -38,11 +38,11 @@ namespace hpl {
 	class cSound;
 	class cPhysics;
 	class cHaptic;
-	class iCamera;
+	class cCamera;
 	class cUpdater;
 	class cWorld3D;
 
-	typedef std::list<iCamera*> tCameraList;
+	typedef std::list<cCamera*> tCameraList;
 	typedef tCameraList::iterator tCameraListIt;
 
 	typedef std::list<cWorld3D*> tWorld3DList;
@@ -85,16 +85,16 @@ namespace hpl {
 
 		///// CAMERA METHODS ////////////////////
 
-		cCamera3D* CreateCamera3D(eCameraMoveMode aMoveMode);
+		cCamera* CreateCamera(eCameraMoveMode aMoveMode);
 
-		void DestroyCamera(iCamera* apCam);
+		void DestroyCamera(cCamera* apCam);
 
 		/**
 		 * This sets the current camera
 		 * \param pCam
 		 */
-		void SetCamera(iCamera* pCam);
-		iCamera* GetCamera(){ return mpActiveCamera; }
+		void SetCamera(cCamera* pCam);
+		cCamera* GetCamera(){ return mpActiveCamera; }
 
 		void SetCameraIsListener(bool abX){ mbCameraIsListener = abX; }
 
@@ -130,7 +130,7 @@ namespace hpl {
 		cWorld3D* mpCurrentWorld3D;
 
 		tCameraList mlstCamera;
-		iCamera *mpActiveCamera;
+		cCamera *mpActiveCamera;
 		bool mbCameraIsListener;
 
 		tScriptVarMap m_mapLocalVars;

@@ -20,7 +20,7 @@
 #include "system/LowLevelSystem.h"
 #include "resources/Resources.h"
 #include "graphics/Graphics.h"
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 #include "math/Math.h"
 
 #include "game/Game.h"
@@ -194,7 +194,7 @@ namespace hpl {
 		apTex[2] = aPos.z;
 	}
 
-	void iParticleEmitter3D::UpdateGraphics(cCamera3D *apCamera,float afFrameTime, cRenderList *apRenderList)
+	void iParticleEmitter3D::UpdateGraphics(cCamera *apCamera,float afFrameTime, cRenderList *apRenderList)
 	{
 		if(apCamera==NULL) return;
 
@@ -559,7 +559,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMatrixf* iParticleEmitter3D::GetModelMatrix(cCamera3D *apCamera)
+	cMatrixf* iParticleEmitter3D::GetModelMatrix(cCamera *apCamera)
 	{
 		if(apCamera)
 		{

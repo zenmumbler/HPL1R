@@ -570,7 +570,7 @@ bool cInventoryItem::InitFromFile(const tString &asFile)
 void cInventoryItem::Drop()
 {
 	cWorld3D *pWorld = mpInit->mpGame->GetScene()->GetWorld3D();
-	cCamera3D *pCamera = mpInit->mpPlayer->GetCamera();
+	auto pCamera = mpInit->mpPlayer->GetCamera();
 
 	cMatrixf mtxItem = cMatrixf::Identity;
 	mtxItem.SetTranslation(pCamera->GetPosition());

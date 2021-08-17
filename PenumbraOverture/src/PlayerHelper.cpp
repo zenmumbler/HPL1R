@@ -949,7 +949,7 @@ void cPlayerLean::Update(float afTimeStep)
 
 		////////////////////
 		//Check collision
-		cCamera3D *pCam = mpInit->mpPlayer->GetCamera();
+		auto pCam = mpInit->mpPlayer->GetCamera();
 		iPhysicsWorld *pPhysicsWorld = mpInit->mpGame->GetScene()->GetWorld3D()->GetPhysicsWorld();
 		
 		float fReverseMov = fPrevMovement - mfMovement;
@@ -1355,7 +1355,7 @@ void cPlayerFlashLight::Update(float afTimeStep)
 		{
 			mfRayCastTime =0;
 			
-			cCamera3D *pCam = mpInit->mpPlayer->GetCamera();
+			auto pCam = mpInit->mpPlayer->GetCamera();
 			iPhysicsWorld *pPhysicsWorld = mpInit->mpGame->GetScene()->GetWorld3D()->GetPhysicsWorld();
 			
 			iHudModel *pHudModel = mpInit->mpPlayerHands->GetModel("Flashlight");
@@ -1802,7 +1802,7 @@ void cPlayerFlare::SetActive(bool abX)
 
 		///////////////////////////////
 		//Create entity
-		cCamera3D *pCam = mpInit->mpPlayer->GetCamera();
+		auto pCam = mpInit->mpPlayer->GetCamera();
 
 		cVector3f vRot = cVector3f(pCam->GetPitch(),pCam->GetYaw(), pCam->GetRoll());
 		cMatrixf mtxStart = cMath::MatrixRotate(vRot, eEulerRotationOrder_XYZ);
@@ -2047,7 +2047,7 @@ void cPlayerLookAt::Update(float afTimeStep)
 {
 	if(mbActive==false) return;
 	
-	cCamera3D *pCam = mpPlayer->GetCamera();
+	auto pCam = mpPlayer->GetCamera();
 	cVector3f vGoalAngle = cMath::GetAngleFromPoints3D(pCam->GetPosition(),mvTargetPos);
 	
 	//Get distance to goal
@@ -2560,7 +2560,7 @@ bool cPlayerHidden::HasLineOfSight(iLight3D *pLight,iPhysicsWorld *pPhysicsWorld
 
 void cPlayerHidden::UpdateEnemyTooClose(float afTimeStep)
 {
-	cCamera3D *pCam = mpInit->mpPlayer->GetCamera();
+	auto pCam = mpInit->mpPlayer->GetCamera();
 	cWorld3D *pWorld = mpInit->mpGame->GetScene()->GetWorld3D();
 	if(pWorld==NULL) return;
 

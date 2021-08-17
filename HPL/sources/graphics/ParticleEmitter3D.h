@@ -114,7 +114,7 @@ namespace hpl {
 		void SetVisible(bool abVisible){ SetRendered(abVisible); }
 
 		//Renderable implementation
-		void UpdateGraphics(cCamera3D *apCamera,float afFrameTime, cRenderList *apRenderList);
+		void UpdateGraphics(cCamera *apCamera,float afFrameTime, cRenderList *apRenderList);
 
 		iMaterial *GetMaterial();
 		iVertexBuffer* GetVertexBuffer();
@@ -123,7 +123,7 @@ namespace hpl {
 
 		cBoundingVolume* GetBoundingVolume();
 
-		cMatrixf* GetModelMatrix(cCamera3D *apCamera);
+		cMatrixf* GetModelMatrix(cCamera *apCamera);
 
 		int GetMatrixUpdateCount(){return GetTransformUpdateCount();}
 		eRenderableType GetRenderType(){ return eRenderableType_Normal;}

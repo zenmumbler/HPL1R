@@ -126,13 +126,13 @@ namespace hpl {
 		iMaterial *GetMaterial(){ return mpMaterial;}
 		iVertexBuffer* GetVertexBuffer(){return mpVtxBuffer;}
 
-		void UpdateGraphics(cCamera3D *apCamera,float afFrameTime, cRenderList *apRenderList);
+		void UpdateGraphics(cCamera *apCamera,float afFrameTime, cRenderList *apRenderList);
 
 		bool IsShadowCaster(){ return false;}
 
 		cBoundingVolume* GetBoundingVolume();
 
-		cMatrixf* GetModelMatrix(cCamera3D *apCamera);
+		cMatrixf* GetModelMatrix(cCamera *apCamera);
 
 		int GetMatrixUpdateCount();
 

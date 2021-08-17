@@ -22,7 +22,7 @@
 #include "physics/PhysicsWorld.h"
 #include "physics/PhysicsBody.h"
 #include "system/LowLevelSystem.h"
-#include "scene/Camera3D.h"
+#include "scene/Camera.h"
 #include "math/Math.h"
 
 #include "game/Game.h"
@@ -1046,12 +1046,12 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void iCharacterBody::SetCamera(cCamera3D *apCam)
+	void iCharacterBody::SetCamera(cCamera *apCam)
 	{
 		mpCamera = apCam;
 	}
 
-	cCamera3D* iCharacterBody::GetCamera()
+	cCamera *iCharacterBody::GetCamera()
 	{
 		return mpCamera;
 	}

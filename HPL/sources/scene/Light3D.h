@@ -47,7 +47,7 @@ namespace hpl {
 
 	class iLowLevelGraphics;
 	class cRenderSettings;
-	class cCamera3D;
+	class cCamera;
 	class cFrustum;
 	class iGpuProgram;
 	class iTexture;
@@ -161,7 +161,7 @@ namespace hpl {
 
 		int GetMatrixUpdateCount(){ return GetTransformUpdateCount();}
 
-		cMatrixf* GetModelMatrix(cCamera3D* apCamera);
+		cMatrixf* GetModelMatrix(cCamera *apCamera);
 
 		inline void RenderShadow(iRenderable *apObject,cRenderSettings *apRenderSettings,iLowLevelGraphics *apLowLevelGraphics);
 
