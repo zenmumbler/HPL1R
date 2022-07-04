@@ -47,135 +47,135 @@ namespace hpl {
 		cLowLevelGraphicsSDL();
 		~cLowLevelGraphicsSDL();
 
-		bool Init(	int alWidth, int alHeight, int alBpp, int abFullscreen, int alMultisampling,
-					const tString& asWindowCaption);
+		bool Init(int alWidth, int alHeight, int alBpp, int abFullscreen, int alMultisampling,
+					const tString& asWindowCaption) override;
 
-		int GetCaps(eGraphicCaps aType);
+		int GetCaps(eGraphicCaps aType) override;
 
-		void ShowCursor(bool abX);
+		void ShowCursor(bool abX) override;
 		void SetInputGrab(bool abX);
 
-		void SetVsyncActive(bool abX);
+		void SetVsyncActive(bool abX) override;
 
-		void SetGammaCorrection(float afX);
-		float GetGammaCorrection();
+		void SetGammaCorrection(float afX) override;
+		float GetGammaCorrection() override;
 
-		void SetMultisamplingActive(bool abX);
-		int GetMultisampling(){ return mlMultisampling;}
+		void SetMultisamplingActive(bool abX) override;
+		int GetMultisampling() override { return mlMultisampling;}
 
-		void SetClipPlane(int alIdx, const cPlanef& aPlane);
-		cPlanef GetClipPlane(int alIdx, const cPlanef& aPlane);
-		void SetClipPlaneActive(int alIdx, bool abX);
+		void SetClipPlane(int alIdx, const cPlanef& aPlane) override;
+		cPlanef GetClipPlane(int alIdx, const cPlanef& aPlane) override;
+		void SetClipPlaneActive(int alIdx, bool abX) override;
 
-		cVector2f GetScreenSize();
-		cVector2f GetVirtualSize();
-		void SetVirtualSize(cVector2f avSize);
+		cVector2f GetScreenSize() override;
+		cVector2f GetVirtualSize() override;
+		void SetVirtualSize(cVector2f avSize) override;
 
-		iBitmap2D* CreateBitmap2D(const cVector2l &avSize, unsigned int alBpp);
-		iFontData* CreateFontData(const tString &asName);
+		iBitmap2D* CreateBitmap2D(const cVector2l &avSize, unsigned int alBpp) override;
+		iFontData* CreateFontData(const tString &asName) override;
 
-		iTexture* CreateTexture(bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget);
-		iTexture* CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget);
-		iTexture* CreateTexture(iBitmap2D* apBmp,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget);
+		iTexture* CreateTexture(bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
+		iTexture* CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
+		iTexture* CreateTexture(iBitmap2D* apBmp,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
 		iTexture* CreateTexture(const cVector2l& avSize,int alBpp,cColor aFillCol,
-								bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget);
+								bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
 
-		iGpuProgram* CreateGpuProgram(const tString& asName, eGpuProgramType aType);
+		iGpuProgram* CreateGpuProgram(const tString& asName, eGpuProgramType aType) override;
 
-		void SaveScreenToBMP(const tString& asFile);
+		void SaveScreenToBMP(const tString& asFile) override;
 
 		/////////// MATRIX METHODS /////////////////////////
 
-		void PushMatrix(eMatrix aMtxType);
-		void PopMatrix(eMatrix aMtxType);
-		void SetIdentityMatrix(eMatrix aMtxType);
+		void PushMatrix(eMatrix aMtxType) override;
+		void PopMatrix(eMatrix aMtxType) override;
+		void SetIdentityMatrix(eMatrix aMtxType) override;
 
-		void SetMatrix(eMatrix aMtxType, const cMatrixf& a_mtxA);
+		void SetMatrix(eMatrix aMtxType, const cMatrixf& a_mtxA) override;
 
-		void TranslateMatrix(eMatrix aMtxType, const cVector3f &avPos);
-		void RotateMatrix(eMatrix aMtxType, const cVector3f &avRot);
-		void ScaleMatrix(eMatrix aMtxType, const cVector3f &avScale);
+		void TranslateMatrix(eMatrix aMtxType, const cVector3f &avPos) override;
+		void RotateMatrix(eMatrix aMtxType, const cVector3f &avRot) override;
+		void ScaleMatrix(eMatrix aMtxType, const cVector3f &avScale) override;
 
-		void SetOrthoProjection(const cVector2f& avSize, float afMin, float afMax);
+		void SetOrthoProjection(const cVector2f& avSize, float afMin, float afMax) override;
 
 		/////////// DRAWING METHODS /////////////////////////
 
 		// OCCLUSION
-		iOcclusionQuery* CreateOcclusionQuery();
-		void DestroyOcclusionQuery(iOcclusionQuery *apQuery);
+		iOcclusionQuery* CreateOcclusionQuery() override;
+		void DestroyOcclusionQuery(iOcclusionQuery *apQuery) override;
 
 		// CLEARING THE FRAMEBUFFER
-		void ClearScreen();
+		void ClearScreen() override;
 
-		void SetClearColor(const cColor& aCol);
-		void SetClearDepth(float afDepth);
-		void SetClearStencil(int alVal);
+		void SetClearColor(const cColor& aCol) override;
+		void SetClearDepth(float afDepth) override;
+		void SetClearStencil(int alVal) override;
 
-		void SetClearColorActive(bool abX);
-		void SetClearDepthActive(bool abX);
-		void SetClearStencilActive(bool abX);
+		void SetClearColorActive(bool abX) override;
+		void SetClearDepthActive(bool abX) override;
+		void SetClearStencilActive(bool abX) override;
 
-		void SetColorWriteActive(bool abR,bool abG,bool abB,bool abA);
-		void SetDepthWriteActive(bool abX);
+		void SetColorWriteActive(bool abR,bool abG,bool abB,bool abA) override;
+		void SetDepthWriteActive(bool abX) override;
 
-		void SetCullActive(bool abX);
-		void SetCullMode(eCullMode aMode);
+		void SetCullActive(bool abX) override;
+		void SetCullMode(eCullMode aMode) override;
 
 		//DEPTH
-		void SetDepthTestActive(bool abX);
-		void SetDepthTestFunc(eDepthTestFunc aFunc);
+		void SetDepthTestActive(bool abX) override;
+		void SetDepthTestFunc(eDepthTestFunc aFunc) override;
 
 		//ALPHA
-		void SetAlphaTestActive(bool abX);
-		void SetAlphaTestFunc(eAlphaTestFunc aFunc,float afRef);
+		void SetAlphaTestActive(bool abX) override;
+		void SetAlphaTestFunc(eAlphaTestFunc aFunc,float afRef) override;
 
 		//STENCIL
-		void SetStencilActive(bool abX);
+		void SetStencilActive(bool abX) override;
 		void SetStencil(eStencilFunc aFunc,int alRef, unsigned int aMask,
-				eStencilOp aFailOp,eStencilOp aZFailOp,eStencilOp aZPassOp);
+				eStencilOp aFailOp,eStencilOp aZFailOp,eStencilOp aZPassOp) override;
 		void SetStencilTwoSide(eStencilFunc aFrontFunc,eStencilFunc aBackFunc,
 				int alRef, unsigned int aMask,
 				eStencilOp aFrontFailOp,eStencilOp aFrontZFailOp,eStencilOp aFrontZPassOp,
-				eStencilOp aBackFailOp,eStencilOp aBackZFailOp,eStencilOp aBackZPassOp);
+				eStencilOp aBackFailOp,eStencilOp aBackZFailOp,eStencilOp aBackZPassOp) override;
 
 		//SCISSOR
-		void SetScissorActive(bool abX);
-		void SetScissorRect(const cRect2l &aRect);
+		void SetScissorActive(bool abX) override;
+		void SetScissorRect(const cRect2l &aRect) override;
 
 		//BLENDING
-		void SetBlendActive(bool abX);
-		void SetBlendFunc(eBlendFunc aSrcFactor, eBlendFunc aDestFactor);
+		void SetBlendActive(bool abX) override;
+		void SetBlendFunc(eBlendFunc aSrcFactor, eBlendFunc aDestFactor) override;
 		void SetBlendFuncSeparate(eBlendFunc aSrcFactorColor, eBlendFunc aDestFactorColor,
-			eBlendFunc aSrcFactorAlpha, eBlendFunc aDestFactorAlpha);
+			eBlendFunc aSrcFactorAlpha, eBlendFunc aDestFactorAlpha) override;
 
 
 		// TEXTURE
-		void SetTexture(unsigned int alUnit,iTexture* apTex);
-		void SetActiveTextureUnit(unsigned int alUnit);
-		void SetTextureEnv(eTextureParam aParam, int alVal);
-		void SetTextureConstantColor(const cColor &aColor);
+		void SetTexture(unsigned int alUnit,iTexture* apTex) override;
+		void SetActiveTextureUnit(unsigned int alUnit) override;
+		void SetTextureEnv(eTextureParam aParam, int alVal) override;
+		void SetTextureConstantColor(const cColor &aColor) override;
 
 		// POLYGONS
 		iVertexBuffer* CreateVertexBuffer(tVertexFlag aFlags, eVertexBufferDrawType aDrawType,
 										eVertexBufferUsageType aUsageType,
-										int alReserveVtxSize=0,int alReserveIdxSize=0);
+										int alReserveVtxSize=0,int alReserveIdxSize=0) override;
 
-		void DrawQuad(const tVertexVec &avVtx);
-		void DrawQuad(const tVertexVec &avVtx, const cColor aCol);
-		void DrawQuad(const tVertexVec &avVtx,const float afZ);
-		void DrawQuad(const tVertexVec &avVtx,const float afZ,const cColor &aCol);
-		void DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs);
+		void DrawQuad(const tVertexVec &avVtx) override;
+		void DrawQuad(const tVertexVec &avVtx, const cColor aCol) override;
+		void DrawQuad(const tVertexVec &avVtx,const float afZ) override;
+		void DrawQuad(const tVertexVec &avVtx,const float afZ,const cColor &aCol) override;
+		void DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs) override;
 
-		void DrawBatch(const cGfxBatch &batch, tGfxBatchAttrs attrs, eBatchDrawMode drawMode);
+		void DrawBatch(const cGfxBatch &batch, tGfxBatchAttrs attrs, eBatchDrawMode drawMode) override;
 
 		//PRIMITIVES
-		void DrawLine(const cVector3f& avBegin, const cVector3f& avEnd, cColor aCol);
-		void DrawBoxMaxMin(const cVector3f& avMax, const cVector3f& avMin, cColor aCol);
-		void DrawSphere(const cVector3f& avPos, float afRadius, cColor aCol);
+		void DrawLine(const cVector3f& avBegin, const cVector3f& avEnd, cColor aCol) override;
+		void DrawBoxMaxMin(const cVector3f& avMax, const cVector3f& avMin, cColor aCol) override;
+		void DrawSphere(const cVector3f& avPos, float afRadius, cColor aCol) override;
 
 		//FRAMEBUFFER
 		void CopyContextToTexure(iTexture* apTex, const cVector2l &avPos,
-			const cVector2l &avSize, const cVector2l &avTexOffset=0);
+			const cVector2l &avSize, const cVector2l &avTexOffset=0) override;
 
 		void StartFrame() override;
 		void FlushRendering() override;
