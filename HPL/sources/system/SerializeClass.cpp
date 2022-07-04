@@ -1069,14 +1069,14 @@ namespace hpl {
 			for(; pVarElem != NULL; pVarElem = pVarElem->NextSiblingElement())
 			{
 				const char* sVal = pVarElem->Attribute("val");
-				void *pData = hplMalloc(SizeOfType(type));
+				auto pData = new char[SizeOfType(type)];
 
 				if(gbLog) Log("%s Element var val '%s' type: %d\n",GetTabs(),sVal,type);
 
 				StringToValue(pData,0,type,sVal);
 				pCont->AddVoidClass(pData);
 
-				hplFree(pData);
+				delete[] pData;
 			}
 		}
 

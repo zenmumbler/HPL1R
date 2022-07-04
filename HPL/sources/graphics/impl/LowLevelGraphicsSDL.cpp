@@ -511,8 +511,8 @@ namespace hpl {
 		cSDLBitmap2D *pBmp = hplNew( cSDLBitmap2D, () );
 		pBmp->Create(cVector2l(mvScreenSize.x,mvScreenSize.y),32);
 
-		unsigned char *pDestPixels = (unsigned char*)pBmp->GetSurface()->pixels;
-		unsigned char *pSrcPixels = (unsigned char*)hplMalloc(mvScreenSize.x * mvScreenSize.y * 4);
+		auto pDestPixels = static_cast<unsigned char*>(pBmp->GetSurface()->pixels);
+		auto pSrcPixels =  new unsigned char[mvScreenSize.x * mvScreenSize.y * 4];
 
 		SDL_LockSurface(pBmp->GetSurface());
 		glReadBuffer(GL_BACK);
@@ -536,7 +536,7 @@ namespace hpl {
 		SDL_UnlockSurface(pBmp->GetSurface());
 		SDL_SaveBMP(pBmp->GetSurface(),asFile.c_str());
 
-		hplFree(pSrcPixels);
+		delete[] pSrcPixels;
 		hplDelete(pBmp);
 
 	}
