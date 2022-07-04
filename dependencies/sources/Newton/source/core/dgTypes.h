@@ -846,18 +846,4 @@ typedef dgUnsigned32 (dgApi *OnGetPerformanceCountCallback) ();
 
 dgCpuClass dgApi dgGetCpuType ();
 
-
-inline dgInt32 dgAtomicAdd(dgInt32* const addend, dgInt32 amount)
-{
-	#ifdef _WIN32
-		return InterlockedExchangeAdd((long*) addend, long(amount));
-	#elif defined (__APPLE__)
-		dgInt32 count = OSAtomicAdd32(amount, (int32_t*)addend);
-
-		return count - (*addend);
-	#else
-		return __sync_fetch_and_add((int32_t*)addend, amount );
-	#endif
-}
-
 #endif

@@ -23,6 +23,7 @@
 #define __dgMemory__
 
 #include "dgStdafx.h"
+#include <atomic>
 
 #ifdef _DEBUG
 //#define __TRACK_MEMORY_LEAKS__
@@ -188,7 +189,7 @@ class dgMemoryAllocator
 	dgMemoryAllocator (dgMemAlloc memAlloc, dgMemFree memFree);
 
 	dgInt32 m_emumerator;
-	dgInt32 m_memoryUsed;
+	std::atomic<dgInt32> m_memoryUsed;
 	dgMemFree m_free;
 	dgMemAlloc m_malloc;
 	dgMemDirectory m_memoryDirectory[DG_MEMORY_BIN_ENTRIES + 1];

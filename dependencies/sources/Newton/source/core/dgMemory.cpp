@@ -136,7 +136,7 @@ void *dgMemoryAllocator::MallocLow(dgInt32 workingSize, dgInt32 alignment)
   dgMemoryInfo* const info = ((dgMemoryInfo*) (retPtr)) - 1;
   info->SaveInfo(this, ptr, size, m_emumerator, workingSize);
 
-  dgAtomicAdd(&m_memoryUsed, size);
+  m_memoryUsed.fetch_add(size, std::memory_order_relaxed);
   return retPtr;
 }
 
@@ -146,8 +146,8 @@ void dgMemoryAllocator::FreeLow (void* const retPtr)
   info = ((dgMemoryInfo*) (retPtr)) - 1;
   _ASSERTE(info->m_allocator == this);
 
-  dgAtomicAdd(&m_memoryUsed, -info->m_size);
-
+  m_memoryUsed.fetch_add(-info->m_size, std::memory_order_relaxed);
+  
 #ifdef _DEBUG
   memset(retPtr, 0, info->m_workingSize);
 #endif
