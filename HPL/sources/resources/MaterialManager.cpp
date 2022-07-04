@@ -368,10 +368,11 @@ namespace hpl {
 
 	eTextureTarget cMaterialManager::GetTarget(const tString& asType)
 	{
-		if(cString::ToLowerCase(asType) == "cube") return eTextureTarget_CubeMap;
-		else if(cString::ToLowerCase(asType) == "1D") return eTextureTarget_1D;
-		else if(cString::ToLowerCase(asType) == "2D") return eTextureTarget_2D;
-		else if(cString::ToLowerCase(asType) == "3D") return eTextureTarget_3D;
+		const auto lowerType = cString::ToLowerCase(asType);
+		if (lowerType == "cube") return eTextureTarget_CubeMap;
+		else if (lowerType == "1d") return eTextureTarget_1D;
+		else if (lowerType == "2d") return eTextureTarget_2D;
+		else if (lowerType == "3d") return eTextureTarget_3D;
 
 		return eTextureTarget_2D;
 	}
