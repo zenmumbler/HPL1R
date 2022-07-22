@@ -51,8 +51,6 @@ namespace hpl {
 
 		void SubmitConstraints (dFloat afTimestep, int alThreadIndex);
 		void GetInfo (NewtonJointRecord* apInfo);
-
-		static unsigned LimitCallback(const NewtonJoint* pHinge, NewtonHingeSliderUpdateDesc* pDesc);
 	};
 };
 #endif // HPL_PHYSICS_JOINT_HINGE_NEWTON_H

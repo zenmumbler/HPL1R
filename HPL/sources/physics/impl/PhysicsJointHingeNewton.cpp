@@ -158,7 +158,7 @@ namespace hpl {
 		cMatrixf mtxPinPivot0Inv = mtxPinPivot0.GetTranspose();
 		cMatrixf mtxPinPivot1Inv = mtxPinPivot1.GetTranspose();
 
-		// Restrict the movement on the pivot point along all tree orthonormal direction
+		// Restrict the movement on the pivot point along all three orthonormal directions
 		NewtonUserJointAddLinearRow (mpNewtonJoint, vPinPivot0Pos.v, vPinPivot1Pos.v, mtxPinPivot0Inv.GetRight().v);
 		NewtonUserJointAddLinearRow (mpNewtonJoint, vPinPivot0Pos.v, vPinPivot1Pos.v, mtxPinPivot0Inv.GetUp().v);
 		NewtonUserJointAddLinearRow (mpNewtonJoint, vPinPivot0Pos.v, vPinPivot1Pos.v, mtxPinPivot0Inv.GetForward().v);
@@ -184,11 +184,13 @@ namespace hpl {
 			float fCosAngle = cMath::Vector3Dot(mtxPinPivot0Inv.GetRight(), mtxPinPivot1Inv.GetRight());
 			float fAngle = atan2(fSinAngle, fCosAngle);
 
-			// Log("LIMITS: %.3f, %.3f, %.3f\n", cMath::ToDeg(mfMinAngle), cMath::ToDeg(fAngle), cMath::ToDeg(mfMaxAngle));
+//			if (static_cast<int>(cMath::ToDeg(mfMaxAngle)) == 140) {
+//				Log("CHEST LIMITS: %.3f, %.3f, %.3f\n", cMath::ToDeg(mfMinAngle), cMath::ToDeg(fAngle), cMath::ToDeg(mfMaxAngle));
+//			}
 
 			///////////////////////////
 			//Avoid oscillation
-			CheckLimitAutoSleep(this, mfMinAngle,mfMaxAngle,fAngle);
+			CheckLimitAutoSleep(this, mfMinAngle, mfMaxAngle,fAngle);
 			
 			bool bSkipLimitCheck = false;
 			if(std::abs(mfPreviousAngle - fAngle) > cMath::ToRad(300)) bSkipLimitCheck = true;
@@ -253,66 +255,7 @@ namespace hpl {
 
 	void cPhysicsJointHingeNewton::GetInfo (NewtonJointRecord* apInfo)
 	{
-
-	}
-
-	unsigned cPhysicsJointHingeNewton::LimitCallback(const NewtonJoint* pHinge, NewtonHingeSliderUpdateDesc* pDesc)
-	{
-		cPhysicsJointHingeNewton* pHingeJoint = (cPhysicsJointHingeNewton*)NewtonJointGetUserData(pHinge);
-
-		if(pHingeJoint->mfMaxAngle == 0 && pHingeJoint->mfMinAngle == 0) return 0;
-
-		float fAngle = NewtonHingeGetJointAngle (pHinge);
-
-		//Avoid oscillation
-		CheckLimitAutoSleep(pHingeJoint, pHingeJoint->mfMinAngle,pHingeJoint->mfMaxAngle,fAngle);
-
-		bool bSkipLimitCheck = false;
-		if(fabs(pHingeJoint->mfPreviousAngle - fAngle) > cMath::ToRad(300)) bSkipLimitCheck = true;
-
-		//Max limit
-		if (fAngle > pHingeJoint->mfMaxAngle && bSkipLimitCheck==false)
-		{
-			pHingeJoint->OnMaxLimit();
-
-			pDesc->m_accel = NewtonHingeCalculateStopAlpha (pHinge, pDesc, pHingeJoint->mfMaxAngle);
-			pDesc->m_maxFriction =0;
-
-			pHingeJoint->mfPreviousAngle = fAngle;
-			return 1;
-		}
-		//Min limit
-		else if (fAngle < pHingeJoint->mfMinAngle && bSkipLimitCheck==false)
-		{
-			pHingeJoint->OnMinLimit();
-
-			pDesc->m_accel = NewtonHingeCalculateStopAlpha (pHinge, pDesc, pHingeJoint->mfMinAngle);
-			pDesc->m_minFriction =0;
-
-			pHingeJoint->mfPreviousAngle = fAngle;
-			return 1;
-		}
-		else
-		{
-			if(pHingeJoint->mpParentBody ==NULL || pHingeJoint->mpParentBody->GetMass()==0)
-			{
-				if(	(pHingeJoint->mfStickyMaxDistance != 0 &&
-					fabs(fAngle - pHingeJoint->mfMaxAngle) < pHingeJoint->mfStickyMaxDistance)
-					||
-					(pHingeJoint->mfStickyMinDistance != 0 &&
-					fabs(fAngle - pHingeJoint->mfMinAngle) < pHingeJoint->mfStickyMinDistance)
-				 )
-				{
-					pHingeJoint->mpChildBody->SetAngularVelocity(0);
-					pHingeJoint->mpChildBody->SetLinearVelocity(0);
-				}
-			}
-
-			pHingeJoint->OnNoLimit();
-		}
-
-		pHingeJoint->mfPreviousAngle = fAngle;
-		return 0;
+		Log("GetInfo called");
 	}
 
 	//-----------------------------------------------------------------------
