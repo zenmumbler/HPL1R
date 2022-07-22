@@ -236,12 +236,8 @@ void GasDelay1(string asTimer)
 void Radio02Timer01(string asTimer)
 {
 	PlayGuiSound("item_radio_noise", 0.9f);
-	
 	AddSubTitleTrans("Radio", "Start", 1.1f);
-		
-	CreateTimer("radio2timer2", 1.1f, "@Radio02Timer02",true);
-	
-	DestroyTimer("radio2timer1");
+	RunAfterGlobal(1.1f, "@Radio02Timer02");
 }
 void Radio02Timer02(string asTimer)
 {
@@ -250,29 +246,21 @@ void Radio02Timer02(string asTimer)
 	AddRadioMessage("Radio","Red 3.03","voice_red_03_part3.ogg");
 	
 	SetRadioOnEndCallback("@ComplicatedRadio");
-	
-	DestroyTimer("radio2timer2");
 }
 void ComplicatedRadio()
 {
-	CreateTimer("radioglobal", 8, "@RadioGlobal01",true);
+	RunAfterGlobal(8, "@RadioGlobal01");
 }
 void RadioGlobal01(string asTimer)
 {
 	PlayGuiSound("item_radio_noise", 0.9f);
-	
 	AddSubTitleTrans("Radio", "Start", 1.1f);
-		
-	CreateTimer("radioglobal2", 1.1f, "@RadioGlobal02",true);
-	
-	DestroyTimer("radioglobal");
+	RunAfterGlobal(1.1f, "@RadioGlobal02");
 }
 void RadioGlobal02(string asTimer)
 {
 	AddRadioMessage("Radio","Red 4.01","voice_red_04_part1.ogg");
 	AddRadioMessage("Radio","Red 4.02","voice_red_04_part2.ogg");
-	
-	DestroyTimer("radioglobal2");
 }
 //STOP COMPLICATED RADIO//
 //////////////////////////
