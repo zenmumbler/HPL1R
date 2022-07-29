@@ -4,6 +4,8 @@ build
 Thumbs.db
 xcuserdata
 
+node_modules
+
 # don't commit local overrides due to asset copyright
 rehatched/**/*.jpg
 rehatched/**/*.png
