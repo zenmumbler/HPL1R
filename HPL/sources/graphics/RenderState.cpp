@@ -281,14 +281,6 @@ namespace hpl {
 				apSettings->mpLowLevel->SetColorWriteActive(true, true, true, true);
 				if(apSettings->mbLog)Log("RGBA");
 				break;
-			case eMaterialChannelMode_RGB:
-				apSettings->mpLowLevel->SetColorWriteActive(true, true, true, false);
-				if(apSettings->mbLog)Log("RGB");
-				break;
-			case eMaterialChannelMode_A:
-				apSettings->mpLowLevel->SetColorWriteActive(false, false, false, true);
-				if(apSettings->mbLog)Log("A");
-				break;
 			case eMaterialChannelMode_Z:
 				apSettings->mpLowLevel->SetColorWriteActive(false, false, false, false);
 				if(apSettings->mbLog)Log("Z");

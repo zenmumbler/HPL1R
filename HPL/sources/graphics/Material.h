@@ -82,10 +82,7 @@ namespace hpl {
 	enum eMaterialChannelMode
 	{
 		eMaterialChannelMode_RGBA,
-		eMaterialChannelMode_RGB,
-		eMaterialChannelMode_A,
 		eMaterialChannelMode_Z,
-		eMaterialChannelMode_LastEnum,
 	};
 
 	//---------------------------------------------------
