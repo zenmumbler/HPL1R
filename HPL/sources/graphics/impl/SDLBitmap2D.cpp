@@ -104,6 +104,14 @@ namespace hpl {
 		rect.w = aRect.w<=0?mlWidth:aRect.w;
 		rect.h = aRect.h<=0?mlHeight:aRect.h;
 
+		Uint32 col = SDL_MapRGBA(mpSurface->format,
+			static_cast<Uint8>(aColor.r * 255.0f),
+			static_cast<Uint8>(aColor.g * 255.0f),
+			static_cast<Uint8>(aColor.b * 255.0f),
+			static_cast<Uint8>(aColor.a * 255.0f)
+		);
+
+/*
 		Uint32 col =
 #if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
 		(static_cast<Uint8>(aColor.a * 255.0f) << 24) |
@@ -116,6 +124,7 @@ namespace hpl {
 		(static_cast<Uint8>(aColor.b * 255.0f) << 8) |
 		(static_cast<Uint8>(aColor.a * 255.0f));
 #endif
+*/
 
 		SDL_FillRect(mpSurface, &rect, col);
 	}
