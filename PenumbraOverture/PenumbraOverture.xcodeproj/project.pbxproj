@@ -10,8 +10,6 @@
 		8E84E76725FD5B7600DC6065 /* ModelExport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E76525FD5B7600DC6065 /* ModelExport.cpp */; };
 		8EA48713260FFBA9000D1AB7 /* libHPL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9F74DE25522A70000324E8 /* libHPL.a */; };
 		8EAA3A3D2641D948005883C9 /* SDL2.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = 8EB7C3A9254F545C00277667 /* SDL2.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8EB7C3AF254F546300277667 /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3AA254F545C00277667 /* Cg.framework */; };
-		8EB7C3B0254F546300277667 /* Cg.framework in Copy Frameworks into .app */ = {isa = PBXBuildFile; fileRef = 8EB7C3AA254F545C00277667 /* Cg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8EB7C3B1254F546600277667 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB7C3A9254F545C00277667 /* SDL2.framework */; };
 		8EB7C3DF254F649C00277667 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EB7C395254E48A900277667 /* Images.xcassets */; };
 		8EC7AEEF26B8ABF200193C45 /* DebugMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7AEED26B8ABF200193C45 /* DebugMenu.cpp */; };
@@ -98,7 +96,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8EAA3A3D2641D948005883C9 /* SDL2.framework in Copy Frameworks into .app */,
-				8EB7C3B0254F546300277667 /* Cg.framework in Copy Frameworks into .app */,
 			);
 			name = "Copy Frameworks into .app";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,7 +107,6 @@
 		8E84E76625FD5B7600DC6065 /* ModelExport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelExport.h; sourceTree = "<group>"; };
 		8EB7C395254E48A900277667 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8EB7C3A9254F545C00277667 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
-		8EB7C3AA254F545C00277667 /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cg.framework; sourceTree = "<group>"; };
 		8EC7AEED26B8ABF200193C45 /* DebugMenu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DebugMenu.cpp; sourceTree = "<group>"; };
 		8EC7AEEE26B8ABF200193C45 /* DebugMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugMenu.h; sourceTree = "<group>"; };
 		DB06307A111D3E3F0048C5E9 /* PenumbraOverture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PenumbraOverture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,7 +235,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EA48713260FFBA9000D1AB7 /* libHPL.a in Frameworks */,
-				8EB7C3AF254F546300277667 /* Cg.framework in Frameworks */,
 				8EB7C3B1254F546600277667 /* SDL2.framework in Frameworks */,
 				DB063068111D3E3F0048C5E9 /* OpenGL.framework in Frameworks */,
 				DB063069111D3E3F0048C5E9 /* OpenAL.framework in Frameworks */,
@@ -402,7 +397,6 @@
 		DBF84A9A0AC76E5E00BB15CD /* dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				8EB7C3AA254F545C00277667 /* Cg.framework */,
 				8EB7C3A9254F545C00277667 /* SDL2.framework */,
 			);
 			name = dependencies;
@@ -458,7 +452,7 @@
 		DBF8483A0AC76CC500BB15CD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1340;
 			};
 			buildConfigurationList = DBF8483B0AC76CC500BB15CD /* Build configuration list for PBXProject "PenumbraOverture" */;
 			compatibilityVersion = "Xcode 3.1";
