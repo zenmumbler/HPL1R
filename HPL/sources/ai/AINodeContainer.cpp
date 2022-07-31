@@ -470,11 +470,12 @@ namespace hpl {
 			if(mvGridSize.y >0)
 				vGridPos.y = (int)(vLocalPos.y / mvGridSize.y);
 
-			if(false)Log("Adding node %d, world: (%s) local (%s), at %d : %d\n",i,
+			/*
+			Log("Adding node %d, world: (%s) local (%s), at %d : %d\n",i,
 												pNode->GetPosition().ToString().c_str(),
 												vLocalPos.ToString().c_str(),
 												vGridPos.x,vGridPos.y);
-
+			*/
 			mvGrids[vGridPos.y * (mvGridMapSize.x+1) + vGridPos.x].mlstNodes.push_back(pNode);
 		}
 	}
