@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include "aswrapcall.h"
 #include "script/ScriptFuncs.h"
 
 #include <stdlib.h>
@@ -1415,10 +1416,8 @@ namespace hpl {
 		gpSound = apSound;
 		gpGame = apGame;
 		
-		const auto AddFunc = [apScript](const tString& sig, auto fn) {
-			apScript->AddScriptFunc(sig, reinterpret_cast<void*>(fn));
-		};
-		
+#define AddFunc(nm, fn) apScript->GetEngine()->RegisterGlobalFunction(nm, WRAP_FN(fn), asCALL_GENERIC);
+
 		//General
 		AddFunc("void Print(const string &in asText)", Print);
 		AddFunc("string FloatToString(float afX)", FloatToString);

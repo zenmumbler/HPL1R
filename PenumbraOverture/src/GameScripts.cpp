@@ -17,6 +17,7 @@
  * along with Penumbra Overture.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "StdAfx.h"
+#include "aswrapcall.h"
 #include "GameScripts.h"
 
 #include "Init.h"
@@ -1526,9 +1527,7 @@ void cGameScripts::Init()
 {
 	cScript *pScript = gpInit->mpGame->GetScript();
 
-	const auto AddFunc = [=](const tString& sig, auto fn) {
-		pScript->AddScriptFunc(sig, reinterpret_cast<void*>(fn));
-	};
+#define AddFunc(nm, fn) pScript->GetEngine()->RegisterGlobalFunction(nm, WRAP_FN(fn), asCALL_GENERIC);
 
 	// Game general
 	AddFunc("void ResetGame()", ResetGame);
