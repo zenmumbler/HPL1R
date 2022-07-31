@@ -58,6 +58,7 @@
 		7B1024E3CAD44C2E9958A754 /* as_scriptnode.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = as_scriptnode.cpp; sourceTree = "<group>"; };
 		8AD195F512F74EF781BAE28D /* as_callfunc_x64_msvc.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = as_callfunc_x64_msvc.cpp; sourceTree = "<group>"; };
 		8D329931651E4304A25E35D4 /* as_builder.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = as_builder.cpp; sourceTree = "<group>"; };
+		8E7742012896DD8F008E9570 /* aswrapcall.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aswrapcall.h; sourceTree = "<group>"; };
 		8EA486C6260FF471000D1AB7 /* as_texts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = as_texts.h; sourceTree = "<group>"; };
 		8EA486C7260FF471000D1AB7 /* as_parser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = as_parser.h; sourceTree = "<group>"; };
 		8EA486C8260FF471000D1AB7 /* as_builder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = as_builder.h; sourceTree = "<group>"; };
@@ -135,6 +136,7 @@
 		06304264E05E4710A217575D /* include */ = {
 			isa = PBXGroup;
 			children = (
+				8E7742012896DD8F008E9570 /* aswrapcall.h */,
 				8EA486EC260FF560000D1AB7 /* angelscript.h */,
 			);
 			path = include;
