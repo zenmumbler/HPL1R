@@ -19,10 +19,12 @@
 #ifndef HPL_LOWLEVELGRAPHICS_SDL_H
 #define HPL_LOWLEVELGRAPHICS_SDL_H
 
-#include <Cg/cg.h>
-#include <Cg/cgGL.h>
-
 #include <SDL2/SDL.h>
+#ifdef __APPLE__
+#include <OpenGL/gltypes.h>
+#else
+#include <GL/gltypes.h>
+#endif
 // Unix's X11 Defines DestoryAll which collides with methods
 #undef DestroyAll
 
@@ -80,7 +82,7 @@ namespace hpl {
 		iTexture* CreateTexture(const cVector2l& avSize,int alBpp,cColor aFillCol,
 								bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
 
-		iGpuProgram* CreateGpuProgram(const tString& asName, eGpuProgramType aType) override;
+		iGpuProgram* CreateGpuProgram(const tString& asName) override;
 
 		void SaveScreenToBMP(const tString& asFile) override;
 
@@ -186,8 +188,6 @@ namespace hpl {
 
 		iBitmap2D* CreateBitmap2DFromSurface(SDL_Surface* apSurface,const tString& asType);
 
-		CGcontext GetGC_Context(){ return mCG_Context;}
-
 		void SetupGL();
 
 		GLenum GetGLTextureTargetEnum(eTextureTarget aType);
@@ -217,9 +217,6 @@ namespace hpl {
 		//Texture
 		iTexture* mpCurrentTexture[MAX_TEXTUREUNITS];
 
-		//CG Compiler Variables
-		CGcontext mCG_Context;
-		
 		// ImGui Setup
 		ImGuiContext* mpImGuiContext;
 

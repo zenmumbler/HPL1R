@@ -17,7 +17,6 @@
  * along with Penumbra Overture.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Init.h"
-#include "graphics/ogl2/CGProgram.h"
 #include "Player.h"
 #include "ButtonHandler.h"
 #include "MapHandler.h"
@@ -332,10 +331,6 @@ bool cInit::Init(tString asCommandLine)
 	Vars.AddString("WindowCaption", "Penumbra");
 
 	Vars.AddBool("LowLevelSoundLogging", mpConfig->GetBool("Sound","LowLevelLogging", false));
-
-	// Set CG Options
-	cCGProgram::SetFProfile(mpConfig->GetString("Graphics","ForceFP","AUTO"));
-	cCGProgram::SetVProfile(mpConfig->GetString("Graphics","ForceVP","AUTO"));
 
 	iLowLevelGameSetup *pSetUp = NULL;
 

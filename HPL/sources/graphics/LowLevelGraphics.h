@@ -253,7 +253,7 @@ namespace hpl {
 									bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
 
 
-		virtual iGpuProgram* CreateGpuProgram(const tString& asName, eGpuProgramType aType)=0;
+		virtual iGpuProgram* CreateGpuProgram(const tString& asName)=0;
 
 		//TODO: Kinda quick and diry, better to have a screen to Bitmap.
 		// and then a save as in the Bitmap.

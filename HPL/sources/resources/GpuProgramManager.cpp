@@ -66,22 +66,24 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iGpuProgram* cGpuProgramManager::CreateProgram(const tString& asName,const tString& asEntry,
-													eGpuProgramType aType)
+	iGpuProgram* cGpuProgramManager::CreateProgram(const tString& asVertexName,
+												   const tString& asFragmentName)
 	{
-		tString sPath;
+		auto combinedName = asVertexName + "__" + asFragmentName;
+		tString dummyPath, vertexPath, fragmentPath;
 		iGpuProgram* pProgram;
-		pProgram = static_cast<iGpuProgram*>(FindLoadedResource(asName,sPath));
+		pProgram = static_cast<iGpuProgram*>(FindLoadedResource(combinedName, dummyPath));
+		FindLoadedResource(asVertexName, vertexPath);
+		FindLoadedResource(asFragmentName, fragmentPath);
 
-		BeginLoad(asName);
+		BeginLoad(combinedName);
 
-		if(pProgram==NULL && sPath!="")
-		{
-			pProgram = mpLowLevelGraphics->CreateGpuProgram(asName, aType);
+		if (pProgram == NULL && vertexPath.length() > 0 && fragmentPath.length() > 0) {
+			pProgram = mpLowLevelGraphics->CreateGpuProgram(combinedName);
 
-			if(pProgram->CreateFromFile(sPath,asEntry)==false)
+			if(pProgram->CreateFromFile(vertexPath, fragmentPath) == false)
 			{
-				Error("Couldn't create program '%s'\n",asName.c_str());
+				Error("Couldn't create program '%s'\n",combinedName.c_str());
 				hplDelete(pProgram);
 				EndLoad();
 				return NULL;
@@ -91,7 +93,7 @@ namespace hpl {
 		}
 
 		if(pProgram)pProgram->IncUserCount();
-		else Error("Couldn't load program '%s'\n",asName.c_str());
+		else Error("Couldn't load program '%s'\n",combinedName.c_str());
 
 		EndLoad();
 		return pProgram;

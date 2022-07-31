@@ -27,7 +27,6 @@
 		8E11637A26C1FDD40065E04C /* FileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11637926C1FDD40065E04C /* FileReader.cpp */; };
 		8E3A72852611363F0086F8ED /* Script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A72832611363F0086F8ED /* Script.cpp */; };
 		8E815948260C1127001CBF63 /* GLSLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E815947260C1127001CBF63 /* GLSLProgram.cpp */; };
-		8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E84AA0C254CB3D2000EA53C /* Cg.framework */; };
 		8E84E7892605487F00DC6065 /* LowLevelSoundOAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */; };
 		8E84E7922605571100DC6065 /* OALSoundData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E7912605571100DC6065 /* OALSoundData.cpp */; };
 		8E84E79626055B2500DC6065 /* OALSoundChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E79526055B2500DC6065 /* OALSoundChannel.cpp */; };
@@ -66,7 +65,6 @@
 		DBF84AB80AC76F1E00BB15CD /* BoneState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849590AC76D5700BB15CD /* BoneState.cpp */; };
 		DBF84AB90AC76F1E00BB15CD /* BoundingVolume.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849BE0AC76D5800BB15CD /* BoundingVolume.cpp */; };
 		DBF84ABB0AC76F1E00BB15CD /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849F00AC76D5800BB15CD /* Camera.cpp */; };
-		DBF84ABC0AC76F1E00BB15CD /* CGProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849870AC76D5800BB15CD /* CGProgram.cpp */; };
 		DBF84ABD0AC76F1E00BB15CD /* CharacterBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849C70AC76D5800BB15CD /* CharacterBody.cpp */; };
 		DBF84ABE0AC76F1E00BB15CD /* CharacterBodyNewton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849880AC76D5800BB15CD /* CharacterBodyNewton.cpp */; };
 		DBF84AC00AC76F1E00BB15CD /* ColliderEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849F10AC76D5800BB15CD /* ColliderEntity.cpp */; };
@@ -272,7 +270,6 @@
 		8E3A72842611363F0086F8ED /* Script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Script.h; path = sources/script/Script.h; sourceTree = SOURCE_ROOT; };
 		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
 		8E815947260C1127001CBF63 /* GLSLProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLProgram.cpp; sourceTree = "<group>"; };
-		8E84AA0C254CB3D2000EA53C /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cg.framework; sourceTree = "<group>"; };
 		8E84E75925FD062A00DC6065 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		8E84E75B25FD063100DC6065 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		8E84E7872605472700DC6065 /* LowLevelSoundOAL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LowLevelSoundOAL.h; sourceTree = "<group>"; };
@@ -350,7 +347,6 @@
 		DB27F05E0ACB9AB90054ACA3 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		DB27F05F0ACB9AB90054ACA3 /* VertexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = VertexBuffer.h; sourceTree = "<group>"; };
 		DB27F0600ACB9AB90054ACA3 /* hpl.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hpl.h; path = sources/hpl.h; sourceTree = "<group>"; };
-		DB27F0620ACB9AB90054ACA3 /* CGProgram.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CGProgram.h; sourceTree = "<group>"; };
 		DB27F0630ACB9AB90054ACA3 /* CharacterBodyNewton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CharacterBodyNewton.h; sourceTree = "<group>"; };
 		DB27F0640ACB9AB90054ACA3 /* CollideShapeNewton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CollideShapeNewton.h; sourceTree = "<group>"; };
 		DB27F0670ACB9AB90054ACA3 /* KeyboardSDL.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = KeyboardSDL.h; sourceTree = "<group>"; };
@@ -550,7 +546,6 @@
 		DBF849830AC76D5800BB15CD /* RenderState.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = RenderState.cpp; sourceTree = "<group>"; };
 		DBF849840AC76D5800BB15CD /* Skeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Skeleton.cpp; sourceTree = "<group>"; };
 		DBF849850AC76D5800BB15CD /* SubMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = SubMesh.cpp; sourceTree = "<group>"; };
-		DBF849870AC76D5800BB15CD /* CGProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = CGProgram.cpp; sourceTree = "<group>"; };
 		DBF849880AC76D5800BB15CD /* CharacterBodyNewton.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = CharacterBodyNewton.cpp; sourceTree = "<group>"; };
 		DBF849890AC76D5800BB15CD /* CollideShapeNewton.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = CollideShapeNewton.cpp; sourceTree = "<group>"; };
 		DBF8498D0AC76D5800BB15CD /* KeyboardSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = KeyboardSDL.cpp; sourceTree = "<group>"; };
@@ -666,7 +661,6 @@
 			files = (
 				8E11634326BED6CB0065E04C /* libangelscript.a in Frameworks */,
 				8E11634426BED6CB0065E04C /* libnewton.a in Frameworks */,
-				8E84AA0D254CB3D2000EA53C /* Cg.framework in Frameworks */,
 				8E9728DF254CBBAF0033415B /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -849,8 +843,6 @@
 		8E3A741B26176F0A0086F8ED /* ogl2 */ = {
 			isa = PBXGroup;
 			children = (
-				DBF849870AC76D5800BB15CD /* CGProgram.cpp */,
-				DB27F0620ACB9AB90054ACA3 /* CGProgram.h */,
 				8E815947260C1127001CBF63 /* GLSLProgram.cpp */,
 				8E815946260C1036001CBF63 /* GLSLProgram.h */,
 				DBF849990AC76D5800BB15CD /* OcclusionQueryOGL.cpp */,
@@ -932,7 +924,6 @@
 			isa = PBXGroup;
 			children = (
 				8E9728DE254CBBAF0033415B /* SDL2.framework */,
-				8E84AA0C254CB3D2000EA53C /* Cg.framework */,
 			);
 			name = dependencies;
 			path = ../dependencies/lib/macosx;
@@ -1490,7 +1481,6 @@
 				8E11635926BED8DC0065E04C /* stb_vorbis.c in Sources */,
 				DBF84AB90AC76F1E00BB15CD /* BoundingVolume.cpp in Sources */,
 				DBF84ABB0AC76F1E00BB15CD /* Camera.cpp in Sources */,
-				DBF84ABC0AC76F1E00BB15CD /* CGProgram.cpp in Sources */,
 				8E84E7892605487F00DC6065 /* LowLevelSoundOAL.cpp in Sources */,
 				8E84E79C260819F800DC6065 /* WAVFile.cpp in Sources */,
 				DBF84ABD0AC76F1E00BB15CD /* CharacterBody.cpp in Sources */,

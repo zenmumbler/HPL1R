@@ -37,12 +37,11 @@ namespace hpl {
 		iResourceBase* Create(const tString& asName);
 		/**
 		 * Creates a new GPU program
-		 * \param asName name of the program
-		 * \param asEntry the entry point of the program (usually "main")
-		 * \param aType type of the program
+		 * \param asVertexName file name of the vertex shader
+		 * \param asFragmentName file name of the fragment shader
 		 * \return
 		 */
-		iGpuProgram* CreateProgram(const tString& asName,const tString& asEntry,eGpuProgramType aType);
+		iGpuProgram* CreateProgram(const tString& asVertexName,const tString& asFragmentName);
 
 		void Destroy(iResourceBase* apResource);
 

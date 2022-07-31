@@ -1,5 +1,5 @@
 /*
- * 2021 by zenmumbler
+ * 2022 by zenmumbler
  * This file is part of Rehatched
  */
 #ifndef HPL_GLSLPROGRAM_H
@@ -14,7 +14,7 @@ namespace hpl {
 	class cGLSLProgram : public iGpuProgram
 	{
 	public:
-		cGLSLProgram(tString asName, eGpuProgramType aType);
+		cGLSLProgram(tString asName);
 		~cGLSLProgram();
 
 		void Destroy();
@@ -34,14 +34,11 @@ namespace hpl {
 		bool SetMatrixf(const tString& asName, const cMatrixf& mMtx);
 		bool SetMatrixIdentityf(const tString& asName, eGpuProgramMatrix mType);
 
-		bool SetTexture(const tString& asName,iTexture* apTexture, bool abAutoDisable=true);
-		bool SetTextureToUnit(int alUnit, iTexture* apTexture);
+		bool SetTexture(const tString& asName,iTexture* apTexture);
 
 	protected:
 		unsigned int mProgram;
 		tString msName;
-		tString msFile;
-		tString msEntry;
 	};
 };
 #endif // HPL_GLSLPROGRAM_H

@@ -20,8 +20,6 @@
 #pragma comment(lib, "OpenGL32.lib")
 #pragma comment(lib, "GLu32.lib")
 #pragma comment(lib, "GLaux.lib")
-#pragma comment(lib, "Cg.lib")
-#pragma comment(lib, "CgGL.lib")
 #endif
 
 #ifdef __APPLE__
@@ -43,7 +41,7 @@
 #include "graphics/impl/SDLFontData.h"
 
 #include "graphics/ogl2/SDLTexture.h"
-#include "graphics/ogl2/CGProgram.h"
+#include "graphics/ogl2/GLSLProgram.h"
 #include "graphics/ogl2/VertexBufferVBO.h"
 #include "graphics/ogl2/OcclusionQueryOGL.h"
 
@@ -104,9 +102,6 @@ namespace hpl {
 		mbClearColor = true;
 		mbClearDepth = true;
 		mbClearStencil = false;
-
-		//Init extra stuff
-		InitCG();
 	}
 
 	//-----------------------------------------------------------------------
@@ -129,9 +124,6 @@ namespace hpl {
 			SDL_DestroyWindow(mpWindow);
 			mpWindow = NULL;
 		}
-
-		//Exit extra stuff
-		ExitCG();
 	}
 
 	//-----------------------------------------------------------------------
@@ -572,9 +564,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iGpuProgram* cLowLevelGraphicsSDL::CreateGpuProgram(const tString& asName, eGpuProgramType aType)
+	iGpuProgram* cLowLevelGraphicsSDL::CreateGpuProgram(const tString& asName)
 	{
-		return hplNew( cCGProgram, (asName,mCG_Context, aType) );
+		return hplNew( cGLSLProgram, (asName) );
 	}
 
 	//-----------------------------------------------------------------------
@@ -1491,20 +1483,6 @@ namespace hpl {
 			case eStencilOp_DecrementWrap:	return GL_DECR_WRAP;
 			default: return 0;
 		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::InitCG()
-	{
-		mCG_Context = cgCreateContext();
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::ExitCG()
-	{
-		cgDestroyContext(mCG_Context);
 	}
 
 	//-----------------------------------------------------------------------
