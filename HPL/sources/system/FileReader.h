@@ -30,6 +30,7 @@ namespace hpl {
 		void skip(uint32_t bytesToSkip);
 	};
 
+	char* LoadEntireFile(const tString& asFileName, int& alLength);
 }
 
 #endif // HPL_FILE_READER_H

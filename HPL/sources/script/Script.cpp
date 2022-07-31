@@ -10,6 +10,7 @@
 #include "system/LowLevelSystem.h"
 #include "impl/Platform.h"
 #include "system/String.h"
+#include "system/FileReader.h"
 
 #include "script/impl/scriptarray.h"
 #include "script/impl/scriptstdstring.h"
@@ -111,7 +112,7 @@ namespace hpl {
 	bool cScriptModule::CreateFromFile(const tString& asFileName)
 	{
 		int lLength;
-		char *pCharBuffer = LoadCharBuffer(asFileName,lLength);
+		char *pCharBuffer = LoadEntireFile(asFileName, lLength);
 		if(pCharBuffer==NULL){
 			Error("Couldn't load script '%s'!\n",asFileName.c_str());
 			return false;
@@ -149,24 +150,6 @@ namespace hpl {
 	{
 		ExecuteString(mpEngine, asFuncLine.c_str(), mpModule);
 		return true;
-	}
-
-	char* cScriptModule::LoadCharBuffer(const tString& asFileName, int& alLength)
-	{
-		FILE *pFile = fopen(asFileName.c_str(), "rb");
-		if (pFile == NULL) {
-			return NULL;
-		}
-
-		int lLength = (int)Platform::FileLength(pFile);
-		alLength = lLength;
-
-		char *pBuffer = hplNewArray(char,lLength);
-		fread(pBuffer, lLength, 1, pFile);
-
-		fclose(pFile);
-
-		return pBuffer;
 	}
 
 	//-----------------------------------------------------------------------

@@ -35,8 +35,6 @@ namespace hpl {
 		bool Run(const tString& asFuncLine);
 
 	private:
-		char* LoadCharBuffer(const tString& asFileName, int& alLength);
-
 		asIScriptEngine *mpEngine;
 		cScriptOutput *mpOutput;
 		asIScriptModule *mpModule;

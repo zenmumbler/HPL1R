@@ -29,4 +29,24 @@ namespace hpl {
 	void FileReader::skip(uint32_t bytesToSkip) {
 		fseek(f, bytesToSkip, SEEK_CUR);
 	}
+
+
+	char* LoadEntireFile(const tString& asFileName, int& alLength)
+	{
+		FILE *pFile = fopen(asFileName.c_str(), "rb");
+		if (pFile == NULL) {
+			return nullptr;
+		}
+
+		fseek(pFile, 0, SEEK_END);
+		alLength = static_cast<uint32_t>(ftell(pFile));
+		fseek(pFile, 0, SEEK_SET);
+
+		char *pBuffer = hplNewArray(char, alLength);
+		fread(pBuffer, alLength, 1, pFile);
+
+		fclose(pFile);
+		return pBuffer;
+	}
+
 }
