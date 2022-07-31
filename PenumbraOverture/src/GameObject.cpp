@@ -421,7 +421,6 @@ void cEntityLoader_GameObject::AfterLoad(TiXmlElement *apRootElem, const cMatrix
 	// Add to map handler
 	mpInit->mpMapHandler->AddGameEntity(pObject);
 
-	pObject->SetUpTransMaterials();
 	pObject->SetupBreakObject();
 	pObject->SetupForceOffset();
 

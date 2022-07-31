@@ -85,8 +85,6 @@ iGameEntity::iGameEntity(cInit *apInit, const tString &asName)
 
 	mbUpdatingCollisionCallbacks = false;
 
-	mbTransActive = false;
-
 	mvLastImpulse = 0;
 }
 
@@ -182,8 +180,6 @@ iGameEntity::~iGameEntity()
 		if( mvCallbackScripts[i]) hplDelete( mvCallbackScripts[i] );
 	}
 	STLMapDeleteAll(m_mapCollideCallbacks);
-
-	STLDeleteAll(mvTransMaterials);
 
 	for(size_t i=0; i<mvPreloadedBreakMeshes.size();++i)
 	{
@@ -449,71 +445,6 @@ void iGameEntity::SetHealth(float afHealth)
 	{
 		mfHealth = afHealth;
 	}
-}
-
-//-----------------------------------------------------------------------
-
-void iGameEntity::SetUpTransMaterials()
-{
-	mvNormalMaterials.resize(mpMeshEntity->GetSubMeshEntityNum());
-	mvTransMaterials.resize(mpMeshEntity->GetSubMeshEntityNum());
-
-	mbTransShadow = mpMeshEntity->IsShadowCaster();
-
-	for(int i=0; i< mpMeshEntity->GetSubMeshEntityNum(); ++i)
-	{
-		cSubMeshEntity *pSubEntity = mpMeshEntity->GetSubMeshEntity(i);
-		cSubMesh *pSubMesh = mpMeshEntity->GetMesh()->GetSubMesh(i);
-		
-		iMaterial *pNormalMaterial = pSubEntity->GetMaterial();
-		
-		mvNormalMaterials[i]= pSubEntity->GetCustomMaterial();
-		
-		//create material for the transperancy
-		iMaterial *pTransMaterial = mpInit->mpGame->GetGraphics()->GetMaterialHandler()->Create("Trans","Modulative");
-		
-		//Set texture for the trans material
-		iTexture *pDiffTex = pNormalMaterial->GetTexture(eMaterialTexture_Diffuse);
-		if(pDiffTex)
-		{
-			pDiffTex->IncUserCount();
-			pTransMaterial->SetTexture(pDiffTex,eMaterialTexture_Diffuse);
-
-			mvTransMaterials[i] = pTransMaterial;
-		}
-		else
-		{
-			Log("Sub mesh '%s' material '%s' does not have diffuse!\n",pSubMesh->GetName().c_str(),
-																	pNormalMaterial->GetName().c_str());
-		}
-	}
-}
-
-void iGameEntity::SetTransActive(bool abX)
-{
-	if(mbTransActive == abX) return;
-
-	mbTransActive = abX;
-	
-	if(mbTransShadow)
-	{
-		//mpMeshEntity->SetForceShadow(mbTransActive);
-	}
-	
-	for(int i=0; i< mpMeshEntity->GetSubMeshEntityNum(); ++i)
-	{
-		cSubMeshEntity *pSubEntity = mpMeshEntity->GetSubMeshEntity(i);
-		
-		if(mbTransActive)
-		{
-			pSubEntity->SetCustomMaterial(mvTransMaterials[i],false);
-		}
-		else
-		{
-			pSubEntity->SetCustomMaterial(mvNormalMaterials[i],false);
-		}
-	}
-
 }
 
 //-----------------------------------------------------------------------

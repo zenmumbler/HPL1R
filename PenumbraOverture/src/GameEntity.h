@@ -250,9 +250,6 @@ public:
     void SetCharBody(iCharacterBody *apCharBody){ mpCharBody = apCharBody;}
 	iCharacterBody* SetCharBody(){ return mpCharBody;}
 
-	void SetUpTransMaterials();
-	void SetTransActive(bool abX);
-
 	void SetPauseControllers(bool abX){ mbPauseControllers = abX;}
 	bool GetPauseControllers(){ return mbPauseControllers;}
 
@@ -336,11 +333,6 @@ protected:
 	bool mbSaveLights;
 	
 	cMeshEntity *mpMeshEntity;
-
-	std::vector<iMaterial*> mvNormalMaterials;
-	std::vector<iMaterial*> mvTransMaterials;
-	bool mbTransActive;
-	bool mbTransShadow;
 
 	cVector3f mvLastImpulse; 
 
