@@ -73,6 +73,8 @@ namespace hpl {
 		 */
 		bool AddScriptVar(const tString& asVarDecl, void *pVar);
 
+		asIScriptEngine* GetEngine() const { return mpEngine; };
+
 	private:
 		cResources* mpResources;
 		asIScriptEngine *mpEngine;
