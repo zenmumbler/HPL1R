@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "graphics/Material_EnvMap_Reflect.h"
+#include "graphics/old/Material_EnvMap_Reflect.h"
 #include "graphics/Renderer3D.h"
 #include "scene/Light.h"
 #include "scene/Camera.h"
@@ -80,7 +80,6 @@ namespace hpl {
 	{
 		mpLowGfx->SetActiveTextureUnit(1);
 		mpLowGfx->SetTextureEnv(eTextureParam_ColorFunc,eTextureFunc_Modulate);
-
 	}
 
 	//-----------------------------------------------------------------------
@@ -105,14 +104,14 @@ namespace hpl {
 
 		///////////////////////////////////////////
 		//Load the Z pass vertex program
-		iGpuProgram *pVtxProg = mpProgramManager->CreateProgram("Diffuse_Color_vp.cg","main",eGpuProgramType_Vertex);
-		SetProgram(pVtxProg,eGpuProgramType_Vertex,0);
+		iGpuProgram *pVtxProg = mpProgramManager->CreateProgram("Diffuse_Color_vp.cg","");
+		SetProgram(pVtxProg,0);
 
 
 		///////////////////////////////////////////
 		//Load the Z pass vertex program
-		pVtxProg = mpProgramManager->CreateProgram("Diffuse_EnvMap_Reflect_vp.cg","main",eGpuProgramType_Vertex);
-		SetProgram(pVtxProg,eGpuProgramType_Vertex,1);
+		pVtxProg = mpProgramManager->CreateProgram("Diffuse_EnvMap_Reflect_vp.cg","");
+		SetProgram(pVtxProg,1);
 	}
 
 	//-----------------------------------------------------------------------
@@ -132,9 +131,9 @@ namespace hpl {
 	iGpuProgram* cMaterial_EnvMap_Reflect::GetVertexProgram(eMaterialRenderType aType, int alPass, iLight3D *apLight)
 	{
 		if(aType == eMaterialRenderType_Z)
-			return mpProgram[eGpuProgramType_Vertex][0];
+			return mpProgram[0];
 		else
-			return mpProgram[eGpuProgramType_Vertex][1];
+			return mpProgram[1];
 	}
 
 	bool cMaterial_EnvMap_Reflect::VertexProgramUsesLight(eMaterialRenderType aType, int alPass, iLight3D *apLight)

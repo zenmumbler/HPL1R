@@ -142,21 +142,16 @@ namespace hpl {
 
 		cImageTrailEffect mImageTrailData;
 
-		iGpuProgram *mpBlurVP;
-		iGpuProgram *mpBlur2dFP;
-		iGpuProgram *mpBlurRectFP;
-		bool mbBlurFallback;
+		iGpuProgram *mpBlur2dProgram;
+		iGpuProgram *mpBlurRectProgram;
 
-		iGpuProgram *mpBloomVP;
-		iGpuProgram *mpBloomFP;
+		iGpuProgram *mpBloomProgram;
 
 		iTexture *mpBloomBlurTexture;
 
-		iGpuProgram *mpMotionBlurVP;
-		iGpuProgram *mpMotionBlurFP;
+		iGpuProgram *mpMotionBlurProgram;
 
-		iGpuProgram *mpDepthOfFieldVP;
-		iGpuProgram *mpDepthOfFieldFP;
+		iGpuProgram *mpDepthOfFieldProgram;
 		iTexture *mpDofBlurTexture;
 
 		tVertexVec mvTexRectVtx;

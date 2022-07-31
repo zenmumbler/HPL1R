@@ -23,7 +23,7 @@
 #include "resources/LowLevelResources.h"
 #include "graphics/GraphicsDrawer.h"
 #include "graphics/Renderer3D.h"
-#include "graphics/RendererPostEffects.h"
+// #include "graphics/RendererPostEffects.h"
 #include "graphics/RenderList.h"
 #include "graphics/MaterialHandler.h"
 #include "graphics/MeshCreator.h"
@@ -31,6 +31,7 @@
 #include "resources/Resources.h"
 
 // Materials
+#ifdef OLD_MATS
 #include "graphics/Material_Alpha.h"
 #include "graphics/Material_Diffuse.h"
 #include "graphics/Material_DiffuseSpec.h"
@@ -44,6 +45,7 @@
 #include "graphics/Material_Alpha.h"
 #include "graphics/Material_EnvMap_Reflect.h"
 #include "graphics/Material_Water.h"
+#endif
 
 namespace hpl {
 
@@ -62,7 +64,7 @@ namespace hpl {
 		mpMeshCreator = NULL;
 		mpMaterialHandler = NULL;
 		mpRenderer3D = NULL;
-		mpRendererPostEffects = NULL;
+		// mpRendererPostEffects = NULL;
 	}
 
 	//-----------------------------------------------------------------------
@@ -73,7 +75,7 @@ namespace hpl {
 		Log("--------------------------------------------------------\n");
 
 		hplDelete(mpRenderer3D);
-		hplDelete(mpRendererPostEffects);
+		// hplDelete(mpRendererPostEffects);
 		hplDelete(mpDrawer);
 		hplDelete(mpMeshCreator);
 		hplDelete(mpMaterialHandler);
@@ -106,13 +108,13 @@ namespace hpl {
 		mpRenderList = hplNew( cRenderList,(this));
 		mpMeshCreator = hplNew( cMeshCreator,(mpLowLevelGraphics, apResources));
 		mpRenderer3D = hplNew( cRenderer3D,(mpLowLevelGraphics,apResources,mpMeshCreator,mpRenderList));
-		mpRendererPostEffects = hplNew( cRendererPostEffects,(mpLowLevelGraphics,apResources,mpRenderList,
-														mpRenderer3D));
-		mpRenderer3D->SetPostEffects(mpRendererPostEffects);
+//		mpRendererPostEffects = hplNew( cRendererPostEffects,(mpLowLevelGraphics, apResources, mpRenderList, mpRenderer3D));
+//		mpRenderer3D->SetPostEffects(mpRendererPostEffects);
 
 
 		//Add all the materials.
 		Log(" Adding engine materials\n");
+		/*
 		mpMaterialHandler->Add(hplNew( cMaterialType_Diffuse,()) );
 		mpMaterialHandler->Add(hplNew( cMaterialType_Bump,()) );
 		mpMaterialHandler->Add(hplNew( cMaterialType_DiffuseSpec,()) );
@@ -128,6 +130,7 @@ namespace hpl {
 		mpMaterialHandler->Add(hplNew( cMaterialType_EnvMap_Reflect,()) );
 
 		mpMaterialHandler->Add(hplNew( cMaterialType_Water,()) );
+		*/
 
 		Log("--------------------------------------------------------\n\n");
 

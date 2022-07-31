@@ -55,8 +55,7 @@ namespace hpl {
 		mbDepthTest = true;
 		mfValue = 1;
 
-		for(int i=0;i<2;i++)
-			for(int j=0;j<kMaxProgramNum;j++) mpProgram[i][j]=NULL;
+		for(int j=0;j<kMaxProgramNum;j++) mpProgram[j]=NULL;
 
 		mlPassCount=0;
 
@@ -72,12 +71,10 @@ namespace hpl {
 				mpTextureManager->Destroy(mvTexture[i]);
 		}
 
-		for(i=0;i<2;i++){
-			for(int j=0;j<kMaxProgramNum;j++)
-			{
-				if(mpProgram[i][j])
-					mpProgramManager->Destroy(mpProgram[i][j]);
-			}
+		for(int j=0;j<kMaxProgramNum;j++)
+		{
+			if(mpProgram[j])
+				mpProgramManager->Destroy(mpProgram[j]);
 		}
 	}
 

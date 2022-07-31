@@ -239,8 +239,8 @@ void cEffect_SaveEffect::NormalSave(const cVector3f &avPos, cGameSaveArea *apSav
 	mpInit->mpPlayer->GetLookAt()->SetActive(true);
 	mpInit->mpPlayer->GetLookAt()->SetTarget(avPos,2.1f,4);
 
-	mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(true);
-	mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailAmount(0.8f);
+//	mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(true);
+//	mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailAmount(0.8f);
 
 	mfFlashAlpha =0;
 	mFlashColor = cColor(	216.0f / 255.0f, 
@@ -372,7 +372,7 @@ void cEffect_SaveEffect::NormalSaveUpdate(float afTimeStep)
 			mbActive = false;
 			mpInit->mpPlayer->SetActive(true);
 			mpInit->mpPlayer->GetLookAt()->SetActive(false);
-			mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(false);
+//			mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(false);
 
 			/////////////
 			//Display message
@@ -467,7 +467,7 @@ cEffect_DepthOfField::cEffect_DepthOfField(cInit *apInit)
 {
 	mbDisabled = false;
 	mpInit = apInit;
-	mpPostEffects = apInit->mpGame->GetGraphics()->GetRendererPostEffects();
+//	mpPostEffects = apInit->mpGame->GetGraphics()->GetRendererPostEffects();
 
 	Reset();
 }
@@ -490,11 +490,11 @@ void cEffect_DepthOfField::SetDisabled(bool abX)
 
 	if(mbDisabled)
 	{
-		mpPostEffects->SetDepthOfFieldActive(false);
+//		mpPostEffects->SetDepthOfFieldActive(false);
 	}
 	else if(mbActive)
 	{
-		mpPostEffects->SetDepthOfFieldActive(true);
+//		mpPostEffects->SetDepthOfFieldActive(true);
 	}
 
 }
@@ -505,7 +505,8 @@ void cEffect_DepthOfField::SetActive(bool abX, float afFadeTime)
 	if(mbDisabled) return;
 	
 	if(mbActive)
-		mpPostEffects->SetDepthOfFieldActive(true);
+		;
+//		mpPostEffects->SetDepthOfFieldActive(true);
 	
 	if(afFadeTime >0)
 		mfFadeSpeed = 1 / afFadeTime;
@@ -517,9 +518,9 @@ void cEffect_DepthOfField::SetActive(bool abX, float afFadeTime)
 
 void cEffect_DepthOfField::SetUp(float afNearPlane, float afFocalPlane, float afFarPlane)
 {
-	mpPostEffects->SetDepthOfFieldNearPlane(afNearPlane);
-	mpPostEffects->SetDepthOfFieldFocalPlane(afFocalPlane);
-	mpPostEffects->SetDepthOfFieldFarPlane(afFarPlane);
+//	mpPostEffects->SetDepthOfFieldNearPlane(afNearPlane);
+//	mpPostEffects->SetDepthOfFieldFocalPlane(afFocalPlane);
+//	mpPostEffects->SetDepthOfFieldFarPlane(afFarPlane);
 }
 
 void cEffect_DepthOfField::Update(float afTimeStep)
@@ -543,11 +544,11 @@ void cEffect_DepthOfField::Update(float afTimeStep)
 		mfMaxBlur -= afTimeStep * mfFadeSpeed;
 		if(mfMaxBlur <0) {
 			mfMaxBlur =0;
-			mpPostEffects->SetDepthOfFieldActive(false);
+//			mpPostEffects->SetDepthOfFieldActive(false);
 		}
 	}
 
-	mpPostEffects->SetDepthOfFieldMaxBlur(mfMaxBlur);
+//	mpPostEffects->SetDepthOfFieldMaxBlur(mfMaxBlur);
 }
 
 

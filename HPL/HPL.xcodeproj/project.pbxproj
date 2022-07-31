@@ -47,7 +47,6 @@
 		DB4AFBA20D7076EE00809E03 /* LowLevelSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFBA10D7076EE00809E03 /* LowLevelSound.cpp */; };
 		DB4AFBA40D7076F900809E03 /* MemoryManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFBA30D7076F900809E03 /* MemoryManager.cpp */; };
 		DBCEE59F0B4B33190088A7E3 /* Beam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE59C0B4B33190088A7E3 /* Beam.cpp */; };
-		DBCEE5A00B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE59D0B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp */; };
 		DBCEE7390B4B56440088A7E3 /* MeshLoaderColladaLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE6250B4B35D50088A7E3 /* MeshLoaderColladaLoader.cpp */; };
 		DBF84AA80AC76F1E00BB15CD /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B60AC76D5800BB15CD /* Action.cpp */; };
 		DBF84AA90AC76F1E00BB15CD /* ActionKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B70AC76D5800BB15CD /* ActionKeyboard.cpp */; };
@@ -104,17 +103,6 @@
 		DBF84AEE0AC76F1E00BB15CD /* LowLevelResourcesSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849910AC76D5800BB15CD /* LowLevelResourcesSDL.cpp */; };
 		DBF84AF00AC76F1E00BB15CD /* LowLevelSystemSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849930AC76D5800BB15CD /* LowLevelSystemSDL.cpp */; };
 		DBF84AF10AC76F1E00BB15CD /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849610AC76D5700BB15CD /* Material.cpp */; };
-		DBF84AF20AC76F1E00BB15CD /* Material_Additive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849620AC76D5700BB15CD /* Material_Additive.cpp */; };
-		DBF84AF30AC76F1E00BB15CD /* Material_Alpha.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849630AC76D5700BB15CD /* Material_Alpha.cpp */; };
-		DBF84AF40AC76F1E00BB15CD /* Material_BaseLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849640AC76D5700BB15CD /* Material_BaseLight.cpp */; };
-		DBF84AF50AC76F1E00BB15CD /* Material_Bump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849650AC76D5700BB15CD /* Material_Bump.cpp */; };
-		DBF84AF60AC76F1E00BB15CD /* Material_BumpColorSpec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849660AC76D5700BB15CD /* Material_BumpColorSpec.cpp */; };
-		DBF84AF70AC76F1E00BB15CD /* Material_BumpSpec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849670AC76D5700BB15CD /* Material_BumpSpec.cpp */; };
-		DBF84AF90AC76F1E00BB15CD /* Material_Diffuse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849690AC76D5700BB15CD /* Material_Diffuse.cpp */; };
-		DBF84AFD0AC76F1E00BB15CD /* Material_DiffuseSpec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8496D0AC76D5700BB15CD /* Material_DiffuseSpec.cpp */; };
-		DBF84AFF0AC76F1E00BB15CD /* Material_Flat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8496F0AC76D5700BB15CD /* Material_Flat.cpp */; };
-		DBF84B010AC76F1E00BB15CD /* Material_Modulative.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849710AC76D5700BB15CD /* Material_Modulative.cpp */; };
-		DBF84B020AC76F1E00BB15CD /* Material_ModulativeX2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849720AC76D5700BB15CD /* Material_ModulativeX2.cpp */; };
 		DBF84B040AC76F1E00BB15CD /* MaterialHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849740AC76D5800BB15CD /* MaterialHandler.cpp */; };
 		DBF84B050AC76F1E00BB15CD /* MaterialManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849DF0AC76D5800BB15CD /* MaterialManager.cpp */; };
 		DBF84B060AC76F1E00BB15CD /* Math.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849C00AC76D5800BB15CD /* Math.cpp */; };
@@ -161,7 +149,6 @@
 		DBF84B360AC76F1E00BB15CD /* Quaternion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849C30AC76D5800BB15CD /* Quaternion.cpp */; };
 		DBF84B370AC76F1E00BB15CD /* Renderable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8497D0AC76D5800BB15CD /* Renderable.cpp */; };
 		DBF84B390AC76F1E00BB15CD /* Renderer3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8497F0AC76D5800BB15CD /* Renderer3D.cpp */; };
-		DBF84B3A0AC76F1E00BB15CD /* RendererPostEffects.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849800AC76D5800BB15CD /* RendererPostEffects.cpp */; };
 		DBF84B3B0AC76F1E00BB15CD /* RenderList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849810AC76D5800BB15CD /* RenderList.cpp */; };
 		DBF84B3D0AC76F1E00BB15CD /* RenderState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849830AC76D5800BB15CD /* RenderState.cpp */; };
 		DBF84B3E0AC76F1E00BB15CD /* ResourceBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849E30AC76D5800BB15CD /* ResourceBase.cpp */; };
@@ -196,7 +183,6 @@
 		DBF84B6C0AC76F1E00BB15CD /* Updater.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849520AC76D5700BB15CD /* Updater.cpp */; };
 		DBF84B6E0AC76F1E00BB15CD /* VertexBufferVBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B40AC76D5800BB15CD /* VertexBufferVBO.cpp */; };
 		DBF84B710AC76F1E00BB15CD /* World3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A120AC76D5800BB15CD /* World3D.cpp */; };
-		DBFBA0190B65E42A0021DAE2 /* Material_Water.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBFBA0180B65E42A0021DAE2 /* Material_Water.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -763,6 +749,41 @@
 			path = cgltf;
 			sourceTree = "<group>";
 		};
+		8E2120892896B43B00761D1D /* old */ = {
+			isa = PBXGroup;
+			children = (
+				DBF849620AC76D5700BB15CD /* Material_Additive.cpp */,
+				DB27F0380ACB9AB90054ACA3 /* Material_Additive.h */,
+				DBF849630AC76D5700BB15CD /* Material_Alpha.cpp */,
+				DB27F0390ACB9AB90054ACA3 /* Material_Alpha.h */,
+				DBF849640AC76D5700BB15CD /* Material_BaseLight.cpp */,
+				DB27F03A0ACB9AB90054ACA3 /* Material_BaseLight.h */,
+				DBF849650AC76D5700BB15CD /* Material_Bump.cpp */,
+				DB27F03B0ACB9AB90054ACA3 /* Material_Bump.h */,
+				DBF849660AC76D5700BB15CD /* Material_BumpColorSpec.cpp */,
+				DB27F03C0ACB9AB90054ACA3 /* Material_BumpColorSpec.h */,
+				DBF849670AC76D5700BB15CD /* Material_BumpSpec.cpp */,
+				DB27F03D0ACB9AB90054ACA3 /* Material_BumpSpec.h */,
+				DBF849690AC76D5700BB15CD /* Material_Diffuse.cpp */,
+				DB27F03F0ACB9AB90054ACA3 /* Material_Diffuse.h */,
+				DBF8496D0AC76D5700BB15CD /* Material_DiffuseSpec.cpp */,
+				DB27F0430ACB9AB90054ACA3 /* Material_DiffuseSpec.h */,
+				DBCEE59D0B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp */,
+				DBCEE5A30B4B332E0088A7E3 /* Material_EnvMap_Reflect.h */,
+				DBF8496F0AC76D5700BB15CD /* Material_Flat.cpp */,
+				DB27F0450ACB9AB90054ACA3 /* Material_Flat.h */,
+				DBF849710AC76D5700BB15CD /* Material_Modulative.cpp */,
+				DB27F0470ACB9AB90054ACA3 /* Material_Modulative.h */,
+				DBF849720AC76D5700BB15CD /* Material_ModulativeX2.cpp */,
+				DB27F0480ACB9AB90054ACA3 /* Material_ModulativeX2.h */,
+				DBFBA0180B65E42A0021DAE2 /* Material_Water.cpp */,
+				DB4AFBE00D70773700809E03 /* Material_Water.h */,
+				DBF849800AC76D5800BB15CD /* RendererPostEffects.cpp */,
+				DB27F0580ACB9AB90054ACA3 /* RendererPostEffects.h */,
+			);
+			path = old;
+			sourceTree = "<group>";
+		};
 		8E3A7282261135050086F8ED /* script */ = {
 			isa = PBXGroup;
 			children = (
@@ -1022,6 +1043,7 @@
 		DBF849530AC76D5700BB15CD /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				8E2120892896B43B00761D1D /* old */,
 				8E3A741C261770CC0086F8ED /* impl */,
 				8E3A741B26176F0A0086F8ED /* ogl2 */,
 				DBF849540AC76D5700BB15CD /* Animation.cpp */,
@@ -1052,32 +1074,6 @@
 				DB27F0330ACB9AB90054ACA3 /* GraphicsTypes.h */,
 				DB27F0350ACB9AB90054ACA3 /* LowLevelGraphics.h */,
 				DB27F0360ACB9AB90054ACA3 /* LowLevelPicture.h */,
-				DBF849620AC76D5700BB15CD /* Material_Additive.cpp */,
-				DB27F0380ACB9AB90054ACA3 /* Material_Additive.h */,
-				DBF849630AC76D5700BB15CD /* Material_Alpha.cpp */,
-				DB27F0390ACB9AB90054ACA3 /* Material_Alpha.h */,
-				DBF849640AC76D5700BB15CD /* Material_BaseLight.cpp */,
-				DB27F03A0ACB9AB90054ACA3 /* Material_BaseLight.h */,
-				DBF849650AC76D5700BB15CD /* Material_Bump.cpp */,
-				DB27F03B0ACB9AB90054ACA3 /* Material_Bump.h */,
-				DBF849660AC76D5700BB15CD /* Material_BumpColorSpec.cpp */,
-				DB27F03C0ACB9AB90054ACA3 /* Material_BumpColorSpec.h */,
-				DBF849670AC76D5700BB15CD /* Material_BumpSpec.cpp */,
-				DB27F03D0ACB9AB90054ACA3 /* Material_BumpSpec.h */,
-				DBF849690AC76D5700BB15CD /* Material_Diffuse.cpp */,
-				DB27F03F0ACB9AB90054ACA3 /* Material_Diffuse.h */,
-				DBF8496D0AC76D5700BB15CD /* Material_DiffuseSpec.cpp */,
-				DB27F0430ACB9AB90054ACA3 /* Material_DiffuseSpec.h */,
-				DBCEE59D0B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp */,
-				DBCEE5A30B4B332E0088A7E3 /* Material_EnvMap_Reflect.h */,
-				DBF8496F0AC76D5700BB15CD /* Material_Flat.cpp */,
-				DB27F0450ACB9AB90054ACA3 /* Material_Flat.h */,
-				DBF849710AC76D5700BB15CD /* Material_Modulative.cpp */,
-				DB27F0470ACB9AB90054ACA3 /* Material_Modulative.h */,
-				DBF849720AC76D5700BB15CD /* Material_ModulativeX2.cpp */,
-				DB27F0480ACB9AB90054ACA3 /* Material_ModulativeX2.h */,
-				DBFBA0180B65E42A0021DAE2 /* Material_Water.cpp */,
-				DB4AFBE00D70773700809E03 /* Material_Water.h */,
 				DBF849610AC76D5700BB15CD /* Material.cpp */,
 				DB27F0370ACB9AB90054ACA3 /* Material.h */,
 				DBF849740AC76D5800BB15CD /* MaterialHandler.cpp */,
@@ -1099,8 +1095,6 @@
 				DB27F0550ACB9AB90054ACA3 /* Renderable.h */,
 				DBF8497F0AC76D5800BB15CD /* Renderer3D.cpp */,
 				DB27F0570ACB9AB90054ACA3 /* Renderer3D.h */,
-				DBF849800AC76D5800BB15CD /* RendererPostEffects.cpp */,
-				DB27F0580ACB9AB90054ACA3 /* RendererPostEffects.h */,
 				DBF849810AC76D5800BB15CD /* RenderList.cpp */,
 				DB27F0590ACB9AB90054ACA3 /* RenderList.h */,
 				DBF849830AC76D5800BB15CD /* RenderState.cpp */,
@@ -1530,18 +1524,7 @@
 				8EA48718260FFCD3000D1AB7 /* scriptstdstring.cpp in Sources */,
 				8E11634A26BED6FF0065E04C /* imgui_demo.cpp in Sources */,
 				DBF84AF10AC76F1E00BB15CD /* Material.cpp in Sources */,
-				DBF84AF20AC76F1E00BB15CD /* Material_Additive.cpp in Sources */,
-				DBF84AF30AC76F1E00BB15CD /* Material_Alpha.cpp in Sources */,
-				DBF84AF40AC76F1E00BB15CD /* Material_BaseLight.cpp in Sources */,
-				DBF84AF50AC76F1E00BB15CD /* Material_Bump.cpp in Sources */,
-				DBF84AF60AC76F1E00BB15CD /* Material_BumpColorSpec.cpp in Sources */,
-				DBF84AF70AC76F1E00BB15CD /* Material_BumpSpec.cpp in Sources */,
-				DBF84AF90AC76F1E00BB15CD /* Material_Diffuse.cpp in Sources */,
-				DBF84AFD0AC76F1E00BB15CD /* Material_DiffuseSpec.cpp in Sources */,
 				8E11636826BEDA630065E04C /* tinyxml.cpp in Sources */,
-				DBF84AFF0AC76F1E00BB15CD /* Material_Flat.cpp in Sources */,
-				DBF84B010AC76F1E00BB15CD /* Material_Modulative.cpp in Sources */,
-				DBF84B020AC76F1E00BB15CD /* Material_ModulativeX2.cpp in Sources */,
 				DBF84B040AC76F1E00BB15CD /* MaterialHandler.cpp in Sources */,
 				DBF84B050AC76F1E00BB15CD /* MaterialManager.cpp in Sources */,
 				DBF84B060AC76F1E00BB15CD /* Math.cpp in Sources */,
@@ -1595,7 +1578,6 @@
 				DBF84B370AC76F1E00BB15CD /* Renderable.cpp in Sources */,
 				8E11634926BED6FF0065E04C /* imgui_widgets.cpp in Sources */,
 				DBF84B390AC76F1E00BB15CD /* Renderer3D.cpp in Sources */,
-				DBF84B3A0AC76F1E00BB15CD /* RendererPostEffects.cpp in Sources */,
 				8E11635826BED8DC0065E04C /* stb_image.c in Sources */,
 				DBF84B3B0AC76F1E00BB15CD /* RenderList.cpp in Sources */,
 				DBF84B3D0AC76F1E00BB15CD /* RenderState.cpp in Sources */,
@@ -1637,9 +1619,7 @@
 				DBF84B6E0AC76F1E00BB15CD /* VertexBufferVBO.cpp in Sources */,
 				DBF84B710AC76F1E00BB15CD /* World3D.cpp in Sources */,
 				DBCEE59F0B4B33190088A7E3 /* Beam.cpp in Sources */,
-				DBCEE5A00B4B33190088A7E3 /* Material_EnvMap_Reflect.cpp in Sources */,
 				DBCEE7390B4B56440088A7E3 /* MeshLoaderColladaLoader.cpp in Sources */,
-				DBFBA0190B65E42A0021DAE2 /* Material_Water.cpp in Sources */,
 				DB294E100C11DC6E005DA55C /* CRC.cpp in Sources */,
 				DB4AFB470D7075B900809E03 /* Haptic.cpp in Sources */,
 				DB4AFB480D7075B900809E03 /* LowLevelHaptic.cpp in Sources */,

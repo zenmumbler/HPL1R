@@ -159,7 +159,7 @@ public:
 	void Reset();
 private:
 	cInit *mpInit;
-	cRendererPostEffects *mpPostEffects;
+	// cRendererPostEffects *mpPostEffects;
 
 	iPhysicsBody *mpFocusBody;
 	

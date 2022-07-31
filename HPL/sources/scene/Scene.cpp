@@ -28,7 +28,7 @@
 #include "scene/Camera.h"
 #include "scene/World3D.h"
 #include "graphics/Renderer3D.h"
-#include "graphics/RendererPostEffects.h"
+// #include "graphics/RendererPostEffects.h"
 #include "graphics/GraphicsDrawer.h"
 #include "graphics/RenderList.h"
 #include "resources/ScriptManager.h"
@@ -228,7 +228,7 @@ namespace hpl {
 			STOP_TIMING(PostSceneDraw)
 
 			START_TIMING(PostEffects)
-			mpGraphics->GetRendererPostEffects()->Render();
+			// mpGraphics->GetRendererPostEffects()->Render();
 			STOP_TIMING(PostEffects)
 		}
 		else

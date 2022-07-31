@@ -39,8 +39,7 @@ namespace hpl {
 		eRenderStateType_Depth = 3,
 		eRenderStateType_AlphaMode = 4,
 		eRenderStateType_BlendMode = 5,
-		eRenderStateType_VertexProgram = 6,
-		eRenderStateType_FragmentProgram = 7,
+		eRenderStateType_GPUProgram = 6,
 		eRenderStateType_Texture = 8,
 		eRenderStateType_VertexBuffer = 9,
 		eRenderStateType_Matrix = 10,
@@ -82,14 +81,13 @@ namespace hpl {
 		eMaterialChannelMode mChannelMode;
 
 		//Vertex program
-		iGpuProgram *mpVtxProgram;
+		iGpuProgram *mpProgram;
 		iMaterialProgramSetup* mpVtxProgramSetup;
 		bool mbUsesLight;
 		bool mbUsesEye;
 		iLight3D* mpLight;
 
 		//Fragment program
-		iGpuProgram *mpFragProgram;
 		iMaterialProgramSetup* mpFragProgramSetup;
 
 		//Texture

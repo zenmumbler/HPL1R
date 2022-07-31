@@ -1033,7 +1033,7 @@ cPlayerDamage::cPlayerDamage(cInit *apInit)
 {
 	mpInit = apInit;
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
-	mpPostEffects = mpInit->mpGame->GetGraphics()->GetRendererPostEffects();
+//	mpPostEffects = mpInit->mpGame->GetGraphics()->GetRendererPostEffects();
 
 	mbActive = false;
 
@@ -1068,8 +1068,8 @@ void cPlayerDamage::Start(float afSize, ePlayerDamageType aType)
 	
 	if(!mpInit->mpPlayer->GetFearFilter()->IsActive())
 	{
-		mpPostEffects->SetImageTrailActive(true);
-		mpPostEffects->SetImageTrailAmount(0);
+//		mpPostEffects->SetImageTrailActive(true);
+//		mpPostEffects->SetImageTrailAmount(0);
 	}
 
 	mvHeadSwingSpeed = cVector2f(cMath::RandRectf(-1,1), cMath::RandRectf(0,0.5f));
@@ -1130,7 +1130,7 @@ void cPlayerDamage::Update(float afTimeStep)
 	{
 		if(!mpInit->mpPlayer->GetFearFilter()->IsActive())
 		{
-			mpPostEffects->SetImageTrailAmount(mfAlpha *0.92f);
+//			mpPostEffects->SetImageTrailAmount(mfAlpha *0.92f);
 		}
 	}
 
@@ -1142,8 +1142,8 @@ void cPlayerDamage::Update(float afTimeStep)
 		{
 			if(!mpInit->mpPlayer->GetFearFilter()->IsActive())
 			{
-				mpPostEffects->SetImageTrailActive(false);
-				mpPostEffects->SetImageTrailAmount(0);
+//				mpPostEffects->SetImageTrailActive(false);
+//				mpPostEffects->SetImageTrailAmount(0);
 			}
 		}
 	}
@@ -1170,7 +1170,7 @@ cPlayerDeath::cPlayerDeath(cInit *apInit)
 {
 	mpInit = apInit;
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
-	mpPostEffects = mpInit->mpGame->GetGraphics()->GetRendererPostEffects();
+//	mpPostEffects = mpInit->mpGame->GetGraphics()->GetRendererPostEffects();
 
 	mpFadeGfx = mpDrawer->CreateGfxObject("player_death_fade.bmp",eGfxMaterialType::Smoke);
 	mpBlackGfx = mpDrawer->CreateGfxObject("player_death_black.bmp",eGfxMaterialType::Smoke);
@@ -1190,7 +1190,7 @@ void cPlayerDeath::Reset()
 	mfHeightAdd =0;
 	mfRoll =0;
 
-	mpPostEffects->SetImageTrailActive(false);
+//	mpPostEffects->SetImageTrailActive(false);
 }
 
 //-----------------------------------------------------------------------
@@ -1223,8 +1223,8 @@ void cPlayerDeath::Start()
 	mfFadeAlpha =0;
 	mfBlackAlpha = 0;
 
-	mpPostEffects->SetImageTrailActive(true);
-	mpPostEffects->SetImageTrailAmount(0.7f);
+//	mpPostEffects->SetImageTrailActive(true);
+//	mpPostEffects->SetImageTrailAmount(0.7f);
 
 	mpInit->mpPlayer->GetEarRing()->Stop(false);
 
@@ -1979,7 +1979,7 @@ void cPlayerFearFilter::Update(float afTimeStep)
 	{
 		mfAlpha += afTimeStep * 0.5f;
 		if(mfAlpha > mfMaxAlpha) mfAlpha = mfMaxAlpha;
-		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailAmount(mfAlpha);
+//		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailAmount(mfAlpha);
 	}
 	else if(mfAlpha >0)
 	{
@@ -1987,11 +1987,11 @@ void cPlayerFearFilter::Update(float afTimeStep)
 		if(mfAlpha < 0)
 		{
 			mfAlpha =0;
-			mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(false);
+//			mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(false);
 		}
 		else
 		{
-			mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailAmount(mfAlpha);
+//			mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailAmount(mfAlpha);
 		}
 	}
 }
@@ -2014,8 +2014,8 @@ void cPlayerFearFilter::SetActive(bool abX)
 	mbActive = abX;
 	mfAlpha =0;
 
-	mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(true);
-	mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailAmount(0);
+//	mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(true);
+//	mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailAmount(0);
 }
 
 //-----------------------------------------------------------------------
@@ -2224,7 +2224,7 @@ void cPlayerHidden::UnHide()
 
 	if(mbEnemyTooClose)
 	{
-		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(false);
+//		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(false);
 	}
 
 	mfEnemyTooCloseCount =0;
@@ -2612,12 +2612,12 @@ void cPlayerHidden::UpdateEnemyTooClose(float afTimeStep)
 
         pCam->SetFOV(mfFov + fAdd);
 
-		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(true);
-		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailAmount(0.8f);
+//		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(true);
+//		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailAmount(0.8f);
 	}
 	else if(mfCloseEffectFov !=0)
 	{
-		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(false);
+//		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(false);
 
 		if(mfCloseEffectFov < 0)
 		{
@@ -2742,7 +2742,7 @@ void cPlayerHidden::UpdateEnemyTooClose(float afTimeStep)
 		else if(mfEnemyTooCloseCount >0)
 		{
 			mfEnemyTooCloseCount-= afTimeStep;
-			mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(false);
+//			mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetImageTrailActive(false);
 		}
 	}
 

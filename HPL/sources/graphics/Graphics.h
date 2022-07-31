@@ -25,7 +25,7 @@ namespace hpl {
 
 	class cResources;
 	class cRenderer3D;
-	class cRendererPostEffects;
+	// class cRendererPostEffects;
 	class cRenderList;
 	class cGraphicsDrawer;
 	class iLowLevelResources;
@@ -55,7 +55,7 @@ namespace hpl {
 		cGraphicsDrawer* GetDrawer();
 
 		cRenderer3D* GetRenderer3D(){ return mpRenderer3D;}
-		cRendererPostEffects* GetRendererPostEffects(){ return mpRendererPostEffects;}
+		// cRendererPostEffects* GetRendererPostEffects(){ return mpRendererPostEffects;}
 		cMeshCreator* GetMeshCreator(){return mpMeshCreator;}
 		cMaterialHandler* GetMaterialHandler(){return mpMaterialHandler;}
 
@@ -66,7 +66,7 @@ namespace hpl {
 		cMeshCreator *mpMeshCreator;
 		cMaterialHandler *mpMaterialHandler;
 		cRenderer3D* mpRenderer3D;
-		cRendererPostEffects* mpRendererPostEffects;
+		// cRendererPostEffects* mpRendererPostEffects;
 		cRenderList *mpRenderList;
 	};
 

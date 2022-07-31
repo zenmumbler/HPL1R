@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "graphics/RendererPostEffects.h"
+#include "graphics/old/RendererPostEffects.h"
 #include "graphics/Texture.h"
 #include "scene/Scene.h"
 #include "system/LowLevelSystem.h"
@@ -87,38 +87,17 @@ namespace hpl {
 
 		/////////////////
 		//Blur programs
-		mbBlurFallback = false; //Set to true if the fallbacks are used.
+		mpBlurRectProgram = mpGpuManager->CreateProgram("PostEffect_Blur_vp.cg", "PostEffect_Blur_Rect_fp.cg");
+		if(!mpBlurRectProgram) Error("Couldn't load BlurRectProgram!\n");
 
-		mpBlurVP = mpGpuManager->CreateProgram("PostEffect_Blur_vp.cg","main",eGpuProgramType_Vertex);
-		if(!mpBlurVP) Error("Couldn't load 'PostEffect_Blur_vp.cg'!\n");
-
-		mpBlurRectFP = mpGpuManager->CreateProgram("PostEffect_Blur_Rect_fp.cg","main",eGpuProgramType_Fragment);
-		/*if(!mpBlurRectFP)
-		{
-			mbBlurFallback = true;
-			Log(" Using Blur Rect FP fallback\n");
-			mpBlurRectFP = mpGpuManager->CreateProgram("PostEffect_Fallback01_Blur_Rect_fp.cg","main",eGpuProgramType_Fragment);
-			if(!mpBlurRectFP) Error("Couldn't load 'PostEffect_Blur_Rect_fp.cg'!\n");
-		}*/
-
-
-		mpBlur2dFP = mpGpuManager->CreateProgram("PostEffect_Blur_2D_fp.cg","main",eGpuProgramType_Fragment);
-		/*if(!mpBlur2dFP)
-		{
-			mbBlurFallback = true;
-			Log(" Using Blur 2D FP fallback\n");
-			mpBlur2dFP = mpGpuManager->CreateProgram("PostEffect_Fallback01_Blur_2D_fp.cg","main",eGpuProgramType_Fragment);
-			if(!mpBlur2dFP) Error("Couldn't load 'PostEffect_Blur_2D_fp.cg'!\n");
-		}*/
+		mpBlur2dProgram = mpGpuManager->CreateProgram("PostEffect_Blur_vp.cg", "PostEffect_Blur_2D_fp.cg");
+		if(!mpBlur2dProgram) Error("Couldn't load Blur2dProgram!\n");
 
 
 		/////////////////
 		// Bloom programs
-		mpBloomVP = mpGpuManager->CreateProgram("PostEffect_Bloom_vp.cg","main",eGpuProgramType_Vertex);
-		if(!mpBloomVP) Error("Couldn't load 'PostEffect_Bloom_vp.cg'!\n");
-
-		mpBloomFP = mpGpuManager->CreateProgram("PostEffect_Bloom_fp.cg","main",eGpuProgramType_Fragment);
-		if(!mpBloomFP) Error("Couldn't load 'PostEffect_Bloom_fp.cg'!\n");
+		mpBloomProgram = mpGpuManager->CreateProgram("PostEffect_Bloom_vp.cg", "PostEffect_Bloom_fp.cg");
+		if(!mpBloomProgram) Error("Couldn't load 'PostEffect_Bloom_fp.cg'!\n");
 
 		//Bloom blur textures
 		mpBloomBlurTexture = mpLowLevelGraphics->CreateTexture(
@@ -137,28 +116,12 @@ namespace hpl {
 
 		/////////////////
 		// MotionBlur programs
-		mpMotionBlurVP = mpGpuManager->CreateProgram("PostEffect_Motion_vp.cg","main",eGpuProgramType_Vertex);
-		if(!mpMotionBlurVP) Error("Couldn't load 'PostEffect_Motion_vp.cg'!\n");
-
-		// Disable the dynamic loop version on Mac OS X until we figure why it doesn't work
-		mpMotionBlurFP = NULL;
-		#ifndef __APPLE__
-		mpMotionBlurFP = mpGpuManager->CreateProgram("PostEffect_Motion_fp.cg","main",eGpuProgramType_Fragment);
-		#endif
-		if(!mpMotionBlurFP)
-		{
-			Log("Dynamic loops in motion blur fp not supported, loading static instead.\n");
-			mpMotionBlurFP = mpGpuManager->CreateProgram("PostEffect_Motion_staticloop_fp.cg","main",eGpuProgramType_Fragment);
-			if(!mpMotionBlurFP)	Error("Couldn't load 'PostEffect_Motion_fp.cg'!\n");
-		}
+		mpMotionBlurProgram = mpGpuManager->CreateProgram("PostEffect_Motion_vp.cg", "PostEffect_Motion_fp.cg");
+		if(!mpMotionBlurProgram) Error("Couldn't load 'PostEffect_Motion_vp.cg'!\n");
 
 		/////////////////
 		// Depth of Field programs
-		mpDepthOfFieldVP = mpGpuManager->CreateProgram("PostEffect_DoF_vp.cg","main",eGpuProgramType_Vertex);
-		if(!mpDepthOfFieldVP) Error("Couldn't load 'PostEffect_DoF_vp.cg'!\n");
-
-		mpDepthOfFieldFP = mpGpuManager->CreateProgram("PostEffect_DoF_fp.cg","main",eGpuProgramType_Fragment);
-		if(!mpDepthOfFieldFP) Error("Couldn't load 'PostEffect_DoF_fp.cg'!\n");
+		mpDepthOfFieldProgram = mpGpuManager->CreateProgram("PostEffect_DoF_vp.cg","PostEffect_DoF_fp.cg");
 
 		//Depth of Field blur textures
 		mpDofBlurTexture = mpLowLevelGraphics->CreateTexture(	cVector2l(256,256),
@@ -206,18 +169,14 @@ namespace hpl {
 		for(int i=0;i<2;i++)
 			if(mpScreenBuffer[i])hplDelete(mpScreenBuffer[i]);
 
-		if(mpBlurVP) mpGpuManager->Destroy(mpBlurVP);
-		if(mpBlur2dFP) mpGpuManager->Destroy(mpBlur2dFP);
-		if(mpBlurRectFP) mpGpuManager->Destroy(mpBlurRectFP);
+		if(mpBlur2dProgram) mpGpuManager->Destroy(mpBlur2dProgram);
+		if(mpBlurRectProgram) mpGpuManager->Destroy(mpBlurRectProgram);
 
-		if(mpBloomVP) mpGpuManager->Destroy(mpBloomVP);
-		if(mpBloomFP) mpGpuManager->Destroy(mpBloomFP);
+		if(mpBloomProgram) mpGpuManager->Destroy(mpBloomProgram);
 
-		if(mpMotionBlurVP) mpGpuManager->Destroy(mpMotionBlurVP);
-		if(mpMotionBlurFP) mpGpuManager->Destroy(mpMotionBlurFP);
+		if(mpMotionBlurProgram) mpGpuManager->Destroy(mpMotionBlurProgram);
 
-		if(mpDepthOfFieldVP) mpGpuManager->Destroy(mpDepthOfFieldVP);
-		if(mpDepthOfFieldFP) mpGpuManager->Destroy(mpDepthOfFieldFP);
+		if(mpDepthOfFieldProgram) mpGpuManager->Destroy(mpDepthOfFieldProgram);
 
 		if(mpBloomBlurTexture) hplDelete(mpBloomBlurTexture);
 		if(mpDofBlurTexture) hplDelete(mpDofBlurTexture);
@@ -284,7 +243,7 @@ namespace hpl {
 													float afBlurAmount)
 	{
 		bool bProgramsLoaded = false;
-		if(mpBlurRectFP && mpBlur2dFP && mpBlurVP) bProgramsLoaded = true;
+		if(mpBlurRectProgram && mpBlur2dProgram) bProgramsLoaded = true;
 
 		iLowLevelGraphics *pLowLevel = mpLowLevelGraphics;
 		cVector2l vBlurSize = cVector2l(apDestination->GetWidth(), apDestination->GetHeight());
@@ -300,23 +259,16 @@ namespace hpl {
 		//Shader setup
 		if(bProgramsLoaded)
 		{
-			//Setup vertex program
-			mpBlurVP->Bind();
-			mpBlurVP->SetFloat("xOffset", 1);
-			mpBlurVP->SetFloat("yOffset", 0);
-			mpBlurVP->SetFloat("amount", afBlurAmount);
-			mpBlurVP->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
+			mpBlurRectProgram->Bind();
 
-			//Setup fragment program
-			mpBlurRectFP->Bind();
+			mpBlurRectProgram->SetFloat("xOffset", 1);
+			mpBlurRectProgram->SetFloat("yOffset", 0);
+			mpBlurRectProgram->SetFloat("amount", afBlurAmount);
+			mpBlurRectProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 		}
 
 		//Draw the screen texture with blur
 		pLowLevel->SetTexture(0,apSource);
-		if(mbBlurFallback){
-			mpLowLevelGraphics->SetTexture(1,apSource);
-			mpLowLevelGraphics->SetTexture(2,apSource);
-		}
 
 		{
 			mvTexRectVtx[0] = cVertex(cVector3f(0,0,40),cVector2f(0,mvScreenSize.y),cColor(1,1.0f) );
@@ -336,20 +288,14 @@ namespace hpl {
 		//Shader setup
 		if(bProgramsLoaded)
 		{
-			mpBlurVP->SetFloat("xOffset",0);
-			mpBlurVP->SetFloat("yOffset",1);
-			mpBlurVP->SetFloat("amount",(1 / pLowLevel->GetScreenSize().x) * afBlurAmount);
-
-			mpBlurRectFP->UnBind();
-			mpBlur2dFP->Bind();
+			mpBlur2dProgram->Bind();
+			mpBlur2dProgram->SetFloat("xOffset",0);
+			mpBlur2dProgram->SetFloat("yOffset",1);
+			mpBlur2dProgram->SetFloat("amount",(1 / pLowLevel->GetScreenSize().x) * afBlurAmount);
 		}
 
 		//Set texture and draw
 		pLowLevel->SetTexture(0,apDestination);
-		if(mbBlurFallback){
-			mpLowLevelGraphics->SetTexture(1,apDestination);
-			mpLowLevelGraphics->SetTexture(2,apDestination);
-		}
 
 		{
 			mvTexRectVtx[0] = cVertex(cVector3f(0,0,40),cVector2f(0,1),cColor(1,1.0f) );
@@ -363,16 +309,10 @@ namespace hpl {
 		//Shader setup
 		if(bProgramsLoaded)
 		{
-			mpBlur2dFP->UnBind();
-			mpBlurVP->UnBind();
+			mpBlur2dProgram->UnBind();
 		}
 
 		pLowLevel->CopyContextToTexure(apDestination,0, vBlurSize);
-
-		if(mbBlurFallback){
-			mpLowLevelGraphics->SetTexture(1,NULL);
-			mpLowLevelGraphics->SetTexture(2,NULL);
-		}
 	}
 
 	//-----------------------------------------------------------------------
@@ -388,7 +328,7 @@ namespace hpl {
 	{
 		if(mbDofActive==false) return;
 
-		if(mpDepthOfFieldFP==NULL || mpDepthOfFieldVP==NULL) return;
+		if(mpDepthOfFieldProgram==NULL) return;
 
 		//////////////////////////////
 		// Setup
@@ -455,12 +395,11 @@ namespace hpl {
 		mpLowLevelGraphics->SetBlendActive(false);
 
 		//Setup
-		mpDepthOfFieldVP->Bind();
+		mpDepthOfFieldProgram->Bind();
 
-		mpDepthOfFieldFP->Bind();
-		mpDepthOfFieldFP->SetVec3f("planes",cVector3f(mfDofNearPlane,mfDofFocalPlane,mfDofFarPlane));
-		mpDepthOfFieldFP->SetFloat("maxBlur",mfDofMaxBlur);
-		mpDepthOfFieldFP->SetVec2f("screenSize",mvScreenSize);
+		mpDepthOfFieldProgram->SetVec3f("planes",cVector3f(mfDofNearPlane,mfDofFocalPlane,mfDofFarPlane));
+		mpDepthOfFieldProgram->SetFloat("maxBlur",mfDofMaxBlur);
+		mpDepthOfFieldProgram->SetVec2f("screenSize",mvScreenSize);
 
 		//////////////////
 		//Render objects
@@ -476,7 +415,7 @@ namespace hpl {
 			{
 				mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,cMath::MatrixMul(pCam->GetViewMatrix(), *pMtx));
 
-				mpDepthOfFieldVP->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
+				mpDepthOfFieldProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 			}
 			//////////////////
 			//NULL Model view matrix (static)
@@ -484,7 +423,7 @@ namespace hpl {
 			{
 				mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,pCam->GetViewMatrix());
 
-				mpDepthOfFieldVP->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
+				mpDepthOfFieldProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 			}
 
 			pObject->GetVertexBuffer()->Bind();
@@ -502,8 +441,7 @@ namespace hpl {
 		mpLowLevelGraphics->SetDepthWriteActive(true);
 
 		//Reset stuff
-		mpDepthOfFieldFP->UnBind();
-		mpDepthOfFieldVP->UnBind();
+		mpDepthOfFieldProgram->UnBind();
 		mpLowLevelGraphics->SetTexture(0,NULL);
 		mpLowLevelGraphics->SetTexture(1,NULL);
 	}
@@ -514,7 +452,7 @@ namespace hpl {
 	{
 		if(mbMotionBlurActive==false) return;
 
-		if(mpMotionBlurFP==NULL || mpMotionBlurVP==NULL) return;
+		if(mpMotionBlurProgram==NULL) return;
 
 		//////////////////////////////
 		// Setup
@@ -542,11 +480,9 @@ namespace hpl {
 		cMotionBlurObjectIterator it = mpRenderList->GetMotionBlurIterator();
 
 		//Setup
-		mpMotionBlurVP->Bind();
-		mpMotionBlurVP->SetFloat("blurScale",mfMotionBlurAmount);
-
-		mpMotionBlurFP->Bind();
-		mpMotionBlurFP->SetVec2f("halfScreenSize",
+		mpMotionBlurProgram->Bind();
+		mpMotionBlurProgram->SetFloat("blurScale",mfMotionBlurAmount);
+		mpMotionBlurProgram->SetVec2f("halfScreenSize",
 								cVector2f(	(float)pScreenTexture->GetWidth()/2.0f,
 											(float)pScreenTexture->GetHeight()/2.0f));
 
@@ -568,16 +504,16 @@ namespace hpl {
 
 				mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,cMath::MatrixMul(pCam->GetViewMatrix(), *pMtx));
 
-				mpMotionBlurVP->SetMatrixIdentityf("worldViewProj",	eGpuProgramMatrix_ViewProjection);
+				mpMotionBlurProgram->SetMatrixIdentityf("worldViewProj",	eGpuProgramMatrix_ViewProjection);
 
 				cMatrixf mtxModelView =		cMath::MatrixMul(pCam->GetViewMatrix(), *pMtx);
 				cMatrixf mtxPrevModelView = cMath::MatrixMul(pCam->GetPrevView(),mtxPrev);
 
 				cMatrixf mtxPrevViewProj = cMath::MatrixMul(pCam->GetPrevProjection(), mtxPrevModelView);
 
-				mpMotionBlurVP->SetMatrixf("prevWorldViewProj", mtxPrevViewProj);
-				mpMotionBlurVP->SetMatrixf("modelView",mtxModelView);
-				mpMotionBlurVP->SetMatrixf("prevModelView",mtxPrevModelView);
+				mpMotionBlurProgram->SetMatrixf("prevWorldViewProj", mtxPrevViewProj);
+				mpMotionBlurProgram->SetMatrixf("modelView",mtxModelView);
+				mpMotionBlurProgram->SetMatrixf("prevModelView",mtxPrevModelView);
 			}
 			//////////////////
 			//NULL Model view matrix (static)
@@ -585,16 +521,16 @@ namespace hpl {
 			{
 				mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,pCam->GetViewMatrix());
 
-				mpMotionBlurVP->SetMatrixIdentityf("worldViewProj",	eGpuProgramMatrix_ViewProjection);
+				mpMotionBlurProgram->SetMatrixIdentityf("worldViewProj",	eGpuProgramMatrix_ViewProjection);
 
 				const cMatrixf &mtxModelView =	pCam->GetViewMatrix();
 				const cMatrixf &mtxPrevModelView = pCam->GetPrevView();
 
 				cMatrixf mtxPrevViewProj = cMath::MatrixMul(pCam->GetPrevProjection(), mtxPrevModelView);
 
-				mpMotionBlurVP->SetMatrixf("prevWorldViewProj", mtxPrevViewProj);
-				mpMotionBlurVP->SetMatrixf("modelView",mtxModelView);
-				mpMotionBlurVP->SetMatrixf("prevModelView",mtxPrevModelView);
+				mpMotionBlurProgram->SetMatrixf("prevWorldViewProj", mtxPrevViewProj);
+				mpMotionBlurProgram->SetMatrixf("modelView",mtxModelView);
+				mpMotionBlurProgram->SetMatrixf("prevModelView",mtxPrevModelView);
 			}
 
 			pObject->GetVertexBuffer()->Bind();
@@ -609,8 +545,7 @@ namespace hpl {
 		}
 
 		//Reset stuff
-		mpMotionBlurFP->UnBind();
-		mpMotionBlurVP->UnBind();
+		mpMotionBlurProgram->UnBind();
 		mpLowLevelGraphics->SetTexture(0,NULL);
 		mpLowLevelGraphics->SetTexture(1,NULL);
 
@@ -626,7 +561,7 @@ namespace hpl {
 	{
 		if(mbBloomActive==false) return;
 
-		if(mpBloomFP==NULL || mpBloomVP==NULL) return;
+		if(mpBloomProgram==NULL) return;
 
 		//////////////////////////////
 		// Setup
@@ -651,12 +586,10 @@ namespace hpl {
 		//Draw Bloom
 
 		//Setup vertex program
-		mpBloomVP->Bind();
-		mpBloomVP->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
+		mpBloomProgram->Bind();
+		mpBloomProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 
 		//Setup fragment program
-		mpBloomFP->Bind();
-
 		mpLowLevelGraphics->SetTexture(0,mpBloomBlurTexture);
 		mpLowLevelGraphics->SetTexture(1,pScreenTexture);
 
@@ -678,8 +611,7 @@ namespace hpl {
 			mpLowLevelGraphics->DrawQuadMultiTex(mvTexRectVtx, vUvVec);
 		}
 
-		mpBloomVP->UnBind();
-		mpBloomFP->UnBind();
+		mpBloomProgram->UnBind();
 
 		mpLowLevelGraphics->SetTexture(0,NULL);
 		mpLowLevelGraphics->SetTexture(1,NULL);

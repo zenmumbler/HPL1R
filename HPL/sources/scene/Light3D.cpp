@@ -326,7 +326,7 @@ namespace hpl {
 		//////////////////////////////////////////////////////////
 		// Cast shadows
 		if(mbCastShadows && apRenderSettings->mShowShadows != eRendererShowShadows_None
-			&& apRenderSettings->mpVtxExtrudeProgram != NULL)
+			&& apRenderSettings->mpExtrudeProgram != NULL)
 		{
 			//Get temp index array. (Remove this when the index pool
 			// is implemented.).
@@ -365,22 +365,11 @@ namespace hpl {
 			//Reset this variable so it can be used when rendering shadows.
 			apRenderSettings->mbMatrixWasNULL = false;
 
-			//Set the fragment program.
-			if(apRenderSettings->mpFragExtrudeProgram)
-			{
-				if(apRenderSettings->mbLog)Log("Setting fragment program: '%s'\n",
-													apRenderSettings->mpFragExtrudeProgram->GetName().c_str());
-				apRenderSettings->mpFragExtrudeProgram->Bind();
-				apRenderSettings->mpFragmentProgram = apRenderSettings->mpFragExtrudeProgram;
-
-			}
-
-
-			//Set the vertex program.
-			if(apRenderSettings->mbLog)Log("Setting vertex program: '%s'\n",
-											apRenderSettings->mpVtxExtrudeProgram->GetName().c_str());
-			apRenderSettings->mpVtxExtrudeProgram->Bind();
-			apRenderSettings->mpVertexProgram = apRenderSettings->mpVtxExtrudeProgram;
+			//Set the program.
+			if(apRenderSettings->mbLog)Log("Setting program: '%s'\n",
+											apRenderSettings->mpExtrudeProgram->GetName().c_str());
+			apRenderSettings->mpExtrudeProgram->Bind();
+			apRenderSettings->mpProgram = apRenderSettings->mpExtrudeProgram;
 
 			//Render shadows
 			tCasterCacheSetIt it = m_setDynamicCasters.begin();
@@ -770,7 +759,7 @@ namespace hpl {
 				//DEBUG:
 				/*if(!(bDoubleSided && Edge.invert_tri2==false))
 				{
-					//apRenderSettings->mpVtxExtrudeProgram->UnBind();
+					//apRenderSettings->mpExtrudeProgram->UnBind();
 					apLowLevelGraphics->SetDepthTestActive(false);
 					apLowLevelGraphics->SetStencilActive(false);
 					apLowLevelGraphics->DrawLine(
@@ -826,8 +815,8 @@ namespace hpl {
 		//object was static.
 		if(pModelMtx || apRenderSettings->mbMatrixWasNULL==false)
 		{
-			apRenderSettings->mpVtxExtrudeProgram->SetVec3f("lightPosition", vLocalLight);
-			apRenderSettings->mpVtxExtrudeProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
+			apRenderSettings->mpExtrudeProgram->SetVec3f("lightPosition", vLocalLight);
+			apRenderSettings->mpExtrudeProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
 
 			//If a null matrix has been set, let other passes know.
 			if(pModelMtx)

@@ -50,7 +50,7 @@ namespace hpl {
 	class cRenderList;
 	class iRenderable;
 	class iLight3D;
-	class cRendererPostEffects;
+	// class cRendererPostEffects;
 	class cSector;
 
 	class cResources;
@@ -76,8 +76,7 @@ namespace hpl {
 		void Reset(iLowLevelGraphics *apLowLevel);
 
 		//Setings that doesn't change:
-		iGpuProgram *mpVtxExtrudeProgram;
-		iGpuProgram *mpFragExtrudeProgram;
+		iGpuProgram *mpExtrudeProgram;
 		iLowLevelGraphics* mpLowLevel;
 
 		unsigned int *mpTempIndexArray;
@@ -108,11 +107,9 @@ namespace hpl {
 		eMaterialBlendMode mBlendMode;
 		eMaterialChannelMode mChannelMode;
 
-		iGpuProgram* mpVertexProgram;
+		iGpuProgram* mpProgram;
 		bool mbVertexUseLight;
 		iMaterialProgramSetup* mpVtxProgramSetup;
-
-		iGpuProgram* mpFragmentProgram;
 
 		bool mbMatrixWasNULL;
 
@@ -175,7 +172,7 @@ namespace hpl {
 
 		cBoundingVolume* GetFogBV(){return &mFogBV;}
 
-		void SetPostEffects(cRendererPostEffects *apPostEffects){ mpPostEffects = apPostEffects;}
+		// void SetPostEffects(cRendererPostEffects *apPostEffects){ mpPostEffects = apPostEffects;}
 
 
 		//Debug setup
@@ -221,25 +218,22 @@ namespace hpl {
 		iLowLevelGraphics *mpLowLevelGraphics;
 		iLowLevelResources *mpLowLevelResources;
 
-		cRendererPostEffects *mpPostEffects;
+		// cRendererPostEffects *mpPostEffects;
 
 		bool mbLog;
 
 		float mfRenderTime;
 
-		iGpuProgram *mpDiffuseVtxProgram;
-		iGpuProgram *mpDiffuseFragProgram;
-		iGpuProgram *mpSolidFogVtxProgram;
-		iGpuProgram *mpSolidFogFragProgram;
+		iGpuProgram *mpDiffuseProgram;
+		iGpuProgram *mpSolidFogProgram;
 
 		iTexture *mpFogLinearSolidTexture;
 
 		iTexture *mpFogLinearAddTexture;
 		iTexture *mpFogLinearAlphaTexture;
 
-		iGpuProgram *mpRefractVtxProgram;
-		iGpuProgram *mpRefractFragProgram;
-		iGpuProgram *mpRefractSpecFragProgram;
+		iGpuProgram *mpRefractProgram;
+		iGpuProgram *mpRefractSpecProgram;
 		bool mbRefractionAvailable;
 		bool mbRefractionUsed;
 

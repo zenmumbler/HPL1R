@@ -1841,12 +1841,12 @@ public:
 
 	void OnMouseDown(eMButton aButton)
 	{
-		bool bX = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetActive();
-		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetActive(!bX);
-		mpInit->mbPostEffects = !bX;
+//		bool bX = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetActive();
+//		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetActive(!bX);
+//		mpInit->mbPostEffects = !bX;
 
-		gpPostEffectsText->msText = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetActive() ? 
-			kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
+//		gpPostEffectsText->msText = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetActive() ?
+//			kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
 	}
 };
 
@@ -1863,11 +1863,11 @@ public:
 
 	void OnMouseDown(eMButton aButton)
 	{
-		bool bX = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetBloomActive();
-		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetBloomActive(!bX);
-
-		gpBloomText->msText = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetBloomActive() ? 
-								kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
+//		bool bX = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetBloomActive();
+//		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetBloomActive(!bX);
+//
+//		gpBloomText->msText = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetBloomActive() ?
+//								kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
 	}
 };
 
@@ -1885,11 +1885,11 @@ public:
 
 	void OnMouseDown(eMButton aButton)
 	{
-		bool bX = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetMotionBlurActive();
-		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetMotionBlurActive(!bX);
-
-		gpMotionBlurText->msText = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetMotionBlurActive() ? 
-			kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
+//		bool bX = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetMotionBlurActive();
+//		mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->SetMotionBlurActive(!bX);
+//
+//		gpMotionBlurText->msText = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetMotionBlurActive() ?
+//			kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
 	}
 };
 
@@ -3527,8 +3527,7 @@ void cMainMenu::CreateWidgets()
 	gpNoiseFilterText->SetExtraWidget(pWidgetNoiseFilter);
 
 	vPos.y += 29;
-	sText = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetBloomActive() ? kTranslate("MainMenu","On") : 
-	kTranslate("MainMenu","Off");
+	sText = L"DISABLED"; // mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetBloomActive() ? kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
 	gpBloomText = hplNew( cMainMenuWidget_Text,(mpInit,vPos,sText,20,eFontAlign_Left) );
 	AddWidgetToState(eMainMenuState_OptionsGraphics,gpBloomText);
 	gpBloomText->SetExtraWidget(pWidgetBloom);
@@ -3600,15 +3599,13 @@ void cMainMenu::CreateWidgets()
 	gpShadowsText->SetExtraWidget(pShadowsButton);
 
 	vPos.y += 29;
-	sText = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetActive() ?	kTranslate("MainMenu","On") : 
-																					kTranslate("MainMenu","Off");
+	sText = L"DISABLED"; // mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetActive() ?	kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
 	gpPostEffectsText = hplNew( cMainMenuWidget_Text,(mpInit,vPos,sText,20,eFontAlign_Left ));
 	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,gpPostEffectsText);
 	gpPostEffectsText->SetExtraWidget(pPostEffectsButton);
 
 	vPos.y += 29;
-	sText = mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetMotionBlurActive() ? kTranslate("MainMenu","On") : 
-	kTranslate("MainMenu","Off");
+	sText = L"DISABLED"; // mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetMotionBlurActive() ? kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
 	gpMotionBlurText = hplNew( cMainMenuWidget_Text,(mpInit,vPos,sText,20,eFontAlign_Left) );
 	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,gpMotionBlurText);
 	gpMotionBlurText->SetExtraWidget(pMotionBlurButton);

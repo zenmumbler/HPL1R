@@ -1151,29 +1151,21 @@ void cMapHandler::RenderItemEffect()
 			iVertexBuffer *pVtxBuffer = pSubEntity->GetVertexBuffer();
 			iMaterial *pMaterial = pSubEntity->GetMaterial();
 			
-			iGpuProgram *pVtxProg = pMaterial->GetVertexProgram(eMaterialRenderType_Z,0,NULL);
-			
-			if(pVtxProg)
+			iGpuProgram *pProg = pMaterial->GetProgramEx(eMaterialRenderType_Z,0,NULL);
+			if(pProg)
 			{
-				pVtxProg->Bind();
-				pVtxProg->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
+				pProg->Bind();
+				pProg->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
+				pProg->SetColor3f("ambientColor", pItem->GetFlashAlpha());
 			}
 
-			iGpuProgram *pFragProg = pMaterial->GetFragmentProgram(eMaterialRenderType_Z,0,NULL);
-			if(pFragProg)
-			{
-				pFragProg->SetColor3f("ambientColor", pItem->GetFlashAlpha());
-				pFragProg->Bind();
-			}
-			
 			pLowGfx->SetTexture(0,pMaterial->GetTexture(eMaterialTexture_Diffuse));
 
 			pVtxBuffer->Bind();
 			pVtxBuffer->Draw();
 			pVtxBuffer->UnBind();
 
-			if(pFragProg) pFragProg->UnBind();
-			if(pVtxProg) pVtxProg->UnBind();
+			if(pProg) pProg->UnBind();
 		}
 	}
 
