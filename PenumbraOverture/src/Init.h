@@ -121,21 +121,6 @@ public:
 	int mlFSAA;
 	eGameDifficulty mDifficulty;
 
-#ifdef INCLUDE_HAPTIC
-	bool mbHasHaptics;
-	bool mbHasHapticsOnRestart;
-	bool mbHapticsAvailable;
-	float mfHapticForceMul;
-	float mfHapticMoveScreenSpeedMul;
-	float mfHapticScale;
-	float mfHapticProxyRadius;
-	float mfHapticOffsetZ;
-	float mfHapticMaxInteractDist;
-
-	bool mbSimpleWeaponSwing;
-	bool mbSimpleSwingInOptions;
-#endif
-
 	int mlMaxSoundChannels;
     int mlStreamUpdateFreq;
 	bool mbUseSoundHardware;

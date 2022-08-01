@@ -182,9 +182,6 @@ void cGameEnemyState_Worm_Hunt::OnEnterState(iGameEnemyState *apPrevState)
 	mpEnemy->PlayAnim("Idle",true,0.2f);
 
 	float fMul = 1.0f;
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbHasHaptics) fMul = 0.6f;
-#endif
 
 	//Setup body
 	mpEnemy->SetupBody();

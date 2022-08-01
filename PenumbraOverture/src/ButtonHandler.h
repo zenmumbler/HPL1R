@@ -64,9 +64,6 @@ private:
 
 	cInput* mpInput;
 	iLowLevelGraphics *mpLowLevelGraphics;
-#ifdef INCLUDE_HAPTIC
-	iLowLevelHaptic *mpLowLevelHaptic;
-#endif
 
 	cPlayer *mpPlayer;
 

@@ -85,10 +85,6 @@ private:
 	cInit *mpInit;
 
 	cVector3f mvAdd;
-
-#ifdef INCLUDE_HAPTIC
-	iHapticForce *mpForce;
-#endif
 	
 	std::list<cEffect_ShakeScreen_Shake> mlstShakes;
 };

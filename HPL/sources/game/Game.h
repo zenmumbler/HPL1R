@@ -37,7 +37,6 @@ namespace hpl {
 	class cScript;
 	class cPhysics;
 	class cAI;
-	class cHaptic;
 
 	class cFPSCounter
 	{
@@ -151,11 +150,7 @@ namespace hpl {
 		* \return A pointer to the AI
 		*/
 		cAI* GetAI();
-		/**
-		*
-		* \return A pointer to the haptic
-		*/
-		cHaptic* GetHaptic();
+
 		cScript* GetScript();
 
 		void ResetLogicTimer();
@@ -209,7 +204,6 @@ namespace hpl {
 		cSound *mpSound;
 		cPhysics *mpPhysics;
 		cAI *mpAI;
-		cHaptic *mpHaptic;
 		cScript *mpScript;
 	};
 

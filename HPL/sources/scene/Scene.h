@@ -37,7 +37,6 @@ namespace hpl {
 	class cSystem;
 	class cSound;
 	class cPhysics;
-	class cHaptic;
 	class cCamera;
 	class cUpdater;
 	class cWorld3D;
@@ -52,7 +51,7 @@ namespace hpl {
 	{
 	public:
 		cScene(cGraphics *apGraphics,cResources *apResources, cSound* apSound, cPhysics *apPhysics,
-				cSystem *apSystem, cAI *apAI, cHaptic *apHaptic);
+				cSystem *apSystem, cAI *apAI);
 		~cScene();
 
 		void Reset();
@@ -121,7 +120,6 @@ namespace hpl {
 		cPhysics *mpPhysics;
 		cSystem *mpSystem;
 		cAI *mpAI;
-		cHaptic *mpHaptic;
 
 		bool mbDrawScene;
 		bool mbUpdateMap;

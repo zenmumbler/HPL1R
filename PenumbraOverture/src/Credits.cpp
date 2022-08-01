@@ -27,9 +27,6 @@
 #include "PlayerHands.h"
 #include "GameMusicHandler.h"
 #include "GameMessageHandler.h"
-#ifdef INCLUDE_HAPTIC
-#include "HapticGameCamera.h"
-#endif
 
 //////////////////////////////////////////////////////////////////////////
 // CONSTRUCTORS
@@ -124,14 +121,6 @@ void cCredits::OnDraw()
 
 void cCredits::Update(float afTimeStep)
 {
-#ifdef INCLUDE_HAPTIC
-	//Make sure haptics is off
-	if(mpInit->mbHasHaptics)
-	{
-		mpInit->mpGame->GetHaptic()->GetLowLevel()->StopAllForces();
-	}
-#endif
-
 	mfYPos -= afTimeStep * 30;
 	cMusicHandler *pMusicHandler = mpInit->mpGame->GetSound()->GetMusicHandler();
 
@@ -183,14 +172,7 @@ void cCredits::SetActive(bool abX)
 		mpInit->mpGame->GetUpdater()->SetContainer("Credits");
 		mpInit->mpGame->GetScene()->SetDrawScene(false);
 		mpInit->mpGame->GetScene()->SetUpdateMap(false);
-#ifdef INCLUDE_HAPTIC
-		if(mpInit->mbHasHaptics)
-		{
-			mpInit->mpGame->GetHaptic()->GetLowLevel()->SetUpdateShapes(false);
-			mpInit->mpGame->GetHaptic()->GetLowLevel()->StopAllForces();
-			mpInit->mpPlayer->GetHapticCamera()->SetActive(false);
-		}
-#endif
+
 		mpInit->mpButtonHandler->ChangeState(eButtonHandlerState_Credits);
 
 		mpInit->mpGame->GetSound()->GetMusicHandler()->Play("penumbra_music_E1_E",1,0.3f,false);

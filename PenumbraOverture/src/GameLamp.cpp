@@ -70,9 +70,6 @@ void cEntityLoader_GameLamp::AfterLoad(TiXmlElement *apRootElem, const cMatrixf 
 	pObject->SetParticleSystems(mvParticleSystems);
 	pObject->SetBillboards(mvBillboards);
 	pObject->SetSoundEntities(mvSoundEntities);
-#ifdef INCLUDE_HAPTIC
-	pObject->SetHapticShapes(mvHapticShapes);
-#endif
 
 	///////////////////////////////////
 	// Load game properties
@@ -82,10 +79,7 @@ void cEntityLoader_GameLamp::AfterLoad(TiXmlElement *apRootElem, const cMatrixf 
 		pObject->mfTurnOnTime = cString::ToFloat(pGameElem->Attribute("TurnOnTime"),0);
 		pObject->mfTurnOffTime = cString::ToFloat(pGameElem->Attribute("TurnOffTime"),0);
 
-#ifdef INCLUDE_HAPTIC
-		if(mpInit->mbHasHaptics==false)
-#endif
-			pObject->mfMaxInteractDist = cString::ToFloat(pGameElem->Attribute("InteractDist"),1.8f);
+		pObject->mfMaxInteractDist = cString::ToFloat(pGameElem->Attribute("InteractDist"),1.8f);
 
 		pObject->mbInteractOff = cString::ToBool(pGameElem->Attribute("InteractOff"),true);
 		pObject->mbInteractOn = cString::ToBool(pGameElem->Attribute("InteractOn"),true);
@@ -240,10 +234,6 @@ void cGameLamp::OnPlayerInteract()
 		if(	mpInit->mpPlayer->GetPickedBody()->GetMass() != 0 && 
 			bInteracted==false && ((mbLit && mbInteractOff) || (!mbLit && mbInteractOn)))
 		{
-#ifdef INCLUDE_HAPTIC
-			if(mpInit->mbHasHaptics && mpInit->mpPlayer->mbProxyTouching==false) return;
-#endif
-
 			mpInit->mpPlayer->mbPickAtPoint = false;
 			mpInit->mpPlayer->mbRotateWithPlayer = true;
 			mpInit->mpPlayer->mbUseNormalMass = false;

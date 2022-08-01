@@ -27,7 +27,6 @@
 #include "sound/Sound.h"
 #include "physics/Physics.h"
 #include "ai/AI.h"
-#include "haptic/Haptic.h"
 #include "script/Script.h"
 
 namespace hpl {
@@ -44,11 +43,10 @@ namespace hpl {
 		virtual cSound* CreateSound()=0;
 		virtual cPhysics* CreatePhysics()=0;
 		virtual cAI* CreateAI()=0;
-		virtual cHaptic* CreateHaptic()=0;
 		virtual cScript* CreateScript(cResources *apResources)=0;
 
 		virtual cScene* CreateScene(cGraphics* apGraphics, cResources* apResources, cSound* apSound,
-									cPhysics *apPhysics, cSystem *apSystem,cAI *apAI,cHaptic *apHaptic)=0;
+									cPhysics *apPhysics, cSystem *apSystem,cAI *apAI)=0;
 	};
 };
 #endif // HPL_LOWLEVELGAMESETUP_H

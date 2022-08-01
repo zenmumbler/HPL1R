@@ -193,9 +193,6 @@ void cGameEnemyState_Spider_Hunt::OnEnterState(iGameEnemyState *apPrevState)
 
 	//Setup body
 	float fMul = 1.0f;
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbHasHaptics) fMul = 0.6f;
-#endif
 
 	mpEnemy->SetupBody();
 	if(mpInit->mDifficulty == eGameDifficulty_Easy)

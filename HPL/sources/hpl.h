@@ -34,7 +34,6 @@
 #include "input/Action.h"
 #include "input/ActionKeyboard.h"
 #include "input/ActionMouseButton.h"
-#include "input/ActionHaptic.h"
 #include "input/LowLevelInput.h"
 
 #include "game/Game.h"
@@ -146,12 +145,6 @@
 #include "script/ScriptVar.h"
 #include "script/Script.h"
 #include "script/ScriptFuncs.h" // sigh, this is only for cScriptJointCallback
-
-#include "haptic/Haptic.h"
-#include "haptic/LowLevelHaptic.h"
-#include "haptic/HapticShape.h"
-#include "haptic/HapticForce.h"
-#include "haptic/HapticSurface.h"
 
 #include "tinyXML/tinyxml.h"
 

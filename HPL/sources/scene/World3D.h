@@ -40,7 +40,6 @@ namespace hpl {
 	class cScene;
 	class cSystem;
 	class cAI;
-	class cHaptic;
 
 	class cCamera;
 	class cNode3D;
@@ -181,8 +180,7 @@ namespace hpl {
 	{
 	public:
 		cWorld3D(tString asName,cGraphics *apGraphics,cResources *apResources,cSound* apSound,
-					cPhysics *apPhysics, cScene *apScene,cSystem *apSystem, cAI *apAI,
-					cHaptic *apHaptic);
+					cPhysics *apPhysics, cScene *apScene,cSystem *apSystem, cAI *apAI);
 		~cWorld3D();
 
 		tString GetName(){ return msName;}
@@ -208,7 +206,6 @@ namespace hpl {
 		cResources* GetResources(){ return mpResources;}
 		cSound* GetSound(){ return mpSound;}
 		cSystem* GetSystem(){ return mpSystem;}
-		cHaptic* GetHaptic(){ return mpHaptic;}
 
 		iEntity3D* CreateEntity(const tString& asName, const cMatrixf &a_mtxTransform,
 								const tString& asFile, bool abLoadReferences);
@@ -342,7 +339,6 @@ namespace hpl {
 		cScene *mpScene;
 		cSystem *mpSystem;
 		cAI *mpAI;
-		cHaptic *mpHaptic;
 
 		iPhysicsWorld *mpPhysicsWorld;
 		bool mbAutoDeletePhysicsWorld;

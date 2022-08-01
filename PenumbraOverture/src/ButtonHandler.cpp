@@ -123,12 +123,7 @@ cButtonHandler::cButtonHandler(cInit *apInit)  : iUpdateable("ButtonHandler")
 
 	mpInput = mpInit->mpGame->GetInput();
 	mpLowLevelGraphics = mpInit->mpGame->GetGraphics()->GetLowLevel();
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbHasHaptics)
-		mpLowLevelHaptic = mpInit->mpGame->GetHaptic()->GetLowLevel();
-#endif
 
-	
 	mState = eButtonHandlerState_Game;
 
 	mlNumOfActions =0;
@@ -284,11 +279,7 @@ void cButtonHandler::Update(float afTimeStep)
 			mpInit->mpMainMenu->Exit();
 		}
 
-		if(	mpInput->BecameTriggerd("RightClick")
-#ifdef INCLUDE_HAPTIC
-		   || (mpInit->mbHasHaptics && mpInput->BecameTriggerd("MouseClickRight")
-#endif
-		)
+		if(mpInput->BecameTriggerd("RightClick"))
 		{
 			mpInit->mpMainMenu->OnMouseDown(eMButton_Right);
 			mpInput->BecameTriggerd("Examine");
@@ -302,11 +293,7 @@ void cButtonHandler::Update(float afTimeStep)
 			mpInit->mpMainMenu->OnMouseDoubleClick(eMButton_Right);
 		}
 
-		if(	mpInput->BecameTriggerd("LeftClick")
-#ifdef INCLUDE_HAPTIC
-		   || (mpInit->mbHasHaptics && mpInput->BecameTriggerd("MouseClick"))
-#endif
-		)
+		if(	mpInput->BecameTriggerd("LeftClick"))
 		{
 			mpInit->mpMainMenu->OnMouseDown(eMButton_Left);
 			mpInput->BecameTriggerd("Interact");
@@ -320,22 +307,9 @@ void cButtonHandler::Update(float afTimeStep)
 			mpInit->mpMainMenu->OnMouseDoubleClick(eMButton_Left);
 		}
 
-#ifdef INCLUDE_HAPTIC
-		if(mpInit->mbHasHaptics)
-		{
-			mpInit->mpMainMenu->AddMousePos(mpLowLevelHaptic->GetRelativeVirtualMousePos() * mfMouseSensitivity);
-
-			cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
-			mpInit->mpMainMenu->AddMousePos(vRel * mfMouseSensitivity);
-		}
-		else
-#endif
-		{
-			/// Mouse Movement
-			cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
-			mpInit->mpMainMenu->AddMousePos(vRel * mfMouseSensitivity);
-		}
-		
+		/// Mouse Movement
+		cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
+		mpInit->mpMainMenu->AddMousePos(vRel * mfMouseSensitivity);
 	}
 	///////////////////////////////////
 	// INTRO BUTTON STATE
@@ -403,18 +377,9 @@ void cButtonHandler::Update(float afTimeStep)
 				mpInit->mpDeathMenu->OnMouseUp(eMButton_Left);
 			}
 
-#ifdef INCLUDE_HAPTIC
-			if(mpInit->mbHasHaptics)
-			{
-				mpInit->mpDeathMenu->AddMousePos(mpLowLevelHaptic->GetRelativeVirtualMousePos() * mfMouseSensitivity);
-			}
-			else
-#endif
-			{
-				/// Mouse Movement
-				cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
-				mpInit->mpDeathMenu->AddMousePos(vRel * mfMouseSensitivity);
-			}
+			/// Mouse Movement
+			cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
+			mpInit->mpDeathMenu->AddMousePos(vRel * mfMouseSensitivity);
 		}
 		///////////////////////////////////////
 		// Death ////////////////////
@@ -448,18 +413,9 @@ void cButtonHandler::Update(float afTimeStep)
 				mpInit->mpNumericalPanel->OnMouseUp(eMButton_Left);
 			}
 
-#ifdef INCLUDE_HAPTIC
-			if(mpInit->mbHasHaptics)
-			{
-				mpInit->mpNumericalPanel->AddMousePos(mpLowLevelHaptic->GetRelativeVirtualMousePos() * mfMouseSensitivity);
-			}
-			else
-#endif
-			{
-				/// Mouse Movement
-				cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
-				mpInit->mpNumericalPanel->AddMousePos(vRel * mfMouseSensitivity);
-			}
+			/// Mouse Movement
+			cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
+			mpInit->mpNumericalPanel->AddMousePos(vRel * mfMouseSensitivity);
 		}
 		///////////////////////////////////////
 		// Notebook ////////////////////
@@ -495,18 +451,9 @@ void cButtonHandler::Update(float afTimeStep)
 				}
 			}
 
-#ifdef INCLUDE_HAPTIC
-			if(mpInit->mbHasHaptics)
-			{
-				mpInit->mpNotebook->AddMousePos(mpLowLevelHaptic->GetRelativeVirtualMousePos() * mfMouseSensitivity);
-			}
-			else
-#endif
-			{
-				/// Mouse Movement
-				cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
-				mpInit->mpNotebook->AddMousePos(vRel * mfMouseSensitivity);
-			}
+			/// Mouse Movement
+			cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
+			mpInit->mpNotebook->AddMousePos(vRel * mfMouseSensitivity);
 		}
 		///////////////////////////////////////
 		// Inventory ////////////////////
@@ -559,19 +506,9 @@ void cButtonHandler::Update(float afTimeStep)
 			if(mpInput->BecameTriggerd("Eight")) mpInit->mpInventory->OnShortcutDown(7);
 			if(mpInput->BecameTriggerd("Nine")) mpInit->mpInventory->OnShortcutDown(8);
 
-#ifdef INCLUDE_HAPTIC
-			if(mpInit->mbHasHaptics)
-			{
-				cVector2f vRel = mpLowLevelHaptic->GetRelativeVirtualMousePos();
-				mpInit->mpInventory->AddMousePos(vRel * mfMouseSensitivity);
-			}
-			else
-#endif
-			{
-				/// Mouse Movement
-				cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
-				mpInit->mpInventory->AddMousePos(vRel * mfMouseSensitivity);
-			}
+			/// Mouse Movement
+			cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
+			mpInit->mpInventory->AddMousePos(vRel * mfMouseSensitivity);
 		}
 		else 
 		{
@@ -703,33 +640,15 @@ void cButtonHandler::Update(float afTimeStep)
 
 					if(mpInput->BecameTriggerd("InteractMode"))
 					{
-#ifdef INCLUDE_HAPTIC
-						if(mpInit->mbHasHaptics)
-						{
-							//DO nothing for the time being.
-						}
-						else
-#endif
-						{
-							mpPlayer->StartInteractMode();
-						}
+						mpPlayer->StartInteractMode();
 					}
-					
-#ifdef INCLUDE_HAPTIC
-					if(mpInit->mbHasHaptics)
-					{
-						// nothing
-					}
-					else
-#endif
-					{
-						//Get the mouse pos and convert it to 0 - 1
-						cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
-						vRel /= mpLowLevelGraphics->GetVirtualSize();
 
-						mpPlayer->AddYaw(vRel.x * mfMouseSensitivity);
-						mpPlayer->AddPitch(vRel.y * mfMouseSensitivity);
-					}
+					//Get the mouse pos and convert it to 0 - 1
+					cVector2f vRel = mpInput->GetMouse()->GetRelPosition();
+					vRel /= mpLowLevelGraphics->GetVirtualSize();
+
+					mpPlayer->AddYaw(vRel.x * mfMouseSensitivity);
+					mpPlayer->AddPitch(vRel.y * mfMouseSensitivity);
 				}
 
 				///////////////////////////////////////
@@ -879,21 +798,9 @@ iAction* cButtonHandler::ActionFromTypeAndVal(const tString& asName,const tStrin
 	{
 		return hplNew( cActionKeyboard, (asName,mpInit->mpGame->GetInput(),(eKey)cString::ToInt(asVal.c_str(),0)) );
 	}
-	else if(asType == "MouseButton" || asType == "HapticDeviceButton")
+	else if(asType == "MouseButton")
 	{
-#ifdef INCLUDE_HAPTIC
-		if(mpInit->mbHasHaptics && asName != "MouseClick")
-		{
-			int lNum = cString::ToInt(asVal.c_str(),0);
-			if(lNum==2)lNum = 2; 
-			else if(lNum==1)lNum = 1;
-			return hplNew( cActionHaptic, (asName,mpInit->mpGame->GetHaptic(),lNum) );
-		}
-		else
-#endif
-		{
-			return hplNew( cActionMouseButton, (asName,mpInit->mpGame->GetInput(),(eMButton)cString::ToInt(asVal.c_str(),0)) );
-		}
+		return hplNew( cActionMouseButton, (asName,mpInit->mpGame->GetInput(),(eMButton)cString::ToInt(asVal.c_str(),0)) );
 	}
 
 	return NULL;
@@ -912,23 +819,10 @@ void cButtonHandler::TypeAndValFromAction(iAction *apAction, tString *apType, tS
 			cActionKeyboard *pKeyAction = static_cast<cActionKeyboard*>(apAction);
 			*apVal = cString::ToString((int)pKeyAction->GetKey() | (int)pKeyAction->GetModifier());
 		}
-		else if(apAction->GetInputType() == "MouseButton" ||
-				apAction->GetInputType() == "HapticDeviceButton")
+		else if(apAction->GetInputType() == "MouseButton")
 		{
-#ifdef INCLUDE_HAPTIC
-			if(mpInit->mbHasHaptics && apAction->GetName() != "MouseClick")
-			{
-				cActionHaptic *pHapticAction = static_cast<cActionHaptic*>(apAction);
-				*apVal = cString::ToString(pHapticAction->GetButton());
-				if(*apVal=="2")*apVal = "2"; 
-				else if(*apVal=="1")*apVal = "1";
-			}
-			else
-#endif
-			{
-				cActionMouseButton *pMouseAction = static_cast<cActionMouseButton*>(apAction);
-				*apVal = cString::ToString((int)pMouseAction->GetButton());
-			}
+			cActionMouseButton *pMouseAction = static_cast<cActionMouseButton*>(apAction);
+			*apVal = cString::ToString((int)pMouseAction->GetButton());
 		}
 	}
 	else

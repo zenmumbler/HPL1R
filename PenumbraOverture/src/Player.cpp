@@ -24,13 +24,6 @@
 #include "MapHandler.h"
 #include "PlayerMoveStates.h"
 
-#ifdef INCLUDE_HAPTIC
-#include "PlayerState_InteractHaptX.h"
-#include "PlayerState_MiscHaptX.h"
-#include "PlayerState_WeaponHaptX.h"
-#include "HapticGameCamera.h"
-#endif
-
 #include "PlayerState_Interact.h"
 #include "PlayerState_Misc.h"
 #include "PlayerState_Weapon.h"
@@ -97,36 +90,17 @@ cPlayer::cPlayer(cInit *apInit)  : iUpdateable("Player")
 	mState = ePlayerState_Normal;
 	
 	mvStates.resize(ePlayerState_LastEnum);
+	mvStates[ePlayerState_Normal] = hplNew( cPlayerState_Normal, (mpInit,this) );
+	mvStates[ePlayerState_Push] = hplNew( cPlayerState_Push, (mpInit,this) );
+	mvStates[ePlayerState_Move] = hplNew( cPlayerState_Move, (mpInit,this) );
+	mvStates[ePlayerState_InteractMode] = hplNew( cPlayerState_InteractMode, (mpInit,this) );
+	mvStates[ePlayerState_Grab] = hplNew( cPlayerState_Grab, (mpInit,this) );
+	mvStates[ePlayerState_WeaponMelee] = hplNew( cPlayerState_WeaponMelee, (mpInit,this) );
+	mvStates[ePlayerState_UseItem] = hplNew( cPlayerState_UseItem, (mpInit,this) );
+	mvStates[ePlayerState_Message] = hplNew( cPlayerState_Message, (mpInit,this) );
+	mvStates[ePlayerState_Throw] = hplNew( cPlayerState_Throw, (mpInit,this) );
+	mvStates[ePlayerState_Climb] = hplNew( cPlayerState_Climb, (mpInit,this) );
 
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbHasHaptics)
-	{
-		mvStates[ePlayerState_Normal] = hplNew( cPlayerState_NormalHaptX, (mpInit,this) );
-		mvStates[ePlayerState_Push] = hplNew( cPlayerState_PushHaptX, (mpInit,this) );
-		mvStates[ePlayerState_Move] = hplNew( cPlayerState_MoveHaptX, (mpInit,this) );
-		mvStates[ePlayerState_InteractMode] = hplNew( cPlayerState_InteractModeHaptX, (mpInit,this) );
-		mvStates[ePlayerState_Grab] = hplNew( cPlayerState_GrabHaptX, (mpInit,this) );
-		mvStates[ePlayerState_WeaponMelee] = hplNew( cPlayerState_WeaponMeleeHaptX, (mpInit,this) );
-		mvStates[ePlayerState_UseItem] = hplNew( cPlayerState_UseItemHaptX, (mpInit,this) );
-		mvStates[ePlayerState_Message] = hplNew( cPlayerState_MessageHaptX, (mpInit,this) );
-		mvStates[ePlayerState_Throw] = hplNew( cPlayerState_ThrowHaptX, (mpInit,this) );
-		mvStates[ePlayerState_Climb] = hplNew( cPlayerState_ClimbHaptX, (mpInit,this) );
-	}
-	else
-#endif
-	{
-		mvStates[ePlayerState_Normal] = hplNew( cPlayerState_Normal, (mpInit,this) );
-		mvStates[ePlayerState_Push] = hplNew( cPlayerState_Push, (mpInit,this) );
-		mvStates[ePlayerState_Move] = hplNew( cPlayerState_Move, (mpInit,this) );
-		mvStates[ePlayerState_InteractMode] = hplNew( cPlayerState_InteractMode, (mpInit,this) );
-		mvStates[ePlayerState_Grab] = hplNew( cPlayerState_Grab, (mpInit,this) );
-		mvStates[ePlayerState_WeaponMelee] = hplNew( cPlayerState_WeaponMelee, (mpInit,this) );
-		mvStates[ePlayerState_UseItem] = hplNew( cPlayerState_UseItem, (mpInit,this) );
-		mvStates[ePlayerState_Message] = hplNew( cPlayerState_Message, (mpInit,this) );
-		mvStates[ePlayerState_Throw] = hplNew( cPlayerState_Throw, (mpInit,this) );
-		mvStates[ePlayerState_Climb] = hplNew( cPlayerState_Climb, (mpInit,this) );
-	}	
-	
 	//The max distance you can be from something to grab it.
 	mfMaxGrabDist =  mpInit->mpGameConfig->GetFloat("Player","MaxGrabDist",0);
 	
@@ -233,29 +207,6 @@ cPlayer::cPlayer(cInit *apInit)  : iUpdateable("Player")
 	mvCrossHairs[eCrossHairState_Ladder] = mpGfxDrawer->CreateGfxObject("player_crosshair_ladder",eGfxMaterialType::DiffuseAlpha);
 	mvCrossHairs[eCrossHairState_Cross] = mpGfxDrawer->CreateGfxObject("player_crosshair_cross",eGfxMaterialType::DiffuseAlpha);
 
-#ifdef INCLUDE_HAPTIC
-	///////////////////////////////
-	//Haptic Init
-	if(mpInit->mbHasHaptics)
-	{
-		mpLowLevelHaptic = mpInit->mpGame->GetHaptic()->GetLowLevel();
-
-		mpLowLevelHaptic->SetCamera(mpCamera);
-		mpLowLevelHaptic->SetCameraOffset(cVector3f(0,0.7f,mpInit->mfHapticOffsetZ));
-
-		mpHapticCamera = hplNew( cHapticGameCamera, (mpInit,this) );
-
-		mpDamageForce = mpInit->mpGame->GetHaptic()->GetLowLevel()->CreateSinusWaveForce(
-																	cVector3f(0,1,0),0.1f,3);
-
-		mpDamageDirForce = mpLowLevelHaptic->CreateImpulseForce(0);
-		mpDamageDirForce->SetActive(false);
-
-		mpHapticCamera->SetInteractModeCameraSpeed(mpInit->mpConfig->GetFloat("Haptics","InteractModeCameraSpeed",0.5f));
-		mpHapticCamera->SetActionModeCameraSpeed(mpInit->mpConfig->GetFloat("Haptics","ActionModeCameraSpeed",1.0f));
-	}
-#endif
-
 	//Set up variable values
 	Reset();
 }
@@ -264,9 +215,6 @@ cPlayer::cPlayer(cInit *apInit)  : iUpdateable("Player")
 
 cPlayer::~cPlayer(void)
 {
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbHasHaptics) hplDelete( mpHapticCamera );
-#endif
 	hplDelete( mpGroundRayCallback);
 	hplDelete( mpPickRayCallback);
 	hplDelete( mpHeadMove);
@@ -648,11 +596,6 @@ void cPlayer::Damage(float afDamage, ePlayerDamageType aType)
 	if(mpInit->mDifficulty== eGameDifficulty_Easy) afDamage /= 2.0f;
 	if(mpInit->mDifficulty== eGameDifficulty_Hard) afDamage *= 2.0f;
 
-#ifdef INCLUDE_HAPTIC
-	// [ZM] this says all you need to know about that "controller" in one line
-	if(mpInit->mbHasHaptics) afDamage /= 4.0f;
-#endif
-
 	if(mpDeath->IsActive()) return;
 	
 	float fSize =0.5f;
@@ -663,36 +606,6 @@ void cPlayer::Damage(float afDamage, ePlayerDamageType aType)
 	mpDamage->Start(fSize,aType);
 
 	AddHealth(-afDamage);
-
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbHasHaptics && aType == ePlayerDamageType_BloodSplash)
-	{
-		if(mbDamageFromPos)
-		{
-			mbDamageFromPos = false;
-
-			cVector3f vDir = cMath::Vector3Normalize(mpCharBody->GetPosition() - mvDamagePos);
-
-			if(mpDamageDirForce->IsActive()) mpDamageDirForce->SetActive(false);
-			mpDamageDirForce->SetActive(true);
-			
-			cMatrixf mtxProxy = cMath::MatrixRotate(cVector3f(-mpCamera->GetPitch(),-mpCamera->GetYaw(),
-													-mpCamera->GetRoll()),eEulerRotationOrder_YXZ);
-			vDir = cMath::MatrixMul(mtxProxy,vDir);
-			
-			mpDamageDirForce->SetForce(vDir * fSize * 2.2f);
-			mpDamageDirForce->SetTimeControl(false,0.2f,0.5f,0.0f,0.15f);
-		}
-		else
-		{
-			mpDamageForce->SetAmp(fSize * 0.15f);
-
-			if(mpDamageForce->IsActive())	mpDamageForce->SetActive(false);
-			mpDamageForce->SetActive(true);
-			mpDamageForce->SetTimeControl(false,0.3f,0.0f,0.05f,0.25f);
-		}
-	}
-#endif
 }
 
 //-----------------------------------------------------------------------
@@ -1014,9 +927,6 @@ void cPlayer::OnWorldLoad()
 	mpFlare->OnWorldLoad();
 	mpHidden->OnWorldLoad();
 	mpLean->OnWorldLoad();
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbHasHaptics) mpHapticCamera->OnWorldLoad();
-#endif
 }
 
 //-----------------------------------------------------------------------
@@ -1028,9 +938,6 @@ void cPlayer::OnWorldExit()
 	mpGroundRayCallback->OnWorldExit();
 	mpPickRayCallback->OnWorldExit();
 	mpHidden->OnWorldExit();
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbHasHaptics) mpHapticCamera->OnWorldExit();
-#endif
 }
 
 //-----------------------------------------------------------------------
@@ -1071,15 +978,6 @@ void cPlayer::Update(float afTimeStep)
 	auto lTime = pSystem->GetLowLevel()->GetTime();	
 	iPhysicsWorld *pPhysicsWorld = mpScene->GetWorld3D()->GetPhysicsWorld();
 
-#ifdef INCLUDE_HAPTIC
-	/////////////////////////////////////
-	// HaptX camera
-	if(cHaptic::GetIsUsed())
-	{
-		mpHapticCamera->Update(afTimeStep);
-	}
-#endif
-	
 	//LogUpdate("  Death\n");
 	////////////////////////////////////////
 	// Make sure player is dead if he should be
@@ -1430,9 +1328,6 @@ void cPlayer::Reset()
 	mpHealth->Reset();
 	mpHidden->Reset();
 	mpGroundRayCallback->Reset();
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbHasHaptics) mpHapticCamera->Reset();
-#endif
 }
 
 //-----------------------------------------------------------------------
@@ -1467,27 +1362,6 @@ void cPlayer::OnDraw()
 	{
 		//Do noting...
 	}
-#ifdef INCLUDE_HAPTIC
-	else if(mpInit->mbHasHaptics && mpHapticCamera->ShowCrosshair()==false) 
-	{
-		if(mCrossHairState != eCrossHairState_None)
-		{
-			cVector3f vProjPos = cMath::MatrixMul(	mpCamera->GetViewMatrix(), 
-													mpHapticCamera->GetHandEntity()->GetWorldPosition());
-			vProjPos = cMath::MatrixMulDivideW(mpCamera->GetProjectionMatrix(),vProjPos);
-			
-			cVector2f vPos(	(vProjPos.x+1) * 0.5f, (-vProjPos.y+1)* 0.5f);
-			vPos *= cVector2f(800,600);
-
-			vPos += cVector2f(10,10);
-			cResourceImage *pImage = mvCrossHairs[mCrossHairState]->GetMaterial()->GetImage(eMaterialTexture_Diffuse);
-			cVector2l vSize = pImage->GetSize();
-			cVector2f vPosAdd(((float)vSize.x) / 2.0f, ((float)vSize.y) / 2.0f);
-			mpGfxDrawer->DrawGfxObject(	mvCrossHairs[mCrossHairState],
-										cVector3f(0,0,100)+(vPos - vPosAdd));
-		}
-	}
-#endif
 	else if(mCrossHairState == eCrossHairState_Item)
 	{
 		const cGfxObject *pObject = mpCurrentItem->GetGfxObject();
@@ -1552,27 +1426,6 @@ void cPlayer::OnDraw()
 	//													pMouse->ButtonIsDown(eMButton_Right));
 															
 
-#ifdef INCLUDE_HAPTIC
-	//DEBUG: Haptic State
-	if(mpInit->mbHasHaptics)
-	{
-	/*tWString sState =_W("Unknown");
-	if(mState == ePlayerState_Normal) sState = _W("Normal");
-	else if(mState == ePlayerState_Push) sState = _W("Push");
-	else if(mState == ePlayerState_Move) sState = _W("Move");
-	else if(mState == ePlayerState_InteractMode) sState = _W("InteractMode");
-	else if(mState == ePlayerState_UseItem) sState = _W("UseItem");
-	else if(mState == ePlayerState_Message) sState = _W("Message");
-	else if(mState == ePlayerState_Grab) sState = _W("Grab");
-	else if(mState == ePlayerState_WeaponMelee) sState = _W("WeaponMelee");
-	else if(mState == ePlayerState_Throw) sState = _W("Throw");
-	else if(mState == ePlayerState_Climb) sState = _W("Climb");
-	
-	mpFont->Draw(cVector3f(5,5,0),12,cColor(1,1,1,1),eFontAlign_Left,_W("State: %s"),
-					sState.c_str());*/
-	}
-#endif
-
 	//DEBUG: MoveState
 	/*tString sState ="";
 	if(mMoveState == ePlayerMoveState_Jump) sState = "Jump";
@@ -1583,36 +1436,6 @@ void cPlayer::OnDraw()
 	
 	mpFont->Draw(cVector3f(5,5,0),12,cColor(1,1,1,1),eFontAlign_Left,"MoveState: %s",
 					sState.c_str());*/
-	
-	//DEBUG: Picked body
-	/*if(mpInit->mbHasHaptics)
-	{
-		if(mpPickRayCallback->mpPickedBody){
-			mpFont->Draw(cVector3f(5,35,0),12,cColor(1,1,1,1),eFontAlign_Left,_W("Body: %s"),
-				cString::To16Char(mpPickRayCallback->mpPickedBody->GetName()).c_str());
-		}
-		else{
-			mpFont->Draw(cVector3f(5,35,0),12,cColor(1,1,1,1),eFontAlign_Left,_W("Body: NULL"));
-		}
-		mpFont->Draw(cVector3f(5,46,0),12,cColor(1,1,1,1),eFontAlign_Left,_W("Dist: %f"),
-			mpPickRayCallback->mfPickedDist);
-
-		tWString sCState = _W("Unknown");
-		if(mCrossHairState == eCrossHairState_Inactive)sCState = _W("Inactive");
-		if(mCrossHairState == eCrossHairState_Active)sCState = _W("Active");
-		if(mCrossHairState == eCrossHairState_Invalid)sCState = _W("Invalid");
-		if(mCrossHairState == eCrossHairState_Grab)sCState = _W("Grab");
-		if(mCrossHairState == eCrossHairState_Examine)sCState = _W("Examine");
-		if(mCrossHairState == eCrossHairState_Pointer)sCState = _W("Pointer");
-		if(mCrossHairState == eCrossHairState_Item)sCState = _W("Item");
-		if(mCrossHairState == eCrossHairState_DoorLink)sCState = _W("DoorLink");
-		if(mCrossHairState == eCrossHairState_PickUp)sCState = _W("PickUp");
-		if(mCrossHairState == eCrossHairState_Ladder)sCState = _W("Ladder");
-		if(mCrossHairState == eCrossHairState_None)sCState = _W("None");
-		mpFont->Draw(	cVector3f(5,66,0),12,cColor(1,1,1,1),eFontAlign_Left,
-						_W("CState: %s"),sCState.c_str());
-
-	}*/
 
 	//DEBUG: On ground and step material
 	/*mpFont->Draw(cVector3f(5,17,0),12,cColor(1,1,1,1),eFontAlign_Left,"Position: %f ClimbPos: %f ClimbCount: %f\n",
@@ -1759,15 +1582,6 @@ void cPlayer::OnPostSceneDraw()
 	mpFlashLight->OnPostSceneDraw();
 
 	mvStates[mState]->OnPostSceneDraw();
-
-#ifdef INCLUDE_HAPTIC
-	///////////////////////////////
-	//Gui Hand effects
-	if(mpInit->mbHasHaptics)
-	{
-		mpHapticCamera->OnPostSceneDraw();
-	}
-#endif
 }
 
 //////////////////////////////////////////////////////////////////////////

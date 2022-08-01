@@ -197,18 +197,11 @@ namespace hpl {
 		Log(" Creating ai module\n");
 		mpAI = mpGameSetup->CreateAI();
 
-#ifdef INCLUDE_HAPTIC
-		Log(" Creating haptic module\n");
-		mpHaptic = mpGameSetup->CreateHaptic();
-#else
-		mpHaptic = NULL;
-#endif
-
 		Log(" Creating script module\n");
 		mpScript = mpGameSetup->CreateScript(mpResources);
 
 		Log(" Creating scene module\n");
-		mpScene = mpGameSetup->CreateScene(mpGraphics, mpResources, mpSound,mpPhysics,mpSystem,mpAI,mpHaptic);
+		mpScene = mpGameSetup->CreateScene(mpGraphics, mpResources, mpSound,mpPhysics,mpSystem,mpAI);
 
 		Log("--------------------------------------------------------\n\n");
 
@@ -246,9 +239,6 @@ namespace hpl {
 		//Init AI
 		mpAI->Init();
 
-		//Init haptic
-		if(mpHaptic) mpHaptic->Init(mpResources);
-
 		Log("Initializing Game Module\n");
 		Log("--------------------------------------------------------\n");
 		//Create the updatehandler
@@ -262,7 +252,6 @@ namespace hpl {
 		mpUpdater->AddGlobalUpdate(mpSound);
 		mpUpdater->AddGlobalUpdate(mpAI);
 		mpUpdater->AddGlobalUpdate(mpResources);
-		if(mpHaptic) mpUpdater->AddGlobalUpdate(mpHaptic);
 		mpUpdater->AddGlobalUpdate(mpScript);
 
 		//Setup the "default" updater container
@@ -305,7 +294,6 @@ namespace hpl {
 		hplDelete(mpUpdater);
 
 		hplDelete(mpScene);
-		if(mpHaptic) hplDelete(mpHaptic);
 		hplDelete(mpInput);
 		hplDelete(mpSound);
 		hplDelete(mpGraphics);
@@ -545,20 +533,12 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cHaptic* cGame::GetHaptic()
-	{
-		return mpHaptic;
-	}
-
-	//-----------------------------------------------------------------------
-
 	cScript* cGame::GetScript()
 	{
 		return mpScript;
 	}
 
 	//-----------------------------------------------------------------------
-
 
 	cUpdater* cGame::GetUpdater()
 	{

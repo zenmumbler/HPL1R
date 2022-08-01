@@ -389,9 +389,6 @@ void cGameEnemyState_Dog_Attention::OnEnterState(iGameEnemyState *apPrevState)
 	mfTime = mpEnemyDog->mfAttentionTime;
 	
 	if(mpInit->mDifficulty == eGameDifficulty_Easy) mfTime *=1.7f;
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbHasHaptics) mfTime *= 1.3f;
-#endif
 }
 
 //-----------------------------------------------------------------------
@@ -755,9 +752,6 @@ void cGameEnemyState_Dog_Hunt::OnEnterState(iGameEnemyState *apPrevState)
 	mpEnemy->SetupBody();
 
 	float fMul = 1.0f;
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbHasHaptics) fMul = 0.6f;
-#endif
 
 	if(mpInit->mDifficulty == eGameDifficulty_Easy)
 		mpMover->GetCharBody()->SetMaxPositiveMoveSpeed(eCharDir_Forward,mpEnemyDog->mfHuntSpeed*0.7f*fMul);

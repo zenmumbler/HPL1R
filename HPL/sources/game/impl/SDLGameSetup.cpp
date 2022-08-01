@@ -30,10 +30,6 @@
 #include "input/impl/LowLevelInputSDL.h"
 #include "sound/impl/LowLevelSoundOAL.h"
 #include "physics/impl/LowLevelPhysicsNewton.h"
-#ifdef INCLUDE_HAPTIC
-#include "impl/LowLevelHapticSDL.h"
-#include "haptic/Haptic.h"
-#endif
 
 #include <SDL2/SDL.h>
 
@@ -58,13 +54,6 @@ namespace hpl {
 		mpLowLevelResources = hplNew( cLowLevelResourcesSDL,((cLowLevelGraphicsSDL *)mpLowLevelGraphics) );
 		mpLowLevelSound	= hplNew( cLowLevelSoundOAL,() );
 		mpLowLevelPhysics = hplNew( cLowLevelPhysicsNewton,() );
-
-#ifdef INCLUDE_HAPTIC
-		mpLowLevelHaptic = hplNew( cLowLevelHapticSDL,() );
-#else
-		mpLowLevelHaptic = NULL;
-#endif
-
 	}
 
 	//-----------------------------------------------------------------------
@@ -85,8 +74,6 @@ namespace hpl {
 		hplDelete(mpLowLevelSystem);
 		Log("  Graphics\n");
 		hplDelete(mpLowLevelGraphics);
-		Log("  Haptic\n");
-		if(mpLowLevelHaptic) hplDelete(mpLowLevelHaptic);
 
 		SDL_Quit();
 	}
@@ -100,10 +87,9 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cScene* cSDLGameSetup::CreateScene(cGraphics* apGraphics, cResources *apResources, cSound* apSound,
-										cPhysics *apPhysics, cSystem *apSystem,cAI *apAI,
-										cHaptic *apHaptic)
+										cPhysics *apPhysics, cSystem *apSystem,cAI *apAI)
 	{
-		cScene *pScene = hplNew( cScene, (apGraphics,apResources, apSound,apPhysics, apSystem,apAI,apHaptic) );
+		cScene *pScene = hplNew( cScene, (apGraphics,apResources, apSound,apPhysics, apSystem,apAI) );
 		return pScene;
 	}
 
@@ -166,14 +152,6 @@ namespace hpl {
 	{
 		cAI *pAI = hplNew( cAI,() );
 		return pAI;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cHaptic* cSDLGameSetup::CreateHaptic()
-	{
-		cHaptic *pHaptic = hplNew( cHaptic, (mpLowLevelHaptic) );
-		return pHaptic;
 	}
 
 	//-----------------------------------------------------------------------

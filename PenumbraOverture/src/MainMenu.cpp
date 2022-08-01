@@ -27,9 +27,6 @@
 #include "Player.h"
 #include "PlayerHelper.h"
 #include "EffectHandler.h"
-#ifdef INCLUDE_HAPTIC
-#include "HapticGameCamera.h"
-#endif
 
 float gfMenuFadeAmount;
 bool gbMustRestart=false;
@@ -908,121 +905,6 @@ cMainMenuWidget_Text *gpInvertMouseYText=NULL;
 cMainMenuWidget_Text *gpMouseSensitivityText=NULL;
 cMainMenuWidget_Text *gpToggleCrouchText=NULL;
 
-#ifdef INCLUDE_HAPTIC
-cMainMenuWidget_Text *gpUseHapticsText=NULL;
-cMainMenuWidget_Text *gpWidgetInteractModeCameraSpeedText = NULL;
-cMainMenuWidget_Text *gpWidgetActionModeCameraSpeedText = NULL;
-cMainMenuWidget_Text *gpWidgetWeightForceScaleText = NULL;
-
-//-----------------------------------------------------------------------
-
-class cMainMenuWidget_UseHaptics : public cMainMenuWidget_Button
-{
-public:
-	cMainMenuWidget_UseHaptics(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment)
-		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment){msTip = _W("");}
-
-	void OnMouseDown(eMButton aButton)
-	{
-		mpInit->mbHasHapticsOnRestart = !mpInit->mbHasHapticsOnRestart;
-
-		gpUseHapticsText->msText = mpInit->mbHasHapticsOnRestart ?
-			kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
-		gbMustRestart = true;
-	}
-};
-
-//-----------------------------------------------------------------------
-
-class cMainMenuWidget_WeightForceScale : public cMainMenuWidget_Button
-{
-public:
-	cMainMenuWidget_WeightForceScale(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment)
-		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment){msTip = _W("");}
-
-		void OnMouseDown(eMButton aButton)
-		{
-			float afX = mpInit->mfHapticForceMul;
-			if(aButton == eMButton_Left)
-			{
-				afX += 0.1f;
-				if(afX>3.0f) afX = 3.0f;
-			}
-			else if(aButton == eMButton_Right)
-			{
-				afX -= 0.1f;
-				if(afX<0.0f) afX = 0.0f;
-			}
-
-			char sTempVec[256];
-			snprintf(sTempVec, 256, "%.1f", afX);
-			gpWidgetWeightForceScaleText->msText = cString::To16Char(sTempVec);
-
-			mpInit->mfHapticForceMul = afX;
-		}
-};
-
-//-----------------------------------------------------------------------
-
-class cMainMenuWidget_InteractModeCameraSpeed : public cMainMenuWidget_Button
-{
-public:
-	cMainMenuWidget_InteractModeCameraSpeed(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment)
-		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment){msTip = _W("");}
-
-		void OnMouseDown(eMButton aButton)
-		{
-			float afX = mpInit->mpPlayer->GetHapticCamera()->GetInteractModeCameraSpeed();
-			if(aButton == eMButton_Left)
-			{
-				afX += 0.1f;
-				if(afX>3.0f) afX = 3.0f;
-			}
-			else if(aButton == eMButton_Right)
-			{
-				afX -= 0.1f;
-				if(afX<0.1f) afX = 0.1f;
-			}
-
-			char sTempVec[256];
-			snprintf(sTempVec, 256, "%.1f", afX);
-			gpWidgetInteractModeCameraSpeedText->msText = cString::To16Char(sTempVec);
-
-			mpInit->mpPlayer->GetHapticCamera()->SetInteractModeCameraSpeed(afX);
-		}
-};
-
-//-----------------------------------------------------------------------
-
-class cMainMenuWidget_ActionModeCameraSpeed : public cMainMenuWidget_Button
-{
-public:
-	cMainMenuWidget_ActionModeCameraSpeed(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment)
-		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment){msTip = _W("");}
-
-		void OnMouseDown(eMButton aButton)
-		{
-			float afX = mpInit->mpPlayer->GetHapticCamera()->GetActionModeCameraSpeed();
-			if(aButton == eMButton_Left)
-			{
-				afX += 0.1f;
-				if(afX>3.0f) afX = 3.0f;
-			}
-			else if(aButton == eMButton_Right)
-			{
-				afX -= 0.1f;
-				if(afX<0.1f) afX = 0.1f;
-			}
-
-			char sTempVec[256];
-			snprintf(sTempVec, 256, "%.1f", afX);
-			gpWidgetActionModeCameraSpeedText->msText = cString::To16Char(sTempVec);
-
-			mpInit->mpPlayer->GetHapticCamera()->SetActionModeCameraSpeed(afX);
-		}
-};
-
-#endif // INCLUDE_HAPTIC
 
 //-----------------------------------------------------------------------
 
@@ -1281,27 +1163,6 @@ public:
 		mpInit->mDifficulty = (eGameDifficulty)lCurrent;
 	}
 };
-
-#ifdef INCLUDE_HAPTIC
-
-class cMainMenuWidget_SimpleSwing : public cMainMenuWidget_Button
-{
-public:
-	cMainMenuWidget_SimpleSwing(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment)
-		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
-	{
-	}
-
-	void OnMouseDown(eMButton aButton)
-	{
-		mpInit->mbSimpleWeaponSwing = !mpInit->mbSimpleWeaponSwing;
-		
-		gpSimpleSwingText->msText = mpInit->mbSimpleWeaponSwing ?
-									kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
-	}
-};
-
-#endif
 
 class cMainMenuWidget_AllowQuickSave : public cMainMenuWidget_Button
 {
@@ -2492,11 +2353,6 @@ void cMainMenu::SetActive(bool abX)
 
 	if(mbActive)
 	{
-#ifdef INCLUDE_HAPTIC
-		if(mpInit->mbHasHaptics)
-			mpInit->mpPlayer->GetHapticCamera()->SetActive(false);
-#endif
-		
 		if (!mpInit->mbFullScreen) {
 			mpInit->mpGame->GetInput()->GetLowLevel()->LockInput(false);
 		}
@@ -2504,13 +2360,6 @@ void cMainMenu::SetActive(bool abX)
 		mpInit->mpGame->GetUpdater()->SetContainer("MainMenu");
 		mpInit->mpGame->GetScene()->SetDrawScene(false);
 		mpInit->mpGame->GetScene()->SetUpdateMap(false);
-#ifdef INCLUDE_HAPTIC
-		if(mpInit->mbHasHaptics)
-		{
-			mpInit->mpGame->GetHaptic()->GetLowLevel()->StopAllForces();
-			mpInit->mpGame->GetHaptic()->GetLowLevel()->SetUpdateShapes(false);
-		}
-#endif
 		
 		mpInit->mpButtonHandler->ChangeState(eButtonHandlerState_MainMenu);
 				
@@ -2570,11 +2419,6 @@ void cMainMenu::SetActive(bool abX)
 			mpInit->mpGame->GetInput()->GetLowLevel()->LockInput(true);
 		}
 
-#ifdef INCLUDE_HAPTIC
-		if(mpInit->mbHasHaptics)
-			mpInit->mpPlayer->GetHapticCamera()->SetActive(true);
-#endif
-
 		cSoundHandler *pSoundHandler =mpInit->mpGame->GetSound()->GetSoundHandler();
 		
 		if(mpInit->mpMapHandler->GetCurrentMapName() != "")
@@ -2595,10 +2439,7 @@ void cMainMenu::SetActive(bool abX)
 		mpInit->mpGame->GetUpdater()->SetContainer("Default");
 		mpInit->mpGame->GetScene()->SetDrawScene(true);
 		mpInit->mpGame->GetScene()->SetUpdateMap(true);
-#ifdef INCLUDE_HAPTIC
-		if(mpInit->mbHasHaptics)
-			mpInit->mpGame->GetHaptic()->GetLowLevel()->SetUpdateShapes(true);
-#endif
+
 		mpInit->mpButtonHandler->ChangeState(eButtonHandlerState_Game);
 
 		if(mpLogo) mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mpLogo);
@@ -3058,45 +2899,6 @@ void cMainMenu::CreateWidgets()
 	cMainMenuWidget *pWidgetToggleCrouch = hplNew( cMainMenuWidget_ToggleCrouch,(mpInit,vPos,kTranslate("MainMenu","Toggle Crouch:"),20,eFontAlign_Right) );
 	AddWidgetToState(eMainMenuState_OptionsControls,pWidgetToggleCrouch); 
 	vPos.y += 29;
-#ifdef INCLUDE_HAPTIC
-	cMainMenuWidget *pWidgetUseHaptics = NULL;
-	cMainMenuWidget *pWidgetInteractModeCameraSpeed = NULL;
-	cMainMenuWidget *pWidgetActionModeCameraSpeed = NULL;
-	cMainMenuWidget *pWidgetWeightForceScale = NULL;
-	if(mpInit->mbHapticsAvailable)
-	{
-		vPos.y+= 5;
-		//Use haptics
-		tWString sText = kTranslate("MainMenu","Use Haptics:");
-		if(sText == _W("")) sText = _W("Use Haptics:");
-		pWidgetUseHaptics = hplNew( cMainMenuWidget_UseHaptics,(mpInit,vPos,sText,20,eFontAlign_Right) );
-		AddWidgetToState(eMainMenuState_OptionsControls,pWidgetUseHaptics); 
-		vPos.y += 29;
-		
-		//Weight Force Scale
-		sText = kTranslate("MainMenu","Weight Force Scale:");
-		if(sText == _W("")) sText = _W("Weight Force Scale:");
-		pWidgetWeightForceScale = hplNew( cMainMenuWidget_WeightForceScale,(mpInit,vPos,sText,20,eFontAlign_Right) );
-		AddWidgetToState(eMainMenuState_OptionsControls,pWidgetWeightForceScale); 
-		vPos.y += 29;
-
-		//InteractMode camera speed
-		sText = kTranslate("MainMenu","InteractMode Camera Speed:");
-		if(sText == _W("")) sText = _W("InteractMode Camera Speed:");
-		pWidgetInteractModeCameraSpeed = hplNew( cMainMenuWidget_InteractModeCameraSpeed,(mpInit,vPos,sText,20,eFontAlign_Right) );
-		AddWidgetToState(eMainMenuState_OptionsControls,pWidgetInteractModeCameraSpeed); 
-		vPos.y += 29;
-
-		//ActionMode camera speed
-		sText = kTranslate("MainMenu","ActionMode Camera Speed:");
-		if(sText == _W("")) sText = _W("ActionMode Camera Speed:");
-		pWidgetActionModeCameraSpeed = hplNew( cMainMenuWidget_ActionModeCameraSpeed,(mpInit,vPos,sText,20,eFontAlign_Right) );
-		AddWidgetToState(eMainMenuState_OptionsControls,pWidgetActionModeCameraSpeed); 
-		vPos.y += 29;
-		
-		vPos.y+= 5;
-	}
-#endif
 	cMainMenuWidget *pWidgetChangeKeyConf = hplNew( cMainMenuWidget_Button,(mpInit,vPos,kTranslate("MainMenu","Change Key Mapping"),eMainMenuState_OptionsKeySetupMove,20,eFontAlign_Center) );
 	AddWidgetToState(eMainMenuState_OptionsControls,pWidgetChangeKeyConf); 
 	vPos.y += 35;
@@ -3119,36 +2921,6 @@ void cMainMenu::CreateWidgets()
 	sText = mpInit->mpButtonHandler->mbToggleCrouch ? kTranslate("MainMenu","On"): kTranslate("MainMenu","Off");
 	gpToggleCrouchText = hplNew( cMainMenuWidget_Text,(mpInit,vPos,sText,20,eFontAlign_Left,pWidgetToggleCrouch) );
 	AddWidgetToState(eMainMenuState_OptionsControls,gpToggleCrouchText); 
-
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbHapticsAvailable)
-	{
-		vPos.y+= 5;
-		vPos.y += 29;
-		sText = mpInit->mbHasHapticsOnRestart ? kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
-		gpUseHapticsText = hplNew( cMainMenuWidget_Text,(mpInit,vPos,sText,20,eFontAlign_Left) );
-		AddWidgetToState(eMainMenuState_OptionsControls,gpUseHapticsText);
-		gpUseHapticsText->SetExtraWidget(pWidgetUseHaptics);
-		
-		vPos.y += 29;
-		snprintf(sTempVec,256,"%.1f",mpInit->mfHapticForceMul);
-		sText = cString::To16Char(sTempVec);
-		gpWidgetWeightForceScaleText = hplNew( cMainMenuWidget_Text,(mpInit,vPos,sText,20,eFontAlign_Left,pWidgetWeightForceScale) );
-		AddWidgetToState(eMainMenuState_OptionsControls,gpWidgetWeightForceScaleText); 
-
-		vPos.y += 29;
-		snprintf(sTempVec,256,"%.1f",mpInit->mpPlayer->GetHapticCamera()->GetInteractModeCameraSpeed());
-		sText = cString::To16Char(sTempVec);
-		gpWidgetInteractModeCameraSpeedText = hplNew( cMainMenuWidget_Text,(mpInit,vPos,sText,20,eFontAlign_Left,pWidgetInteractModeCameraSpeed) );
-		AddWidgetToState(eMainMenuState_OptionsControls,gpWidgetInteractModeCameraSpeedText); 
-
-		vPos.y += 29;
-		snprintf(sTempVec,256,"%.1f",mpInit->mpPlayer->GetHapticCamera()->GetActionModeCameraSpeed());
-		sText = cString::To16Char(sTempVec);
-		gpWidgetActionModeCameraSpeedText = hplNew( cMainMenuWidget_Text,(mpInit,vPos,sText,20,eFontAlign_Left,pWidgetActionModeCameraSpeed) );
-		AddWidgetToState(eMainMenuState_OptionsControls,gpWidgetActionModeCameraSpeedText); 
-	}
-#endif
 
 	///////////////////////////////////
 	// Options Key Setup General stuff
@@ -3343,14 +3115,8 @@ void cMainMenu::CreateWidgets()
 	cMainMenuWidget *pWidgetDifficulty = hplNew( cMainMenuWidget_Difficulty,(mpInit,vPos,kTranslate("MainMenu","Difficulty:"),20,eFontAlign_Right) );
 	AddWidgetToState(eMainMenuState_OptionsGame,pWidgetDifficulty); 
 	vPos.y += 29;
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbSimpleSwingInOptions)
-	{
-		AddWidgetToState(eMainMenuState_OptionsGame,hplNew( cMainMenuWidget_SimpleSwing,(mpInit,vPos,kTranslate("MainMenu","SimpleSwing:"),20,eFontAlign_Right)) ); 
-		vPos.y += 29;
-	}
-#endif
-	//AddWidgetToState(eMainMenuState_OptionsGame,hplNew( cMainMenuWidget_AllowQuickSave(mpInit,vPos,kTranslate("MainMenu","AllowQuickSave:"),20,eFontAlign_Right)); 
+
+	//AddWidgetToState(eMainMenuState_OptionsGame,hplNew( cMainMenuWidget_AllowQuickSave(mpInit,vPos,kTranslate("MainMenu","AllowQuickSave:"),20,eFontAlign_Right));
 	//vPos.y += 29;
 	tWString sCrosshairText = kTranslate("MainMenu","Show Crosshair:");
 	if(sCrosshairText == _W("")) sCrosshairText = _W("Show Crosshair:");
@@ -3393,16 +3159,6 @@ void cMainMenu::CreateWidgets()
 	AddWidgetToState(eMainMenuState_OptionsGame,gpDifficultyText); 
 	gpDifficultyText->SetExtraWidget(pWidgetDifficulty);
 	vPos.y += 29;
-
-#ifdef INCLUDE_HAPTIC
-	if(mpInit->mbSimpleSwingInOptions)
-	{
-		sText = mpInit->mbSimpleWeaponSwing ? kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
-		gpSimpleSwingText = hplNew( cMainMenuWidget_Text,(mpInit,vPos,sText,20,eFontAlign_Left) );
-		AddWidgetToState(eMainMenuState_OptionsGame,gpSimpleSwingText); 
-		vPos.y += 29;
-	}
-#endif
 	
 	//sText = mpInit->mbAllowQuickSave ? kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
 	//gpAllowQuickSaveText = hplNew( cMainMenuWidget_Text, (mpInit,vPos,sText,20,eFontAlign_Left) );

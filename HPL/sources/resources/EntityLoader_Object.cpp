@@ -50,10 +50,6 @@
 
 #include "scene/Light3DSpot.h"
 
-#include "haptic/Haptic.h"
-#include "haptic/LowLevelHaptic.h"
-#include "haptic/HapticShape.h"
-
 namespace hpl {
 
 	//////////////////////////////////////////////////////////////////////////
@@ -79,8 +75,6 @@ namespace hpl {
 		// Init
 		mvBodies.clear();
 		mvJoints.clear();
-
-		mvHapticShapes.clear();
 
 		mvParticleSystems.clear();
 		mvBillboards.clear();
@@ -471,44 +465,6 @@ namespace hpl {
 						mvBodies.push_back(pBody);
 					}
 				}
-			}
-		}
-
-		////////////////////////////////////////
-		//Create Haptic
-		if(cHaptic::GetIsUsed())
-		{
-			iLowLevelHaptic *pLowLevelHaptic = apWorld->GetHaptic()->GetLowLevel();
-
-			for(size_t i=0; i<mvBodies.size(); ++i)
-			{
-				iPhysicsBody* pBody = mvBodies[i];
-
-				//Not Mesh
-				if(pBody->GetShape()->GetType() != eCollideShapeType_Mesh)
-				{
-					iHapticShape *pHShape = pLowLevelHaptic->CreateShapeFromPhysicsBody(
-															pBody->GetName(),pBody);
-					mvHapticShapes.push_back(pHShape);
-				}
-				//Mesh
-				else {
-					cSubMeshEntity *pSubEnt = mpEntity->GetSubMeshEntityName(pBody->GetName());
-
-					if(pSubEnt)
-					{
-						iHapticShape *pHShape = pLowLevelHaptic->CreateMeshShape(pBody->GetName(),
-															pSubEnt->GetSubMesh()->GetVertexBuffer());
-						pHShape->SetSubMeshEntity(pSubEnt);
-						mvHapticShapes.push_back(pHShape);
-					}
-					else
-					{
-						Error("Could not find sub mesh '%s' in '%s'\n",pBody->GetName().c_str(),
-																asFileName.c_str());
-					}
-				}
-
 			}
 		}
 

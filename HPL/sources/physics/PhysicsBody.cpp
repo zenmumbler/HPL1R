@@ -81,8 +81,6 @@ namespace hpl {
 
 		mpUserData = NULL;
 
-		mpHapticShape = NULL;
-
 		mbPushedByCharacterGravity = false;
 
 		mbIsCharacter = false;

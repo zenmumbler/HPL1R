@@ -97,9 +97,6 @@ void cEntityLoader_GameItem::AfterLoad(TiXmlElement *apRootElem, const cMatrixf 
 	// Set the engine objects to the object
 	pObject->SetBodies(mvBodies);
 	pObject->SetMeshEntity(mpEntity);
-#ifdef INCLUDE_HAPTIC
-	pObject->SetHapticShapes(mvHapticShapes);
-#endif
 
 	///////////////////////////////////
 	// Add a the object as user data to the body, to get the obejct later on.

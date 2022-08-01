@@ -65,8 +65,6 @@ namespace hpl {
 		mfMaxScrapeFreqSpeed = 3;
 		mfMiddleScrapeSpeed = 2;
 		msScrapeSoundName = "";
-
-		mpHapticSurface = NULL;
 	}
 
 	//-----------------------------------------------------------------------

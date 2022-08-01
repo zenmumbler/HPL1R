@@ -58,11 +58,6 @@
 #include "physics/PhysicsMaterial.h"
 #include "physics/SurfaceData.h"
 
-#include "haptic/Haptic.h"
-#include "haptic/HapticShape.h"
-#include "haptic/HapticSurface.h"
-#include "haptic/LowLevelHaptic.h"
-
 #include "tinyXML/tinyxml.h"
 
 #include "math/Math.h"
@@ -1608,24 +1603,6 @@ namespace hpl {
 				pBody->SetMaterial(pPhysicsMat);
 			}
 
-			//Haptic creation
-			if(cHaptic::GetIsUsed())
-			{
-				cHaptic	*pHaptic = apWorld->GetHaptic();
-				iHapticShape *pHShape = NULL;
-
-				pHShape = pHaptic->GetLowLevel()->CreateMeshShape(pBody->GetName(),pVtxBuffer);
-				if(bDrawn) pHShape->SetSubMeshEntity(pEntity->GetSubMeshEntity(0));
-
-				pBody->SetHapticShape(pHShape);
-
-				if(pPhysicsMat)
-				{
-					iHapticSurface *pHapticSurface = pPhysicsMat->GetSurfaceData()->GetHapticSurface();
-					if(pHapticSurface) pHShape->SetSurface(pHapticSurface);
-				}
-			}
-
 			if(bDrawn==false){
 				hplDelete(pVtxBuffer);
 			}
@@ -1759,13 +1736,6 @@ namespace hpl {
 			pBody->SetCollide(false);
 		else
 			pBody->SetCollide(true);
-
-		//Haptic creation
-		if(cHaptic::GetIsUsed())
-		{
-			cHaptic	*pHaptic = apWorld->GetHaptic();
-			iHapticShape *pHShape = pHaptic->GetLowLevel()->CreateShapeFromPhysicsBody(apNode->msName,pBody);
-		}
 
 		return apWorld->CreateColliderEntity(apNode->msName,pBody);
 	}

@@ -240,10 +240,6 @@ private:
 	cVector3f mvLightOffset;
 	tMatrixfVec mvLightLocalOffsets;
 
-#ifdef INCLUDE_HAPTIC
-	float mfHapticTorqueMul;
-#endif
-
 	float mfCloseToSameCount;
 
 	cObjectBreakProperties mBreakProps;
