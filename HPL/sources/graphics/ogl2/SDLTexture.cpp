@@ -45,7 +45,6 @@ namespace hpl {
 
 		mlTextureIndex = 0;
 		mfTimeCount =0;
-
 		mfTimeDir = 1;
 
 		mlBpp = 0;

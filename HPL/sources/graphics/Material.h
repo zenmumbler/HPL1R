@@ -94,51 +94,6 @@ namespace hpl {
 	class iLight;
 	class iLight3D;
 
-	//---------------------------------------------------
-
-	class iGLStateProgram : public iGpuProgram
-	{
-	public:
-		iGLStateProgram(tString asName)
-			: iGpuProgram(asName)
-		{
-			mbSetUpDone = false;
-		}
-		virtual ~iGLStateProgram(){}
-
-		void SetUp(iLowLevelGraphics *apLowLevelGraphics)
-		{
-			if(mbSetUpDone==false)
-			{
-				mpLowGfx = apLowLevelGraphics;
-				mbSetUpDone = true;
-				InitData();
-			}
-		}
-
-		virtual void Bind()=0;
-		virtual void UnBind()=0;
-
-		bool CreateFromFile(const tString& asFile, const tString& asEntry){return false;}
-		bool SetFloat(const tString& asName, float afX){return false;}
-
-		bool SetVec2f(const tString& asName, float afX,float afY){return false;}
-		bool SetVec3f(const tString& asName, float afX,float afY,float afZ){return false;}
-		bool SetVec4f(const tString& asName, float afX,float afY,float afZ, float afW){return false;}
-		bool SetMatrixf(const tString& asName, const cMatrixf& mMtx){return false;}
-		bool SetMatrixIdentityf(const tString& asName, eGpuProgramMatrix mType){return false;}
-		bool SetTexture(const tString& asName,iTexture* apTexture){return false;}
-
-		void Destroy(){}
-	protected:
-
-		iLowLevelGraphics *mpLowGfx;
-
-		bool mbSetUpDone;
-
-		virtual void InitData()=0;
-	};
-
 	//---------------------------------------------------------------
 
 

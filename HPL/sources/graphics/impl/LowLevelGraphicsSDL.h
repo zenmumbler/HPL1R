@@ -25,7 +25,7 @@
 #else
 #include <GL/gltypes.h>
 #endif
-// Unix's X11 Defines DestoryAll which collides with methods
+// Unix's X11 Defines DestroyAll which collides with methods
 #undef DestroyAll
 
 #include "graphics/LowLevelGraphics.h"
