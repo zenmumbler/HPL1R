@@ -139,9 +139,6 @@ public:
 	int mlMaxSoundChannels;
     int mlStreamUpdateFreq;
 	bool mbUseSoundHardware;
-	bool mbUseSoundThreading;
-	int mlMaxMonoChannelsHint;
-	int mlMaxStereoChannelsHint;
 	tString msDeviceName;
 
 	ePhysicsAccuracy mPhysicsAccuracy;

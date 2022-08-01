@@ -135,17 +135,7 @@ void cInit::CreateHardCodedPS(iParticleEmitterData *apPE)
 
 bool cInit::Init(tString asCommandLine)
 {
-	/*if(asCommandLine != "")
-	{
-		Log("CommandLine: %s\n",asCommandLine.c_str());
-		if(cSerialChecker::Validate(asCommandLine)<=0)
-		{
-			FatalError("Invalid serial number!\n");
-		}
-	}*/
-
 	//iResourceBase::SetLogCreateAndDelete(true);
-	SetWindowCaption("Penumbra Loading...");
 
 	// PERSONAL DIR /////////////////////
 	tWString sPersonalDir = GetSystemSpecialPath(eSystemPath_Personal);
@@ -157,21 +147,6 @@ bool cInit::Init(tString asCommandLine)
 
 	// CREATE NEEDED DIRS /////////////////////
 	gsUserSettingsPath = sPersonalDir + PERSONAL_RELATIVEROOT PERSONAL_RELATIVEGAME _W("settings.cfg");
-	#ifndef WIN32
-	// For Mac OS X and Linux move the OLD Episode 1 folder to Penumbra/Overture and symlink to the old path
-	if (FolderExists(sPersonalDir + PERSONAL_RELATIVEROOT _W("Penumbra Overture/Episode1"))
-			&& !IsFileLink(sPersonalDir + PERSONAL_RELATIVEROOT _W("Penumbra Overture/Episode1"))) {
-		// Create the new folder
-		if(!FolderExists(sPersonalDir + PERSONAL_RELATIVEROOT _W("Penumbra")))
-			CreateFolder(sPersonalDir + PERSONAL_RELATIVEROOT _W("Penumbra"));
-		// Move the Older Episode 1 to the new Overture
-		RenameFile(sPersonalDir + PERSONAL_RELATIVEROOT _W("Penumbra Overture/Episode1"),
-				sPersonalDir + PERSONAL_RELATIVEROOT _W("Penumbra/Overture"));
-		// Link back the old one to the new one
-		LinkFile(sPersonalDir + PERSONAL_RELATIVEROOT _W("Penumbra/Overture"),
-			sPersonalDir + PERSONAL_RELATIVEROOT _W("Penumbra Overture/Episode1"));
-	}
-	#endif
 
 	tWString vDirs[] = { PERSONAL_RELATIVEPIECES //auto includes ,
 			PERSONAL_RELATIVEROOT PERSONAL_RELATIVEGAME_PARENT,
@@ -294,17 +269,6 @@ bool cInit::Init(tString asCommandLine)
 	mbUseSoundHardware = mpConfig->GetBool("Sound","UseSoundHardware",false);
 	//mbForceGenericSoundDevice = mpConfig->GetBool("Sound", "ForceGeneric", false);
 	mlStreamUpdateFreq = mpConfig->GetInt("Sound","StreamUpdateFreq",10);
-	mbUseSoundThreading = mpConfig->GetBool("Sound","UseThreading",true);
-#if __APPLE__
-	// TODO: once we fix/replace OAL wrapper, look at this again
-	// Override to false for macOS as threaded OAL is broken there
-	mbUseSoundThreading = false;
-#endif
-	//mbUseVoiceManagement = mpConfig->GetBool("Sound","UseVoiceManagement", true);
-	mlMaxMonoChannelsHint = mpConfig->GetInt("Sound","MaxMonoChannelsHint",0);
-	mlMaxStereoChannelsHint = mpConfig->GetInt("Sound","MaxStereoChannelsHint",0);
-	//mlStreamBufferSize = mpConfig->GetInt("Sound", "StreamBufferSize", 64);
-	//mlStreamBufferCount = mpConfig->GetInt("Sound", "StreamBufferCount", 4);
 	msDeviceName = mpConfig->GetString("Sound","DeviceName","NULL");
 
 	iGpuProgram::SetLogDebugInformation(false);
@@ -321,10 +285,7 @@ bool cInit::Init(tString asCommandLine)
 	Vars.AddBool("ForceGeneric", mpConfig->GetBool("Sound", "ForceGeneric", false));
 	Vars.AddInt("MaxSoundChannels",mlMaxSoundChannels);
 	Vars.AddInt("StreamUpdateFreq",mlStreamUpdateFreq);
-    Vars.AddBool("UseSoundThreading", mbUseSoundThreading);
 	Vars.AddBool("UseVoiceManagement", mpConfig->GetBool("Sound","UseVoiceManagement",true));
-	Vars.AddInt("MaxMonoChannelsHint",mlMaxMonoChannelsHint);
-	Vars.AddInt("MaxStereoChannelsHint",mlMaxStereoChannelsHint);
 	Vars.AddInt("StreamBufferSize",mpConfig->GetInt("Sound", "StreamBufferSize", 64));
 	Vars.AddInt("StreamBufferCount",mpConfig->GetInt("Sound", "StreamBufferCount", 4));
 	Vars.AddString("DeviceName",mpConfig->GetString("Sound", "DeviceName", "NULL"));
@@ -703,12 +664,8 @@ void cInit::Exit()
 	mpConfig->SetBool("Sound","UseSoundHardware", mbUseSoundHardware);
 	mpConfig->SetInt("Sound","MaxSoundChannels",mlMaxSoundChannels);
 	mpConfig->SetInt("Sound","StreamUpdateFreq",mlStreamUpdateFreq);
-	mpConfig->SetBool("Sound","UseThreading",mbUseSoundThreading);
-	mpConfig->SetInt("Sound","MaxMonoChannelsHint",mlMaxMonoChannelsHint);
-	mpConfig->SetInt("Sound","MaxStereoChannelsHint",mlMaxStereoChannelsHint);
 	mpConfig->SetString("Sound","DeviceName",msDeviceName);
 
-	
 	mpConfig->SetInt("Graphics","TextureSizeLevel",mpGame->GetResources()->GetMaterialManager()->GetTextureSizeLevel());
 	mpConfig->SetInt("Graphics","TextureFilter",mpGame->GetResources()->GetMaterialManager()->GetTextureFilter());
 	mpConfig->SetFloat("Graphics","TextureAnisotropy",mpGame->GetResources()->GetMaterialManager()->GetTextureAnisotropy());

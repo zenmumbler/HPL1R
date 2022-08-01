@@ -46,25 +46,13 @@ cInventory::cInventory(cInit *apInit)  : iUpdateable("Inventory")
 
 	mpGfxBackground = mpDrawer->CreateGfxObject("inventory_background.bmp",eGfxMaterialType::DiffuseAlpha);
 
-	//mpBatteryMeter = mpDrawer->CreateGfxObject("inventory_battery_meter.bmp",eOldMaterialType::DiffuseAlpha);
-	//mpBatteryMeterBar = mpDrawer->CreateGfxObject("inventory_battery_meter_bar.bmp",eOldMaterialType::DiffuseAlpha);
-
-	//mpBagpack = mpDrawer->CreateGfxObject("inventory_backpack.bmp",eOldMaterialType::DiffuseAlpha);
-
-	//mpHealthFrame = mpDrawer->CreateGfxObject("inventory_health_frame.bmp",eOldMaterialType::DiffuseAlpha);
-	//mpHealthBack = mpDrawer->CreateGfxObject("inventory_health_background.bmp",eOldMaterialType::DiffuseAlpha);
-	//mpHealthMan_Fine = mpDrawer->CreateGfxObject("inventory_health_fine.bmp",eOldMaterialType::DiffuseAlpha);
-	//mpHealthMan_Caution = mpDrawer->CreateGfxObject("inventory_health_caution.bmp",eOldMaterialType::DiffuseAlpha); 
-	//mpHealthMan_Danger = mpDrawer->CreateGfxObject("inventory_health_danger.bmp",eOldMaterialType::DiffuseAlpha);
-	//mpHealthTextFrame = mpDrawer->CreateGfxObject("inventory_health_text_slot.bmp",eOldMaterialType::DiffuseAlpha);
-
 	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt");
 
 	mpContext = hplNew( cInventoryContext, (mpInit) );
 
 	mbMessageActive = false;
 	msMessage = _W("");
-	mfMessageAlpha =0;
+	mfMessageAlpha = 0;
 
 	mpMessageBackground = mpDrawer->CreateGfxObject("effect_black.bmp",eGfxMaterialType::DiffuseAlpha);
 

@@ -3478,15 +3478,8 @@ void cMainMenu::CreateWidgets()
 	//Head
 	AddWidgetToState(eMainMenuState_OptionsGraphics,hplNew( cMainMenuWidget_Text,(mpInit,vPos,kTranslate("MainMenu","Graphics"),25,eFontAlign_Center)) ); 
 	vPos.y += 37;
-	/*AddWidgetToState(eMainMenuState_OptionsGraphics,hplNew( cMainMenuWidget_Image, (mpInit,
-													cVector3f(400,vPos.y,30),
-													cVector2f(200,150),
-													"menu_gamma.bmp",
-													eOldMaterialType::DiffuseAlpha,
-													cColor(1,1))) );
-	
+
 	//Buttons
-	vPos.x -= 130;*/
 	cMainMenuWidget *pWidgetResolution = hplNew( cMainMenuWidget_Resolution,(mpInit,vPos,kTranslate("MainMenu","Resolution:"),20,eFontAlign_Right) );
 	AddWidgetToState(eMainMenuState_OptionsGraphics,pWidgetResolution); 
 	vPos.y += 29;
