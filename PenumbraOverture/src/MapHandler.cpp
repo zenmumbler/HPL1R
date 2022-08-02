@@ -1144,7 +1144,7 @@ void cMapHandler::RenderItemEffect()
 			{
 				pProg->Bind();
 				pProg->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
-				pProg->SetColor3f("ambientColor", pItem->GetFlashAlpha());
+				pProg->SetColor3f("ambientColor", cColor(pItem->GetFlashAlpha()));
 			}
 
 			pLowGfx->SetTexture(0,pMaterial->GetTexture(eMaterialTexture_Diffuse));
