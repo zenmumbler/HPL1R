@@ -59,10 +59,7 @@ namespace hpl {
 		iFontData(const tString &asName, iLowLevelGraphics* apLowLevelGraphics);
 		~iFontData();
 
-		virtual bool CreateFromFontFile(const tString &asFileName, int alSize,unsigned short alFirstChar,
-									unsigned short alLastChar)=0;
-
-		virtual bool CreateFromBitmapFile(const tString &asFileName)=0;
+		bool CreateFromBitmapFile(const tString &asFileName);
 
 
 		void Destroy(){}

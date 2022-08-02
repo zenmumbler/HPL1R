@@ -38,7 +38,6 @@
 #include "graphics/Bitmap.h"
 
 #include "graphics/impl/LowLevelGraphicsSDL.h"
-#include "graphics/impl/SDLFontData.h"
 
 #include "graphics/ogl2/SDLTexture.h"
 #include "graphics/ogl2/GLSLProgram.h"
@@ -494,7 +493,7 @@ namespace hpl {
 
 	iFontData* cLowLevelGraphicsSDL::CreateFontData(const tString &asName)
 	{
-		return hplNew( cSDLFontData, (asName, this) );
+		return new iFontData(asName, this);
 	}
 
 	//-----------------------------------------------------------------------

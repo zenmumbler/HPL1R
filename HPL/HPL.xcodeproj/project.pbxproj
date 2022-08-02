@@ -157,7 +157,6 @@
 		DBF84B430AC76F1E00BB15CD /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A050AC76D5800BB15CD /* Scene.cpp */; };
 		DBF84B440AC76F1E00BB15CD /* ScriptFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849510AC76D5700BB15CD /* ScriptFuncs.cpp */; };
 		DBF84B450AC76F1E00BB15CD /* ScriptManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849E70AC76D5800BB15CD /* ScriptManager.cpp */; };
-		DBF84B470AC76F1E00BB15CD /* SDLFontData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849A70AC76D5800BB15CD /* SDLFontData.cpp */; };
 		DBF84B490AC76F1E00BB15CD /* SDLGameSetup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */; };
 		DBF84B4A0AC76F1E00BB15CD /* SDLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849AA0AC76D5800BB15CD /* SDLTexture.cpp */; };
 		DBF84B4C0AC76F1E00BB15CD /* SectorVisibility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF84A060AC76D5800BB15CD /* SectorVisibility.cpp */; };
@@ -352,7 +351,6 @@
 		DB27F07B0ACB9AB90054ACA3 /* PhysicsMaterialNewton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PhysicsMaterialNewton.h; sourceTree = "<group>"; };
 		DB27F07C0ACB9AB90054ACA3 /* PhysicsWorldNewton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PhysicsWorldNewton.h; sourceTree = "<group>"; };
 		DB27F07D0ACB9AB90054ACA3 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
-		DB27F07F0ACB9AB90054ACA3 /* SDLFontData.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SDLFontData.h; sourceTree = "<group>"; };
 		DB27F0800ACB9AB90054ACA3 /* SDLGameSetup.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SDLGameSetup.h; sourceTree = "<group>"; };
 		DB27F0820ACB9AB90054ACA3 /* SDLTexture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SDLTexture.h; sourceTree = "<group>"; };
 		DB27F0840ACB9AB90054ACA3 /* scriptstdstring.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = scriptstdstring.h; sourceTree = "<group>"; };
@@ -541,7 +539,6 @@
 		DBF849A20AC76D5800BB15CD /* PhysicsWorldNewton.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsWorldNewton.cpp; sourceTree = "<group>"; };
 		DBF849A40AC76D5800BB15CD /* posix.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = posix.cpp; sourceTree = "<group>"; };
 		DBF849A50AC76D5800BB15CD /* win32.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = win32.cpp; sourceTree = "<group>"; };
-		DBF849A70AC76D5800BB15CD /* SDLFontData.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = SDLFontData.cpp; sourceTree = "<group>"; };
 		DBF849A90AC76D5800BB15CD /* SDLGameSetup.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = SDLGameSetup.cpp; sourceTree = "<group>"; };
 		DBF849AA0AC76D5800BB15CD /* SDLTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = SDLTexture.cpp; sourceTree = "<group>"; };
 		DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstdstring.cpp; sourceTree = "<group>"; };
@@ -866,8 +863,6 @@
 			children = (
 				DBF8498E0AC76D5800BB15CD /* LowLevelGraphicsSDL.cpp */,
 				DB27F0680ACB9AB90054ACA3 /* LowLevelGraphicsSDL.h */,
-				DBF849A70AC76D5800BB15CD /* SDLFontData.cpp */,
-				DB27F07F0ACB9AB90054ACA3 /* SDLFontData.h */,
 				DBF9A1F6119A58DB00CCFDC9 /* VideoStreamTheora.cpp */,
 				DBF9A1F7119A58E600CCFDC9 /* VideoStreamTheora.h */,
 			);
@@ -1556,7 +1551,6 @@
 				DBF84B430AC76F1E00BB15CD /* Scene.cpp in Sources */,
 				DBF84B440AC76F1E00BB15CD /* ScriptFuncs.cpp in Sources */,
 				DBF84B450AC76F1E00BB15CD /* ScriptManager.cpp in Sources */,
-				DBF84B470AC76F1E00BB15CD /* SDLFontData.cpp in Sources */,
 				DBF84B490AC76F1E00BB15CD /* SDLGameSetup.cpp in Sources */,
 				DBF84B4A0AC76F1E00BB15CD /* SDLTexture.cpp in Sources */,
 				DBF84B4C0AC76F1E00BB15CD /* SectorVisibility.cpp in Sources */,

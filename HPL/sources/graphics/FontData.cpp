@@ -27,6 +27,8 @@
 
 #include "resources/ResourceImage.h"
 
+#include "tinyXML/tinyxml.h"
+
 namespace hpl {
 
 
@@ -77,6 +79,117 @@ namespace hpl {
 	//////////////////////////////////////////////////////////////////////////
 	// PUBLIC METHODS
 	//////////////////////////////////////////////////////////////////////////
+
+	//-----------------------------------------------------------------------
+
+	bool iFontData::CreateFromBitmapFile(const tString &asFileName)
+	{
+		tString sPath = cString::GetFilePath(asFileName);
+
+		////////////////////////////////////////////
+		// Load xml file
+		TiXmlDocument *pXmlDoc = hplNew( TiXmlDocument,(asFileName.c_str()) );
+
+		if(pXmlDoc->LoadFile()==false)
+		{
+			Error("Couldn't load angle code font file '%s'\n",asFileName.c_str());
+			hplDelete(pXmlDoc);
+			return false;
+		}
+
+		TiXmlElement *pRootElem = pXmlDoc->RootElement();
+
+		////////////////////////////////////////////
+		// Load Common info
+		TiXmlElement *pCommonElem = pRootElem->FirstChildElement("common");
+
+		int lLineHeight = cString::ToInt(pCommonElem->Attribute("lineHeight"),0);
+		int lBase = cString::ToInt(pCommonElem->Attribute("base"),0);
+
+		mlFirstChar =0;
+		mlLastChar = 3000; //Get this num from something.
+
+		mfHeight = (float)lLineHeight;
+
+		mvGlyphs.resize(3000, NULL);
+
+		mvSizeRatio.x = (float)lBase / (float)lLineHeight;
+		mvSizeRatio.y = 1;
+
+		////////////////////////////////////////////
+		// Load bitmaps
+		std::vector<Bitmap> vBitmaps;
+
+		TiXmlElement *pPagesRootElem = pRootElem->FirstChildElement("pages");
+
+		TiXmlElement *pPageElem = pPagesRootElem->FirstChildElement("page");
+		for(; pPageElem != NULL; pPageElem = pPageElem->NextSiblingElement("page"))
+		{
+			tString sFileName = pPageElem->Attribute("file");
+			tString sFilePath = cString::SetFilePath(sFileName,sPath);
+
+			auto bitmap = mpLowLevelResources->LoadBitmap2D(sFilePath);
+			if (! bitmap)
+			{
+				Error("Couldn't load bitmap %s for FNT file '%s'\n",sFilePath.c_str(),asFileName.c_str());
+				hplDelete(pXmlDoc);
+				return false;
+			}
+
+			vBitmaps.push_back(std::move(*bitmap));
+		}
+
+		////////////////////////////////////////////
+		// Load glyphs
+		TiXmlElement *pCharsRootElem = pRootElem->FirstChildElement("chars");
+
+		TiXmlElement *pCharElem = pCharsRootElem->FirstChildElement("char");
+		for(; pCharElem != NULL; pCharElem = pCharElem->NextSiblingElement("char"))
+		{
+			//Get the info on the character
+			int lId = cString::ToInt(pCharElem->Attribute("id"),0);
+			int lX = cString::ToInt(pCharElem->Attribute("x"),0);
+			int lY = cString::ToInt(pCharElem->Attribute("y"),0);
+
+			int lW = cString::ToInt(pCharElem->Attribute("width"),0);
+			int lH = cString::ToInt(pCharElem->Attribute("height"),0);
+
+			int lXOffset = cString::ToInt(pCharElem->Attribute("xoffset"),0);
+			int lYOffset = cString::ToInt(pCharElem->Attribute("yoffset"),0);
+
+			int lAdvance = cString::ToInt(pCharElem->Attribute("xadvance"),0);
+
+			int lPage = cString::ToInt(pCharElem->Attribute("page"),0);
+
+			//Get the bitmap where the character graphics is
+			auto& sourceBitmap = vBitmaps[lPage];
+
+			//Create a bitmap for the character.
+			Bitmap bmp{lW, lH};
+
+			//Copy from source to character bitmap
+			bmp.CopyFromBitmap(sourceBitmap, lX, lY, lW, lH);
+
+			//Set alpha to grayscale value of glyph pixel
+			auto pixelData = bmp.GetRawData<uint8_t>();
+			for (int y=0; y < bmp.GetHeight(); y++) {
+				for (int x=0; x < bmp.GetWidth(); x++) {
+					uint8_t *Pix = pixelData + (y * bmp.GetWidth() * 4) + x * 4;
+					Pix[3] = Pix[0];
+				}
+			}
+
+			//Create glyph and place it correctly.
+			cGlyph *pGlyph = CreateGlyph(bmp, cVector2l(lXOffset,lYOffset), cVector2l(lW,lH),
+										cVector2l(lBase,lLineHeight), lAdvance);
+
+			mvGlyphs[lId] = pGlyph;
+		}
+
+		//Destroy XML
+		hplDelete(pXmlDoc);
+		return true;
+	}
 
 	//-----------------------------------------------------------------------
 
