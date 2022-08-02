@@ -16,7 +16,13 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "graphics/impl/SDLBitmap2D.h"
+#if defined(__APPLE__)&&defined(__MACH__)
+#include <OpenGL/glu.h>
+#else
+#include <GL/glu.h>
+#endif
+
+#include "graphics/Bitmap.h"
 #include "graphics/ogl2/SDLTexture.h"
 
 #include "system/LowLevelSystem.h"
@@ -44,7 +50,7 @@ namespace hpl {
 		mpGfxSDL = static_cast<cLowLevelGraphicsSDL*>(mpLowLevelGraphics);
 
 		mlTextureIndex = 0;
-		mfTimeCount =0;
+		mfTimeCount = 0;
 		mfTimeDir = 1;
 
 		mlBpp = 0;
@@ -68,13 +74,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cSDLTexture::CreateFromBitmap(iBitmap2D* pBmp)
+	bool cSDLTexture::CreateFromBitmap(const Bitmap &bmp)
 	{
 		//Generate handles
-		if(mvTextureHandles.empty())
+		if (mvTextureHandles.empty())
 		{
 			mvTextureHandles.resize(1);
-			glGenTextures(1,(GLuint *)&mvTextureHandles[0]);
+			glGenTextures(1, mvTextureHandles.data());
 		}
 		else
 		{
@@ -83,19 +89,20 @@ namespace hpl {
 			//glGenTextures(1,(GLuint *)&mvTextureHandles[0]);
 		}
 
-		return CreateFromBitmapToHandle(pBmp,0);
+		return CreateFromBitmapToHandle(bmp, 0);
 	}
 
 	//-----------------------------------------------------------------------
 
-	bool cSDLTexture::CreateAnimFromBitmapVec(tBitmap2DVec *avBitmaps)
+	bool cSDLTexture::CreateAnimFromBitmapVec(const std::vector<Bitmap>& bitmaps)
 	{
-		mvTextureHandles.resize(avBitmaps->size());
+		int count = static_cast<int>(bitmaps.size());
+		mvTextureHandles.resize(count);
+		glGenTextures(count, mvTextureHandles.data());
 
-		for(size_t i=0; i< mvTextureHandles.size(); ++i)
+		for (int i=0; i<count; ++i)
 		{
-			glGenTextures(1,(GLuint *)&mvTextureHandles[i]);
-			if(CreateFromBitmapToHandle((*avBitmaps)[i],(int)i)==false)
+			if (CreateFromBitmapToHandle(bitmaps[i], i) == false)
 			{
 				return false;
 			}
@@ -106,15 +113,15 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cSDLTexture::CreateCubeFromBitmapVec(tBitmap2DVec *avBitmaps)
+	bool cSDLTexture::CreateCubeFromBitmapVec(const std::vector<Bitmap>& bitmaps)
 	{
 		if(mType == eTextureType_RenderTarget || mTarget != eTextureTarget_CubeMap)
 		{
 			return false;
 		}
 
-		if(avBitmaps->size()<6){
-			Error("Only %d bitmaps supplied for creation of cube map, 6 needed.",avBitmaps->size());
+		if (bitmaps.size() < 6) {
+			Error("Only %d bitmaps supplied for creation of cube map, 6 needed.", bitmaps.size());
 			return false;
 		}
 
@@ -135,16 +142,16 @@ namespace hpl {
 		//Create the cube map sides
 		for(int i=0; i< 6; i++)
 		{
-			cSDLBitmap2D *pSrc = static_cast<cSDLBitmap2D*>((*avBitmaps)[i]);
+			const Bitmap &bmp = bitmaps[i];
 
 			GLenum target = GL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB + i;
 
 			int lChannels;
 			GLenum format;
-			GetSettings(pSrc, lChannels,format);
+			GetSettings(bmp, lChannels,format);
 
-			glTexImage2D(target, 0, lChannels, pSrc->GetWidth(), pSrc->GetHeight(),
-				0, format, GL_UNSIGNED_BYTE, pSrc->GetSurface()->pixels);
+			glTexImage2D(target, 0, lChannels, bmp.GetWidth(), bmp.GetHeight(),
+				0, format, GL_UNSIGNED_BYTE, bmp.GetRawData());
 
 			//No mip maps for cubemap
 			//if(mbUseMipMaps)
@@ -153,8 +160,8 @@ namespace hpl {
 			//		GL_RGBA, GL_UNSIGNED_BYTE, pSrc->GetSurface()->pixels);
 			//}
 
-			mlWidth = pSrc->GetWidth();
-			mlHeight = pSrc->GetHeight();
+			mlWidth = bmp.GetWidth();
+			mlHeight = bmp.GetHeight();
 			mlBpp = lChannels * 8;
 
 			if(!cMath::IsPow2(mlHeight) || !cMath::IsPow2(mlWidth))
@@ -551,7 +558,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cSDLTexture::CreateFromBitmapToHandle(iBitmap2D* pBmp, int alHandleIdx)
+	bool cSDLTexture::CreateFromBitmapToHandle(const Bitmap &bmp, int alHandleIdx)
 	{
 		if(mType == eTextureType_RenderTarget)
 		{
@@ -566,25 +573,23 @@ namespace hpl {
 		return false;
 		}*/
 
-		GLenum GLTarget =InitCreation(alHandleIdx);
+		GLenum GLTarget = InitCreation(alHandleIdx);
 
-		cSDLBitmap2D *pBitmapSrc = static_cast<cSDLBitmap2D*>(pBmp);
-
-		mlWidth = pBitmapSrc->GetWidth();
-		mlHeight = pBitmapSrc->GetHeight();
+		mlWidth = bmp.GetWidth();
+		mlHeight = bmp.GetHeight();
 
 		if((!cMath::IsPow2(mlHeight) || !cMath::IsPow2(mlWidth)) && mTarget != eTextureTarget_Rect)
 		{
 			Warning("Texture '%s' does not have a pow2 size!\n",msName.c_str());
 		}
 
-		int lChannels =0;
-		GLenum format =0;
-		GetSettings(pBitmapSrc,lChannels,format);
+		int lChannels = 0;
+		GLenum format = 0;
+		GetSettings(bmp, lChannels, format);
 
 		mlBpp = lChannels * 8;
 
-		unsigned char *pPixelSrc = (unsigned char*)pBitmapSrc->GetSurface()->pixels;
+		auto pPixelSrc = bmp.GetRawData<unsigned char>();
 
 		//Log("Loading %s  %d x %d\n",msName.c_str(), pSrc->GetWidth(), pSrc->GetHeight());
 		//Log("Channels: %d Format: %x\n",lChannels, format);
@@ -654,13 +659,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cSDLTexture::GetSettings(cSDLBitmap2D* apSrc, int &alChannels, GLenum &aFormat)
+	void cSDLTexture::GetSettings(const Bitmap &bmp, int &alChannels, GLenum &aFormat)
 	{
-		SDL_Surface *pSurface =  apSrc->GetSurface();
-		alChannels = pSurface->format->BytesPerPixel;
-		aFormat = GL_BGRA;
-
-		tString sType = cString::ToLowerCase(apSrc->msType);
+		alChannels = bmp.GetNumChannels();
 
 		if(alChannels==4)
 		{

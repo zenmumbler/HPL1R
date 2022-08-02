@@ -33,7 +33,7 @@ namespace hpl {
 	class iLowLevelGraphics;
 	class cGraphicsDrawer;
 	struct cGfxObject;
-	class iBitmap2D;
+	class Bitmap;
 
 	//------------------------------------------------
 
@@ -152,7 +152,7 @@ namespace hpl {
 
 		cVector2f mvSizeRatio;
 
-		cGlyph* CreateGlyph(iBitmap2D* apBmp, const cVector2l &avOffset,const cVector2l &avSize,
+		cGlyph* CreateGlyph(const Bitmap &aBmp, const cVector2l &avOffset,const cVector2l &avSize,
 							const cVector2l& avFontSize, int alAdvance);
 		void AddGlyph(cGlyph *apGlyph);
 	};

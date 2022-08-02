@@ -17,7 +17,6 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/impl/LowLevelResourcesSDL.h"
-#include "graphics/impl/SDLBitmap2D.h"
 #include "resources/impl/MeshLoaderMSH.h"
 #include "resources/impl/MeshLoaderGLTF2.h"
 #include "resources/impl/MeshLoaderCollada.h"
@@ -62,7 +61,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iBitmap2D* cLowLevelResourcesSDL::LoadBitmap2D(tString asFilePath, tString asType)
+	Maybe<Bitmap> cLowLevelResourcesSDL::LoadBitmap2D(tString asFilePath, tString asType)
 	{
 		tString tType;
 		if(asType != "") {
@@ -75,36 +74,22 @@ namespace hpl {
 				
 		if (pixels == nullptr) {
 			Error("Failed to load image: %s!\n", asFilePath.c_str());
-			return nullptr;
+			return std::nullopt;
 		}
 
-		SDL_Surface* pSurface = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_RGBA32);
-//		memcpy(pSurface->pixels, pixels, width * height * 4);
-		
-		// [ZM] apply the same hack fix for now until I factor out the SDL_surface nonsense
-		uint32_t* pDst = static_cast<uint32_t*>(pSurface->pixels);
-		uint32_t* pSrc = reinterpret_cast<uint32_t*>(pixels);
-		for (int y = 0; y < height; ++y) {
-			for (int x = 0; x < width; ++x) {
-				auto pixIn = *pSrc;
-				
-				// flip R and G RGBA -> BGRA
-				auto pixOut = (pixIn & 0xff00ff00) | ((pixIn & 0xff) << 16) | ((pixIn & 0xff0000) >> 16);
-				*pDst = pixOut;
-
-				pSrc += 1;
-				pDst += 1;
-			}
+		Bitmap bmp;
+		if (! bmp.CreateFromPixels(pixels, width, height)) {
+			Error("Failed to create bitmap for image: %s!\n", asFilePath.c_str());
+			stbi_image_free(pixels);
+			return std::nullopt;
 		}
-		
+		bmp.TogglePixelFormat();
+		bmp.SetPath(asFilePath);
 		stbi_image_free(pixels);
 		
-//		Log("Image: %s - %d x %d - Chans: %d - Format = %s\n", asFilePath.c_str(), width, height, chans, SDL_GetPixelFormatName(pSurface->format->format));
+//		Log("Image: %s - %d x %d - Chans: %d\n", asFilePath.c_str(), width, height, chans);
 
-		iBitmap2D* pBmp = mpLowLevelGraphics->CreateBitmap2DFromSurface(pSurface, cString::GetFileExt(asFilePath));
-		pBmp->SetPath(asFilePath);
-
-		return pBmp;
+		return bmp;
 	}
 
 	//-----------------------------------------------------------------------
@@ -131,7 +116,7 @@ namespace hpl {
 
 	void cLowLevelResourcesSDL::AddVideoLoaders(cVideoManager* apManager)
 	{
-		#ifdef INCLUDE_THORA
+		#ifdef INCLUDE_THEORA
 		apManager->AddVideoLoader(hplNew( cVideoStreamTheora_Loader,()));
 		#endif
 	}

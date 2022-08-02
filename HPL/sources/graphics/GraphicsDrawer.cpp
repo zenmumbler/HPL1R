@@ -247,9 +247,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	const cGfxObject* cGraphicsDrawer::CreateUnmanagedGfxObject(iBitmap2D *apBmp, eGfxMaterialType matType)
+	const cGfxObject* cGraphicsDrawer::CreateUnmanagedGfxObject(const Bitmap &bmp, eGfxMaterialType matType)
 	{
-		cResourceImage* pImage = mpImageManager->CreateFromBitmap(apBmp);
+		cResourceImage* pImage = mpImageManager->CreateFromBitmap(bmp);
 		if(pImage == nullptr){
 			Error("Couldn't create image from bitmap!\n");
 			return nullptr;

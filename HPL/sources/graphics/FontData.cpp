@@ -333,14 +333,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cGlyph* iFontData::CreateGlyph(iBitmap2D* apBmp, const cVector2l &avOffset,const cVector2l &avSize,
+	cGlyph* iFontData::CreateGlyph(const Bitmap &aBmp, const cVector2l &avOffset,const cVector2l &avSize,
 								const cVector2l& avFontSize, int alAdvance)
 	{
 		//Here the bitmap should be saved to diskk for faster loading.
 
 		//////////////////////////
 		//Gfx object
-		const cGfxObject* pObject = mpGraphicsDrawer->CreateUnmanagedGfxObject(apBmp, eGfxMaterialType::DiffuseAlpha);
+		const cGfxObject* pObject = mpGraphicsDrawer->CreateUnmanagedGfxObject(aBmp, eGfxMaterialType::DiffuseAlpha);
 
 		//////////////////////////
 		//Gui gfx

@@ -34,7 +34,7 @@ namespace hpl {
 		void FindFilesInDir(tWStringList &alstStrings, tWString asDir, tWString asMask);
 
 		void GetSupportedImageFormats(tStringList &alstFormats);
-		iBitmap2D* LoadBitmap2D(tString asFilePath, tString asType = "");
+		Maybe<Bitmap> LoadBitmap2D(tString asFilePath, tString asType = "");
 
 		void AddMeshLoaders(cMeshLoaderHandler* apHandler);
 		void AddVideoLoaders(cVideoManager* apManager);

@@ -17,10 +17,10 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "graphics/impl/SDLFontData.h"
+#include "graphics/Bitmap.h"
 #include "graphics/GraphicsDrawer.h"
 #include "graphics/LowLevelGraphics.h"
 #include "system/LowLevelSystem.h"
-#include "graphics/impl/SDLBitmap2D.h"
 #include "tinyXML/tinyxml.h"
 
 namespace hpl {
@@ -83,7 +83,7 @@ namespace hpl {
 
 		////////////////////////////////////////////
 		// Load bitmaps
-		std::vector<cSDLBitmap2D *> vBitmaps;
+		std::vector<Bitmap> vBitmaps;
 
 		TiXmlElement *pPagesRootElem = pRootElem->FirstChildElement("pages");
 
@@ -93,15 +93,15 @@ namespace hpl {
 			tString sFileName = pPageElem->Attribute("file");
 			tString sFilePath = cString::SetFilePath(sFileName,sPath);
 
-			cSDLBitmap2D *pBitmap = static_cast<cSDLBitmap2D*>(mpLowLevelResources->LoadBitmap2D(sFilePath));
-			if(pBitmap==NULL)
+			auto bitmap = mpLowLevelResources->LoadBitmap2D(sFilePath);
+			if (! bitmap)
 			{
 				Error("Couldn't load bitmap %s for FNT file '%s'\n",sFilePath.c_str(),asFileName.c_str());
 				hplDelete(pXmlDoc);
 				return false;
 			}
 
-			vBitmaps.push_back(pBitmap);
+			vBitmaps.push_back(std::move(*bitmap));
 		}
 
 		////////////////////////////////////////////
@@ -127,41 +127,29 @@ namespace hpl {
 			int lPage = cString::ToInt(pCharElem->Attribute("page"),0);
 
 			//Get the bitmap where the character graphics is
-			cSDLBitmap2D *pSourceBitmap = vBitmaps[lPage];
+			auto& sourceBitmap = vBitmaps[lPage];
 
 			//Create a bitmap for the character.
-			cVector2l vSize(lW, lH);
-			cSDLBitmap2D *pBmp = static_cast<cSDLBitmap2D*>(mpLowLevelGraphics->CreateBitmap2D(vSize,32));
+			Bitmap bmp{lW, lH};
 
 			//Copy from source to character bitmap
-			SDL_Rect srcRect;
-			srcRect.x = lX; srcRect.y = lY;
-			srcRect.w = lW; srcRect.h = lH;
-			SDL_BlitSurface(pSourceBitmap->GetSurface(),&srcRect, pBmp->GetSurface(), NULL);
+			bmp.CopyFromBitmap(sourceBitmap, lX, lY, lW, lH);
 
-			int lBmpSize = pBmp->GetSurface()->format->BytesPerPixel;
-			unsigned char* PixBuffer = (unsigned char*)pBmp->GetSurface()->pixels;
-
-			//Set proper alpha (dunno if this is needed)
-			for(unsigned int y=0;y<pBmp->GetHeight();y++)
-				for(unsigned int x=0;x<pBmp->GetWidth();x++) {
-					unsigned char* Pix = &PixBuffer[y*pBmp->GetWidth()*lBmpSize + x*lBmpSize];
+			//Set alpha to grayscale value of glyph pixel
+			auto pixelData = bmp.GetRawData<uint8_t>();
+			for (int y=0; y < bmp.GetHeight(); y++) {
+				for (int x=0; x < bmp.GetWidth(); x++) {
+					uint8_t *Pix = pixelData + (y * bmp.GetWidth() * 4) + x * 4;
 					Pix[3] = Pix[0];
 				}
+			}
 
 			//Create glyph and place it correctly.
-			cGlyph *pGlyph = CreateGlyph(pBmp,cVector2l(lXOffset,lYOffset),cVector2l(lW,lH),
-										cVector2l(lBase,lLineHeight),lAdvance);
+			cGlyph *pGlyph = CreateGlyph(bmp, cVector2l(lXOffset,lYOffset), cVector2l(lW,lH),
+										cVector2l(lBase,lLineHeight), lAdvance);
 
 			mvGlyphs[lId] = pGlyph;
-
-			hplDelete(pBmp);
 		}
-
-
-
-		//Destroy bitmaps
-		STLDeleteAll(vBitmaps);
 
 		//Destroy XML
 		hplDelete(pXmlDoc);

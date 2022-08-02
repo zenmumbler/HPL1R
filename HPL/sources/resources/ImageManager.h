@@ -28,7 +28,7 @@ namespace hpl {
 	class cFrameTexture;
 	class cFrameBitmap;
 	class iLowLevelGraphics;
-	class iBitmap2D;
+	class Bitmap;
 
 	typedef std::list<cFrameBitmap*> tFrameBitmapList;
 	typedef tFrameBitmapList::iterator tFrameBitmapListIt;
@@ -48,7 +48,7 @@ namespace hpl {
 
 		//Image specifc
 		cResourceImage* CreateImage(const tString& asName);
-		cResourceImage* CreateFromBitmap(iBitmap2D* apBmp);
+		cResourceImage* CreateFromBitmap(const Bitmap &bmp);
 
 	private:
 		iLowLevelGraphics *mpLowLevelGraphics;
@@ -61,7 +61,7 @@ namespace hpl {
 		int mlFrameHandle;
 
 		cResourceImage *FindImage(const tString &asName, tString &asFilePath);
-		cResourceImage *AddToFrame(iBitmap2D *apBmp);
+		cResourceImage *AddToFrame(const Bitmap &bmp);
 		cFrameBitmap *CreateBitmapFrame(cVector2l avSize);
 
 	};

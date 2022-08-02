@@ -73,12 +73,11 @@ namespace hpl {
 		cVector2f GetVirtualSize() override;
 		void SetVirtualSize(cVector2f avSize) override;
 
-		iBitmap2D* CreateBitmap2D(const cVector2l &avSize, unsigned int alBpp) override;
 		iFontData* CreateFontData(const tString &asName) override;
 
 		iTexture* CreateTexture(bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
 		iTexture* CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
-		iTexture* CreateTexture(iBitmap2D* apBmp,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
+		iTexture* CreateTexture(const Bitmap& source, bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
 		iTexture* CreateTexture(const cVector2l& avSize,int alBpp,cColor aFillCol,
 								bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
 
@@ -185,9 +184,6 @@ namespace hpl {
 		void EndFrame() override;
 		
 		///// SDL Specific ////////////////////////////
-
-		iBitmap2D* CreateBitmap2DFromSurface(SDL_Surface* apSurface,const tString& asType);
-
 		void SetupGL();
 
 		GLenum GetGLTextureTargetEnum(eTextureTarget aType);

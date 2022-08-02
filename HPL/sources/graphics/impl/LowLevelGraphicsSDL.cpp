@@ -35,9 +35,9 @@
 #include "imgui/backends/imgui_impl_opengl2.h"
 
 #include "graphics/FontData.h"
+#include "graphics/Bitmap.h"
 
 #include "graphics/impl/LowLevelGraphicsSDL.h"
-#include "graphics/impl/SDLBitmap2D.h"
 #include "graphics/impl/SDLFontData.h"
 
 #include "graphics/ogl2/SDLTexture.h"
@@ -444,26 +444,6 @@ namespace hpl {
 		mfGammaCorrection = afX;
 
 		SDL_SetWindowBrightness(mpWindow, mfGammaCorrection);
-
-		/*Uint16 GammaArray[3][256];
-
-		for (int iIndex = 0; iIndex < 256; iIndex++)
-		{
-			Uint16 iArrayValue = iIndex * ((int)(afX*127.0f) + 128);
-
-			if (iArrayValue > 65535)
-				iArrayValue = 65535;
-
-			GammaArray[0][iIndex] =
-			GammaArray[1][iIndex] =
-			GammaArray[2][iIndex] = iArrayValue;
-
-		}
-
-		//Set the GammaArray values into the display device context.
-		int bReturn = SDL_SetGammaRamp(GammaArray[0],GammaArray[1],GammaArray[2]);*/
-		/*if(bReturn!=-1) Log("Setting gamma worked!\n");
-		else		Log("Setting gamma FAILED!\n");*/
 	}
 
 	float cLowLevelGraphicsSDL::GetGammaCorrection()
@@ -500,47 +480,14 @@ namespace hpl {
 	{
 		glFinish();
 
-		cSDLBitmap2D *pBmp = hplNew( cSDLBitmap2D, () );
-		pBmp->Create(cVector2l(mvScreenSize.x,mvScreenSize.y),32);
+		Bitmap bmp{mvScreenSize.x, mvScreenSize.y};
 
-		auto pDestPixels = static_cast<unsigned char*>(pBmp->GetSurface()->pixels);
-		auto pSrcPixels =  new unsigned char[mvScreenSize.x * mvScreenSize.y * 4];
+		auto pixels = bmp.GetRawData<unsigned char>();
 
-		SDL_LockSurface(pBmp->GetSurface());
 		glReadBuffer(GL_BACK);
-		glReadPixels(0,0,mvScreenSize.x,mvScreenSize.y,GL_RGBA,GL_UNSIGNED_BYTE,pSrcPixels);
+		glReadPixels(0, 0, mvScreenSize.x, mvScreenSize.y, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
-		for(int y=0; y<mvScreenSize.y; ++y)
-		{
-			for(int x=0; x<mvScreenSize.x; ++x)
-			{
-				unsigned char* pDestPix = &pDestPixels[((mvScreenSize.x * y) + x) * 4];
-				unsigned char* pSrcPix = &pSrcPixels[((mvScreenSize.x * ((mvScreenSize.y-1) - y))
-														+ x) * 4];
-
-				pDestPix[0] = pSrcPix[0];
-				pDestPix[1] = pSrcPix[1];
-				pDestPix[2] = pSrcPix[2];
-				pDestPix[3] = 255;
-			}
-		}
-
-		SDL_UnlockSurface(pBmp->GetSurface());
-		SDL_SaveBMP(pBmp->GetSurface(),asFile.c_str());
-
-		delete[] pSrcPixels;
-		hplDelete(pBmp);
-
-	}
-
-	//-----------------------------------------------------------------------
-
-	iBitmap2D* cLowLevelGraphicsSDL::CreateBitmap2D(const cVector2l &avSize, unsigned int alBpp)
-	{
-		cSDLBitmap2D *pBmp = hplNew( cSDLBitmap2D, () );
-		pBmp->Create(avSize,alBpp);
-
-		return pBmp;
+		// TODO: save image
 	}
 
 	//-----------------------------------------------------------------------
@@ -552,24 +499,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iBitmap2D* cLowLevelGraphicsSDL::CreateBitmap2DFromSurface(SDL_Surface* apSurface,const tString& asType)
-	{
-		cSDLBitmap2D *pBmp = hplNew( cSDLBitmap2D, (apSurface,asType) );
-
-		pBmp->msType = asType;
-
-		return pBmp;
-	}
-
-
-	//-----------------------------------------------------------------------
-
 	iGpuProgram* cLowLevelGraphicsSDL::CreateGpuProgram(const tString& asName)
 	{
 		return hplNew( cGLSLProgram, (asName) );
 	}
-
-	//-----------------------------------------------------------------------
 
 	//-----------------------------------------------------------------------
 
@@ -587,11 +520,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cLowLevelGraphicsSDL::CreateTexture(iBitmap2D* apBmp,bool abUseMipMaps, eTextureType aType,
+	iTexture* cLowLevelGraphicsSDL::CreateTexture(const Bitmap& source, bool abUseMipMaps, eTextureType aType,
 												eTextureTarget aTarget)
 	{
 		cSDLTexture *pTex = hplNew( cSDLTexture, ("",this,aType, abUseMipMaps, aTarget) );
-		pTex->CreateFromBitmap(apBmp);
+		pTex->CreateFromBitmap(source);
 
 		return pTex;
 	}
@@ -610,13 +543,11 @@ namespace hpl {
 		}
 		else
 		{
-			iBitmap2D* pBmp = CreateBitmap2D(avSize,alBpp);
-			pBmp->FillRect(cRect2l(0,0,0,0),aFillCol);
+			Bitmap bmp{avSize.x, avSize.y};
+			bmp.FillRect(cRect2l(0,0,0,0),aFillCol);
 
 			pTex = hplNew( cSDLTexture, ("",this,aType, abUseMipMaps, aTarget) );
-			bool bRet = pTex->CreateFromBitmap(pBmp);
-
-			hplDelete(pBmp);
+			bool bRet = pTex->CreateFromBitmap(bmp);
 
 			if(bRet==false){
 				hplDelete(pTex);

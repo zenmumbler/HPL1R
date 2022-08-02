@@ -22,7 +22,7 @@
 #include "math/MathTypes.h"
 #include "system/SystemTypes.h"
 #include "graphics/GraphicsTypes.h"
-#include "graphics/Bitmap2D.h"
+#include "graphics/Bitmap.h"
 #include "graphics/Texture.h"
 #include "graphics/GPUProgram.h"
 #include "graphics/VertexBuffer.h"
@@ -242,13 +242,11 @@ namespace hpl {
 		virtual cPlanef GetClipPlane(int alIdx, const cPlanef& aPlane)=0;
 		virtual void SetClipPlaneActive(int alIdx, bool abX)=0;
 
-		virtual iBitmap2D* CreateBitmap2D(const cVector2l &avSize, unsigned int alBpp)=0;
 		virtual iFontData* CreateFontData(const tString &asName)=0;
 
 		virtual iTexture* CreateTexture(bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
 		virtual iTexture* CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
-		virtual iTexture* CreateTexture(iBitmap2D* apBmp,bool abUseMipMaps, eTextureType aType,
-										eTextureTarget aTarget)=0;
+		virtual iTexture* CreateTexture(const Bitmap& source, bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
 		virtual iTexture* CreateTexture(const cVector2l& avSize,int alBpp,cColor aFillCol,
 									bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
 

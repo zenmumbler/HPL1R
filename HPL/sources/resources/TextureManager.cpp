@@ -25,7 +25,7 @@
 #include "resources/LowLevelResources.h"
 #include "system/LowLevelSystem.h"
 #include "resources/FileSearcher.h"
-#include "graphics/Bitmap2D.h"
+#include "graphics/Bitmap.h"
 
 
 namespace hpl {
@@ -130,20 +130,17 @@ namespace hpl {
 				return NULL;
 			}
 
-			tBitmap2DVec vBitmaps;
+			std::vector<Bitmap> vBitmaps;
 			for(size_t i =0; i< vPaths.size(); ++i)
 			{
-				iBitmap2D* pBmp = mpResources->GetLowLevel()->LoadBitmap2D(vPaths[i]);
-				if(pBmp==NULL){
+				auto bmp = mpResources->GetLowLevel()->LoadBitmap2D(vPaths[i]);
+				if (! bmp){
 					Error("Couldn't load bitmap '%s'!\n",vPaths[i].c_str());
-
-					for(int j=0;j<(int)vBitmaps.size();j++) hplDelete(vBitmaps[j]);
-
 					EndLoad();
 					return NULL;
 				}
 
-				vBitmaps.push_back(pBmp);
+				vBitmaps.push_back(std::move(*bmp));
 			}
 
 			//Create the animated texture
@@ -152,17 +149,13 @@ namespace hpl {
 
 			pTexture->SetSizeLevel(alTextureSizeLevel);
 
-			if(pTexture->CreateAnimFromBitmapVec(&vBitmaps)==false)
+			if(pTexture->CreateAnimFromBitmapVec(vBitmaps)==false)
 			{
 				Error("Couldn't create animated texture '%s'!\n", asName.c_str());
 				hplDelete(pTexture);
-				for(int j=0;j<(int)vBitmaps.size();j++) hplDelete(vBitmaps[j]);
 				EndLoad();
 				return NULL;
 			}
-
-			//Bitmaps no longer needed.
-			for(int j=0;j<(int)vBitmaps.size();j++) hplDelete(vBitmaps[j]);
 
 			AddResource(pTexture);
 		}
@@ -212,36 +205,30 @@ namespace hpl {
 			}
 
 			//Load bitmaps for all faces
-			tBitmap2DVec vBitmaps;
+			std::vector<Bitmap> vBitmaps;
 			for(int i=0;i<6; i++)
 			{
-				iBitmap2D* pBmp = mpResources->GetLowLevel()->LoadBitmap2D(vPaths[i]);
-				if(pBmp==NULL){
+				auto bmp = mpResources->GetLowLevel()->LoadBitmap2D(vPaths[i]);
+				if (! bmp) {
 					Error("Couldn't load bitmap '%s'!\n",vPaths[i].c_str());
-					for(int j=0;j<(int)vBitmaps.size();j++) hplDelete(vBitmaps[j]);
 					EndLoad();
 					return NULL;
 				}
 
-				vBitmaps.push_back(pBmp);
+				vBitmaps.push_back(std::move(*bmp));
 			}
 
 			//Create the cubemap
-			pTexture = mpGraphics->GetLowLevel()->CreateTexture(sName,abUseMipMaps,aType,
-													eTextureTarget_CubeMap);
+			pTexture = mpGraphics->GetLowLevel()->CreateTexture(sName, abUseMipMaps, aType, eTextureTarget_CubeMap);
 			pTexture->SetSizeLevel(alTextureSizeLevel);
 
-			if(pTexture->CreateCubeFromBitmapVec(&vBitmaps)==false)
+			if (pTexture->CreateCubeFromBitmapVec(vBitmaps)==false)
 			{
 				Error("Couldn't create cubemap '%s'!\n", sName.c_str());
 				hplDelete(pTexture);
-				for(int j=0;j<(int)vBitmaps.size();j++) hplDelete(vBitmaps[j]);
 				EndLoad();
 				return NULL;
 			}
-
-			//Bitmaps no longer needed.
-			for(int j=0;j<(int)vBitmaps.size();j++)	hplDelete(vBitmaps[j]);
 
 			AddResource(pTexture);
 		}
@@ -320,8 +307,8 @@ namespace hpl {
 			return NULL;
 		}
 
-		iBitmap2D* pBmp = mpResources->GetLowLevel()->LoadBitmap2D(sPath);
-		if(pBmp == NULL)
+		auto pBmp = mpResources->GetLowLevel()->LoadBitmap2D(sPath);
+		if (! pBmp)
 		{
 			Log("Couldn't load bitmap '%s'\n",asFallOffName.c_str());
 			return NULL;
@@ -369,8 +356,6 @@ namespace hpl {
 		pTexture->SetWrapT(eTextureWrap_ClampToBorder);
 		pTexture->SetWrapR(eTextureWrap_ClampToBorder);
 
-		hplDelete(pBmp);
-
 		m_mapAttenuationTextures.insert(tTextureAttenuationMap::value_type(sName,pTexture));
 
 		return pTexture;
@@ -398,9 +383,8 @@ namespace hpl {
 		if(pTexture==NULL && sPath!="")
 		{
 			//Load the bitmap
-			iBitmap2D *pBmp;
-			pBmp = mpLowLevelResources->LoadBitmap2D(sPath);
-			if(pBmp==NULL)
+			auto pBmp = mpLowLevelResources->LoadBitmap2D(sPath);
+			if (! pBmp)
 			{
 				Error("Texturemanager Couldn't load bitmap '%s'\n", sPath.c_str());
 				EndLoad();
@@ -411,16 +395,12 @@ namespace hpl {
 			pTexture = mpGraphics->GetLowLevel()->CreateTexture(asName,abUseMipMaps,aType,
 																aTarget);
 			pTexture->SetSizeLevel(alTextureSizeLevel);
-			if(pTexture->CreateFromBitmap(pBmp)==false)
+			if(pTexture->CreateFromBitmap(*pBmp)==false)
 			{
 				hplDelete(pTexture);
-				hplDelete(pBmp);
 				EndLoad();
 				return NULL;
 			}
-
-			//Bitmap is no longer needed so delete it.
-			hplDelete(pBmp);
 
 			AddResource(pTexture);
 		}

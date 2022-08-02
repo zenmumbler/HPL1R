@@ -21,12 +21,11 @@
 
 #include "graphics/Texture.h"
 #include "graphics/impl/LowLevelGraphicsSDL.h"
-#include "graphics/impl/SDLBitmap2D.h"
 
 #if defined(__APPLE__)&&defined(__MACH__)
-#include <OpenGL/glu.h>
+#include <OpenGL/gltypes.h>
 #else
-#include <GL/glu.h>
+#include <GL/gltypes.h>
 #endif
 #include <SDL2/SDL.h>
 
@@ -41,53 +40,52 @@ namespace hpl {
 					bool abCompress=false);
 		~cSDLTexture();
 
-		bool CreateFromBitmap(iBitmap2D* pBmp);
+		bool CreateFromBitmap(const Bitmap &bmp) override;
 
-		bool CreateAnimFromBitmapVec(tBitmap2DVec *avBitmaps);
+		bool CreateAnimFromBitmapVec(const std::vector<Bitmap>& bitmaps) override;
+		bool CreateCubeFromBitmapVec(const std::vector<Bitmap>& bitmaps) override;
+		bool Create(unsigned int alWidth, unsigned int alHeight, cColor aCol) override;
 
-		bool CreateCubeFromBitmapVec(tBitmap2DVec *avBitmaps);
-		bool Create(unsigned int alWidth, unsigned int alHeight, cColor aCol);
-
-		bool CreateFromArray(unsigned char *apPixelData, int alChannels, const cVector3l &avSize);
+		bool CreateFromArray(unsigned char *apPixelData, int alChannels, const cVector3l &avSize) override;
 
 		void SetPixels2D(	int alLevel, const cVector2l& avOffset, const cVector2l& avSize,
-							eColorDataFormat aDataFormat, void *apPixelData);
+							eColorDataFormat aDataFormat, void *apPixelData) override;
 
 
-		float GetGamma(){return 0;}
-		void SetGamma(float afGamma){}
-		int GetHandle(){return (int) mvTextureHandles[0];}
+		float GetGamma() override {return 0;}
+		void SetGamma(float afGamma) override {}
+		int GetHandle() override {return (int) mvTextureHandles[0];}
 
-		void SetFilter(eTextureFilter aFilter);
-		void SetAnisotropyDegree(float afX);
+		void SetFilter(eTextureFilter aFilter) override;
+		void SetAnisotropyDegree(float afX) override;
 
-		void SetWrapS(eTextureWrap aMode);
-		void SetWrapT(eTextureWrap aMode);
-		void SetWrapR(eTextureWrap aMode);
+		void SetWrapS(eTextureWrap aMode) override;
+		void SetWrapT(eTextureWrap aMode) override;
+		void SetWrapR(eTextureWrap aMode) override;
 
-		void Update(float afTimeStep);
+		void Update(float afTimeStep) override;
 
-		bool HasAnimation();
-		void NextFrame();
-		void PrevFrame();
-		float GetT();
-		float GetTimeCount();
-		void SetTimeCount(float afX);
-		int GetCurrentLowlevelHandle();
+		bool HasAnimation() override;
+		void NextFrame() override;
+		void PrevFrame() override;
+		float GetT() override;
+		float GetTimeCount() override;
+		void SetTimeCount(float afX) override;
+		int GetCurrentLowlevelHandle() override;
 
 		/// SDL / OGL Specific ///////////
 
 		unsigned int GetTextureHandle();
 
 	private:
-		bool CreateFromBitmapToHandle(iBitmap2D* pBmp, int alHandleIdx);
+		bool CreateFromBitmapToHandle(const Bitmap &bmp, int alHandleIdx);
 
 		GLenum InitCreation(int alHandleIdx);
 		void PostCreation(GLenum aGLTarget);
 
 		GLenum GetGLWrap(eTextureWrap aMode);
 
-		void GetSettings(cSDLBitmap2D* apSrc, int &alChannels, GLenum &aFormat);
+		void GetSettings(const Bitmap &bmp, int &alChannels, GLenum &aFormat);
 
 		tUIntVec mvTextureHandles;
 		bool mbContainsData;

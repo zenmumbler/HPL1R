@@ -20,8 +20,7 @@
 #define HPL_TEXTURE_H
 
 #include <vector>
-#include "graphics/LowLevelPicture.h"
-#include "graphics/Bitmap2D.h"
+#include "graphics/Bitmap.h"
 #include "graphics/GraphicsTypes.h"
 #include "resources/ResourceBase.h"
 
@@ -81,13 +80,14 @@ namespace hpl {
 
 	class iLowLevelGraphics;
 
-	class iTexture : public iLowLevelPicture, public iResourceBase
+	class iTexture : public iResourceBase
 	{
 	public:
 		iTexture(tString asName,tString asType, iLowLevelGraphics* apLowLevelGraphics,
 				eTextureType aType,bool abUseMipMaps, eTextureTarget aTarget,
 				bool abCompress=false)
-			: iLowLevelPicture(asType), iResourceBase(asName,0),
+			: iResourceBase(asName,0),
+				mlWidth(0), mlHeight(0), mlDepth(1),
 				mType(aType), mbUseMipMaps(abUseMipMaps),
 				mpLowLevelGraphics(apLowLevelGraphics), mbCompress(abCompress),
 				mTarget(aTarget),
@@ -107,14 +107,14 @@ namespace hpl {
 		 * \param pBmp
 		 * \return
 		 */
-		virtual bool CreateFromBitmap(iBitmap2D* pBmp)=0;
+		virtual bool CreateFromBitmap(const Bitmap &bmp)=0;
 		/**
 		 * Create a cube map texture from a vector of bitmaps. Doesn't work with render targets.
 		 * All bitmaps most be square, a power of 2 and the same same. The order must be: posX, negX, posY, negY, posZ and negZ.
 		 * \param *avBitmaps a vector with at least 6 bitmaps
 		 * \return
 		 */
-		virtual bool CreateCubeFromBitmapVec(tBitmap2DVec *avBitmaps)=0;
+		virtual bool CreateCubeFromBitmapVec(const std::vector<Bitmap>& bitmaps)=0;
 		/**
 		 * Create a texture with color, works with all target types. Works with render targets.
 		 * \param alWidth
@@ -124,7 +124,7 @@ namespace hpl {
 		 */
 		virtual bool Create(unsigned int alWidth, unsigned int alHeight, cColor aCol)=0;
 
-		virtual bool CreateAnimFromBitmapVec(tBitmap2DVec *avBitmaps)=0;
+		virtual bool CreateAnimFromBitmapVec(const std::vector<Bitmap>& bitmaps)=0;
 
 		virtual bool CreateFromArray(unsigned char *apPixelData, int alChannels, const cVector3l &avSize)=0;
 
@@ -171,7 +171,16 @@ namespace hpl {
 		virtual void SetTimeCount(float afX)=0;
 		virtual int GetCurrentLowlevelHandle()=0;
 
+		int GetWidth() const { return mlWidth; }
+		int GetHeight() const { return mlHeight; }
+		int GetDepth() const { return mlDepth; }
+
 	protected:
+		int mlWidth;
+		int mlHeight;
+		int mlDepth;
+		int mlBpp;
+
 		eTextureType mType;
 		eTextureTarget mTarget;
 		eTextureWrap mWrapS;
@@ -187,7 +196,6 @@ namespace hpl {
 		eTextureAnimMode mAnimMode;
 		unsigned int mlSizeLevel;
 		cVector2l mvMinLevelSize;
-
 	};
 
 	typedef std::vector<iTexture*> tTextureVec;

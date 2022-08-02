@@ -80,19 +80,16 @@ namespace hpl {
 		{
 			if(sPath != "")
 			{
-				iBitmap2D *pBmp;
-				pBmp = mpLowLevelResources->LoadBitmap2D(sPath);
-				if(pBmp==NULL){
+				auto bitmap = mpLowLevelResources->LoadBitmap2D(sPath);
+				if(! bitmap) {
 					Error("Imagemanager Couldn't load bitmap '%s'\n", sPath.c_str());
 					EndLoad();
 					return NULL;
 				}
 
-				pImage = AddToFrame(pBmp);
+				pImage = AddToFrame(*bitmap);
 
-				hplDelete(pBmp);
-
-				if(pImage==NULL){
+				if(pImage == NULL){
 					Error("Imagemanager couldn't create image '%s'\n", asName.c_str());
 				}
 
@@ -116,11 +113,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cResourceImage* cImageManager::CreateFromBitmap(iBitmap2D* apBmp)
+	cResourceImage* cImageManager::CreateFromBitmap(const Bitmap &bmp)
 	{
-		if(apBmp==NULL)return NULL;
-
-		cResourceImage *pImage = AddToFrame(apBmp);
+		cResourceImage *pImage = AddToFrame(bmp);
 
 		if(pImage){
 			AddResource(pImage, false);
@@ -222,13 +217,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cResourceImage *cImageManager::AddToFrame(iBitmap2D *apBmp)
+	cResourceImage *cImageManager::AddToFrame(const Bitmap &aBmp)
 	{
 		cResourceImage *pImage = nullptr;
 
 		for (auto frame : mlstBitmapFrames) {
 			if (! frame->IsFull()) {
-				pImage = frame->AddBitmap(apBmp);
+				pImage = frame->AddBitmap(aBmp);
 				if (pImage) {
 					return pImage;
 				}
@@ -238,7 +233,7 @@ namespace hpl {
 		// no frames had space, create new one
 		cFrameBitmap *pFrame = CreateBitmapFrame(mvFrameSize);
 		if (pFrame) {
-			pImage = pFrame->AddBitmap(apBmp);
+			pImage = pFrame->AddBitmap(aBmp);
 			if (pImage == nullptr)
 			{
 				Error("No fit in new frame!\n");
@@ -252,17 +247,16 @@ namespace hpl {
 
 	cFrameBitmap *cImageManager::CreateBitmapFrame(cVector2l avSize)
 	{
-		iTexture *pTex = mpLowLevelGraphics->CreateTexture(false,eTextureType_Normal,eTextureTarget_2D);
-		cFrameTexture *pTFrame = hplNew( cFrameTexture, (pTex,mlFrameHandle) );
-		iBitmap2D *pBmp = mpLowLevelGraphics->CreateBitmap2D(avSize, 32);
-		cFrameBitmap *pBFrame = hplNew(  cFrameBitmap, (pBmp,pTFrame,mlFrameHandle) );
+		iTexture *pTex = mpLowLevelGraphics->CreateTexture(false, eTextureType_Normal, eTextureTarget_2D);
+		cFrameTexture *pTFrame = new cFrameTexture(pTex, mlFrameHandle);
+		cFrameBitmap *pBFrame = new cFrameBitmap(avSize.x, avSize.y, pTFrame, mlFrameHandle);
 
 		mlstBitmapFrames.push_back(pBFrame);
 
 		std::pair<tFrameTextureMap::iterator, bool> ret = m_mapTextureFrames.insert(tFrameTextureMap::value_type(mlFrameHandle, pTFrame));
 		if(ret.second == false)
 		{
-			Error("Could not add texture frame %d with handle %d! Handle already exist!\n",pTFrame, mlFrameHandle);
+			Error("Could not add texture frame %d with handle %d! Handle already exist!\n", pTFrame, mlFrameHandle);
 		}
 		else
 		{

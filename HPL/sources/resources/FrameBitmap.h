@@ -22,12 +22,12 @@
 #include "resources/FrameBase.h"
 #include "system/BinTree.h"
 #include "math/MathTypes.h"
+#include "graphics/Bitmap.h"
 
 namespace hpl {
 
 	class cFrameTexture;
 	class cResourceImage;
-	class iBitmap2D;
 
 	//The frames bitmap + rect class
 	class cFBitmapRect
@@ -51,10 +51,10 @@ namespace hpl {
 	class cFrameBitmap : public iFrameBase
 	{
 	public:
-		cFrameBitmap(iBitmap2D *apBitmap, cFrameTexture *apFrmTex, int alHandle);
+		cFrameBitmap(int width, int height, cFrameTexture *apFrmTex, int alHandle);
 		~cFrameBitmap();
 
-		cResourceImage * AddBitmap(iBitmap2D *apSrc);
+		cResourceImage * AddBitmap(const Bitmap &aSrc);
 		bool MinimumFit(cRect2l aSrc,cRect2l aDest);
 		bool IsFull();
 		bool IsUpdated();
@@ -65,7 +65,7 @@ namespace hpl {
 
 		int GetHandle()const{ return mlHandle; }
 	private:
-		iBitmap2D* mpBitmap;
+		Bitmap mBitmap;
 		cFrameTexture* mpFrameTexture;
 		tRectTree mRects;
 		int mlMinHole;

@@ -21,7 +21,7 @@
 
 #include "resources/ImageManager.h"
 #include "graphics/GraphicsTypes.h"
-#include "graphics/Bitmap2D.h"
+#include "graphics/Bitmap.h"
 #include "graphics/GfxBatch.h"
 
 namespace hpl {
@@ -114,7 +114,7 @@ namespace hpl {
 		 * \param matType material to use
 		 * \return
 		 */
-		const cGfxObject* CreateUnmanagedGfxObject(iBitmap2D *apBmp, eGfxMaterialType matType);
+		const cGfxObject* CreateUnmanagedGfxObject(const Bitmap &bmp, eGfxMaterialType matType);
 
 		/**
 		 * Destroys a gfx object.
