@@ -50,15 +50,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iFontData::iFontData(const tString &asName,iLowLevelGraphics* apLowLevelGraphics)
+	FontData::FontData(const tString &asName)
 	: iResourceBase(asName,0)
 	{
-		mpLowLevelGraphics = apLowLevelGraphics;
 	}
 
 	//-----------------------------------------------------------------------
 
-	iFontData::~iFontData()
+	FontData::~FontData()
 	{
 		for(int i=0; i <(int)mvGlyphs.size(); i++)
 		{
@@ -82,7 +81,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool iFontData::CreateFromBitmapFile(const tString &asFileName)
+	bool FontData::CreateFromBitmapFile(const tString &asFileName)
 	{
 		tString sPath = cString::GetFilePath(asFileName);
 
@@ -193,7 +192,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void iFontData::Draw(const cVector3f& avPos,const cVector2f& avSize, const cColor& aCol,
+	void FontData::Draw(const cVector3f& avPos,const cVector2f& avSize, const cColor& aCol,
 						eFontAlign aAlign,	const wchar_t* fmt,...)
 	{
 		wchar_t sText[256];
@@ -242,7 +241,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	int iFontData::DrawWordWrap(cVector3f avPos,float afLength,float afFontHeight,cVector2f avSize,const cColor& aCol,
+	int FontData::DrawWordWrap(cVector3f avPos,float afLength,float afFontHeight,cVector2f avSize,const cColor& aCol,
 								eFontAlign aAlign,	const tWString &asString)
 	{
 		int rows = 0;
@@ -319,7 +318,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void iFontData::GetWordWrapRows(float afLength,float afFontHeight,cVector2f avSize,
+	void FontData::GetWordWrapRows(float afLength,float afFontHeight,cVector2f avSize,
 							const tWString& asString,tWStringVec *apRowVec)
 	{
 		int rows = 0;
@@ -395,7 +394,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	float iFontData::GetLength(const cVector2f& avSize,const wchar_t* sText)
+	float FontData::GetLength(const cVector2f& avSize,const wchar_t* sText)
 	{
 		int lCount=0;
 		float lXAdd =0;
@@ -427,7 +426,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 
-	float iFontData::GetLengthFmt(const cVector2f& avSize,const wchar_t* fmt,...)
+	float FontData::GetLengthFmt(const cVector2f& avSize,const wchar_t* fmt,...)
 	{
 		wchar_t sText[256];
 		va_list ap;
@@ -446,7 +445,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cGlyph* iFontData::CreateGlyph(const Bitmap &aBmp, const cVector2l &avOffset,const cVector2l &avSize,
+	cGlyph* FontData::CreateGlyph(const Bitmap &aBmp, const cVector2l &avOffset,const cVector2l &avSize,
 								const cVector2l& avFontSize, int alAdvance)
 	{
 		//Here the bitmap should be saved to diskk for faster loading.
@@ -481,7 +480,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void iFontData::AddGlyph(cGlyph *apGlyph)
+	void FontData::AddGlyph(cGlyph *apGlyph)
 	{
 		mvGlyphs.push_back(apGlyph);
 	}

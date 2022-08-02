@@ -129,7 +129,7 @@ public:
 protected:
 	tWString msText;
 	tWString msTip;
-	iFontData *mpFont;
+	FontData *mpFont;
 	bool mbOver;
 	cVector2f mvFontSize;
 	eMainMenuState mNextState;
@@ -161,7 +161,7 @@ public:
 
 	tWString msText;
 protected:
-	iFontData *mpFont;
+	FontData *mpFont;
 	
 	cVector2f mvFontSize;
 	eMainMenuState mNextState;
@@ -194,7 +194,7 @@ public:
 	tWString msText;
 protected:
 	
-	iFontData *mpFont;
+	FontData *mpFont;
 
 	eFontAlign mAlignment;
 
@@ -252,7 +252,7 @@ public:
 	
 protected:
 	cGraphicsDrawer *mpDrawer;
-	iFontData *mpFont;
+	FontData *mpFont;
 	const cGfxObject *mpBackGfx;
 
 	const cGfxObject *mpDownGfx;
@@ -419,7 +419,7 @@ private:
 	cMainMenuWidget_Text *mpCurrentActionText;
 
 	tWString msButtonTip;
-	iFontData *mpTipFont;
+	FontData *mpTipFont;
 
     std::vector<cMainMenuParticle> mvRainDrops;
 	float mfRainDropCount;
@@ -440,7 +440,7 @@ private:
 
 	eMainMenuState mLastState;
 
-	iFontData *mpFont;
+	FontData *mpFont;
 	
 	cVector2f mvMousePos;
 

@@ -34,7 +34,6 @@
 #include "imgui/backends/imgui_impl_sdl.h"
 #include "imgui/backends/imgui_impl_opengl2.h"
 
-#include "graphics/FontData.h"
 #include "graphics/Bitmap.h"
 
 #include "graphics/impl/LowLevelGraphicsSDL.h"
@@ -487,13 +486,6 @@ namespace hpl {
 		glReadPixels(0, 0, mvScreenSize.x, mvScreenSize.y, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
 		// TODO: save image
-	}
-
-	//-----------------------------------------------------------------------
-
-	iFontData* cLowLevelGraphicsSDL::CreateFontData(const tString &asName)
-	{
-		return new iFontData(asName, this);
 	}
 
 	//-----------------------------------------------------------------------

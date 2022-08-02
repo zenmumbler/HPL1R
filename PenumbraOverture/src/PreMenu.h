@@ -73,8 +73,8 @@ private:
 	iTexture* mpLogoTexture;
 	// iTexture* mpEpTexture;
 
-	iFontData *mpFont;
-	iFontData *mpTextFont;
+	FontData *mpFont;
+	FontData *mpTextFont;
 
 	bool mbShowText;
 	tWStringVec mvTextRows;

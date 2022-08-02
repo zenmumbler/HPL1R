@@ -57,20 +57,20 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iFontData* cFontManager::CreateFontData(const tString& asName, int alSize,unsigned short alFirstChar,
+	FontData* cFontManager::CreateFontData(const tString& asName, int alSize,unsigned short alFirstChar,
 											unsigned short alLastChar)
 	{
 		tString sPath;
-		iFontData* pFont;
+		FontData* pFont;
 		tString asNewName = cString::ToLowerCase(asName);
 
 		BeginLoad(asName);
 
-		pFont = static_cast<iFontData*>(this->FindLoadedResource(asNewName,sPath));
+		pFont = static_cast<FontData*>(this->FindLoadedResource(asNewName,sPath));
 
 		if(pFont==NULL && sPath!="")
 		{
-			pFont = mpGraphics->GetLowLevel()->CreateFontData(asNewName);
+			pFont = new FontData(asNewName);
 			pFont->SetUp(mpGraphics->GetDrawer(),mpLowLevelResources);
 
 			tString sExt = cString::ToLowerCase(cString::GetFileExt(asName));

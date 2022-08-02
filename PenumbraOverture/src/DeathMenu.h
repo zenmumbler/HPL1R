@@ -55,7 +55,7 @@ protected:
 	cVector3f mvPositon;
 	cRect2f mRect;
 
-	iFontData *mpFont;
+	FontData *mpFont;
 
 	cVector2f mvFontSize;
 	tWString msText;
@@ -129,7 +129,7 @@ private:
 	bool mbActive;
 	float mfAlpha;
 
-	iFontData *mpFont;
+	FontData *mpFont;
 	
 	cVector2f mvMousePos;
 

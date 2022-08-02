@@ -96,7 +96,7 @@ void cGameMessage::Update(float afTimeStep)
 
 //-----------------------------------------------------------------------
 
-void cGameMessage::Draw(iFontData *apFont)
+void cGameMessage::Draw(FontData *apFont)
 {
 	if(mbActive == false) return;
 	

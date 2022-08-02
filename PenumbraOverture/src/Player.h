@@ -371,7 +371,7 @@ private:
 	cResources *mpResources;
 	cGraphicsDrawer *mpGfxDrawer;
 
-	iFontData *mpFont;
+	FontData *mpFont;
 
 	cNode3D mFeetNode;
 

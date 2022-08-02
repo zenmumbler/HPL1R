@@ -53,11 +53,11 @@ namespace hpl {
 	typedef std::vector<cGlyph*> tGlyphVec;
 	typedef tGlyphVec::iterator tGlyphVecIt;
 
-	class iFontData : public iResourceBase
+	class FontData : public iResourceBase
 	{
 	public:
-		iFontData(const tString &asName, iLowLevelGraphics* apLowLevelGraphics);
-		~iFontData();
+		FontData(const tString &asName);
+		~FontData();
 
 		bool CreateFromBitmapFile(const tString &asFileName);
 
@@ -137,7 +137,6 @@ namespace hpl {
 		float GetLength(const cVector2f& avSize,const wchar_t* sText);
 
 	protected:
-		iLowLevelGraphics* mpLowLevelGraphics;
 		iLowLevelResources* mpLowLevelResources;
 		cGraphicsDrawer *mpGraphicsDrawer;
 

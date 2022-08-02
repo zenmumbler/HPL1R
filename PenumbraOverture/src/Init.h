@@ -106,7 +106,7 @@ public:
 	cGame *mpGame;
 	cScriptModule *mpGlobalScript;
 
-	iFontData *mpDefaultFont;
+	FontData *mpDefaultFont;
 	
 	//Main properties
 	cVector2l mvScreenSize;

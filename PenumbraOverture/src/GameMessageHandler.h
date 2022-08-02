@@ -34,7 +34,7 @@ public:
 	cGameMessage(const tWString &asText, cGameMessageHandler *apMessHandler);
 
 	void Update(float afTimeStep);
-	void Draw(iFontData *apFont);
+	void Draw(FontData *apFont);
 
 	bool mbActive;
 
@@ -78,7 +78,7 @@ public:
 private:
 	cInit* mpInit;
 
-	iFontData *mpFont;
+	FontData *mpFont;
 	ePlayerState mLastState;
 	tString msOverCallback;
 

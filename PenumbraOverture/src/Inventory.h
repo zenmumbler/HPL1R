@@ -104,7 +104,7 @@ private:
 
 	const cGfxObject *mpGfxBack;
 
-	iFontData *mpFont;
+	FontData *mpFont;
 };
 
 typedef std::list<cInventorySlot*> tInventorySlotList;
@@ -237,7 +237,7 @@ public:
 private:
 	cInit *mpInit;
 	cGraphicsDrawer *mpDrawer;
-	iFontData *mpFont;
+	FontData *mpFont;
     	
 	const cGfxObject* mpGfxBack;
 	const cGfxObject* mpGfxCorner11;
@@ -405,7 +405,7 @@ private:
 
 	bool mbNoteBookIsActive;
 
-	iFontData *mpFont;
+	FontData *mpFont;
 
 	cVector2f mvMousePos;
 

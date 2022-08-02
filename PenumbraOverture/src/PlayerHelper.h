@@ -571,7 +571,7 @@ private:
 
 	bool mbIntersected;
 
-	iFontData *mpFont;
+	FontData *mpFont;
 };
 
 

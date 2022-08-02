@@ -182,7 +182,6 @@ namespace hpl {
 
 	#define kMaxClipPlanes (6)
 
-	class iFontData;
 	class iOcclusionQuery;
 
 	class iLowLevelGraphics
@@ -241,8 +240,6 @@ namespace hpl {
 		virtual void SetClipPlane(int alIdx, const cPlanef& aPlane)=0;
 		virtual cPlanef GetClipPlane(int alIdx, const cPlanef& aPlane)=0;
 		virtual void SetClipPlaneActive(int alIdx, bool abX)=0;
-
-		virtual iFontData* CreateFontData(const tString &asName)=0;
 
 		virtual iTexture* CreateTexture(bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
 		virtual iTexture* CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;

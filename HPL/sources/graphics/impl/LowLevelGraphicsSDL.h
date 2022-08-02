@@ -73,8 +73,6 @@ namespace hpl {
 		cVector2f GetVirtualSize() override;
 		void SetVirtualSize(cVector2f avSize) override;
 
-		iFontData* CreateFontData(const tString &asName) override;
-
 		iTexture* CreateTexture(bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
 		iTexture* CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
 		iTexture* CreateTexture(const Bitmap& source, bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
