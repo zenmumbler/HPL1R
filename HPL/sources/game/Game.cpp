@@ -85,8 +85,7 @@ namespace hpl {
 
 	void cSetupVarContainer::AddString(const tString& asName, const tString& asValue)
 	{
-		std::map<tString, tString>::value_type val(asName,asValue);
-		m_mapVars.insert(val);
+		m_mapVars.insert({asName, asValue});
 	}
 
 	void cSetupVarContainer::AddInt(const tString& asName, int alValue)

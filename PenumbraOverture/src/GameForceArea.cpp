@@ -237,10 +237,10 @@ void cGameForceArea::Update(float afTimeStep)
 
 void cGameForceArea::OnPostSceneDraw()
 {
-	return;
+	/*
 	iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
-
 	mvBodies[0]->RenderDebugGeometry(pLowGfx,cColor(1,1,1,1));
+	*/
 }
 
 //-----------------------------------------------------------------------

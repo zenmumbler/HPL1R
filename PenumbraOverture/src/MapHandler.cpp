@@ -1220,7 +1220,7 @@ void cMapHandler::OnPostSceneDraw()
 		pEntity->OnPostSceneDraw();
 	}
 	
-	return;
+	/*
 	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetTexture(0,NULL);
 	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetBlendActive(false);
 	
@@ -1252,7 +1252,7 @@ void cMapHandler::OnPostSceneDraw()
 	}
 
 	
-	/*mpInit->mpGame->GetGraphics()->GetLowLevel()->SetDepthTestActive(false);
+	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetDepthTestActive(false);
 	cBillboardIterator billIt = mpScene->GetWorld3D()->GetBillboardIterator();
 	while(billIt.HasNext())
 	{
@@ -1261,7 +1261,7 @@ void cMapHandler::OnPostSceneDraw()
 		mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(
 								pBillboard->GetBoundingVolume()->GetMax(),
 								pBillboard->GetBoundingVolume()->GetMin(),cColor(1,0,1));
-	}*/
+	}
 
 	GIt = m_mapGameEntities.begin();
 	for(; GIt != m_mapGameEntities.end(); ++GIt)
@@ -1276,7 +1276,7 @@ void cMapHandler::OnPostSceneDraw()
 		//						pEntity->GetMeshEntity()->GetBoundingVolume()->GetMax(),
 		//						pEntity->GetMeshEntity()->GetBoundingVolume()->GetMin(),cColor(1,0,1));
 
-		/*for(int i=0; i < pEntity->GetBodyNum(); ++i)
+		for(int i=0; i < pEntity->GetBodyNum(); ++i)
 		{
 			iPhysicsBody* pBody = pEntity->GetBody(i);
 			if(pBody){
@@ -1285,11 +1285,12 @@ void cMapHandler::OnPostSceneDraw()
 																cColor(1,0.5f,1));
 				//pBody->RenderDebugGeometry(mpInit->mpGame->GetGraphics()->GetLowLevel(),cColor(1,0.5f,1));
 			}
-		}*/
+		}
 	}
 	
 
 	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetDepthTestActive(true);
+	*/
 }
 
 //-----------------------------------------------------------------------

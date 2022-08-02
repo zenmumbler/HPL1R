@@ -1387,10 +1387,10 @@ namespace hpl {
 
 	/////////////////////////
 
-	static bool EdgeTriEqual(const cTriEdge &edge1,  const cTriEdge &edge2)
+	static bool EdgeTriEqual(const cTriEdge &edge1, const cTriEdge &edge2)
 	{
 		if(edge1.tri1 == edge2.tri1 && edge1.tri2 == edge2.tri2) return true;
-		if(edge1.tri1 == edge1.tri1 && edge1.tri2 == edge2.tri1) return true;
+		if(edge1.tri1 == edge2.tri1 && edge1.tri2 == edge2.tri1) return true;
 		return false;
 	}
 

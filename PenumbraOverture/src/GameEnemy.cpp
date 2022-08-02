@@ -607,7 +607,7 @@ float gfCurrentMaxViewDist=0;
 
 void iGameEnemy::OnDraw()
 {
-	return;
+	/*
 	if(mbActive==false) return;
 	if(mbCanSeePlayer){
 		mpInit->mpDefaultFont->Draw(cVector3f(5,15,100),14,cColor(1,1,1,1),eFontAlign_Left,
@@ -637,12 +637,10 @@ void iGameEnemy::OnDraw()
 
 	mvStates[mlCurrentState]->OnDraw();
 
-	/*mpInit->mpDefaultFont->Draw(cVector3f(5,15,100),14,cColor(1,1,1,1),eFontAlign_Left,
-								"Active: %d",mbActive);
-	mpInit->mpDefaultFont->Draw(cVector3f(5,30,100),14,cColor(1,1,1,1),eFontAlign_Left,
-								"Yaw: %f",cMath::ToDeg(mpMover->GetCharBody()->GetYaw()));
-	mpInit->mpDefaultFont->Draw(cVector3f(5,45,100),14,cColor(1,1,1,1),eFontAlign_Left,
-								"Pos: %s",mpMover->GetCharBody()->GetPosition().ToString().c_str());*/
+	// mpInit->mpDefaultFont->Draw(cVector3f(5,15,100),14,cColor(1,1,1,1),eFontAlign_Left, "Active: %d",mbActive);
+	// mpInit->mpDefaultFont->Draw(cVector3f(5,30,100),14,cColor(1,1,1,1),eFontAlign_Left, "Yaw: %f",cMath::ToDeg(mpMover->GetCharBody()->GetYaw()));
+	// mpInit->mpDefaultFont->Draw(cVector3f(5,45,100),14,cColor(1,1,1,1),eFontAlign_Left, "Pos: %s",mpMover->GetCharBody()->GetPosition().ToString().c_str());
+	*/
 }
 
 //-----------------------------------------------------------------------
