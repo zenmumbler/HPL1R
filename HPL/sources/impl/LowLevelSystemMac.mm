@@ -42,8 +42,6 @@ namespace hpl {
 		tString sTemp;
 
 		@autoreleasepool {
-			NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
 			NSBundle *bundle = [NSBundle mainBundle];
 			NSString *dataPath = getGamePathForBundle(bundle);
 
