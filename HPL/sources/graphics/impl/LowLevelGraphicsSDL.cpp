@@ -86,7 +86,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cLowLevelGraphicsSDL::cLowLevelGraphicsSDL()
+	cLowLevelGraphicsSDL::cLowLevelGraphicsSDL() : iLowLevelGraphics()
 	{
 		mlMultisampling = 0;
 
@@ -995,42 +995,6 @@ namespace hpl {
 			//Make all this inline??
 			for(int i=0;i<4;i++){
 				glTexCoord3f(avVtx[i].tex.x,avVtx[i].tex.y,avVtx[i].tex.z);
-				glColor4f(aCol.r,aCol.g,aCol.b,aCol.a);
-				glVertex3f(avVtx[i].pos.x,avVtx[i].pos.y,avVtx[i].pos.z);
-			}
-		}
-		glEnd();
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::DrawQuad(const tVertexVec &avVtx,const float afZ)
-	{
-		assert(avVtx.size()==4);
-
-		glBegin(GL_QUADS);
-		{
-			//Make all this inline??
-			for(int i=0;i<4;i++){
-				glTexCoord3f(avVtx[i].tex.x,avVtx[i].tex.y,afZ);
-				glColor4f(avVtx[i].col.r,avVtx[i].col.g,avVtx[i].col.b,avVtx[i].col.a);
-				glVertex3f(avVtx[i].pos.x,avVtx[i].pos.y,avVtx[i].pos.z);
-			}
-		}
-		glEnd();
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::DrawQuad(const tVertexVec &avVtx,const float afZ,const cColor &aCol)
-	{
-		assert(avVtx.size()==4);
-
-		glBegin(GL_QUADS);
-		{
-			//Make all this inline??
-			for(int i=0;i<4;i++){
-				glTexCoord3f(avVtx[i].tex.x,avVtx[i].tex.y,afZ);
 				glColor4f(aCol.r,aCol.g,aCol.b,aCol.a);
 				glVertex3f(avVtx[i].pos.x,avVtx[i].pos.y,avVtx[i].pos.z);
 			}

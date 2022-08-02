@@ -187,7 +187,7 @@ namespace hpl {
 	class iLowLevelGraphics
 	{
 	public:
-		virtual ~iLowLevelGraphics(){}
+		virtual ~iLowLevelGraphics() = default;
 		/**
 		 * Sets the video mode. Must only be called ONCE!
 		 * \param alWidth
@@ -331,8 +331,6 @@ namespace hpl {
 
 		virtual void DrawQuad(const tVertexVec &avVtx)=0;
 		virtual void DrawQuad(const tVertexVec &avVtx, const cColor aCol)=0;
-		virtual void DrawQuad(const tVertexVec &avVtx,const float afZ)=0;
-		virtual void DrawQuad(const tVertexVec &avVtx,const float afZ,const cColor &aCol)=0;
 		virtual void DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs)=0;
 
 		//VERTEX BATCHER
