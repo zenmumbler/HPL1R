@@ -33,8 +33,7 @@ namespace hpl {
 		cGfxBatch(int vertexCount);
 		~cGfxBatch();
 
-		void AddVertex(const cVertex &vertex, const cVector3f &offset);
-		void AddVertexExt(const cVertex &vertex, const cVector3f &position, const cColor &color);
+		void AddVertex(const cVector3f &position, const cColor &color, const cVector3f& tex);
 		void AddIndex(uint32_t index);
 		void Clear();
 

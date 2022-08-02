@@ -199,7 +199,8 @@ namespace hpl {
 
 				for (int i = 0; i < 4; i++)
 				{
-					mBatch.AddVertexExt(pObj.mpObject->mvVtx[i], vPos[i], pObj.mColor);
+					const auto& vtx = pObj.mpObject->mvVtx[i];
+					mBatch.AddVertex(vPos[i], pObj.mColor, vtx.tex);
 					mBatch.AddIndex(lIdxAdd++);
 				}
 			}
@@ -207,7 +208,8 @@ namespace hpl {
 			{
 				for (int i = 0; i < 4; i++)
 				{
-					mBatch.AddVertex(pObj.mpObject->mvVtx[i], pObj.mvPosition);
+					const auto& vtx = pObj.mpObject->mvVtx[i];
+					mBatch.AddVertex(vtx.pos + pObj.mvPosition, vtx.col, vtx.tex);
 					mBatch.AddIndex(lIdxAdd++);
 				}
 			}

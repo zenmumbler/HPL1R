@@ -16,40 +16,16 @@ namespace hpl {
 
 		// 3 pos floats, 4 color floats, 2 tex coord floats
 		mlBatchStride = 9;
-		mpVertexArray = hplNewArray(float, mlBatchStride * mlBatchArraySize);
-		mpIndexArray = hplNewArray(unsigned int, mlBatchArraySize);
+		mpVertexArray = new float[mlBatchStride * mlBatchArraySize];
+		mpIndexArray = new unsigned int[mlBatchArraySize];
 	}
 
 	cGfxBatch::~cGfxBatch() {
-		hplDeleteArray(mpVertexArray);
-		hplDelete(mpIndexArray);
+		delete[] mpVertexArray;
+		delete[] mpIndexArray;
 	}
 
-	void cGfxBatch::AddVertex(const cVertex &vertex, const cVector3f &offset) {
-		//Coord
-		mpVertexArray[mlVertexCount + 0] =	vertex.pos.x + offset.x;
-		mpVertexArray[mlVertexCount + 1] =	vertex.pos.y + offset.y;
-		mpVertexArray[mlVertexCount + 2] =	vertex.pos.z + offset.z;
-
-		//Color
-		mpVertexArray[mlVertexCount + 3] =	vertex.col.r;
-		mpVertexArray[mlVertexCount + 4] =	vertex.col.g;
-		mpVertexArray[mlVertexCount + 5] =	vertex.col.b;
-		mpVertexArray[mlVertexCount + 6] =	vertex.col.a;
-
-		//Texture coord
-		mpVertexArray[mlVertexCount + 7] =	vertex.tex.x;
-		mpVertexArray[mlVertexCount + 8] =	vertex.tex.y;
-
-		mlVertexCount = mlVertexCount + mlBatchStride;
-
-		if (mlVertexCount / mlBatchStride >= mlBatchArraySize)
-		{
-			//Make the array larger.
-		}
-	}
-
-	void cGfxBatch::AddVertexExt(const cVertex &vertex, const cVector3f &position, const cColor &color) {
+	void cGfxBatch::AddVertex(const cVector3f &position, const cColor &color, const cVector3f& tex) {
 		//Coord
 		mpVertexArray[mlVertexCount + 0] =	position.x;
 		mpVertexArray[mlVertexCount + 1] =	position.y;
@@ -62,8 +38,8 @@ namespace hpl {
 		mpVertexArray[mlVertexCount + 6] =	color.a;
 
 		//Texture coord
-		mpVertexArray[mlVertexCount + 7] =	vertex.tex.x;
-		mpVertexArray[mlVertexCount + 8] =	vertex.tex.y;
+		mpVertexArray[mlVertexCount + 7] =	tex.x;
+		mpVertexArray[mlVertexCount + 8] =	tex.y;
 
 		mlVertexCount = mlVertexCount + mlBatchStride;
 

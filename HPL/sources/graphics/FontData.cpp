@@ -23,7 +23,6 @@
 #include "system/LowLevelSystem.h"
 
 #include "graphics/GraphicsDrawer.h"
-#include "graphics/Material.h"
 
 #include "resources/ResourceImage.h"
 
