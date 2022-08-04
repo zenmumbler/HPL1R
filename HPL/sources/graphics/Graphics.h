@@ -28,7 +28,6 @@ namespace hpl {
 	// class cRendererPostEffects;
 	class cRenderList;
 	class cGraphicsDrawer;
-	class iLowLevelResources;
 	class iLowLevelGraphics;
 	class cMeshCreator;
 	class cMaterialHandler;
@@ -36,7 +35,7 @@ namespace hpl {
 	class cGraphics
 	{
 	public:
-		cGraphics(iLowLevelGraphics *apLowLevelGraphics,iLowLevelResources *apLowLevelResources);
+		cGraphics(iLowLevelGraphics *apLowLevelGraphics);
 		~cGraphics();
 
 		bool Init(int alWidth, int alHeight, int alBpp, int abFullscreen, int alMultisampling,
@@ -61,7 +60,6 @@ namespace hpl {
 
 	private:
 		iLowLevelGraphics *mpLowLevelGraphics;
-		iLowLevelResources *mpLowLevelResources;
 		cGraphicsDrawer *mpDrawer;
 		cMeshCreator *mpMeshCreator;
 		cMaterialHandler *mpMaterialHandler;

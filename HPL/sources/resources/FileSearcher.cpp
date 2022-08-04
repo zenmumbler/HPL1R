@@ -18,8 +18,8 @@
  */
 #include "resources/FileSearcher.h"
 #include "system/String.h"
-#include "resources/LowLevelResources.h"
 #include "system/LowLevelSystem.h"
+#include "impl/Platform.h"
 
 
 namespace hpl {
@@ -30,9 +30,8 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cFileSearcher::cFileSearcher(iLowLevelResources *apLowLevelResources)
+	cFileSearcher::cFileSearcher()
 	{
-		mpLowLevelResources = apLowLevelResources;
 	}
 
 	//-----------------------------------------------------------------------
@@ -63,8 +62,7 @@ namespace hpl {
 		{
 			m_setLoadedDirs.insert(asPath);
 
-			mpLowLevelResources->FindFilesInDir(lstFileNames,cString::To16Char(asPath),
-												cString::To16Char(asMask));
+			Platform::FindFileInDir(lstFileNames, cString::To16Char(asPath), cString::To16Char(asMask));
 
 			for(const tWString& sExt : lstFileNames)
 			{

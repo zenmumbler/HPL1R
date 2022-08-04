@@ -36,8 +36,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cAnimationManager::cAnimationManager(cGraphics* apGraphic,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevel(),
-							apResources->GetLowLevelSystem())
+		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevelSystem())
 	{
 		mpGraphics = apGraphic;
 		mpResources = apResources;

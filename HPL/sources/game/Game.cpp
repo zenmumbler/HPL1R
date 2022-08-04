@@ -182,10 +182,10 @@ namespace hpl {
 		mpSystem = mpGameSetup->CreateSystem();
 
 		Log(" Creating resource module\n");
-		mpResources = mpGameSetup->CreateResources(mpGraphics);
+		mpResources = mpGameSetup->CreateResources();
 
 		Log(" Creating input module\n");
-		mpInput = mpGameSetup->CreateInput(mpGraphics);
+		mpInput = mpGameSetup->CreateInput();
 
 		Log(" Creating sound module\n");
 		mpSound = mpGameSetup->CreateSound();
@@ -200,7 +200,7 @@ namespace hpl {
 		mpScript = mpGameSetup->CreateScript(mpResources);
 
 		Log(" Creating scene module\n");
-		mpScene = mpGameSetup->CreateScene(mpGraphics, mpResources, mpSound,mpPhysics,mpSystem,mpAI);
+		mpScene = new cScene(mpGraphics, mpResources, mpSound,mpPhysics,mpSystem,mpAI);
 
 		Log("--------------------------------------------------------\n\n");
 

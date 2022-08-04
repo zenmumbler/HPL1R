@@ -25,7 +25,6 @@
 #include "system/SystemTypes.h"
 #include "graphics/GraphicsTypes.h"
 #include "resources/ResourceBase.h"
-#include "resources/LowLevelResources.h"
 
 namespace hpl {
 
@@ -67,10 +66,9 @@ namespace hpl {
 		/**
 		 * Used internally
 		 */
-		void SetUp(cGraphicsDrawer *apGraphicsDrawer, iLowLevelResources* apLowLevelResources)
+		void SetUp(cGraphicsDrawer *apGraphicsDrawer)
 		{
 			mpGraphicsDrawer = apGraphicsDrawer;
-			mpLowLevelResources = apLowLevelResources;
 		}
 
 		/**
@@ -137,7 +135,6 @@ namespace hpl {
 		float GetLength(const cVector2f& avSize,const wchar_t* sText);
 
 	protected:
-		iLowLevelResources* mpLowLevelResources;
 		cGraphicsDrawer *mpGraphicsDrawer;
 
 		tGlyphVec mvGlyphs;
@@ -154,4 +151,4 @@ namespace hpl {
 	};
 
 };
-#endif // HPL_FONTDATA_H
+#endif

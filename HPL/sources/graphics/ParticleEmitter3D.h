@@ -26,7 +26,6 @@
 
 namespace hpl {
 
-	class cResourceImage;
 	class cGraphics;
 	class cWorld3D;
 	class cParticleSystem3D;

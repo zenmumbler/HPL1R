@@ -36,8 +36,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cFontManager::cFontManager(cGraphics* apGraphics,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevel(),
-							apResources->GetLowLevelSystem())
+		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevelSystem())
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;
@@ -71,7 +70,7 @@ namespace hpl {
 		if(pFont==NULL && sPath!="")
 		{
 			pFont = new FontData(asNewName);
-			pFont->SetUp(mpGraphics->GetDrawer(),mpLowLevelResources);
+			pFont->SetUp(mpGraphics->GetDrawer());
 
 			tString sExt = cString::ToLowerCase(cString::GetFileExt(asName));
 

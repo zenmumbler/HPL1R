@@ -717,14 +717,10 @@ void cSaveHandler::OnExit()
 
 void cSaveHandler::DeleteOldestIfMax(const tWString &asDir,const tWString &asMask, int alMaxFiles)
 {
-	iLowLevelResources *pLowLevelResources = mpInit->mpGame->GetResources()->GetLowLevel();
-	iLowLevelSystem *pLowLevelSystem = mpInit->mpGame->GetSystem()->GetLowLevel();
-
-	
 	tWString sPath = msSaveDir + asDir;
 
 	tWStringList lstFiles;
-	pLowLevelResources->FindFilesInDir(lstFiles,sPath,asMask);
+	Platform::FindFileInDir(lstFiles,sPath,asMask);
 
 	//If there are too many files, remove oldest.
 	if((int)lstFiles.size() >= alMaxFiles)
@@ -750,13 +746,10 @@ void cSaveHandler::DeleteOldestIfMax(const tWString &asDir,const tWString &asMas
 
 tWString cSaveHandler::GetLatest(const tWString &asDir,const tWString &asMask)
 {
-	iLowLevelResources *pLowLevelResources = mpInit->mpGame->GetResources()->GetLowLevel();
-	iLowLevelSystem *pLowLevelSystem = mpInit->mpGame->GetSystem()->GetLowLevel();
-
 	tWString sPath = msSaveDir + asDir;
 
 	tWStringList lstFiles;
-	pLowLevelResources->FindFilesInDir(lstFiles,sPath,asMask);
+	Platform::FindFileInDir(lstFiles,sPath,asMask);
 
 	tWString sNewest = _W("");
 	cDate newestDate;

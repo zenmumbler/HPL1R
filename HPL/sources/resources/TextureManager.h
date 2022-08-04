@@ -79,7 +79,7 @@ namespace hpl {
 
 		tTextureAttenuationMap m_mapAttenuationTextures;
 
-		tStringList mlstFileFormats;
+		tStringVec mvFileFormats;
 
 		tStringVec mvCubeSideSuffixes;
 

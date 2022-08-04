@@ -23,7 +23,7 @@
 #include "resources/FrameBitmap.h"
 #include "resources/FrameTexture.h"
 #include "graphics/LowLevelGraphics.h"
-#include "resources/LowLevelResources.h"
+#include "resources/LoadImage.h"
 
 
 namespace hpl {
@@ -34,13 +34,12 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cImageManager::cImageManager(cFileSearcher *apFileSearcher,iLowLevelGraphics *apLowLevelGraphics,
-								iLowLevelResources *apLowLevelResources,iLowLevelSystem *apLowLevelSystem)
-	: iResourceManager(apFileSearcher, apLowLevelResources,apLowLevelSystem)
+	cImageManager::cImageManager(cFileSearcher *apFileSearcher, iLowLevelGraphics *apLowLevelGraphics ,iLowLevelSystem *apLowLevelSystem)
+	: iResourceManager(apFileSearcher, apLowLevelSystem)
 	{
 	   mpLowLevelGraphics = apLowLevelGraphics;
 
-	   mpLowLevelResources->GetSupportedImageFormats(mlstFileFormats);
+	   GetSupportedImageFormats(mvFileFormats);
 
 	   mvFrameSize = cVector2l(512, 512);
 	   mlFrameHandle = 0;
@@ -80,7 +79,7 @@ namespace hpl {
 		{
 			if(sPath != "")
 			{
-				auto bitmap = mpLowLevelResources->LoadBitmap2D(sPath);
+				auto bitmap = LoadBitmapFile(sPath);
 				if(! bitmap) {
 					Error("Imagemanager Couldn't load bitmap '%s'\n", sPath.c_str());
 					EndLoad();
@@ -199,7 +198,7 @@ namespace hpl {
 
 		if(cString::GetFileExt(asName)=="")
 		{
-			for (const tString& sExt : mlstFileFormats)
+			for (const tString& sExt : mvFileFormats)
 			{
 				tString sNewName = cString::SetFileExt(asName, sExt);
 				pImage = static_cast<cResourceImage*> (FindLoadedResource(sNewName, asFilePath));

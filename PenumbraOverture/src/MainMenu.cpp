@@ -1224,7 +1224,7 @@ public:
 		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
 	{
 		tWStringList lstStrings;
-		apInit->mpGame->GetResources()->GetLowLevel()->FindFilesInDir(lstStrings, _W("config/"), _W("*.lang"));
+		Platform::FindFileInDir(lstStrings, _W("config/"), _W("*.lang"));
 
 		mlCurrentFile =0;
 		int lIdx=0;
@@ -2803,14 +2803,13 @@ void cMainMenu::CreateWidgets()
 														mpInit,vPos,cVector2f(355,170),15,sDir,(int)i) );
 		AddWidgetToState(state,gpSaveGameList[i]);
 			
-		iLowLevelResources *pLowLevelResources = mpInit->mpGame->GetResources()->GetLowLevel();
 		iLowLevelSystem *pLowLevelSystem = mpInit->mpGame->GetSystem()->GetLowLevel();
 
 		tWStringList lstFiles;
 		tTempFileAndDataSet setTempFiles;
 		
 		tWString sFullPath = mpInit->mpSaveHandler->GetSaveDir() + sDir;
-		pLowLevelResources->FindFilesInDir(lstFiles,sFullPath,_W("*.sav"));
+		Platform::FindFileInDir(lstFiles, sFullPath, _W("*.sav"));
 
 		for (const tWString& sFile : lstFiles)
 		{

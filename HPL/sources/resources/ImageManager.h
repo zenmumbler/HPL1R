@@ -39,8 +39,7 @@ namespace hpl {
 	class cImageManager :public iResourceManager
 	{
 	public:
-		cImageManager(cFileSearcher *apFileSearcher, iLowLevelGraphics *apLowLevelGraphics,
-						iLowLevelResources *apLowLevelResources,iLowLevelSystem *apLowLevelSystem);
+		cImageManager(cFileSearcher *apFileSearcher, iLowLevelGraphics *apLowLevelGraphics, iLowLevelSystem *apLowLevelSystem);
 		~cImageManager();
 
 		iResourceBase* Create(const tString& asName);
@@ -56,7 +55,7 @@ namespace hpl {
 		tFrameBitmapList mlstBitmapFrames;
 		tFrameTextureMap m_mapTextureFrames;
 
-		tStringList mlstFileFormats;
+		tStringVec mvFileFormats;
 		cVector2l mvFrameSize;
 		int mlFrameHandle;
 

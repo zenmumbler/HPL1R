@@ -41,7 +41,6 @@ namespace hpl {
 
 	class cResources;
 	class iLowLevelGraphics;
-	class iLowLevelResources;
 	class iTexture;
 	class cCamera;
 	class cWorld3D;
@@ -216,7 +215,6 @@ namespace hpl {
 		void RenderPhysicsDebug(cWorld3D *apWorld, cCamera *apCamera);
 
 		iLowLevelGraphics *mpLowLevelGraphics;
-		iLowLevelResources *mpLowLevelResources;
 
 		// cRendererPostEffects *mpPostEffects;
 

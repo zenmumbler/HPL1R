@@ -77,7 +77,6 @@
 #include "math/CRC.h"
 
 #include "resources/Resources.h"
-#include "resources/LowLevelResources.h"
 #include "resources/FileSearcher.h"
 #include "resources/ImageManager.h"
 #include "resources/ResourceImage.h"
@@ -96,6 +95,7 @@
 #include "resources/MeshLoader.h"
 #include "resources/ConfigFile.h"
 #include "resources/EntityLoader_Object.h"
+#include "resources/LoadImage.h"
 
 #include "scene/Scene.h"
 #include "scene/World3D.h"
@@ -148,5 +148,6 @@
 
 #include "tinyXML/tinyxml.h"
 
+#include "impl/Platform.h"
 
 #endif // HPL_HPL_H

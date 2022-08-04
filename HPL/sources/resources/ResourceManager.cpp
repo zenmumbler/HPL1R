@@ -19,7 +19,6 @@
 #include "resources/ResourceManager.h"
 #include "system/String.h"
 
-#include "resources/LowLevelResources.h"
 #include "resources/FileSearcher.h"
 #include "resources/ResourceBase.h"
 
@@ -37,12 +36,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceManager::iResourceManager(cFileSearcher *apFileSearcher,
-										iLowLevelResources *apLowLevelResources,
-										iLowLevelSystem *apLowLevelSystem)
+	iResourceManager::iResourceManager(cFileSearcher *apFileSearcher, iLowLevelSystem *apLowLevelSystem)
 	{
 		mpFileSearcher = apFileSearcher;
-		mpLowLevelResources = apLowLevelResources;
 		mpLowLevelSystem = apLowLevelSystem;
 		mlHandleCount=0;
 	}
@@ -261,6 +257,5 @@ namespace hpl {
 	}
 
 	//-----------------------------------------------------------------------
-
 
 }

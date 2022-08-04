@@ -20,7 +20,6 @@
 
 #include "system/LowLevelSystem.h"
 #include "graphics/LowLevelGraphics.h"
-#include "resources/LowLevelResources.h"
 #include "graphics/GraphicsDrawer.h"
 #include "graphics/Renderer3D.h"
 // #include "graphics/RendererPostEffects.h"
@@ -55,10 +54,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cGraphics::cGraphics(iLowLevelGraphics *apLowLevelGraphics, iLowLevelResources *apLowLevelResources)
+	cGraphics::cGraphics(iLowLevelGraphics *apLowLevelGraphics)
 	{
 		mpLowLevelGraphics = apLowLevelGraphics;
-		mpLowLevelResources = apLowLevelResources;
 
 		mpDrawer = NULL;
 		mpMeshCreator = NULL;

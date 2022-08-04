@@ -33,7 +33,6 @@ namespace hpl {
 
 	class cImageEntity;
 
-	class iLowLevelResources;
 	class iLowLevelGraphics;
 	class iLowLevelSystem;
 	class cSystem;
@@ -50,7 +49,6 @@ namespace hpl {
 	class cSoundEntityManager;
 	class cAnimationManager;
 	class cMeshManager;
-	class cVideoManager;
 	class cConfigFile;
 
 	class cSound;
@@ -117,14 +115,13 @@ namespace hpl {
 	class cResources : public iUpdateable
 	{
 	public:
-		cResources(iLowLevelResources *apLowLevelResources,iLowLevelGraphics *apLowLevelGraphics);
+		cResources(iLowLevelGraphics *apLowLevelGraphics);
 		~cResources();
 
 		void Init(cGraphics* apGraphics, cSystem *apSystem, cSound *apSound, cScript *apScript, cScene *apScene);
 
 		void Update(float afTimeStep);
 
-		iLowLevelResources* GetLowLevel();
 		cFileSearcher* GetFileSearcher();
 
 		void SetupResourceDirsForLanguage(const tString &asLangFile);
@@ -151,7 +148,6 @@ namespace hpl {
 		cMeshLoaderHandler* GetMeshLoaderHandler(){ return mpMeshLoaderHandler;}
 		cSoundEntityManager* GetSoundEntityManager(){ return mpSoundEntityManager;}
 		cAnimationManager* GetAnimationManager(){ return mpAnimationManager;}
-		cVideoManager* GetVideoManager(){ return mpVideoManager;}
 
 		iLowLevelSystem* GetLowLevelSystem(){ return mpLowLevelSystem;}
 
@@ -159,7 +155,6 @@ namespace hpl {
 		void AddBaseDirectories();
 		bool SetLanguageFile(const tString &asFile);
 
-		iLowLevelResources *mpLowLevelResources;
 		iLowLevelGraphics *mpLowLevelGraphics;
 		iLowLevelSystem *mpLowLevelSystem;
 		cFileSearcher *mpFileSearcher;
@@ -175,7 +170,6 @@ namespace hpl {
 		cMaterialManager* mpMaterialManager;
 		cSoundEntityManager* mpSoundEntityManager;
 		cAnimationManager *mpAnimationManager;
-		cVideoManager *mpVideoManager;
 
 		cLanguageFile *mpLanguageFile;
 

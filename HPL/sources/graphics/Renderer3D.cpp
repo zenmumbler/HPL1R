@@ -23,7 +23,6 @@
 #include "system/LowLevelSystem.h"
 #include "graphics/LowLevelGraphics.h"
 #include "resources/Resources.h"
-#include "resources/LowLevelResources.h"
 #include "resources/TextureManager.h"
 #include "graphics/VertexBuffer.h"
 #include "graphics/MeshCreator.h"
@@ -73,7 +72,6 @@ namespace hpl {
 
 
 		mpLowLevelGraphics = apLowLevelGraphics;
-		mpLowLevelResources = apResources->GetLowLevel();
 		mpResources = apResources;
 		mpMeshCreator = apMeshCreator;
 

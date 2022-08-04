@@ -33,8 +33,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cSoundManager::cSoundManager(cSound* apSound,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevel(),
-							apResources->GetLowLevelSystem())
+		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevelSystem())
 	{
 		mpSound = apSound;
 		mpResources = apResources;

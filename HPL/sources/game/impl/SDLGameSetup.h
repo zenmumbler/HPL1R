@@ -23,7 +23,6 @@
 #include "graphics/LowLevelGraphics.h"
 #include "input/LowLevelInput.h"
 #include "physics/LowLevelPhysics.h"
-#include "resources/LowLevelResources.h"
 #include "sound/LowLevelSound.h"
 #include "system/LowLevelSystem.h"
 #include "script/Script.h"
@@ -38,10 +37,8 @@ namespace hpl {
 
 		cSystem* CreateSystem();
 		cGraphics* CreateGraphics();
-		cInput* CreateInput(cGraphics* apGraphics);
-		cResources* CreateResources(cGraphics* apGraphics);
-		cScene* CreateScene(cGraphics* apGraphics, cResources* apResources, cSound* apSound,
-							cPhysics *apPhysics, cSystem *apSystem,cAI *apAI);
+		cInput* CreateInput();
+		cResources* CreateResources();
 		cSound* CreateSound();
 		cPhysics* CreatePhysics();
 		cAI* CreateAI();
@@ -51,7 +48,6 @@ namespace hpl {
 		iLowLevelSystem *mpLowLevelSystem;
 		iLowLevelGraphics *mpLowLevelGraphics;
 		iLowLevelInput *mpLowLevelInput;
-		iLowLevelResources *mpLowLevelResources;
 		iLowLevelSound*	mpLowLevelSound;
 		iLowLevelPhysics* mpLowLevelPhysics;
 	};

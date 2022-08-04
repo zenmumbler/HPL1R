@@ -18,7 +18,6 @@
  */
 #include "resources/Resources.h"
 
-#include "resources/LowLevelResources.h"
 #include "resources/FileSearcher.h"
 #include "resources/ImageManager.h"
 #include "resources/GpuProgramManager.h"
@@ -32,11 +31,12 @@
 #include "resources/MeshLoaderHandler.h"
 #include "resources/SoundEntityManager.h"
 #include "resources/AnimationManager.h"
-#include "resources/VideoManager.h"
 #include "resources/ConfigFile.h"
 #include "resources/LanguageFile.h"
-#include "system/System.h"
+#include "resources/impl/MeshLoaderGLTF2.h"
+#include "resources/impl/MeshLoaderCollada.h"
 
+#include "system/System.h"
 #include "system/LowLevelSystem.h"
 
 #include "tinyXML/tinyxml.h"
@@ -49,13 +49,12 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cResources::cResources(iLowLevelResources *apLowLevelResources,iLowLevelGraphics *apLowLevelGraphics)
+	cResources::cResources(iLowLevelGraphics *apLowLevelGraphics)
 		: iUpdateable("Resources")
 	{
-		mpLowLevelResources = apLowLevelResources;
 		mpLowLevelGraphics = apLowLevelGraphics;
 
-		mpFileSearcher = hplNew( cFileSearcher, (mpLowLevelResources) );
+		mpFileSearcher = new cFileSearcher();
 
 		mpDefaultEntity3DLoader = NULL;
 		mpDefaultArea3DLoader = NULL;
@@ -84,11 +83,10 @@ namespace hpl {
 		hplDelete(mpTextureManager);
 		hplDelete(mpSoundEntityManager);
 		hplDelete(mpAnimationManager);
-		hplDelete(mpVideoManager);
 
 		Log(" All resources deleted\n");
 
-		hplDelete(mpFileSearcher);
+		delete mpFileSearcher;
 		hplDelete(mpMeshLoaderHandler);
 
 		if(mpLanguageFile) hplDelete(mpLanguageFile);
@@ -117,9 +115,9 @@ namespace hpl {
 
 		Log(" Creating resource managers\n");
 
-		mpImageManager = hplNew( cImageManager,(mpFileSearcher,mpLowLevelGraphics,mpLowLevelResources,mpLowLevelSystem) );
+		mpImageManager = hplNew( cImageManager,(mpFileSearcher, mpLowLevelGraphics, mpLowLevelSystem) );
 		mlstManagers.push_back(mpImageManager);
-		mpGpuProgramManager = hplNew( cGpuProgramManager,(mpFileSearcher,mpLowLevelGraphics,mpLowLevelResources,mpLowLevelSystem) );
+		mpGpuProgramManager = hplNew( cGpuProgramManager,(mpFileSearcher, mpLowLevelGraphics, mpLowLevelSystem) );
 		mlstManagers.push_back(mpGpuProgramManager);
 		mpParticleManager = hplNew( cParticleManager,(apGraphics, this) );
 		mlstManagers.push_back(mpParticleManager);
@@ -139,15 +137,14 @@ namespace hpl {
 		mlstManagers.push_back(mpSoundEntityManager);
 		mpAnimationManager = hplNew( cAnimationManager,(apGraphics, this) );
 		mlstManagers.push_back(mpAnimationManager);
-		mpVideoManager = hplNew( cVideoManager,(apGraphics, this) );
-		mlstManagers.push_back(mpVideoManager);
 
 		Log(" Misc Creation\n");
 
 		mpMeshLoaderHandler = hplNew( cMeshLoaderHandler,(this, apScene) );
-
-		mpLowLevelResources->AddMeshLoaders(mpMeshLoaderHandler);
-		mpLowLevelResources->AddVideoLoaders(mpVideoManager);
+		// mpMeshLoaderHandler->AddLoader(hplNew( cMeshLoaderFBX,(mpLowLevelGraphics)));
+		// mpMeshLoaderHandler->AddLoader(hplNew( cMeshLoaderMSH,(mpLowLevelGraphics)));
+		mpMeshLoaderHandler->AddLoader(hplNew( cMeshLoaderGLTF2,(mpLowLevelGraphics)));
+		mpMeshLoaderHandler->AddLoader(hplNew( cMeshLoaderCollada,(mpLowLevelGraphics)));
 
 		Log("--------------------------------------------------------\n\n");
 	}
@@ -360,13 +357,6 @@ namespace hpl {
 		}
 
 		return it->second;
-	}
-
-	//-----------------------------------------------------------------------
-
-	iLowLevelResources* cResources::GetLowLevel()
-	{
-		return mpLowLevelResources;
 	}
 
 	//-----------------------------------------------------------------------

@@ -22,7 +22,7 @@
 #include "resources/Resources.h"
 #include "graphics/Texture.h"
 #include "graphics/LowLevelGraphics.h"
-#include "resources/LowLevelResources.h"
+#include "resources/LoadImage.h"
 #include "system/LowLevelSystem.h"
 #include "resources/FileSearcher.h"
 #include "graphics/Bitmap.h"
@@ -37,13 +37,12 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cTextureManager::cTextureManager(cGraphics* apGraphics,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevel(),
-							apResources->GetLowLevelSystem())
+		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevelSystem())
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;
 
-		mpLowLevelResources->GetSupportedImageFormats(mlstFileFormats);
+		GetSupportedImageFormats(mvFileFormats);
 
 		mvCubeSideSuffixes.push_back("_pos_x");
 		mvCubeSideSuffixes.push_back("_neg_x");
@@ -133,7 +132,7 @@ namespace hpl {
 			std::vector<Bitmap> vBitmaps;
 			for(size_t i =0; i< vPaths.size(); ++i)
 			{
-				auto bmp = mpResources->GetLowLevel()->LoadBitmap2D(vPaths[i]);
+				auto bmp = LoadBitmapFile(vPaths[i]);
 				if (! bmp){
 					Error("Couldn't load bitmap '%s'!\n",vPaths[i].c_str());
 					EndLoad();
@@ -186,7 +185,7 @@ namespace hpl {
 			tString sPath="";
 			for(int i=0;i <6 ;i++)
 			{
-				for(const tString& sExt : mlstFileFormats)
+				for(const tString& sExt : mvFileFormats)
 				{
 					tString sNewName = sName + mvCubeSideSuffixes[i] + "." + sExt;
 					sPath = mpFileSearcher->GetFilePath(sNewName);
@@ -208,7 +207,7 @@ namespace hpl {
 			std::vector<Bitmap> vBitmaps;
 			for(int i=0;i<6; i++)
 			{
-				auto bmp = mpResources->GetLowLevel()->LoadBitmap2D(vPaths[i]);
+				auto bmp = LoadBitmapFile(vPaths[i]);
 				if (! bmp) {
 					Error("Couldn't load bitmap '%s'!\n",vPaths[i].c_str());
 					EndLoad();
@@ -294,7 +293,7 @@ namespace hpl {
 		}
 		else
 		{
-			for(const tString& sExt : mlstFileFormats)
+			for(const tString& sExt : mvFileFormats)
 			{
 				tString sFileName = cString::SetFileExt(asFallOffName, sExt);
 				sPath = mpFileSearcher->GetFilePath(sFileName);
@@ -307,7 +306,7 @@ namespace hpl {
 			return NULL;
 		}
 
-		auto pBmp = mpResources->GetLowLevel()->LoadBitmap2D(sPath);
+		auto pBmp = LoadBitmapFile(sPath);
 		if (! pBmp)
 		{
 			Log("Couldn't load bitmap '%s'\n",asFallOffName.c_str());
@@ -383,7 +382,7 @@ namespace hpl {
 		if(pTexture==NULL && sPath!="")
 		{
 			//Load the bitmap
-			auto pBmp = mpLowLevelResources->LoadBitmap2D(sPath);
+			auto pBmp = LoadBitmapFile(sPath);
 			if (! pBmp)
 			{
 				Error("Texturemanager Couldn't load bitmap '%s'\n", sPath.c_str());
@@ -421,7 +420,7 @@ namespace hpl {
 
 		if(cString::GetFileExt(asName)=="")
 		{
-			for (const tString& sExt : mlstFileFormats)
+			for (const tString& sExt : mvFileFormats)
 			{
 				tString sNewName = cString::SetFileExt(asName, sExt);
 				pTexture = static_cast<iTexture*> (FindLoadedResource(sNewName, asFilePath));

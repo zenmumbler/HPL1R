@@ -25,6 +25,7 @@
 #include "graphics/GraphicsDrawer.h"
 
 #include "resources/ResourceImage.h"
+#include "resources/LoadImage.h"
 
 #include "tinyXML/tinyxml.h"
 
@@ -126,7 +127,7 @@ namespace hpl {
 			tString sFileName = pPageElem->Attribute("file");
 			tString sFilePath = cString::SetFilePath(sFileName,sPath);
 
-			auto bitmap = mpLowLevelResources->LoadBitmap2D(sFilePath);
+			auto bitmap = LoadBitmapFile(sFilePath);
 			if (! bitmap)
 			{
 				Error("Couldn't load bitmap %s for FNT file '%s'\n",sFilePath.c_str(),asFileName.c_str());

@@ -22,7 +22,6 @@
 #include "system/LowLevelSystem.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/GPUProgram.h"
-#include "resources/LowLevelResources.h"
 #include "math/Math.h"
 #include "resources/Resources.h"
 #include "resources/GpuProgramManager.h"
@@ -41,7 +40,6 @@ namespace hpl {
 												cRenderList *apRenderList,cRenderer3D *apRenderer3D)
 	{
 		mpLowLevelGraphics = apLowLevelGraphics;
-		mpLowLevelResources = apResources->GetLowLevel();
 		mpResources = apResources;
 		mpRenderer3D = apRenderer3D;
 

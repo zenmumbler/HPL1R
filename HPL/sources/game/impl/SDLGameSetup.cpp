@@ -25,7 +25,6 @@
 #include "input/impl/KeyboardSDL.h"
 #include "input/impl/MouseSDL.h"
 #include "graphics/impl/LowLevelGraphicsSDL.h"
-#include "resources/impl/LowLevelResourcesSDL.h"
 #include "impl/LowLevelSystemSDL.h"
 #include "input/impl/LowLevelInputSDL.h"
 #include "sound/impl/LowLevelSoundOAL.h"
@@ -48,12 +47,11 @@ namespace hpl {
 			exit(1);
 		}
 
-		mpLowLevelSystem = hplNew( cLowLevelSystemSDL, () );
-		mpLowLevelGraphics = hplNew( cLowLevelGraphicsSDL,() );
-		mpLowLevelInput = hplNew( cLowLevelInputSDL,(mpLowLevelGraphics) );
-		mpLowLevelResources = hplNew( cLowLevelResourcesSDL,((cLowLevelGraphicsSDL *)mpLowLevelGraphics) );
-		mpLowLevelSound	= hplNew( cLowLevelSoundOAL,() );
-		mpLowLevelPhysics = hplNew( cLowLevelPhysicsNewton,() );
+		mpLowLevelSystem = new cLowLevelSystemSDL();
+		mpLowLevelGraphics = new cLowLevelGraphicsSDL();
+		mpLowLevelInput = new cLowLevelInputSDL(mpLowLevelGraphics);
+		mpLowLevelSound	= new cLowLevelSoundOAL();
+		mpLowLevelPhysics = new cLowLevelPhysicsNewton();
 	}
 
 	//-----------------------------------------------------------------------
@@ -68,8 +66,6 @@ namespace hpl {
 		hplDelete(mpLowLevelSound);
 		Log("  Input\n");
 		hplDelete(mpLowLevelInput);
-		Log("  Resources\n");
-		hplDelete(mpLowLevelResources);
 		Log("  System\n");
 		hplDelete(mpLowLevelSystem);
 		Log("  Graphics\n");
@@ -86,30 +82,15 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cScene* cSDLGameSetup::CreateScene(cGraphics* apGraphics, cResources *apResources, cSound* apSound,
-										cPhysics *apPhysics, cSystem *apSystem,cAI *apAI)
+	cResources* cSDLGameSetup::CreateResources()
 	{
-		cScene *pScene = hplNew( cScene, (apGraphics,apResources, apSound,apPhysics, apSystem,apAI) );
-		return pScene;
-	}
-
-	//-----------------------------------------------------------------------
-
-
-	/**
-	 * \todo Lowlevelresource and resource both use lowlevel graphics. Can this be fixed??
-	 * \param apGraphics
-	 * \return
-	 */
-	cResources* cSDLGameSetup::CreateResources(cGraphics* apGraphics)
-	{
-		cResources *pResources = hplNew( cResources, (mpLowLevelResources,mpLowLevelGraphics) );
+		cResources *pResources = hplNew( cResources, (mpLowLevelGraphics) );
 		return pResources;
 	}
 
 	//-----------------------------------------------------------------------
 
-	cInput* cSDLGameSetup::CreateInput(cGraphics* apGraphics)
+	cInput* cSDLGameSetup::CreateInput()
 	{
 		cInput *pInput = hplNew( cInput, (mpLowLevelInput) );
 		return pInput;
@@ -127,7 +108,7 @@ namespace hpl {
 
 	cGraphics* cSDLGameSetup::CreateGraphics()
 	{
-		cGraphics *pGraphics = hplNew( cGraphics, (mpLowLevelGraphics,mpLowLevelResources) );
+		cGraphics *pGraphics = hplNew( cGraphics, (mpLowLevelGraphics) );
 		return pGraphics;
 	}
 	//-----------------------------------------------------------------------
