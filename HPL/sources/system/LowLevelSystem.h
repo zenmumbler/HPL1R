@@ -102,12 +102,6 @@ namespace hpl {
 		*/
 		virtual cDate GetDate()=0;
 
-		/**
-		* Sets the main thread to rest for a number of milliseconds.
-		* \param alMillisecs
-		*/
-		virtual void Sleep ( const unsigned int alMillisecs )=0 ;
-
 	};
 };
 #endif // HPL_LOWLEVELSYSTEM_H

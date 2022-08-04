@@ -24,7 +24,6 @@
 
 namespace hpl {
 
-	class cSystem;
 	class cResources;
 	class cScriptModule;
 

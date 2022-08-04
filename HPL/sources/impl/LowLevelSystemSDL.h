@@ -57,8 +57,6 @@ namespace hpl {
 
 		unsigned long GetTime();
 		cDate GetDate();
-
-		void Sleep ( const unsigned int alMillisecs );
 	};
 
 	//------------------------------------------------------

@@ -21,7 +21,6 @@
 #include "scene/World3D.h"
 
 #include "system/LowLevelSystem.h"
-#include "system/System.h"
 #include "system/String.h"
 
 #include "resources/Resources.h"
@@ -116,7 +115,6 @@ namespace hpl {
 
 		bool mbLoadFromFile=false;
 
-		cSystem *pSystem = apWorld->GetSystem();
 		cResources *pResources = apWorld->GetResources();
 		cFileSearcher *pFileSearcher = pResources->GetFileSearcher();
 
@@ -279,7 +277,6 @@ namespace hpl {
 	{
 		if(mpWorld->GetFileName() == "") return;
 
-		cSystem *pSystem = mpWorld->GetSystem();
 		cResources *pResources = mpWorld->GetResources();
 		cFileSearcher *pFileSearcher = pResources->GetFileSearcher();
 
@@ -316,7 +313,6 @@ namespace hpl {
 	{
 		if(mpWorld->GetFileName() == "") return;
 
-		cSystem *pSystem = mpWorld->GetSystem();
 		cResources *pResources = mpWorld->GetResources();
 		cFileSearcher *pFileSearcher = pResources->GetFileSearcher();
 

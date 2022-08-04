@@ -43,7 +43,6 @@ namespace hpl {
 	class iPhysicsBody;
 	class cColliderEntity;
 	class cMeshJoint;
-	class cSystem;
 
 	//////////////////////////////////////////////
 	// HELP CLASSES

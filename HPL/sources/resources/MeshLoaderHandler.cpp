@@ -156,7 +156,6 @@ namespace hpl {
 		apLoader->mpMaterialManager = mpResources->GetMaterialManager();
 		apLoader->mpMeshManager = mpResources->GetMeshManager();
 		apLoader->mpAnimationManager = mpResources->GetAnimationManager();
-		apLoader->mpSystem = mpScene->GetSystem();
 
 		apLoader->AddSupportedTypes(&mvSupportedTypes);
 	}
