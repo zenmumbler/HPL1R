@@ -5,7 +5,8 @@
 #ifndef HPL_GFXBATCH_H
 #define HPL_GFXBATCH_H
 
-#include "graphics/GraphicsTypes.h"
+#include "math/MathTypes.h"
+#include "graphics/Color.h"
 
 namespace hpl {
 	
@@ -15,9 +16,7 @@ namespace hpl {
 		eGfxBatchAttr_Position =	0x0001,
 		eGfxBatchAttr_Normal =		0x0002,
 		eGfxBatchAttr_Color0 =		0x0004,
-		eGfxBatchAttr_Texture0 =	0x0008,
-		eGfxBatchAttr_Texture1 =	0x0010,
-		eGfxBatchAttr_Texture2 =	0x0020
+		eGfxBatchAttr_Texture0 =	0x0008
 	};
 
 	enum eBatchDrawMode

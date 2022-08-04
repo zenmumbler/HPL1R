@@ -67,8 +67,6 @@ namespace hpl {
 
 		std::vector<bool> mvMButtonArray;
 
-		tVector2fList mlstMouseCoord;
-
 		float mfMaxPercent;
 		float mfMinPercent;
 		int mlBufferSize;
