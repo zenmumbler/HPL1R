@@ -23,10 +23,9 @@
 #include "graphics/Texture.h"
 #include "graphics/LowLevelGraphics.h"
 #include "resources/LoadImage.h"
-#include "system/LowLevelSystem.h"
 #include "resources/FileSearcher.h"
 #include "graphics/Bitmap.h"
-
+#include "system/System.h"
 
 namespace hpl {
 
@@ -37,7 +36,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cTextureManager::cTextureManager(cGraphics* apGraphics,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevelSystem())
+		: iResourceManager(apResources->GetFileSearcher())
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;

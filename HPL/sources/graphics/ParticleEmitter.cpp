@@ -17,7 +17,6 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "graphics/ParticleEmitter.h"
-#include "system/LowLevelSystem.h"
 #include "resources/Resources.h"
 #include "graphics/Graphics.h"
 #include "graphics/MaterialHandler.h"

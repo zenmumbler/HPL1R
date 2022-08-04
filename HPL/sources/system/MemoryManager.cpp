@@ -18,7 +18,6 @@
  */
 #include "system/MemoryManager.h"
 
-#include "system/LowLevelSystem.h"
 
 namespace hpl {
 

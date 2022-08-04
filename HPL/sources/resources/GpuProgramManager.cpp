@@ -17,11 +17,10 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/GpuProgramManager.h"
-#include "system/String.h"
-#include "system/LowLevelSystem.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/GPUProgram.h"
-
+#include "system/String.h"
+#include "system/System.h"
 
 namespace hpl {
 
@@ -31,8 +30,8 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cGpuProgramManager::cGpuProgramManager(cFileSearcher *apFileSearcher,iLowLevelGraphics *apLowLevelGraphics, iLowLevelSystem *apLowLevelSystem)
-		: iResourceManager(apFileSearcher, apLowLevelSystem)
+	cGpuProgramManager::cGpuProgramManager(cFileSearcher *apFileSearcher,iLowLevelGraphics *apLowLevelGraphics)
+		: iResourceManager(apFileSearcher)
 	{
 		mpLowLevelGraphics = apLowLevelGraphics;
 	}

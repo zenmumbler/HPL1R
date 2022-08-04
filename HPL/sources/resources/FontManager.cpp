@@ -18,14 +18,12 @@
  */
 #include "resources/FontManager.h"
 #include "system/String.h"
-#include "system/LowLevelSystem.h"
 #include "resources/Resources.h"
 #include "graphics/Graphics.h"
 #include "graphics/LowLevelGraphics.h"
 #include "resources/ImageManager.h"
-
 #include "graphics/FontData.h"
-
+#include "system/System.h"
 
 namespace hpl {
 
@@ -36,7 +34,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cFontManager::cFontManager(cGraphics* apGraphics,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevelSystem())
+		: iResourceManager(apResources->GetFileSearcher())
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;

@@ -20,7 +20,6 @@
 
 #include "graphics/Bone.h"
 #include "system/MemoryManager.h"
-#include "system/LowLevelSystem.h"
 
 namespace hpl {
 

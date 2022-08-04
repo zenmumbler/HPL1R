@@ -17,12 +17,11 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/ParticleManager.h"
-
-#include "system/LowLevelSystem.h"
 #include "resources/Resources.h"
 #include "resources/FileSearcher.h"
 #include "graphics/Graphics.h"
 #include "graphics/ParticleSystem3D.h"
+#include "system/System.h"
 
 namespace hpl {
 
@@ -33,7 +32,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cParticleManager::cParticleManager(cGraphics* apGraphics,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevelSystem())
+		: iResourceManager(apResources->GetFileSearcher())
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;

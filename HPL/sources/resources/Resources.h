@@ -34,8 +34,6 @@ namespace hpl {
 	class cImageEntity;
 
 	class iLowLevelGraphics;
-	class iLowLevelSystem;
-	class cSystem;
 	class iResourceManager;
 	class cFileSearcher;
 	class cImageManager;
@@ -118,7 +116,7 @@ namespace hpl {
 		cResources(iLowLevelGraphics *apLowLevelGraphics);
 		~cResources();
 
-		void Init(cGraphics* apGraphics, cSystem *apSystem, cSound *apSound, cScript *apScript, cScene *apScene);
+		void Init(cGraphics* apGraphics, cSound *apSound, cScript *apScript, cScene *apScene);
 
 		void Update(float afTimeStep);
 
@@ -149,14 +147,11 @@ namespace hpl {
 		cSoundEntityManager* GetSoundEntityManager(){ return mpSoundEntityManager;}
 		cAnimationManager* GetAnimationManager(){ return mpAnimationManager;}
 
-		iLowLevelSystem* GetLowLevelSystem(){ return mpLowLevelSystem;}
-
 	private:
 		void AddBaseDirectories();
 		bool SetLanguageFile(const tString &asFile);
 
 		iLowLevelGraphics *mpLowLevelGraphics;
-		iLowLevelSystem *mpLowLevelSystem;
 		cFileSearcher *mpFileSearcher;
 
 		tResourceManagerList mlstManagers;

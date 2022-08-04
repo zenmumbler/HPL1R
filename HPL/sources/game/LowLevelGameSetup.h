@@ -36,7 +36,6 @@ namespace hpl {
 	public:
 		virtual ~iLowLevelGameSetup(){}
 
-		virtual cSystem* CreateSystem()=0;
 		virtual cGraphics* CreateGraphics()=0;
 		virtual cInput* CreateInput()=0;
 		virtual cResources* CreateResources()=0;

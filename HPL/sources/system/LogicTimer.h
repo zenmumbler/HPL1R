@@ -27,7 +27,6 @@ namespace hpl {
 		/**
 		 *
 		 * \param alUpdatesPerSec Number of updates per second.
-		 * \param *apLowLevelSystem
 		 * \return
 		 */
 		cLogicTimer(int alUpdatesPerSec);

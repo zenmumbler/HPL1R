@@ -5,7 +5,6 @@
 
 #include "resources/impl/MeshLoaderGLTF2.h"
 
-#include "system/LowLevelSystem.h"
 #include "system/System.h"
 #include "system/FileReader.h"
 #include "graphics/LowLevelGraphics.h"

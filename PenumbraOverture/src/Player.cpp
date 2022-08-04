@@ -974,8 +974,7 @@ cTempCheckProxy gTempCheckProxy;
 
 void cPlayer::Update(float afTimeStep)
 {
-	cSystem *pSystem = mpInit->mpGame->GetSystem();
-	auto lTime = pSystem->GetLowLevel()->GetTime();	
+	auto lTime = GetTime();	
 	iPhysicsWorld *pPhysicsWorld = mpScene->GetWorld3D()->GetPhysicsWorld();
 
 	//LogUpdate("  Death\n");
@@ -989,8 +988,8 @@ void cPlayer::Update(float afTimeStep)
 	
 	////////////////////////////////////////
 	// Update Node and Footstep sounds
-	/*//LogUpdate("  took %d ms\n",pSystem->GetLowLevel()->GetTime() - lTime);
-	lTime = pSystem->GetLowLevel()->GetTime();			
+	/*//LogUpdate("  took %d ms\n", GetTime() - lTime);
+	lTime = GetTime();
 	//LogUpdate("  Footstep sounds\n");
 	cMatrixf mtxChar = mpInit->mpGame->GetSound()->GetLowLevel()->GetListenerMatrix();
 	mtxChar.SetTranslation(mtxChar.GetTranslation() - 
@@ -1007,9 +1006,9 @@ void cPlayer::Update(float afTimeStep)
 			pEntry->mpSound->SetPosition(pSound->GetWorldPosition());
 		}
 	}
-	//LogUpdate("  took %d ms\n",pSystem->GetLowLevel()->GetTime() - lTime);*/
+	//LogUpdate("  took %d ms\n",GetTime() - lTime);*/
 	
-	lTime = pSystem->GetLowLevel()->GetTime();			
+	lTime = GetTime();
 	//LogUpdate("  misc\n");
 	//////////////////////
 	//Reset roll
@@ -1029,29 +1028,29 @@ void cPlayer::Update(float afTimeStep)
 	
 	/////////////////////////////////////////////////
 	// Flashlight
-	//LogUpdate("  took %d ms\n",pSystem->GetLowLevel()->GetTime() - lTime);
-	lTime = pSystem->GetLowLevel()->GetTime();			
+	//LogUpdate("  took %d ms\n",GetTime() - lTime);
+	lTime = GetTime();
 	//LogUpdate("  flashlight");
 	mpFlashLight->Update(afTimeStep);
 	
 	/////////////////////////////////////////////////
 	//Glowstick
-	//LogUpdate("  took %d ms\n",pSystem->GetLowLevel()->GetTime() - lTime);
-	lTime = pSystem->GetLowLevel()->GetTime();			
+	//LogUpdate("  took %d ms\n",GetTime() - lTime);
+	lTime = GetTime();
 	//LogUpdate("  glowstick\n");
 	mpGlowStick->Update(afTimeStep);
 
 	/////////////////////////////////////////////////
 	//Flare
-	//LogUpdate("  took %d ms\n",pSystem->GetLowLevel()->GetTime() - lTime);
-	lTime = pSystem->GetLowLevel()->GetTime();			
+	//LogUpdate("  took %d ms\n",GetTime() - lTime);
+	lTime = GetTime();
 	//LogUpdate("  flare\n");
 	mpFlare->Update(afTimeStep);
 
 	/////////////////////////////////////////////////
 	// Lean
-	//LogUpdate("  took %d ms\n",pSystem->GetLowLevel()->GetTime() - lTime);
-	lTime = pSystem->GetLowLevel()->GetTime();
+	//LogUpdate("  took %d ms\n",GetTime() - lTime);
+	lTime = GetTime();
 	//LogUpdate("  more misc\n");
 	mpLean->Update(afTimeStep);
 
@@ -1077,13 +1076,13 @@ void cPlayer::Update(float afTimeStep)
 
 	////////////////////////////////////////
 	// Hidden
-	//LogUpdate("  took %d ms\n",pSystem->GetLowLevel()->GetTime() - lTime);
-	lTime = pSystem->GetLowLevel()->GetTime();
+	//LogUpdate("  took %d ms\n",GetTime() - lTime);
+	lTime = GetTime();
 	//LogUpdate("  hidden\n");
 	mpHidden->Update(afTimeStep);
 	
-	//LogUpdate("  took %d ms\n",pSystem->GetLowLevel()->GetTime() - lTime);
-	lTime = pSystem->GetLowLevel()->GetTime();
+	//LogUpdate("  took %d ms\n",GetTime() - lTime);
+	lTime = GetTime();
 	//LogUpdate("  collide scripts\n");
 	/////////////////////////////////////////////////
 	// Collide script
@@ -1195,8 +1194,8 @@ void cPlayer::Update(float afTimeStep)
 		mlGroundCount--;
 
 	
-	//LogUpdate("  took %d ms\n",pSystem->GetLowLevel()->GetTime() - lTime);
-	lTime = pSystem->GetLowLevel()->GetTime();
+	//LogUpdate("  took %d ms\n",GetTime() - lTime);
+	lTime = GetTime();
 	//LogUpdate("  Check For ground\n");
 	//////////////////////////////
 	//Cast ray and check for ground.
@@ -1212,8 +1211,8 @@ void cPlayer::Update(float afTimeStep)
 
 	//////////////////////////////
 	//Update movement
-	//LogUpdate("  took %d ms\n",pSystem->GetLowLevel()->GetTime() - lTime);
-	lTime = pSystem->GetLowLevel()->GetTime();
+	//LogUpdate("  took %d ms\n",GetTime() - lTime);
+	lTime = GetTime();
 	//LogUpdate("  Movement\n");
 
 	if(mbMoving==false)	
@@ -1226,8 +1225,8 @@ void cPlayer::Update(float afTimeStep)
 
 	//////////////////////////////
 	//Update camera pos add
-	//LogUpdate("  took %d ms\n",pSystem->GetLowLevel()->GetTime() - lTime);
-	lTime = pSystem->GetLowLevel()->GetTime();
+	//LogUpdate("  took %d ms\n",GetTime() - lTime);
+	lTime = GetTime();
 	//LogUpdate("  Camera pos\n");
 	if(mpCharBody)
 	{
@@ -1253,15 +1252,15 @@ void cPlayer::Update(float afTimeStep)
 	//mpPushBody = NULL;
 	SetPickedBody(NULL);
 
-	//LogUpdate("  took %d ms\n",pSystem->GetLowLevel()->GetTime() - lTime);
-	lTime = pSystem->GetLowLevel()->GetTime();
+	//LogUpdate("  took %d ms\n",GetTime() - lTime);
+	lTime = GetTime();
 	//LogUpdate("  state %d\n",mState);
 	if(mpInit->mpInventory->IsActive() ==false && 
 		mpInit->mpNotebook->IsActive()==false)
 	{
 		mvStates[mState]->OnUpdate(afTimeStep);
 	}
-	//LogUpdate("  took %d ms\n",pSystem->GetLowLevel()->GetTime() - lTime);
+	//LogUpdate("  took %d ms\n",GetTime() - lTime);
 }
 
 //-----------------------------------------------------------------------

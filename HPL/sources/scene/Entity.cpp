@@ -19,7 +19,6 @@
 #include "scene/Entity.h"
 
 #include "scene/Node.h"
-#include "system/LowLevelSystem.h"
 
 namespace hpl {
 

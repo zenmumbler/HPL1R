@@ -7,10 +7,10 @@
 
 #include "script/Script.h"
 #include "resources/ResourceManager.h"
-#include "system/LowLevelSystem.h"
 #include "impl/Platform.h"
 #include "system/String.h"
 #include "system/FileReader.h"
+#include "system/System.h"
 
 #include "script/impl/scriptarray.h"
 #include "script/impl/scriptstdstring.h"

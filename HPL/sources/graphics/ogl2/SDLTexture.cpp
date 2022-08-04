@@ -25,9 +25,8 @@
 #include "graphics/Bitmap.h"
 #include "graphics/ogl2/SDLTexture.h"
 
-#include "system/LowLevelSystem.h"
 #include "math/Math.h"
-#include "math.h"
+#include "system/System.h"
 
 namespace hpl {
 

@@ -18,13 +18,13 @@
  */
 #include "resources/SoundEntityManager.h"
 
-#include "system/String.h"
 #include "sound/Sound.h"
 #include "resources/Resources.h"
 #include "sound/SoundEntityData.h"
-#include "system/LowLevelSystem.h"
 #include "sound/SoundHandler.h"
 #include "sound/SoundChannel.h"
+#include "system/String.h"
+#include "system/System.h"
 
 namespace hpl {
 
@@ -35,7 +35,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cSoundEntityManager::cSoundEntityManager(cSound* apSound,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevelSystem())
+		: iResourceManager(apResources->GetFileSearcher())
 	{
 		mpSound = apSound;
 		mpResources = apResources;

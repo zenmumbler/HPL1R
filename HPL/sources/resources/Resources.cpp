@@ -37,7 +37,6 @@
 #include "resources/impl/MeshLoaderCollada.h"
 
 #include "system/System.h"
-#include "system/LowLevelSystem.h"
 
 #include "tinyXML/tinyxml.h"
 
@@ -103,21 +102,19 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cResources::Init(cGraphics* apGraphics, cSystem *apSystem, cSound *apSound, cScript *apScript, cScene *apScene)
+	void cResources::Init(cGraphics* apGraphics, cSound *apSound, cScript *apScript, cScene *apScene)
 	{
 		Log("Initializing Resources Module\n");
 		Log("--------------------------------------------------------\n");
-
-		mpLowLevelSystem = apSystem->GetLowLevel();
 
 		Log(" Setting default directories\n");
 		AddBaseDirectories();
 
 		Log(" Creating resource managers\n");
 
-		mpImageManager = hplNew( cImageManager,(mpFileSearcher, mpLowLevelGraphics, mpLowLevelSystem) );
+		mpImageManager = hplNew( cImageManager,(mpFileSearcher, mpLowLevelGraphics) );
 		mlstManagers.push_back(mpImageManager);
-		mpGpuProgramManager = hplNew( cGpuProgramManager,(mpFileSearcher, mpLowLevelGraphics, mpLowLevelSystem) );
+		mpGpuProgramManager = hplNew( cGpuProgramManager,(mpFileSearcher, mpLowLevelGraphics) );
 		mlstManagers.push_back(mpGpuProgramManager);
 		mpParticleManager = hplNew( cParticleManager,(apGraphics, this) );
 		mlstManagers.push_back(mpParticleManager);

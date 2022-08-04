@@ -18,14 +18,11 @@
  */
 #include "system/SerializeClass.h"
 
-
-#include "system/LowLevelSystem.h"
-
-#include "system/String.h"
-
 #include "graphics/GraphicsTypes.h"
 #include "math/MathTypes.h"
 #include "system/Container.h"
+#include "system/String.h"
+#include "system/System.h"
 
 #include "tinyXML/tinyxml.h"
 

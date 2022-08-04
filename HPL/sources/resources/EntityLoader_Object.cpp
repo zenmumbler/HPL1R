@@ -20,7 +20,6 @@
 
 #include "system/String.h"
 #include "scene/World3D.h"
-#include "system/LowLevelSystem.h"
 #include "tinyXML/tinyxml.h"
 
 #include "physics/PhysicsWorld.h"

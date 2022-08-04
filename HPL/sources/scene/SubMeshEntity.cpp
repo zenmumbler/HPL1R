@@ -17,10 +17,7 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "scene/SubMeshEntity.h"
-
 #include "scene/MeshEntity.h"
-
-#include "system/LowLevelSystem.h"
 
 #include "resources/MaterialManager.h"
 #include "resources/MeshManager.h"
@@ -40,6 +37,7 @@
 #include "physics/PhysicsBody.h"
 
 #include "math/Math.h"
+#include "system/System.h"
 
 #include <string.h>
 

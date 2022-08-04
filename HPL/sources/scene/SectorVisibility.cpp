@@ -20,8 +20,7 @@
 
 #include "math/Math.h"
 #include "scene/PortalContainer.h"
-
-#include "system/LowLevelSystem.h"
+#include "system/System.h"
 
 namespace hpl {
 

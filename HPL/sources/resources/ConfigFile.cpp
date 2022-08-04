@@ -18,7 +18,6 @@
  */
 #include "resources/ConfigFile.h"
 #include "system/String.h"
-#include "system/LowLevelSystem.h"
 #include "resources/FileSearcher.h"
 #include "tinyXML/tinyxml.h"
 

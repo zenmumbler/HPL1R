@@ -2802,8 +2802,6 @@ void cMainMenu::CreateWidgets()
 		gpSaveGameList[i] = hplNew( cMainMenuWidget_SaveGameList,(
 														mpInit,vPos,cVector2f(355,170),15,sDir,(int)i) );
 		AddWidgetToState(state,gpSaveGameList[i]);
-			
-		iLowLevelSystem *pLowLevelSystem = mpInit->mpGame->GetSystem()->GetLowLevel();
 
 		tWStringList lstFiles;
 		tTempFileAndDataSet setTempFiles;

@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "ai/StateMachine.h"
 
-#include "system/LowLevelSystem.h"
+#include "ai/StateMachine.h"
+#include "system/System.h"
 
 
 namespace hpl {

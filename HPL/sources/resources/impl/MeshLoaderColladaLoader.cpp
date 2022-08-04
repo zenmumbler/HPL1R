@@ -18,7 +18,6 @@
  */
 #include "resources/impl/MeshLoaderCollada.h"
 
-#include "system/LowLevelSystem.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/VertexBuffer.h"
 #include "system/String.h"
@@ -95,7 +94,7 @@ namespace hpl {
 
 		/////////////////////////////////////////////////
 		// LOAD THE DOCUMENT
-		//unsigned long lStartTime = mpSystem->GetLowLevel()->GetTime();
+		//unsigned long lStartTime = GetTime();
 
 		TiXmlDocument* pXmlDoc = hplNew(TiXmlDocument, (asFile.c_str()) );
 		if(pXmlDoc->LoadFile()==false)
@@ -105,7 +104,7 @@ namespace hpl {
 			return false;
 		}
 
-		//unsigned long lTime = mpSystem->GetLowLevel()->GetTime() - lStartTime;
+		//unsigned long lTime = GetTime() - lStartTime;
 		//Log("Loading collada XML file for '%s' took: %d ms\n",asFile.c_str(),lTime);
 
 		//Get the root.
@@ -850,7 +849,7 @@ namespace hpl {
 		tColladaAnimationVec *apColladaAnimVec,
 		cColladaScene *apColladaScene)
 	{
-		//unsigned long lStartTime = mpSystem->GetLowLevel()->GetTime();
+		//unsigned long lStartTime = GetTime();
 
 		TiXmlDocument* pXmlDoc = hplNew(TiXmlDocument, (asFile.c_str()) );
 		if(pXmlDoc->LoadFile()==false)
@@ -860,7 +859,7 @@ namespace hpl {
 			return false;
 		}
 
-		//unsigned long lTime = mpSystem->GetLowLevel()->GetTime() - lStartTime;
+		//unsigned long lTime = GetTime() - lStartTime;
 		//Log("Loading cached collada XML file '%s' took: %d ms\n",asFile.c_str(),lTime);
 
 		TiXmlElement *pRootElem = pXmlDoc->RootElement();

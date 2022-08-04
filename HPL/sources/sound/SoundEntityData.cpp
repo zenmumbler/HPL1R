@@ -17,11 +17,9 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "sound/SoundEntityData.h"
-
-#include "system/LowLevelSystem.h"
 #include "resources/Resources.h"
 #include "system/String.h"
-
+#include "system/System.h"
 #include "tinyXML/tinyxml.h"
 
 

@@ -18,7 +18,6 @@
  */
 #include "graphics/Mesh.h"
 
-#include "system/LowLevelSystem.h"
 
 #include "graphics/SubMesh.h"
 #include "resources/MaterialManager.h"

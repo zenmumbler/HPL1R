@@ -17,7 +17,7 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "system/LogicTimer.h"
-#include "system/LowLevelSystem.h"
+#include "system/System.h"
 
 namespace hpl {
 

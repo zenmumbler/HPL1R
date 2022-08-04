@@ -30,7 +30,6 @@
 #include "script/ScriptFuncs.h"
 #include "graphics/Renderer3D.h"
 
-#include "system/LowLevelSystem.h"
 #include "game/LowLevelGameSetup.h"
 
 namespace hpl {
@@ -39,7 +38,7 @@ namespace hpl {
 	// FPS COUNTER
 	//////////////////////////////////////////////////////////////////////////
 
-	cFPSCounter::cFPSCounter(iLowLevelSystem* apLowLevelSystem)
+	cFPSCounter::cFPSCounter()
 	{
 		mfFPS = 60;
 
@@ -48,8 +47,6 @@ namespace hpl {
 		mfFrametime=0;
 
 		mfUpdateRate = 1;
-
-		mpLowLevelSystem = apLowLevelSystem;
 
 		mfFrametimestart = ((float)GetApplicationTime()) / 1000.0f;
 	}
@@ -178,9 +175,6 @@ namespace hpl {
 		Log(" Creating graphics module\n");
 		mpGraphics = mpGameSetup->CreateGraphics();
 
-		Log(" Creating system module\n");
-		mpSystem = mpGameSetup->CreateSystem();
-
 		Log(" Creating resource module\n");
 		mpResources = mpGameSetup->CreateResources();
 
@@ -200,13 +194,13 @@ namespace hpl {
 		mpScript = mpGameSetup->CreateScript(mpResources);
 
 		Log(" Creating scene module\n");
-		mpScene = new cScene(mpGraphics, mpResources, mpSound,mpPhysics,mpSystem,mpAI);
+		mpScene = new cScene(mpGraphics, mpResources, mpSound,mpPhysics, mpAI);
 
 		Log("--------------------------------------------------------\n\n");
 
 
 		//Init the resources
-		mpResources->Init(mpGraphics, mpSystem, mpSound, mpScript, mpScene);
+		mpResources->Init(mpGraphics, mpSound, mpScript, mpScene);
 
 		//Init the graphics
 		mpGraphics->Init(aVars.GetInt("ScreenWidth",800),
@@ -242,7 +236,7 @@ namespace hpl {
 		Log("--------------------------------------------------------\n");
 		//Create the updatehandler
 		Log(" Adding engine updates\n");
-		mpUpdater = hplNew( cUpdater,(mpSystem->GetLowLevel()));
+		mpUpdater = hplNew( cUpdater,());
 
 		//Add some loaded modules to the updater
 		mpUpdater->AddGlobalUpdate(mpInput);
@@ -262,7 +256,7 @@ namespace hpl {
 
 		//Init some standard script funcs
 		Log(" Initializing script functions\n");
-		RegisterCoreFunctions(mpScript,mpGraphics,mpResources,mpSystem,mpInput,mpScene,mpSound,this);
+		RegisterCoreFunctions(mpScript,mpGraphics,mpResources,mpInput,mpScene,mpSound,this);
 
 		//Since game is not done:
 		mbGameIsDone=false;
@@ -274,7 +268,7 @@ namespace hpl {
 
 		mbLimitFPS = true;
 
-		mpFPSCounter = hplNew( cFPSCounter,(mpSystem->GetLowLevel()) );
+		mpFPSCounter = hplNew( cFPSCounter,() );
 		Log("--------------------------------------------------------\n\n");
 
 		Log("User Initialization\n");
@@ -299,7 +293,6 @@ namespace hpl {
 		hplDelete(mpResources);
 		hplDelete(mpPhysics);
 		hplDelete(mpAI);
-		hplDelete(mpSystem);
 
 		Log(" Deleting game setup provided by user\n");
 		hplDelete(mpGameSetup);
@@ -493,13 +486,6 @@ namespace hpl {
 	cGraphics* cGame::GetGraphics()
 	{
 		return mpGraphics;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cSystem* cGame::GetSystem()
-	{
-		return mpSystem;
 	}
 
 	//-----------------------------------------------------------------------

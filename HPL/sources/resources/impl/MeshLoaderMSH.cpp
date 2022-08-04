@@ -17,20 +17,17 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/impl/MeshLoaderMSH.h"
-
-#include "system/LowLevelSystem.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/VertexBuffer.h"
 #include "system/String.h"
-
 #include "graphics/Mesh.h"
 #include "graphics/SubMesh.h"
 #include "resources/MaterialManager.h"
 #include "graphics/Material.h"
+#include "math/Math.h"
+#include "system/System.h"
 
 #include "tinyXML/tinyxml.h"
-
-#include "math/Math.h"
 
 namespace hpl {
 

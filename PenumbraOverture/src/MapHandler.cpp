@@ -327,7 +327,7 @@ bool cMapHandler::Load(const tString &asFile,const tString& asStartPos)
 	bool bFirstTime = false;
 	double fTimeSinceVisit=0;
 	
-	unsigned long lStartTime = mpInit->mpGame->GetSystem()->GetLowLevel()->GetTime();
+	unsigned long lStartTime = GetTime();
 
 	if(sMapName != msCurrentMap)
 	{
@@ -515,7 +515,7 @@ bool cMapHandler::Load(const tString &asFile,const tString& asStartPos)
 
 	//Log("After load and before preupdate:\n");
 
-	unsigned long lTime = mpInit->mpGame->GetSystem()->GetLowLevel()->GetTime() - lStartTime;
+	unsigned long lTime = GetTime() - lStartTime;
 	Log("Loading map '%s' took: %d ms\n",pWorld->GetFileName().c_str(),lTime);
 	
 	PreUpdate(fTimeSinceVisit);
@@ -1299,8 +1299,6 @@ void cMapHandler::Update(float afTimeStep)
 {
 	mfGameTime += (double)afTimeStep;
 
-	//iLowLevelSystem *pLowLevelSystem =mpInit->mpGame->GetSystem()->GetLowLevel();
-	
 	//LogUpdate(" Flashes!\n");
 	
 	////////////////////////////
@@ -1335,7 +1333,7 @@ void cMapHandler::Update(float afTimeStep)
 	{
 		iGameEntity *pEntity = GIt->second;
 
-		//unsigned int lTime = pLowLevelSystem->GetTime();
+		//unsigned int lTime = GetTime();
 		//LogUpdate("  %s\n",pEntity->GetName().c_str());
 
 		if(pEntity->IsActive()){
@@ -1353,8 +1351,7 @@ void cMapHandler::Update(float afTimeStep)
 		}
 		else
 		{
-			////LogUpdate("  updating %s took %d ms\n",	pEntity->GetName().c_str(),
-			//										pLowLevelSystem->GetTime() - lTime);
+			////LogUpdate("  updating %s took %d ms\n",	pEntity->GetName().c_str(), GetTime() - lTime);
 			++GIt;
 		}
 
@@ -1780,7 +1777,7 @@ void cMapHandler::PreUpdate(double afTimeSinceVisit)
 
 	mbPreUpdating = true;
 
-	unsigned long lStart = mpInit->mpGame->GetSystem()->GetLowLevel()->GetTime();
+	unsigned long lStart = GetTime();
 
 	//Enable all physic bodies
 	cPhysicsBodyIterator bodyIt = pPhysicsWorld->GetBodyIterator();
@@ -1823,7 +1820,7 @@ void cMapHandler::PreUpdate(double afTimeSinceVisit)
 		mpInit->mpGame->GetSound()->GetSoundHandler()->SetSilent(false);
 	}
 
-	unsigned long lTime = mpInit->mpGame->GetSystem()->GetLowLevel()->GetTime() - lStart;
+	unsigned long lTime = GetTime() - lStart;
 
 	//Log("PREUPDATE time: %d\n",lTime);
 	

@@ -17,14 +17,13 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "input/Input.h"
-#include "system/LowLevelSystem.h"
 #include "input/Mouse.h"
 #include "input/Keyboard.h"
 #include "input/LowLevelInput.h"
 #include "input/Action.h"
 #include "input/ActionKeyboard.h"
 #include "input/ActionMouseButton.h"
-
+#include "system/System.h"
 
 namespace hpl
 {

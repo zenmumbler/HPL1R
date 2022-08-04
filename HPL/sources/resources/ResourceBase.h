@@ -20,8 +20,7 @@
 #define HPL_RESOURCEBASE_H
 
 #include "system/SystemTypes.h"
-//#include "system/LowLevelSystem.h"
-
+//
 namespace hpl {
 
 	class iResourceBase

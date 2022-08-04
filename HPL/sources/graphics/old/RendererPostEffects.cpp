@@ -19,7 +19,6 @@
 #include "graphics/old/RendererPostEffects.h"
 #include "graphics/Texture.h"
 #include "scene/Scene.h"
-#include "system/LowLevelSystem.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/GPUProgram.h"
 #include "math/Math.h"

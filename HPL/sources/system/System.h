@@ -19,21 +19,72 @@
 #ifndef HPL_SYSTEM_H
 #define HPL_SYSTEM_H
 
+#include "system/MemoryManager.h"
+#include "system/SystemTypes.h"
+
+
 namespace hpl {
 
-	class iLowLevelSystem;
+#ifdef UPDATE_TIMING_ENABLED
+	#define START_TIMING_EX(x,y)	LogUpdate("Updating %s in file %s at line %d\n",x,__FILE__,__LINE__); \
+									unsigned int y##_lTime = GetApplicationTime();
+	#define START_TIMING(x)	LogUpdate("Updating %s in file %s at line %d\n",#x,__FILE__,__LINE__); \
+								unsigned int x##_lTime = GetApplicationTime();
+	#define STOP_TIMING(x)	LogUpdate(" Time spent: %d ms\n",GetApplicationTime() - x##_lTime);
+	#define START_TIMING_TAB(x)	LogUpdate("\tUpdating %s in file %s at line %d\n",#x,__FILE__,__LINE__); \
+							unsigned int x##_lTime = GetApplicationTime();
+	#define STOP_TIMING_TAB(x)	LogUpdate("\t Time spent: %d ms\n",GetApplicationTime() - x##_lTime);
+#else
+	#define START_TIMING_EX(x,y)
+	#define START_TIMING(x)
+	#define STOP_TIMING(x)
+	#define START_TIMING_TAB(x)
+	#define STOP_TIMING_TAB(x)
+#endif
 
-	class cSystem
-	{
-	public:
-		cSystem(iLowLevelSystem *apLowLevelSystem);
-		~cSystem();
+	void SetLogFile(const tWString &asFile);
+	void FatalError(const char* fmt,... );
+	void Error(const char* fmt, ...);
+	void Warning(const char* fmt, ...);
+	void Log(const char* fmt, ...);
 
-		iLowLevelSystem* GetLowLevel();
+	void SetUpdateLogFile(const tWString &asFile);
+	void ClearUpdateLogFile();
+	void SetUpdateLogActive(bool abX);
+	void LogUpdate(const char* fmt, ...);
 
-	private:
-		iLowLevelSystem *mpLowLevelSystem;
-	};
+//	extern void CreateMessageBox ( const char* asCaption, const char *fmt, ...);
+//	extern void CreateMessageBox ( eMsgBoxType eType, const char* asCaption, const char *fmt, ...);
+
+	void CreateMessageBoxW( const wchar_t* asCaption, const wchar_t* fmt, ...);
+	void CreateMessageBoxW( eMsgBoxType eType, const wchar_t* asCaption, const wchar_t* fmt, ...);
+
+	void OpenBrowserWindow ( const tWString& asURL );
+
+	void CopyTextToClipboard(const tWString &asText);
+	tWString LoadTextFromClipboard();
+
+	tWString GetSystemSpecialPath(eSystemPath aPathType);
+
+	bool FileExists(const tWString& asFileName);
+	void RemoveFile(const tWString& asFileName);
+	bool CloneFile(const tWString& asSrcFileName,const tWString& asDestFileName,
+					bool abFailIfExists);
+	bool CreateFolder(const tWString& asPath);
+	bool FolderExists(const tWString& asPath);
+	bool IsFileLink(const tWString& asPath);
+	bool LinkFile(const tWString& asPointsTo, const tWString& asLink);
+	bool RenameFile(const tWString& asFrom, const tWString& asTo);
+	cDate FileModifiedDate(const tWString& asFilePath);
+	cDate FileCreationDate(const tWString& asFilePath);
+
+	void SetWindowCaption(const tString &asName);
+
+	bool HasWindowFocus(const tWString &asWindowCaption);
+
+	unsigned long GetApplicationTime();
+	unsigned long GetTime();
+	cDate GetDate();
 
 };
 #endif // HPL_SYSTEM_H

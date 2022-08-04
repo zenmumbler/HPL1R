@@ -20,10 +20,9 @@
 #include "scene/Node3D.h"
 #include "math/Math.h"
 #include "graphics/RenderList.h"
-
-#include "system/LowLevelSystem.h"
-
 #include "scene/PortalContainer.h"
+#include "system/System.h"
+
 
 namespace hpl {
 

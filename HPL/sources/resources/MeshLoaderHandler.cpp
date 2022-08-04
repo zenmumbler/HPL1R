@@ -20,9 +20,9 @@
 
 #include "resources/MeshLoader.h"
 #include "system/String.h"
-#include "system/LowLevelSystem.h"
 #include "resources/Resources.h"
 #include "scene/Scene.h"
+#include "system/System.h"
 
 namespace hpl {
 

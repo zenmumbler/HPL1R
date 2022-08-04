@@ -36,7 +36,6 @@
 #include "scene/PortalContainer.h"
 #include "input/Input.h"
 #include "system/System.h"
-#include "system/LowLevelSystem.h"
 #include "sound/MusicHandler.h"
 #include "resources/SoundManager.h"
 #include "resources/SoundEntityManager.h"
@@ -105,7 +104,6 @@ namespace hpl {
 	//////////////////////////////////////////////////////////////////////////
 
 	static cResources *gpResources=NULL;
-	static cSystem *gpSystem=NULL;
 	static cInput *gpInput=NULL;
 	static cGraphics *gpGraphics=NULL;
 	static cScene *gpScene=NULL;
@@ -1401,7 +1399,6 @@ namespace hpl {
 		cScript* apScript,
 		cGraphics* apGraphics,
 		cResources *apResources,
-		cSystem *apSystem,
 		cInput *apInput,
 		cScene *apScene,
 		cSound *apSound,
@@ -1410,7 +1407,6 @@ namespace hpl {
 	{
 		gpGraphics = apGraphics;
 		gpResources = apResources;
-		gpSystem = apSystem;
 		gpInput = apInput;
 		gpScene = apScene;
 		gpSound = apSound;

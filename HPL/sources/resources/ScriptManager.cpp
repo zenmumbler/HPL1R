@@ -20,7 +20,6 @@
 #include "system/String.h"
 #include "system/System.h"
 #include "resources/Resources.h"
-#include "system/LowLevelSystem.h"
 
 
 
@@ -33,7 +32,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cScriptManager::cScriptManager(cScript* apScript, cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevelSystem())
+		: iResourceManager(apResources->GetFileSearcher())
 	{
 		mpScript = apScript;
 		mpResources = apResources;

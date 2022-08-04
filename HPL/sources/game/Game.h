@@ -21,14 +21,12 @@
 
 #include "system/SystemTypes.h"
 
-namespace hpl {
 
+namespace hpl {
 	class cUpdater;
 	class iLowLevelGameSetup;
-	class iLowLevelSystem;
 	class cLogicTimer;
 
-	class cSystem;
 	class cInput;
 	class cResources;
 	class cGraphics;
@@ -41,14 +39,13 @@ namespace hpl {
 	class cFPSCounter
 	{
 	public:
-		cFPSCounter(iLowLevelSystem* apLowLevelSystem);
+		cFPSCounter();
 
 		void AddFrame();
 
 		float mfFPS;
 		float mfUpdateRate;
 	private:
-		iLowLevelSystem* mpLowLevelSystem;
 		int mlFramecounter;
 		float mfFrametimestart;
 		float mfFrametime;
@@ -117,12 +114,6 @@ namespace hpl {
 		 * \return A pointer to the Updater
 		 */
 		cUpdater* GetUpdater();
-
-		/**
-		*
-		* \return A pointer to the System
-		*/
-		cSystem* GetSystem();
 
 		/**
 		*
@@ -197,7 +188,6 @@ namespace hpl {
 
 		//Modules that Game connnect to:
 		cResources *mpResources;
-		cSystem *mpSystem;
 		cInput *mpInput;
 		cGraphics *mpGraphics;
 		cScene *mpScene;

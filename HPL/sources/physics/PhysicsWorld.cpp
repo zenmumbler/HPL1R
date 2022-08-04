@@ -25,7 +25,6 @@
 #include "physics/PhysicsJoint.h"
 #include "physics/PhysicsController.h"
 #include "physics/SurfaceData.h"
-#include "system/LowLevelSystem.h"
 #include "system/System.h"
 #include "math/Math.h"
 #include "graphics/LowLevelGraphics.h"
@@ -89,7 +88,7 @@ namespace hpl {
 				pBody->Update(afTimeStep);//20.0f);
 			}
 		}
-		//LogUpdate(" Updating chars took %d ms\n",mpWorld3D->GetSystem()->GetLowLevel()->GetTime() - lTime);
+		//LogUpdate(" Updating chars took %d ms\n", GetTime() - lTime);
 
 
 		////////////////////////////////////
@@ -107,7 +106,7 @@ namespace hpl {
 		//Simulate the physics
 		lTime = GetApplicationTime();
 		Simulate(afTimeStep);
-		//LogUpdate(" Updating lowlevel physics took %d ms\n",mpWorld3D->GetSystem()->GetLowLevel()->GetTime() - lTime);
+		//LogUpdate(" Updating lowlevel physics took %d ms\n", GetTime() - lTime);
 
 		////////////////////////////////////
 		//Update the joints after simulation.

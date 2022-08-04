@@ -23,7 +23,6 @@
 #include "resources/TextureManager.h"
 #include "resources/Resources.h"
 #include "graphics/Material.h"
-#include "system/LowLevelSystem.h"
 #include "graphics/MaterialHandler.h"
 #include "tinyXML/tinyxml.h"
 
@@ -38,7 +37,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cMaterialManager::cMaterialManager(cGraphics* apGraphics,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevelSystem())
+		: iResourceManager(apResources->GetFileSearcher())
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;

@@ -18,7 +18,6 @@
  */
 #include "scene/MeshEntity.h"
 
-#include "system/LowLevelSystem.h"
 
 #include "resources/Resources.h"
 #include "resources/MaterialManager.h"

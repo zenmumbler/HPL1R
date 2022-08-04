@@ -18,13 +18,12 @@
  */
 #include "resources/ImageManager.h"
 #include "system/String.h"
-#include "system/LowLevelSystem.h"
 #include "resources/ResourceImage.h"
 #include "resources/FrameBitmap.h"
 #include "resources/FrameTexture.h"
 #include "graphics/LowLevelGraphics.h"
 #include "resources/LoadImage.h"
-
+#include "system/System.h"
 
 namespace hpl {
 
@@ -34,8 +33,8 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cImageManager::cImageManager(cFileSearcher *apFileSearcher, iLowLevelGraphics *apLowLevelGraphics ,iLowLevelSystem *apLowLevelSystem)
-	: iResourceManager(apFileSearcher, apLowLevelSystem)
+	cImageManager::cImageManager(cFileSearcher *apFileSearcher, iLowLevelGraphics *apLowLevelGraphics)
+	: iResourceManager(apFileSearcher)
 	{
 	   mpLowLevelGraphics = apLowLevelGraphics;
 

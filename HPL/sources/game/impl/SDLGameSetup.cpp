@@ -25,7 +25,6 @@
 #include "input/impl/KeyboardSDL.h"
 #include "input/impl/MouseSDL.h"
 #include "graphics/impl/LowLevelGraphicsSDL.h"
-#include "impl/LowLevelSystemSDL.h"
 #include "input/impl/LowLevelInputSDL.h"
 #include "sound/impl/LowLevelSoundOAL.h"
 #include "physics/impl/LowLevelPhysicsNewton.h"
@@ -47,7 +46,6 @@ namespace hpl {
 			exit(1);
 		}
 
-		mpLowLevelSystem = new cLowLevelSystemSDL();
 		mpLowLevelGraphics = new cLowLevelGraphicsSDL();
 		mpLowLevelInput = new cLowLevelInputSDL(mpLowLevelGraphics);
 		mpLowLevelSound	= new cLowLevelSoundOAL();
@@ -66,8 +64,6 @@ namespace hpl {
 		hplDelete(mpLowLevelSound);
 		Log("  Input\n");
 		hplDelete(mpLowLevelInput);
-		Log("  System\n");
-		hplDelete(mpLowLevelSystem);
 		Log("  Graphics\n");
 		hplDelete(mpLowLevelGraphics);
 
@@ -94,14 +90,6 @@ namespace hpl {
 	{
 		cInput *pInput = hplNew( cInput, (mpLowLevelInput) );
 		return pInput;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cSystem* cSDLGameSetup::CreateSystem()
-	{
-		cSystem *pSystem = hplNew( cSystem, (mpLowLevelSystem) );
-		return pSystem;
 	}
 
 	//-----------------------------------------------------------------------

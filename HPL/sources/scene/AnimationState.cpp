@@ -22,7 +22,6 @@
 #include "graphics/Animation.h"
 #include "resources/AnimationManager.h"
 
-#include "system/LowLevelSystem.h"
 
 
 namespace hpl {

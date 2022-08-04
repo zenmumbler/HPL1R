@@ -22,7 +22,6 @@
 #include "resources/Resources.h"
 #include "graphics/Mesh.h"
 #include "graphics/Animation.h"
-#include "system/LowLevelSystem.h"
 #include "resources/MeshLoaderHandler.h"
 #include "resources/FileSearcher.h"
 
@@ -36,7 +35,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cAnimationManager::cAnimationManager(cGraphics* apGraphic,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevelSystem())
+		: iResourceManager(apResources->GetFileSearcher())
 	{
 		mpGraphics = apGraphic;
 		mpResources = apResources;

@@ -229,7 +229,6 @@ cSaveHandler::cSaveHandler(cInit *apInit)  : iUpdateable("SaveHandler")
 	//////////////////////////////////////////////
 	// Create directories
 	msSaveDir = _W("");
-	iLowLevelSystem *pLowLevelSystem = mpInit->mpGame->GetSystem()->GetLowLevel();
 
 	tWString sPeronalDir = GetSystemSpecialPath(eSystemPath_Personal);
 	
@@ -521,7 +520,7 @@ void cSaveHandler::SaveGameToFile(const tWString& asFile)
 	//////////////////////////////
 	//Write to file:
 	
-	//tWString sSavePath = mpInit->mpGame->GetSystem()->GetLowLevel()->GetSystemSpecialPath(eSystemPath_Personal);
+	//tWString sSavePath = GetSystemSpecialPath(eSystemPath_Personal);
 	
 	//if(cString::GetLastCharW(sSavePath) != _W("/") && cString::GetLastCharW(sSavePath) != _W("\\"))
 	//sSavePath += _W("/");
@@ -644,7 +643,7 @@ void cSaveHandler::AutoSave(const tWString &asDir, int alMaxSaves)
 	tWString sMapName = mpInit->mpMapHandler->GetMapGameName();
 	sMapName = cString::ReplaceCharToW(sMapName,_W("\n"),_W(" "));
 	sMapName = cString::ReplaceCharToW(sMapName,_W(":"),_W(" "));
-	cDate date = mpInit->mpGame->GetSystem()->GetLowLevel()->GetDate();
+	cDate date = GetDate();
 	wchar_t sTemp[512];
 	swprintf(sTemp,512,_W("save/%ls/%ls %d-%02d-%02d_%02d.%02d.%02d_%02d.sav"),
 													asDir.c_str(),

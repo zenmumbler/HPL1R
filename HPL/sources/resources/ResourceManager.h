@@ -24,7 +24,6 @@
 
 namespace hpl {
 
-	class iLowLevelSystem;
 	class cFileSearcher;
 	class iResourceBase;
 
@@ -43,7 +42,7 @@ namespace hpl {
 	class iResourceManager
 	{
 	public:
-		iResourceManager(cFileSearcher *apFileSearcher, iLowLevelSystem *apLowLevelSystem);
+		iResourceManager(cFileSearcher *apFileSearcher);
 		virtual ~iResourceManager() = default;
 
 		virtual iResourceBase* Create(const tString& asName)=0;
@@ -66,7 +65,6 @@ namespace hpl {
 		tResourceHandleMap m_mapHandleResources;
 
 		cFileSearcher *mpFileSearcher;
-		iLowLevelSystem *mpLowLevelSystem;
 
 		void BeginLoad(const tString& asFile);
 		void EndLoad();

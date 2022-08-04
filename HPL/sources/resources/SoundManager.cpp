@@ -17,12 +17,12 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/SoundManager.h"
-#include "system/String.h"
-#include "system/LowLevelSystem.h"
 #include "resources/Resources.h"
 #include "sound/Sound.h"
 #include "sound/SoundData.h"
 #include "sound/LowLevelSound.h"
+#include "system/String.h"
+#include "system/System.h"
 
 namespace hpl {
 
@@ -33,7 +33,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cSoundManager::cSoundManager(cSound* apSound,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevelSystem())
+		: iResourceManager(apResources->GetFileSearcher())
 	{
 		mpSound = apSound;
 		mpResources = apResources;

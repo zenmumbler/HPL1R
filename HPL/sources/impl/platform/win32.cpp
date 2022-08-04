@@ -19,7 +19,6 @@
 #include "impl/Platform.h"
 #include <io.h>
 
-#include "system/LowLevelSystem.h"
 
 #define _UNICODE
 #include <stdio.h>

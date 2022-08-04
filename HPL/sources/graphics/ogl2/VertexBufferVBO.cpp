@@ -17,7 +17,6 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "graphics/ogl2/VertexBufferVBO.h"
-#include "system/LowLevelSystem.h"
 #include "math/Math.h"
 
 #include <memory.h>

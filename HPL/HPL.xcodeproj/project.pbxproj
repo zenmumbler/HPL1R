@@ -99,7 +99,6 @@
 		DBF84AEB0AC76F1E00BB15CD /* LowLevelGraphicsSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8498E0AC76D5800BB15CD /* LowLevelGraphicsSDL.cpp */; };
 		DBF84AEC0AC76F1E00BB15CD /* LowLevelInputSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8498F0AC76D5800BB15CD /* LowLevelInputSDL.cpp */; };
 		DBF84AED0AC76F1E00BB15CD /* LowLevelPhysicsNewton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849900AC76D5800BB15CD /* LowLevelPhysicsNewton.cpp */; };
-		DBF84AF00AC76F1E00BB15CD /* LowLevelSystemSDL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849930AC76D5800BB15CD /* LowLevelSystemSDL.cpp */; };
 		DBF84AF10AC76F1E00BB15CD /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849610AC76D5700BB15CD /* Material.cpp */; };
 		DBF84B040AC76F1E00BB15CD /* MaterialHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849740AC76D5800BB15CD /* MaterialHandler.cpp */; };
 		DBF84B050AC76F1E00BB15CD /* MaterialManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849DF0AC76D5800BB15CD /* MaterialManager.cpp */; };
@@ -337,7 +336,6 @@
 		DB27F0680ACB9AB90054ACA3 /* LowLevelGraphicsSDL.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LowLevelGraphicsSDL.h; sourceTree = "<group>"; };
 		DB27F0690ACB9AB90054ACA3 /* LowLevelInputSDL.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LowLevelInputSDL.h; sourceTree = "<group>"; };
 		DB27F06A0ACB9AB90054ACA3 /* LowLevelPhysicsNewton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LowLevelPhysicsNewton.h; sourceTree = "<group>"; };
-		DB27F06D0ACB9AB90054ACA3 /* LowLevelSystemSDL.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LowLevelSystemSDL.h; sourceTree = "<group>"; };
 		DB27F06E0ACB9AB90054ACA3 /* MeshLoaderCollada.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MeshLoaderCollada.h; sourceTree = "<group>"; };
 		DB27F0700ACB9AB90054ACA3 /* MeshLoaderMSH.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MeshLoaderMSH.h; sourceTree = "<group>"; };
 		DB27F0710ACB9AB90054ACA3 /* MouseSDL.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MouseSDL.h; sourceTree = "<group>"; };
@@ -446,7 +444,6 @@
 		DB27F1020ACB9AB90054ACA3 /* BinTree.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BinTree.h; sourceTree = "<group>"; };
 		DB27F1030ACB9AB90054ACA3 /* Container.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Container.h; sourceTree = "<group>"; };
 		DB27F1040ACB9AB90054ACA3 /* LogicTimer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LogicTimer.h; sourceTree = "<group>"; };
-		DB27F1050ACB9AB90054ACA3 /* LowLevelSystem.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LowLevelSystem.h; sourceTree = "<group>"; };
 		DB27F1070ACB9AB90054ACA3 /* SerializeClass.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SerializeClass.h; sourceTree = "<group>"; };
 		DB27F1080ACB9AB90054ACA3 /* String.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = String.h; sourceTree = "<group>"; };
 		DB27F1090ACB9AB90054ACA3 /* System.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
@@ -522,7 +519,6 @@
 		DBF8498E0AC76D5800BB15CD /* LowLevelGraphicsSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = LowLevelGraphicsSDL.cpp; sourceTree = "<group>"; };
 		DBF8498F0AC76D5800BB15CD /* LowLevelInputSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = LowLevelInputSDL.cpp; sourceTree = "<group>"; };
 		DBF849900AC76D5800BB15CD /* LowLevelPhysicsNewton.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = LowLevelPhysicsNewton.cpp; sourceTree = "<group>"; };
-		DBF849930AC76D5800BB15CD /* LowLevelSystemSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = LowLevelSystemSDL.cpp; sourceTree = "<group>"; };
 		DBF849940AC76D5800BB15CD /* MeshLoaderCollada.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MeshLoaderCollada.cpp; sourceTree = "<group>"; };
 		DBF849950AC76D5800BB15CD /* MeshLoaderColladaHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MeshLoaderColladaHelpers.cpp; sourceTree = "<group>"; };
 		DBF849970AC76D5800BB15CD /* MeshLoaderMSH.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MeshLoaderMSH.cpp; sourceTree = "<group>"; };
@@ -1074,8 +1070,6 @@
 			children = (
 				DBF849A30AC76D5800BB15CD /* platform */,
 				8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */,
-				DBF849930AC76D5800BB15CD /* LowLevelSystemSDL.cpp */,
-				DB27F06D0ACB9AB90054ACA3 /* LowLevelSystemSDL.h */,
 				DB27F07D0ACB9AB90054ACA3 /* Platform.h */,
 			);
 			name = impl;
@@ -1317,7 +1311,6 @@
 				8E11637826C1FD520065E04C /* FileReader.h */,
 				DBF84A1A0AC76D5800BB15CD /* LogicTimer.cpp */,
 				DB27F1040ACB9AB90054ACA3 /* LogicTimer.h */,
-				DB27F1050ACB9AB90054ACA3 /* LowLevelSystem.h */,
 				DB4AFBA30D7076F900809E03 /* MemoryManager.cpp */,
 				DB4AFBF70D7077B000809E03 /* MemoryManager.h */,
 				8E9787602617A35A00C4395C /* MemoryPool.h */,
@@ -1476,7 +1469,6 @@
 				DBF84AEB0AC76F1E00BB15CD /* LowLevelGraphicsSDL.cpp in Sources */,
 				DBF84AEC0AC76F1E00BB15CD /* LowLevelInputSDL.cpp in Sources */,
 				DBF84AED0AC76F1E00BB15CD /* LowLevelPhysicsNewton.cpp in Sources */,
-				DBF84AF00AC76F1E00BB15CD /* LowLevelSystemSDL.cpp in Sources */,
 				8EA48718260FFCD3000D1AB7 /* scriptstdstring.cpp in Sources */,
 				8E11634A26BED6FF0065E04C /* imgui_demo.cpp in Sources */,
 				DBF84AF10AC76F1E00BB15CD /* Material.cpp in Sources */,

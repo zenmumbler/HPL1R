@@ -18,7 +18,6 @@
  */
 #include "graphics/MeshCreator.h"
 #include "system/String.h"
-#include "system/LowLevelSystem.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/VertexBuffer.h"
 #include "resources/Resources.h"

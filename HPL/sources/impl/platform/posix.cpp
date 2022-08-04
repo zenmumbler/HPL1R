@@ -22,7 +22,6 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <wctype.h>
-#include "system/LowLevelSystem.h"
 
 namespace hpl {
 

@@ -19,7 +19,6 @@
 #include "physics/impl/CollideShapeNewton.h"
 
 #include "physics/PhysicsWorld.h"
-#include "system/LowLevelSystem.h"
 
 namespace hpl {
 

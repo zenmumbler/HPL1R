@@ -16,9 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "resources/FrameBitmap.h"
+#include "system/System.h"
 #include "math/Math.h"
-#include "system/LowLevelSystem.h"
 #include "resources/FrameTexture.h"
 #include "resources/ResourceImage.h"
 #include "graphics/Bitmap.h"

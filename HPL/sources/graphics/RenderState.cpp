@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "system/LowLevelSystem.h"
 #include "graphics/RenderState.h"
 #include "graphics/Renderer3D.h"
 
@@ -29,7 +28,7 @@
 #include "scene/Camera.h"
 #include "scene/PortalContainer.h"
 #include "math/Math.h"
-
+#include "system/System.h"
 
 
 namespace hpl {

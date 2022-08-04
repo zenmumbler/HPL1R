@@ -20,12 +20,11 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-#include "system/LowLevelSystem.h"
-
 #include "graphics/GraphicsDrawer.h"
 
 #include "resources/ResourceImage.h"
 #include "resources/LoadImage.h"
+#include "system/System.h"
 
 #include "tinyXML/tinyxml.h"
 

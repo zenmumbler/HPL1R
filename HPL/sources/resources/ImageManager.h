@@ -39,7 +39,7 @@ namespace hpl {
 	class cImageManager :public iResourceManager
 	{
 	public:
-		cImageManager(cFileSearcher *apFileSearcher, iLowLevelGraphics *apLowLevelGraphics, iLowLevelSystem *apLowLevelSystem);
+		cImageManager(cFileSearcher *apFileSearcher, iLowLevelGraphics *apLowLevelGraphics);
 		~cImageManager();
 
 		iResourceBase* Create(const tString& asName);

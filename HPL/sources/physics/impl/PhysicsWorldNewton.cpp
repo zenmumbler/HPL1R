@@ -33,7 +33,6 @@
 #include "scene/World3D.h"
 #include "scene/PortalContainer.h"
 
-#include "system/LowLevelSystem.h"
 #include "graphics/VertexBuffer.h"
 #include "graphics/LowLevelGraphics.h"
 #include "math/Math.h"

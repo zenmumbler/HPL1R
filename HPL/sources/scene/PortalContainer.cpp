@@ -21,11 +21,11 @@
 #include "graphics/Renderable.h"
 #include "graphics/RenderList.h"
 #include "math/Frustum.h"
-#include "system/LowLevelSystem.h"
 #include "math/Math.h"
 #include "scene/Light3D.h"
-
 #include "scene/SectorVisibility.h"
+#include "system/System.h"
+
 
 namespace hpl {
 

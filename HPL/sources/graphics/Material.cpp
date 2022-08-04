@@ -18,7 +18,6 @@
  */
 #include "graphics/Material.h"
 #include "graphics/Renderer3D.h"
-#include "system/LowLevelSystem.h"
 #include "resources/TextureManager.h"
 #include "resources/GpuProgramManager.h"
 #include "graphics/GPUProgram.h"

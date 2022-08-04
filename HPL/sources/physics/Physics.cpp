@@ -21,8 +21,8 @@
 
 #include "physics/PhysicsWorld.h"
 #include "physics/SurfaceData.h"
-#include "system/LowLevelSystem.h"
 #include "system/String.h"
+#include "system/System.h"
 
 #include "tinyXML/tinyxml.h"
 

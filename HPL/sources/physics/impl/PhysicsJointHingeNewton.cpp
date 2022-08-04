@@ -18,7 +18,6 @@
  */
 #include "physics/impl/PhysicsJointHingeNewton.h"
 
-#include "system/LowLevelSystem.h"
 
 #include "physics/impl/PhysicsBodyNewton.h"
 #include "physics/impl/PhysicsWorldNewton.h"
@@ -255,7 +254,6 @@ namespace hpl {
 
 	void cPhysicsJointHingeNewton::GetInfo (NewtonJointRecord* apInfo)
 	{
-		Log("GetInfo called");
 	}
 
 	//-----------------------------------------------------------------------

@@ -17,12 +17,11 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "sound/Sound.h"
-#include "system/LowLevelSystem.h"
 #include "sound/LowLevelSound.h"
 #include "resources/Resources.h"
 #include "sound/SoundHandler.h"
 #include "sound/MusicHandler.h"
-
+#include "system/System.h"
 
 namespace hpl {
 

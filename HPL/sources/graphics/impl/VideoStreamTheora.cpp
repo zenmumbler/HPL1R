@@ -18,7 +18,6 @@
  */
 #include "graphics/impl/VideoStreamTheora.h"
 
-#include "system/LowLevelSystem.h"
 #include "math/Math.h"
 #include "graphics/Texture.h"
 

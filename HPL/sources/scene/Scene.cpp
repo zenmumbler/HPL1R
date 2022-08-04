@@ -18,7 +18,6 @@
  */
 #include "scene/Scene.h"
 #include "game/Updater.h"
-#include "system/LowLevelSystem.h"
 
 #include "graphics/Graphics.h"
 #include "resources/Resources.h"
@@ -46,15 +45,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cScene::cScene(cGraphics *apGraphics,cResources *apResources, cSound* apSound,cPhysics *apPhysics,
-					cSystem *apSystem, cAI *apAI)
+	cScene::cScene(cGraphics *apGraphics, cResources *apResources, cSound* apSound,cPhysics *apPhysics, cAI *apAI)
 		: iUpdateable("HPL_Scene")
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;
 		mpSound = apSound;
 		mpPhysics = apPhysics;
-		mpSystem = apSystem;
 		mpAI = apAI;
 
 		mpCurrentWorld3D = NULL;
@@ -346,8 +343,7 @@ namespace hpl {
 
 	cWorld3D* cScene::CreateWorld3D(const tString& asName)
 	{
-		cWorld3D* pWorld = hplNew( cWorld3D, (asName,mpGraphics,mpResources,mpSound,mpPhysics,this,
-										mpSystem,mpAI) );
+		cWorld3D* pWorld = hplNew( cWorld3D, (asName,mpGraphics,mpResources,mpSound,mpPhysics,this,mpAI) );
 
 		mlstWorld3D.push_back(pWorld);
 

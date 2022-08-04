@@ -3,12 +3,12 @@
  * This file is part of Rehatched
  */
 #include <AL/al.h>
-#include "system/LowLevelSystem.h"
-#include "system/String.h"
 #include "sound/impl/OALSoundData.h"
 #include "sound/impl/OALSoundChannel.h"
 #include "sound/impl/WAVFile.h"
 #include "stb/stb_vorbis.h"
+#include "system/String.h"
+#include "system/System.h"
 
 namespace hpl {
 

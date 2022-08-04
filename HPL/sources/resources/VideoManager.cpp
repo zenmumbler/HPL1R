@@ -18,11 +18,11 @@
  */
 #include "resources/VideoManager.h"
 
-#include "system/LowLevelSystem.h"
 #include "system/String.h"
 #include "resources/Resources.h"
 #include "resources/FileSearcher.h"
 #include "graphics/VideoStream.h"
+#include "system/System.h"
 
 namespace hpl {
 
@@ -33,7 +33,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cVideoManager::cVideoManager(cGraphics* apGraphics,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher(), apResources->GetLowLevelSystem())
+		: iResourceManager(apResources->GetFileSearcher())
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;

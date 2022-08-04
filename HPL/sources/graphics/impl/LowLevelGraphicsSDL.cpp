@@ -43,7 +43,7 @@
 #include "graphics/ogl2/VertexBufferVBO.h"
 #include "graphics/ogl2/OcclusionQueryOGL.h"
 
-#include "system/LowLevelSystem.h"
+#include "system/System.h"
 
 namespace hpl {
 

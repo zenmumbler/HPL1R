@@ -20,7 +20,6 @@
 
 #include "tinyXML/tinyxml.h"
 
-#include "system/LowLevelSystem.h"
 #include "resources/Resources.h"
 #include "resources/MaterialManager.h"
 #include "resources/FileSearcher.h"
@@ -35,6 +34,7 @@
 #include "math/Math.h"
 
 #include "game/Game.h"
+#include "system/System.h"
 
 namespace hpl {
 

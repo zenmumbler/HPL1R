@@ -3,8 +3,8 @@
  * This file is part of Rehatched
  */
 #include "resources/LoadImage.h"
-#include "system/LowLevelSystem.h"
 #include "stb/stb_image.h"
+#include "system/System.h"
 
 namespace hpl {
 

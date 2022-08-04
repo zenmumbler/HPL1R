@@ -20,7 +20,6 @@
 
 #include "physics/CollideShape.h"
 #include "physics/PhysicsWorld.h"
-#include "system/LowLevelSystem.h"
 
 namespace hpl {
 

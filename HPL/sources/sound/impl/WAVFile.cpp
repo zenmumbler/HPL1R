@@ -6,8 +6,8 @@
 #include <cstdio>
 #include <AL/al.h>
 #include "sound/impl/WAVFile.h"
-#include "system/LowLevelSystem.h"
 #include "system/FileReader.h"
+#include "system/System.h"
 
 struct WAVHeader {
 	uint32_t wavID; // "RIFF"

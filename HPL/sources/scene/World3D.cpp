@@ -21,7 +21,6 @@
 #include "tinyXML/tinyxml.h"
 
 #include "system/String.h"
-#include "system/LowLevelSystem.h"
 
 #include "math/Math.h"
 #include "math/MathTypes.h"
@@ -81,14 +80,13 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cWorld3D::cWorld3D(tString asName,cGraphics *apGraphics,cResources *apResources,cSound* apSound,
-						cPhysics *apPhysics, cScene *apScene,cSystem *apSystem, cAI *apAI)
+						cPhysics *apPhysics, cScene *apScene, cAI *apAI)
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;
 		mpSound = apSound;
 		mpPhysics = apPhysics;
 		mpScene = apScene;
-		mpSystem =apSystem;
 		mpAI = apAI;
 
 		mpRootNode = hplNew( cNode3D, () );
@@ -878,7 +876,7 @@ namespace hpl {
 	{
 		cAINodeContainer* pContainer=NULL;
 
-		//unsigned long lStartTime = mpSystem->GetLowLevel()->GetTime();
+		//unsigned long lStartTime = GetTime();
 
 		//////////////////////////////////
 		//See if the container is allready loaded.
@@ -959,7 +957,7 @@ namespace hpl {
 			}
 		}
 
-		//unsigned long lTime = mpSystem->GetLowLevel()->GetTime() - lStartTime;
+		//unsigned long lTime = GetTime() - lStartTime;
 		//Log("Creating ai nodes took: %d\n",lTime);
 
 

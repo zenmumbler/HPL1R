@@ -26,7 +26,6 @@ namespace hpl {
 	class cScript;
 	class cGraphics;
 	class cResources;
-	class cSystem;
 	class cSound;
 	class cScene;
 	class cInput;
@@ -56,7 +55,6 @@ namespace hpl {
 		cScript* apScript,
 		cGraphics* apGraphics,
 		cResources *apResources,
-		cSystem *apSystem,
 		cInput *apInput,
 		cScene *apScene,
 		cSound *apSound,

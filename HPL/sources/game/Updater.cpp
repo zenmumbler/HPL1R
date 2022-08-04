@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "game/Updater.h"
 
+#include "game/Updater.h"
 #include "game/Updateable.h"
-#include "system/LowLevelSystem.h"
+#include "system/System.h"
 
 namespace hpl {
 
@@ -29,11 +29,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cUpdater::cUpdater(iLowLevelSystem *apLowLevelSystem)
+	cUpdater::cUpdater()
 	{
 		mpCurrentUpdates = NULL;
-
-		mpLowLevelSystem = apLowLevelSystem;
 	}
 
 	//-----------------------------------------------------------------------

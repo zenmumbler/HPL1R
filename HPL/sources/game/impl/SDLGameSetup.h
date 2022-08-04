@@ -24,7 +24,6 @@
 #include "input/LowLevelInput.h"
 #include "physics/LowLevelPhysics.h"
 #include "sound/LowLevelSound.h"
-#include "system/LowLevelSystem.h"
 #include "script/Script.h"
 
 namespace hpl {
@@ -35,7 +34,6 @@ namespace hpl {
 		cSDLGameSetup();
 		~cSDLGameSetup();
 
-		cSystem* CreateSystem();
 		cGraphics* CreateGraphics();
 		cInput* CreateInput();
 		cResources* CreateResources();
@@ -45,7 +43,6 @@ namespace hpl {
 		cScript* CreateScript(cResources *apResources);
 
 	private:
-		iLowLevelSystem *mpLowLevelSystem;
 		iLowLevelGraphics *mpLowLevelGraphics;
 		iLowLevelInput *mpLowLevelInput;
 		iLowLevelSound*	mpLowLevelSound;

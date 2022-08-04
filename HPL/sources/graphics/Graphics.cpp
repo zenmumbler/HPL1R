@@ -18,7 +18,6 @@
  */
 #include "graphics/Graphics.h"
 
-#include "system/LowLevelSystem.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/GraphicsDrawer.h"
 #include "graphics/Renderer3D.h"
@@ -28,6 +27,7 @@
 #include "graphics/MeshCreator.h"
 #include "game/Updateable.h"
 #include "resources/Resources.h"
+#include "system/System.h"
 
 // Materials
 #ifdef OLD_MATS

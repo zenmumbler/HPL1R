@@ -21,8 +21,8 @@
 #include "graphics/LowLevelGraphics.h"
 #include "resources/ResourceImage.h"
 #include "resources/FrameBitmap.h"
-#include "system/LowLevelSystem.h"
 #include "math/Math.h"
+#include "system/System.h"
 
 namespace hpl {
 

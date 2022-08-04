@@ -21,7 +21,6 @@
 #include "physics/CollideShape.h"
 #include "physics/PhysicsWorld.h"
 #include "physics/PhysicsBody.h"
-#include "system/LowLevelSystem.h"
 #include "scene/Camera.h"
 #include "math/Math.h"
 
@@ -29,6 +28,7 @@
 #include "scene/Scene.h"
 #include "scene/World3D.h"
 #include "scene/PortalContainer.h"
+#include "system/System.h"
 
 namespace hpl {
 

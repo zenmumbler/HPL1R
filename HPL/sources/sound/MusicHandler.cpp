@@ -18,14 +18,13 @@
  */
 #include "sound/MusicHandler.h"
 #include "resources/Resources.h"
-#include "system/LowLevelSystem.h"
 #include "system/String.h"
 #include "math/Math.h"
 #include "sound/LowLevelSound.h"
 #include "sound/SoundChannel.h"
 #include "sound/SoundData.h"
 #include "resources/SoundManager.h"
-
+#include "system/System.h"
 
 namespace hpl {
 

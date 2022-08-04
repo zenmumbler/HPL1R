@@ -18,7 +18,6 @@
  */
 #include "sound/SoundHandler.h"
 #include "resources/Resources.h"
-#include "system/LowLevelSystem.h"
 #include "system/String.h"
 #include "math/Math.h"
 #include "sound/LowLevelSound.h"

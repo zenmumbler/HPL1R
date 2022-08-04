@@ -18,9 +18,8 @@
  */
 #include "resources/FileSearcher.h"
 #include "system/String.h"
-#include "system/LowLevelSystem.h"
 #include "impl/Platform.h"
-
+#include "system/System.h"
 
 namespace hpl {
 

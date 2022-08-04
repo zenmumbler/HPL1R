@@ -22,7 +22,6 @@
 #include "physics/impl/PhysicsBodyNewton.h"
 #include "physics/SurfaceData.h"
 
-#include "system/LowLevelSystem.h"
 #include <algorithm>
 
 namespace hpl {
