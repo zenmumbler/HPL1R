@@ -212,6 +212,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E079520289D3AFB0043A26A /* UpdateTimerMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateTimerMacros.h; sourceTree = "<group>"; };
 		8E11631D26BED4E00065E04C /* imgui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
 		8E11631E26BED4E00065E04C /* imstb_textedit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imstb_textedit.h; sourceTree = "<group>"; };
 		8E11631F26BED4E00065E04C /* imconfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
@@ -1321,6 +1322,7 @@
 				DBF84A1D0AC76D5800BB15CD /* System.cpp */,
 				DB27F1090ACB9AB90054ACA3 /* System.h */,
 				DB27F10A0ACB9AB90054ACA3 /* SystemTypes.h */,
+				8E079520289D3AFB0043A26A /* UpdateTimerMacros.h */,
 			);
 			name = system;
 			path = sources/system;

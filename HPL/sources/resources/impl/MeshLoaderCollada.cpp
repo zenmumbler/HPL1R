@@ -108,7 +108,7 @@ namespace hpl {
 
 		mFlags = aFlags;
 
-		unsigned long lStartTime = GetApplicationTime();
+		unsigned long lStartTime = GetAppTimeMS();
 
 		//Fill the structures with collada file data
 		bool bRet = FillStructures(asFile, &vColladaImages, &vColladaTextures,
@@ -117,7 +117,7 @@ namespace hpl {
 			NULL,NULL,
 			&ColladaScene,true);
 
-		unsigned long lTime = GetApplicationTime() - lStartTime;
+		unsigned long lTime = GetAppTimeMS() - lStartTime;
 		Log("Loading collada for '%s' took: %d ms\n",asFile.c_str(),lTime);
 
 		if(bRet==false) return NULL;

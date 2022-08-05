@@ -178,7 +178,7 @@ namespace hpl {
 
 	void iResourceManager::BeginLoad(const tString& asFile)
 	{
-		mlTimeStart = GetApplicationTime();
+		mlTimeStart = GetAppTimeMS();
 
 		//Log("Begin resource: %s\n",asFile.c_str());
 
@@ -229,7 +229,7 @@ namespace hpl {
 
 		if(abLog && iResourceBase::GetLogCreateAndDelete())
 		{
-			unsigned long lTime = GetApplicationTime() - mlTimeStart;
+			unsigned long lTime = GetAppTimeMS() - mlTimeStart;
 			Log("%sLoaded resource %s in %d ms\n",GetTabs().c_str(), apResource->GetName().c_str(),lTime);
 			apResource->SetLogDestruction(true);
 		}

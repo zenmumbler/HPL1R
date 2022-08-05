@@ -77,7 +77,7 @@ namespace hpl {
 
 		////////////////////////////////////
 		//Update character bodies
-		unsigned long lTime = GetApplicationTime();
+		//unsigned long lTime = GetAppTimeMS();
 		tCharacterBodyListIt CharIt = mlstCharBodies.begin();
 		for(; CharIt != mlstCharBodies.end(); ++CharIt)
 		{
@@ -88,7 +88,7 @@ namespace hpl {
 				pBody->Update(afTimeStep);//20.0f);
 			}
 		}
-		//LogUpdate(" Updating chars took %d ms\n", GetTime() - lTime);
+		//LogUpdate(" Updating chars took %d ms\n", GetAppTimeMS() - lTime);
 
 
 		////////////////////////////////////
@@ -104,9 +104,9 @@ namespace hpl {
 
 		////////////////////////////////////
 		//Simulate the physics
-		lTime = GetApplicationTime();
+		//lTime = GetAppTimeMS();
 		Simulate(afTimeStep);
-		//LogUpdate(" Updating lowlevel physics took %d ms\n", GetTime() - lTime);
+		//LogUpdate(" Updating lowlevel physics took %d ms\n", GetAppTimeMS() - lTime);
 
 		////////////////////////////////////
 		//Update the joints after simulation.

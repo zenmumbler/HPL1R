@@ -23,6 +23,7 @@
 #include <SDL2/SDL.h>
 
 #ifdef WIN32
+	#define WIN32_MEAN_AND_LEAN
 	#include <windows.h>
 #endif
 

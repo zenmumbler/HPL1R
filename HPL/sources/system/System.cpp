@@ -20,10 +20,16 @@
 //Use this to check for memory leaks!
 
 #ifdef WIN32
-#pragma comment(lib, "angelscript.lib")
-#define UNICODE
-#include <windows.h>
-#include <shlobj.h>
+	#pragma comment(lib, "angelscript.lib")
+	#define UNICODE
+	#define WIN32_MEAN_AND_LEAN
+	#include <windows.h>
+	#include <shlobj.h>
+#else
+	#include <clocale>
+	#include <langinfo.h>
+	#include <unistd.h>
+	#include <time.h>
 #endif
 
 #define _UNICODE
@@ -31,20 +37,13 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
-#include <time.h>
 #include <sys/stat.h>
 #include <fstream>
 #include <string>
 
-#include <SDL2/SDL.h>
-
+#include "system/System.h"
 #include "system/String.h"
 
-#ifndef WIN32
-#include <clocale>
-#include <langinfo.h>
-#include <unistd.h>
-#endif
 
 namespace hpl {
 	// macOS version defined in LowLevelSystemMac.mm
@@ -74,7 +73,6 @@ namespace hpl {
 extern int hplMain(const hpl::tString &asCommandLine);
 
 #ifdef WIN32
-#include <windows.h>
 int WINAPI WinMain(	HINSTANCE hInstance,  HINSTANCE hPrevInstance,LPSTR	lpCmdLine, int nCmdShow)
 {
 	return hplMain(lpCmdLine);
@@ -745,16 +743,27 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	unsigned long GetApplicationTime()
+	static uint64_t baseTimeMS = 0;
+
+	void InitAppTime()
 	{
-		return SDL_GetTicks();
+		baseTimeMS = 0UL;
+		baseTimeMS = GetAppTimeMS();
 	}
 
 	//-----------------------------------------------------------------------
 
-	unsigned long GetTime()
+	uint64_t GetAppTimeMS()
 	{
-		return SDL_GetTicks();
+		// TODO: use regular clock_gettime for other unixen and QPC stuff for Win
+		return (clock_gettime_nsec_np(CLOCK_MONOTONIC_RAW) / 1000000UL) - baseTimeMS;
+	}
+
+	//-----------------------------------------------------------------------
+
+	float GetAppTimeFloat() {
+		auto timeMS = GetAppTimeMS();
+		return static_cast<float>(timeMS) / 1000.f;
 	}
 
 	//-----------------------------------------------------------------------
@@ -769,22 +778,6 @@ namespace hpl {
 
 		return DateFromGMTIme(pClock);
 	}
-
-	//-----------------------------------------------------------------------
-	//////////////////////////////////////////////////////////////////////////
-	// PRIVATE METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	//-----------------------------------------------------------------------
-
-
-	//////////////////////////////////////////////////////////////////////////
-	// STATIC PRIVATE METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
 
 	//-----------------------------------------------------------------------
 

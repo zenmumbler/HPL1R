@@ -48,21 +48,21 @@ namespace hpl {
 
 		mfUpdateRate = 1;
 
-		mfFrametimestart = ((float)GetApplicationTime()) / 1000.0f;
+		mfFrametimestart = GetAppTimeFloat();
 	}
 
 	void cFPSCounter::AddFrame()
 	{
 		mlFramecounter++;
 
-		mfFrametime = (((float)GetApplicationTime()) / 1000.0f) - mfFrametimestart;
+		mfFrametime = GetAppTimeFloat() - mfFrametimestart;
 
 		// update the timer
 		if (mfFrametime >= mfUpdateRate)
 		{
 			mfFPS = ((float)mlFramecounter)/mfFrametime;
 			mlFramecounter = 0;
-			mfFrametimestart = ((float)GetApplicationTime()) / 1000.0f;
+			mfFrametimestart = GetAppTimeFloat();
 		}
 	}
 
@@ -322,9 +322,6 @@ namespace hpl {
 
 		mpLogicTimer->Reset();
 
-		//Loop the game... fix the var...
-		unsigned long lTempTime = GetApplicationTime();
-
 		//reset the mouse, really reset the damn thing :P
 		for(int i=0;i<10;i++) mpInput->GetMouse()->Reset();
 
@@ -333,7 +330,7 @@ namespace hpl {
 		Log("--------------------------------------------------------\n");
 
 		mfFrameTime = 0;
-		unsigned long lTempFrameTime = GetApplicationTime();
+		float tempFrameTime = GetAppTimeFloat();
 
 		bool mbIsUpdated = true;
 
@@ -346,12 +343,9 @@ namespace hpl {
 			//Update logic.
 			while(mpLogicTimer->WantUpdate() && !mbGameIsDone)
 			{
-				unsigned long lUpdateTime = GetApplicationTime();
-
+				float updateTime = GetAppTimeFloat();
 				mpUpdater->Update(GetStepSize());
-
-				unsigned long lDeltaTime = GetApplicationTime() - lUpdateTime;
-				mfUpdateTime = (float)(lDeltaTime) / 1000.0f;
+				mfUpdateTime = GetAppTimeFloat() - updateTime;
 
 				mbIsUpdated = true;
 
@@ -392,22 +386,19 @@ namespace hpl {
 				mbIsUpdated = false;
 
 				//Get the the from the last frame.
-				mfFrameTime = ((float)(GetApplicationTime() - lTempFrameTime))/1000;
-				lTempFrameTime = GetApplicationTime();
+				mfFrameTime = GetAppTimeFloat() - tempFrameTime;
+				tempFrameTime = GetAppTimeFloat();
 
 				//Draw this frame
-				//unsigned long lFTime = GetApplicationTime();
 				mpGraphics->GetLowLevel()->StartFrame();
 				mpUpdater->OnDraw();
 				mpScene->Render(mpUpdater,mfFrameTime);
-				//if(mpScene->GetDrawScene()) LogUpdate("FrameTime: %d ms\n", GetApplicationTime() - lFTime);
 
 				//Update fps counter.
 				mpFPSCounter->AddFrame();
 
 				//Update the screen.
 				mpGraphics->GetLowLevel()->EndFrame();
-				//Log("Swap done: %d\n", GetApplicationTime());
 				//if(mbRenderOnce)
 				{
 					mpGraphics->GetRenderer3D()->FetchOcclusionQueries();
@@ -416,22 +407,7 @@ namespace hpl {
 
 				fNumOfTimes++;
 			}
-
-			//if(cMemoryManager::GetLogCreation())
-			//{
-				//cMemoryManager::SetLogCreation(false);
-				//Log("----\nCreations made: %d\n------\n",cMemoryManager::GetCreationCount());
-			//}
 		}
-		Log("--------------------------------------------------------\n\n");
-
-		Log("Statistics\n");
-		Log("--------------------------------------------------------\n");
-
-		unsigned long lTime = GetApplicationTime() - lTempTime;
-		fMediumTime = fNumOfTimes/(((double)lTime)/1000);
-
-		Log(" Medium framerate: %f\n", fMediumTime);
 		Log("--------------------------------------------------------\n\n");
 
 		Log("User Exit\n");

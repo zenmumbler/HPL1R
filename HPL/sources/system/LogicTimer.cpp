@@ -44,7 +44,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 	void cLogicTimer::Reset()
 	{
-		mlLocalTime = (double)GetApplicationTime();
+		mlLocalTime = (double)GetAppTimeMS();
 	}
 
 	//-----------------------------------------------------------------------
@@ -54,7 +54,7 @@ namespace hpl {
 		++mlUpdateCount;
 		if(mlUpdateCount > mlMaxUpdates) return false;
 
-		if(mlLocalTime< (double)GetApplicationTime())
+		if(mlLocalTime< (double)GetAppTimeMS())
 		{
 			Update();
 			return true;

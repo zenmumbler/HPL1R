@@ -37,6 +37,8 @@
 #include "resources/FileSearcher.h"
 #include "resources/MeshLoaderHandler.h"
 
+#include "system/UpdateTimerMacros.h"
+
 namespace hpl {
 
 	//////////////////////////////////////////////////////////////////////////

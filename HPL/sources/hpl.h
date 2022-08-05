@@ -25,6 +25,7 @@
 #include "system/LogicTimer.h"
 #include "system/SerializeClass.h"
 #include "system/Container.h"
+#include "system/UpdateTimerMacros.h"
 
 #include "input/Input.h"
 #include "input/InputDevice.h"

@@ -71,6 +71,8 @@
 #include "ai/AINodeGenerator.h"
 #include "ai/AStar.h"
 
+#include "system/UpdateTimerMacros.h"
+
 namespace hpl {
 
 	//////////////////////////////////////////////////////////////////////////

@@ -138,8 +138,6 @@ namespace hpl {
 		Log(" Misc Creation\n");
 
 		mpMeshLoaderHandler = hplNew( cMeshLoaderHandler,(this, apScene) );
-		// mpMeshLoaderHandler->AddLoader(hplNew( cMeshLoaderFBX,(mpLowLevelGraphics)));
-		// mpMeshLoaderHandler->AddLoader(hplNew( cMeshLoaderMSH,(mpLowLevelGraphics)));
 		mpMeshLoaderHandler->AddLoader(hplNew( cMeshLoaderGLTF2,(mpLowLevelGraphics)));
 		mpMeshLoaderHandler->AddLoader(hplNew( cMeshLoaderCollada,(mpLowLevelGraphics)));
 

@@ -19,28 +19,9 @@
 #ifndef HPL_SYSTEM_H
 #define HPL_SYSTEM_H
 
-#include "system/MemoryManager.h"
 #include "system/SystemTypes.h"
 
-
 namespace hpl {
-
-#ifdef UPDATE_TIMING_ENABLED
-	#define START_TIMING_EX(x,y)	LogUpdate("Updating %s in file %s at line %d\n",x,__FILE__,__LINE__); \
-									unsigned int y##_lTime = GetApplicationTime();
-	#define START_TIMING(x)	LogUpdate("Updating %s in file %s at line %d\n",#x,__FILE__,__LINE__); \
-								unsigned int x##_lTime = GetApplicationTime();
-	#define STOP_TIMING(x)	LogUpdate(" Time spent: %d ms\n",GetApplicationTime() - x##_lTime);
-	#define START_TIMING_TAB(x)	LogUpdate("\tUpdating %s in file %s at line %d\n",#x,__FILE__,__LINE__); \
-							unsigned int x##_lTime = GetApplicationTime();
-	#define STOP_TIMING_TAB(x)	LogUpdate("\t Time spent: %d ms\n",GetApplicationTime() - x##_lTime);
-#else
-	#define START_TIMING_EX(x,y)
-	#define START_TIMING(x)
-	#define STOP_TIMING(x)
-	#define START_TIMING_TAB(x)
-	#define STOP_TIMING_TAB(x)
-#endif
 
 	void SetLogFile(const tWString &asFile);
 	void FatalError(const char* fmt,... );
@@ -82,8 +63,9 @@ namespace hpl {
 
 	bool HasWindowFocus(const tWString &asWindowCaption);
 
-	unsigned long GetApplicationTime();
-	unsigned long GetTime();
+	void InitAppTime();
+	uint64_t GetAppTimeMS();
+	float GetAppTimeFloat();
 	cDate GetDate();
 
 };
