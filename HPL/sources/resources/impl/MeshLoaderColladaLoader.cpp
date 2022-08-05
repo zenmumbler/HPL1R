@@ -22,6 +22,7 @@
 #include "graphics/VertexBuffer.h"
 #include "system/String.h"
 #include "system/System.h"
+#include "system/Files.h"
 
 #include "graphics/Mesh.h"
 #include "graphics/SubMesh.h"

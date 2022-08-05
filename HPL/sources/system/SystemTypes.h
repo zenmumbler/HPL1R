@@ -38,14 +38,6 @@ namespace hpl {
 
 	//--------------------------------------------------------
 
-	enum eSystemPath
-	{
-		eSystemPath_Personal,
-		eSystemPath_LastEnum
-	};
-
-	//--------------------------------------------------------
-
 	typedef unsigned int tFlag;
 
 	typedef std::string tString;
@@ -115,7 +107,7 @@ namespace hpl {
 		int week_day;
 		int year_day;
 
-		tString ToString()
+		tString ToString() const
 		{
 			char buff[256];
 
@@ -190,6 +182,22 @@ namespace hpl {
 			return false;
 		}
 	};
+
+	static cDate DateFromGMTIme(struct tm* apClock)
+	{
+		cDate date;
+
+		date.seconds = apClock->tm_sec;
+		date.minutes = apClock->tm_min;
+		date.hours = apClock->tm_hour;
+		date.month_day = apClock->tm_mday;
+		date.month = apClock->tm_mon;
+		date.year = 1900 + apClock->tm_year;
+		date.week_day = apClock->tm_wday;
+		date.year_day = apClock->tm_yday;
+
+		return date;
+	}
 
 	//----------------------------------------------------------
 

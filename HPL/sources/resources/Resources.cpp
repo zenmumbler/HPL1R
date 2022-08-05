@@ -37,6 +37,7 @@
 #include "resources/impl/MeshLoaderCollada.h"
 
 #include "system/System.h"
+#include "system/Files.h"
 
 #include "tinyXML/tinyxml.h"
 

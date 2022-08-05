@@ -22,6 +22,7 @@
 #include "system/System.h"
 #include "system/SystemTypes.h"
 #include "system/String.h"
+#include "system/Files.h"
 #include "system/LogicTimer.h"
 #include "system/SerializeClass.h"
 #include "system/Container.h"
@@ -147,7 +148,5 @@
 #include "script/ScriptFuncs.h" // sigh, this is only for cScriptJointCallback
 
 #include "tinyXML/tinyxml.h"
-
-#include "impl/Platform.h"
 
 #endif // HPL_HPL_H

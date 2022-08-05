@@ -7,9 +7,8 @@
 
 #include "script/Script.h"
 #include "resources/ResourceManager.h"
-#include "impl/Platform.h"
 #include "system/String.h"
-#include "system/FileReader.h"
+#include "system/Files.h"
 #include "system/System.h"
 
 #include "script/impl/scriptarray.h"

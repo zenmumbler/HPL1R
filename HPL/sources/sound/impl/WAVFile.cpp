@@ -6,7 +6,7 @@
 #include <cstdio>
 #include <AL/al.h>
 #include "sound/impl/WAVFile.h"
-#include "system/FileReader.h"
+#include "system/Files.h"
 #include "system/System.h"
 
 struct WAVHeader {

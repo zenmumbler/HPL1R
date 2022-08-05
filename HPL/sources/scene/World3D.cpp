@@ -57,6 +57,7 @@
 #include "script/ScriptVar.h"
 
 #include "system/System.h"
+#include "system/Files.h"
 
 #include "sound/SoundEntityData.h"
 #include "sound/Sound.h"

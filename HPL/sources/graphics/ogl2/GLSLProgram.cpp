@@ -5,7 +5,7 @@
 #include "graphics/ogl2/GLSLProgram.h"
 #include "graphics/ogl2/SDLTexture.h"
 #include "system/String.h"
-#include "system/FileReader.h"
+#include "system/Files.h"
 #include "system/System.h"
 
 #define GL_GLEXT_LEGACY

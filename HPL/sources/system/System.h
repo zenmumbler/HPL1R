@@ -37,30 +37,15 @@ namespace hpl {
 //	extern void CreateMessageBox ( const char* asCaption, const char *fmt, ...);
 //	extern void CreateMessageBox ( eMsgBoxType eType, const char* asCaption, const char *fmt, ...);
 
-	void CreateMessageBoxW( const wchar_t* asCaption, const wchar_t* fmt, ...);
-	void CreateMessageBoxW( eMsgBoxType eType, const wchar_t* asCaption, const wchar_t* fmt, ...);
+	void CreateMessageBoxW(const wchar_t* asCaption, const wchar_t* fmt, ...);
+	void CreateMessageBoxW(eMsgBoxType eType, const wchar_t* asCaption, const wchar_t* fmt, ...);
 
-	void OpenBrowserWindow ( const tWString& asURL );
+	void OpenBrowserWindow(const tWString& asURL);
 
 	void CopyTextToClipboard(const tWString &asText);
 	tWString LoadTextFromClipboard();
 
-	tWString GetSystemSpecialPath(eSystemPath aPathType);
-
-	bool FileExists(const tWString& asFileName);
-	void RemoveFile(const tWString& asFileName);
-	bool CloneFile(const tWString& asSrcFileName,const tWString& asDestFileName,
-					bool abFailIfExists);
-	bool CreateFolder(const tWString& asPath);
-	bool FolderExists(const tWString& asPath);
-	bool IsFileLink(const tWString& asPath);
-	bool LinkFile(const tWString& asPointsTo, const tWString& asLink);
-	bool RenameFile(const tWString& asFrom, const tWString& asTo);
-	cDate FileModifiedDate(const tWString& asFilePath);
-	cDate FileCreationDate(const tWString& asFilePath);
-
 	void SetWindowCaption(const tString &asName);
-
 	bool HasWindowFocus(const tWString &asWindowCaption);
 
 	void InitAppTime();
@@ -69,4 +54,5 @@ namespace hpl {
 	cDate GetDate();
 
 };
+
 #endif // HPL_SYSTEM_H

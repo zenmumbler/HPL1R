@@ -22,6 +22,7 @@
 
 #include "system/System.h"
 #include "system/String.h"
+#include "system/Files.h"
 
 #include "resources/Resources.h"
 #include "resources/FileSearcher.h"

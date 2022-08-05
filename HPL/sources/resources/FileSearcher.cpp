@@ -18,7 +18,7 @@
  */
 #include "resources/FileSearcher.h"
 #include "system/String.h"
-#include "impl/Platform.h"
+#include "system/Files.h"
 #include "system/System.h"
 
 namespace hpl {
@@ -61,7 +61,7 @@ namespace hpl {
 		{
 			m_setLoadedDirs.insert(asPath);
 
-			Platform::FindFileInDir(lstFileNames, cString::To16Char(asPath), cString::To16Char(asMask));
+			FindFilesInDir(lstFileNames, cString::To16Char(asPath), cString::To16Char(asMask));
 
 			for(const tWString& sExt : lstFileNames)
 			{

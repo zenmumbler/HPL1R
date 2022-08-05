@@ -1224,7 +1224,7 @@ public:
 		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
 	{
 		tWStringList lstStrings;
-		Platform::FindFileInDir(lstStrings, _W("config/"), _W("*.lang"));
+		FindFilesInDir(lstStrings, _W("config/"), _W("*.lang"));
 
 		mlCurrentFile =0;
 		int lIdx=0;
@@ -2807,7 +2807,7 @@ void cMainMenu::CreateWidgets()
 		tTempFileAndDataSet setTempFiles;
 		
 		tWString sFullPath = mpInit->mpSaveHandler->GetSaveDir() + sDir;
-		Platform::FindFileInDir(lstFiles, sFullPath, _W("*.sav"));
+		FindFilesInDir(lstFiles, sFullPath, _W("*.sav"));
 
 		for (const tWString& sFile : lstFiles)
 		{
@@ -3273,7 +3273,7 @@ void cMainMenu::CreateWidgets()
 	gpNoiseFilterText->SetExtraWidget(pWidgetNoiseFilter);
 
 	vPos.y += 29;
-	sText = L"DISABLED"; // mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetBloomActive() ? kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
+	sText = _W("DISABLED"); // mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetBloomActive() ? kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
 	gpBloomText = hplNew( cMainMenuWidget_Text,(mpInit,vPos,sText,20,eFontAlign_Left) );
 	AddWidgetToState(eMainMenuState_OptionsGraphics,gpBloomText);
 	gpBloomText->SetExtraWidget(pWidgetBloom);
@@ -3345,13 +3345,13 @@ void cMainMenu::CreateWidgets()
 	gpShadowsText->SetExtraWidget(pShadowsButton);
 
 	vPos.y += 29;
-	sText = L"DISABLED"; // mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetActive() ?	kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
+	sText = _W("DISABLED"); // mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetActive() ?	kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
 	gpPostEffectsText = hplNew( cMainMenuWidget_Text,(mpInit,vPos,sText,20,eFontAlign_Left ));
 	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,gpPostEffectsText);
 	gpPostEffectsText->SetExtraWidget(pPostEffectsButton);
 
 	vPos.y += 29;
-	sText = L"DISABLED"; // mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetMotionBlurActive() ? kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
+	sText = _W("DISABLED"); // mpInit->mpGame->GetGraphics()->GetRendererPostEffects()->GetMotionBlurActive() ? kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
 	gpMotionBlurText = hplNew( cMainMenuWidget_Text,(mpInit,vPos,sText,20,eFontAlign_Left) );
 	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,gpMotionBlurText);
 	gpMotionBlurText->SetExtraWidget(pMotionBlurButton);
