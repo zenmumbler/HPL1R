@@ -944,7 +944,6 @@
 				DBF849470AC76D5700BB15CD /* ai */,
 				DBF8494D0AC76D5700BB15CD /* game */,
 				DBF849530AC76D5700BB15CD /* graphics */,
-				DBF849860AC76D5800BB15CD /* impl */,
 				DBF849B50AC76D5800BB15CD /* input */,
 				DBF849BD0AC76D5800BB15CD /* math */,
 				DBF849C50AC76D5800BB15CD /* physics */,
@@ -1061,14 +1060,6 @@
 			);
 			name = graphics;
 			path = sources/graphics;
-			sourceTree = "<group>";
-		};
-		DBF849860AC76D5800BB15CD /* impl */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = impl;
-			path = sources/impl;
 			sourceTree = "<group>";
 		};
 		DBF849B50AC76D5800BB15CD /* input */ = {
@@ -1295,8 +1286,11 @@
 				DB27F1030ACB9AB90054ACA3 /* Container.h */,
 				8E11637926C1FDD40065E04C /* Files.cpp */,
 				8E11637826C1FD520065E04C /* Files.h */,
+				8E3A5C17289D5991006D99BF /* Log.cpp */,
+				8E3A5C18289D5991006D99BF /* Log.h */,
 				DBF84A1A0AC76D5800BB15CD /* LogicTimer.cpp */,
 				DB27F1040ACB9AB90054ACA3 /* LogicTimer.h */,
+				8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */,
 				DB4AFBF70D7077B000809E03 /* MemoryManager.h */,
 				8E9787602617A35A00C4395C /* MemoryPool.h */,
 				DBF84A1B0AC76D5800BB15CD /* SerializeClass.cpp */,
@@ -1307,9 +1301,6 @@
 				DB27F1090ACB9AB90054ACA3 /* System.h */,
 				DB27F10A0ACB9AB90054ACA3 /* SystemTypes.h */,
 				8E079520289D3AFB0043A26A /* UpdateTimerMacros.h */,
-				8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */,
-				8E3A5C17289D5991006D99BF /* Log.cpp */,
-				8E3A5C18289D5991006D99BF /* Log.h */,
 			);
 			name = system;
 			path = sources/system;
