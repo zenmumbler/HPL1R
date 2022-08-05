@@ -25,6 +25,7 @@
 		8E11637026BF08840065E04C /* cgltf_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636F26BF08840065E04C /* cgltf_write.c */; };
 		8E11637526C1D4620065E04C /* MeshLoaderGLTF2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11637426C1D4620065E04C /* MeshLoaderGLTF2.cpp */; };
 		8E11637A26C1FDD40065E04C /* Files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11637926C1FDD40065E04C /* Files.cpp */; };
+		8E3A5C19289D5991006D99BF /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A5C17289D5991006D99BF /* Log.cpp */; };
 		8E3A72852611363F0086F8ED /* Script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A72832611363F0086F8ED /* Script.cpp */; };
 		8E77420628989E02008E9570 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E77420528989E02008E9570 /* Bitmap.cpp */; };
 		8E815948260C1127001CBF63 /* GLSLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E815947260C1127001CBF63 /* GLSLProgram.cpp */; };
@@ -246,6 +247,8 @@
 		8E11637426C1D4620065E04C /* MeshLoaderGLTF2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MeshLoaderGLTF2.cpp; sourceTree = "<group>"; };
 		8E11637826C1FD520065E04C /* Files.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Files.h; sourceTree = "<group>"; };
 		8E11637926C1FDD40065E04C /* Files.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Files.cpp; sourceTree = "<group>"; };
+		8E3A5C17289D5991006D99BF /* Log.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Log.cpp; sourceTree = "<group>"; };
+		8E3A5C18289D5991006D99BF /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		8E3A72832611363F0086F8ED /* Script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Script.cpp; path = sources/script/Script.cpp; sourceTree = SOURCE_ROOT; };
 		8E3A72842611363F0086F8ED /* Script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Script.h; path = sources/script/Script.h; sourceTree = SOURCE_ROOT; };
 		8E77420528989E02008E9570 /* Bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
@@ -1305,6 +1308,8 @@
 				DB27F10A0ACB9AB90054ACA3 /* SystemTypes.h */,
 				8E079520289D3AFB0043A26A /* UpdateTimerMacros.h */,
 				8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */,
+				8E3A5C17289D5991006D99BF /* Log.cpp */,
+				8E3A5C18289D5991006D99BF /* Log.h */,
 			);
 			name = system;
 			path = sources/system;
@@ -1403,6 +1408,7 @@
 				DBF84AB00AC76F1E00BB15CD /* AnimationState.cpp in Sources */,
 				DBF84AB10AC76F1E00BB15CD /* AnimationTrack.cpp in Sources */,
 				DBF84AB30AC76F1E00BB15CD /* AStar.cpp in Sources */,
+				8E3A5C19289D5991006D99BF /* Log.cpp in Sources */,
 				DBF84AB50AC76F1E00BB15CD /* BillBoard.cpp in Sources */,
 				DBF84AB70AC76F1E00BB15CD /* Bone.cpp in Sources */,
 				DBF84AB80AC76F1E00BB15CD /* BoneState.cpp in Sources */,

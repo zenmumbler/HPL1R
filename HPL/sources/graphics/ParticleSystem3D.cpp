@@ -17,17 +17,14 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "graphics/ParticleSystem3D.h"
-
-#include "tinyXML/tinyxml.h"
-
 #include "graphics/ParticleEmitter3D_UserData.h"
-
 #include "resources/ParticleManager.h"
-
 #include "game/Game.h"
-
 #include "scene/Scene.h"
 #include "scene/World3D.h"
+#include "system/Log.h"
+
+#include "tinyXML/tinyxml.h"
 
 namespace hpl {
 

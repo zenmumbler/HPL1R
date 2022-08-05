@@ -21,7 +21,7 @@
 #include "resources/FileSearcher.h"
 #include "graphics/Graphics.h"
 #include "graphics/ParticleSystem3D.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl {
 

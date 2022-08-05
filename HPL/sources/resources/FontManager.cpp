@@ -23,7 +23,7 @@
 #include "graphics/LowLevelGraphics.h"
 #include "resources/ImageManager.h"
 #include "graphics/FontData.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl {
 

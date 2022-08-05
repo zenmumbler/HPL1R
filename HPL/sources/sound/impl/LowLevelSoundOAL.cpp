@@ -3,7 +3,7 @@
  * This file is part of Rehatched
  */
 
-#include "system/System.h"
+#include "system/Log.h"
 #include "sound/impl/LowLevelSoundOAL.h"
 #include "sound/impl/OALSoundData.h"
 #include "sound/impl/OALSoundChannel.h"

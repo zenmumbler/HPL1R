@@ -19,7 +19,7 @@
 #include "resources/FileSearcher.h"
 #include "system/String.h"
 #include "system/Files.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl {
 

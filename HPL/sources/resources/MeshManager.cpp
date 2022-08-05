@@ -18,7 +18,7 @@
  */
 #include "resources/MeshManager.h"
 #include "system/String.h"
-#include "system/System.h"
+#include "system/Log.h"
 #include "resources/Resources.h"
 #include "graphics/Mesh.h"
 #include "resources/MeshLoaderHandler.h"

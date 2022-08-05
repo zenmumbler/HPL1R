@@ -43,7 +43,7 @@
 #include "graphics/ogl2/VertexBufferVBO.h"
 #include "graphics/ogl2/OcclusionQueryOGL.h"
 
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl {
 
@@ -179,7 +179,7 @@ namespace hpl {
 									alWidth, alHeight, mlFlags);
 		if(mpWindow == NULL) {
 			Error("Could not set display mode setting a lower one!\n");
-			mvScreenSize = cVector2l(640,480);
+			mvScreenSize = cVector2l(800,600);
 			mpWindow = SDL_CreateWindow(asWindowCaption.c_str(),
 										SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 										mvScreenSize.x, mvScreenSize.y, mlFlags);
@@ -191,8 +191,7 @@ namespace hpl {
 			}
 			else
 			{
-				CreateMessageBoxW(_W("Warning!"),
-									_W("Could not set displaymode and 640x480 is used instead!\n"));
+				Warning("Could not set displaymode and 800x600 is used instead!\n");
 			}
 		}
 		

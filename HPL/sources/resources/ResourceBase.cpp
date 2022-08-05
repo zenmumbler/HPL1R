@@ -18,7 +18,7 @@
  */
 
 #include "resources/ResourceBase.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl {
 

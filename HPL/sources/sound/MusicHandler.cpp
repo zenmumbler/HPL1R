@@ -24,7 +24,7 @@
 #include "sound/SoundChannel.h"
 #include "sound/SoundData.h"
 #include "resources/SoundManager.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl {
 

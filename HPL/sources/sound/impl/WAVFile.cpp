@@ -7,7 +7,7 @@
 #include <AL/al.h>
 #include "sound/impl/WAVFile.h"
 #include "system/Files.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 struct WAVHeader {
 	uint32_t wavID; // "RIFF"

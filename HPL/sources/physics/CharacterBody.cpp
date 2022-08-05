@@ -28,7 +28,7 @@
 #include "scene/Scene.h"
 #include "scene/World3D.h"
 #include "scene/PortalContainer.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl {
 

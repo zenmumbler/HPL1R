@@ -22,7 +22,7 @@
 #include "sound/SoundData.h"
 #include "sound/LowLevelSound.h"
 #include "system/String.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl {
 

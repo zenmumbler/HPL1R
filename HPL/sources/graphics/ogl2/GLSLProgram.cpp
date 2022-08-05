@@ -6,7 +6,7 @@
 #include "graphics/ogl2/SDLTexture.h"
 #include "system/String.h"
 #include "system/Files.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 #define GL_GLEXT_LEGACY
 #ifdef __APPLE__

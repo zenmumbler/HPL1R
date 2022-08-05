@@ -65,15 +65,6 @@ namespace hpl {
 
 	//--------------------------------------------------------
 
-	typedef enum
-	{
-		eMsgBoxType_Info,
-		eMsgBoxType_Error,
-		eMsgBoxType_Warning,
-		eMsgBoxType_Default
-	} eMsgBoxType;
-
-
 	//////////////////////////////////////////////////
 	///////// DEFINES ///////////////////////////////
 	//////////////////////////////////////////////////
@@ -106,6 +97,22 @@ namespace hpl {
 		int year;
 		int week_day;
 		int year_day;
+
+		static cDate FromGMTIme(struct tm* apClock)
+		{
+			cDate date;
+
+			date.seconds = apClock->tm_sec;
+			date.minutes = apClock->tm_min;
+			date.hours = apClock->tm_hour;
+			date.month_day = apClock->tm_mday;
+			date.month = apClock->tm_mon;
+			date.year = 1900 + apClock->tm_year;
+			date.week_day = apClock->tm_wday;
+			date.year_day = apClock->tm_yday;
+
+			return date;
+		}
 
 		tString ToString() const
 		{
@@ -182,22 +189,6 @@ namespace hpl {
 			return false;
 		}
 	};
-
-	static cDate DateFromGMTIme(struct tm* apClock)
-	{
-		cDate date;
-
-		date.seconds = apClock->tm_sec;
-		date.minutes = apClock->tm_min;
-		date.hours = apClock->tm_hour;
-		date.month_day = apClock->tm_mday;
-		date.month = apClock->tm_mon;
-		date.year = 1900 + apClock->tm_year;
-		date.week_day = apClock->tm_wday;
-		date.year_day = apClock->tm_yday;
-
-		return date;
-	}
 
 	//----------------------------------------------------------
 

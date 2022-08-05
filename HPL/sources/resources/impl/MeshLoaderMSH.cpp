@@ -25,7 +25,7 @@
 #include "resources/MaterialManager.h"
 #include "graphics/Material.h"
 #include "math/Math.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 #include "tinyXML/tinyxml.h"
 

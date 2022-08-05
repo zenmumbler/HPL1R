@@ -20,7 +20,7 @@
 #include "system/String.h"
 #include "tinyXML/tinyxml.h"
 #include "resources/Resources.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl {
 

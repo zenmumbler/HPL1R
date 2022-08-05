@@ -22,7 +22,7 @@
 #include "physics/PhysicsWorld.h"
 #include "physics/SurfaceData.h"
 #include "system/String.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 #include "tinyXML/tinyxml.h"
 

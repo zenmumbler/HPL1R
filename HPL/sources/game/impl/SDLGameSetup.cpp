@@ -28,6 +28,7 @@
 #include "input/impl/LowLevelInputSDL.h"
 #include "sound/impl/LowLevelSoundOAL.h"
 #include "physics/impl/LowLevelPhysicsNewton.h"
+#include "system/Log.h"
 
 #include <SDL2/SDL.h>
 

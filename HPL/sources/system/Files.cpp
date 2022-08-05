@@ -2,6 +2,7 @@
  * 2022 by zenmumbler
  * This file is part of Rehatched
  */
+
 #include "system/Files.h"
 
 #ifdef WIN32
@@ -231,9 +232,7 @@ namespace hpl {
 
 		pClock = gmtime(&(attrib.st_mtime));	// Get the last modified time and put it into the time structure
 
-		cDate date = DateFromGMTIme(pClock);
-
-		return date;
+		return cDate::FromGMTIme(pClock);
 	}
 
 	//-----------------------------------------------------------------------
@@ -251,9 +250,7 @@ namespace hpl {
 
 		pClock = gmtime(&(attrib.st_ctime));	// Get the last modified time and put it into the time structure
 
-		cDate date = DateFromGMTIme(pClock);
-
-		return date;
+		return cDate::FromGMTIme(pClock);
 	}
 
 	//-----------------------------------------------------------------------

@@ -23,7 +23,7 @@
 #include "input/Action.h"
 #include "input/ActionKeyboard.h"
 #include "input/ActionMouseButton.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl
 {

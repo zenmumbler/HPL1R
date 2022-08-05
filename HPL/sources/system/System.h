@@ -23,19 +23,16 @@
 
 namespace hpl {
 
-	void SetLogFile(const tWString &asFile);
-	void FatalError(const char* fmt,... );
-	void Error(const char* fmt, ...);
-	void Warning(const char* fmt, ...);
-	void Log(const char* fmt, ...);
-
-	void SetUpdateLogFile(const tWString &asFile);
-	void ClearUpdateLogFile();
-	void SetUpdateLogActive(bool abX);
-	void LogUpdate(const char* fmt, ...);
-
 //	extern void CreateMessageBox ( const char* asCaption, const char *fmt, ...);
 //	extern void CreateMessageBox ( eMsgBoxType eType, const char* asCaption, const char *fmt, ...);
+
+	typedef enum
+	{
+		eMsgBoxType_Info,
+		eMsgBoxType_Error,
+		eMsgBoxType_Warning,
+		eMsgBoxType_Default
+	} eMsgBoxType;
 
 	void CreateMessageBoxW(const wchar_t* asCaption, const wchar_t* fmt, ...);
 	void CreateMessageBoxW(eMsgBoxType eType, const wchar_t* asCaption, const wchar_t* fmt, ...);

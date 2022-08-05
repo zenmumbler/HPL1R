@@ -22,6 +22,7 @@
 #include "resources/FileSearcher.h"
 #include "resources/ResourceBase.h"
 #include "system/System.h"
+#include "system/Log.h"
 
 #include <algorithm>
 

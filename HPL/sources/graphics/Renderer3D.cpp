@@ -38,6 +38,7 @@
 // #include "graphics/RendererPostEffects.h"
 #include "physics/PhysicsWorld.h"
 #include "physics/PhysicsBody.h"
+#include "system/Log.h"
 
 namespace hpl {
 

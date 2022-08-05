@@ -35,6 +35,7 @@
 #include "scene/Node3D.h"
 
 #include "math/Math.h"
+#include "system/Log.h"
 
 namespace hpl {
 

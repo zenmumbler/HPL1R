@@ -18,7 +18,6 @@
  */
 #include "scene/MeshEntity.h"
 
-
 #include "resources/Resources.h"
 #include "resources/MaterialManager.h"
 #include "resources/MeshManager.h"
@@ -48,6 +47,7 @@
 #include "physics/PhysicsWorld.h"
 
 #include "math/Math.h"
+#include "system/Log.h"
 
 #include "game/Game.h"
 

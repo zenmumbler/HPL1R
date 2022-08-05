@@ -35,7 +35,7 @@
 #include "graphics/BillBoard.h"
 #include "scene/SectorVisibility.h"
 #include "scene/PortalContainer.h"
-
+#include "system/Log.h"
 
 
 namespace hpl {

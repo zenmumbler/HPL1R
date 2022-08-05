@@ -19,6 +19,7 @@
 #include "resources/EntityLoader_Object.h"
 
 #include "system/String.h"
+#include "system/Log.h"
 #include "scene/World3D.h"
 #include "tinyXML/tinyxml.h"
 

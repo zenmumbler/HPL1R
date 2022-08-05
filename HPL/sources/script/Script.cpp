@@ -9,7 +9,7 @@
 #include "resources/ResourceManager.h"
 #include "system/String.h"
 #include "system/Files.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 #include "script/impl/scriptarray.h"
 #include "script/impl/scriptstdstring.h"

@@ -18,7 +18,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#include "system/SystemTypes.h"
+#include "system/System.h"
 
 namespace hpl {
 

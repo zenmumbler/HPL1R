@@ -23,7 +23,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <map>
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl {
 

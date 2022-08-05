@@ -1123,7 +1123,7 @@ bool iGameEnemy::CheckForDoor()
 	cVector3f vEnd = vStart + pBody->GetForward() * 0.4f;
 
 	bool bRet = mDoorCheck.CheckDoor(vStart,vEnd);
-	Log("CheckDoor: %d\n",bRet);
+	Log("CheckDoor: %d\n", bRet ? 1 : 0);
 
 	return bRet;
 }

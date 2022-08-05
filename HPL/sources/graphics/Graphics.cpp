@@ -27,7 +27,7 @@
 #include "graphics/MeshCreator.h"
 #include "game/Updateable.h"
 #include "resources/Resources.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 // Materials
 #ifdef OLD_MATS

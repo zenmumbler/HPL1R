@@ -23,7 +23,7 @@
 #include "physics/PhysicsJoint.h"
 
 #include "math/Math.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl {
 

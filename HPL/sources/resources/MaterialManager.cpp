@@ -16,16 +16,16 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "resources/MaterialManager.h"
 #include "system/String.h"
-#include "system/System.h"
+#include "system/Log.h"
 #include "graphics/Graphics.h"
 #include "resources/TextureManager.h"
 #include "resources/Resources.h"
 #include "graphics/Material.h"
 #include "graphics/MaterialHandler.h"
 #include "tinyXML/tinyxml.h"
-
 
 
 namespace hpl {

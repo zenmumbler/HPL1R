@@ -20,7 +20,7 @@
 
 #include "scene/World3D.h"
 #include "physics/PhysicsBody.h"
-#include "system/System.h"
+#include "system/Log.h"
 #include "system/String.h"
 
 #include "math/Math.h"

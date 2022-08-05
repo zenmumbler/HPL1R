@@ -19,7 +19,7 @@
 
 #include "game/Updater.h"
 #include "game/Updateable.h"
-#include "system/System.h"
+#include "system/Log.h"
 #include "system/UpdateTimerMacros.h"
 
 namespace hpl {

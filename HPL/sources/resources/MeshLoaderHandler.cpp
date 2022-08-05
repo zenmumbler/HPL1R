@@ -22,7 +22,7 @@
 #include "system/String.h"
 #include "resources/Resources.h"
 #include "scene/Scene.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl {
 

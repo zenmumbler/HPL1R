@@ -24,7 +24,7 @@
 #include "math/Math.h"
 #include "scene/Light3D.h"
 #include "scene/SectorVisibility.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 
 namespace hpl {

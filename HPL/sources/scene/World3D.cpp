@@ -56,7 +56,7 @@
 #include "script/Script.h"
 #include "script/ScriptVar.h"
 
-#include "system/System.h"
+#include "system/Log.h"
 #include "system/Files.h"
 
 #include "sound/SoundEntityData.h"

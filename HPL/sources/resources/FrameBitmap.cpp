@@ -18,7 +18,7 @@
  */
 
 #include "resources/FrameBitmap.h"
-#include "system/System.h"
+#include "system/Log.h"
 #include "math/Math.h"
 #include "resources/FrameTexture.h"
 #include "resources/ResourceImage.h"

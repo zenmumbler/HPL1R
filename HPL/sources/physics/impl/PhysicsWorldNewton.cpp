@@ -36,6 +36,7 @@
 #include "graphics/VertexBuffer.h"
 #include "graphics/LowLevelGraphics.h"
 #include "math/Math.h"
+#include "system/Log.h"
 
 namespace hpl {
 

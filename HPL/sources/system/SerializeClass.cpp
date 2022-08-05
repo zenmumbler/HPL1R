@@ -22,7 +22,7 @@
 #include "math/MathTypes.h"
 #include "system/Container.h"
 #include "system/String.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 #include "tinyXML/tinyxml.h"
 

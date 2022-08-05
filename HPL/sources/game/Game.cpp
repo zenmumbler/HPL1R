@@ -19,6 +19,7 @@
 #include "game/Game.h"
 
 #include "system/System.h"
+#include "system/Log.h"
 #include "system/LogicTimer.h"
 #include "system/String.h"
 #include "input/Input.h"

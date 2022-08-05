@@ -27,7 +27,7 @@
 #include "math/Math.h"
 
 #include "system/MemoryManager.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 #include <string.h>
 

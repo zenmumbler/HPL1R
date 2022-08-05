@@ -19,10 +19,11 @@
 #ifndef HPL_HPL_H
 #define HPL_HPL_H
 
-#include "system/System.h"
 #include "system/SystemTypes.h"
+#include "system/System.h"
 #include "system/String.h"
 #include "system/Files.h"
+#include "system/Log.h"
 #include "system/LogicTimer.h"
 #include "system/SerializeClass.h"
 #include "system/Container.h"

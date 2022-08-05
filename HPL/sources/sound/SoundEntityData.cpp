@@ -19,7 +19,7 @@
 #include "sound/SoundEntityData.h"
 #include "resources/Resources.h"
 #include "system/String.h"
-#include "system/System.h"
+#include "system/Log.h"
 #include "tinyXML/tinyxml.h"
 
 

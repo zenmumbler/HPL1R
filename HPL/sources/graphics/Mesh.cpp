@@ -18,7 +18,6 @@
  */
 #include "graphics/Mesh.h"
 
-
 #include "graphics/SubMesh.h"
 #include "resources/MaterialManager.h"
 #include "resources/AnimationManager.h"
@@ -33,6 +32,7 @@
 #include "graphics/ParticleSystem3D.h"
 
 #include "math/Math.h"
+#include "system/Log.h"
 
 #include "physics/PhysicsWorld.h"
 #include "physics/PhysicsBody.h"

@@ -36,7 +36,7 @@
 #include "resources/impl/MeshLoaderGLTF2.h"
 #include "resources/impl/MeshLoaderCollada.h"
 
-#include "system/System.h"
+#include "system/Log.h"
 #include "system/Files.h"
 
 #include "tinyXML/tinyxml.h"

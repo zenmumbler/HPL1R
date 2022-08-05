@@ -34,6 +34,7 @@
 #include "game/Game.h"
 
 #include "math/Math.h"
+#include "system/Log.h"
 
 #include "script/ScriptFuncs.h"
 

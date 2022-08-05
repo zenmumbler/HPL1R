@@ -156,9 +156,8 @@ bool cInit::Init(tString asCommandLine)
 	}
 
 	// LOG FILE SETUP /////////////////////
-	SetLogFile(sPersonalDir+PERSONAL_RELATIVEROOT PERSONAL_RELATIVEGAME _W("hpl.log"));
-	SetUpdateLogFile(sPersonalDir+PERSONAL_RELATIVEROOT PERSONAL_RELATIVEGAME _W("hpl_update.log"));
-
+	SetLogFile(cString::To8Char(sPersonalDir+PERSONAL_RELATIVEROOT PERSONAL_RELATIVEGAME _W("hpl.log")).c_str());
+	SetUpdateLogFile(cString::To8Char(sPersonalDir+PERSONAL_RELATIVEROOT PERSONAL_RELATIVEGAME _W("hpl_update.log")).c_str());
 	
 	// MAIN INIT /////////////////////
 	

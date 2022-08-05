@@ -25,7 +25,7 @@
 #include "resources/LoadImage.h"
 #include "resources/FileSearcher.h"
 #include "graphics/Bitmap.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 namespace hpl {
 

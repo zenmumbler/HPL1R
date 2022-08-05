@@ -29,6 +29,7 @@
 #include "game/Game.h"
 #include "scene/Scene.h"
 #include "scene/World3D.h"
+#include "system/Log.h"
 
 namespace hpl {
 

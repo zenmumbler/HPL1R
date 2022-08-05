@@ -19,6 +19,7 @@
 #include "sound/SoundHandler.h"
 #include "resources/Resources.h"
 #include "system/String.h"
+#include "system/Log.h"
 #include "math/Math.h"
 #include "sound/LowLevelSound.h"
 #include "sound/SoundChannel.h"

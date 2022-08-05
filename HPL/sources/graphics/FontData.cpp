@@ -17,14 +17,12 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "graphics/FontData.h"
-#include <stdarg.h>
-#include <stdlib.h>
 
 #include "graphics/GraphicsDrawer.h"
 
 #include "resources/ResourceImage.h"
 #include "resources/LoadImage.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 #include "tinyXML/tinyxml.h"
 

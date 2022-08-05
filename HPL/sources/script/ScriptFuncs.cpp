@@ -35,7 +35,7 @@
 #include "scene/SoundEntity.h"
 #include "scene/PortalContainer.h"
 #include "input/Input.h"
-#include "system/System.h"
+#include "system/Log.h"
 #include "sound/MusicHandler.h"
 #include "resources/SoundManager.h"
 #include "resources/SoundEntityManager.h"

@@ -5,7 +5,7 @@
 
 #include "resources/impl/MeshLoaderGLTF2.h"
 
-#include "system/System.h"
+#include "system/Log.h"
 #include "system/Files.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/VertexBuffer.h"

@@ -21,7 +21,7 @@
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/VertexBuffer.h"
 #include "system/String.h"
-#include "system/System.h"
+#include "system/Log.h"
 
 #include "scene/Scene.h"
 #include "scene/PortalContainer.h"
