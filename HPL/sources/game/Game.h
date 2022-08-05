@@ -53,25 +53,14 @@ namespace hpl {
 
 	//---------------------------------------------------
 
-	class cSetupVarContainer
-	{
-	public:
-		cSetupVarContainer();
+	struct GameSetupOptions {
+		int ScreenWidth = 800;
+		int ScreenHeight = 600;
+		bool Fullscreen = false;
+		int Multisampling = 0;
 
-		void AddString(const tString& asName, const tString& asValue);
-
-		void AddInt(const tString& asName, int alValue);
-		void AddFloat(const tString& asName, float afValue);
-		void AddBool(const tString& asName, bool abValue);
-
-		const tString& GetString(const tString& asName);
-
-		float GetFloat(const tString& asName, float afDefault);
-		int GetInt(const tString& asName,int alDefault);
-		bool GetBool(const tString& asName, bool abDefault);
-	private:
-		std::map<tString, tString>  m_mapVars;
-		tString msBlank;
+		tString AudioDeviceName{};
+		tString WindowCaption{};
 	};
 
 	//---------------------------------------------------
@@ -79,12 +68,11 @@ namespace hpl {
 	class cGame
 	{
 	public:
-		cGame(iLowLevelGameSetup *apGameSetup, cSetupVarContainer &aVars);
-		cGame(iLowLevelGameSetup *apGameSetup,int alWidth, int alHeight, int alBpp, bool abFullscreen,
-					unsigned int alUpdateRate=60,int alMultisampling=0);
+		cGame(iLowLevelGameSetup *apGameSetup, GameSetupOptions &options);
+		cGame(iLowLevelGameSetup *apGameSetup, int alWidth, int alHeight, bool abFullscreen, int alMultisampling=0);
 		~cGame();
 	private:
-		void GameInit(iLowLevelGameSetup *apGameSetup, cSetupVarContainer &aVars);
+		void GameInit(iLowLevelGameSetup *apGameSetup, GameSetupOptions &options);
 
 	public:
 

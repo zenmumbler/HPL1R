@@ -121,9 +121,6 @@ public:
 	int mlFSAA;
 	eGameDifficulty mDifficulty;
 
-	int mlMaxSoundChannels;
-    int mlStreamUpdateFreq;
-	bool mbUseSoundHardware;
 	tString msDeviceName;
 
 	ePhysicsAccuracy mPhysicsAccuracy;

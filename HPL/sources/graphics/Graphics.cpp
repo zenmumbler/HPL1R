@@ -90,15 +90,15 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cGraphics::Init(	int alWidth, int alHeight, int alBpp, int abFullscreen,
-							int alMultisampling,const tString &asWindowCaption,
-							cResources* apResources)
+	bool cGraphics::Init(int alWidth, int alHeight, bool abFullscreen,
+						 int alMultisampling, const tString &asWindowCaption,
+						 cResources* apResources)
 	{
 		Log("Initializing Graphics Module\n");
 		Log("--------------------------------------------------------\n");
 
 		Log(" Init low level graphics\n");
-		mpLowLevelGraphics->Init(alWidth,alHeight,alBpp,abFullscreen,alMultisampling,asWindowCaption);
+		mpLowLevelGraphics->Init(alWidth, alHeight, abFullscreen, alMultisampling, asWindowCaption);
 
 		Log(" Creating graphic systems\n");
 		mpMaterialHandler = hplNew( cMaterialHandler,(this, apResources));

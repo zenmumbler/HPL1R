@@ -192,14 +192,12 @@ namespace hpl {
 		 * Sets the video mode. Must only be called ONCE!
 		 * \param alWidth
 		 * \param alHeight
-		 * \param alBpp
 		 * \param abFullscreen
 		 * \param alMultiSampling The amount of multisamplimg, 0 = off.
 		 * \return
 		 */
-		virtual bool Init(int alWidth, int alHeight, int alBpp, int abFullscreen, int alMultisampling,
-							const tString& asWindowCaption)=0;
-
+		virtual bool Init(int alWidth, int alHeight, bool abFullscreen, int alMultisampling,
+							const tString& asWindowCaption) = 0;
 
 		/**
 		 * Get the capabilities of the graphics. Th return value depends on the capability

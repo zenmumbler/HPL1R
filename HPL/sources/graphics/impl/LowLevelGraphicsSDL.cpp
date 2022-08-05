@@ -118,7 +118,6 @@ namespace hpl {
 		}
 
 		if (mpWindow) {
-			SDL_SetWindowGammaRamp(mpWindow, mvStartGammaArray[0],mvStartGammaArray[1],mvStartGammaArray[2]);
 			SDL_DestroyWindow(mpWindow);
 			mpWindow = NULL;
 		}
@@ -132,12 +131,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cLowLevelGraphicsSDL::Init(int alWidth, int alHeight, int alBpp, int abFullscreen,
+	bool cLowLevelGraphicsSDL::Init(int alWidth, int alHeight, bool abFullscreen,
 									int alMultisampling, const tString& asWindowCaption)
 	{
 		mvScreenSize.x = alWidth;
 		mvScreenSize.y = alHeight;
-		mlBpp = alBpp;
 
 		mlMultisampling = alMultisampling;
 
@@ -173,7 +171,7 @@ namespace hpl {
 		if(abFullscreen)
 			mlFlags |= SDL_WINDOW_FULLSCREEN;
 
-		Log(" Creating display: %d x %d - %d bpp\n",alWidth, alHeight, alBpp);
+		Log(" Creating display: %d x %d\n", alWidth, alHeight);
 		mpWindow = SDL_CreateWindow(asWindowCaption.c_str(),
 									SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 									alWidth, alHeight, mlFlags);
@@ -207,12 +205,6 @@ namespace hpl {
 
 		//Turn off cursor as default
 		ShowCursor(false);
-
-		//Gamma
-		mfGammaCorrection = 1.0f;
-		SDL_GetWindowGammaRamp(mpWindow, mvStartGammaArray[0],mvStartGammaArray[1],mvStartGammaArray[2]);
-
-		SDL_SetWindowBrightness(mpWindow, mfGammaCorrection);
 
 		//GL
 		Log(" Setting up OpenGL\n");
@@ -440,7 +432,8 @@ namespace hpl {
 
 		mfGammaCorrection = afX;
 
-		SDL_SetWindowBrightness(mpWindow, mfGammaCorrection);
+		// TODO: move gamma correction to a postproc shader
+		//SDL_SetWindowBrightness(mpWindow, mfGammaCorrection);
 	}
 
 	float cLowLevelGraphicsSDL::GetGammaCorrection()
@@ -521,7 +514,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cLowLevelGraphicsSDL::CreateTexture(const cVector2l& avSize,int alBpp,cColor aFillCol,
+	iTexture* cLowLevelGraphicsSDL::CreateTexture(const cVector2l& avSize, int alBpp,cColor aFillCol,
 											bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)
 	{
 		cSDLTexture *pTex=NULL;

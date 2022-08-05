@@ -49,7 +49,7 @@ namespace hpl {
 		cLowLevelGraphicsSDL();
 		~cLowLevelGraphicsSDL();
 
-		bool Init(int alWidth, int alHeight, int alBpp, int abFullscreen, int alMultisampling,
+		bool Init(int alWidth, int alHeight, bool abFullscreen, int alMultisampling,
 					const tString& asWindowCaption) override;
 
 		int GetCaps(eGraphicCaps aType) override;
@@ -188,10 +188,8 @@ namespace hpl {
 		cVector2l mvScreenSize;
 		cVector2f mvVirtualSize;
 		int mlMultisampling;
-		int mlBpp;
 
 		//Gamma
-		Uint16 mvStartGammaArray[3][256];
 		float mfGammaCorrection;
 
 		//Clipping

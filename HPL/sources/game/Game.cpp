@@ -67,73 +67,6 @@ namespace hpl {
 		}
 	}
 
-	//////////////////////////////////////////////////////////////////////////
-	// SETUP VAR CONTAINER
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	cSetupVarContainer::cSetupVarContainer()
-	{
-		msBlank = "";
-	}
-
-	//-----------------------------------------------------------------------
-
-
-	void cSetupVarContainer::AddString(const tString& asName, const tString& asValue)
-	{
-		m_mapVars.insert({asName, asValue});
-	}
-
-	void cSetupVarContainer::AddInt(const tString& asName, int alValue)
-	{
-		AddString(asName, cString::ToString(alValue));
-	}
-	void cSetupVarContainer::AddFloat(const tString& asName, float afValue)
-	{
-		AddString(asName, cString::ToString(afValue));
-	}
-	void cSetupVarContainer::AddBool(const tString& asName, bool abValue)
-	{
-		AddString(asName, abValue ? "true" : "false");
-	}
-
-	//-----------------------------------------------------------------------
-
-
-	const tString& cSetupVarContainer::GetString(const tString& asName)
-	{
-		std::map<tString, tString>::iterator it = m_mapVars.find(asName);
-		if(it == m_mapVars.end()) return msBlank;
-		else return it->second;
-	}
-
-	float cSetupVarContainer::GetFloat(const tString& asName, float afDefault)
-	{
-		const tString& sVal = GetString(asName);
-		if(sVal == "")
-			return afDefault;
-		else
-			return cString::ToFloat(sVal.c_str(),afDefault);
-	}
-	int cSetupVarContainer::GetInt(const tString& asName, int alDefault)
-	{
-		const tString& sVal = GetString(asName);
-		if(sVal == "")
-			return alDefault;
-		else
-			return cString::ToInt(sVal.c_str(),alDefault);
-	}
-	bool cSetupVarContainer::GetBool(const tString& asName, bool abDefault)
-	{
-		const tString& sVal = GetString(asName);
-		if(sVal == "")
-			return abDefault;
-		else
-			return cString::ToBool(sVal.c_str(),abDefault);
-	}
-
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////
@@ -142,30 +75,27 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cGame::cGame(iLowLevelGameSetup *apGameSetup, cSetupVarContainer &aVars)
+	cGame::cGame(iLowLevelGameSetup *apGameSetup, GameSetupOptions &options)
 	{
-		GameInit(apGameSetup,aVars);
+		GameInit(apGameSetup, options);
 	}
 
 
 	//-----------------------------------------------------------------------
 
-	cGame::cGame(iLowLevelGameSetup *apGameSetup,int alWidth, int alHeight, int alBpp, bool abFullscreen,
-					unsigned int alUpdateRate,int alMultisampling)
+	cGame::cGame(iLowLevelGameSetup *apGameSetup, int alWidth, int alHeight, bool abFullscreen, int alMultisampling)
 	{
-		cSetupVarContainer Vars;
-		Vars.AddInt("ScreenWidth",alWidth);
-		Vars.AddInt("ScreenHeight",alHeight);
-		Vars.AddInt("ScreenBpp",alBpp);
-		Vars.AddBool("Fullscreen",abFullscreen);
-		Vars.AddInt("Multisampling",alMultisampling);
-		Vars.AddInt("LogicUpdateRate",alUpdateRate);
-		GameInit(apGameSetup,Vars);
+		GameSetupOptions options{};
+		options.ScreenWidth = alWidth;
+		options.ScreenHeight = alHeight;
+		options.Fullscreen = abFullscreen;
+		options.Multisampling = alMultisampling;
+		GameInit(apGameSetup, options);
 	}
 
 	//-----------------------------------------------------------------------
 
-	void cGame::GameInit(iLowLevelGameSetup *apGameSetup, cSetupVarContainer &aVars)
+	void cGame::GameInit(iLowLevelGameSetup *apGameSetup, GameSetupOptions &options)
 	{
 		mpGameSetup = apGameSetup;
 
@@ -204,16 +134,15 @@ namespace hpl {
 		mpResources->Init(mpGraphics, mpSound, mpScript, mpScene);
 
 		//Init the graphics
-		mpGraphics->Init(aVars.GetInt("ScreenWidth",800),
-			aVars.GetInt("ScreenHeight",600),
-			aVars.GetInt("ScreenBpp",32),
-			aVars.GetBool("Fullscreen",false),
-			aVars.GetInt("Multisampling",0),
-			aVars.GetString("WindowCaption"),
+		mpGraphics->Init(options.ScreenWidth,
+			options.ScreenHeight,
+			options.Fullscreen,
+			options.Multisampling,
+			options.WindowCaption,
 			mpResources);
 
 		//Init Sound
-		mpSound->Init(mpResources, aVars.GetString("DeviceName"));
+		mpSound->Init(mpResources, options.AudioDeviceName);
 
 		//Init physics
 		mpPhysics->Init(mpResources);
@@ -241,14 +170,14 @@ namespace hpl {
 		mpUpdater->SetContainer("Default");
 
 		//Create the logic timer.
-		mpLogicTimer = hplNew(cLogicTimer, (aVars.GetInt("LogicUpdateRate", 60)));
+		mpLogicTimer = new cLogicTimer(60);
 
 		//Init some standard script funcs
 		Log(" Initializing script functions\n");
 		RegisterCoreFunctions(mpScript,mpGraphics,mpResources,mpInput,mpScene,mpSound,this);
 
 		//Since game is not done:
-		mbGameIsDone=false;
+		mbGameIsDone = false;
 
 		mbRenderOnce = false;
 

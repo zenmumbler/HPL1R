@@ -158,7 +158,7 @@ bool cInit::Init(tString asCommandLine)
 	// LOG FILE SETUP /////////////////////
 	SetLogFile(cString::To8Char(sPersonalDir+PERSONAL_RELATIVEROOT PERSONAL_RELATIVEGAME _W("hpl.log")).c_str());
 	SetUpdateLogFile(cString::To8Char(sPersonalDir+PERSONAL_RELATIVEROOT PERSONAL_RELATIVEGAME _W("hpl_update.log")).c_str());
-	
+
 	// MAIN INIT /////////////////////
 	
 	//Check for what settings file to use.
@@ -232,41 +232,23 @@ bool cInit::Init(tString asCommandLine)
 	mPhysicsAccuracy = (ePhysicsAccuracy)mpConfig->GetInt("Physics","Accuracy",ePhysicsAccuracy_High);
 	mfPhysicsUpdatesPerSec = mpConfig->GetFloat("Physics","UpdatesPerSec",60.0f);
 
-	mlMaxSoundChannels = mpConfig->GetInt("Sound","MaxSoundChannels",32);
-	mbUseSoundHardware = mpConfig->GetBool("Sound","UseSoundHardware",false);
-	//mbForceGenericSoundDevice = mpConfig->GetBool("Sound", "ForceGeneric", false);
-	mlStreamUpdateFreq = mpConfig->GetInt("Sound","StreamUpdateFreq",10);
 	msDeviceName = mpConfig->GetString("Sound","DeviceName","NULL");
 
 	iGpuProgram::SetLogDebugInformation(false);
 	iResourceBase::SetLogCreateAndDelete(mbLogResources);
 
-	cSetupVarContainer Vars;
-	Vars.AddInt("ScreenWidth",mvScreenSize.x);
-	Vars.AddInt("ScreenHeight",mvScreenSize.y);
-	Vars.AddInt("ScreenBpp",32);
-	Vars.AddBool("Fullscreen",mbFullScreen);
-	Vars.AddInt("Multisampling",mlFSAA);
-	Vars.AddInt("LogicUpdateRate",60);
-	Vars.AddBool("UseSoundHardware",mbUseSoundHardware);
-	Vars.AddBool("ForceGeneric", mpConfig->GetBool("Sound", "ForceGeneric", false));
-	Vars.AddInt("MaxSoundChannels",mlMaxSoundChannels);
-	Vars.AddInt("StreamUpdateFreq",mlStreamUpdateFreq);
-	Vars.AddBool("UseVoiceManagement", mpConfig->GetBool("Sound","UseVoiceManagement",true));
-	Vars.AddInt("StreamBufferSize",mpConfig->GetInt("Sound", "StreamBufferSize", 64));
-	Vars.AddInt("StreamBufferCount",mpConfig->GetInt("Sound", "StreamBufferCount", 4));
-	Vars.AddString("DeviceName",mpConfig->GetString("Sound", "DeviceName", "NULL"));
-	Vars.AddString("WindowCaption", "Penumbra");
-
-	Vars.AddBool("LowLevelSoundLogging", mpConfig->GetBool("Sound","LowLevelLogging", false));
+	GameSetupOptions options;
+	options.ScreenWidth = mvScreenSize.x;
+	options.ScreenHeight = mvScreenSize.y;
+	options.Fullscreen = mbFullScreen;
+	options.Multisampling = mlFSAA;
+	options.AudioDeviceName = mpConfig->GetString("Sound", "DeviceName", "NULL");
+	options.WindowCaption = "Penumbra Overture";
 
 	iLowLevelGameSetup *pSetUp = NULL;
 
-	pSetUp = hplNew( cSDLGameSetup, () );
-	mpGame = hplNew( cGame, ( pSetUp,Vars) );
-
-	//Make sure hardware is really used.
-	mbUseSoundHardware = mpGame->GetSound()->GetLowLevel()->IsHardwareAccelerated();
+	pSetUp = new cSDLGameSetup();
+	mpGame = new cGame(pSetUp, options);
 
 	mpGame->GetGraphics()->GetLowLevel()->SetVsyncActive(mbVsync);
 
@@ -590,9 +572,6 @@ void cInit::Exit()
 	mpConfig->GetBool("Graphics", "Refractions", mpGame->GetGraphics()->GetRenderer3D()->GetRefractionUsed());
 	
 	mpConfig->SetFloat("Sound","Volume",mpGame->GetSound()->GetLowLevel()->GetVolume());
-	mpConfig->SetBool("Sound","UseSoundHardware", mbUseSoundHardware);
-	mpConfig->SetInt("Sound","MaxSoundChannels",mlMaxSoundChannels);
-	mpConfig->SetInt("Sound","StreamUpdateFreq",mlStreamUpdateFreq);
 	mpConfig->SetString("Sound","DeviceName",msDeviceName);
 
 	mpConfig->SetInt("Graphics","TextureSizeLevel",mpGame->GetResources()->GetMaterialManager()->GetTextureSizeLevel());
