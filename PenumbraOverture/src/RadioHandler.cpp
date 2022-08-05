@@ -73,7 +73,7 @@ void cRadioHandler::Add(const tWString& asText, const tString& asSound)
 {
 	if(mlstMessages.empty())msPrevText = _W("");
 
-	cRadioMessage *pMess = hplNew( cRadioMessage, (asText, asSound) );
+	cRadioMessage *pMess = new cRadioMessage(asText, asSound);
 	mlstMessages.push_back(pMess);
 }
 
@@ -95,7 +95,7 @@ void cRadioHandler::Update(float afTimeStep)
 		{
 			msCurrentText = _W("");
 			msPrevText = mpCurrentMessage->msText;
-			hplDelete( mpCurrentMessage );
+			delete  mpCurrentMessage ;
 			mpCurrentMessage = NULL;
 
 			if(mlstMessages.empty() && msOnEndCallback != "")

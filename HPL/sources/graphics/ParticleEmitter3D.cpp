@@ -99,7 +99,7 @@ namespace hpl {
 
 	iParticleEmitter3D::~iParticleEmitter3D()
 	{
-		hplDelete(mpVtxBuffer);
+		delete mpVtxBuffer;
 	}
 
 	//-----------------------------------------------------------------------
@@ -639,7 +639,7 @@ namespace hpl {
 
 	iSaveData* iParticleEmitter3D::CreateSaveData()
 	{
-		//return hplNew( cSaveData_iParticleEmitter3D, () );
+		//return new cSaveData_iParticleEmitter3D();
 		return NULL;
 	}
 

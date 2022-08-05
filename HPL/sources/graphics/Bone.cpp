@@ -59,7 +59,7 @@ namespace hpl {
 
 	cBone* cBone::CreateChildBone(const tString &asName)
 	{
-		cBone *pBone = hplNew(cBone,(asName, mpSkeleton) );
+		cBone *pBone = new cBone(asName, mpSkeleton);
 		pBone->mpParent = this;
 
 		mlstChildren.push_back(pBone);

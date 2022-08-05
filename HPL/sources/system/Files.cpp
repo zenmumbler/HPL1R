@@ -63,7 +63,7 @@ namespace hpl {
 		alLength = static_cast<uint32_t>(ftell(pFile));
 		fseek(pFile, 0, SEEK_SET);
 
-		char *pBuffer = hplNewArray(char, alLength);
+		char *pBuffer = new char[alLength];
 		fread(pBuffer, alLength, 1, pFile);
 
 		fclose(pFile);

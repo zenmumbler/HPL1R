@@ -76,7 +76,7 @@ namespace hpl {
 			if(sExt == "fnt")
 			{
 				if(pFont->CreateFromBitmapFile(sPath)==false){
-					hplDelete(pFont);
+					delete pFont;
 					EndLoad();
 					return NULL;
 				}
@@ -84,7 +84,7 @@ namespace hpl {
 			else
 			{
 				Error("Font '%s' has an unkown extension!\n",asName.c_str());
-				hplDelete(pFont);
+				delete pFont;
 				EndLoad();
 				return NULL;
 			}
@@ -114,7 +114,7 @@ namespace hpl {
 
 		if(apResource->HasUsers()==false){
 			RemoveResource(apResource);
-			hplDelete(apResource);
+			delete apResource;
 		}
 	}
 

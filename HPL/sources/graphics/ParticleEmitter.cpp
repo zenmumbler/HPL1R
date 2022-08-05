@@ -77,7 +77,7 @@ namespace hpl {
 		mvParticles.resize(alMaxParticles);
 		for(int i=0;i<(int)alMaxParticles;i++)
 		{
-			mvParticles[i] = hplNew( cParticle, () );
+			mvParticles[i] = new cParticle();
 		}
 		mlMaxParticles = alMaxParticles;
 		mlNumOfParticles =0;
@@ -98,7 +98,7 @@ namespace hpl {
 	iParticleEmitter::~iParticleEmitter()
 	{
 		for(int i=0;i<(int)mvParticles.size();i++){
-			hplDelete(mvParticles[i]);
+			delete mvParticles[i];
 		}
 	}
 

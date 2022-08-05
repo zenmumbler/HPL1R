@@ -66,7 +66,7 @@ namespace hpl {
 
 	cKeyFrame* cAnimationTrack::CreateKeyFrame(float afTime)
 	{
-		cKeyFrame* pFrame = hplNew( cKeyFrame,());
+		cKeyFrame* pFrame = new cKeyFrame();
 		pFrame->time = afTime;
 
 		//Check so that this is the first

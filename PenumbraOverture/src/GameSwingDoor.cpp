@@ -57,7 +57,7 @@ void cEntityLoader_GameSwingDoor::BeforeLoad(TiXmlElement *apRootElem, const cMa
 void cEntityLoader_GameSwingDoor::AfterLoad(TiXmlElement *apRootElem, const cMatrixf &a_mtxTransform,
 										 cWorld3D *apWorld)
 {
-	cGameSwingDoor *pObject = hplNew( cGameSwingDoor, (mpInit,mpEntity->GetName()) );
+	cGameSwingDoor *pObject = new cGameSwingDoor(mpInit,mpEntity->GetName());
 
 	pObject->msFileName = msFileName;
 	pObject->m_mtxOnLoadTransform = a_mtxTransform;
@@ -378,7 +378,7 @@ void cGameSwingDoor::SetupBreakObject()
 	{
 		cParticleSystem3D *pPS  = mpInit->mpGame->GetResources()->GetParticleManager()->CreatePS3D(
 			"",msBreakPS,1,cMatrixf::Identity);
-		hplDelete( pPS );
+		delete  pPS ;
 	}
 	if(msBreakSound!="")
 	{
@@ -416,7 +416,7 @@ iGameEntity* cGameSwingDoor_SaveData::CreateEntity()
 
 iGameEntity_SaveData* cGameSwingDoor::CreateSaveData()
 {
-	return hplNew( cGameSwingDoor_SaveData, () );
+	return new cGameSwingDoor_SaveData();
 }
 
 //-----------------------------------------------------------------------

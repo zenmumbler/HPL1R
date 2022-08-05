@@ -124,7 +124,7 @@ namespace hpl {
 			if(pJoint->CheckBreakage())
 			{
 				JointIt = mlstJoints.erase(JointIt);
-				hplDelete(pJoint);
+				delete pJoint;
 			}
 			else
 			{
@@ -166,7 +166,7 @@ namespace hpl {
 			{
 				if(mpWorld3D) mpWorld3D->GetPortalContainer()->RemoveEntity(pBody);
 				pBody->Destroy();
-				hplDelete(pBody);
+				delete pBody;
 				mlstBodies.erase(it);
 				return;
 			}
@@ -283,7 +283,7 @@ namespace hpl {
 		{
 			iPhysicsBody *pBody = *it;
 			pBody->Destroy();
-			hplDelete(pBody);
+			delete pBody;
 		}
 		mlstBodies.clear();
 

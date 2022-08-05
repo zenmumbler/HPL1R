@@ -412,9 +412,7 @@ namespace hpl {
 
 	iVertexBuffer* cVertexBufferVBO::CreateCopy(eVertexBufferUsageType aUsageType)
 	{
-		cVertexBufferVBO *pVtxBuff = hplNew( cVertexBufferVBO, (mpLowLevelGraphics,
-															mVertexFlags,mDrawType,aUsageType,
-															GetVertexNum(),GetIndexNum()));
+		cVertexBufferVBO *pVtxBuff = new cVertexBufferVBO(mpLowLevelGraphics, mVertexFlags,mDrawType,aUsageType, GetVertexNum(),GetIndexNum());
 
 		//Copy the vertices to the new buffer.
 		for(int i=0; i < klNumOfVertexFlags; i++)

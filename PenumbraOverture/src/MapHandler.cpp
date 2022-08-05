@@ -158,10 +158,10 @@ cMapHandlerSoundCallback::cMapHandlerSoundCallback(cInit *apInit)
 	///////////////////////////////////////////
 	//Load all sounds that can heard by enemies
 	tString sFile = "sounds/EnemySounds.dat";
-	TiXmlDocument* pXmlDoc = hplNew( TiXmlDocument, (sFile.c_str()) );
+	TiXmlDocument* pXmlDoc = new TiXmlDocument(sFile.c_str());
 	if(pXmlDoc->LoadFile()==false){
 		Error("Couldn't load XML file '%s'!\n",sFile.c_str());
-		hplDelete( pXmlDoc );	return;
+		delete  pXmlDoc ;	return;
 	}
 
 	//Get the root.
@@ -174,7 +174,7 @@ cMapHandlerSoundCallback::cMapHandlerSoundCallback(cInit *apInit)
 		mvEnemyHearableSounds.push_back(sName);
 	}
 
-	hplDelete( pXmlDoc );
+	delete  pXmlDoc ;
 }
 
 //-----------------------------------------------------------------------
@@ -197,7 +197,7 @@ void cMapHandlerSoundCallback::OnStart(cSoundEntity *apSoundEntity)
 	if(bUsed == false) return;
 
 	//Add a sound trigger
-	cGameTrigger_Sound *pSound = hplNew( cGameTrigger_Sound, () );
+	cGameTrigger_Sound *pSound = new cGameTrigger_Sound();
 	pSound->mpSound = apSoundEntity->GetData();
 	mpInit->mpTriggerHandler->Add(pSound, eGameTriggerType_Sound,
 									apSoundEntity->GetWorldPosition(),
@@ -286,7 +286,7 @@ cMapHandler::cMapHandler(cInit *apInit) : iUpdateable("MapHandler")
 	mpScene = apInit->mpGame->GetScene();
 	mpResources = apInit->mpGame->GetResources();
 
-	mpWorldCache = hplNew( cWorldCache, (apInit) );
+	mpWorldCache = new cWorldCache(apInit);
 
 	mfGameTime =0;
 
@@ -294,7 +294,7 @@ cMapHandler::cMapHandler(cInit *apInit) : iUpdateable("MapHandler")
 
 	Reset();
 
-	mpSoundCallback = hplNew( cMapHandlerSoundCallback, (apInit) );
+	mpSoundCallback = new cMapHandlerSoundCallback(apInit);
 	cSoundEntity::AddGlobalCallback(mpSoundCallback);
 
 	mpMapChangeTexture = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("other_mapchange.jpg",false);
@@ -306,8 +306,8 @@ cMapHandler::~cMapHandler(void)
 {
 	if(mpMapChangeTexture)mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mpMapChangeTexture);
 	
-	hplDelete(mpSoundCallback );
-	hplDelete( mpWorldCache );
+	delete mpSoundCallback ;
+	delete  mpWorldCache ;
 }
 
 //-----------------------------------------------------------------------
@@ -811,7 +811,7 @@ void cMapHandler::LoadSaveData(cSavedWorld* apSavedWorld)
 	{
 		cGameTimer& savedTimer = timerIt.Next();
 
-        cGameTimer *pTimer = hplNew( cGameTimer, () );
+        cGameTimer *pTimer = new cGameTimer();
 		*pTimer = savedTimer;
 
 		mlstTimers.push_back(pTimer);
@@ -1311,7 +1311,7 @@ void cMapHandler::Update(float afTimeStep)
 		pFlash->Update(afTimeStep);
 		if(pFlash->IsDead())
 		{
-			hplDelete( pFlash );
+			delete  pFlash ;
 			FlashIt = mlstLightFlashes.erase(FlashIt);
 		}
 		else
@@ -1346,7 +1346,7 @@ void cMapHandler::Update(float afTimeStep)
 			if(pEntity->GetBreakMe()) pEntity->BreakAction();
 			
 			m_mapGameEntities.erase(GIt++);
-			hplDelete( pEntity );
+			delete  pEntity ;
 			//LogUpdate("    done destroying\n");
 		}
 		else
@@ -1447,7 +1447,7 @@ void cMapHandler::DestroyAll()
 
 cGameTimer * cMapHandler::CreateTimer(const tString& asName,float afTime, const tString& asCallback, bool abGlobal)
 {
-	cGameTimer *pTimer = hplNew( cGameTimer, () );
+	cGameTimer *pTimer = new cGameTimer();
 
 	pTimer->msName = asName;
 	pTimer->msCallback = asCallback;
@@ -1468,7 +1468,7 @@ cGameTimer * cMapHandler::GetTimer(const tString& asName)
 
 void cMapHandler::AddLightFlash(const cVector3f& avPos,float afRadius, const cColor &aColor, float afAddTime, float afNegTime)
 {
-	cEffectLightFlash *pFlash = hplNew( cEffectLightFlash, (mpInit,avPos,afRadius,aColor,afAddTime,afNegTime) );
+	cEffectLightFlash *pFlash = new cEffectLightFlash(mpInit,avPos,afRadius,aColor,afAddTime,afNegTime);
 
 	mlstLightFlashes.push_back(pFlash);
 }
@@ -1581,7 +1581,7 @@ void cMapHandler::RemoveGameEntity(iGameEntity *apEntity)
 		}
 	}
 
-	hplDelete( apEntity );
+	delete  apEntity ;
 }
 
 iGameEntity* cMapHandler::GetGameEntity(const tString &asName, bool abErrorMessage)
@@ -1680,7 +1680,7 @@ void cMapHandler::LoadFromGlobal(cMapHandler_GlobalSave *apSave)
 	cContainerListIterator<cMapHandlerTimer_GlobalSave> it = pData->mlstTimers.GetIterator();
 	while(it.HasNext())
 	{
-		cGameTimer *pTimer = hplNew( cGameTimer, () );
+		cGameTimer *pTimer = new cGameTimer();
 		cMapHandlerTimer_GlobalSave &timerSave = it.Next();
 
 		pTimer->mfTime = timerSave.mfTime;
@@ -1726,7 +1726,7 @@ void cMapHandler::UpdateTimers(float afTimeStep)
         if(pTimer->mbDeleteMe)
 		{
 			it = mlstTimers.erase(it);
-			hplDelete( pTimer );
+			delete  pTimer ;
 		}
 		else
 		{
@@ -1739,7 +1739,7 @@ void cMapHandler::UpdateTimers(float afTimeStep)
 				mpInit->RunScriptCommand(sCommand);	
 
 				it = mlstTimers.erase(it);
-				hplDelete( pTimer );
+				delete  pTimer ;
 			}
 			else
 			{
@@ -1758,7 +1758,7 @@ void cMapHandler::RemoveLocalTimers()
 		if(pTimer->mbGlobal==false)
 		{
 			it = mlstTimers.erase(it);
-			hplDelete( pTimer );
+			delete  pTimer ;
 		}
 		else
 		{

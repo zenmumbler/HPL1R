@@ -93,7 +93,7 @@ namespace hpl {
 
 		mpVtxBuffer->Compile(eVertexCompileFlag_CreateTangents);
 
-		mpEnd = hplNew( cBeamEnd, (asName + "_end",this));
+		mpEnd = new cBeamEnd(asName + "_end",this);
 		mpEnd->AddCallback(&mEndCallback);
 
 		//Some temp setup
@@ -106,9 +106,9 @@ namespace hpl {
 
 	cBeam::~cBeam()
 	{
-		hplDelete(mpEnd);
+		delete mpEnd;
 		if(mpMaterial) mpMaterialManager->Destroy(mpMaterial);
-		if(mpVtxBuffer) hplDelete(mpVtxBuffer);
+		if(mpVtxBuffer) delete mpVtxBuffer;
 	}
 
 	//-----------------------------------------------------------------------
@@ -355,7 +355,7 @@ namespace hpl {
 		tString sPath = mpFileSearcher->GetFilePath(sNewFile);
 		if(sPath != "")
 		{
-			TiXmlDocument *pDoc = hplNew( TiXmlDocument, (sPath.c_str()) );
+			TiXmlDocument *pDoc = new TiXmlDocument(sPath.c_str());
 			if(pDoc->LoadFile())
 			{
 				TiXmlElement *pRootElem = pDoc->RootElement();
@@ -401,7 +401,7 @@ namespace hpl {
 			{
 				Error("Couldn't load file '%s'\n",sNewFile.c_str());
 			}
-			hplDelete(pDoc);
+			delete pDoc;
 		}
 		else
 		{

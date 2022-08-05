@@ -57,7 +57,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	//Definition to make the error exit not so bloated.
-	#define ExitLoad() hplDelete(pMesh); hplDelete(pXmlDoc); return NULL;
+	#define ExitLoad() delete pMesh; delete pXmlDoc; return NULL;
 
 	cWorld3D* cMeshLoaderMSH::LoadWorld(const tString& asFile, cScene* apScene,tWorldLoadFlag aFlags)
 	{
@@ -68,14 +68,14 @@ namespace hpl {
 
 	cMesh* cMeshLoaderMSH::LoadMesh(const tString& asFile,tMeshLoadFlag aFlags)
 	{
-		cMesh* pMesh = hplNew( cMesh, (cString::GetFileName(asFile),mpMaterialManager,mpAnimationManager) );
+		cMesh* pMesh = new cMesh(cString::GetFileName(asFile),mpMaterialManager,mpAnimationManager);
 		//If the mesh is animated there are some property differences, the vertex buffer
 		//Must be Stream instead of static for example.
 		bool bIsAnimated = false;
 
 		/////////////////////////////////////////////////
 		// LOAD THE DOCUMENT
-		TiXmlDocument* pXmlDoc = hplNew( TiXmlDocument, (asFile.c_str()) );
+		TiXmlDocument* pXmlDoc = new TiXmlDocument(asFile.c_str());
 		if(pXmlDoc->LoadFile()==false)
 		{
 			Error("Couldn't load XML file '%s'!\n",asFile.c_str());
@@ -191,7 +191,7 @@ namespace hpl {
 
 
 
-		hplDelete(pXmlDoc);
+		delete pXmlDoc;
 
 		return pMesh;
 	}
@@ -200,7 +200,7 @@ namespace hpl {
 
 	bool cMeshLoaderMSH::SaveMesh(cMesh* apMesh, const tString& asFile)
 	{
-		TiXmlDocument* pXmlDoc = hplNew( TiXmlDocument, (asFile.c_str()) );
+		TiXmlDocument* pXmlDoc = new TiXmlDocument(asFile.c_str());
 
 		//Root
 		TiXmlElement XmlRoot("HPL_Mesh");
@@ -257,7 +257,7 @@ namespace hpl {
 		if(bRet==false)
 			Error("Couldn't save mesh to '%s'", asFile.c_str());
 
-		hplDelete(pXmlDoc);
+		delete pXmlDoc;
 		return bRet;
 	}
 

@@ -66,14 +66,14 @@ namespace hpl {
 		/////////////////////////////////
 		//Create default material.
 		int lDefaultMatId = 0;//NewtonMaterialGetDefaultGroupID(mpNewtonWorld);
-		cPhysicsMaterialNewton *pMaterial = hplNew( cPhysicsMaterialNewton, ("Default",this,lDefaultMatId) );
+		cPhysicsMaterialNewton *pMaterial = new cPhysicsMaterialNewton("Default",this,lDefaultMatId);
 		tPhysicsMaterialMap::value_type Val("Default",pMaterial);
 		m_mapMaterials.insert(Val);
 		pMaterial->UpdateMaterials();
 
-		mpTempDepths = hplNewArray( float,500);
-		mpTempNormals = hplNewArray( float,500 * 3);
-		mpTempPoints = hplNewArray( float,500 * 3);
+		mpTempDepths = new float[500];
+		mpTempNormals = new float[500 * 3];
+		mpTempPoints = new float[500 * 3];
 	}
 
 	//-----------------------------------------------------------------------
@@ -83,9 +83,9 @@ namespace hpl {
 		DestroyAll();
 		NewtonDestroy(mpNewtonWorld);
 
-		hplDeleteArray(mpTempDepths);
-		hplDeleteArray(mpTempNormals);
-		hplDeleteArray(mpTempPoints);
+		delete[] mpTempDepths;
+		delete[] mpTempNormals;
+		delete[] mpTempPoints;
 	}
 
 	//-----------------------------------------------------------------------
@@ -204,8 +204,7 @@ namespace hpl {
 
 	iCollideShape* cPhysicsWorldNewton::CreateNullShape()
 	{
-		iCollideShape *pShape = hplNew( cCollideShapeNewton, (eCollideShapeType_Null, 0, NULL,
-													mpNewtonWorld, this) );
+		iCollideShape *pShape = new cCollideShapeNewton(eCollideShapeType_Null, 0, NULL, mpNewtonWorld, this);
 		mlstShapes.push_back(pShape);
 
 		return pShape;
@@ -215,8 +214,7 @@ namespace hpl {
 
 	iCollideShape* cPhysicsWorldNewton::CreateBoxShape(const cVector3f &avSize, cMatrixf* apOffsetMtx)
 	{
-		iCollideShape *pShape = hplNew( cCollideShapeNewton, (eCollideShapeType_Box, avSize, apOffsetMtx,
-													mpNewtonWorld, this) );
+		iCollideShape *pShape = new cCollideShapeNewton(eCollideShapeType_Box, avSize, apOffsetMtx, mpNewtonWorld, this);
 		mlstShapes.push_back(pShape);
 
 		return pShape;
@@ -226,8 +224,7 @@ namespace hpl {
 
 	iCollideShape* cPhysicsWorldNewton::CreateSphereShape(const cVector3f &avRadii, cMatrixf* apOffsetMtx)
 	{
-		iCollideShape *pShape = hplNew( cCollideShapeNewton, (eCollideShapeType_Sphere, avRadii, apOffsetMtx,
-														mpNewtonWorld, this) );
+		iCollideShape *pShape = new cCollideShapeNewton(eCollideShapeType_Sphere, avRadii, apOffsetMtx, mpNewtonWorld, this);
 		mlstShapes.push_back(pShape);
 
 		return pShape;
@@ -237,10 +234,10 @@ namespace hpl {
 
 	iCollideShape* cPhysicsWorldNewton::CreateCylinderShape(float afRadius, float afHeight, cMatrixf* apOffsetMtx)
 	{
-		iCollideShape *pShape = hplNew( cCollideShapeNewton, (eCollideShapeType_Cylinder,
+		iCollideShape *pShape = new cCollideShapeNewton(eCollideShapeType_Cylinder,
 													cVector3f(afRadius,afHeight,afRadius),
 													apOffsetMtx,
-													mpNewtonWorld, this) );
+													mpNewtonWorld, this);
 		mlstShapes.push_back(pShape);
 
 		return pShape;
@@ -250,10 +247,10 @@ namespace hpl {
 
 	iCollideShape* cPhysicsWorldNewton::CreateCapsuleShape(float afRadius, float afHeight, cMatrixf* apOffsetMtx)
 	{
-		iCollideShape *pShape = hplNew( cCollideShapeNewton, (eCollideShapeType_Capsule,
+		iCollideShape *pShape = new cCollideShapeNewton(eCollideShapeType_Capsule,
 													cVector3f(afRadius,afHeight,afRadius),
 													apOffsetMtx,
-													mpNewtonWorld, this) );
+													mpNewtonWorld, this);
 		mlstShapes.push_back(pShape);
 
 		return pShape;
@@ -263,8 +260,7 @@ namespace hpl {
 
 	iCollideShape* cPhysicsWorldNewton::CreateMeshShape(iVertexBuffer *apVtxBuffer)
 	{
-		cCollideShapeNewton *pShape = hplNew( cCollideShapeNewton, (eCollideShapeType_Mesh,
-															0, NULL, mpNewtonWorld,this) );
+		cCollideShapeNewton *pShape = new cCollideShapeNewton(eCollideShapeType_Mesh, 0, NULL, mpNewtonWorld,this);
 
 		pShape->CreateFromVertices(apVtxBuffer->GetIndices(),apVtxBuffer->GetIndexNum(),
 									apVtxBuffer->GetArray(eVertexFlag_Position),
@@ -279,8 +275,7 @@ namespace hpl {
 
 	iCollideShape* cPhysicsWorldNewton::CreateCompundShape(tCollideShapeVec &avShapes)
 	{
-		cCollideShapeNewton *pShape = hplNew( cCollideShapeNewton, (eCollideShapeType_Compound,
-															0, NULL, mpNewtonWorld,this) );
+		cCollideShapeNewton *pShape = new cCollideShapeNewton(eCollideShapeType_Compound, 0, NULL, mpNewtonWorld,this);
 		pShape->CreateFromShapeVec(avShapes);
 		mlstShapes.push_back(pShape);
 
@@ -293,8 +288,7 @@ namespace hpl {
 										const cVector3f& avPivotPoint, const cVector3f& avPinDir,
 										iPhysicsBody* apParentBody, iPhysicsBody *apChildBody)
 	{
-		iPhysicsJointBall *pJoint = hplNew( cPhysicsJointBallNewton, (asName,apParentBody,apChildBody,this,
-														avPivotPoint, avPinDir) );
+		iPhysicsJointBall *pJoint = new cPhysicsJointBallNewton(asName,apParentBody,apChildBody,this,avPivotPoint, avPinDir);
 		mlstJoints.push_back(pJoint);
 		return pJoint;
 	}
@@ -303,8 +297,7 @@ namespace hpl {
 										const cVector3f& avPivotPoint,const cVector3f& avPinDir,
 										iPhysicsBody* apParentBody, iPhysicsBody *apChildBody)
 	{
-		iPhysicsJointHinge *pJoint = hplNew( cPhysicsJointHingeNewton, (asName,apParentBody,apChildBody,this,
-										avPivotPoint,avPinDir) );
+		iPhysicsJointHinge *pJoint = new cPhysicsJointHingeNewton(asName,apParentBody,apChildBody,this,avPivotPoint,avPinDir);
 		mlstJoints.push_back(pJoint);
 		return pJoint;
 	}
@@ -313,8 +306,7 @@ namespace hpl {
 										const cVector3f& avPivotPoint,const cVector3f& avPinDir,
 										iPhysicsBody* apParentBody, iPhysicsBody *apChildBody)
 	{
-		iPhysicsJointSlider *pJoint = hplNew( cPhysicsJointSliderNewton, (asName,apParentBody,apChildBody,this,
-											avPivotPoint,avPinDir) );
+		iPhysicsJointSlider *pJoint = new cPhysicsJointSliderNewton(asName,apParentBody,apChildBody,this,avPivotPoint,avPinDir);
 		mlstJoints.push_back(pJoint);
 		return pJoint;
 	}
@@ -323,8 +315,7 @@ namespace hpl {
 										const cVector3f& avPivotPoint,const cVector3f& avPinDir,
 										iPhysicsBody* apParentBody, iPhysicsBody *apChildBody)
 	{
-		iPhysicsJointScrew *pJoint = hplNew( cPhysicsJointScrewNewton, (asName,apParentBody,apChildBody,this,
-											avPivotPoint,avPinDir) );
+		iPhysicsJointScrew *pJoint = new cPhysicsJointScrewNewton(asName,apParentBody,apChildBody,this,avPivotPoint,avPinDir);
 		mlstJoints.push_back(pJoint);
 		return pJoint;
 	}
@@ -333,7 +324,7 @@ namespace hpl {
 
 	iPhysicsBody* cPhysicsWorldNewton::CreateBody(const tString &asName,iCollideShape *apShape)
 	{
-		cPhysicsBodyNewton *pBody = hplNew( cPhysicsBodyNewton, (asName,this, apShape) );
+		cPhysicsBodyNewton *pBody = new cPhysicsBodyNewton(asName,this, apShape);
 
 		mlstBodies.push_back(pBody);
 
@@ -346,7 +337,7 @@ namespace hpl {
 
 	iCharacterBody* cPhysicsWorldNewton::CreateCharacterBody(const tString &asName, const cVector3f &avSize)
 	{
-		cCharacterBodyNewton *pChar = hplNew( cCharacterBodyNewton, (asName,this,avSize) );
+		cCharacterBodyNewton *pChar = new cCharacterBodyNewton(asName,this,avSize);
 
 		mlstCharBodies.push_back(pChar);
 
@@ -357,7 +348,7 @@ namespace hpl {
 
 	iPhysicsMaterial* cPhysicsWorldNewton::CreateMaterial(const tString &asName)
 	{
-		cPhysicsMaterialNewton *pMaterial = hplNew( cPhysicsMaterialNewton, (asName,this) );
+		cPhysicsMaterialNewton *pMaterial = new cPhysicsMaterialNewton(asName,this);
 
 		tPhysicsMaterialMap::value_type Val(asName,pMaterial);
 		m_mapMaterials.insert(Val);
@@ -371,7 +362,7 @@ namespace hpl {
 
 	iPhysicsController* cPhysicsWorldNewton::CreateController(const tString &asName)
 	{
-		iPhysicsController* pController = hplNew( cPhysicsControllerNewton, (asName, this) );
+		iPhysicsController* pController = new cPhysicsControllerNewton(asName, this);
 
 		mlstControllers.push_back(pController);
 

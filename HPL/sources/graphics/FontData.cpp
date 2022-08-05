@@ -64,7 +64,7 @@ namespace hpl {
 					// [zm] Graphics has already been destroyed at this point...
 					// mpGraphicsDrawer->DestroyGfxObject(mvGlyphs[i]->mpGfxObject);
 				}
-				hplDelete(mvGlyphs[i]);
+				delete mvGlyphs[i];
 			}
 		}
 	}
@@ -84,12 +84,12 @@ namespace hpl {
 
 		////////////////////////////////////////////
 		// Load xml file
-		TiXmlDocument *pXmlDoc = hplNew( TiXmlDocument,(asFileName.c_str()) );
+		TiXmlDocument *pXmlDoc = new TiXmlDocument(asFileName.c_str());
 
 		if(pXmlDoc->LoadFile()==false)
 		{
 			Error("Couldn't load angle code font file '%s'\n",asFileName.c_str());
-			hplDelete(pXmlDoc);
+			delete pXmlDoc;
 			return false;
 		}
 
@@ -128,7 +128,7 @@ namespace hpl {
 			if (! bitmap)
 			{
 				Error("Couldn't load bitmap %s for FNT file '%s'\n",sFilePath.c_str(),asFileName.c_str());
-				hplDelete(pXmlDoc);
+				delete pXmlDoc;
 				return false;
 			}
 
@@ -183,7 +183,7 @@ namespace hpl {
 		}
 
 		//Destroy XML
-		hplDelete(pXmlDoc);
+		delete pXmlDoc;
 		return true;
 	}
 
@@ -470,7 +470,7 @@ namespace hpl {
 
 		float fAdvance = ((float)alAdvance)/((float)avFontSize.x) * mvSizeRatio.x;
 
-		cGlyph* pGlyph = hplNew( cGlyph,(pObject,vOffset,vSize,fAdvance));
+		cGlyph* pGlyph = new cGlyph(pObject,vOffset,vSize,fAdvance);
 
 		return pGlyph;
 	}

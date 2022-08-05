@@ -92,13 +92,12 @@ namespace hpl {
 				return NULL;
 			}
 
-			cParticleSystemData3D *pPSData = hplNew( cParticleSystemData3D, (sTypeName,
-																		mpResources,mpGraphics) );
+			cParticleSystemData3D *pPSData = new cParticleSystemData3D(sTypeName,mpResources,mpGraphics);
 
 			if(pPSData->LoadFromFile(sPath)==false)
 			{
 				Error("Can't load data from particle system file '%s'\n",sTypeName.c_str());
-				hplDelete(pPSData);
+				delete pPSData;
 				return NULL;
 			}
 
@@ -145,13 +144,12 @@ namespace hpl {
 				return;
 			}
 
-			cParticleSystemData3D *pPSData = hplNew( cParticleSystemData3D, (sTypeName,
-																	mpResources,mpGraphics) );
+			cParticleSystemData3D *pPSData = new cParticleSystemData3D(sTypeName,mpResources,mpGraphics);
 
 			if(pPSData->LoadFromFile(sPath)==false)
 			{
 				Error("Can't load data from particle system file '%s'\n",sTypeName.c_str());
-				hplDelete(pPSData);
+				delete pPSData;
 				return;
 			}
 

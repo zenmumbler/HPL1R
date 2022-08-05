@@ -257,7 +257,7 @@ namespace hpl {
 
 	iSaveData* iPhysicsController::CreateSaveData()
 	{
-		return hplNew( cSaveData_iPhysicsController, () );
+		return new cSaveData_iPhysicsController();
 	}
 
 	//-----------------------------------------------------------------------

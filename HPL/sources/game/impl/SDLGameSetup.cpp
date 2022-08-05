@@ -60,13 +60,13 @@ namespace hpl {
 		Log("- Deleting lowlevel stuff.\n");
 
 		Log("  Physics\n");
-		hplDelete(mpLowLevelPhysics);
+		delete mpLowLevelPhysics;
 		Log("  Sound\n");
-		hplDelete(mpLowLevelSound);
+		delete mpLowLevelSound;
 		Log("  Input\n");
-		hplDelete(mpLowLevelInput);
+		delete mpLowLevelInput;
 		Log("  Graphics\n");
-		hplDelete(mpLowLevelGraphics);
+		delete mpLowLevelGraphics;
 
 		SDL_Quit();
 	}
@@ -81,7 +81,7 @@ namespace hpl {
 
 	cResources* cSDLGameSetup::CreateResources()
 	{
-		cResources *pResources = hplNew( cResources, (mpLowLevelGraphics) );
+		cResources *pResources = new cResources(mpLowLevelGraphics);
 		return pResources;
 	}
 
@@ -89,7 +89,7 @@ namespace hpl {
 
 	cInput* cSDLGameSetup::CreateInput()
 	{
-		cInput *pInput = hplNew( cInput, (mpLowLevelInput) );
+		cInput *pInput = new cInput(mpLowLevelInput);
 		return pInput;
 	}
 
@@ -97,14 +97,14 @@ namespace hpl {
 
 	cGraphics* cSDLGameSetup::CreateGraphics()
 	{
-		cGraphics *pGraphics = hplNew( cGraphics, (mpLowLevelGraphics) );
+		cGraphics *pGraphics = new cGraphics(mpLowLevelGraphics);
 		return pGraphics;
 	}
 	//-----------------------------------------------------------------------
 
 	cSound* cSDLGameSetup::CreateSound()
 	{
-		cSound *pSound = hplNew( cSound, (mpLowLevelSound) );
+		cSound *pSound = new cSound(mpLowLevelSound);
 		return pSound;
 	}
 
@@ -112,7 +112,7 @@ namespace hpl {
 
 	cPhysics* cSDLGameSetup::CreatePhysics()
 	{
-		cPhysics *pPhysics = hplNew( cPhysics, (mpLowLevelPhysics) );
+		cPhysics *pPhysics = new cPhysics(mpLowLevelPhysics);
 		return pPhysics;
 	}
 
@@ -120,7 +120,7 @@ namespace hpl {
 
 	cAI* cSDLGameSetup::CreateAI()
 	{
-		cAI *pAI = hplNew( cAI,() );
+		cAI *pAI = new cAI();
 		return pAI;
 	}
 
@@ -128,7 +128,7 @@ namespace hpl {
 
 	cScript* cSDLGameSetup::CreateScript(cResources *apResources)
 	{
-		cScript *pScript = hplNew( cScript,(apResources) );
+		cScript *pScript = new cScript(apResources);
 		return pScript;
 	}
 

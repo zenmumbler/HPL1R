@@ -53,7 +53,7 @@ namespace hpl {
 
 	iPhysicsWorld* cLowLevelPhysicsNewton::CreateWorld()
 	{
-		cPhysicsWorldNewton* pWorld = hplNew( cPhysicsWorldNewton, () );
+		cPhysicsWorldNewton* pWorld = new cPhysicsWorldNewton();
 		return pWorld;
 	}
 

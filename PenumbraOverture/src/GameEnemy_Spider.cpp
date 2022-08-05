@@ -794,12 +794,12 @@ cGameEnemy_Spider::cGameEnemy_Spider(cInit *apInit,const tString& asName,TiXmlEl
 
 	//////////////////////////////
 	//Set up states
-	AddState(hplNew( cGameEnemyState_Spider_Idle,(STATE_IDLE,mpInit,this)) );
-	AddState(hplNew( cGameEnemyState_Spider_Hunt,(STATE_HUNT,mpInit,this)) );
-	AddState(hplNew( cGameEnemyState_Spider_Attack,(STATE_ATTACK,mpInit,this)) );
-	AddState(hplNew( cGameEnemyState_Spider_Flee,(STATE_FLEE,mpInit,this)) );
-	AddState(hplNew( cGameEnemyState_Spider_KnockDown,(STATE_KNOCKDOWN,mpInit,this)) );
-	AddState(hplNew( cGameEnemyState_Spider_Dead,(STATE_DEAD,mpInit,this)) );
+	AddState(new cGameEnemyState_Spider_Idle(STATE_IDLE,mpInit,this));
+	AddState(new cGameEnemyState_Spider_Hunt(STATE_HUNT,mpInit,this));
+	AddState(new cGameEnemyState_Spider_Attack(STATE_ATTACK,mpInit,this));
+	AddState(new cGameEnemyState_Spider_Flee(STATE_FLEE,mpInit,this));
+	AddState(new cGameEnemyState_Spider_KnockDown(STATE_KNOCKDOWN,mpInit,this));
+	AddState(new cGameEnemyState_Spider_Dead(STATE_DEAD,mpInit,this));
 }
 
 //-----------------------------------------------------------------------

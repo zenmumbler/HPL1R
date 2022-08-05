@@ -484,21 +484,21 @@ namespace hpl {
 
 	iGpuProgram* cLowLevelGraphicsSDL::CreateGpuProgram(const tString& asName)
 	{
-		return hplNew( cGLSLProgram, (asName) );
+		return new cGLSLProgram(asName);
 	}
 
 	//-----------------------------------------------------------------------
 
 	iTexture* cLowLevelGraphicsSDL::CreateTexture(bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)
 	{
-		return hplNew( cSDLTexture, ("",this,aType, abUseMipMaps, aTarget) );
+		return new cSDLTexture("",this,aType, abUseMipMaps, aTarget);
 	}
 
 	//-----------------------------------------------------------------------
 
 	iTexture* cLowLevelGraphicsSDL::CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)
 	{
-		return hplNew( cSDLTexture, (asName,this,aType, abUseMipMaps, aTarget) );
+		return new cSDLTexture(asName,this,aType, abUseMipMaps, aTarget);
 	}
 
 	//-----------------------------------------------------------------------
@@ -506,7 +506,7 @@ namespace hpl {
 	iTexture* cLowLevelGraphicsSDL::CreateTexture(const Bitmap& source, bool abUseMipMaps, eTextureType aType,
 												eTextureTarget aTarget)
 	{
-		cSDLTexture *pTex = hplNew( cSDLTexture, ("",this,aType, abUseMipMaps, aTarget) );
+		cSDLTexture *pTex = new cSDLTexture("",this,aType, abUseMipMaps, aTarget);
 		pTex->CreateFromBitmap(source);
 
 		return pTex;
@@ -521,7 +521,7 @@ namespace hpl {
 
 		if(aType==eTextureType_RenderTarget)
 		{
-			pTex = hplNew( cSDLTexture, ("",this,aType, abUseMipMaps, aTarget) );
+			pTex = new cSDLTexture("",this,aType, abUseMipMaps, aTarget);
 			pTex->Create(avSize.x, avSize.y, aFillCol);
 		}
 		else
@@ -529,11 +529,11 @@ namespace hpl {
 			Bitmap bmp{avSize.x, avSize.y};
 			bmp.FillRect(cRect2l(0,0,0,0),aFillCol);
 
-			pTex = hplNew( cSDLTexture, ("",this,aType, abUseMipMaps, aTarget) );
+			pTex = new cSDLTexture("",this,aType, abUseMipMaps, aTarget);
 			bool bRet = pTex->CreateFromBitmap(bmp);
 
 			if(bRet==false){
-				hplDelete(pTex);
+				delete pTex;
 				return NULL;
 			}
 		}
@@ -706,7 +706,7 @@ namespace hpl {
 														eVertexBufferUsageType aUsageType,
 														int alReserveVtxSize,int alReserveIdxSize)
 	{
-		return hplNew( cVertexBufferVBO, (this, aFlags,aDrawType,aUsageType,alReserveVtxSize,alReserveIdxSize) );
+		return new cVertexBufferVBO(this, aFlags,aDrawType,aUsageType,alReserveVtxSize,alReserveIdxSize);
 	}
 
 
@@ -784,14 +784,14 @@ namespace hpl {
 
 	iOcclusionQuery* cLowLevelGraphicsSDL::CreateOcclusionQuery()
 	{
-		return hplNew(cOcclusionQueryOGL, () );
+		return new cOcclusionQueryOGL();
 	}
 
 	//-----------------------------------------------------------------------
 
 	void cLowLevelGraphicsSDL::DestroyOcclusionQuery(iOcclusionQuery *apQuery)
 	{
-		if(apQuery)	hplDelete(apQuery);
+		if(apQuery)	delete apQuery;
 	}
 
 	//-----------------------------------------------------------------------

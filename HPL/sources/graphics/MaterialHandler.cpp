@@ -41,7 +41,7 @@ namespace hpl {
 		tMaterialTypeListIt it = mlstMatTypes.begin();
 		for(;it!=mlstMatTypes.end();it++)
 		{
-			hplDelete(*it);
+			delete *it;
 		}
 
 		mlstMatTypes.clear();

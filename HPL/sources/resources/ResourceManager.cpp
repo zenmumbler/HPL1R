@@ -86,7 +86,7 @@ namespace hpl {
 		if(apResource->HasUsers()==false){
 			m_mapHandleResources.erase(apResource->GetHandle());
 			m_mapNameResources.erase(apResource->GetName());
-			hplDelete(apResource);
+			delete apResource;
 		}
 	}*/
 
@@ -138,7 +138,7 @@ namespace hpl {
 			if(pRes->HasUsers()==false)
 			{
 				RemoveResource(pRes);
-				hplDelete(pRes);
+				delete pRes;
 			}
 		}
 		//Log("--------------------------------------\n");

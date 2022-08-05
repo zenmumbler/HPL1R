@@ -66,15 +66,15 @@ namespace hpl {
 
 		if(pData->GetMainSoundName() != ""){
 			iSoundChannel *pChannel = mpSound->GetSoundHandler()->CreateChannel(pData->GetMainSoundName(),0);
-			if(pChannel) hplDelete(pChannel);
+			if(pChannel) delete pChannel;
 		}
 		if(pData->GetStartSoundName() != ""){
 			iSoundChannel *pChannel = mpSound->GetSoundHandler()->CreateChannel(pData->GetStartSoundName(),0);
-			if(pChannel) hplDelete(pChannel);
+			if(pChannel) delete pChannel;
 		}
 		if(pData->GetStopSoundName() != ""){
 			iSoundChannel *pChannel = mpSound->GetSoundHandler()->CreateChannel(pData->GetStopSoundName(),0);
-			if(pChannel) hplDelete(pChannel);
+			if(pChannel) delete pChannel;
 		}
 	}
 
@@ -94,7 +94,7 @@ namespace hpl {
 
 		if(pSoundEntity==NULL && sPath!="")
 		{
-			pSoundEntity = hplNew( cSoundEntityData, (asNewName) );
+			pSoundEntity = new cSoundEntityData(asNewName);
 
 			if(pSoundEntity->CreateFromFile(sPath))
 			{
@@ -102,7 +102,7 @@ namespace hpl {
 			}
 			else
 			{
-				hplDelete(pSoundEntity);
+				delete pSoundEntity;
 				pSoundEntity =NULL;
 			}
 		}
@@ -129,7 +129,7 @@ namespace hpl {
 
 		if(apResource->HasUsers()==false){
 			RemoveResource(apResource);
-			hplDelete(apResource);
+			delete apResource;
 		}
 	}
 

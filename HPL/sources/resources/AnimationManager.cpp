@@ -106,7 +106,7 @@ namespace hpl {
 			if(pTempMesh->GetAnimationNum()<=0)
 			{
 				Error("No animations found in '%s'\n",sPath.c_str());
-				hplDelete(pTempMesh);
+				delete pTempMesh;
 				EndLoad();
 				return NULL;
 			}
@@ -114,7 +114,7 @@ namespace hpl {
 			pAnimation = pTempMesh->GetAnimation(0);
 			pTempMesh->ClearAnimations(false);
 
-			hplDelete(pTempMesh);
+			delete pTempMesh;
 
 			AddResource(pAnimation);
 		}
@@ -141,7 +141,7 @@ namespace hpl {
 
 		if(apResource->HasUsers()==false){
 			RemoveResource(apResource);
-			hplDelete(apResource);
+			delete apResource;
 		}
 	}
 

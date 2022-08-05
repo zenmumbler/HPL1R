@@ -56,8 +56,7 @@ namespace hpl {
 
 	cMesh* cMeshCreator::CreateBox(const tString &asName,cVector3f avSize, const tString &asMaterial)
 	{
-		cMesh *pMesh = hplNew( cMesh, (asName, mpResources->GetMaterialManager(),
-										mpResources->GetAnimationManager()) );
+		cMesh *pMesh = new cMesh(asName, mpResources->GetMaterialManager(), mpResources->GetAnimationManager());
 
 		cSubMesh *pSubMesh = pMesh->CreateSubMesh("Main");
 
@@ -137,7 +136,7 @@ namespace hpl {
 
 		if(!pSkyBox->Compile(0))
 		{
-			hplDelete(pSkyBox);
+			delete pSkyBox;
 			return NULL;
 		}
 		return pSkyBox;
@@ -225,7 +224,7 @@ namespace hpl {
 
 		if(!pBox->Compile(eVertexCompileFlag_CreateTangents))
 		{
-			hplDelete(pBox);
+			delete pBox;
 			return NULL;
 		}
 		return pBox;

@@ -28,7 +28,7 @@ namespace hpl {
 	{
 	public:
 		cPhysicsJointSliderNewton(const tString &asName, iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
-							iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f avPinDir) ;
+							iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f avPinDir);
 		~cPhysicsJointSliderNewton();
 
 		void SetMaxDistance(float afX);

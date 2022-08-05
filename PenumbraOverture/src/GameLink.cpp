@@ -48,7 +48,7 @@ cAreaLoader_GameLink::~cAreaLoader_GameLink()
 iEntity3D* cAreaLoader_GameLink::Load(const tString &asName, const cVector3f &avSize, 
 									  const cMatrixf &a_mtxTransform,cWorld3D *apWorld)
 {
-	cGameLink *pLink = hplNew( cGameLink, (mpInit,asName) );
+	cGameLink *pLink = new cGameLink(mpInit,asName);
 
 	pLink->m_mtxOnLoadTransform = a_mtxTransform;
 
@@ -158,7 +158,7 @@ iGameEntity* cGameLink_SaveData::CreateEntity()
 
 iGameEntity_SaveData* cGameLink::CreateSaveData()
 {
-	return hplNew( cGameLink_SaveData, () );
+	return new cGameLink_SaveData();
 }
 
 //-----------------------------------------------------------------------

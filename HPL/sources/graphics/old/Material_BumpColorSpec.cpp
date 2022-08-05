@@ -50,7 +50,7 @@ namespace hpl {
 		cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
 		cRenderer3D *apRenderer3D)
 	{
-		return hplNew( cMaterial_BumpColorSpec, (asName,apLowLevelGraphics,apTextureManager,apProgramManager,apRenderer3D) );
+		return new cMaterial_BumpColorSpec(asName,apLowLevelGraphics,apTextureManager,apProgramManager,apRenderer3D);
 	}
 
 	//-----------------------------------------------------------------------

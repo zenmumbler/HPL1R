@@ -69,14 +69,14 @@ namespace hpl {
 		it = mlstGuiSounds.begin();
 		while(it != mlstGuiSounds.end()){
 			it->mpSound->Stop();
-			hplDelete(it->mpSound);
+			delete it->mpSound;
 			it = mlstGuiSounds.erase(it);
 		}
 
 		it = mlstWorldSounds.begin();
 		while(it != mlstWorldSounds.end())	{
 			it->mpSound->Stop();
-			hplDelete(it->mpSound);
+			delete it->mpSound;
 			it = mlstWorldSounds.erase(it);
 		}
 	}
@@ -658,7 +658,7 @@ namespace hpl {
 			//									pSound->GetTotalTime());
 
 			pSound->Stop();
-			hplDelete(pSound);
+			delete pSound;
 
 			return false;
 		}

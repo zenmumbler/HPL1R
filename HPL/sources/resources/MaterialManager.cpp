@@ -125,7 +125,7 @@ namespace hpl {
 
 		if(apResource->HasUsers()==false){
 			RemoveResource(apResource);
-			hplDelete(apResource);
+			delete apResource;
 		}
 	}
 
@@ -192,7 +192,7 @@ namespace hpl {
 
 		if(pMaterial==NULL && sPath!="")
 		{
-			TiXmlDocument *pDoc = hplNew( TiXmlDocument, (sPath.c_str()) );
+			TiXmlDocument *pDoc = new TiXmlDocument(sPath.c_str());
 			if(!pDoc->LoadFile()){
 				return "";
 			}
@@ -201,14 +201,14 @@ namespace hpl {
 
 			TiXmlElement *pMain = pRoot->FirstChildElement("Main");
 			if(pMain==NULL){
-				hplDelete(pDoc);
+				delete pDoc;
 				Error("Main child not found in '%s'\n",sPath.c_str());
 				return "";
 			}
 
 			tString sPhysicsName = cString::ToString(pMain->Attribute("PhysicsMaterial"),"Default");
 
-			hplDelete(pDoc);
+			delete pDoc;
 
 			return sPhysicsName;
 		}
@@ -228,9 +228,9 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 	iMaterial* cMaterialManager::LoadFromFile(const tString& asName,const tString& asPath)
 	{
-		TiXmlDocument *pDoc = hplNew( TiXmlDocument, (asPath.c_str()) );
+		TiXmlDocument *pDoc = new TiXmlDocument(asPath.c_str());
 		if(!pDoc->LoadFile()){
-			hplDelete(pDoc);
+			delete pDoc;
 			return NULL;
 		}
 
@@ -240,14 +240,14 @@ namespace hpl {
 		//Main
 		TiXmlElement *pMain = pRoot->FirstChildElement("Main");
 		if(pMain==NULL){
-			hplDelete(pDoc);
+			delete pDoc;
 			Error("Main child not found.\n");
 			return NULL;
 		}
 
 		const char* sType = pMain->Attribute("Type");
 		if(sType ==NULL){
-			hplDelete(pDoc);
+			delete pDoc;
 			Error("Type not found.\n");
 			return NULL;
 		}
@@ -259,7 +259,7 @@ namespace hpl {
 
 		iMaterial* pMat = mpGraphics->GetMaterialHandler()->Create(asName,sType);
 		if(pMat==NULL){
-			hplDelete(pDoc);
+			delete pDoc;
 			Error("Invalid material type '%s'\n",sType);
 			return NULL;
 		}
@@ -274,7 +274,7 @@ namespace hpl {
 		//Textures
 		TiXmlElement *pTexRoot = pRoot->FirstChildElement("TextureUnits");
 		if(pTexRoot==NULL){
-			hplDelete(pDoc);
+			delete pDoc;
 			Error("TextureUnits child not found.\n");
 			return NULL;
 		}
@@ -288,7 +288,7 @@ namespace hpl {
 			TiXmlElement *pTexChild = pTexRoot->FirstChildElement(GetTextureString(it->mType).c_str());
 			if(pTexChild==NULL){
 				/*Error("Texture unit missing!");
-				hplDelete(pMat);
+				delete pMat;
 				return NULL;*/
 				continue;
 			}
@@ -339,8 +339,8 @@ namespace hpl {
 			pTex->SetAnimMode(animMode);
 
 			if(pTex==NULL){
-				hplDelete(pDoc);
-				hplDelete(pMat);
+				delete pDoc;
+				delete pMat;
 				return NULL;
 			}
 
@@ -357,7 +357,7 @@ namespace hpl {
 		//Custom
 		pMat->LoadData(pRoot);
 
-		hplDelete(pDoc);
+		delete pDoc;
 
 		return pMat;
 	}

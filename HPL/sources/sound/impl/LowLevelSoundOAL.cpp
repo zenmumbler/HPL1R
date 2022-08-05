@@ -47,13 +47,13 @@ namespace hpl {
 	iSoundData* cLowLevelSoundOAL::LoadSoundData(const tString& asName, const tString& asFilePath,
 												const tString& asType, bool abStream,bool abLoopStream)
 	{
-		cOALSoundData* pSoundData = hplNew( cOALSoundData, (asName,abStream) );
+		cOALSoundData* pSoundData = new cOALSoundData(asName,abStream);
 
 		pSoundData->SetLoopStream(abLoopStream);
 
 		if(pSoundData->CreateFromFile(asFilePath)==false)
 		{
-			hplDelete(pSoundData);
+			delete pSoundData;
 			return NULL;
 		}
 

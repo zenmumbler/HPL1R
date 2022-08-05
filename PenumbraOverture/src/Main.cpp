@@ -25,7 +25,7 @@ int hplMain(const tString& asCommandLine)
 	bool bRet = pInit->Init(asCommandLine);
 	
 	if (bRet == false) {
-		hplDelete( pInit->mpGame );
+		delete  pInit->mpGame ;
 		CreateMessageBoxW(_W("Error!"), pInit->msErrorMessage.c_str());
 		return 1;
 	}

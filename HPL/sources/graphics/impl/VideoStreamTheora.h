@@ -93,7 +93,7 @@ namespace hpl {
 		cVideoStreamTheora_Loader();
 		~cVideoStreamTheora_Loader();
 
-		iVideoStream* Create(const tString& asName){ return hplNew( cVideoStreamTheora, (asName,this) );}
+		iVideoStream* Create(const tString& asName){ return new cVideoStreamTheora(asName,this);}
 
 	private:
 		unsigned char* mpYuvToR;

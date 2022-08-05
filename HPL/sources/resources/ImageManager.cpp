@@ -151,7 +151,7 @@ namespace hpl {
 			pFrame->DecPicCount(); // Doing it here now instead.
 			pBmpFrame->DecPicCount();
 			RemoveResource(apResource);
-			hplDelete(apResource);
+			delete apResource;
 
 			//Log("deleting image and dec fram to %d images!\n",pFrame->GetPicCount());
 		}
@@ -168,7 +168,7 @@ namespace hpl {
 				if(pBmpFrame->GetFrameTexture() == pFrame)
 				{
 					//Log("and bitmap...");
-					hplDelete(pBmpFrame);
+					delete pBmpFrame;
 					mlstBitmapFrames.erase(it);
 					break;
 				}
@@ -176,7 +176,7 @@ namespace hpl {
 
 			//delete from list
 			m_mapTextureFrames.erase(pFrame->GetHandle());
-			hplDelete(pFrame);
+			delete pFrame;
 			//Log(" Deleted frame!\n");
 		}
 		//Log("---\n");

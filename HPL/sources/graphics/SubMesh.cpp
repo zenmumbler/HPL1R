@@ -26,7 +26,6 @@
 #include "graphics/Bone.h"
 #include "math/Math.h"
 
-#include "system/MemoryManager.h"
 #include "system/Log.h"
 
 #include <string.h>
@@ -65,10 +64,10 @@ namespace hpl {
 	cSubMesh::~cSubMesh()
 	{
 		if(mpMaterial)mpMaterialManager->Destroy(mpMaterial);
-		if(mpVtxBuffer) hplDelete(mpVtxBuffer);
+		if(mpVtxBuffer) delete mpVtxBuffer;
 
-		if(mpVertexBones) hplDeleteArray(mpVertexBones);
-		if(mpVertexWeights) hplDeleteArray(mpVertexWeights);
+		if(mpVertexBones) delete[] mpVertexBones;
+		if(mpVertexWeights) delete[] mpVertexWeights;
 	}
 
 	//-----------------------------------------------------------------------
@@ -140,8 +139,8 @@ namespace hpl {
 	///normalize weights here?
 	void cSubMesh::CompileBonePairs()
 	{
-		mpVertexWeights = hplNewArray( float, 4 * mpVtxBuffer->GetVertexNum());
-		mpVertexBones = hplNewArray( unsigned char, 4 * mpVtxBuffer->GetVertexNum()) ;
+		mpVertexWeights = new float[4 * mpVtxBuffer->GetVertexNum()];
+		mpVertexBones = new unsigned char[4 * mpVtxBuffer->GetVertexNum()];
 		memset(mpVertexWeights,0,4 * mpVtxBuffer->GetVertexNum()*sizeof(float));
 
 		for(int i=0; i < (int)mvVtxBonePairs.size(); i++)

@@ -49,7 +49,7 @@ cAreaLoader_GameForceArea::~cAreaLoader_GameForceArea()
 iEntity3D* cAreaLoader_GameForceArea::Load(const tString &asName, const cVector3f &avSize, 
 									  const cMatrixf &a_mtxTransform,cWorld3D *apWorld)
 {
-	cGameForceArea *pArea = hplNew( cGameForceArea, (mpInit,asName) );
+	cGameForceArea *pArea = new cGameForceArea(mpInit,asName);
 
 	pArea->m_mtxOnLoadTransform = a_mtxTransform;
 
@@ -285,7 +285,7 @@ iGameEntity* cGameForceArea_SaveData::CreateEntity()
 
 iGameEntity_SaveData* cGameForceArea::CreateSaveData()
 {
-	return hplNew( cGameForceArea_SaveData, () );
+	return new cGameForceArea_SaveData();
 }
 
 //-----------------------------------------------------------------------

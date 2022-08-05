@@ -58,7 +58,7 @@ void cEntityLoader_GameLamp::BeforeLoad(TiXmlElement *apRootElem, const cMatrixf
 void cEntityLoader_GameLamp::AfterLoad(TiXmlElement *apRootElem, const cMatrixf &a_mtxTransform,
 										 cWorld3D *apWorld)
 {
-	cGameLamp *pObject = hplNew( cGameLamp, (mpInit,mpEntity->GetName()) );
+	cGameLamp *pObject = new cGameLamp(mpInit,mpEntity->GetName());
 
 	pObject->msFileName = msFileName;
 	pObject->m_mtxOnLoadTransform = a_mtxTransform;
@@ -591,7 +591,7 @@ iGameEntity* cGameLamp_SaveData::CreateEntity()
 
 iGameEntity_SaveData* cGameLamp::CreateSaveData()
 {
-	return hplNew( cGameLamp_SaveData, () );
+	return new cGameLamp_SaveData();
 }
 
 //-----------------------------------------------------------------------

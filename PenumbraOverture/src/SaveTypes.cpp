@@ -147,7 +147,7 @@ void cEngineJoint_SaveData::ToJoint(iPhysicsJoint *apJoint)
 	cScriptJointCallback *pCallback = static_cast<cScriptJointCallback*>(apJoint->GetCallback());
 	if(pCallback==NULL)
 	{
-		pCallback = hplNew( cScriptJointCallback, (gpInit->mpGame->GetScene()) );
+		pCallback = new cScriptJointCallback(gpInit->mpGame->GetScene());
 		apJoint->SetCallback(pCallback,true);
 
 		if(msOnMaxCallback!="" || msOnMinCallback!="")

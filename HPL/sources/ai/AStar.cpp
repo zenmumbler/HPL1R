@@ -260,19 +260,19 @@ namespace hpl {
 		//TODO: free path check with dynamic objects here.
 
 		//TODO: Some pooling here would be good.
-		cAStarNode *pNode = hplNew( cAStarNode, (apAINode) );
+		cAStarNode *pNode = new cAStarNode(apAINode);
 
 		//Check if it is in closed list.
 		tAStarNodeSetIt it = m_setClosedList.find(pNode);
 		if(it != m_setClosedList.end()){
-			hplDelete(pNode);
+			delete pNode;
 			return;
 		}
 
 		//Try to add it to the open list
 		std::pair<tAStarNodeSetIt, bool> testPair = m_setOpenList.insert(pNode);
 		if(testPair.second == false){
-			hplDelete(pNode);
+			delete pNode;
 			return;
 		}
 

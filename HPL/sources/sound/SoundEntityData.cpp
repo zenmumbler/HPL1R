@@ -69,11 +69,11 @@ namespace hpl {
 
 	bool cSoundEntityData::CreateFromFile(const tString &asFile)
 	{
-		TiXmlDocument *pDoc = hplNew( TiXmlDocument, () );
+		TiXmlDocument *pDoc = new TiXmlDocument();
 		if(pDoc->LoadFile(asFile.c_str())==false)
 		{
 			Error("Couldn't load '%s'!\n",asFile.c_str());
-			hplDelete(pDoc);
+			delete pDoc;
 			return false;
 		}
 
@@ -84,7 +84,7 @@ namespace hpl {
 		TiXmlElement *pMainElem = pRootElem->FirstChildElement("MAIN");
 		if(pMainElem==NULL){
 			Error("Couldn't find MAIN element in '%s'!\n",asFile.c_str());
-			hplDelete(pDoc);
+			delete pDoc;
 			return false;
 		}
 
@@ -97,7 +97,7 @@ namespace hpl {
 		TiXmlElement *pPropElem = pRootElem->FirstChildElement("PROPERTIES");
 		if(pPropElem==NULL){
 			Error("Couldn't find PROPERTIES element in '%s'!\n",asFile.c_str());
-			hplDelete(pDoc);
+			delete pDoc;
 			return false;
 		}
 
@@ -120,7 +120,7 @@ namespace hpl {
 
 		mlPriority = cString::ToInt(pPropElem->Attribute("Priority"),0);
 
-		hplDelete(pDoc);
+		delete pDoc;
 
 		return true;
 	}

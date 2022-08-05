@@ -345,11 +345,11 @@ void cDeathMenu::SetActive(bool abX)
 		tWString sSpot = mpInit->mpSaveHandler->GetLatest(_W("save/spot/"),_W("*.sav"));
 		if(sAuto != _W("") || sSpot != _W(""))
 		{
-			mlstButtons.push_back(hplNew( cDeathMenuButton_Continue, (mpInit,cVector2f(400,290),kTranslate("DeathMenu","Continue"))) );
+			mlstButtons.push_back(new cDeathMenuButton_Continue(mpInit,cVector2f(400,290),kTranslate("DeathMenu","Continue")));
 		}
 		
 		//Back to Main
-		mlstButtons.push_back(hplNew( cDeathMenuButton_BackToMain, (mpInit,cVector2f(400,350),kTranslate("DeathMenu","BackToMainMenu")) ) );
+		mlstButtons.push_back(new cDeathMenuButton_BackToMain(mpInit,cVector2f(400,350),kTranslate("DeathMenu","BackToMainMenu")) );
 	}
 	else
 	{

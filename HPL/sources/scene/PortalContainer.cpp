@@ -681,8 +681,8 @@ namespace hpl {
 
 	cPortalContainer::cPortalContainer()
 	{
-		mpEntityCallback = hplNew( cPortalContainerCallback, (this) );
-		mpNormalEntityCallback = hplNew( cPortalContainerEntityCallback, (this) );
+		mpEntityCallback = new cPortalContainerCallback(this);
+		mpNormalEntityCallback = new cPortalContainerEntityCallback(this);
 
 		mlSectorVisitCount =0;
 
@@ -693,8 +693,8 @@ namespace hpl {
 
 	cPortalContainer::~cPortalContainer()
 	{
-		hplDelete(mpEntityCallback);
-		hplDelete(mpNormalEntityCallback);
+		delete mpEntityCallback;
+		delete mpNormalEntityCallback;
 
 		STLMapDeleteAll(m_mapSectors);
 	}
@@ -1102,7 +1102,7 @@ namespace hpl {
 		}
 
 		//Delete visible sectors.
-		hplDelete(pVisSectorCont);
+		delete pVisSectorCont;
 
 		gbCallbackActive = true;
 	}
@@ -1153,7 +1153,7 @@ namespace hpl {
 
 	void cPortalContainer::AddSector(tString asId)
 	{
-		cSector *pSector = hplNew( cSector, (asId, this) );
+		cSector *pSector = new cSector(asId, this);
 
 		m_mapSectors.insert(tSectorMap::value_type(asId,pSector));
 	}
@@ -1238,7 +1238,7 @@ namespace hpl {
 
 	cSectorVisibilityContainer* cPortalContainer::CreateVisibiltyFromBV(cBoundingVolume *apBV)
 	{
-		cSectorVisibilityContainer *pContainer = hplNew( cSectorVisibilityContainer, (eSectorVisibilityType_BV) );
+		cSectorVisibilityContainer *pContainer = new cSectorVisibilityContainer(eSectorVisibilityType_BV);
 		pContainer->SetBV(*apBV);
 
 		pContainer->Compute(this);
@@ -1250,7 +1250,7 @@ namespace hpl {
 
 	cSectorVisibilityContainer* cPortalContainer::CreateVisibiltyFromFrustum(cFrustum *apFrustum)
 	{
-		cSectorVisibilityContainer *pContainer = hplNew( cSectorVisibilityContainer, (eSectorVisibilityType_Frustum) );
+		cSectorVisibilityContainer *pContainer = new cSectorVisibilityContainer(eSectorVisibilityType_Frustum);
 		pContainer->SetFrustum(*apFrustum);
 
 		pContainer->Compute(this);
@@ -1327,6 +1327,6 @@ namespace hpl {
 		//DEBUG:
 		//Test the visible sector stuff
 		cSectorVisibilityContainer *pVisSector = CreateVisibiltyFromFrustum(apFrustum);
-		hplDelete(pVisSector);
+		delete pVisSector;
 	}*/
 }

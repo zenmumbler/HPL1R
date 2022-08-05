@@ -88,7 +88,7 @@ void cEntityLoader_GameItem::BeforeLoad(TiXmlElement *apRootElem, const cMatrixf
 void cEntityLoader_GameItem::AfterLoad(TiXmlElement *apRootElem, const cMatrixf &a_mtxTransform,
 										 cWorld3D *apWorld)
 {
-	cGameItem *pObject = hplNew( cGameItem, (mpInit,mpEntity->GetName()) );
+	cGameItem *pObject = new cGameItem(mpInit,mpEntity->GetName());
 	
 	pObject->msSubType = msSubType;
 	pObject->msFileName = msFileName;
@@ -429,7 +429,7 @@ iGameEntity* cGameItem_SaveData::CreateEntity()
 
 iGameEntity_SaveData* cGameItem::CreateSaveData()
 {
-	return hplNew( cGameItem_SaveData, () );
+	return new cGameItem_SaveData();
 }
 
 //-----------------------------------------------------------------------

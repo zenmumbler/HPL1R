@@ -75,7 +75,7 @@ namespace hpl {
 
 		mpLocalNode = NULL;
 
-		mpEntityCallback = hplNew( cSubMeshEntityBodyUpdate, () );
+		mpEntityCallback = new cSubMeshEntityBodyUpdate();
 		mbUpdateBody = false;
 
 		mpMaterial = NULL;
@@ -83,9 +83,9 @@ namespace hpl {
 
 	cSubMeshEntity::~cSubMeshEntity()
 	{
-		hplDelete(mpEntityCallback);
+		delete mpEntityCallback;
 
-		if(mpDynVtxBuffer) hplDelete(mpDynVtxBuffer);
+		if(mpDynVtxBuffer) delete mpDynVtxBuffer;
 
 		/* Clear any custom textures here*/
 		if(mpMaterial) mpMaterialManager->Destroy(mpMaterial);
@@ -509,7 +509,7 @@ namespace hpl {
 
 	iSaveData* cSubMeshEntity::CreateSaveData()
 	{
-		return hplNew( cSaveData_cSubMeshEntity, () );
+		return new cSaveData_cSubMeshEntity();
 	}
 
 	//-----------------------------------------------------------------------

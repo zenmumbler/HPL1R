@@ -90,16 +90,16 @@ cPlayer::cPlayer(cInit *apInit)  : iUpdateable("Player")
 	mState = ePlayerState_Normal;
 	
 	mvStates.resize(ePlayerState_LastEnum);
-	mvStates[ePlayerState_Normal] = hplNew( cPlayerState_Normal, (mpInit,this) );
-	mvStates[ePlayerState_Push] = hplNew( cPlayerState_Push, (mpInit,this) );
-	mvStates[ePlayerState_Move] = hplNew( cPlayerState_Move, (mpInit,this) );
-	mvStates[ePlayerState_InteractMode] = hplNew( cPlayerState_InteractMode, (mpInit,this) );
-	mvStates[ePlayerState_Grab] = hplNew( cPlayerState_Grab, (mpInit,this) );
-	mvStates[ePlayerState_WeaponMelee] = hplNew( cPlayerState_WeaponMelee, (mpInit,this) );
-	mvStates[ePlayerState_UseItem] = hplNew( cPlayerState_UseItem, (mpInit,this) );
-	mvStates[ePlayerState_Message] = hplNew( cPlayerState_Message, (mpInit,this) );
-	mvStates[ePlayerState_Throw] = hplNew( cPlayerState_Throw, (mpInit,this) );
-	mvStates[ePlayerState_Climb] = hplNew( cPlayerState_Climb, (mpInit,this) );
+	mvStates[ePlayerState_Normal] = new cPlayerState_Normal(mpInit,this);
+	mvStates[ePlayerState_Push] = new cPlayerState_Push(mpInit,this);
+	mvStates[ePlayerState_Move] = new cPlayerState_Move(mpInit,this);
+	mvStates[ePlayerState_InteractMode] = new cPlayerState_InteractMode(mpInit,this);
+	mvStates[ePlayerState_Grab] = new cPlayerState_Grab(mpInit,this);
+	mvStates[ePlayerState_WeaponMelee] = new cPlayerState_WeaponMelee(mpInit,this);
+	mvStates[ePlayerState_UseItem] = new cPlayerState_UseItem(mpInit,this);
+	mvStates[ePlayerState_Message] = new cPlayerState_Message(mpInit,this);
+	mvStates[ePlayerState_Throw] = new cPlayerState_Throw(mpInit,this);
+	mvStates[ePlayerState_Climb] = new cPlayerState_Climb(mpInit,this);
 
 	//The max distance you can be from something to grab it.
 	mfMaxGrabDist =  mpInit->mpGameConfig->GetFloat("Player","MaxGrabDist",0);
@@ -125,50 +125,50 @@ cPlayer::cPlayer(cInit *apInit)  : iUpdateable("Player")
 	mvInteractMoveBorder = cVector2f(130,95);
 
 	//Create head movement
-	mpHeadMove = hplNew( cPlayerHeadMove,(this) );
+	mpHeadMove = new cPlayerHeadMove(this);
 
 	//create damage effect
-	mpDamage = hplNew( cPlayerDamage,(mpInit) );
+	mpDamage = new cPlayerDamage(mpInit);
 
 	//Create death effect
-	mpDeath = hplNew( cPlayerDeath,(mpInit) );
+	mpDeath = new cPlayerDeath(mpInit);
 
 	//Create flashlight
-	mpFlashLight = hplNew( cPlayerFlashLight,(mpInit) );
+	mpFlashLight = new cPlayerFlashLight(mpInit);
 	
 	//Create Glowstick
-	mpGlowStick = hplNew( cPlayerGlowStick,(mpInit) );
+	mpGlowStick = new cPlayerGlowStick(mpInit);
 
 	//Create Flare
-	mpFlare = hplNew( cPlayerFlare,(mpInit) );
+	mpFlare = new cPlayerFlare(mpInit);
 
 	//Create leaner
-	mpLean = hplNew( cPlayerLean,(mpInit,this) );
+	mpLean = new cPlayerLean(mpInit,this);
 	
 	//Create ear ringer
-	mpEarRing = hplNew( cPlayerEarRing,(mpInit,this) );
+	mpEarRing = new cPlayerEarRing(mpInit,this);
 
 	//Health
-	mpHealth = hplNew( cPlayerHealth,(mpInit) );
+	mpHealth = new cPlayerHealth(mpInit);
 	
 	//NOise Filter
-	mpNoiseFilter = hplNew( cPlayerNoiseFilter,(mpInit) );
+	mpNoiseFilter = new cPlayerNoiseFilter(mpInit);
 
 	//Fear Filter
-	mpFearFilter = hplNew( cPlayerFearFilter,(mpInit) );
+	mpFearFilter = new cPlayerFearFilter(mpInit);
 
 	//Look at
-	mpLookAt = hplNew( cPlayerLookAt,(this) );
+	mpLookAt = new cPlayerLookAt(this);
 
 	//Hidden
-	mpHidden = hplNew( cPlayerHidden,(mpInit) );
+	mpHidden = new cPlayerHidden(mpInit);
 	
 	//Create ray callbacks
-	mpGroundRayCallback = hplNew( cPlayerGroundRayCallback,() );
-	mpPickRayCallback = hplNew( cPlayerPickRayCallback,() );
+	mpGroundRayCallback = new cPlayerGroundRayCallback();
+	mpPickRayCallback = new cPlayerPickRayCallback();
 
 	//Create body callback
-	mpBodyCallback = hplNew( cPlayerBodyCallback,(this) );
+	mpBodyCallback = new cPlayerBodyCallback(this);
 
 	//Load font
 	mpFont = mpResources->GetFontManager()->CreateFontData("verdana.fnt");
@@ -178,11 +178,11 @@ cPlayer::cPlayer(cInit *apInit)  : iUpdateable("Player")
 	mMoveState = ePlayerMoveState_Walk;
 	
 	mvMoveStates.resize(ePlayerMoveState_LastEnum);
-	mvMoveStates[ePlayerMoveState_Walk] = hplNew( cPlayerMoveState_Walk,(this,mpInit) );
-	mvMoveStates[ePlayerMoveState_Run] = hplNew( cPlayerMoveState_Run,(this,mpInit) );
-	mvMoveStates[ePlayerMoveState_Still] = hplNew( cPlayerMoveState_Still,(this,mpInit) );
-	mvMoveStates[ePlayerMoveState_Jump] = hplNew( cPlayerMoveState_Jump,(this,mpInit) );
-	mvMoveStates[ePlayerMoveState_Crouch] = hplNew( cPlayerMoveState_Crouch,(this,mpInit) );
+	mvMoveStates[ePlayerMoveState_Walk] = new cPlayerMoveState_Walk(this,mpInit);
+	mvMoveStates[ePlayerMoveState_Run] = new cPlayerMoveState_Run(this,mpInit);
+	mvMoveStates[ePlayerMoveState_Still] = new cPlayerMoveState_Still(this,mpInit);
+	mvMoveStates[ePlayerMoveState_Jump] = new cPlayerMoveState_Jump(this,mpInit);
+	mvMoveStates[ePlayerMoveState_Crouch] = new cPlayerMoveState_Crouch(this,mpInit);
 
 
 	/////////////////////////
@@ -215,22 +215,22 @@ cPlayer::cPlayer(cInit *apInit)  : iUpdateable("Player")
 
 cPlayer::~cPlayer(void)
 {
-	hplDelete( mpGroundRayCallback);
-	hplDelete( mpPickRayCallback);
-	hplDelete( mpHeadMove);
-	hplDelete( mpBodyCallback);
-	hplDelete( mpDamage);
-	hplDelete( mpDeath);
-	hplDelete( mpFlashLight);
-	hplDelete( mpLean);
-	hplDelete( mpEarRing);
-	hplDelete( mpGlowStick);
-	hplDelete( mpFlare);
-	hplDelete( mpHealth);
-	hplDelete( mpNoiseFilter);
-	hplDelete( mpFearFilter);
-	hplDelete( mpLookAt);
-	hplDelete( mpHidden);
+	delete  mpGroundRayCallback;
+	delete  mpPickRayCallback;
+	delete  mpHeadMove;
+	delete  mpBodyCallback;
+	delete  mpDamage;
+	delete  mpDeath;
+	delete  mpFlashLight;
+	delete  mpLean;
+	delete  mpEarRing;
+	delete  mpGlowStick;
+	delete  mpFlare;
+	delete  mpHealth;
+	delete  mpNoiseFilter;
+	delete  mpFearFilter;
+	delete  mpLookAt;
+	delete  mpHidden;
 
 	/*mpInit->mpConfig->SetFloat("Game","PlayerWidth",mvSize.x);
 	mpInit->mpConfig->SetFloat("Game","PlayerHeight",mvSize.y);
@@ -388,7 +388,7 @@ void cPlayer::FootStep(float afMul, const tString &asType, bool abSkipCount)
 		pSoundHandler->PlayGui(	pSoundData->GetMainSoundName(),false,
 								afMul * pSoundData->GetVolume());
 
-		cGameTrigger_Sound *pSound = hplNew( cGameTrigger_Sound, () );
+		cGameTrigger_Sound *pSound = new cGameTrigger_Sound();
 		pSound->mpSound = pSoundData;
 		mpInit->mpTriggerHandler->Add(pSound, eGameTriggerType_Sound,
 						mpCharBody->GetFeetPosition() + cVector3f(0,0.2f,0),
@@ -462,14 +462,14 @@ void cPlayer::AddCollideScript(eGameCollideScriptType aType,const tString &asFun
 	}
 	else
 	{
-		pCallback = hplNew( cGameCollideScript, () );
+		pCallback = new cGameCollideScript();
 
 		//Get the entity
 		iGameEntity *pEntity = mpInit->mpMapHandler->GetGameEntity(asEntity);
 		if(pEntity==NULL)
 		{
 			Warning("Couldn't find entity '%s'\n",asEntity.c_str());
-			hplDelete( pCallback );
+			delete  pCallback ;
 			return;
 		}
 
@@ -502,7 +502,7 @@ void cPlayer::RemoveCollideScriptWithChildEntity(iGameEntity *apEntity)
 			}
 			else
 			{
-				hplDelete( pCallback );
+				delete  pCallback ;
 				m_mapCollideCallbacks.erase(currentIt);
 			}
 		}
@@ -528,7 +528,7 @@ void cPlayer::RemoveCollideScript(eGameCollideScriptType aType,const tString &as
 			}
 			else
 			{
-				hplDelete( pCallback );
+				delete  pCallback ;
 				m_mapCollideCallbacks.erase(it);
 			}
 		}
@@ -1179,7 +1179,7 @@ void cPlayer::Update(float afTimeStep)
 		cGameCollideScript *pCallback = CollideIt->second;
 		if(pCallback->mbDeleteMe)
 		{
-			hplDelete( pCallback );
+			delete  pCallback ;
 			m_mapCollideCallbacks.erase(CollideIt++);
 		} else {
 			++CollideIt;
@@ -1607,13 +1607,13 @@ void cPlayer::LoadSaveData(cSavedWorld* apSavedWorld)
 	while(colIt.HasNext())
 	{
 		cSaveGame_cGameCollideScript &savedScript = colIt.Next();
-		cGameCollideScript *pCallback = hplNew( cGameCollideScript, () );
+		cGameCollideScript *pCallback = new cGameCollideScript();
 
 		pCallback->mpEntity = mpInit->mpMapHandler->GetGameEntity(savedScript.msEntity);
 		if(pCallback->mpEntity==NULL)
 		{
 			Warning("Couldn't find entity '%s'\n",savedScript.msEntity.c_str());
-			hplDelete( pCallback );
+			delete  pCallback ;
 			continue;
 		}
 		savedScript.SaveTo(pCallback);
@@ -1812,7 +1812,7 @@ iSaveObject* cSaveData_cPlayer::CreateSaveObject(cSaveObjectHandler *apSaveObjec
 			continue;
 		}
 
-		cGameCollideScript *pCallback = hplNew( cGameCollideScript, () );
+		cGameCollideScript *pCallback = new cGameCollideScript();
 		pCallback->mpEntity = pEntity;
 		saveScript.SaveTo(pCallback);
 
@@ -1834,7 +1834,7 @@ int cSaveData_cPlayer::GetSaveCreatePrio()
 
 iSaveData* cPlayer::CreateSaveData()
 {
-	cSaveData_cPlayer *pData = hplNew( cSaveData_cPlayer, () );
+	cSaveData_cPlayer *pData = new cSaveData_cPlayer();
 	
 	//Collide callbacks
 	{

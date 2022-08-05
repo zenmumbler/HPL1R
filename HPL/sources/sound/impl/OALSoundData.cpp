@@ -97,7 +97,7 @@ namespace hpl {
 			return nullptr;
 		}
 
-		iSoundChannel *pSoundChannel = hplNew(cOALSoundChannel, (this, mpSoundManger));
+		iSoundChannel *pSoundChannel = new cOALSoundChannel(this, mpSoundManger);
 		IncUserCount();
 
 		return pSoundChannel;

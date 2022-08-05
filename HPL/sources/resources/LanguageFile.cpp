@@ -52,10 +52,10 @@ namespace hpl {
 
 	bool cLanguageFile::LoadFromFile(const tString asFile)
 	{
-		TiXmlDocument *pDoc = hplNew(TiXmlDocument,(asFile.c_str()) );
+		TiXmlDocument *pDoc = new TiXmlDocument(asFile.c_str());
 		if(pDoc->LoadFile()==false)
 		{
-			hplDelete(pDoc);
+			delete pDoc;
 			Error("Couldn't find language file '%s'\n",asFile.c_str());
 			return false;
 		}
@@ -94,7 +94,7 @@ namespace hpl {
 				pCategory = existing->second;
 			}
 			else {
-				pCategory = hplNew( cLanguageCategory, () );
+				pCategory = new cLanguageCategory();
 				m_mapCategories.insert(tLanguageCategoryMap::value_type(sCatName, pCategory));
 			}
 
@@ -195,7 +195,7 @@ namespace hpl {
 			}
 		}
 
-		hplDelete(pDoc);
+		delete pDoc;
 
 		/*{
 			tString sRawFile = cString::SetFileExt(asFile,"")+"_raw_text.txt";

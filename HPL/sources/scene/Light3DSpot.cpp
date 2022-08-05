@@ -56,7 +56,7 @@ namespace hpl {
 
 		mLightType = eLight3DType_Spot;
 
-		mpFrustum = hplNew( cFrustum, () );
+		mpFrustum = new cFrustum();
 
 		mlViewProjMatrixCount =-1;
 		mlViewMatrixCount =-1;
@@ -79,7 +79,7 @@ namespace hpl {
 	cLight3DSpot::~cLight3DSpot()
 	{
 		if(mpTexture) mpTextureManager->Destroy(mpTexture);
-		hplDelete(mpFrustum);
+		delete mpFrustum;
 	}
 
 	//-----------------------------------------------------------------------
@@ -339,7 +339,7 @@ namespace hpl {
 
 	iSaveData* cLight3DSpot::CreateSaveData()
 	{
-		return hplNew( cSaveData_cLight3DSpot, () );
+		return new cSaveData_cLight3DSpot();
 	}
 
 	//-----------------------------------------------------------------------

@@ -110,7 +110,7 @@ namespace hpl {
 
 	iSaveData* cLight3DPoint::CreateSaveData()
 	{
-		return hplNew( cSaveData_cLight3DPoint, () );
+		return new cSaveData_cLight3DPoint();
 	}
 
 	//-----------------------------------------------------------------------

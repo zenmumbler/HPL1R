@@ -137,15 +137,15 @@ namespace hpl {
 	cRenderList::cRenderList(cGraphics *apGraphics)
 	{
 		mfFrameTime = 0;
-		mTempNode.mpState = hplNew( iRenderState, () );
+		mTempNode.mpState = new iRenderState();
 
 		mlRenderCount=0;
 		mlLastRenderCount =0;
 
 		mpGraphics = apGraphics;
 
-		m_poolRenderState = hplNew( cMemoryPool<iRenderState>, (3000, NULL));
-		m_poolRenderNode = hplNew( cMemoryPool<cRenderNode>, (3000, NULL));
+		m_poolRenderState = new cMemoryPool<iRenderState>(3000, NULL);
+		m_poolRenderNode = new cMemoryPool<cRenderNode>(3000, NULL);
 
 		g_poolRenderState = m_poolRenderState;
 		g_poolRenderNode = m_poolRenderNode;
@@ -156,10 +156,10 @@ namespace hpl {
 	cRenderList::~cRenderList()
 	{
 		Clear();
-		hplDelete(mTempNode.mpState);
+		delete mTempNode.mpState;
 
-		hplDelete(m_poolRenderState);
-		hplDelete(m_poolRenderNode);
+		delete m_poolRenderState;
+		delete m_poolRenderNode;
 
 		g_poolRenderState = NULL;
 		g_poolRenderNode = NULL;

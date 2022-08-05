@@ -82,7 +82,7 @@ namespace hpl {
 			if(pProgram->CreateFromFile(vertexPath, fragmentPath) == false)
 			{
 				Error("Couldn't create program '%s'\n",combinedName.c_str());
-				hplDelete(pProgram);
+				delete pProgram;
 				EndLoad();
 				return NULL;
 			}
@@ -105,7 +105,7 @@ namespace hpl {
 
 		if(apResource->HasUsers()==false){
 			RemoveResource(apResource);
-			hplDelete(apResource);
+			delete apResource;
 		}
 	}
 

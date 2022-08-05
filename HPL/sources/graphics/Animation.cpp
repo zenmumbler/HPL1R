@@ -66,7 +66,7 @@ namespace hpl {
 
 	cAnimationTrack* cAnimation::CreateTrack(const tString &asName, tAnimTransformFlag aFlags)
 	{
-		cAnimationTrack *pTrack = hplNew( cAnimationTrack,(asName, aFlags, this) );
+		cAnimationTrack *pTrack = new cAnimationTrack(asName, aFlags, this);
 
 		mvTracks.push_back(pTrack);
 

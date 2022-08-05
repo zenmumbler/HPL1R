@@ -93,14 +93,14 @@ namespace hpl {
 
 	iMouse* cLowLevelInputSDL::CreateMouse()
 	{
-		return hplNew( cMouseSDL,(this,mpLowLevelGraphics));
+		return new cMouseSDL(this,mpLowLevelGraphics);
 	}
 
 	//-----------------------------------------------------------------------
 
 	iKeyboard* cLowLevelInputSDL::CreateKeyboard()
 	{
-		return hplNew( cKeyboardSDL,(this) );
+		return new cKeyboardSDL(this);
 	}
 
 	//-----------------------------------------------------------------------

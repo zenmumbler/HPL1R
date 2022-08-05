@@ -93,9 +93,9 @@ namespace hpl {
 		mbRefractionUsed = true;
 
 		mvVtxRect.resize(4);
-		mvVtxRect[0] = cVertex(cVector3f(0,0,0),cVector2f(0,1),cColor(1,1) ) ;
-		mvVtxRect[1] = cVertex(cVector3f(1,0,0),cVector2f(1,1),cColor(1,1)) ;
-		mvVtxRect[2] = cVertex(cVector3f(1,1,0),cVector2f(1,0),cColor(1,1)) ;
+		mvVtxRect[0] = cVertex(cVector3f(0,0,0),cVector2f(0,1),cColor(1,1) );
+		mvVtxRect[1] = cVertex(cVector3f(1,0,0),cVector2f(1,1),cColor(1,1));
+		mvVtxRect[2] = cVertex(cVector3f(1,1,0),cVector2f(1,0),cColor(1,1));
 		mvVtxRect[3] = cVertex(cVector3f(0,1,40),cVector2f(0,0),cColor(1,1));
 
 
@@ -103,7 +103,7 @@ namespace hpl {
 		mRenderSettings.mpLowLevel = mpLowLevelGraphics;
 		mRenderSettings.mbLog = false;
 		mRenderSettings.mShowShadows = eRendererShowShadows_All;
-		mRenderSettings.mpTempIndexArray = hplNewArray(unsigned int,60000);
+		mRenderSettings.mpTempIndexArray = new unsigned int[60000];
 
 		Log("   Load Renderer3D gpu programs:\n");
 
@@ -137,7 +137,7 @@ namespace hpl {
 		//Fog Texture Init
 
 		Log("   Creating fog textures: ");
-		unsigned char* pFogArray = hplNewArray(unsigned char,256 *2);
+		unsigned char* pFogArray = new unsigned char[256 *2];
 
 
 		//Solid
@@ -186,7 +186,7 @@ namespace hpl {
 
 		mpFogLinearAlphaTexture = pTex;
 
-		hplDeleteArray(pFogArray);
+		delete[] pFogArray;
 
 		Log("\n");
 
@@ -217,7 +217,7 @@ namespace hpl {
 
 	cRenderer3D::~cRenderer3D()
 	{
-		hplDeleteArray(mRenderSettings.mpTempIndexArray);
+		delete[] mRenderSettings.mpTempIndexArray;
 
 		if(mRenderSettings.mpExtrudeProgram) mpResources->GetGpuProgramManager()->Destroy(mRenderSettings.mpExtrudeProgram);
 
@@ -229,15 +229,15 @@ namespace hpl {
 		if(mpRefractSpecProgram)mpResources->GetGpuProgramManager()->Destroy(mpRefractSpecProgram);
 
 
-		if(mpSkyBox) hplDelete(mpSkyBox);
+		if(mpSkyBox) delete mpSkyBox;
 		if(mpSkyBoxTexture && mbAutoDestroySkybox)
 		{
 			mpResources->GetTextureManager()->Destroy(mpSkyBoxTexture);
 		}
 
-		if(mpFogLinearSolidTexture) hplDelete(mpFogLinearSolidTexture);
-		if(mpFogLinearAddTexture) hplDelete(mpFogLinearAddTexture);
-		if(mpFogLinearAlphaTexture) hplDelete(mpFogLinearAlphaTexture);
+		if(mpFogLinearSolidTexture) delete mpFogLinearSolidTexture;
+		if(mpFogLinearAddTexture) delete mpFogLinearAddTexture;
+		if(mpFogLinearAlphaTexture) delete mpFogLinearAlphaTexture;
 	}
 
 	//-----------------------------------------------------------------------

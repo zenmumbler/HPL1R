@@ -52,7 +52,7 @@ namespace hpl {
 		BinTreeNode<T>* AddChild(eBinTreeNode i, T aData)
 		{
 			if(mChild[i]==NULL){
-				mChild[i] = hplNew( BinTreeNode<T>, (aData, this,i) );
+				mChild[i] = new BinTreeNode<T>(aData, this,i);
 				return mChild[i];
 			}
 			return NULL;
@@ -114,7 +114,7 @@ namespace hpl {
 		{
 			if(mFirstNode==NULL)
 			{
-				mFirstNode = hplNew( BinTreeNode<T>, (aData, NULL,eBinTreeNode_Left) );
+				mFirstNode = new BinTreeNode<T>(aData, NULL,eBinTreeNode_Left);
 				mlNumOfNodes++;
 
 				return mFirstNode;
@@ -205,7 +205,7 @@ namespace hpl {
 			DeleteNode(aNode->GetChild(eBinTreeNode_Left));
 			DeleteNode(aNode->GetChild(eBinTreeNode_Right));
 
-			hplDelete(aNode);
+			delete aNode;
 			mlNum++;
 		}
 

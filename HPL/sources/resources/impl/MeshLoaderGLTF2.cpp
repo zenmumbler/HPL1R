@@ -25,7 +25,7 @@ namespace hpl {
 
 
 	cMesh* cMeshLoaderGLTF2::LoadMesh(const tString& asFile, tMeshLoadFlag aFlags) {
-		cMesh* pMesh = hplNew( cMesh, (cString::GetFileName(asFile), mpMaterialManager, mpAnimationManager) );
+		cMesh* pMesh = new cMesh(cString::GetFileName(asFile), mpMaterialManager, mpAnimationManager);
 
 		/////////////////////////////////////////////////
 		// LOAD THE DOCUMENT
@@ -35,13 +35,13 @@ namespace hpl {
 		
 		if (loadResult != cgltf_result_success) {
 			Error("Could not load gltf file `%s`", asFile.c_str());
-			hplDelete(pMesh);
+			delete pMesh;
 			return nullptr;
 		}
 		
 		// only support 1 buffer (file) for now
 		auto bufferSize = model->buffers->size;
-		uint8_t *bufferData = hplNewArray(uint8_t, bufferSize);
+		uint8_t *bufferData = new uint8_t[bufferSize];
 		if (model->buffers->data == nullptr) {
 			auto binFilePath = cString::SetFilePath(model->buffers->uri, cString::GetFilePath(asFile));
 			FileReader reader { binFilePath };
@@ -212,7 +212,7 @@ namespace hpl {
 
 		*/
 
-		hplDeleteArray(bufferData);
+		delete[] bufferData;
 		cgltf_free(model);
 
 		return pMesh;

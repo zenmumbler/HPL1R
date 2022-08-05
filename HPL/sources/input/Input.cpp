@@ -53,8 +53,8 @@ namespace hpl
 
 		STLMapDeleteAll(m_mapActions);
 
-		if(mpKeyboard)hplDelete(mpKeyboard);
-		if(mpMouse)hplDelete(mpMouse);
+		if(mpKeyboard)delete mpKeyboard;
+		if(mpMouse)delete mpMouse;
 
 		Log("--------------------------------------------------------\n\n");
 	}
@@ -162,7 +162,7 @@ namespace hpl
 	void cInput::DestroyAction(tString asName)
 	{
 		iAction *pOldAction = GetAction(asName);
-		if(pOldAction) hplDelete(pOldAction);
+		if(pOldAction) delete pOldAction;
 		m_mapActions.erase(asName);
 	}
 
@@ -199,7 +199,7 @@ namespace hpl
 		{
 			if(mpKeyboard->KeyIsDown((eKey)i))
 			{
-				pAction = hplNew( cActionKeyboard, (asName,this,(eKey)i));
+				pAction = new cActionKeyboard(asName,this,(eKey)i);
 				break;
 			}
 		}
@@ -212,7 +212,7 @@ namespace hpl
 			{
 				if(mpMouse->ButtonIsDown((eMButton)i))
 				{
-					pAction = hplNew( cActionMouseButton, (asName,this,(eMButton)i));
+					pAction = new cActionMouseButton(asName,this,(eMButton)i);
 					break;
 				}
 			}
@@ -221,7 +221,7 @@ namespace hpl
 		if(pAction)
 		{
 			iAction *pOldAction = GetAction(asName);
-			if(pOldAction) hplDelete(pOldAction);
+			if(pOldAction) delete pOldAction;
 
 			m_mapActions.erase(asName);
 

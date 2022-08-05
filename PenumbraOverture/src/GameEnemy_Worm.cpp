@@ -523,9 +523,9 @@ cGameEnemy_Worm::cGameEnemy_Worm(cInit *apInit,const tString& asName,TiXmlElemen
 
 	//////////////////////////////
 	//Set up states
-	AddState(hplNew( cGameEnemyState_Worm_Idle,(STATE_IDLE,mpInit,this)) );
-	AddState(hplNew( cGameEnemyState_Worm_Hunt,(STATE_HUNT,mpInit,this)) );
-	AddState(hplNew( cGameEnemyState_Worm_Dead,(STATE_DEAD,mpInit,this)) );
+	AddState(new cGameEnemyState_Worm_Idle(STATE_IDLE,mpInit,this));
+	AddState(new cGameEnemyState_Worm_Hunt(STATE_HUNT,mpInit,this));
+	AddState(new cGameEnemyState_Worm_Dead(STATE_DEAD,mpInit,this));
 
 	/////////////////////////////
 	//Internal variables
@@ -681,7 +681,7 @@ void cGameEnemy_Worm::OnLoad()
 	iPhysicsWorld *pPhysicsWorld = mpInit->mpGame->GetScene()->GetWorld3D()->GetPhysicsWorld();
 	mpAttackShape = pPhysicsWorld->CreateBoxShape(mvAttackDamageSize,NULL);
 
-	mpMeshCallback = hplNew(  cGameEnemy_Worm_MeshCallback, (this) );
+	mpMeshCallback = new cGameEnemy_Worm_MeshCallback(this);
 	mpMeshEntity->SetCallback(mpMeshCallback);
 
 	//Set up enemy
@@ -1002,7 +1002,7 @@ void cGameEnemy_Worm::SetupTail()
 	for(int i=0; i<7; ++i)
 	{
 		//Create and set to right data
-		mvTailSegments[i] = hplNew(  cWormTailSegment, () );
+		mvTailSegments[i] = new cWormTailSegment();
 		cWormTailSegment *pSegment = mvTailSegments[i];
 		if(i==0){
 			mpRootSegment = pSegment;

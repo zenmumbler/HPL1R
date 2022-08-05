@@ -156,7 +156,7 @@ static void ExportModel(cMesh *model, cResources *res) {
 	gltf["accessors"] = accessors;
 
 	// write binary data
-	float * const binData = hplNewArray(float, bufferOffset >> 2);
+	float * const binData = new float[bufferOffset >> 2];
 	float *nextBufferPos = binData;
 	
 	// write indices
@@ -212,6 +212,7 @@ static void ExportModel(cMesh *model, cResources *res) {
 	FILE *pFile = fopen(binFilePath.c_str(),"wb+");
 	fwrite(binData, bufferOffset, 1, pFile);
 	fclose(pFile);
+	delete[] binData;
 
 	// write mesh node
 	primitive["material"] = 0;

@@ -34,13 +34,13 @@ namespace hpl {
 	cConfigFile::cConfigFile(tWString asFile)
 	{
 		msFile = asFile;
-		mpXmlDoc = hplNew( TiXmlDocument,() );
+		mpXmlDoc = new TiXmlDocument();
 		//mpFileSearcher = apFileSearcher;
 	}
 
 	cConfigFile::~cConfigFile()
 	{
-		hplDelete(mpXmlDoc);
+		delete mpXmlDoc;
 	}
 
 	//-----------------------------------------------------------------------
@@ -90,9 +90,9 @@ namespace hpl {
 		TiXmlElement *pLevelElem = mpXmlDoc->FirstChildElement(asLevel.c_str());
 
 		if(pLevelElem==NULL){
-			TiXmlElement *pNodeChild = hplNew( TiXmlElement, (asLevel.c_str()) );
+			TiXmlElement *pNodeChild = new TiXmlElement(asLevel.c_str());
 			pLevelElem = static_cast<TiXmlElement*>(mpXmlDoc->InsertEndChild(*pNodeChild));
-			hplDelete(pNodeChild);
+			delete pNodeChild;
 		}
 
 		pLevelElem->SetAttribute(asName.c_str(),asVal.c_str());

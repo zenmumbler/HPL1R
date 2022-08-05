@@ -327,15 +327,15 @@ namespace hpl {
 
 			if(pData->GetMainSoundName() != ""){
 				iSoundChannel *pChannel = gpSound->GetSoundHandler()->CreateChannel(pData->GetMainSoundName(),0);
-				hplDelete(pChannel);
+				delete pChannel;
 			}
 			if(pData->GetStartSoundName() != ""){
 				iSoundChannel *pChannel = gpSound->GetSoundHandler()->CreateChannel(pData->GetStartSoundName(),0);
-				hplDelete(pChannel);
+				delete pChannel;
 			}
 			if(pData->GetStopSoundName() != ""){
 				iSoundChannel *pChannel = gpSound->GetSoundHandler()->CreateChannel(pData->GetStopSoundName(),0);
-				hplDelete(pChannel);
+				delete pChannel;
 			}
 		}
 		else
@@ -839,7 +839,7 @@ namespace hpl {
 		cScriptJointCallback *pCallback = static_cast<cScriptJointCallback*>(pJoint->GetCallback());
 		if(pCallback==NULL)
 		{
-			pCallback = hplNew( cScriptJointCallback, (gpScene) );
+			pCallback = new cScriptJointCallback(gpScene);
 			pJoint->SetCallback(pCallback,true);
 		}
 

@@ -83,7 +83,7 @@ namespace hpl {
 		if(pVideo->LoadFromFile(sPath)==false)
 		{
 			EndLoad();
-			hplDelete(pVideo);
+			delete pVideo;
 			Error("Could not load video '%s'\n",asName.c_str());
 			return NULL;
 		}
@@ -108,7 +108,7 @@ namespace hpl {
 		if(apResource)
 		{
 			RemoveResource(apResource);
-			hplDelete(apResource);
+			delete apResource;
 		}
 	}
 

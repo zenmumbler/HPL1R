@@ -150,7 +150,7 @@ namespace hpl {
 			if(pTexture->CreateAnimFromBitmapVec(vBitmaps)==false)
 			{
 				Error("Couldn't create animated texture '%s'!\n", asName.c_str());
-				hplDelete(pTexture);
+				delete pTexture;
 				EndLoad();
 				return NULL;
 			}
@@ -223,7 +223,7 @@ namespace hpl {
 			if (pTexture->CreateCubeFromBitmapVec(vBitmaps)==false)
 			{
 				Error("Couldn't create cubemap '%s'!\n", sName.c_str());
-				hplDelete(pTexture);
+				delete pTexture;
 				EndLoad();
 				return NULL;
 			}
@@ -258,7 +258,7 @@ namespace hpl {
 			//Log("Deleting2 '%s'-%d\n",apResource->GetName().c_str() ,(iTexture*)apResource);
 			//Log("Deleting1 %d\n",apResource);
 			//Log("Deleting2 %d\n",(iTexture*)apResource);
-			hplDelete(apResource);
+			delete apResource;
 		}
 	}
 
@@ -395,7 +395,7 @@ namespace hpl {
 			pTexture->SetSizeLevel(alTextureSizeLevel);
 			if(pTexture->CreateFromBitmap(*pBmp)==false)
 			{
-				hplDelete(pTexture);
+				delete pTexture;
 				EndLoad();
 				return NULL;
 			}

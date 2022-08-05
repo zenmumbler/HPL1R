@@ -66,7 +66,7 @@ namespace hpl {
 
 	int cPortalVisibilitySet::AddPortalVisibility(cPortal *apPortal)
 	{
-		mvVisibility.push_back(hplNew( cPortalVisibility, () ));
+		mvVisibility.push_back(new cPortalVisibility() );
 
 		size_t lIdx = mvVisibility.size()-1;
 
@@ -204,7 +204,7 @@ namespace hpl {
 
 	cPortalVisibilitySet* cSectorVisibilityContainer::CreatePortalVisibiltySet(cPortalVisibilitySet* apParent)
 	{
-		cPortalVisibilitySet *pSet = hplNew( cPortalVisibilitySet, (this,apParent) );
+		cPortalVisibilitySet *pSet = new cPortalVisibilitySet(this,apParent);
 
 
 		//Add to visibility list.
@@ -225,7 +225,7 @@ namespace hpl {
 		{
 			if(mbLog) Log("%sCreating Visibility sector for '%s'!\n",GetTabs().c_str(),apSector->GetId().c_str());
 
-			cSectorVisibility *pVisSector = hplNew( cSectorVisibility, (this) );
+			cSectorVisibility *pVisSector = new cSectorVisibility(this);
 			pVisSector->mpSector = apSector;
 
 			m_mapSectors.insert(tSectorVisibilityMapIt::value_type(apSector,pVisSector));

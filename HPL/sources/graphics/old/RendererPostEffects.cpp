@@ -164,7 +164,7 @@ namespace hpl {
 	cRendererPostEffects::~cRendererPostEffects()
 	{
 		for(int i=0;i<2;i++)
-			if(mpScreenBuffer[i])hplDelete(mpScreenBuffer[i]);
+			if(mpScreenBuffer[i])delete mpScreenBuffer[i];
 
 		if(mpBlur2dProgram) mpGpuManager->Destroy(mpBlur2dProgram);
 		if(mpBlurRectProgram) mpGpuManager->Destroy(mpBlurRectProgram);
@@ -175,8 +175,8 @@ namespace hpl {
 
 		if(mpDepthOfFieldProgram) mpGpuManager->Destroy(mpDepthOfFieldProgram);
 
-		if(mpBloomBlurTexture) hplDelete(mpBloomBlurTexture);
-		if(mpDofBlurTexture) hplDelete(mpDofBlurTexture);
+		if(mpBloomBlurTexture) delete mpBloomBlurTexture;
+		if(mpDofBlurTexture) delete mpDofBlurTexture;
 
 	}
 

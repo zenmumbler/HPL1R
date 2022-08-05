@@ -20,7 +20,6 @@
 #define HPL_MEMORYPOOL_H
 
 #include <vector>
-#include "system/MemoryManager.h"
 
 template <class T>
 class cMemoryPool
@@ -38,7 +37,7 @@ public:
 		for(size_t i=0; i< mvData.size(); ++i)
 		{
 			if(mpCreateFunc)	mvData[i] = mpCreateFunc();
-			else				mvData[i] = hplNew(T, () );
+			else				mvData[i] = new T();
 		}
 	}
 
@@ -46,7 +45,7 @@ public:
 
 	~cMemoryPool()
 	{
-		for(size_t i=0; i< mvData.size(); ++i) hplDelete(mvData[i]);
+		for(size_t i=0; i< mvData.size(); ++i) delete mvData[i];
 	}
 
 	//---------------------------------
@@ -64,7 +63,7 @@ public:
 			for(size_t i=lStart; i< mvData.size(); ++i)
 			{
 				if(mpCreateFunc)	mvData[i] = mpCreateFunc();
-				else				mvData[i] = hplNew(T,());
+				else				mvData[i] = new T();
 			}
 
 			++mlCurrentData;
@@ -93,7 +92,7 @@ public:
 	{
 		for(size_t i=mlCurrentData+1; i< mvData.size(); ++i)
 		{
-			hplDelete(mvData[i]);
+			delete mvData[i];
 		}
 		mvData.resize(mlCurrentData+1);
 	}

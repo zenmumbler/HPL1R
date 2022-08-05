@@ -224,7 +224,7 @@ namespace hpl {
 				break;
 			}
 		}
-		hplDelete(pObject);
+		delete pObject;
 	}
 
 	//--------------------------------------------------------
@@ -249,7 +249,7 @@ namespace hpl {
 		typename T::iterator it = aCont.begin();
 		for(;it != aCont.end();it++)
 		{
-			hplDelete(*it);
+			delete *it;
 		}
 		aCont.clear();
 	}
@@ -261,7 +261,7 @@ namespace hpl {
 		typename T::iterator it = aCont.begin();
 		for(;it != aCont.end();it++)
 		{
-			hplDelete(it->second);
+			delete it->second;
 		}
 		aCont.clear();
 	}

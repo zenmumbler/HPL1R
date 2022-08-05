@@ -122,7 +122,7 @@ namespace hpl {
 		if(mpModule->AddScriptSection("main", pCharBuffer, lLength)<0)
 		{
 			Error("Couldn't add script '%s'!\n",asFileName.c_str());
-			hplDeleteArray(pCharBuffer);
+			delete[] pCharBuffer;
 			return false;
 		}
 
@@ -141,7 +141,7 @@ namespace hpl {
 		}
 		mpOutput->Clear();
 
-		hplDeleteArray(pCharBuffer);
+		delete[] pCharBuffer;
 		return success;
 	}
 
@@ -167,7 +167,7 @@ namespace hpl {
 			Error("Failed to start angel script!\n");
 		}
 
-		mpOutput = hplNew( cScriptOutput, () );
+		mpOutput = new cScriptOutput();
 		mpEngine->SetMessageCallback(asMETHOD(cScriptOutput,AddMessage), mpOutput, asCALL_THISCALL);
 
 		RegisterScriptArray(mpEngine, true);
@@ -177,11 +177,11 @@ namespace hpl {
 	
 	cScript::~cScript() {
 		mpEngine->Release();
-		hplDelete(mpOutput);
+		delete mpOutput;
 	}
 
 	cScriptModule *cScript::CreateScript(const tString &asName) {
-		return hplNew( cScriptModule, (asName, mpEngine, mpOutput) );
+		return new cScriptModule(asName, mpEngine, mpOutput);
 	}
 	
 	bool cScript::AddScriptFunc(const tString &asFuncDecl, void *pFunc) {

@@ -855,13 +855,13 @@ cEffectHandler::cEffectHandler(cInit *apInit)  : iUpdateable("EffectHandler")
 	mpInit = apInit;
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
 
-	mpFlash = hplNew( cEffect_Flash,(mpInit, mpDrawer) );
-	mpWaveGravity = hplNew( cEffect_WaveGravity,(mpInit) );
-	mpSubTitle = hplNew( cEffect_SubTitle,(mpInit,mpDrawer) );
-	mpDepthOfField = hplNew( cEffect_DepthOfField,(mpInit) );
-	mpSaveEffect = hplNew( cEffect_SaveEffect,(mpInit,mpDrawer) );
-	mpShakeScreen = hplNew( cEffect_ShakeScreen,(mpInit) );
-	mpUnderwater = hplNew( cEffect_Underwater,(mpInit,mpDrawer) );
+	mpFlash = new cEffect_Flash(mpInit,mpDrawer);
+	mpWaveGravity = new cEffect_WaveGravity(mpInit);
+	mpSubTitle = new cEffect_SubTitle(mpInit,mpDrawer);
+	mpDepthOfField = new cEffect_DepthOfField(mpInit);
+	mpSaveEffect = new cEffect_SaveEffect(mpInit,mpDrawer);
+	mpShakeScreen = new cEffect_ShakeScreen(mpInit);
+	mpUnderwater = new cEffect_Underwater(mpInit,mpDrawer);
 
 	Reset();
 }
@@ -870,13 +870,13 @@ cEffectHandler::cEffectHandler(cInit *apInit)  : iUpdateable("EffectHandler")
 
 cEffectHandler::~cEffectHandler(void)
 {
-	hplDelete( mpFlash );
-	hplDelete( mpWaveGravity );
-	hplDelete( mpSubTitle );
-	hplDelete( mpDepthOfField );
-	hplDelete( mpSaveEffect );
-	hplDelete( mpShakeScreen );
-	hplDelete( mpUnderwater );
+	delete  mpFlash ;
+	delete  mpWaveGravity ;
+	delete  mpSubTitle ;
+	delete  mpDepthOfField ;
+	delete  mpSaveEffect ;
+	delete  mpShakeScreen ;
+	delete  mpUnderwater ;
 }
 
 //-----------------------------------------------------------------------

@@ -214,7 +214,7 @@ namespace hpl {
 
 	iContainerIterator* cSaveDataHandler::CreateIteratorPtr()
 	{
-		return hplNew( cSaveDataIterator, (&m_mapSaveData) );
+		return new cSaveDataIterator(&m_mapSaveData);
 	}
 
 	//------------------------------------------------------------------------

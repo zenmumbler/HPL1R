@@ -119,9 +119,9 @@ namespace hpl {
 		mfGroundFriction =0.1f;
 		mfAirFriction = 0.01f;
 
-		mpRayCallback = hplNew( cCharacterBodyRay, () );
-		mpCollideCallbackGravity = hplNew( cCharacterBodyCollideGravity,());
-		mpCollideCallbackPush = hplNew( cCharacterBodyCollidePush,());
+		mpRayCallback = new cCharacterBodyRay();
+		mpCollideCallbackGravity = new cCharacterBodyCollideGravity();
+		mpCollideCallbackPush = new cCharacterBodyCollidePush();
 
 		mpCollideCallbackGravity->mpCharBody = this;
 		mpCollideCallbackPush->mpCharBody = this;
@@ -149,9 +149,9 @@ namespace hpl {
 		for(size_t i=0; i< mvExtraBodies.size(); i++)
 			mpWorld->DestroyBody(mvExtraBodies[i]);
 
-		hplDelete(mpRayCallback);
-		hplDelete(mpCollideCallbackGravity);
-		hplDelete(mpCollideCallbackPush);
+		delete mpRayCallback;
+		delete mpCollideCallbackGravity;
+		delete mpCollideCallbackPush;
 	}
 
 	//-----------------------------------------------------------------------
@@ -1340,7 +1340,7 @@ namespace hpl {
 
 	iSaveData* iCharacterBody::CreateSaveData()
 	{
-		return hplNew( cSaveData_iCharacterBody, () );
+		return new cSaveData_iCharacterBody();
 	}
 
 	//-----------------------------------------------------------------------

@@ -237,12 +237,7 @@ namespace hpl {
 			return nullptr;
 		}
 
-		cGfxObject *go = hplNew(cGfxObject, ({
-			asFileName,
-			matType,
-			pImage,
-			pImage->GetVertexVecCopy(0, -1)
-		}));
+		cGfxObject *go = new cGfxObject({asFileName, matType, pImage, pImage->GetVertexVecCopy(0, -1) });
 		mvGfxObjects.push_back(go);
 		return go;
 	}
@@ -257,12 +252,7 @@ namespace hpl {
 			return nullptr;
 		}
 
-		return hplNew(cGfxObject, ({
-			"",
-			matType,
-			pImage,
-			pImage->GetVertexVecCopy(0, -1)
-		}));
+		return new cGfxObject({ "", matType, pImage, pImage->GetVertexVecCopy(0, -1) });
 	}
 
 	//-----------------------------------------------------------------------

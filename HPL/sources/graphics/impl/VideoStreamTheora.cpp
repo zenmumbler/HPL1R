@@ -46,11 +46,11 @@ namespace hpl {
 
 		//////////////////////////////
 		//Create buffers
-		mpYuvToR = hplNewArray( unsigned char,256*256);
-		mpYuvToB = hplNewArray( unsigned char,256*256);
+		mpYuvToR = new unsigned char[256*256];
+		mpYuvToB = new unsigned char[256*256];
 
-		mpYuv_G_UV = hplNewArray( unsigned short,256*256);
-		mpYuv_G_Y_UV = hplNewArray( unsigned char,256*1024);
+		mpYuv_G_UV = new unsigned short[256*256];
+		mpYuv_G_Y_UV = new unsigned char[256*1024];
 
 		//////////////////////////////
 		//Values for R and B
@@ -100,11 +100,11 @@ namespace hpl {
 
 	cVideoStreamTheora_Loader::~cVideoStreamTheora_Loader()
 	{
-		hplDeleteArray(mpYuvToR);
-		hplDeleteArray(mpYuvToB);
+		delete[] mpYuvToR;
+		delete[] mpYuvToB;
 
-		hplDeleteArray(mpYuv_G_UV);
-		hplDeleteArray(mpYuv_G_Y_UV);
+		delete[] mpYuv_G_UV;
+		delete[] mpYuv_G_Y_UV;
 	}
 
 	//-----------------------------------------------------------------------
@@ -162,7 +162,7 @@ namespace hpl {
 		if(mbVideoLoaded)
 		{
 			theora_clear(&mTheoraState);
-			if(mpFrameBuffer) hplDeleteArray(mpFrameBuffer);
+			if(mpFrameBuffer) delete[] mpFrameBuffer;
 		}
 	}
 
@@ -496,7 +496,7 @@ namespace hpl {
 
 			mvSize = cVector2l(mTheoraInfo.frame_width, mTheoraInfo.frame_height);
 
-			mpFrameBuffer = hplNewArray(unsigned char,mvSize.x * mvSize.y *3);
+			mpFrameBuffer = new unsigned char[mvSize.x * mvSize.y *3];
 		}
 		else
 		{

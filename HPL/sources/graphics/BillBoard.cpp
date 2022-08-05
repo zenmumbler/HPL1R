@@ -110,8 +110,8 @@ namespace hpl {
 	cBillboard::~cBillboard()
 	{
 		if(mpMaterial) mpMaterialManager->Destroy(mpMaterial);
-		if(mpVtxBuffer) hplDelete(mpVtxBuffer);
-		if(mpHaloSourceBuffer) hplDelete(mpHaloSourceBuffer);
+		if(mpVtxBuffer) delete mpVtxBuffer;
+		if(mpHaloSourceBuffer) delete mpHaloSourceBuffer;
 
 		if(mQueryObject.mpQuery)
 			mpLowLevelGraphics->DestroyOcclusionQuery(mQueryObject.mpQuery);
@@ -394,7 +394,7 @@ namespace hpl {
 		tString sPath = mpFileSearcher->GetFilePath(sNewFile);
 		if(sPath != "")
 		{
-			TiXmlDocument *pDoc = hplNew( TiXmlDocument, (sPath.c_str()) );
+			TiXmlDocument *pDoc = new TiXmlDocument(sPath.c_str());
 			if(pDoc->LoadFile())
 			{
 				TiXmlElement *pRootElem = pDoc->RootElement();
@@ -448,7 +448,7 @@ namespace hpl {
 			{
 				Error("Couldn't load file '%s'\n",sNewFile.c_str());
 			}
-			hplDelete(pDoc);
+			delete pDoc;
 		}
 		else
 		{
@@ -602,7 +602,7 @@ namespace hpl {
 
 	iSaveData* cBillboard::CreateSaveData()
 	{
-		return hplNew( cSaveData_cBillboard, () );
+		return new cSaveData_cBillboard();
 	}
 
 	//-----------------------------------------------------------------------

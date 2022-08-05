@@ -116,7 +116,7 @@ namespace hpl {
 	{
 		//Log("Start Destroying newton body '%s' %d\n",msName.c_str(),(size_t)this);
 
-		if(mpNode) hplDelete(mpNode);
+		if(mpNode) delete mpNode;
 		mpWorld->DestroyShape(mpShape);
 
 		//Log(" Joints\n");
@@ -266,7 +266,7 @@ namespace hpl {
 	{
 		if(mpNode) return mpNode;
 
-		mpNode = hplNew( cNode3D, () );
+		mpNode = new cNode3D();
 		return mpNode;
 	}
 
@@ -483,7 +483,7 @@ namespace hpl {
 
 	iSaveData* iPhysicsBody::CreateSaveData()
 	{
-		return hplNew( cSaveData_iPhysicsBody, () );
+		return new cSaveData_iPhysicsBody();
 	}
 
 	//-----------------------------------------------------------------------

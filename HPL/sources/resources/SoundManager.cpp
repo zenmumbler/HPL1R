@@ -107,7 +107,7 @@ namespace hpl {
 			if(pData->IsStream() && pData->HasUsers()==false)
 			{
 				RemoveResource(pData);
-				hplDelete(pData);
+				delete pData;
 			}
 		}
 	}
@@ -123,7 +123,7 @@ namespace hpl {
 		{
 			iResourceBase* pData = it->second;
 			RemoveResource(pData);
-			hplDelete(pData);
+			delete pData;
 
 			it= m_mapHandleResources.begin();
 		}

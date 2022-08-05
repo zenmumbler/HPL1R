@@ -168,10 +168,10 @@ namespace hpl {
 		if(bFoundNode)
 		{
 			//Create the image resource
-			pImage = hplNew( cResourceImage, (aSrc.GetFileName(), mpFrameTexture, this,
+			pImage = new cResourceImage(aSrc.GetFileName(), mpFrameTexture, this,
 				cRect2l(vPos,cVector2l(lSW-2,lSH-2)),//-2 to get the correct size.
 				cVector2l(mBitmap.GetWidth(),mBitmap.GetHeight()),
-				mlHandle) );
+				mlHandle);
 
 			if(!bFoundEmptyNode)
 			{

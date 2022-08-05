@@ -149,7 +149,7 @@ cNumericalPanel::cNumericalPanel(cInit *apInit)  : iUpdateable("NumericalPanel")
 		else if(i==11)lNum=0;
 		else if(i==12) lNum=-2;
 
-		mlstButtons.push_back(hplNew( cNumericalButton, (mpInit,this,vPos,cVector2f(62,30),lNum)) );
+		mlstButtons.push_back(new cNumericalButton(mpInit,this,vPos,cVector2f(62,30),lNum));
         
 		if(i%3 ==0)
 		{

@@ -68,7 +68,7 @@ namespace hpl {
 			pScript = mpScript->CreateScript(asNewName);
 
 			if (pScript->CreateFromFile(sPath)==false){
-				hplDelete(pScript);
+				delete pScript;
 				EndLoad();
 				return nullptr;
 			}
@@ -98,7 +98,7 @@ namespace hpl {
 
 		if (apResource->HasUsers()==false) {
 			RemoveResource(apResource);
-			hplDelete(apResource);
+			delete apResource;
 		}
 	}
 
