@@ -67,19 +67,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cSound::Init(	cResources *apResources, bool abUseHardware, bool abForceGeneric, bool abUseEnvAudio, int alMaxChannels,
-						int alStreamUpdateFreq, bool abUseThreading, bool abUseVoiceManagement,
-						int alMaxMonoSourceHint, int alMaxStereoSourceHint,
-						int alStreamingBufferSize, int alStreamingBufferCount, bool abEnableLowLevelLog, tString asDeviceName)
+	void cSound::Init(cResources *apResources, const tString &asDeviceName)
 	{
 		mpResources = apResources;
 
 		Log("Initializing Sound Module\n");
 		Log("--------------------------------------------------------\n");
 
-		mpLowLevelSound->Init(	abUseHardware, abForceGeneric, abUseEnvAudio, alMaxChannels, alStreamUpdateFreq, abUseThreading,
-								abUseVoiceManagement, alMaxMonoSourceHint, alMaxStereoSourceHint,
-								alStreamingBufferSize, alStreamingBufferCount, abEnableLowLevelLog, asDeviceName);
+		mpLowLevelSound->Init(asDeviceName);
 
 		mpSoundHandler = hplNew( cSoundHandler, (mpLowLevelSound, mpResources) );
 		mpMusicHandler = hplNew( cMusicHandler, (mpLowLevelSound, mpResources) );

@@ -213,19 +213,7 @@ namespace hpl {
 			mpResources);
 
 		//Init Sound
-		mpSound->Init(mpResources, aVars.GetBool("UseSoundHardware",true),
-						aVars.GetBool("ForceGeneric",false),
-						aVars.GetBool("UseEnvironmentalAudio", false),
-						aVars.GetInt("MaxSoundChannels",32),
-						aVars.GetInt("StreamUpdateFreq",10),
-						aVars.GetBool("UseSoundThreading",true),
-						aVars.GetBool("UseVoiceManagement",true),
-						aVars.GetInt("MaxMonoChannelsHint",0),
-						aVars.GetInt("MaxStereoChannelsHint",0),
-						aVars.GetInt("StreamBufferSize",4096),
-						aVars.GetInt("StreamBufferCount",8),
-						aVars.GetBool("LowLevelSoundLogging", false),
-						aVars.GetString("DeviceName"));
+		mpSound->Init(mpResources, aVars.GetString("DeviceName"));
 
 		//Init physics
 		mpPhysics->Init(mpResources);

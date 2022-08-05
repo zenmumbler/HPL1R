@@ -147,12 +147,8 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelSoundOAL::Init(bool abUseHardware, bool abForceGeneric, bool abUseEnvAudio,int alMaxChannels,
-									int alStreamUpdateFreq, bool abUseThreading, bool abUseVoiceManagement,
-									int alMaxMonoSourceHint, int alMaxStereoSourceHint,
-									int alStreamingBufferSize, int alStreamingBufferCount, bool abEnableLowLevelLog, tString asDeviceName)
+	void cLowLevelSoundOAL::Init(const tString &asDeviceName)
 	{
-
 		Log(" Initializing Direct OpenAL\n");
 		
 		miDevice = alcOpenDevice(nullptr);

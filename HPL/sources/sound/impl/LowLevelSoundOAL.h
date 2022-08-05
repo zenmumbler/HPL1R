@@ -34,12 +34,7 @@ namespace hpl
 
 		void SetListenerAttenuation (bool abEnabled) override;
 
-		void Init ( bool abUseHardware, bool abForceGeneric, bool abUseEnvAudio, int alMaxChannels,
-					int alStreamUpdateFreq, bool abUseThreading, bool abUseVoiceManagement,
-					int alMaxMonoSourceHint, int alMaxStereoSourceHint,
-					int alStreamingBufferSize, int alStreamingBufferCount, bool abEnableLowLevelLog,
-					tString asDeviceName
-					) override;
+		void Init (const tString &asDeviceName) override;
 
 		void SetVolume(float afVolume) override;
 

@@ -34,10 +34,7 @@ namespace hpl {
 		cSound(iLowLevelSound *apLowLevelSound);
 		~cSound();
 
-		void Init(	cResources *apResources, bool abUseHardware, bool abForceGeneric, bool abUseEnvAudio, int alMaxChannels,
-						int alStreamUpdateFreq, bool abUseThreading, bool abUseVoiceManagement,
-						int alMaxMonoSourceHint, int alMaxStereoSourceHint,
-						int alStreamingBufferSize, int alStreamingBufferCount, bool abEnableLowLevelLog, tString asDeviceName);
+		void Init(cResources *apResources, const tString &asDeviceName);
 
 		void Update(float afTimeStep);
 
