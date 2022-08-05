@@ -1412,12 +1412,6 @@ void cPlayer::OnDraw()
 		mpGfxDrawer->DrawGfxObject(mvCrossHairs[eCrossHairState_Cross],cVector3f(0,0,100)+(vPos - vPosAdd));
 	}
 
-	//DEBUG: Memory
-	/*float fMbMem = ((float)cMemoryManager::mlTotalMemoryUsage) / (1024.0f * 1024.0f);
-	mpFont->Draw(cVector3f(5,5,0),12,cColor(1,1,1,1),eFontAlign_Left,_W("Memory used: %d (%.2f mb)"),
-											cMemoryManager::mlTotalMemoryUsage, fMbMem);
-	*/
-
 	//DEBUG: Mouse
 	//iMouse *pMouse = mpInit->mpGame->GetInput()->GetMouse();
 	//mpFont->Draw(cVector3f(5,5,0),12,cColor(1,1,1,1),eFontAlign_Left,_W("Left: %d Right: %d"),

@@ -16,39 +16,23 @@
  * You should have received a copy of the GNU General Public License
  * along with Penumbra Overture.  If not, see <http://www.gnu.org/licenses/>.
  */
-//#include <vld.h>
 
 #include "Init.h"
 
-#include <SDL2/SDL.h>
-
-#ifdef WIN32
-	#define WIN32_MEAN_AND_LEAN
-	#include <windows.h>
-#endif
-
 int hplMain(const tString& asCommandLine)
 {
-	cInit *pInit = hplNew( cInit, () );
-
+	auto pInit = new cInit();
 	bool bRet = pInit->Init(asCommandLine);
 	
-	if(bRet==false){
+	if (bRet == false) {
 		hplDelete( pInit->mpGame );
-		CreateMessageBoxW(_W("Error!"),pInit->msErrorMessage.c_str());
-		OpenBrowserWindow(_W("http://support.frictionalgames.com"));
+		CreateMessageBoxW(_W("Error!"), pInit->msErrorMessage.c_str());
 		return 1;
 	}
 
 	pInit->Run();
-
 	pInit->Exit();
-
-	hplDelete( pInit );
-
-#ifdef MEMORY_MANAGER_ACTIVE
-	cMemoryManager::LogResults();
-#endif
+	delete pInit;
 
 	return 0;
 }

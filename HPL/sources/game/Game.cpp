@@ -334,8 +334,6 @@ namespace hpl {
 
 		bool mbIsUpdated = true;
 
-		//cMemoryManager::SetLogCreation(true);
-
 		while(!mbGameIsDone)
 		{
 			//Log("-----------------\n");

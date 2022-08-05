@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-//#include <vld.h>
-//Use this to check for memory leaks!
+
+#define _UNICODE
 
 #ifdef WIN32
 	#pragma comment(lib, "angelscript.lib")
@@ -29,17 +29,14 @@
 	#include <clocale>
 	#include <langinfo.h>
 	#include <unistd.h>
-	#include <time.h>
 #endif
 
-#define _UNICODE
-
-#include <stdio.h>
-#include <stdarg.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdarg>
+#include <cstdlib>
 #include <sys/stat.h>
 #include <fstream>
-#include <string>
+#include <time.h>
 
 #include "system/System.h"
 #include "system/String.h"

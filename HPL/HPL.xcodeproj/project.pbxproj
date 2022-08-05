@@ -44,7 +44,6 @@
 		DB294E100C11DC6E005DA55C /* CRC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB294E0F0C11DC6E005DA55C /* CRC.cpp */; };
 		DB4AFB9B0D70768B00809E03 /* OpenALSoundEnvironment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFB8C0D70768B00809E03 /* OpenALSoundEnvironment.cpp */; };
 		DB4AFBA20D7076EE00809E03 /* LowLevelSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFBA10D7076EE00809E03 /* LowLevelSound.cpp */; };
-		DB4AFBA40D7076F900809E03 /* MemoryManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB4AFBA30D7076F900809E03 /* MemoryManager.cpp */; };
 		DBCEE59F0B4B33190088A7E3 /* Beam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE59C0B4B33190088A7E3 /* Beam.cpp */; };
 		DBCEE7390B4B56440088A7E3 /* MeshLoaderColladaLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBCEE6250B4B35D50088A7E3 /* MeshLoaderColladaLoader.cpp */; };
 		DBF84AA80AC76F1E00BB15CD /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B60AC76D5800BB15CD /* Action.cpp */; };
@@ -454,7 +453,6 @@
 		DB4AFB8C0D70768B00809E03 /* OpenALSoundEnvironment.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = OpenALSoundEnvironment.cpp; sourceTree = "<group>"; };
 		DB4AFB9F0D7076B200809E03 /* VideoManager.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = VideoManager.cpp; sourceTree = "<group>"; };
 		DB4AFBA10D7076EE00809E03 /* LowLevelSound.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = LowLevelSound.cpp; sourceTree = "<group>"; };
-		DB4AFBA30D7076F900809E03 /* MemoryManager.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryManager.cpp; sourceTree = "<group>"; };
 		DB4AFBE00D70773700809E03 /* Material_Water.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Material_Water.h; sourceTree = "<group>"; };
 		DB4AFBE10D70773700809E03 /* VideoStream.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = VideoStream.h; sourceTree = "<group>"; };
 		DB4AFBF10D70776800809E03 /* OpenALSoundEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = OpenALSoundEnvironment.h; sourceTree = "<group>"; };
@@ -1312,7 +1310,6 @@
 				8E11637826C1FD520065E04C /* FileReader.h */,
 				DBF84A1A0AC76D5800BB15CD /* LogicTimer.cpp */,
 				DB27F1040ACB9AB90054ACA3 /* LogicTimer.h */,
-				DB4AFBA30D7076F900809E03 /* MemoryManager.cpp */,
 				DB4AFBF70D7077B000809E03 /* MemoryManager.h */,
 				8E9787602617A35A00C4395C /* MemoryPool.h */,
 				DBF84A1B0AC76D5800BB15CD /* SerializeClass.cpp */,
@@ -1573,7 +1570,6 @@
 				8E9B9332289C623F007BC193 /* LoadImage.cpp in Sources */,
 				DB4AFB9B0D70768B00809E03 /* OpenALSoundEnvironment.cpp in Sources */,
 				DB4AFBA20D7076EE00809E03 /* LowLevelSound.cpp in Sources */,
-				DB4AFBA40D7076F900809E03 /* MemoryManager.cpp in Sources */,
 				DB019B210D7462DE00FADC2C /* VideoManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
