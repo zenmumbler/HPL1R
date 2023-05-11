@@ -267,11 +267,11 @@ namespace hpl {
 	{
 		float vTriVec[9];
 
-		bool bOptimize = false;
+		// bool bOptimize = false;
 		bool bCreatedPlane = false;
 		cPlanef plane;
 
-		mpNewtonCollision = NewtonCreateTreeCollision(mpNewtonWorld, NULL);
+		mpNewtonCollision = NewtonCreateTreeCollision(mpNewtonWorld, 0);
 		//Log("-- Creating mesh collision.:\n");
 		NewtonTreeCollisionBeginBuild(mpNewtonCollision);
 		for(int tri = 0; tri < alIndexNum; tri+=3)
@@ -286,6 +286,7 @@ namespace hpl {
 				vTriVec[idx*3 + 2] = apVertexArray[lVtx + 2];
 			}
 
+			/*
 			if(bOptimize==false)
 			{
 				cPlanef tempPlane;
@@ -313,11 +314,13 @@ namespace hpl {
 					}
 				}
 			}
+			*/
 
 			NewtonTreeCollisionAddFace(mpNewtonCollision,3,vTriVec,sizeof(float)*3,1);
 		}
 
-		NewtonTreeCollisionEndBuild(mpNewtonCollision, bOptimize ? 1: 0);
+		NewtonTreeCollisionEndBuild(mpNewtonCollision, 0);
+		// NewtonTreeCollisionEndBuild(mpNewtonCollision, bOptimize ? 1: 0);
 
 		//Set bounding box size
 		mBoundingVolume.AddArrayPoints(apVertexArray, alVtxNum);
