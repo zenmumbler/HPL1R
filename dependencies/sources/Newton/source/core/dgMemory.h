@@ -76,7 +76,7 @@ dgInt32 dgGetMemoryUsed ();
 
 class dgMemoryAllocator
 {
-	#ifdef __x86_64__
+	#if (defined __x86_64__) || defined(__aarch64__)
 		#define DG_MEMORY_GRANULARITY_BITS		6
 	#else
 		#define DG_MEMORY_GRANULARITY_BITS		5
