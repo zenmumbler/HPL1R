@@ -443,29 +443,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::SetClipPlane(int alIdx, const cPlanef& aPlane)
-	{
-		mvClipPlanes[alIdx] = aPlane;
-
-		double vPlane[4];
-		vPlane[0] = aPlane.a;
-		vPlane[1] = aPlane.b;
-		vPlane[2] = aPlane.c;
-		vPlane[3] = aPlane.d;
-		glClipPlane(GL_CLIP_PLANE0 + alIdx,vPlane);
-	}
-	cPlanef cLowLevelGraphicsSDL::GetClipPlane(int alIdx, const cPlanef& aPlane)
-	{
-		return mvClipPlanes[alIdx];
-	}
-	void cLowLevelGraphicsSDL::SetClipPlaneActive(int alIdx, bool abX)
-	{
-		if(abX) glEnable(GL_CLIP_PLANE0 + alIdx);
-		else	glDisable(GL_CLIP_PLANE0 + alIdx);
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cLowLevelGraphicsSDL::SaveScreenToBMP(const tString& asFile)
 	{
 		glFinish();

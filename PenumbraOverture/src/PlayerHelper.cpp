@@ -220,7 +220,7 @@ bool cPlayerPickRayCallback::OnIntersect(iPhysicsBody *apBody, cPhysicsRayParams
 	float fDist = apParams->mfDist;
 	
 	//Must be positive
-	if(fDist < 0) return true;
+	if(fDist <= 0) return true;
 
 	//Must be below max distance
 	if(fDist > mfMaxDistance) return true;

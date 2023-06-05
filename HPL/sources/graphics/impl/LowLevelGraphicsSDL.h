@@ -65,10 +65,6 @@ namespace hpl {
 		void SetMultisamplingActive(bool abX) override;
 		int GetMultisampling() override { return mlMultisampling;}
 
-		void SetClipPlane(int alIdx, const cPlanef& aPlane) override;
-		cPlanef GetClipPlane(int alIdx, const cPlanef& aPlane) override;
-		void SetClipPlaneActive(int alIdx, bool abX) override;
-
 		cVector2f GetScreenSize() override;
 		cVector2f GetVirtualSize() override;
 		void SetVirtualSize(cVector2f avSize) override;
@@ -191,9 +187,6 @@ namespace hpl {
 
 		//Gamma
 		float mfGammaCorrection;
-
-		//Clipping
-		cPlanef mvClipPlanes[kMaxClipPlanes];
 
 		//SDL Variables
 		SDL_Window *mpWindow;

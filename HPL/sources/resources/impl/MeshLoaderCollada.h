@@ -338,7 +338,7 @@ namespace hpl {
 	class cColladaNode
 	{
 	public:
-		cColladaNode() : mlCount(0), pParent(NULL), mvScale(1,1,1) {}
+		cColladaNode() : mlCount(0), pParent(NULL), mvScale(1,1,1), mbSourceIsFile(false) {}
 
 		tString msId;
 		tString msName;

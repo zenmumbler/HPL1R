@@ -259,8 +259,8 @@ namespace hpl {
 
 		iMaterial* pMat = mpGraphics->GetMaterialHandler()->Create(asName,sType);
 		if(pMat==NULL){
-			delete pDoc;
 			Error("Invalid material type '%s'\n",sType);
+			delete pDoc;
 			return NULL;
 		}
 

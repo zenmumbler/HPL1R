@@ -168,10 +168,10 @@ void *dgMemoryAllocator::Malloc(dgInt32 memsize)
   dgInt32 entry = paddedSize >> DG_MEMORY_GRANULARITY_BITS;
 
   void* ptr;
-	if (entry >= DG_MEMORY_BIN_ENTRIES) {
+  if (entry >= DG_MEMORY_BIN_ENTRIES) {
     ptr = MallocLow(size);
-	} else {
-		if (!m_memoryDirectory[entry].m_cache) {
+  } else {
+    if (!m_memoryDirectory[entry].m_cache) {
       dgMemoryBin* const bin = (dgMemoryBin*) MallocLow(sizeof(dgMemoryBin));
 
       dgInt32 count = dgInt32(sizeof(bin->m_pool) / paddedSize);
@@ -180,7 +180,7 @@ void *dgMemoryAllocator::Malloc(dgInt32 memsize)
       bin->m_info.m_stepInBites = paddedSize;
       bin->m_info.m_next = m_memoryDirectory[entry].m_first;
       bin->m_info.m_prev = NULL;
-			if (bin->m_info.m_next) {
+      if (bin->m_info.m_next) {
         bin->m_info.m_next->m_info.m_prev = bin;
       }
 
@@ -189,16 +189,16 @@ void *dgMemoryAllocator::Malloc(dgInt32 memsize)
       char* charPtr = bin->m_pool;
       m_memoryDirectory[entry].m_cache = (dgMemoryCacheEntry*) charPtr;
 
-//			charPtr = bin->m_pool
-			for (dgInt32 i = 0; i < count; i ++) {
+//      charPtr = bin->m_pool
+      for (dgInt32 i = 0; i < count; i ++) {
         dgMemoryCacheEntry* const cashe = (dgMemoryCacheEntry*) charPtr;
         cashe->m_next = (dgMemoryCacheEntry*) (charPtr + paddedSize);
         cashe->m_prev = (dgMemoryCacheEntry*) (charPtr - paddedSize);
-				dgMemoryInfo* const info = ((dgMemoryInfo*) (charPtr + DG_MEMORY_GRANULARITY)) - 1;						
+        dgMemoryInfo* const info = ((dgMemoryInfo*) (charPtr + DG_MEMORY_GRANULARITY)) - 1;
         info->SaveInfo(this, bin, entry, m_emumerator, memsize);
         charPtr += paddedSize;
       }
-			dgMemoryCacheEntry* const cashe = (dgMemoryCacheEntry*) (charPtr - paddedSize);
+      dgMemoryCacheEntry* const cashe = (dgMemoryCacheEntry*) (charPtr - paddedSize);
       cashe->m_next = NULL;
       m_memoryDirectory[entry].m_cache->m_prev = NULL;
     }
@@ -208,7 +208,7 @@ void *dgMemoryAllocator::Malloc(dgInt32 memsize)
 
     dgMemoryCacheEntry* const cashe = m_memoryDirectory[entry].m_cache;
     m_memoryDirectory[entry].m_cache = cashe->m_next;
-		if (cashe->m_next) {
+    if (cashe->m_next) {
       cashe->m_next->m_prev = NULL;
     }
 
