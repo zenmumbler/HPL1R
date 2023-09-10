@@ -1401,13 +1401,13 @@ void CScriptArray::Sort(asUINT startAt, asUINT count, bool asc)
 #if defined(_MSC_VER) && _MSC_VER >= 1500 && !defined(__S3E__)
 					sprintf_s(tmp, 512, "Type '%s' has multiple matching opCmp methods", subType->GetName());
 #else
-					sprintf(tmp, "Type '%s' has multiple matching opCmp methods", subType->GetName());
+					snprintf(tmp, 512, "Type '%s' has multiple matching opCmp methods", subType->GetName());
 #endif
 				else
 #if defined(_MSC_VER) && _MSC_VER >= 1500 && !defined(__S3E__)
 					sprintf_s(tmp, 512, "Type '%s' does not have a matching opCmp method", subType->GetName());
 #else
-					sprintf(tmp, "Type '%s' does not have a matching opCmp method", subType->GetName());
+					snprintf(tmp, 512, "Type '%s' does not have a matching opCmp method", subType->GetName());
 #endif
 
 				ctx->SetException(tmp);

@@ -375,7 +375,7 @@ dgInt32 dgWorld::GetHardwareMode(char* description)
     mode = 0;
     if (description)
     {
-      sprintf(description, "x87");
+      snprintf(description, 4, "x87");
     }
   }
   else
@@ -383,7 +383,7 @@ dgInt32 dgWorld::GetHardwareMode(char* description)
     mode = 1;
     if (description)
     {
-      sprintf(description, "simd");
+      snprintf(description, 5, "simd");
     }
   }
 //	}
