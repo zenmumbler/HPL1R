@@ -63,6 +63,14 @@ namespace hpl {
 		delete[] source;
 		glGetShaderiv(shader, GL_COMPILE_STATUS, &compileOK);
 		if (compileOK == GL_FALSE) {
+			int logLength;
+			glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLength);
+			char *infoLog = new char[logLength];
+			glGetShaderInfoLog(shader, logLength, &logLength, infoLog);
+
+			Log("Error compiling shader: %s\n", infoLog);
+			delete[] infoLog;
+
 			glDeleteShader(shader);
 			return 0;
 		}
@@ -85,6 +93,12 @@ namespace hpl {
 
 		mProgram = glCreateProgram();
 		glUseProgram(mProgram);
+
+		glBindAttribLocation(mProgram, 0, "position");
+		glBindAttribLocation(mProgram, 1, "color");
+		glBindAttribLocation(mProgram, 2, "uv");
+		glBindAttribLocation(mProgram, 3, "normal");
+
 		glAttachShader(mProgram, vtxShader);
 		glAttachShader(mProgram, fragShader);
 		glLinkProgram(mProgram);
@@ -177,8 +191,18 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	static const float IDENTITY_MATRIX[16] = {
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	};
+
 	bool cGLSLProgram::SetMatrixIdentityf(const tString& asName, eGpuProgramMatrix mType)
 	{
+		auto loc = glGetUniformLocation(mProgram, asName.c_str());
+		if (loc < 0) return false;
+		glUniformMatrix4fv(loc, 1, false, &IDENTITY_MATRIX[0]);
 		return true;
 	}
 
