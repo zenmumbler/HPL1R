@@ -1154,8 +1154,8 @@ namespace hpl {
 		if(attrs & eGfxBatchAttr_Position) glEnableClientState(GL_VERTEX_ARRAY);
 		else glDisableClientState(GL_VERTEX_ARRAY);
 
-		if(attrs & eGfxBatchAttr_Color0) glEnableClientState(GL_COLOR_ARRAY );
-		else glDisableClientState(GL_COLOR_ARRAY );
+		if(attrs & eGfxBatchAttr_Color0) glEnableClientState(GL_COLOR_ARRAY);
+		else glDisableClientState(GL_COLOR_ARRAY);
 
 		glDisableClientState(GL_NORMAL_ARRAY);
 

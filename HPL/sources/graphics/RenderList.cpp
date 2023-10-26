@@ -623,11 +623,11 @@ namespace hpl {
 
 			pTempState->mType = eRenderStateType_GPUProgram;
 
-			pTempState->mpProgram = pMaterial->GetProgramEx(aPassType,alPass,apLight);
-			pTempState->mpVtxProgramSetup = pMaterial->GetVertexProgramSetup(aPassType,alPass,apLight);
-			pTempState->mpFragProgramSetup = pMaterial->GetFragmentProgramSetup(aPassType,alPass,apLight);
-			pTempState->mbUsesLight = pMaterial->VertexProgramUsesLight(aPassType, alPass,apLight);
-			pTempState->mbUsesEye = pMaterial->VertexProgramUsesEye(aPassType, alPass,apLight);
+			pTempState->mpProgram = pMaterial->GetProgramEx(aPassType, alPass, apLight);
+			pTempState->mpVtxProgramSetup = pMaterial->GetVertexProgramSetup(aPassType, alPass, apLight);
+			pTempState->mpFragProgramSetup = pMaterial->GetFragmentProgramSetup(aPassType, alPass, apLight);
+			pTempState->mbUsesLight = pMaterial->VertexProgramUsesLight(aPassType, alPass, apLight);
+			pTempState->mbUsesEye = pMaterial->VertexProgramUsesEye(aPassType, alPass, apLight);
 			pTempState->mpLight = apLight;
 
 			pNode = InsertNode(pNode, pTempNode);

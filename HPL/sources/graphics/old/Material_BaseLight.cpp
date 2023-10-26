@@ -171,7 +171,7 @@ namespace hpl {
 			return mvVtxPrograms[program];
 		}
 
-		if(aType == eMaterialRenderType_Z) return mpProgram[eGpuProgramType_Vertex][1];
+		if(aType == eMaterialRenderType_Z)       return mpProgram[eGpuProgramType_Vertex][1];
 		if(aType == eMaterialRenderType_Diffuse) return mpProgram[eGpuProgramType_Vertex][1];
 
 		return NULL;
