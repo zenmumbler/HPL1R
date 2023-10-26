@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,6 +27,7 @@
 		8E11637A26C1FDD40065E04C /* Files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11637926C1FDD40065E04C /* Files.cpp */; };
 		8E3A5C19289D5991006D99BF /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A5C17289D5991006D99BF /* Log.cpp */; };
 		8E3A72852611363F0086F8ED /* Script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A72832611363F0086F8ED /* Script.cpp */; };
+		8E5BCD602AD5958700B64AD3 /* Material_Universal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BCD5E2AD5958700B64AD3 /* Material_Universal.cpp */; };
 		8E77420628989E02008E9570 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E77420528989E02008E9570 /* Bitmap.cpp */; };
 		8E815948260C1127001CBF63 /* GLSLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E815947260C1127001CBF63 /* GLSLProgram.cpp */; };
 		8E84E7892605487F00DC6065 /* LowLevelSoundOAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */; };
@@ -251,6 +252,8 @@
 		8E3A5C18289D5991006D99BF /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		8E3A72832611363F0086F8ED /* Script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Script.cpp; path = sources/script/Script.cpp; sourceTree = SOURCE_ROOT; };
 		8E3A72842611363F0086F8ED /* Script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Script.h; path = sources/script/Script.h; sourceTree = SOURCE_ROOT; };
+		8E5BCD5E2AD5958700B64AD3 /* Material_Universal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material_Universal.cpp; sourceTree = "<group>"; };
+		8E5BCD5F2AD5958700B64AD3 /* Material_Universal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Material_Universal.h; sourceTree = "<group>"; };
 		8E77420528989E02008E9570 /* Bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
 		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
 		8E815947260C1127001CBF63 /* GLSLProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLProgram.cpp; sourceTree = "<group>"; };
@@ -1024,6 +1027,8 @@
 				DB27F0320ACB9AB90054ACA3 /* GraphicsDrawer.h */,
 				DB27F0330ACB9AB90054ACA3 /* GraphicsTypes.h */,
 				DB27F0350ACB9AB90054ACA3 /* LowLevelGraphics.h */,
+				8E5BCD5E2AD5958700B64AD3 /* Material_Universal.cpp */,
+				8E5BCD5F2AD5958700B64AD3 /* Material_Universal.h */,
 				DBF849610AC76D5700BB15CD /* Material.cpp */,
 				DB27F0370ACB9AB90054ACA3 /* Material.h */,
 				DBF849740AC76D5800BB15CD /* MaterialHandler.cpp */,
@@ -1486,6 +1491,7 @@
 				DBF84B240AC76F1E00BB15CD /* PhysicsBody.cpp in Sources */,
 				DBF84B250AC76F1E00BB15CD /* PhysicsBodyNewton.cpp in Sources */,
 				DBF84B260AC76F1E00BB15CD /* PhysicsController.cpp in Sources */,
+				8E5BCD602AD5958700B64AD3 /* Material_Universal.cpp in Sources */,
 				DBF84B270AC76F1E00BB15CD /* PhysicsControllerNewton.cpp in Sources */,
 				8E11636726BEDA630065E04C /* tinyxmlerror.cpp in Sources */,
 				DBF84B280AC76F1E00BB15CD /* PhysicsJoint.cpp in Sources */,

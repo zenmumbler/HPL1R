@@ -44,6 +44,8 @@
 #include "graphics/Material_Alpha.h"
 #include "graphics/Material_EnvMap_Reflect.h"
 #include "graphics/Material_Water.h"
+#else
+#include "graphics/Material_Universal.h"
 #endif
 
 namespace hpl {
@@ -112,6 +114,7 @@ namespace hpl {
 
 		//Add all the materials.
 		Log(" Adding engine materials\n");
+		mpMaterialHandler->Add(new MaterialType_Universal());
 		/*
 		mpMaterialHandler->Add(new cMaterialType_Diffuse());
 		mpMaterialHandler->Add(new cMaterialType_Bump());
