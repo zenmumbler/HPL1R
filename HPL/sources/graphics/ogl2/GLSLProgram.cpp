@@ -4,6 +4,7 @@
  */
 #include "graphics/ogl2/GLSLProgram.h"
 #include "graphics/ogl2/SDLTexture.h"
+#include "math/Math.h"
 #include "system/String.h"
 #include "system/Files.h"
 #include "system/Log.h"
@@ -136,12 +137,12 @@ namespace hpl {
 
 	void cGLSLProgram::UnBind()
 	{
-		// glUseProgram(0);
+		glUseProgram(0);
 	}
 
 	//-----------------------------------------------------------------------
 
-	bool  cGLSLProgram::SetFloat(const tString& asName, float afX)
+	bool cGLSLProgram::SetFloat(const tString& asName, float afX)
 	{
 		auto loc = glGetUniformLocation(mProgram, asName.c_str());
 		if (loc < 0) return false;
@@ -151,7 +152,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool  cGLSLProgram::SetVec2f(const tString& asName, float afX,float afY)
+	bool  cGLSLProgram::SetVec2f(const tString& asName, float afX, float afY)
 	{
 		auto loc = glGetUniformLocation(mProgram, asName.c_str());
 		if (loc < 0) return false;
@@ -185,24 +186,19 @@ namespace hpl {
 	{
 		auto loc = glGetUniformLocation(mProgram, asName.c_str());
 		if (loc < 0) return false;
-		glUniformMatrix4fv(loc, 1, false, &mMtx.v[0]);
+		// transpose matrix for GL
+		const auto glMat = cMath::MatrixTranspose(mMtx);
+		glUniformMatrix4fv(loc, 1, false, &glMat.v[0]);
 		return true;
 	}
 
 	//-----------------------------------------------------------------------
 
-	static const float IDENTITY_MATRIX[16] = {
-		1.0f, 0.0f, 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 1.0f
-	};
-
 	bool cGLSLProgram::SetMatrixIdentityf(const tString& asName, eGpuProgramMatrix mType)
 	{
 		auto loc = glGetUniformLocation(mProgram, asName.c_str());
 		if (loc < 0) return false;
-		glUniformMatrix4fv(loc, 1, false, &IDENTITY_MATRIX[0]);
+		glUniformMatrix4fv(loc, 1, false, &cMatrixf::Identity.v[0]);
 		return true;
 	}
 
