@@ -129,7 +129,7 @@ namespace hpl {
 		void SetDepthMode(cRenderSettings* apSettings);
 		void SetBlendMode(cRenderSettings* apSettings);
 		void SetAlphaMode(cRenderSettings* apSettings);
-		void SetVtxProgMode(cRenderSettings* apSettings);
+		void SetGPUProgMode(cRenderSettings* apSettings);
 		void SetFragProgMode(cRenderSettings* apSettings);
 		void SetTextureMode(cRenderSettings* apSettings);
 		void SetVtxBuffMode(cRenderSettings* apSettings);

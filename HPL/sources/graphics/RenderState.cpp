@@ -77,7 +77,7 @@ namespace hpl {
 		case eRenderStateType_Depth:				SetDepthMode(apSettings); break;
 		case eRenderStateType_AlphaMode:			SetAlphaMode(apSettings); break;
 		case eRenderStateType_BlendMode:			SetBlendMode(apSettings); break;
-		case eRenderStateType_GPUProgram:		SetVtxProgMode(apSettings); break;
+		case eRenderStateType_GPUProgram:		SetGPUProgMode(apSettings); break;
 		case eRenderStateType_Texture:			SetTextureMode(apSettings); break;
 		case eRenderStateType_VertexBuffer:		SetVtxBuffMode(apSettings); break;
 		case eRenderStateType_Matrix:			SetMatrixMode(apSettings); break;
@@ -290,33 +290,33 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void iRenderState::SetVtxProgMode(cRenderSettings* apSettings)
+	void iRenderState::SetGPUProgMode(cRenderSettings* apSettings)
 	{
 		if(mpProgram != apSettings->mpProgram)
 		{
 			if(apSettings->mbLog){
 				if(mpProgram)
-					Log("Setting vertex program: '%s'/%d ",mpProgram->GetName().c_str(),
+					Log("Setting gpu program: '%s'/%d ",mpProgram->GetName().c_str(),
 																		(size_t)mpProgram);
 				else
-					Log("Setting vertex program: NULL ");
+					Log("Setting gpu program: NULL ");
 			}
 
 			if(mpProgram==NULL && apSettings->mpProgram)
 			{
+				if(apSettings->mbLog)Log("Unbinding old program");
 				apSettings->mpProgram->UnBind();
-				if(apSettings->mbLog)Log("Unbinding old ");
 			}
 			apSettings->mpProgram = mpProgram;
 
 			if(mpProgram)
 			{
-				if(apSettings->mbLog)Log("Binding new ");
+				if(apSettings->mbLog)Log("Binding new program");
 				mpProgram->Bind();
 
 				if(mpVtxProgramSetup)
 				{
-					if(apSettings->mbLog)Log("Custom setup %d ", mpProgram);
+					if(apSettings->mbLog)Log("Custom vertex setup %d ", mpProgram);
 					mpVtxProgramSetup->Setup(mpProgram, apSettings);
 				}
 				apSettings->mpVtxProgramSetup = mpVtxProgramSetup;
@@ -324,11 +324,14 @@ namespace hpl {
 				//reset this so all matrix setting are set to vertex program.
 				apSettings->mbMatrixWasNULL = false;
 
-				if(mpFragProgramSetup) mpFragProgramSetup->Setup(mpProgram,apSettings);
+				if(mpFragProgramSetup) {
+					if(apSettings->mbLog)Log("Custom fragment setup %d ", mpProgram);
+					mpFragProgramSetup->Setup(mpProgram,apSettings);
+				}
 
 				if(mbUsesLight)
 				{
-					if(apSettings->mbLog)Log("Setting light properites ");
+					if(apSettings->mbLog)Log("Setting light properties");
 
 					//mpVtxProgram->SetFloat("LightRadius",mpLight->GetFarAttenuation());
 					mpProgram->SetColor4f("LightColor",mpLight->GetDiffuseColor());
@@ -349,7 +352,7 @@ namespace hpl {
 		{
 			if(apSettings->mpProgram && mbUsesLight && mpLight != apSettings->mpLight)
 			{
-				if(apSettings->mbLog)Log("Setting new light properites\n");
+				if(apSettings->mbLog)Log("Setting new light properties");
 				//mpVtxProgram->SetFloat("LightRadius",mpLight->GetFarAttenuation());
 				mpProgram->SetColor4f("LightColor",mpLight->GetDiffuseColor());
 
