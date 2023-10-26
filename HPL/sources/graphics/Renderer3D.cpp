@@ -118,11 +118,11 @@ namespace hpl {
 
 		///////////////////////////////////
 		//Load diffuse program, for stuff like query rendering
-		Log("    Diffuse Vertex\n");
-		mpDiffuseProgram = pProgramManager->CreateProgram("Diffuse_Color_vp.cg","Diffuse_Color_fp.cg");
+		Log("    Diffuse\n");
+		mpDiffuseProgram = pProgramManager->CreateProgram("Universal.vert", "Universal.frag");
 		if(mpDiffuseProgram==NULL)
 		{
-			Error("Couldn't load 'Diffuse_Color_vp.cg'\n");
+			Error("Couldn't load Diffuse shader\n");
 		}
 
 		///////////////////////////////////
@@ -708,8 +708,7 @@ namespace hpl {
 
 	void cRenderer3D::RenderZ(cCamera *apCamera)
 	{
-		cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Normal,
-														eMaterialRenderType_Z, 0);
+		cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Normal, eMaterialRenderType_Z, 0);
 
 		mRenderSettings.mpLight = NULL;
 		pNode->Render(&mRenderSettings);
@@ -857,8 +856,7 @@ namespace hpl {
 
 	void cRenderer3D::RenderDiffuse(cCamera *apCamera)
 	{
-		cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Normal,
-														eMaterialRenderType_Diffuse, 0);
+		cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Normal, eMaterialRenderType_Diffuse, 0);
 		mRenderSettings.mpLight = NULL;
 		pNode->Render(&mRenderSettings);
 	}
