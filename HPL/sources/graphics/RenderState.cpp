@@ -404,15 +404,16 @@ namespace hpl {
 
 	void iRenderState::SetMatrixMode(cRenderSettings* apSettings)
 	{
+		cMatrixf mvMatrix;
+
 		//It is a normal matrix
 		if(mpModelMatrix)
 		{
-			cMatrixf mtxModel = cMath::MatrixMul(apSettings->mpCamera->GetViewMatrix(),
-				*mpModelMatrix);
+			mvMatrix = cMath::MatrixMul(apSettings->mpCamera->GetViewMatrix(), *mpModelMatrix);
 
-			if(apSettings->mbLog)Log("Setting model matrix: %s ",cMath::MatrixToChar(*mpModelMatrix));
+			if(apSettings->mbLog)Log("Setting model matrix: %s ", cMath::MatrixToChar(*mpModelMatrix));
 
-			apSettings->mpLowLevel->SetMatrix(eMatrix_ModelView,mtxModel);
+			apSettings->mpLowLevel->SetMatrix(eMatrix_ModelView, mvMatrix);
 
 			apSettings->mbMatrixWasNULL = false;
 		}
@@ -424,7 +425,8 @@ namespace hpl {
 
 			if(apSettings->mbLog)Log("Setting model matrix: Identity (NULL) ");
 
-			apSettings->mpLowLevel->SetMatrix(eMatrix_ModelView,apSettings->mpCamera->GetViewMatrix());
+			mvMatrix = apSettings->mpCamera->GetViewMatrix();
+			apSettings->mpLowLevel->SetMatrix(eMatrix_ModelView, mvMatrix);
 
 			apSettings->mbMatrixWasNULL = true;
 		}
@@ -432,8 +434,12 @@ namespace hpl {
 		if(apSettings->mpProgram)
 		{
 			//Might be quicker if this is set directly
-			apSettings->mpProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
-			if(apSettings->mpVtxProgramSetup)
+			
+			// rehatched - use full mvp
+			auto mvpMatrix = cMath::MatrixMul(apSettings->mpCamera->GetProjectionMatrix(), mvMatrix);
+			apSettings->mpProgram->SetMatrixf("worldViewProj", mvpMatrix);
+
+			if (apSettings->mpVtxProgramSetup)
 			{
 				apSettings->mpVtxProgramSetup->SetupMatrix(	mpModelMatrix,apSettings);
 			}

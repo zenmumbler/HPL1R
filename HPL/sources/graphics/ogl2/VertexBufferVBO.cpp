@@ -510,51 +510,108 @@ namespace hpl {
 	}
 	//-----------------------------------------------------------------------
 
+	constexpr const bool USE_FIXED_FUNCTION = false;
+
 	void cVertexBufferVBO::SetVertexStates(tVertexFlag aFlags)
 	{
-		/// COLOR 0 /////////////////////////
-		if(aFlags & eVertexFlag_Color0)
+		/// POSITION /////////////////////////
+		if (aFlags & eVertexFlag_Position) {
+			if constexpr (USE_FIXED_FUNCTION)
+				glEnableClientState(GL_VERTEX_ARRAY );
+			else
+				glEnableVertexAttribArray(0);
+
+			int idx = cMath::Log2ToInt(eVertexFlag_Position);
+			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
+
+			if constexpr (USE_FIXED_FUNCTION)
+				glVertexPointer(kvVertexElements[idx],GL_FLOAT, 0, (char*)NULL);
+			else
+				glVertexAttribPointer(0, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
+		}
+		else
 		{
-			glEnableClientState(GL_COLOR_ARRAY );
+			if constexpr (USE_FIXED_FUNCTION)
+				glDisableClientState(GL_VERTEX_ARRAY);
+			else
+				glDisableVertexAttribArray(0);
+		}
+
+		/// COLOR 0 /////////////////////////
+		if (aFlags & eVertexFlag_Color0) {
+			if constexpr (USE_FIXED_FUNCTION)
+				glEnableClientState(GL_COLOR_ARRAY);
+			else
+				glEnableVertexAttribArray(1);
 
 			int idx = cMath::Log2ToInt(eVertexFlag_Color0);
 			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
-			glColorPointer(kvVertexElements[idx],GL_FLOAT, 0, (char*)NULL);
+
+			if constexpr (USE_FIXED_FUNCTION)
+				glColorPointer(kvVertexElements[idx],GL_FLOAT, 0, (char*)NULL);
+			else
+				glVertexAttribPointer(1, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
 		}
-		else
-		{
-			glDisableClientState(GL_COLOR_ARRAY );
+		else {
+			if constexpr (USE_FIXED_FUNCTION)
+				glDisableClientState(GL_COLOR_ARRAY);
+			else
+				glDisableVertexAttribArray(1);
 		}
 
 		/// NORMAL /////////////////////////
-		if(aFlags & eVertexFlag_Normal)
-		{
-			glEnableClientState(GL_NORMAL_ARRAY );
+		if (aFlags & eVertexFlag_Normal) {
+			if constexpr (USE_FIXED_FUNCTION)
+				glEnableClientState(GL_NORMAL_ARRAY);
+			else
+				glEnableVertexAttribArray(3);
 
 			int idx = cMath::Log2ToInt(eVertexFlag_Normal);
-			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
-			glNormalPointer(GL_FLOAT, 0, (char*)NULL);
+			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
+
+			if constexpr (USE_FIXED_FUNCTION)
+				glNormalPointer(GL_FLOAT, 0, (char*)NULL);
+			else
+				glVertexAttribPointer(3, 3, GL_FLOAT, false, 0, nullptr);
 		}
-		else
-		{
-			glDisableClientState(GL_NORMAL_ARRAY );
+		else {
+			if constexpr (USE_FIXED_FUNCTION)
+				glDisableClientState(GL_NORMAL_ARRAY);
+			else
+				glDisableVertexAttribArray(3);
 		}
 
 		/// TEXTURE 0 /////////////////////////
-		if(aFlags & eVertexFlag_Texture0)
-		{
-			glClientActiveTexture(GL_TEXTURE0);
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
+		if (aFlags & eVertexFlag_Texture0) {
+			if constexpr (USE_FIXED_FUNCTION) {
+				glClientActiveTexture(GL_TEXTURE0);
+				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+			}
+			else {
+				glActiveTexture(GL_TEXTURE0);
+				glEnableVertexAttribArray(2);
+			}
 
 			int idx =  cMath::Log2ToInt(eVertexFlag_Texture0);
 			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
-			glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL );
+
+			if constexpr (USE_FIXED_FUNCTION)
+				glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL);
+			else
+				glVertexAttribPointer(2, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
 		}
 		else {
-			glClientActiveTexture(GL_TEXTURE0);
-			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
+			if constexpr (USE_FIXED_FUNCTION) {
+				glClientActiveTexture(GL_TEXTURE0);
+				glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+			}
+			else {
+				glActiveTexture(GL_TEXTURE0);
+				glDisableVertexAttribArray(2);
+			}
 		}
 
+/*
 		/// TEXTURE 1 /////////////////////////
 		if(aFlags & eVertexFlag_Texture1){
 			glClientActiveTexture(GL_TEXTURE1);
@@ -614,21 +671,9 @@ namespace hpl {
 			glClientActiveTexture(GL_TEXTURE4);
 			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
 		}
+*/
 
-		/// POSITION /////////////////////////
-		if(aFlags & eVertexFlag_Position){
-			glEnableClientState(GL_VERTEX_ARRAY );
-
-			int idx = cMath::Log2ToInt(eVertexFlag_Position);
-			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
-			glVertexPointer(kvVertexElements[idx],GL_FLOAT, 0, (char*)NULL);
-		}
-		else
-		{
-			glDisableClientState(GL_VERTEX_ARRAY);
-		}
-
-		glBindBuffer(GL_ARRAY_BUFFER,0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
 	//-----------------------------------------------------------------------
