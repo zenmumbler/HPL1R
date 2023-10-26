@@ -423,6 +423,11 @@ namespace hpl {
 		static cMatrixf MatrixInverse(const cMatrixf &a_mtxA);
 
 		/**
+		 * Gets the transpose of a matrix.
+		 */
+		static cMatrixf MatrixTranspose(const cMatrixf &mtx);
+
+		/**
 		 * Converts the matrix into Euler angles, XYZ only supported at the moment.
 		 * \param &a_mtxA
 		 * \param aOrder
