@@ -1076,27 +1076,20 @@ void cMapHandler::OnWorldLoad()
 
 void cMapHandler::OnDraw()
 {
-	tGameEntityMapIt GIt = m_mapGameEntities.begin();
-	for(; GIt != m_mapGameEntities.end(); ++GIt)
-	{
-		iGameEntity *pEntity = GIt->second;
-
+	for (auto entPair : m_mapGameEntities) {
+		iGameEntity *pEntity = entPair.second;
 		pEntity->OnDraw();
 	}
 }
 
 void cMapHandler::RenderItemEffect()
 {
-	if(mpInit->mbFlashItems == false) return;
+	if (mpInit->mbFlashItems == false) return;
 
 	//Check if any item needs the effect.
 	bool bFound = false;
-	tGameItemListIt it = mlstGameItems.begin();
-	for(; it != mlstGameItems.end(); ++it)
-	{
-		cGameItem *pItem = *it;
-		if(pItem->IsActive() && pItem->GetFlashAlpha() >0)
-		{
+	for (auto pItem : mlstGameItems) {
+		if (pItem->IsActive() && pItem->GetFlashAlpha() > 0) {
 			bFound = true;
 			break;
 		}
@@ -1110,44 +1103,32 @@ void cMapHandler::RenderItemEffect()
 	pLowGfx->SetDepthWriteActive(false);
 
 	pLowGfx->SetBlendActive(true);
-	pLowGfx->SetBlendFunc(eBlendFunc_One,eBlendFunc_One);
+	pLowGfx->SetBlendFunc(eBlendFunc_One, eBlendFunc_One);
 
-	pLowGfx->SetActiveTextureUnit(0);
-	pLowGfx->SetTextureEnv(eTextureParam_ColorSource1,eTextureSource_Constant);
-	pLowGfx->SetTextureEnv(eTextureParam_ColorSource0,eTextureSource_Texture);
-	pLowGfx->SetTextureEnv(eTextureParam_ColorFunc, eTextureFunc_Modulate);
-		
-	
-	it = mlstGameItems.begin();
-	for(; it != mlstGameItems.end(); ++it)
-	{
-		cGameItem *pItem = *it;
-		
-		if(pItem->IsActive()==false) continue;
-		if(pItem->GetFlashAlpha() <=0) continue;
+	for (auto pItem : mlstGameItems) {
+		if (pItem->IsActive()==false) continue;
+		if (pItem->GetFlashAlpha() <= 0) continue;
 
 		cMeshEntity *pMeshEntity = pItem->GetMeshEntity();
 
-		pLowGfx->SetTextureConstantColor(cColor(pItem->GetFlashAlpha(),0));
-		
-		pLowGfx->SetMatrix(eMatrix_ModelView, cMath::MatrixMul(pCam->GetViewMatrix(), 
-														pMeshEntity->GetWorldMatrix()));
-		for(int i=0; i< pMeshEntity->GetMesh()->GetSubMeshNum(); i++)
+		const auto mvMat = cMath::MatrixMul(pCam->GetViewMatrix(), pMeshEntity->GetWorldMatrix());
+		const auto mvpMat = cMath::MatrixMul(pCam->GetProjectionMatrix(), mvMat);
+
+		for (int i=0; i< pMeshEntity->GetMesh()->GetSubMeshNum(); i++)
 		{
 			cSubMeshEntity *pSubEntity = pMeshEntity->GetSubMeshEntity(i);
 			cSubMesh *pSubMesh = pMeshEntity->GetMesh()->GetSubMesh(i);
 			iVertexBuffer *pVtxBuffer = pSubEntity->GetVertexBuffer();
 			iMaterial *pMaterial = pSubEntity->GetMaterial();
 			
-			iGpuProgram *pProg = pMaterial->GetProgramEx(eMaterialRenderType_Z,0,NULL);
-			if(pProg)
-			{
+			iGpuProgram *pProg = pMaterial->GetProgramEx(eMaterialRenderType_Z, 0, NULL);
+			if (pProg) {
 				pProg->Bind();
-				pProg->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
+				pProg->SetMatrixf("worldViewProj", mvpMat);
 				pProg->SetColor3f("ambientColor", cColor(pItem->GetFlashAlpha()));
 			}
 
-			pLowGfx->SetTexture(0,pMaterial->GetTexture(eMaterialTexture_Diffuse));
+			pLowGfx->SetTexture(0, pMaterial->GetTexture(eMaterialTexture_Diffuse));
 
 			pVtxBuffer->Bind();
 			pVtxBuffer->Draw();
@@ -1157,17 +1138,13 @@ void cMapHandler::RenderItemEffect()
 		}
 	}
 
-	pLowGfx->SetTexture(0,NULL);
-
-	pLowGfx->SetActiveTextureUnit(0);
-	pLowGfx->SetTextureEnv(eTextureParam_ColorSource1,eTextureSource_Previous);
-	pLowGfx->SetTextureEnv(eTextureParam_ColorSource0,eTextureSource_Texture);
+	pLowGfx->SetTexture(0, NULL);
 
 	pLowGfx->SetBlendActive(false);
 	pLowGfx->SetDepthTestActive(true);
 	pLowGfx->SetDepthWriteActive(true);
-
 }
+
 //-----------------------------------------------------------------------
 
 void cMapHandler::OnPostSceneDraw()
