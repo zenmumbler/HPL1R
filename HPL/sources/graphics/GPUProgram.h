@@ -28,14 +28,6 @@ namespace hpl {
 
 	class iTexture;
 
-	enum eGpuProgramMatrix
-	{
-		eGpuProgramMatrix_View,
-		eGpuProgramMatrix_Projection,
-		eGpuProgramMatrix_Texture,
-		eGpuProgramMatrix_ViewProjection
-	};
-
 
 	class iGpuProgram : public iResourceBase
 	{
@@ -87,7 +79,7 @@ namespace hpl {
 		virtual bool SetVec4f(const tString& asName, float afX,float afY,float afZ, float afW)=0;
 
 		virtual bool SetMatrixf(const tString& asName, const cMatrixf& mMtx)=0;
-		virtual bool SetMatrixIdentityf(const tString& asName, eGpuProgramMatrix mType)=0;
+		virtual bool SetMatrixIdentityf(const tString& asName)=0;
 
 		virtual bool SetTexture(const tString& asName,iTexture* apTexture)=0;
 

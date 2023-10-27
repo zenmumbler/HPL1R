@@ -194,7 +194,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cGLSLProgram::SetMatrixIdentityf(const tString& asName, eGpuProgramMatrix mType)
+	bool cGLSLProgram::SetMatrixIdentityf(const tString& asName)
 	{
 		auto loc = glGetUniformLocation(mProgram, asName.c_str());
 		if (loc < 0) return false;

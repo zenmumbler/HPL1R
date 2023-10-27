@@ -815,7 +815,7 @@ namespace hpl {
 		if(pModelMtx || apRenderSettings->mbMatrixWasNULL==false)
 		{
 			apRenderSettings->mpExtrudeProgram->SetVec3f("lightPosition", vLocalLight);
-			apRenderSettings->mpExtrudeProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
+			apRenderSettings->mpExtrudeProgram->SetMatrixIdentityf("worldViewProj");
 
 			//If a null matrix has been set, let other passes know.
 			if(pModelMtx)
