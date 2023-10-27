@@ -627,7 +627,7 @@ namespace hpl {
 				mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,cMath::MatrixMul(apCamera->GetViewMatrix(),
 																				*pMtx));
 
-				mpSolidFogProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
+				mpSolidFogProgram->SetMatrixIdentityf("worldViewProj");
 			}
 			//////////////////
 			//NULL Model view matrix (static)
@@ -635,7 +635,7 @@ namespace hpl {
 			{
 				mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,apCamera->GetViewMatrix());
 
-				mpSolidFogProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
+				mpSolidFogProgram->SetMatrixIdentityf("worldViewProj");
 			}
 
 			pObject->GetVertexBuffer()->Bind();
@@ -786,7 +786,7 @@ namespace hpl {
 				}
 				pPrevMatrix = pObject->mpMatrix;
 				//Set the vertex program matrix.
-				mpDiffuseProgram->SetMatrixIdentityf("worldViewProj",eGpuProgramMatrix_ViewProjection);
+				mpDiffuseProgram->SetMatrixIdentityf("worldViewProj");
 
 				if(mbLog) Log(" Setting matrix %d\n",pObject->mpMatrix);
 			}
@@ -1135,7 +1135,7 @@ namespace hpl {
 					mRenderSettings.mbMatrixWasNULL = true;
 				}
 
-				pRefractProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
+				pRefractProgram->SetMatrixIdentityf("worldViewProj");
 
 				//Eye position
 				if(pMaterial->GetRefractionUsesEye())
@@ -1367,7 +1367,7 @@ namespace hpl {
 			if(mRenderSettings.mpProgram && bSetVtxProgMatrix)
 			{
 				//Might be quicker if this is set directly
-				mRenderSettings.mpProgram->SetMatrixIdentityf("worldViewProj", eGpuProgramMatrix_ViewProjection);
+				mRenderSettings.mpProgram->SetMatrixIdentityf("worldViewProj");
 				if(mRenderSettings.mpVtxProgramSetup)
 				{
 					mRenderSettings.mpVtxProgramSetup->SetupMatrix(pModelMatrix,&mRenderSettings);

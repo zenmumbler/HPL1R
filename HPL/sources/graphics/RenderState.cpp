@@ -333,7 +333,7 @@ namespace hpl {
 				{
 					if(apSettings->mbLog)Log("Setting light properties");
 
-					//mpVtxProgram->SetFloat("LightRadius",mpLight->GetFarAttenuation());
+					//mpProgram->SetFloat("LightRadius",mpLight->GetFarAttenuation());
 					mpProgram->SetColor4f("LightColor",mpLight->GetDiffuseColor());
 
 					apSettings->mpLight = mpLight;
@@ -353,13 +353,14 @@ namespace hpl {
 			if(apSettings->mpProgram && mbUsesLight && mpLight != apSettings->mpLight)
 			{
 				if(apSettings->mbLog)Log("Setting new light properties");
-				//mpVtxProgram->SetFloat("LightRadius",mpLight->GetFarAttenuation());
+				//mpProgram->SetFloat("LightRadius",mpLight->GetFarAttenuation());
 				mpProgram->SetColor4f("LightColor",mpLight->GetDiffuseColor());
 
 				apSettings->mpLight = mpLight;
 			}
 		}
 	}
+
 	//-----------------------------------------------------------------------
 
 	void iRenderState::SetTextureMode(cRenderSettings* apSettings)
