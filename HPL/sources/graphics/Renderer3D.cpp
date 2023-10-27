@@ -404,7 +404,7 @@ namespace hpl {
 		mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_Equal);
 
 		if(mbLog) Log("Rendering Lighting:\n");
-		RenderLight(apCamera);
+//		RenderLight(apCamera);
 
 		////////////////////////////
 		//Render Diffuse
@@ -414,7 +414,7 @@ namespace hpl {
 		////////////////////////////
 		//Render fog
 		if(mbLog) Log("Rendering fog:\n");
-		RenderFog(apCamera);
+//		RenderFog(apCamera);
 
 
 		////////////////////////////
@@ -423,18 +423,18 @@ namespace hpl {
 
 		////////////////////////////
 		if(mbLog) Log("Rendering Skybox:\n");
-		RenderSkyBox(apCamera);
+//		RenderSkyBox(apCamera);
 
 		//Render transparent
 		if(mbLog) Log("Rendering Transperant:\n");
-		RenderTrans(apCamera);
+//		RenderTrans(apCamera);
 
 		mRenderSettings.Reset(mpLowLevelGraphics);
 
 		////////////////////////////
 		//Render debug
 		RenderDebug(apCamera);
-		RenderPhysicsDebug(apWorld, apCamera);
+//		RenderPhysicsDebug(apWorld, apCamera);
 
 		mpLowLevelGraphics->SetDepthWriteActive(true);
 	}
