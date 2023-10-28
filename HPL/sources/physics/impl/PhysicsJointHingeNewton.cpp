@@ -23,6 +23,7 @@
 #include "physics/impl/PhysicsWorldNewton.h"
 
 #include "math/Math.h"
+#include "system/Log.h"
 
 namespace hpl {
 
@@ -35,7 +36,9 @@ namespace hpl {
 	cPhysicsJointHingeNewton::cPhysicsJointHingeNewton(const tString &asName,
 		iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
 		iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f &avPinDir)
-		: iPhysicsJointNewton<iPhysicsJointHinge>(asName,apParentBody,apChildBody,apWorld,avPivotPoint,avPinDir)
+		: iPhysicsJointNewton<iPhysicsJointHinge>(asName,apParentBody,apChildBody,apWorld,avPivotPoint,
+												  cVector3f{-avPinDir.x, -avPinDir.y, -avPinDir.z}
+												 )
 	{
 		mfMaxAngle = 0;
 		mfMinAngle = 0;
@@ -86,6 +89,7 @@ namespace hpl {
 	{
 		return cVector3f(0,0,0);
 	}
+
 	cVector3f cPhysicsJointHingeNewton::GetAngularVelocity()
 	{
 		if(mpParentBody)
@@ -100,6 +104,7 @@ namespace hpl {
 			return GetPinDir() * cMath::Vector3Dot(mpChildBody->GetAngularVelocity(), GetPinDir());
 		}
 	}
+
 	float cPhysicsJointHingeNewton::GetForceSize()
 	{
 		float fSize = 0;
@@ -116,6 +121,7 @@ namespace hpl {
 	{
 		return 0;
 	}
+
 	float cPhysicsJointHingeNewton::GetAngle()
 	{
 		cMatrixf mtxPinPivot0;
@@ -175,17 +181,13 @@ namespace hpl {
 		//Check limits
 		if (mfMinAngle != 0 || mfMaxAngle != 0)
 		{
-			/////////////////////////7
+			//////////////////////////
 			// Get Angle
 			//  the joint angle can be determine by getting the angle between any two non parallel vectors
 			float fSinAngle = cMath::Vector3Dot( cMath::Vector3Cross(mtxPinPivot0Inv.GetRight(), mtxPinPivot1Inv.GetRight()),
 												mtxPinPivot0Inv.GetUp());
 			float fCosAngle = cMath::Vector3Dot(mtxPinPivot0Inv.GetRight(), mtxPinPivot1Inv.GetRight());
 			float fAngle = atan2(fSinAngle, fCosAngle);
-
-//			if (static_cast<int>(cMath::ToDeg(mfMaxAngle)) == 140) {
-//				Log("CHEST LIMITS: %.3f, %.3f, %.3f\n", cMath::ToDeg(mfMinAngle), cMath::ToDeg(fAngle), cMath::ToDeg(mfMaxAngle));
-//			}
 
 			///////////////////////////
 			//Avoid oscillation
