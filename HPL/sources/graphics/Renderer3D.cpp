@@ -398,7 +398,7 @@ namespace hpl {
 		////////////////////////////
 		//Render Diffuse
 		if(mbLog) Log("Rendering Diffuse:\n");
-		RenderDiffuse(apCamera);
+//		RenderDiffuse(apCamera);
 
 		////////////////////////////
 		//Render fog

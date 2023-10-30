@@ -107,7 +107,7 @@ namespace hpl {
 
 	eMaterialAlphaMode Material_Universal::GetAlphaMode(eMaterialRenderType aType, int alPass, iLight3D *apLight)
 	{
-		return eMaterialAlphaMode_Solid;
+		return (aType == eMaterialRenderType_Z && mbHasAlpha) ? eMaterialAlphaMode_Trans : eMaterialAlphaMode_Solid;
 	}
 
 	//------------------------------------------------------------------------------------
