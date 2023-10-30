@@ -58,7 +58,10 @@ namespace hpl {
 		pChildBody->SetMatrix(m_mtxChildBodySetup);
 		if(pParentBody) pParentBody->SetMatrix(m_mtxParentBodySetup);
 
-		iPhysicsJointHinge *pJoint = apWorld->CreateJointHinge(msName,mvStartPivotPoint,mvPinDir,pParentBody,pChildBody);
+		// Rehatched: to match the direction of the pinDir in HPL1 maps, it is negated here
+		// as it will be negated again after loading
+		cVector3f negPinDir{ -mvPinDir.x, -mvPinDir.y, -mvPinDir.z };
+		iPhysicsJointHinge *pJoint = apWorld->CreateJointHinge(msName, mvStartPivotPoint, negPinDir, pParentBody, pChildBody);
 
 		pChildBody->SetMatrix(mtxChildTemp);
 		if(pParentBody) pParentBody->SetMatrix(mtxParentTemp);

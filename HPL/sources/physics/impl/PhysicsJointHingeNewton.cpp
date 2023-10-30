@@ -37,6 +37,7 @@ namespace hpl {
 		iPhysicsBody *apParentBody, iPhysicsBody *apChildBody,
 		iPhysicsWorld *apWorld,const cVector3f &avPivotPoint, const cVector3f &avPinDir)
 		: iPhysicsJointNewton<iPhysicsJointHinge>(asName,apParentBody,apChildBody,apWorld,avPivotPoint,
+												  // Rehatched: negate pinDir due to impl change to HPL2 hinge
 												  cVector3f{-avPinDir.x, -avPinDir.y, -avPinDir.z}
 												 )
 	{
