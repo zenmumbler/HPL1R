@@ -373,19 +373,8 @@ namespace hpl {
 		//mpLowLevelGraphics->SetColorWriteActive(false, false, false,false);
 		//mRenderSettings.mChannelMode = eMaterialChannelMode_Z;
 
-		//Set the ambient color
-		mpLowLevelGraphics->SetActiveTextureUnit(0);
-		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorFunc,eTextureFunc_Modulate);
-		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorSource0,eTextureSource_Texture);
-		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorSource1,eTextureSource_Constant);
-
-		mpLowLevelGraphics->SetTextureConstantColor(mRenderSettings.mAmbientColor);
-
 		if(mbLog) Log("Rendering ZBuffer:\n");
 		RenderZ(apCamera);
-
-		//reset parameters.
-		mpLowLevelGraphics->SetTextureEnv(eTextureParam_ColorSource1,eTextureSource_Previous);
 
 		////////////////////////////
 		//Render Occlusion Queries
