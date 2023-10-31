@@ -515,7 +515,7 @@ namespace hpl {
 
 		if(apSettings->mDebugFlags & eRendererDebugFlag_RenderLines)
 		{
-			apSettings->mpVtxBuffer->Draw(VertexBufferPrimitiveType::Lines);
+			apSettings->mpVtxBuffer->DrawWireframe();
 		}
 		else
 		{

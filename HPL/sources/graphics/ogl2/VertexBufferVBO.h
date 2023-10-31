@@ -43,8 +43,9 @@ namespace hpl {
 
 		void Transform(const cMatrixf &mtxTransform);
 
-		void Draw(VertexBufferPrimitiveType primType);
-		void DrawIndices(unsigned int *apIndices, int alCount, VertexBufferPrimitiveType primType);
+		void Draw();
+		void DrawWireframe();
+		void DrawIndices(unsigned int *apIndices, int alCount);
 
 		void Bind();
 		void UnBind();

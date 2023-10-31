@@ -322,15 +322,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::Draw(VertexBufferPrimitiveType primType)
+	void cVertexBufferVBO::Draw()
 	{
-		VertexBufferPrimitiveType drawType = primType == VertexBufferPrimitiveType::None ? mDrawType : primType;
-
 		///////////////////////////////
 		//Get the draw type
 		GLenum mode = GL_TRIANGLES;
-		if (drawType == VertexBufferPrimitiveType::Quads)		mode = GL_QUADS;
-		else if(drawType == VertexBufferPrimitiveType::Lines)	mode = GL_LINE_STRIP;
+		if (mDrawType == VertexBufferPrimitiveType::Quads)		mode = GL_QUADS;
+		else if(mDrawType == VertexBufferPrimitiveType::LineStrips)	mode = GL_LINE_STRIP;
 
 		//////////////////////////////////
 		//Bind and draw the buffer
@@ -346,15 +344,28 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::DrawIndices(unsigned int *apIndices, int alCount,VertexBufferPrimitiveType primType)
-	{
-		VertexBufferPrimitiveType drawType = primType == VertexBufferPrimitiveType::None ? mDrawType : primType;
+	// Rehatched: this method is introduced to support the hacky wireframe debug view
+	// To be obsoleted
+	void cVertexBufferVBO::DrawWireframe() {
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mlElementHandle);
 
+		int lSize = mlElementNum;
+		if (mlElementNum < 0) lSize = GetIndexNum();
+
+		glDrawElements(GL_LINE_STRIP, lSize, GL_UNSIGNED_INT, (char*) NULL);
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
+	}
+
+	//-----------------------------------------------------------------------
+
+	void cVertexBufferVBO::DrawIndices(unsigned int *apIndices, int alCount)
+	{
 		///////////////////////////////
 		//Get the draw type
 		GLenum mode = GL_TRIANGLES;
-		if (drawType == VertexBufferPrimitiveType::Quads)		mode = GL_QUADS;
-		else if(drawType == VertexBufferPrimitiveType::Lines)	mode = GL_LINE_STRIP;
+		if (mDrawType == VertexBufferPrimitiveType::Quads)		mode = GL_QUADS;
+		else if (mDrawType == VertexBufferPrimitiveType::LineStrips)	mode = GL_LINE_STRIP;
 
 		//////////////////////////////////
 		//Bind and draw the buffer

@@ -28,10 +28,9 @@ namespace hpl {
 
 	enum class VertexBufferPrimitiveType
 	{
-		None,
 		Triangles,
 		Quads,
-		Lines
+		LineStrips
 	};
 
 	enum eVertexBufferUsageType
@@ -110,9 +109,9 @@ namespace hpl {
 		*/
 		virtual void Transform(const cMatrixf &mtxTransform)=0;
 
-		virtual void Draw(VertexBufferPrimitiveType primType = VertexBufferPrimitiveType::None)=0;
-		virtual void DrawIndices(unsigned int *apIndices, int alCount,
-								VertexBufferPrimitiveType primType = VertexBufferPrimitiveType::None)=0;
+		virtual void Draw() = 0;
+		virtual void DrawWireframe() = 0;
+		virtual void DrawIndices(unsigned int *apIndices, int alCount) = 0;
 
 		virtual void Bind()=0;
 		virtual void UnBind()=0;
