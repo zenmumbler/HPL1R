@@ -74,15 +74,13 @@ namespace hpl {
 	#define eVertexCompileFlag_CreateTangents	(0x00000001)
 
 
-	class iLowLevelGraphics;
-
 	class iVertexBuffer
 	{
 	public:
-		iVertexBuffer(iLowLevelGraphics* apLowLevelGraphics,tVertexFlag aFlags,
+		iVertexBuffer(tVertexFlag aFlags,
 			VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
 			int alReserveVtxSize,int alReserveIdxSize) :
-			mVertexFlags(aFlags), mpLowLevelGraphics(apLowLevelGraphics),
+			mVertexFlags(aFlags),
 			mDrawType(aDrawType), mUsageType(aUsageType), mlElementNum(-1),
 			mbTangents(false){}
 
@@ -153,7 +151,6 @@ namespace hpl {
 		tVertexFlag mVertexFlags;
 		VertexBufferPrimitiveType mDrawType;
 		VertexBufferUsageType mUsageType;
-		iLowLevelGraphics* mpLowLevelGraphics;
 
 		int mlElementNum;
 

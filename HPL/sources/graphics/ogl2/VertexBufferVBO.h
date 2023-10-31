@@ -27,7 +27,7 @@ namespace hpl {
 	class cVertexBufferVBO : public iVertexBuffer
 	{
 	public:
-		cVertexBufferVBO(iLowLevelGraphics* apLowLevelGraphics,tVertexFlag aFlags,
+		cVertexBufferVBO(tVertexFlag aFlags,
 			VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
 			int alReserveVtxSize,int alReserveIdxSize);
 		~cVertexBufferVBO();
@@ -88,4 +88,5 @@ namespace hpl {
 	};
 
 };
-#endif // HPL_RENDERER3D_VBO_H
+
+#endif // HPL_VERTEXBUFFER_VBO_H

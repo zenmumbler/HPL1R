@@ -36,10 +36,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cVertexBufferVBO::cVertexBufferVBO(iLowLevelGraphics* apLowLevelGraphics,tVertexFlag aFlags,
+	cVertexBufferVBO::cVertexBufferVBO(tVertexFlag aFlags,
 		VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
 		int alReserveVtxSize,int alReserveIdxSize) :
-	iVertexBuffer(apLowLevelGraphics, aFlags, aDrawType,aUsageType, alReserveVtxSize, alReserveIdxSize)
+	iVertexBuffer(aFlags, aDrawType,aUsageType, alReserveVtxSize, alReserveIdxSize)
 	{
 		if(alReserveVtxSize>0)
 		{
@@ -64,8 +64,6 @@ namespace hpl {
 		mbCompiled = false;
 
 		mbHasShadowDouble = false;
-
-		mpLowLevelGraphics = apLowLevelGraphics;
 	}
 
 	cVertexBufferVBO::~cVertexBufferVBO()
@@ -423,7 +421,7 @@ namespace hpl {
 
 	iVertexBuffer* cVertexBufferVBO::CreateCopy(VertexBufferUsageType aUsageType)
 	{
-		cVertexBufferVBO *pVtxBuff = new cVertexBufferVBO(mpLowLevelGraphics, mVertexFlags,mDrawType,aUsageType, GetVertexNum(),GetIndexNum());
+		cVertexBufferVBO *pVtxBuff = new cVertexBufferVBO(mVertexFlags, mDrawType, aUsageType, GetVertexNum(), GetIndexNum());
 
 		//Copy the vertices to the new buffer.
 		for(int i=0; i < klNumOfVertexFlags; i++)

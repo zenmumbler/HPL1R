@@ -683,7 +683,7 @@ namespace hpl {
 														VertexBufferUsageType aUsageType,
 														int alReserveVtxSize,int alReserveIdxSize)
 	{
-		return new cVertexBufferVBO(this, aFlags,aDrawType,aUsageType,alReserveVtxSize,alReserveIdxSize);
+		return new cVertexBufferVBO(aFlags,aDrawType,aUsageType,alReserveVtxSize,alReserveIdxSize);
 	}
 
 
