@@ -37,7 +37,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cVertexBufferVBO::cVertexBufferVBO(iLowLevelGraphics* apLowLevelGraphics,tVertexFlag aFlags,
-		eVertexBufferDrawType aDrawType,eVertexBufferUsageType aUsageType,
+		VertexBufferPrimitiveType aDrawType,eVertexBufferUsageType aUsageType,
 		int alReserveVtxSize,int alReserveIdxSize) :
 	iVertexBuffer(apLowLevelGraphics, aFlags, aDrawType,aUsageType, alReserveVtxSize, alReserveIdxSize)
 	{
@@ -322,19 +322,19 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::Draw(eVertexBufferDrawType aDrawType)
+	void cVertexBufferVBO::Draw(VertexBufferPrimitiveType primType)
 	{
-		eVertexBufferDrawType drawType = aDrawType == eVertexBufferDrawType_LastEnum ? mDrawType : aDrawType;
+		VertexBufferPrimitiveType drawType = primType == VertexBufferPrimitiveType::None ? mDrawType : primType;
 
 		///////////////////////////////
 		//Get the draw type
 		GLenum mode = GL_TRIANGLES;
-		if(drawType==eVertexBufferDrawType_Quad)		mode = GL_QUADS;
-		else if(drawType==eVertexBufferDrawType_Lines)	mode = GL_LINE_STRIP;
+		if (drawType == VertexBufferPrimitiveType::Quads)		mode = GL_QUADS;
+		else if(drawType == VertexBufferPrimitiveType::Lines)	mode = GL_LINE_STRIP;
 
 		//////////////////////////////////
 		//Bind and draw the buffer
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mlElementHandle);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mlElementHandle);
 
 		int lSize = mlElementNum;
 		if(mlElementNum<0) lSize = GetIndexNum();
@@ -346,15 +346,15 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::DrawIndices(unsigned int *apIndices, int alCount,eVertexBufferDrawType aDrawType)
+	void cVertexBufferVBO::DrawIndices(unsigned int *apIndices, int alCount,VertexBufferPrimitiveType primType)
 	{
-		eVertexBufferDrawType drawType = aDrawType == eVertexBufferDrawType_LastEnum ? mDrawType : aDrawType;
+		VertexBufferPrimitiveType drawType = primType == VertexBufferPrimitiveType::None ? mDrawType : primType;
 
 		///////////////////////////////
 		//Get the draw type
 		GLenum mode = GL_TRIANGLES;
-		if(drawType==eVertexBufferDrawType_Quad)		mode = GL_QUADS;
-		else if(drawType==eVertexBufferDrawType_Lines)	mode = GL_LINE_STRIP;
+		if (drawType == VertexBufferPrimitiveType::Quads)		mode = GL_QUADS;
+		else if(drawType == VertexBufferPrimitiveType::Lines)	mode = GL_LINE_STRIP;
 
 		//////////////////////////////////
 		//Bind and draw the buffer

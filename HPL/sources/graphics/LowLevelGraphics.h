@@ -317,7 +317,7 @@ namespace hpl {
 										eBlendFunc aSrcFactorAlpha, eBlendFunc aDestFactorAlpha)=0;
 
 		// POLYGONS
-		virtual iVertexBuffer* CreateVertexBuffer(tVertexFlag aFlags, eVertexBufferDrawType aDrawType,
+		virtual iVertexBuffer* CreateVertexBuffer(tVertexFlag aFlags, VertexBufferPrimitiveType aDrawType,
 								eVertexBufferUsageType aUsageType,
 								int alReserveVtxSize=0,int alReserveIdxSize=0)=0;
 

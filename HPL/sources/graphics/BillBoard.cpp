@@ -69,11 +69,9 @@ namespace hpl {
 		mlLastRenderCount = -1;
 
 		mpVtxBuffer = mpLowLevelGraphics->CreateVertexBuffer(
-								eVertexFlag_Position | eVertexFlag_Color0 | eVertexFlag_Texture0 |
-								eVertexFlag_Normal,
-								eVertexBufferDrawType_Tri, eVertexBufferUsageType_Dynamic,4,6);
-
-
+								eVertexFlag_Position | eVertexFlag_Color0 | eVertexFlag_Texture0 | eVertexFlag_Normal,
+								VertexBufferPrimitiveType::Triangles, eVertexBufferUsageType_Dynamic,
+								4, 6);
 
 		cVector3f vCoords[4] = {cVector3f((mvSize.x/2),-(mvSize.y/2),0),
 								cVector3f(-(mvSize.x/2),-(mvSize.y/2),0),

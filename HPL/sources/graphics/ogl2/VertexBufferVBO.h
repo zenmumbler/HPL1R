@@ -28,7 +28,7 @@ namespace hpl {
 	{
 	public:
 		cVertexBufferVBO(iLowLevelGraphics* apLowLevelGraphics,tVertexFlag aFlags,
-			eVertexBufferDrawType aDrawType,eVertexBufferUsageType aUsageType,
+			VertexBufferPrimitiveType aDrawType,eVertexBufferUsageType aUsageType,
 			int alReserveVtxSize,int alReserveIdxSize);
 		~cVertexBufferVBO();
 
@@ -43,9 +43,8 @@ namespace hpl {
 
 		void Transform(const cMatrixf &mtxTransform);
 
-		void Draw(eVertexBufferDrawType aDrawType = eVertexBufferDrawType_LastEnum);
-		void DrawIndices(unsigned int *apIndices, int alCount,
-						eVertexBufferDrawType aDrawType = eVertexBufferDrawType_LastEnum);
+		void Draw(VertexBufferPrimitiveType primType);
+		void DrawIndices(unsigned int *apIndices, int alCount, VertexBufferPrimitiveType primType);
 
 		void Bind();
 		void UnBind();

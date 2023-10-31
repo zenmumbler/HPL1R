@@ -151,7 +151,7 @@ namespace hpl {
 		void SetTextureConstantColor(const cColor &aColor) override;
 
 		// POLYGONS
-		iVertexBuffer* CreateVertexBuffer(tVertexFlag aFlags, eVertexBufferDrawType aDrawType,
+		iVertexBuffer* CreateVertexBuffer(tVertexFlag aFlags, VertexBufferPrimitiveType aDrawType,
 										eVertexBufferUsageType aUsageType,
 										int alReserveVtxSize=0,int alReserveIdxSize=0) override;
 

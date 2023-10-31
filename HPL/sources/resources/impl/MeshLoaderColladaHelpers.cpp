@@ -520,7 +520,7 @@ namespace hpl {
 		iVertexBuffer *pVtxBuff = mpLowLevelGraphics->CreateVertexBuffer(
 			eVertexFlag_Position | eVertexFlag_Normal | eVertexFlag_Texture0 | eVertexFlag_Color0 |
 			eVertexFlag_Texture1,
-			eVertexBufferDrawType_Tri, aUsageType,
+			VertexBufferPrimitiveType::Triangles, aUsageType,
 			(int)aGeometry.mvVertexVec.size(), (int)aGeometry.mvIndexVec.size());
 
 		pVtxBuff->SetTangents(true);

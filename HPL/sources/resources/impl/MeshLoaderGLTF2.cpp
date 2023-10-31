@@ -93,7 +93,7 @@ namespace hpl {
 
 			//Create the vertex buffer
 			iVertexBuffer* pVtxBuff = mpLowLevelGraphics->CreateVertexBuffer(vtxFlags,
-							eVertexBufferDrawType_Tri,
+							VertexBufferPrimitiveType::Triangles,
 							eVertexBufferUsageType_Static,
 							0, 0);
 

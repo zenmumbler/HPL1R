@@ -74,15 +74,14 @@ namespace hpl {
 	enum eMaterialAlphaMode
 	{
 		eMaterialAlphaMode_Solid,
-		eMaterialAlphaMode_Trans,
-		eMaterialAlphaMode_LastEnum,
+		eMaterialAlphaMode_Trans
 	};
 
 	//! Determines what color channels are going to be affected
 	enum eMaterialChannelMode
 	{
 		eMaterialChannelMode_RGBA,
-		eMaterialChannelMode_Z,
+		eMaterialChannelMode_Z
 	};
 
 	//---------------------------------------------------

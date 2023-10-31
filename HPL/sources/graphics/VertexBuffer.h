@@ -26,14 +26,12 @@
 
 namespace hpl {
 
-	class cBoundingVolume;
-
-	enum eVertexBufferDrawType
+	enum class VertexBufferPrimitiveType
 	{
-		eVertexBufferDrawType_Tri,
-		eVertexBufferDrawType_Quad,
-		eVertexBufferDrawType_Lines,
-		eVertexBufferDrawType_LastEnum
+		None,
+		Triangles,
+		Quads,
+		Lines
 	};
 
 	enum eVertexBufferUsageType
@@ -84,7 +82,7 @@ namespace hpl {
 	{
 	public:
 		iVertexBuffer(iLowLevelGraphics* apLowLevelGraphics,tVertexFlag aFlags,
-			eVertexBufferDrawType aDrawType,eVertexBufferUsageType aUsageType,
+			VertexBufferPrimitiveType aDrawType,eVertexBufferUsageType aUsageType,
 			int alReserveVtxSize,int alReserveIdxSize) :
 			mVertexFlags(aFlags), mpLowLevelGraphics(apLowLevelGraphics),
 			mDrawType(aDrawType), mUsageType(aUsageType), mlElementNum(-1),
@@ -112,9 +110,9 @@ namespace hpl {
 		*/
 		virtual void Transform(const cMatrixf &mtxTransform)=0;
 
-		virtual void Draw(eVertexBufferDrawType aDrawType = eVertexBufferDrawType_LastEnum)=0;
+		virtual void Draw(VertexBufferPrimitiveType primType = VertexBufferPrimitiveType::None)=0;
 		virtual void DrawIndices(unsigned int *apIndices, int alCount,
-								eVertexBufferDrawType aDrawType = eVertexBufferDrawType_LastEnum)=0;
+								VertexBufferPrimitiveType primType = VertexBufferPrimitiveType::None)=0;
 
 		virtual void Bind()=0;
 		virtual void UnBind()=0;
@@ -155,7 +153,7 @@ namespace hpl {
 
 	protected:
 		tVertexFlag mVertexFlags;
-		eVertexBufferDrawType mDrawType;
+		VertexBufferPrimitiveType mDrawType;
 		eVertexBufferUsageType mUsageType;
 		iLowLevelGraphics* mpLowLevelGraphics;
 

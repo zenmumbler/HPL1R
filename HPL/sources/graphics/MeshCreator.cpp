@@ -74,7 +74,7 @@ namespace hpl {
 	{
 		iVertexBuffer* pSkyBox = mpLowLevelGraphics->CreateVertexBuffer(
 										eVertexFlag_Color0 | eVertexFlag_Position | eVertexFlag_Texture0,
-										eVertexBufferDrawType_Quad,eVertexBufferUsageType_Static);
+										VertexBufferPrimitiveType::Quads, eVertexBufferUsageType_Static);
 
 		float fSize = afSize;
 
@@ -149,7 +149,7 @@ namespace hpl {
 		iVertexBuffer* pBox = mpLowLevelGraphics->CreateVertexBuffer(
 			eVertexFlag_Color0 | eVertexFlag_Position | eVertexFlag_Texture0 |
 			eVertexFlag_Texture1 | eVertexFlag_Normal,
-			eVertexBufferDrawType_Tri,eVertexBufferUsageType_Static);
+			VertexBufferPrimitiveType::Triangles, eVertexBufferUsageType_Static);
 
 		avSize = avSize*0.5;
 

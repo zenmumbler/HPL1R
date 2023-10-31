@@ -136,9 +136,8 @@ namespace hpl {
 			//Create the vertex buffer
 			eVertexBufferUsageType usageType = bIsAnimated ? eVertexBufferUsageType_Stream : eVertexBufferUsageType_Static;
 			iVertexBuffer* pVtxBuff = mpLowLevelGraphics->CreateVertexBuffer(vtxFlags,
-							eVertexBufferDrawType_Tri,
-							usageType,
-							0,0);
+							VertexBufferPrimitiveType::Triangles, usageType,
+							0, 0);
 
 			pVtxBuff->SetTangents(bTangents);
 

@@ -1266,8 +1266,7 @@ namespace hpl {
 						mpLowLevelGraphics->SetBlendFunc(eBlendFunc_DestAlpha,eBlendFunc_One);
 						if(bLog) Log("  Set blend mode destalpha-one!\n");
 						break;
-					case eMaterialBlendMode_None:
-					case eMaterialBlendMode_LastEnum:
+					default:
 						if(bLog) Log("  Invalid blend mode!\n");
 						break;
 					}
