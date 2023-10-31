@@ -44,7 +44,7 @@ namespace hpl {
 	{
 		mpVtxBuffer = apGraphics->GetLowLevel()->CreateVertexBuffer(
 							eVertexFlag_Position | eVertexFlag_Color0 | eVertexFlag_Texture0,
-							VertexBufferPrimitiveType::Triangles, eVertexBufferUsageType_Stream,
+							VertexBufferPrimitiveType::Triangles, VertexBufferUsageType::Stream,
 							alMaxParticles * 4, alMaxParticles * 6);
 
 		//Fill the indices with quads

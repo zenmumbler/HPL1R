@@ -522,7 +522,7 @@ namespace hpl {
 		void CreateSkeletonBone(cColladaNode* apColladaNode, cBone* apParentBone);
 
 		iVertexBuffer *CreateVertexBuffer(cColladaGeometry & aGeometry,
-											eVertexBufferUsageType aUsageType);
+											VertexBufferUsageType aUsageType);
 											//tColladaExtraVtxListVec &vExtraVtxVec);
 
 		bool FillStructures(const tString &asFile,

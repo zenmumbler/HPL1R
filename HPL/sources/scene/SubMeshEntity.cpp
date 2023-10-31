@@ -65,7 +65,7 @@ namespace hpl {
 
 		if(mpMeshEntity->GetMesh()->GetSkeleton())
 		{
-			mpDynVtxBuffer = mpSubMesh->GetVertexBuffer()->CreateCopy(eVertexBufferUsageType_Dynamic);
+			mpDynVtxBuffer = mpSubMesh->GetVertexBuffer()->CreateCopy(VertexBufferUsageType::Dynamic);
 			mvDynTriangles = *mpSubMesh->GetTriangleVecPtr();
 		}
 		else

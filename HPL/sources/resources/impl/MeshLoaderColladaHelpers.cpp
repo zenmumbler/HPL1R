@@ -504,7 +504,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	iVertexBuffer * cMeshLoaderCollada::CreateVertexBuffer(cColladaGeometry & aGeometry,
-		eVertexBufferUsageType aUsageType)
+		VertexBufferUsageType aUsageType)
 		//,tColladaExtraVtxListVec &vExtraVtxVec)
 	{
 		//tVertexVec vVertexVec;

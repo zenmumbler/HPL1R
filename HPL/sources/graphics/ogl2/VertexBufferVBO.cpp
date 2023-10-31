@@ -37,7 +37,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cVertexBufferVBO::cVertexBufferVBO(iLowLevelGraphics* apLowLevelGraphics,tVertexFlag aFlags,
-		VertexBufferPrimitiveType aDrawType,eVertexBufferUsageType aUsageType,
+		VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
 		int alReserveVtxSize,int alReserveIdxSize) :
 	iVertexBuffer(apLowLevelGraphics, aFlags, aDrawType,aUsageType, alReserveVtxSize, alReserveIdxSize)
 	{
@@ -168,8 +168,8 @@ namespace hpl {
 		}
 
 		GLenum usageType = GL_STATIC_DRAW;
-		if(mUsageType== eVertexBufferUsageType_Dynamic) usageType = GL_DYNAMIC_DRAW;
-		else if(mUsageType== eVertexBufferUsageType_Stream) usageType = GL_STREAM_DRAW;
+		if(mUsageType== VertexBufferUsageType::Dynamic) usageType = GL_DYNAMIC_DRAW;
+		else if(mUsageType== VertexBufferUsageType::Stream) usageType = GL_STREAM_DRAW;
 
 		//Create the VBO vertex arrays
 		for(int i=0;i< klNumOfVertexFlags; i++)
@@ -206,8 +206,8 @@ namespace hpl {
 	void cVertexBufferVBO::UpdateData(tVertexFlag aTypes, bool abIndices)
 	{
 		GLenum usageType = GL_STATIC_DRAW;
-		if(mUsageType== eVertexBufferUsageType_Dynamic) usageType = GL_DYNAMIC_DRAW;
-		else if(mUsageType== eVertexBufferUsageType_Stream) usageType = GL_STREAM_DRAW;
+		if(mUsageType== VertexBufferUsageType::Dynamic) usageType = GL_DYNAMIC_DRAW;
+		else if(mUsageType== VertexBufferUsageType::Stream) usageType = GL_STREAM_DRAW;
 
 		//Create the VBO vertex arrays
 		for(int i=0;i< klNumOfVertexFlags; i++)
@@ -421,7 +421,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iVertexBuffer* cVertexBufferVBO::CreateCopy(eVertexBufferUsageType aUsageType)
+	iVertexBuffer* cVertexBufferVBO::CreateCopy(VertexBufferUsageType aUsageType)
 	{
 		cVertexBufferVBO *pVtxBuff = new cVertexBufferVBO(mpLowLevelGraphics, mVertexFlags,mDrawType,aUsageType, GetVertexNum(),GetIndexNum());
 

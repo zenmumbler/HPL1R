@@ -134,7 +134,7 @@ namespace hpl {
 			}
 
 			//Create the vertex buffer
-			eVertexBufferUsageType usageType = bIsAnimated ? eVertexBufferUsageType_Stream : eVertexBufferUsageType_Static;
+			VertexBufferUsageType usageType = bIsAnimated ? VertexBufferUsageType::Stream : VertexBufferUsageType::Static;
 			iVertexBuffer* pVtxBuff = mpLowLevelGraphics->CreateVertexBuffer(vtxFlags,
 							VertexBufferPrimitiveType::Triangles, usageType,
 							0, 0);

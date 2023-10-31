@@ -94,7 +94,7 @@ namespace hpl {
 			//Create the vertex buffer
 			iVertexBuffer* pVtxBuff = mpLowLevelGraphics->CreateVertexBuffer(vtxFlags,
 							VertexBufferPrimitiveType::Triangles,
-							eVertexBufferUsageType_Static,
+							VertexBufferUsageType::Static,
 							0, 0);
 
 			pVtxBuff->SetTangents((vtxFlags & eVertexFlag_Texture1) != 0);
@@ -160,7 +160,7 @@ namespace hpl {
 			}
 
 			//Create the vertex buffer
-			eVertexBufferUsageType usageType = eVertexBufferUsageType_Static;
+			eVertexBufferUsageType usageType = VertexBufferUsageType::Static;
 			iVertexBuffer* pVtxBuff = mpLowLevelGraphics->CreateVertexBuffer(vtxFlags,
 							eVertexBufferDrawType_Tri,
 							usageType,

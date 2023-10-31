@@ -33,12 +33,11 @@ namespace hpl {
 		LineStrips
 	};
 
-	enum eVertexBufferUsageType
+	enum VertexBufferUsageType
 	{
-		eVertexBufferUsageType_Static,
-		eVertexBufferUsageType_Dynamic,
-		eVertexBufferUsageType_Stream,
-		eVertexBufferUsageType_LastEnum
+		Static,
+		Dynamic,
+		Stream
 	};
 
 	typedef tFlag tVertexFlag;
@@ -81,7 +80,7 @@ namespace hpl {
 	{
 	public:
 		iVertexBuffer(iLowLevelGraphics* apLowLevelGraphics,tVertexFlag aFlags,
-			VertexBufferPrimitiveType aDrawType,eVertexBufferUsageType aUsageType,
+			VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
 			int alReserveVtxSize,int alReserveIdxSize) :
 			mVertexFlags(aFlags), mpLowLevelGraphics(apLowLevelGraphics),
 			mDrawType(aDrawType), mUsageType(aUsageType), mlElementNum(-1),
@@ -116,7 +115,7 @@ namespace hpl {
 		virtual void Bind()=0;
 		virtual void UnBind()=0;
 
-		virtual iVertexBuffer* CreateCopy(eVertexBufferUsageType aUsageType)=0;
+		virtual iVertexBuffer* CreateCopy(VertexBufferUsageType aUsageType)=0;
 
 		virtual cBoundingVolume CreateBoundingVolume()=0;
 
@@ -153,7 +152,7 @@ namespace hpl {
 	protected:
 		tVertexFlag mVertexFlags;
 		VertexBufferPrimitiveType mDrawType;
-		eVertexBufferUsageType mUsageType;
+		VertexBufferUsageType mUsageType;
 		iLowLevelGraphics* mpLowLevelGraphics;
 
 		int mlElementNum;

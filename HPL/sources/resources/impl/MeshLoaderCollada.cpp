@@ -735,9 +735,9 @@ namespace hpl {
 
 			//////////////////////////////
 			// Create Vertex buffer
-			eVertexBufferUsageType UsageType = eVertexBufferUsageType_Static;
+			VertexBufferUsageType UsageType = VertexBufferUsageType::Static;
 			//The streams will be the entity copies.
-			//if(vColladaControllers.empty()==false) UsageType = eVertexBufferUsageType_Stream;
+			//if(vColladaControllers.empty()==false) UsageType = VertexBufferUsageType::Stream;
 
 			iVertexBuffer *pVtxBuffer = CreateVertexBuffer(Geom, UsageType);//, vExtraVtxVec);
 			pSubMesh->SetVertexBuffer(pVtxBuffer);
@@ -1481,7 +1481,7 @@ namespace hpl {
 
 			//Create vertex buffer
 			//tColladaExtraVtxListVec vExtraVtxVec;
-			pVtxBuffer = CreateVertexBuffer(*apGeom, eVertexBufferUsageType_Static); ///,&apNode->m_mtxWorldTransform);
+			pVtxBuffer = CreateVertexBuffer(*apGeom, VertexBufferUsageType::Static); ///,&apNode->m_mtxWorldTransform);
 
 			//Check if If the mesh casts shadows:
 			pVtxBuffer->CreateShadowDouble(true);
@@ -1551,7 +1551,7 @@ namespace hpl {
 		if(HasParam(vParams, "nocollide")==false)
 		{
 			if(bDrawn==false){
-				pVtxBuffer = CreateVertexBuffer(*apGeom, eVertexBufferUsageType_Static);
+				pVtxBuffer = CreateVertexBuffer(*apGeom, VertexBufferUsageType::Static);
 				pVtxBuffer->Transform(apNode->m_mtxWorldTransform);
 			}
 

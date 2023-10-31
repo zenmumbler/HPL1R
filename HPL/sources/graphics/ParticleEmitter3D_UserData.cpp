@@ -556,7 +556,7 @@ namespace hpl {
 				}
 
 				mpVtxBuffer = apGraphics->GetLowLevel()->CreateVertexBuffer ( eVertexFlag_Position,		// Now that we know how many points we have, we create the Vertex Buffer
-						eVertexBufferDrawType_Tri, eVertexBufferUsageType_Stream,
+						eVertexBufferDrawType_Tri, VertexBufferUsageType::Stream,
 						mlMaxParticles*mpData->mvBeamNoisePoints.size()*2, mlMaxParticles*(mpData->mvBeamNoisePoints.size()-1)*6);
 
 				for ( int i = 0; i < (int) mlMaxParticles; ++i )

@@ -152,7 +152,7 @@ namespace hpl {
 
 		// POLYGONS
 		iVertexBuffer* CreateVertexBuffer(tVertexFlag aFlags, VertexBufferPrimitiveType aDrawType,
-										eVertexBufferUsageType aUsageType,
+										VertexBufferUsageType aUsageType,
 										int alReserveVtxSize=0,int alReserveIdxSize=0) override;
 
 		void DrawQuad(const tVertexVec &avVtx) override;

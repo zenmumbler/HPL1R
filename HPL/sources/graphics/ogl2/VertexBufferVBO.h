@@ -28,7 +28,7 @@ namespace hpl {
 	{
 	public:
 		cVertexBufferVBO(iLowLevelGraphics* apLowLevelGraphics,tVertexFlag aFlags,
-			VertexBufferPrimitiveType aDrawType,eVertexBufferUsageType aUsageType,
+			VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
 			int alReserveVtxSize,int alReserveIdxSize);
 		~cVertexBufferVBO();
 
@@ -50,7 +50,7 @@ namespace hpl {
 		void Bind();
 		void UnBind();
 
-		iVertexBuffer* CreateCopy(eVertexBufferUsageType aUsageType);
+		iVertexBuffer* CreateCopy(VertexBufferUsageType aUsageType);
 
 		cBoundingVolume CreateBoundingVolume();
 
