@@ -204,9 +204,6 @@ namespace hpl {
 		void InitCG();
 		void ExitCG();
 
-		//Batch helper
-		void PrepareBatchDraw(const cGfxBatch &batch, tGfxBatchAttrs attrs);
-
 		//Depth helper
 		GLenum GetGLDepthTestFuncEnum(eDepthTestFunc aType);
 

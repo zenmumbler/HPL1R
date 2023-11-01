@@ -958,8 +958,28 @@ namespace hpl {
 
 	void cLowLevelGraphicsSDL::DrawBatch(const cGfxBatch &batch, tGfxBatchAttrs attrs, eBatchDrawMode drawMode)
 	{
-		PrepareBatchDraw(batch, attrs);
-		
+		glVertexPointer(3, GL_FLOAT, sizeof(float) * batch.mlBatchStride, batch.mpVertexArray);
+		glColorPointer(4, GL_FLOAT, sizeof(float) * batch.mlBatchStride, &batch.mpVertexArray[3]);
+
+		glClientActiveTexture(GL_TEXTURE0);
+		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * batch.mlBatchStride, &batch.mpVertexArray[7]);
+
+		if(attrs & eGfxBatchAttr_Position) glEnableClientState(GL_VERTEX_ARRAY);
+		else glDisableClientState(GL_VERTEX_ARRAY);
+
+		if(attrs & eGfxBatchAttr_Color0) glEnableClientState(GL_COLOR_ARRAY);
+		else glDisableClientState(GL_COLOR_ARRAY);
+
+		glDisableClientState(GL_NORMAL_ARRAY);
+
+		glClientActiveTexture(GL_TEXTURE0);
+		if(attrs & eGfxBatchAttr_Texture0){
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		}
+		else {
+			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		}
+
 		GLenum glMode = drawMode == eBatchDrawMode_Tris ? GL_TRIANGLES : GL_QUADS;
 		glDrawElements(glMode, batch.mlIndexCount, GL_UNSIGNED_INT, batch.mpIndexArray);
 	}
@@ -1123,33 +1143,6 @@ namespace hpl {
 	//////////////////////////////////////////////////////////////////////////
 	// PRIVATE METHODS
 	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::PrepareBatchDraw(const cGfxBatch &batch, tGfxBatchAttrs attrs)
-	{
-		glVertexPointer(3, GL_FLOAT, sizeof(float) * batch.mlBatchStride, batch.mpVertexArray);
-		glColorPointer(4, GL_FLOAT, sizeof(float) * batch.mlBatchStride, &batch.mpVertexArray[3]);
-
-		glClientActiveTexture(GL_TEXTURE0);
-		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * batch.mlBatchStride, &batch.mpVertexArray[7]);
-
-		if(attrs & eGfxBatchAttr_Position) glEnableClientState(GL_VERTEX_ARRAY);
-		else glDisableClientState(GL_VERTEX_ARRAY);
-
-		if(attrs & eGfxBatchAttr_Color0) glEnableClientState(GL_COLOR_ARRAY);
-		else glDisableClientState(GL_COLOR_ARRAY);
-
-		glDisableClientState(GL_NORMAL_ARRAY);
-
-		glClientActiveTexture(GL_TEXTURE0);
-		if(attrs & eGfxBatchAttr_Texture0){
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		}
-		else {
-			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		}
-	}
 
 	//-----------------------------------------------------------------------
 
