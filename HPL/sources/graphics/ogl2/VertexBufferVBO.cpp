@@ -176,10 +176,7 @@ namespace hpl {
 			{
 				glGenBuffers(1,(GLuint *)&mvArrayHandle[i]);
 				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[i]);
-
-				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[i].size()*sizeof(float),
-						&(mvVertexArray[i][0]), usageType);
-
+				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[i].size() * sizeof(float), &(mvVertexArray[i][0]), usageType);
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 				//Log("%d-Handle: %d, size: %d \n",i,mvArrayHandle[i], mvVertexArray);
@@ -189,8 +186,7 @@ namespace hpl {
 		//Create the VBO index array
 		glGenBuffers(1,(GLuint *)&mlElementHandle);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mlElementHandle);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum()*sizeof(unsigned int),
-														&mvIndexArray[0], usageType);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum()*sizeof(unsigned int), &mvIndexArray[0], usageType);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
 
 		//Log("VBO compile done!\n");
@@ -204,35 +200,25 @@ namespace hpl {
 	void cVertexBufferVBO::UpdateData(VertexAttributes aTypes, bool abIndices)
 	{
 		GLenum usageType = GL_STATIC_DRAW;
-		if(mUsageType== VertexBufferUsageType::Dynamic) usageType = GL_DYNAMIC_DRAW;
-		else if(mUsageType== VertexBufferUsageType::Stream) usageType = GL_STREAM_DRAW;
+		if (mUsageType== VertexBufferUsageType::Dynamic) usageType = GL_DYNAMIC_DRAW;
+		else if (mUsageType== VertexBufferUsageType::Stream) usageType = GL_STREAM_DRAW;
 
 		//Create the VBO vertex arrays
-		for(int i=0;i< klNumOfVertexFlags; i++)
+		for (int i=0; i < klNumOfVertexFlags; i++)
 		{
-			if((mVertexFlags & kvVertexFlags[i]) && (aTypes & kvVertexFlags[i]))
+			if ((mVertexFlags & kvVertexFlags[i]) && (aTypes & kvVertexFlags[i]))
 			{
 				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[i]);
-
-				//This was apparently VERY slow.
-				// glBufferData(GL_ARRAY_BUFFER, mvVertexArray[i].size() * sizeof(float), NULL, usageType);//Clear memory
-
 				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[i].size() * sizeof(float), &(mvVertexArray[i][0]), usageType);
 			}
 		}
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		//Create the VBO index array
-		if(abIndices)
+		if (abIndices)
 		{
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mlElementHandle);
-
-			//glBufferData(GL_ELEMENT_ARRAY_BUFFER,GetIndexNum()*sizeof(unsigned int),
-			//	NULL, usageType);
-
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum()*sizeof(unsigned int),
-				&mvIndexArray[0], usageType);
-
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum()*sizeof(unsigned int), &mvIndexArray[0], usageType);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
 		}
 	}
