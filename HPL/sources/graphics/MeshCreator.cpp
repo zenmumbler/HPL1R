@@ -222,7 +222,7 @@ namespace hpl {
 					//Log("\n");
 				}
 
-		if(!pBox->Compile(eVertexCompileFlag_CreateTangents))
+		if (! pBox->Compile(VertexCompileOption::CreateTangents))
 		{
 			delete pBox;
 			return NULL;

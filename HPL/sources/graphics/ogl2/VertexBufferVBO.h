@@ -36,7 +36,7 @@ namespace hpl {
 		void AddColor(VertexAttributes aType,const cColor& aColor);
 		void AddIndex(unsigned int alIndex);
 
-		bool Compile(tVertexCompileFlag aFlags);
+		bool Compile(VertexCompileOptions options);
 		void UpdateData(VertexAttributes aTypes, bool abIndices);
 
 		void CreateShadowDouble(bool abUpdateData);

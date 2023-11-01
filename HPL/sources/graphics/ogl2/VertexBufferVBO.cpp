@@ -136,13 +136,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cVertexBufferVBO::Compile(tVertexCompileFlag aFlags)
+	bool cVertexBufferVBO::Compile(VertexCompileOptions options)
 	{
 		if(mbCompiled) return false;
 		mbCompiled = true;
 
 		//Create tangents
-		if(aFlags & eVertexCompileFlag_CreateTangents)
+		if (options & VertexCompileOption::CreateTangents)
 		{
 			mbTangents = true;
 
@@ -153,7 +153,8 @@ namespace hpl {
 			int lSize = GetVertexNum()*4;
 			mvVertexArray[idx].resize(lSize);
 
-			cMath::CreateTriTangentVectors(&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_UV1)][0]),
+			cMath::CreateTriTangentVectors(
+				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_UV1)][0]),
 				&mvIndexArray[0], GetIndexNum(),
 
 				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_Position)][0]),
@@ -162,7 +163,7 @@ namespace hpl {
 				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_UV0)][0]),
 				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_Normal)][0]),
 				GetVertexNum()
-				);
+			);
 		}
 
 		GLenum usageType = GL_STATIC_DRAW;

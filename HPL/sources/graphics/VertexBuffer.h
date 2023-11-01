@@ -71,9 +71,11 @@ namespace hpl {
 									3 //Texture4
 								};
 
-	typedef tFlag tVertexCompileFlag;
+	using VertexCompileOptions = tFlag;
 
-	#define eVertexCompileFlag_CreateTangents	(0x00000001)
+	enum VertexCompileOption {
+		CreateTangents = 1
+	};
 
 
 	class iVertexBuffer
@@ -94,7 +96,7 @@ namespace hpl {
 		virtual void AddColor(VertexAttributes aType,const cColor& aColor)=0;
 		virtual void AddIndex(unsigned int alIndex)=0;
 
-		virtual bool Compile(tVertexCompileFlag aFlags)=0;
+		virtual bool Compile(VertexCompileOptions options)=0;
 		virtual void UpdateData(VertexAttributes aTypes, bool abIndices)=0;
 
 		/**
