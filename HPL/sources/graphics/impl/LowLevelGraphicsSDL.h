@@ -59,9 +59,6 @@ namespace hpl {
 
 		void SetVsyncActive(bool abX) override;
 
-		void SetGammaCorrection(float afX) override;
-		float GetGammaCorrection() override;
-
 		void SetMultisamplingActive(bool abX) override;
 		int GetMultisampling() override { return mlMultisampling;}
 
@@ -184,9 +181,6 @@ namespace hpl {
 		cVector2l mvScreenSize;
 		cVector2f mvVirtualSize;
 		int mlMultisampling;
-
-		//Gamma
-		float mfGammaCorrection;
 
 		//SDL Variables
 		SDL_Window *mpWindow;

@@ -230,9 +230,6 @@ namespace hpl {
 
 		virtual void SetMultisamplingActive(bool abX)=0;
 
-		virtual void SetGammaCorrection(float afX)=0;
-		virtual float GetGammaCorrection()=0;
-
 		virtual iTexture* CreateTexture(bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
 		virtual iTexture* CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
 		virtual iTexture* CreateTexture(const Bitmap& source, bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;

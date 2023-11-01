@@ -426,24 +426,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::SetGammaCorrection(float afX)
-	{
-		//if(mfGammaCorrection == afX) return;
-
-		mfGammaCorrection = afX;
-
-		// TODO: move gamma correction to a postproc shader
-		//SDL_SetWindowBrightness(mpWindow, mfGammaCorrection);
-	}
-
-	float cLowLevelGraphicsSDL::GetGammaCorrection()
-	{
-		return mfGammaCorrection;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SaveScreenToBMP(const tString& asFile)
+	Bitmap cLowLevelGraphicsSDL::GetScreenPixels()
 	{
 		glFinish();
 

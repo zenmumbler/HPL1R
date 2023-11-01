@@ -1308,19 +1308,12 @@ public:
 							int alGNum)
 		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
 	{
-		mfMax = 3.0f;
-		mfMin = 0.1f;
-		mfStep = 0.1f;
-		
 		mlGNum = alGNum;
-
 		msTip = kTranslate("MainMenu", "TipGraphicsGamma");
 	}
 
 	void OnMouseDown(eMButton aButton)
 	{
-		mfGamma = mpInit->mpGame->GetGraphics()->GetLowLevel()->GetGammaCorrection();
-
 		if(aButton == eMButton_Left)
 		{
 			mfGamma += mfStep;
@@ -1332,8 +1325,6 @@ public:
 			if(mfGamma < mfMin) mfGamma = mfMin;
 		}
 
-		mpInit->mpGame->GetGraphics()->GetLowLevel()->SetGammaCorrection(mfGamma);
-		
 		char sTempVec[256];
 		snprintf(sTempVec,256,"%.1f",mfGamma);
 		
@@ -1342,10 +1333,10 @@ public:
 			gpGammaText2->msText = cString::To16Char(sTempVec);
 	}
 
-	float mfGamma;
-	float mfMax;
-	float mfMin;
-	float mfStep;
+	float mfGamma = 1.0f;
+	float mfMax = 3.0f;
+	float mfMin = 0.1f;
+	float mfStep = 0.1f;
 	int mlGNum;
 };
 
@@ -2642,8 +2633,7 @@ void cMainMenu::CreateWidgets()
 		cMainMenuWidget *pGammaFirstButton = new cMainMenuWidget_Gamma(mpInit,vPos,kTranslate("MainMenu","Gamma:"),20,eFontAlign_Right,1);
 		AddWidgetToState(eMainMenuState_FirstStart,pGammaFirstButton); 
 		vPos.x = 405;
-		snprintf(sTempVec,256,"%.1f",mpInit->mpGame->GetGraphics()->GetLowLevel()->GetGammaCorrection());
-		sText = cString::To16Char(sTempVec);
+		sText = cString::To16Char("-");
 		gpGammaText2 = new cMainMenuWidget_Text(mpInit,vPos,sText,20,eFontAlign_Left);
 		AddWidgetToState(eMainMenuState_FirstStart,gpGammaText2); 
 		gpGammaText2->SetExtraWidget(pGammaFirstButton);
@@ -3246,8 +3236,7 @@ void cMainMenu::CreateWidgets()
 	gpBloomText->SetExtraWidget(pWidgetBloom);
 
 	vPos.y += 29;
-	snprintf(sTempVec,256,"%.1f",mpInit->mpGame->GetGraphics()->GetLowLevel()->GetGammaCorrection());
-	sText = cString::To16Char(sTempVec);
+	sText = cString::To16Char("-");
 	gpGammaText = new cMainMenuWidget_Text(mpInit,vPos,sText,20,eFontAlign_Left);
 	AddWidgetToState(eMainMenuState_OptionsGraphics,gpGammaText);
 	gpGammaText->SetExtraWidget(pWidgetGamma);
