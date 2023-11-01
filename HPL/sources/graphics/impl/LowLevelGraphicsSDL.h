@@ -74,7 +74,7 @@ namespace hpl {
 
 		iGpuProgram* CreateGpuProgram(const tString& asName) override;
 
-		void SaveScreenToBMP(const tString& asFile) override;
+		Bitmap GetScreenPixels() override;
 
 		/////////// MATRIX METHODS /////////////////////////
 

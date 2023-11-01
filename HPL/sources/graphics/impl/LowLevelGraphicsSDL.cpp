@@ -437,7 +437,7 @@ namespace hpl {
 		glReadBuffer(GL_BACK);
 		glReadPixels(0, 0, mvScreenSize.x, mvScreenSize.y, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
-		// TODO: save image
+		return bmp;
 	}
 
 	//-----------------------------------------------------------------------

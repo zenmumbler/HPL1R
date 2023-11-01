@@ -239,9 +239,7 @@ namespace hpl {
 
 		virtual iGpuProgram* CreateGpuProgram(const tString& asName)=0;
 
-		//TODO: Kinda quick and diry, better to have a screen to Bitmap.
-		// and then a save as in the Bitmap.
-		virtual void SaveScreenToBMP(const tString& asFile)=0;
+		virtual Bitmap GetScreenPixels()=0;
 
 		/////////// MATRIX METHODS //////////////////////////
 

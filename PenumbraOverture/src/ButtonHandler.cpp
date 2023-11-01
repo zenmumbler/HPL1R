@@ -220,7 +220,8 @@ void cButtonHandler::Update(float afTimeStep)
 			++lCount;
 		}
 
-		mpInit->mpGame->GetGraphics()->GetLowLevel()->SaveScreenToBMP(sFileName);
+		auto screenPixels = mpInit->mpGame->GetGraphics()->GetLowLevel()->GetScreenPixels();
+		// TODO: actually save file
 	}
 	if(mpInput->BecameTriggerd("DebugMenu"))
 	{
