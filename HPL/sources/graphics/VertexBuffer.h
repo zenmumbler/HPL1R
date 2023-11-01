@@ -48,7 +48,7 @@ namespace hpl {
 		VertexAttr_Color0	= 0x00000004,
 		VertexAttr_Color1	= 0x00000008, // Unused
 		VertexAttr_UV0      = 0x00000010,
-		VertexAttr_UV1      = 0x00000020,
+		VertexAttr_Tangent  = 0x00000020,
 		VertexAttr_UV2      = 0x00000040, // Unused
 		VertexAttr_UV3      = 0x00000080, // Unused
 		VertexAttr_UV4      = 0x00000100, // Unused
@@ -57,7 +57,7 @@ namespace hpl {
 	const int klNumOfVertexFlags = 9;
 
 	const VertexAttribute kvVertexFlags[] = {VertexAttr_Normal,VertexAttr_Position,VertexAttr_Color0,
-				VertexAttr_Color1,VertexAttr_UV0,VertexAttr_UV1,VertexAttr_UV2,
+				VertexAttr_Color1,VertexAttr_UV0,VertexAttr_Tangent,VertexAttr_UV2,
 				VertexAttr_UV3,VertexAttr_UV4};
 
 	const int kvVertexElements[] = {3, //Normal
@@ -82,8 +82,10 @@ namespace hpl {
 	{
 	public:
 		iVertexBuffer(VertexAttributes aFlags,
-			VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
-			int alReserveVtxSize,int alReserveIdxSize) :
+			VertexBufferPrimitiveType aDrawType,
+			VertexBufferUsageType aUsageType,
+			int alReserveVtxSize, int alReserveIdxSize
+		) :
 			mVertexFlags(aFlags),
 			mDrawType(aDrawType), mUsageType(aUsageType), mlElementNum(-1),
 			mbTangents(false){}

@@ -129,7 +129,7 @@ namespace hpl {
 			if(pVtxElem->FirstChild("Texture"))vtxFlags |= VertexAttr_UV0;
 			if(pVtxElem->FirstChild("Color"))vtxFlags |= VertexAttr_Color0;
 			if(pVtxElem->FirstChild("Tangent")){
-				vtxFlags |= VertexAttr_UV1;
+				vtxFlags |= VertexAttr_Tangent;
 				bTangents = true;
 			}
 
@@ -147,7 +147,7 @@ namespace hpl {
 				if(kvVertexFlags[i] & vtxFlags)
 				{
 					int lElemPerVtx = 3;
-					if(kvVertexFlags[i] & VertexAttr_UV1 || kvVertexFlags[i] & VertexAttr_Color0){
+					if(kvVertexFlags[i] & VertexAttr_Tangent || kvVertexFlags[i] & VertexAttr_Color0){
 						lElemPerVtx = 4;
 					}
 
@@ -238,7 +238,7 @@ namespace hpl {
 				{
 					int lSizeMul = kvVertexElements[i];
 					//Only support texture1 coordinate as tangent for now.
-					if(kvVertexFlags[j] & VertexAttr_UV1)	lSizeMul = 4;
+					if(kvVertexFlags[j] & VertexAttr_Tangent)	lSizeMul = 4;
 
 					SaveFloatData(pVtxElem,lVtxSize * lSizeMul, GetVertexName(kvVertexFlags[j]),
 									pVtxBuff->GetArray(kvVertexFlags[j]));
@@ -333,11 +333,11 @@ namespace hpl {
 	{
 		switch(aFlag)
 		{
-			case VertexAttr_Normal:	return "Normal";
-			case VertexAttr_Position:	return "Position";
-			case VertexAttr_Color0:	return "Color";
-			case VertexAttr_UV0:	return "Texture";
-			case VertexAttr_UV1:	return "Tangent";
+			case VertexAttr_Normal:   return "Normal";
+			case VertexAttr_Position: return "Position";
+			case VertexAttr_Color0:   return "Color";
+			case VertexAttr_UV0:      return "Texture";
+			case VertexAttr_Tangent:  return "Tangent";
 		}
 		return "";
 	}

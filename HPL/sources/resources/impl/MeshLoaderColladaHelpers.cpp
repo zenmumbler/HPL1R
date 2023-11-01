@@ -519,12 +519,12 @@ namespace hpl {
 		//Create vertex buffer and fill it
 		iVertexBuffer *pVtxBuff = mpLowLevelGraphics->CreateVertexBuffer(
 			VertexAttr_Position | VertexAttr_Normal | VertexAttr_UV0 | VertexAttr_Color0 |
-			VertexAttr_UV1,
+			VertexAttr_Tangent,
 			VertexBufferPrimitiveType::Triangles, aUsageType,
 			(int)aGeometry.mvVertexVec.size(), (int)aGeometry.mvIndexVec.size());
 
 		pVtxBuff->SetTangents(true);
-		pVtxBuff->ResizeArray(VertexAttr_UV1,(int)aGeometry.mvTangents.size());
+		pVtxBuff->ResizeArray(VertexAttr_Tangent,(int)aGeometry.mvTangents.size());
 
 		//Add vertices
 		for(size_t j=0; j<aGeometry.mvVertexVec.size();j++)
@@ -537,7 +537,7 @@ namespace hpl {
 		}
 
 		//Add tangents
-		memcpy(pVtxBuff->GetArray(VertexAttr_UV1),&aGeometry.mvTangents[0],
+		memcpy(pVtxBuff->GetArray(VertexAttr_Tangent),&aGeometry.mvTangents[0],
 				aGeometry.mvTangents.size()*sizeof(float));
 
 		//Add indices

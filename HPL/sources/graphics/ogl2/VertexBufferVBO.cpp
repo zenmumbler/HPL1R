@@ -146,15 +146,15 @@ namespace hpl {
 		{
 			mbTangents = true;
 
-			mVertexFlags |= VertexAttr_UV1;
+			mVertexFlags |= VertexAttr_Tangent;
 
-			int idx = cMath::Log2ToInt((int)VertexAttr_UV1);
+			int idx = cMath::Log2ToInt((int)VertexAttr_Tangent);
 
 			int lSize = GetVertexNum()*4;
 			mvVertexArray[idx].resize(lSize);
 
 			cMath::CreateTriTangentVectors(
-				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_UV1)][0]),
+				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_Tangent)][0]),
 				&mvIndexArray[0], GetIndexNum(),
 
 				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_Position)][0]),
@@ -258,7 +258,7 @@ namespace hpl {
 		float *pPosArray = GetArray(VertexAttr_Position);
 		float *pNormalArray = GetArray(VertexAttr_Normal);
 		float *pTangentArray = NULL;
-		if(mbTangents)pTangentArray = GetArray(VertexAttr_UV1);
+		if(mbTangents)pTangentArray = GetArray(VertexAttr_Tangent);
 
 		int lVtxNum = GetVertexNum();
 
@@ -297,7 +297,7 @@ namespace hpl {
 		if(mbCompiled)
 		{
 			if(mbTangents)
-				UpdateData(VertexAttr_Position | VertexAttr_Normal | VertexAttr_UV1,false);
+				UpdateData(VertexAttr_Position | VertexAttr_Normal | VertexAttr_Tangent,false);
 			else
 				UpdateData(VertexAttr_Position | VertexAttr_Normal,false);
 		}
@@ -414,7 +414,7 @@ namespace hpl {
 			if(kvVertexFlags[i] & mVertexFlags)
 			{
 				int lElements = kvVertexElements[i];
-				if(mbTangents && kvVertexFlags[i] == VertexAttr_UV1)
+				if(mbTangents && kvVertexFlags[i] == VertexAttr_Tangent)
 					lElements=4;
 
 				pVtxBuff->ResizeArray(kvVertexFlags[i], (int)mvVertexArray[i].size());

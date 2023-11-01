@@ -197,11 +197,11 @@ namespace hpl {
 
 			const float *pBindPos = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_Position);
 			const float *pBindNormal = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_Normal);
-			const float *pBindTangent = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_UV1);
+			const float *pBindTangent = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_Tangent);
 
 			float *pSkinPos = mpDynVtxBuffer->GetArray(VertexAttr_Position);
 			float *pSkinNormal = mpDynVtxBuffer->GetArray(VertexAttr_Normal);
-			float *pSkinTangent = mpDynVtxBuffer->GetArray(VertexAttr_UV1);
+			float *pSkinTangent = mpDynVtxBuffer->GetArray(VertexAttr_Tangent);
 
 			const int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)];
 			const int lVtxNum = mpDynVtxBuffer->GetVertexNum();
@@ -272,7 +272,7 @@ namespace hpl {
 			}
 
 			//Update buffer
-			mpDynVtxBuffer->UpdateData(VertexAttr_Position | VertexAttr_Normal | VertexAttr_UV1,false);
+			mpDynVtxBuffer->UpdateData(VertexAttr_Position | VertexAttr_Normal | VertexAttr_Tangent,false);
 
 			if(mpMeshEntity->IsShadowCaster())
 			{

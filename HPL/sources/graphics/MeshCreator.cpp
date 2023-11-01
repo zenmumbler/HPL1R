@@ -148,7 +148,7 @@ namespace hpl {
 	{
 		iVertexBuffer* pBox = mpLowLevelGraphics->CreateVertexBuffer(
 			VertexAttr_Color0 | VertexAttr_Position | VertexAttr_UV0 |
-			VertexAttr_UV1 | VertexAttr_Normal,
+			VertexAttr_Tangent | VertexAttr_Normal,
 			VertexBufferPrimitiveType::Triangles, VertexBufferUsageType::Static);
 
 		avSize = avSize*0.5;

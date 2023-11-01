@@ -87,7 +87,7 @@ namespace hpl {
 				if (curAttr->type == cgltf_attribute_type_position) vtxFlags |= VertexAttr_Position;
 				if (curAttr->type == cgltf_attribute_type_texcoord) vtxFlags |= VertexAttr_UV0;
 				if (curAttr->type == cgltf_attribute_type_color) vtxFlags |= VertexAttr_Color0;
-				if (curAttr->type == cgltf_attribute_type_tangent) vtxFlags |= VertexAttr_UV1;
+				if (curAttr->type == cgltf_attribute_type_tangent) vtxFlags |= VertexAttr_Tangent;
 				curAttr++;
 			}
 
@@ -97,13 +97,13 @@ namespace hpl {
 							VertexBufferUsageType::Static,
 							0, 0);
 
-			pVtxBuff->SetTangents((vtxFlags & VertexAttr_UV1) != 0);
+			pVtxBuff->SetTangents((vtxFlags & VertexAttr_Tangent) != 0);
 
 			//Fill the arrays
 			for (int i = 0; i < klNumOfVertexFlags; i++) {
 				if (kvVertexFlags[i] & vtxFlags) {
 					int lElemPerVtx = 3;
-					if (kvVertexFlags[i] & VertexAttr_UV1 || kvVertexFlags[i] & VertexAttr_Color0) {
+					if (kvVertexFlags[i] & VertexAttr_Tangent || kvVertexFlags[i] & VertexAttr_Color0) {
 						lElemPerVtx = 4;
 					}
 
