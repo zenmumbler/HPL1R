@@ -61,7 +61,7 @@ namespace hpl {
 		void FillIdxArray(unsigned int *apArray, const char* apString,int alSize);
 
 		//Common
-		const char* GetVertexName(tVertexFlag aFlag);
+		const char* GetVertexName(VertexAttributes aFlag);
 
 
 	};

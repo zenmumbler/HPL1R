@@ -40,23 +40,25 @@ namespace hpl {
 		Stream
 	};
 
-	typedef tFlag tVertexFlag;
+	using VertexAttributes = tFlag;
 
-	#define eVertexFlag_Normal		(0x00000001)
-	#define eVertexFlag_Position	(0x00000002)
-	#define eVertexFlag_Color0		(0x00000004)
-	#define eVertexFlag_Color1		(0x00000008)
-	#define eVertexFlag_Texture0	(0x00000010)
-	#define eVertexFlag_Texture1	(0x00000020)
-	#define eVertexFlag_Texture2	(0x00000040)
-	#define eVertexFlag_Texture3	(0x00000080)
-	#define eVertexFlag_Texture4	(0x00000100)
+	enum VertexAttribute {
+		VertexAttr_Normal	= 0x00000001,
+		VertexAttr_Position = 0x00000002,
+		VertexAttr_Color0	= 0x00000004,
+		VertexAttr_Color1	= 0x00000008, // Unused
+		VertexAttr_UV0      = 0x00000010,
+		VertexAttr_UV1      = 0x00000020,
+		VertexAttr_UV2      = 0x00000040, // Unused
+		VertexAttr_UV3      = 0x00000080, // Unused
+		VertexAttr_UV4      = 0x00000100, // Unused
+	};
 
-	#define klNumOfVertexFlags (9)
+	const int klNumOfVertexFlags = 9;
 
-	const tVertexFlag kvVertexFlags[] = {eVertexFlag_Normal,eVertexFlag_Position,eVertexFlag_Color0,
-				eVertexFlag_Color1,eVertexFlag_Texture0,eVertexFlag_Texture1,eVertexFlag_Texture2,
-				eVertexFlag_Texture3,eVertexFlag_Texture4};
+	const VertexAttribute kvVertexFlags[] = {VertexAttr_Normal,VertexAttr_Position,VertexAttr_Color0,
+				VertexAttr_Color1,VertexAttr_UV0,VertexAttr_UV1,VertexAttr_UV2,
+				VertexAttr_UV3,VertexAttr_UV4};
 
 	const int kvVertexElements[] = {3, //Normal
 									4, //Position
@@ -77,7 +79,7 @@ namespace hpl {
 	class iVertexBuffer
 	{
 	public:
-		iVertexBuffer(tVertexFlag aFlags,
+		iVertexBuffer(VertexAttributes aFlags,
 			VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
 			int alReserveVtxSize,int alReserveIdxSize) :
 			mVertexFlags(aFlags),
@@ -86,14 +88,14 @@ namespace hpl {
 
 		virtual ~iVertexBuffer(){}
 
-		tVertexFlag GetFlags(){ return mVertexFlags;}
+		VertexAttributes GetFlags(){ return mVertexFlags;}
 
-		virtual void AddVertex(tVertexFlag aType,const cVector3f& avVtx)=0;
-		virtual void AddColor(tVertexFlag aType,const cColor& aColor)=0;
+		virtual void AddVertex(VertexAttributes aType,const cVector3f& avVtx)=0;
+		virtual void AddColor(VertexAttributes aType,const cColor& aColor)=0;
 		virtual void AddIndex(unsigned int alIndex)=0;
 
 		virtual bool Compile(tVertexCompileFlag aFlags)=0;
-		virtual void UpdateData(tVertexFlag aTypes, bool abIndices)=0;
+		virtual void UpdateData(VertexAttributes aTypes, bool abIndices)=0;
 
 		/**
 		* This creates a double of the vertex array with w=0.
@@ -117,7 +119,7 @@ namespace hpl {
 
 		virtual cBoundingVolume CreateBoundingVolume()=0;
 
-		virtual float* GetArray(tVertexFlag aType)=0;
+		virtual float* GetArray(VertexAttributes aType)=0;
 		virtual unsigned int* GetIndices()=0;
 
 		virtual int GetVertexNum()=0;
@@ -126,14 +128,14 @@ namespace hpl {
 		/**
 		 * Resizes an array to a custom size, the size is number of elements and NOT number of vertices.
 		 */
-		virtual void ResizeArray(tVertexFlag aType, int alSize)=0;
+		virtual void ResizeArray(VertexAttributes aType, int alSize)=0;
 		virtual void ResizeIndices(int alSize)=0;
 
 		//For debugging purposes, quite slow to use.
-		virtual cVector3f GetVector3(tVertexFlag aType, unsigned alIdx)=0;
-		virtual cVector3f GetVector4(tVertexFlag aType, unsigned alIdx)=0;
-		virtual cColor GetColor(tVertexFlag aType, unsigned alIdx)=0;
-		virtual unsigned int GetIndex(tVertexFlag aType, unsigned alIdx)=0;
+		virtual cVector3f GetVector3(VertexAttributes aType, unsigned alIdx)=0;
+		virtual cVector3f GetVector4(VertexAttributes aType, unsigned alIdx)=0;
+		virtual cColor GetColor(VertexAttributes aType, unsigned alIdx)=0;
+		virtual unsigned int GetIndex(VertexAttributes aType, unsigned alIdx)=0;
 
 		/**
 		 * Set the number of of elements to draw.
@@ -142,13 +144,13 @@ namespace hpl {
 		void SetElementNum(int alNum){ mlElementNum = alNum;}
 		int GetElementNum(){ return mlElementNum;}
 
-		tVertexFlag GetVertexFlags(){ return mVertexFlags;}
+		VertexAttributes GetVertexFlags(){ return mVertexFlags;}
 
 		bool HasTangents(){ return mbTangents;}
 		void SetTangents(bool abX){ mbTangents = abX;}
 
 	protected:
-		tVertexFlag mVertexFlags;
+		VertexAttributes mVertexFlags;
 		VertexBufferPrimitiveType mDrawType;
 		VertexBufferUsageType mUsageType;
 

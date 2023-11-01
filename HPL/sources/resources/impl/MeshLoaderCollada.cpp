@@ -864,16 +864,16 @@ namespace hpl {
 			//Create triangle data for the geometry
 			cMath::CreateTriangleData(*pSubMesh->GetTriangleVecPtr(),
 								pVtxBuffer->GetIndices(), pVtxBuffer->GetIndexNum(),
-								pVtxBuffer->GetArray(eVertexFlag_Position),
-								kvVertexElements[cMath::Log2ToInt(eVertexFlag_Position)],
+								pVtxBuffer->GetArray(VertexAttr_Position),
+								kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)],
 								pVtxBuffer->GetVertexNum());
 
 			//Create edges for the geometry.
 			bool bDoubleSided = false;
 			cMath::CreateEdges(*pSubMesh->GetEdgeVecPtr(),
 								pVtxBuffer->GetIndices(), pVtxBuffer->GetIndexNum(),
-								pVtxBuffer->GetArray(eVertexFlag_Position),
-								kvVertexElements[cMath::Log2ToInt(eVertexFlag_Position)],
+								pVtxBuffer->GetArray(VertexAttr_Position),
+								kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)],
 								pVtxBuffer->GetVertexNum(),
 								&bDoubleSided);
 			pSubMesh->SetDoubleSided(bDoubleSided);
@@ -1495,16 +1495,16 @@ namespace hpl {
 			//Create triangle data for the geometry
 			cMath::CreateTriangleData(*pSubMesh->GetTriangleVecPtr(),
 				pVtxBuffer->GetIndices(), pVtxBuffer->GetIndexNum(),
-				pVtxBuffer->GetArray(eVertexFlag_Position),
-				kvVertexElements[cMath::Log2ToInt(eVertexFlag_Position)],
+				pVtxBuffer->GetArray(VertexAttr_Position),
+				kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)],
 				pVtxBuffer->GetVertexNum());
 
 			//Create edges for the geometry.
 			bool bDoubleSided = false;
 			cMath::CreateEdges(*pSubMesh->GetEdgeVecPtr(),
 				pVtxBuffer->GetIndices(), pVtxBuffer->GetIndexNum(),
-				pVtxBuffer->GetArray(eVertexFlag_Position),
-				kvVertexElements[cMath::Log2ToInt(eVertexFlag_Position)],
+				pVtxBuffer->GetArray(VertexAttr_Position),
+				kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)],
 				pVtxBuffer->GetVertexNum(),
 				&bDoubleSided);
 

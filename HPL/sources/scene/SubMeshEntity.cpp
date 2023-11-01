@@ -195,15 +195,15 @@ namespace hpl {
 
 			mbGraphicsUpdated = true;
 
-			const float *pBindPos = mpSubMesh->GetVertexBuffer()->GetArray(eVertexFlag_Position);
-			const float *pBindNormal = mpSubMesh->GetVertexBuffer()->GetArray(eVertexFlag_Normal);
-			const float *pBindTangent = mpSubMesh->GetVertexBuffer()->GetArray(eVertexFlag_Texture1);
+			const float *pBindPos = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_Position);
+			const float *pBindNormal = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_Normal);
+			const float *pBindTangent = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_UV1);
 
-			float *pSkinPos = mpDynVtxBuffer->GetArray(eVertexFlag_Position);
-			float *pSkinNormal = mpDynVtxBuffer->GetArray(eVertexFlag_Normal);
-			float *pSkinTangent = mpDynVtxBuffer->GetArray(eVertexFlag_Texture1);
+			float *pSkinPos = mpDynVtxBuffer->GetArray(VertexAttr_Position);
+			float *pSkinNormal = mpDynVtxBuffer->GetArray(VertexAttr_Normal);
+			float *pSkinTangent = mpDynVtxBuffer->GetArray(VertexAttr_UV1);
 
-			const int lVtxStride = kvVertexElements[cMath::Log2ToInt(eVertexFlag_Position)];
+			const int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)];
 			const int lVtxNum = mpDynVtxBuffer->GetVertexNum();
 
 			for(int vtx=0; vtx < lVtxNum; vtx++)
@@ -260,7 +260,7 @@ namespace hpl {
 				pSkinTangent += 4;
 			}
 
-			float *pSkinPosArray = mpDynVtxBuffer->GetArray(eVertexFlag_Position);
+			float *pSkinPosArray = mpDynVtxBuffer->GetArray(VertexAttr_Position);
 			if(mpMeshEntity->IsShadowCaster())
 			{
 				//Update the shadow double
@@ -272,7 +272,7 @@ namespace hpl {
 			}
 
 			//Update buffer
-			mpDynVtxBuffer->UpdateData(eVertexFlag_Position | eVertexFlag_Normal | eVertexFlag_Texture1,false);
+			mpDynVtxBuffer->UpdateData(VertexAttr_Position | VertexAttr_Normal | VertexAttr_UV1,false);
 
 			if(mpMeshEntity->IsShadowCaster())
 			{
@@ -287,15 +287,15 @@ namespace hpl {
 
 		/*if(mpDynVtxBuffer)
 		{
-		const float *pBindPosArray = mpSubMesh->GetVertexBuffer()->GetArray(eVertexFlag_Position);
-		const float *pBindNormalArray = mpSubMesh->GetVertexBuffer()->GetArray(eVertexFlag_Normal);
-		const float *pBindTangentArray = mpSubMesh->GetVertexBuffer()->GetArray(eVertexFlag_Texture1);
+		const float *pBindPosArray = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_Position);
+		const float *pBindNormalArray = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_Normal);
+		const float *pBindTangentArray = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_UV1);
 
-		float *pSkinPosArray = mpDynVtxBuffer->GetArray(eVertexFlag_Position);
-		float *pSkinNormalArray = mpDynVtxBuffer->GetArray(eVertexFlag_Normal);
-		float *pSkinTangentArray = mpDynVtxBuffer->GetArray(eVertexFlag_Texture1);
+		float *pSkinPosArray = mpDynVtxBuffer->GetArray(VertexAttr_Position);
+		float *pSkinNormalArray = mpDynVtxBuffer->GetArray(VertexAttr_Normal);
+		float *pSkinTangentArray = mpDynVtxBuffer->GetArray(VertexAttr_UV1);
 
-		int lVtxStride = kvVertexElements[cMath::Log2ToInt(eVertexFlag_Position)];
+		int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)];
 		int lVtxNum = mpDynVtxBuffer->GetVertexNum();
 
 		memset(pSkinPosArray,0,sizeof(float)*lVtxStride*lVtxNum);
@@ -345,7 +345,7 @@ namespace hpl {
 		}
 
 		//Update buffer
-		mpDynVtxBuffer->UpdateData(eVertexFlag_Position | eVertexFlag_Normal | eVertexFlag_Texture1,false);
+		mpDynVtxBuffer->UpdateData(VertexAttr_Position | VertexAttr_Normal | VertexAttr_UV1,false);
 
 		//Update triangles
 		cMath::CreateTriangleData(mvDynTriangles,

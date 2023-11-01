@@ -73,7 +73,7 @@ namespace hpl {
 	iVertexBuffer* cMeshCreator::CreateSkyBoxVertexBuffer(float afSize)
 	{
 		iVertexBuffer* pSkyBox = mpLowLevelGraphics->CreateVertexBuffer(
-										eVertexFlag_Color0 | eVertexFlag_Position | eVertexFlag_Texture0,
+										VertexAttr_Color0 | VertexAttr_Position | VertexAttr_UV0,
 										VertexBufferPrimitiveType::Quads, VertexBufferUsageType::Static);
 
 		float fSize = afSize;
@@ -122,9 +122,9 @@ namespace hpl {
 						int idx = i;
 						if(x + y + z < 0) idx = 3-i;
 
-						pSkyBox->AddColor(eVertexFlag_Color0, cColor(1,1,1,1));
-						pSkyBox->AddVertex(eVertexFlag_Position, (vDir+vAdd[idx])*fSize);
-						pSkyBox->AddVertex(eVertexFlag_Texture0, vDir+vAdd[idx]);
+						pSkyBox->AddColor(VertexAttr_Color0, cColor(1,1,1,1));
+						pSkyBox->AddVertex(VertexAttr_Position, (vDir+vAdd[idx])*fSize);
+						pSkyBox->AddVertex(VertexAttr_UV0, vDir+vAdd[idx]);
 
 						vSide = vDir+vAdd[idx];
 						//Log("%d: (%.1f : %.1f : %.1f) ", i,vSide.x,  vSide.y,vSide.z);
@@ -147,8 +147,8 @@ namespace hpl {
 	iVertexBuffer* cMeshCreator::CreateBoxVertexBuffer(cVector3f avSize)
 	{
 		iVertexBuffer* pBox = mpLowLevelGraphics->CreateVertexBuffer(
-			eVertexFlag_Color0 | eVertexFlag_Position | eVertexFlag_Texture0 |
-			eVertexFlag_Texture1 | eVertexFlag_Normal,
+			VertexAttr_Color0 | VertexAttr_Position | VertexAttr_UV0 |
+			VertexAttr_UV1 | VertexAttr_Normal,
 			VertexBufferPrimitiveType::Triangles, VertexBufferUsageType::Static);
 
 		avSize = avSize*0.5;
@@ -199,13 +199,13 @@ namespace hpl {
 						int idx = GetBoxIdx(i,x,y,z);
 						cVector3f vTex = GetBoxTex(i,x,y,z,vAdd);
 
-						pBox->AddColor(eVertexFlag_Color0, cColor(1,1,1,1));
-						pBox->AddVertex(eVertexFlag_Position, (vDir+vAdd[idx])*avSize);
-						pBox->AddVertex(eVertexFlag_Normal, vDir);
+						pBox->AddColor(VertexAttr_Color0, cColor(1,1,1,1));
+						pBox->AddVertex(VertexAttr_Position, (vDir+vAdd[idx])*avSize);
+						pBox->AddVertex(VertexAttr_Normal, vDir);
 
 						//texture coord
 						cVector3f vCoord = cVector3f((vTex.x+1)*0.5f,(vTex.y+1)*0.5f,0);
-						pBox->AddVertex(eVertexFlag_Texture0,vCoord);
+						pBox->AddVertex(VertexAttr_UV0,vCoord);
 
 						vSide = vDir+vAdd[idx];
 						//Log("%d: Tex: (%.1f : %.1f : %.1f) ", i,vTex.x,  vTex.y,vTex.z);

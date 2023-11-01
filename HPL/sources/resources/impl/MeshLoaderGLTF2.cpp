@@ -77,17 +77,17 @@ namespace hpl {
 
 			////////////////////
 			//Get the vertices
-			tVertexFlag vtxFlags = 0;
+			VertexAttributes vtxFlags = 0;
 			int lVtxSize = static_cast<int>(curPrim->attributes->data->count);
 
 			//Check what type of vertices are included.
 			auto curAttr = curPrim->attributes;
 			for (size_t attrIx = 0; attrIx < curPrim->attributes_count; ++attrIx) {
-				if (curAttr->type == cgltf_attribute_type_normal) vtxFlags |= eVertexFlag_Normal;
-				if (curAttr->type == cgltf_attribute_type_position) vtxFlags |= eVertexFlag_Position;
-				if (curAttr->type == cgltf_attribute_type_texcoord) vtxFlags |= eVertexFlag_Texture0;
-				if (curAttr->type == cgltf_attribute_type_color) vtxFlags |= eVertexFlag_Color0;
-				if (curAttr->type == cgltf_attribute_type_tangent) vtxFlags |= eVertexFlag_Texture1;
+				if (curAttr->type == cgltf_attribute_type_normal) vtxFlags |= VertexAttr_Normal;
+				if (curAttr->type == cgltf_attribute_type_position) vtxFlags |= VertexAttr_Position;
+				if (curAttr->type == cgltf_attribute_type_texcoord) vtxFlags |= VertexAttr_UV0;
+				if (curAttr->type == cgltf_attribute_type_color) vtxFlags |= VertexAttr_Color0;
+				if (curAttr->type == cgltf_attribute_type_tangent) vtxFlags |= VertexAttr_UV1;
 				curAttr++;
 			}
 
@@ -97,13 +97,13 @@ namespace hpl {
 							VertexBufferUsageType::Static,
 							0, 0);
 
-			pVtxBuff->SetTangents((vtxFlags & eVertexFlag_Texture1) != 0);
+			pVtxBuff->SetTangents((vtxFlags & VertexAttr_UV1) != 0);
 
 			//Fill the arrays
 			for (int i = 0; i < klNumOfVertexFlags; i++) {
 				if (kvVertexFlags[i] & vtxFlags) {
 					int lElemPerVtx = 3;
-					if (kvVertexFlags[i] & eVertexFlag_Texture1 || kvVertexFlags[i] & eVertexFlag_Color0) {
+					if (kvVertexFlags[i] & VertexAttr_UV1 || kvVertexFlags[i] & VertexAttr_Color0) {
 						lElemPerVtx = 4;
 					}
 
@@ -150,12 +150,12 @@ namespace hpl {
 			bool bTangents = false;
 
 			//Check what type of vertices are included.
-			if(pVtxElem->FirstChild("Normal"))vtxFlags |= eVertexFlag_Normal;
-			if(pVtxElem->FirstChild("Position"))vtxFlags |= eVertexFlag_Position;
-			if(pVtxElem->FirstChild("Texture"))vtxFlags |= eVertexFlag_Texture0;
-			if(pVtxElem->FirstChild("Color"))vtxFlags |= eVertexFlag_Color0;
+			if(pVtxElem->FirstChild("Normal"))vtxFlags |= VertexAttr_Normal;
+			if(pVtxElem->FirstChild("Position"))vtxFlags |= VertexAttr_Position;
+			if(pVtxElem->FirstChild("Texture"))vtxFlags |= VertexAttr_UV0;
+			if(pVtxElem->FirstChild("Color"))vtxFlags |= VertexAttr_Color0;
 			if(pVtxElem->FirstChild("Tangent")){
-				vtxFlags |= eVertexFlag_Texture1;
+				vtxFlags |= VertexAttr_UV1;
 				bTangents = true;
 			}
 
@@ -174,7 +174,7 @@ namespace hpl {
 				if(kvVertexFlags[i] & vtxFlags)
 				{
 					int lElemPerVtx = 3;
-					if(kvVertexFlags[i] & eVertexFlag_Texture1 || kvVertexFlags[i] & eVertexFlag_Color0){
+					if(kvVertexFlags[i] & VertexAttr_UV1 || kvVertexFlags[i] & VertexAttr_Color0){
 						lElemPerVtx = 4;
 					}
 

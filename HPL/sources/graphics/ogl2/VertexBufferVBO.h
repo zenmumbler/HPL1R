@@ -27,17 +27,17 @@ namespace hpl {
 	class cVertexBufferVBO : public iVertexBuffer
 	{
 	public:
-		cVertexBufferVBO(tVertexFlag aFlags,
+		cVertexBufferVBO(VertexAttributes aFlags,
 			VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
 			int alReserveVtxSize,int alReserveIdxSize);
 		~cVertexBufferVBO();
 
-		void AddVertex(tVertexFlag aType,const cVector3f& avVtx);
-		void AddColor(tVertexFlag aType,const cColor& aColor);
+		void AddVertex(VertexAttributes aType,const cVector3f& avVtx);
+		void AddColor(VertexAttributes aType,const cColor& aColor);
 		void AddIndex(unsigned int alIndex);
 
 		bool Compile(tVertexCompileFlag aFlags);
-		void UpdateData(tVertexFlag aTypes, bool abIndices);
+		void UpdateData(VertexAttributes aTypes, bool abIndices);
 
 		void CreateShadowDouble(bool abUpdateData);
 
@@ -57,22 +57,22 @@ namespace hpl {
 		int GetVertexNum();
 		int GetIndexNum();
 
-		float* GetArray(tVertexFlag aType);
+		float* GetArray(VertexAttributes aType);
 		unsigned int* GetIndices();
 
-		void ResizeArray(tVertexFlag aType, int alSize);
+		void ResizeArray(VertexAttributes aType, int alSize);
 		void ResizeIndices(int alSize);
 
 		//For debugging purposes
-		cVector3f GetVector3(tVertexFlag aType, unsigned alIdx);
-		cVector3f GetVector4(tVertexFlag aType, unsigned alIdx);
-		cColor GetColor(tVertexFlag aType, unsigned alIdx);
-		unsigned int GetIndex(tVertexFlag aType, unsigned alIdx);
+		cVector3f GetVector3(VertexAttributes aType, unsigned alIdx);
+		cVector3f GetVector4(VertexAttributes aType, unsigned alIdx);
+		cColor GetColor(VertexAttributes aType, unsigned alIdx);
+		unsigned int GetIndex(VertexAttributes aType, unsigned alIdx);
 
 	private:
-		int GetElementNum(tVertexFlag aFlag);
+		int GetElementNum(VertexAttributes aFlag);
 
-		void SetVertexStates(tVertexFlag aFlags);
+		void SetVertexStates(VertexAttributes aFlags);
 
 		unsigned int mlElementHandle;
 

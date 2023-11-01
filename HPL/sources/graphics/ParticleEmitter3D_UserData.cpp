@@ -271,7 +271,7 @@ namespace hpl {
 // NEW
 //		cMesh *mshTempMesh = mpResources->GetMeshManager()->CreateMesh("character_roach.dae");
 //		mVBMeshData = mshTempMesh->GetSubMeshName("polySurfaceShape38")->GetVertexBuffer();
-//		mpfMeshVtxData = mVBMeshData->GetArray(eVertexFlag_Position);
+//		mpfMeshVtxData = mVBMeshData->GetArray(VertexAttr_Position);
 
 
 // ---
@@ -555,7 +555,7 @@ namespace hpl {
 					mpData->mvBeamNoisePoints.push_back(tempBNP);
 				}
 
-				mpVtxBuffer = apGraphics->GetLowLevel()->CreateVertexBuffer ( eVertexFlag_Position,		// Now that we know how many points we have, we create the Vertex Buffer
+				mpVtxBuffer = apGraphics->GetLowLevel()->CreateVertexBuffer ( VertexAttr_Position,		// Now that we know how many points we have, we create the Vertex Buffer
 						eVertexBufferDrawType_Tri, VertexBufferUsageType::Stream,
 						mlMaxParticles*mpData->mvBeamNoisePoints.size()*2, mlMaxParticles*(mpData->mvBeamNoisePoints.size()-1)*6);
 
@@ -579,8 +579,8 @@ namespace hpl {
 				{
 					for (int j = 0; j < (int) mpData->mvBeamNoisePoints.size(); ++j )
 					{
-						mpVtxBuffer->AddVertex(eVertexFlag_Texture0, cVector2f(mpData->mvBeamNoisePoints[j].fRelToBeamPos,1));
-						mpVtxBuffer->AddVertex(eVertexFlag_Texture0, cVector2f(mpData->mvBeamNoisePoints[j].fRelToBeamPos,0));
+						mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector2f(mpData->mvBeamNoisePoints[j].fRelToBeamPos,1));
+						mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector2f(mpData->mvBeamNoisePoints[j].fRelToBeamPos,0));
 					}
 				}
 
@@ -588,8 +588,8 @@ namespace hpl {
 				{
 					for (int j = 0; j < (int) mpData->mvBeamNoisePoints.size()*2; ++j )
 					{
-						mpVtxBuffer->AddVertex(eVertexFlag_Position, 0);
-						mpVtxBuffer->AddColor(eVertexFlag_Color0, cColor(1,1));
+						mpVtxBuffer->AddVertex(VertexAttr_Position, 0);
+						mpVtxBuffer->AddColor(VertexAttr_Color0, cColor(1,1));
 					}
 				}
 
@@ -726,7 +726,7 @@ namespace hpl {
 
 			apParticle->mvPos = vTrans;
 			*/
-//			apParticle->mvPos = mtxStart.GetTranslation() + mpData->mVBMeshData->GetVector3( eVertexFlag_Position, cMath::RandRectl(0,mpData->mVBMeshData->GetVertexNum()-1) );
+//			apParticle->mvPos = mtxStart.GetTranslation() + mpData->mVBMeshData->GetVector3( VertexAttr_Position, cMath::RandRectl(0,mpData->mVBMeshData->GetVertexNum()-1) );
 //			++posI;
 	//		if ( posI == mpData->mVBMeshData->GetVertexNum() )
 	//			posI = 0;

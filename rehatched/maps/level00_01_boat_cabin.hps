@@ -41,7 +41,8 @@ void HornEvent01(string asTimer)
   	
 	PlayGameMusic("penumbra_music_E1_A6",0.7,0.2,true,0);
 	
-	RunAfter(1, "HornEvent02");
+	// RunAfter(1, "HornEvent02");
+	RunAfter(0.01, "HornEvent04");
 }
 void HornEvent02(string asTimer)
 {	
@@ -280,7 +281,7 @@ void OnStart()
 	
 	
 	//For boat horn event
-	RunAfter(5.5, "HornEvent01");
+	RunAfter(0.01, "HornEvent01"); // 5.5
 	
 	bool bIntro = false;
 		

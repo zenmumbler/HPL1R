@@ -678,12 +678,12 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iVertexBuffer* cLowLevelGraphicsSDL::CreateVertexBuffer(tVertexFlag aFlags,
+	iVertexBuffer* cLowLevelGraphicsSDL::CreateVertexBuffer(VertexAttributes aFlags,
 														VertexBufferPrimitiveType aDrawType,
 														VertexBufferUsageType aUsageType,
 														int alReserveVtxSize,int alReserveIdxSize)
 	{
-		return new cVertexBufferVBO(aFlags,aDrawType,aUsageType,alReserveVtxSize,alReserveIdxSize);
+		return new cVertexBufferVBO(aFlags, aDrawType, aUsageType, alReserveVtxSize, alReserveIdxSize);
 	}
 
 

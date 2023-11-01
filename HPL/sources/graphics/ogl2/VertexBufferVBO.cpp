@@ -36,14 +36,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cVertexBufferVBO::cVertexBufferVBO(tVertexFlag aFlags,
+	cVertexBufferVBO::cVertexBufferVBO(VertexAttributes aFlags,
 		VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
 		int alReserveVtxSize,int alReserveIdxSize) :
 	iVertexBuffer(aFlags, aDrawType,aUsageType, alReserveVtxSize, alReserveIdxSize)
 	{
 		if(alReserveVtxSize>0)
 		{
-			for(int i=0;i< klNumOfVertexFlags; i++)
+			for(int i=0; i< klNumOfVertexFlags; i++)
 			{
 				if(aFlags & kvVertexFlags[i])
 				{
@@ -90,7 +90,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::AddVertex(tVertexFlag aType,const cVector3f& avVtx)
+	void cVertexBufferVBO::AddVertex(VertexAttributes aType,const cVector3f& avVtx)
 	{
 		int idx = cMath::Log2ToInt((int)aType);
 
@@ -103,7 +103,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::AddColor(tVertexFlag aType,const cColor& aColor)
+	void cVertexBufferVBO::AddColor(VertexAttributes aType,const cColor& aColor)
 	{
 		int idx = cMath::Log2ToInt((int)aType);
 
@@ -126,10 +126,10 @@ namespace hpl {
 	{
 		cBoundingVolume bv;
 
-		int lNum = cMath::Log2ToInt((int)eVertexFlag_Position);
+		int lNum = cMath::Log2ToInt((int)VertexAttr_Position);
 
 		bv.AddArrayPoints(&(mvVertexArray[lNum][0]), GetVertexNum());
-		bv.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(eVertexFlag_Position)]);
+		bv.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)]);
 
 		return bv;
 	}
@@ -146,21 +146,21 @@ namespace hpl {
 		{
 			mbTangents = true;
 
-			mVertexFlags |= eVertexFlag_Texture1;
+			mVertexFlags |= VertexAttr_UV1;
 
-			int idx = cMath::Log2ToInt((int)eVertexFlag_Texture1);
+			int idx = cMath::Log2ToInt((int)VertexAttr_UV1);
 
 			int lSize = GetVertexNum()*4;
 			mvVertexArray[idx].resize(lSize);
 
-			cMath::CreateTriTangentVectors(&(mvVertexArray[cMath::Log2ToInt((int)eVertexFlag_Texture1)][0]),
+			cMath::CreateTriTangentVectors(&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_UV1)][0]),
 				&mvIndexArray[0], GetIndexNum(),
 
-				&(mvVertexArray[cMath::Log2ToInt((int)eVertexFlag_Position)][0]),
-				kvVertexElements[cMath::Log2ToInt((int)eVertexFlag_Position)],
+				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_Position)][0]),
+				kvVertexElements[cMath::Log2ToInt((int)VertexAttr_Position)],
 
-				&(mvVertexArray[cMath::Log2ToInt((int)eVertexFlag_Texture0)][0]),
-				&(mvVertexArray[cMath::Log2ToInt((int)eVertexFlag_Normal)][0]),
+				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_UV0)][0]),
+				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_Normal)][0]),
 				GetVertexNum()
 				);
 		}
@@ -201,7 +201,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::UpdateData(tVertexFlag aTypes, bool abIndices)
+	void cVertexBufferVBO::UpdateData(VertexAttributes aTypes, bool abIndices)
 	{
 		GLenum usageType = GL_STATIC_DRAW;
 		if(mUsageType== VertexBufferUsageType::Dynamic) usageType = GL_DYNAMIC_DRAW;
@@ -215,11 +215,9 @@ namespace hpl {
 				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[i]);
 
 				//This was apparently VERY slow.
-				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[i].size()*sizeof(float),
-					NULL, usageType);//Clear memory
+				// glBufferData(GL_ARRAY_BUFFER, mvVertexArray[i].size() * sizeof(float), NULL, usageType);//Clear memory
 
-				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[i].size()*sizeof(float),
-					&(mvVertexArray[i][0]), usageType);
+				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[i].size() * sizeof(float), &(mvVertexArray[i][0]), usageType);
 			}
 		}
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -243,7 +241,7 @@ namespace hpl {
 
 	void cVertexBufferVBO::CreateShadowDouble(bool abUpdateData)
 	{
-		int lIdx = cMath::Log2ToInt(eVertexFlag_Position);
+		int lIdx = cMath::Log2ToInt(VertexAttr_Position);
 
 		//Set to new size.
 		int lSize = (int)mvVertexArray[lIdx].size();
@@ -262,7 +260,7 @@ namespace hpl {
 
 		if(abUpdateData)
 		{
-			UpdateData(eVertexFlag_Position, false);
+			UpdateData(VertexAttr_Position, false);
 		}
 	}
 
@@ -270,16 +268,16 @@ namespace hpl {
 
 	void cVertexBufferVBO::Transform(const cMatrixf &a_mtxTransform)
 	{
-		float *pPosArray = GetArray(eVertexFlag_Position);
-		float *pNormalArray = GetArray(eVertexFlag_Normal);
+		float *pPosArray = GetArray(VertexAttr_Position);
+		float *pNormalArray = GetArray(VertexAttr_Normal);
 		float *pTangentArray = NULL;
-		if(mbTangents)pTangentArray = GetArray(eVertexFlag_Texture1);
+		if(mbTangents)pTangentArray = GetArray(VertexAttr_UV1);
 
 		int lVtxNum = GetVertexNum();
 
 		cMatrixf mtxRot = a_mtxTransform.GetRotation();
 
-		int lVtxStride = kvVertexElements[cMath::Log2ToInt(eVertexFlag_Position)];
+		int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)];
 
 		int lOffset = GetVertexNum()*4;
 
@@ -312,9 +310,9 @@ namespace hpl {
 		if(mbCompiled)
 		{
 			if(mbTangents)
-				UpdateData(eVertexFlag_Position | eVertexFlag_Normal | eVertexFlag_Texture1,false);
+				UpdateData(VertexAttr_Position | VertexAttr_Normal | VertexAttr_UV1,false);
 			else
-				UpdateData(eVertexFlag_Position | eVertexFlag_Normal,false);
+				UpdateData(VertexAttr_Position | VertexAttr_Normal,false);
 		}
 	}
 
@@ -387,7 +385,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	float* cVertexBufferVBO::GetArray(tVertexFlag aType)
+	float* cVertexBufferVBO::GetArray(VertexAttributes aType)
 	{
 		int idx = cMath::Log2ToInt((int)aType);
 
@@ -403,7 +401,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::ResizeArray(tVertexFlag aType, int alSize)
+	void cVertexBufferVBO::ResizeArray(VertexAttributes aType, int alSize)
 	{
 		int idx = cMath::Log2ToInt((int)aType);
 
@@ -429,7 +427,7 @@ namespace hpl {
 			if(kvVertexFlags[i] & mVertexFlags)
 			{
 				int lElements = kvVertexElements[i];
-				if(mbTangents && kvVertexFlags[i] == eVertexFlag_Texture1)
+				if(mbTangents && kvVertexFlags[i] == VertexAttr_UV1)
 					lElements=4;
 
 				pVtxBuff->ResizeArray(kvVertexFlags[i], (int)mvVertexArray[i].size());
@@ -455,7 +453,7 @@ namespace hpl {
 
 	int cVertexBufferVBO::GetVertexNum()
 	{
-		int idx = cMath::Log2ToInt((int)eVertexFlag_Position);
+		int idx = cMath::Log2ToInt((int)VertexAttr_Position);
 		int lSize = (int)mvVertexArray[idx].size()/kvVertexElements[idx];
 
 		//If there is a shadow double, just return the length of the first half.
@@ -467,7 +465,7 @@ namespace hpl {
 		return (int)mvIndexArray.size();
 	}
 
-	cVector3f cVertexBufferVBO::GetVector3(tVertexFlag aType, unsigned alIdx)
+	cVector3f cVertexBufferVBO::GetVector3(VertexAttributes aType, unsigned alIdx)
 	{
 		if(!(aType & mVertexFlags)) return cVector3f(0,0,0);
 
@@ -477,7 +475,7 @@ namespace hpl {
 		return cVector3f(mvVertexArray[idx][pos+0],mvVertexArray[idx][pos+1],
 			mvVertexArray[idx][pos+2]);
 	}
-	cVector3f cVertexBufferVBO::GetVector4(tVertexFlag aType, unsigned alIdx)
+	cVector3f cVertexBufferVBO::GetVector4(VertexAttributes aType, unsigned alIdx)
 	{
 		if(!(aType & mVertexFlags)) return cVector3f(0,0,0);
 
@@ -487,7 +485,7 @@ namespace hpl {
 		return cVector3f(mvVertexArray[idx][pos+0],mvVertexArray[idx][pos+1],
 			mvVertexArray[idx][pos+2]);
 	}
-	cColor cVertexBufferVBO::GetColor(tVertexFlag aType, unsigned alIdx)
+	cColor cVertexBufferVBO::GetColor(VertexAttributes aType, unsigned alIdx)
 	{
 		if(!(aType & mVertexFlags)) return cColor();
 
@@ -497,7 +495,7 @@ namespace hpl {
 		return cColor(mvVertexArray[idx][pos+0],mvVertexArray[idx][pos+1],
 			mvVertexArray[idx][pos+2],mvVertexArray[idx][pos+3]);
 	}
-	unsigned int cVertexBufferVBO::GetIndex(tVertexFlag aType, unsigned alIdx)
+	unsigned int cVertexBufferVBO::GetIndex(VertexAttributes aType, unsigned alIdx)
 	{
 		return mvIndexArray[alIdx];
 	}
@@ -511,7 +509,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	int cVertexBufferVBO::GetElementNum(tVertexFlag aFlag)
+	int cVertexBufferVBO::GetElementNum(VertexAttributes aFlag)
 	{
 		int idx = cMath::Log2ToInt((int)aFlag);
 
@@ -521,16 +519,16 @@ namespace hpl {
 
 	constexpr const bool USE_FIXED_FUNCTION = false;
 
-	void cVertexBufferVBO::SetVertexStates(tVertexFlag aFlags)
+	void cVertexBufferVBO::SetVertexStates(VertexAttributes aFlags)
 	{
 		/// POSITION /////////////////////////
-		if (aFlags & eVertexFlag_Position) {
+		if (aFlags & VertexAttr_Position) {
 			if constexpr (USE_FIXED_FUNCTION)
 				glEnableClientState(GL_VERTEX_ARRAY );
 			else
 				glEnableVertexAttribArray(0);
 
-			int idx = cMath::Log2ToInt(eVertexFlag_Position);
+			int idx = cMath::Log2ToInt(VertexAttr_Position);
 			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
 
 			if constexpr (USE_FIXED_FUNCTION)
@@ -547,13 +545,13 @@ namespace hpl {
 		}
 
 		/// COLOR 0 /////////////////////////
-		if (aFlags & eVertexFlag_Color0) {
+		if (aFlags & VertexAttr_Color0) {
 			if constexpr (USE_FIXED_FUNCTION)
 				glEnableClientState(GL_COLOR_ARRAY);
 			else
 				glEnableVertexAttribArray(1);
 
-			int idx = cMath::Log2ToInt(eVertexFlag_Color0);
+			int idx = cMath::Log2ToInt(VertexAttr_Color0);
 			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 
 			if constexpr (USE_FIXED_FUNCTION)
@@ -569,13 +567,13 @@ namespace hpl {
 		}
 
 		/// NORMAL /////////////////////////
-		if (aFlags & eVertexFlag_Normal) {
+		if (aFlags & VertexAttr_Normal) {
 			if constexpr (USE_FIXED_FUNCTION)
 				glEnableClientState(GL_NORMAL_ARRAY);
 			else
 				glEnableVertexAttribArray(3);
 
-			int idx = cMath::Log2ToInt(eVertexFlag_Normal);
+			int idx = cMath::Log2ToInt(VertexAttr_Normal);
 			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
 
 			if constexpr (USE_FIXED_FUNCTION)
@@ -591,7 +589,7 @@ namespace hpl {
 		}
 
 		/// TEXTURE 0 /////////////////////////
-		if (aFlags & eVertexFlag_Texture0) {
+		if (aFlags & VertexAttr_UV0) {
 			if constexpr (USE_FIXED_FUNCTION) {
 				glClientActiveTexture(GL_TEXTURE0);
 				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -601,7 +599,7 @@ namespace hpl {
 				glEnableVertexAttribArray(2);
 			}
 
-			int idx =  cMath::Log2ToInt(eVertexFlag_Texture0);
+			int idx =  cMath::Log2ToInt(VertexAttr_UV0);
 			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 
 			if constexpr (USE_FIXED_FUNCTION)
@@ -622,11 +620,11 @@ namespace hpl {
 
 /*
 		/// TEXTURE 1 /////////////////////////
-		if(aFlags & eVertexFlag_Texture1){
+		if(aFlags & VertexAttr_UV1){
 			glClientActiveTexture(GL_TEXTURE1);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
 
-			int idx =  cMath::Log2ToInt(eVertexFlag_Texture1);
+			int idx =  cMath::Log2ToInt(VertexAttr_UV1);
 			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 
 			if(mbTangents)
@@ -640,11 +638,11 @@ namespace hpl {
 		}
 
 		/// TEXTURE 2 /////////////////////////
-		if(aFlags & eVertexFlag_Texture2){
+		if(aFlags & VertexAttr_UV2){
 			glClientActiveTexture(GL_TEXTURE2);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
 
-			int idx =  cMath::Log2ToInt(eVertexFlag_Texture2);
+			int idx =  cMath::Log2ToInt(VertexAttr_UV2);
 			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 			glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL );
 		}
@@ -654,11 +652,11 @@ namespace hpl {
 		}
 
 		/// TEXTURE 3 /////////////////////////
-		if(aFlags & eVertexFlag_Texture3){
+		if(aFlags & VertexAttr_UV3){
 			glClientActiveTexture(GL_TEXTURE3);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
 
-			int idx =  cMath::Log2ToInt(eVertexFlag_Texture3);
+			int idx =  cMath::Log2ToInt(VertexAttr_UV3);
 			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 			glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL );
 		}
@@ -668,11 +666,11 @@ namespace hpl {
 		}
 
 		/// TEXTURE 4 /////////////////////////
-		if(aFlags & eVertexFlag_Texture4){
+		if(aFlags & VertexAttr_UV4){
 			glClientActiveTexture(GL_TEXTURE4);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
 
-			int idx =  cMath::Log2ToInt(eVertexFlag_Texture4);
+			int idx =  cMath::Log2ToInt(VertexAttr_UV4);
 			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 			glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL );
 		}

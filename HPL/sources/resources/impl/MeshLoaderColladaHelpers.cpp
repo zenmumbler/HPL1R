@@ -518,26 +518,26 @@ namespace hpl {
 
 		//Create vertex buffer and fill it
 		iVertexBuffer *pVtxBuff = mpLowLevelGraphics->CreateVertexBuffer(
-			eVertexFlag_Position | eVertexFlag_Normal | eVertexFlag_Texture0 | eVertexFlag_Color0 |
-			eVertexFlag_Texture1,
+			VertexAttr_Position | VertexAttr_Normal | VertexAttr_UV0 | VertexAttr_Color0 |
+			VertexAttr_UV1,
 			VertexBufferPrimitiveType::Triangles, aUsageType,
 			(int)aGeometry.mvVertexVec.size(), (int)aGeometry.mvIndexVec.size());
 
 		pVtxBuff->SetTangents(true);
-		pVtxBuff->ResizeArray(eVertexFlag_Texture1,(int)aGeometry.mvTangents.size());
+		pVtxBuff->ResizeArray(VertexAttr_UV1,(int)aGeometry.mvTangents.size());
 
 		//Add vertices
 		for(size_t j=0; j<aGeometry.mvVertexVec.size();j++)
 		{
-			pVtxBuff->AddVertex(eVertexFlag_Position,aGeometry.mvVertexVec[j].pos);
-			pVtxBuff->AddVertex(eVertexFlag_Normal,aGeometry.mvVertexVec[j].norm);
-			pVtxBuff->AddVertex(eVertexFlag_Texture0,aGeometry.mvVertexVec[j].tex);
+			pVtxBuff->AddVertex(VertexAttr_Position,aGeometry.mvVertexVec[j].pos);
+			pVtxBuff->AddVertex(VertexAttr_Normal,aGeometry.mvVertexVec[j].norm);
+			pVtxBuff->AddVertex(VertexAttr_UV0,aGeometry.mvVertexVec[j].tex);
 
-			pVtxBuff->AddColor(eVertexFlag_Color0,cColor(1,1));
+			pVtxBuff->AddColor(VertexAttr_Color0,cColor(1,1));
 		}
 
 		//Add tangents
-		memcpy(pVtxBuff->GetArray(eVertexFlag_Texture1),&aGeometry.mvTangents[0],
+		memcpy(pVtxBuff->GetArray(VertexAttr_UV1),&aGeometry.mvTangents[0],
 				aGeometry.mvTangents.size()*sizeof(float));
 
 		//Add indices

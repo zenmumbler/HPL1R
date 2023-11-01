@@ -69,7 +69,7 @@ namespace hpl {
 		mlLastRenderCount = -1;
 
 		mpVtxBuffer = mpLowLevelGraphics->CreateVertexBuffer(
-								eVertexFlag_Position | eVertexFlag_Color0 | eVertexFlag_Texture0 | eVertexFlag_Normal,
+								VertexAttr_Position | VertexAttr_Color0 | VertexAttr_UV0 | VertexAttr_Normal,
 								VertexBufferPrimitiveType::Triangles, VertexBufferUsageType::Dynamic,
 								4, 6);
 
@@ -84,10 +84,10 @@ namespace hpl {
 								cVector3f(1,1,0)};
 		for(int i=0;i<4;i++)
 		{
-			mpVtxBuffer->AddVertex(eVertexFlag_Position, vCoords[i]);
-			mpVtxBuffer->AddColor(eVertexFlag_Color0, cColor(1,1,1,1));
-			mpVtxBuffer->AddVertex(eVertexFlag_Texture0, (vTexCoords[i] + cVector2f(1,1))/2 );
-			mpVtxBuffer->AddVertex(eVertexFlag_Normal,cVector3f(0,0,1));
+			mpVtxBuffer->AddVertex(VertexAttr_Position, vCoords[i]);
+			mpVtxBuffer->AddColor(VertexAttr_Color0, cColor(1,1,1,1));
+			mpVtxBuffer->AddVertex(VertexAttr_UV0, (vTexCoords[i] + cVector2f(1,1))/2 );
+			mpVtxBuffer->AddVertex(VertexAttr_Normal,cVector3f(0,0,1));
 		}
 
 		for(int i=0;i<3;i++) mpVtxBuffer->AddIndex(i);
@@ -130,7 +130,7 @@ namespace hpl {
 		mvSize = avSize;
 		mBoundingVolume.SetSize(cVector3f(mvSize.x, mvSize.y, mvSize.x));
 
-		float *pPos = mpVtxBuffer->GetArray(eVertexFlag_Position);
+		float *pPos = mpVtxBuffer->GetArray(VertexAttr_Position);
 
 		cVector3f vCoords[4] = {cVector3f((mvSize.x/2),-(mvSize.y/2),0),
 								cVector3f(-(mvSize.x/2),-(mvSize.y/2),0),
@@ -145,7 +145,7 @@ namespace hpl {
 			pPos+=4;
 		}
 
-		mpVtxBuffer->UpdateData(eVertexFlag_Position,false);
+		mpVtxBuffer->UpdateData(VertexAttr_Position,false);
 
 		if(mType == eBillboardType_Axis) SetAxis(mvAxis);
 
@@ -190,7 +190,7 @@ namespace hpl {
 
 		mColor = aColor;
 
-		float *pColors = mpVtxBuffer->GetArray(eVertexFlag_Color0);
+		float *pColors = mpVtxBuffer->GetArray(VertexAttr_Color0);
 
 		for(int i=0; i<4;++i)
 		{
@@ -201,7 +201,7 @@ namespace hpl {
 			pColors+=4;
 		}
 
-		mpVtxBuffer->UpdateData(eVertexFlag_Color0,false);
+		mpVtxBuffer->UpdateData(VertexAttr_Color0,false);
 	}
 
 	//-----------------------------------------------------------------------
@@ -215,7 +215,7 @@ namespace hpl {
 
 		mfHaloAlpha = afX;
 
-		float *pColors = mpVtxBuffer->GetArray(eVertexFlag_Color0);
+		float *pColors = mpVtxBuffer->GetArray(VertexAttr_Color0);
 
 		for(int i=0; i<4;++i)
 		{
@@ -226,7 +226,7 @@ namespace hpl {
 			pColors+=4;
 		}
 
-		mpVtxBuffer->UpdateData(eVertexFlag_Color0,false);
+		mpVtxBuffer->UpdateData(VertexAttr_Color0,false);
 	}
 
 	//-----------------------------------------------------------------------
@@ -529,7 +529,7 @@ namespace hpl {
 	void cBillboard::UpdateSourceBufferSize()
 	{
 		int lNum = mpHaloSourceBuffer->GetVertexNum();
-		float *pPositions = mpHaloSourceBuffer->GetArray(eVertexFlag_Position);
+		float *pPositions = mpHaloSourceBuffer->GetArray(VertexAttr_Position);
 
 		for(int i=0; i<lNum;++i)
 		{
@@ -552,7 +552,7 @@ namespace hpl {
 			pPositions += 4;
 		}
 
-		mpHaloSourceBuffer->UpdateData(eVertexFlag_Position, false);
+		mpHaloSourceBuffer->UpdateData(VertexAttr_Position, false);
 	}
 
 	//-----------------------------------------------------------------------

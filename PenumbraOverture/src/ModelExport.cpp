@@ -122,14 +122,14 @@ static void ExportModel(cMesh *model, cResources *res) {
 	addAccessor(0, 0, 0x1405, vb->GetIndexNum(), "SCALAR"); // UINT
 	primitive["indices"] = attrIndex++;
 
-	const auto addAttr = [&attrIndex, &bufferViewIndex, &attrSize, &attributes, vb, &addBufferView, &addAccessor](tFlag attrMask, const tString& name) {
+	const auto addAttr = [&attrIndex, &bufferViewIndex, &attrSize, &attributes, vb, &addBufferView, &addAccessor](VertexAttributes attrMask, const tString& name) {
 		json attr;
 		auto arr = vb->GetArray(attrMask);
 		if (arr == NULL) {
 			return;
 		}
 		int count = vb->GetVertexNum();
-		int elements = attrMask == eVertexFlag_Texture0 ? 2 : 3;
+		int elements = attrMask == VertexAttr_UV0 ? 2 : 3;
 		int arrSizeBytes = sizeof(float) * count * elements;
 
 		addAccessor(bufferViewIndex, 0, 0x1406, count, tString("VEC") + std::to_string(elements)); // FLOAT
@@ -139,11 +139,11 @@ static void ExportModel(cMesh *model, cResources *res) {
 		attrSize += arrSizeBytes;
 	};
 	
-	addAttr(eVertexFlag_Normal, "NORMAL");
-	addAttr(eVertexFlag_Position, "POSITION");
-//	addAttr(eVertexFlag_Color0, "COLOR_0");
-	addAttr(eVertexFlag_Texture0, "TEXCOORD_0");
-//	addAttr(eVertexFlag_Texture1, "TANGENT");
+	addAttr(VertexAttr_Normal, "NORMAL");
+	addAttr(VertexAttr_Position, "POSITION");
+//	addAttr(VertexAttr_Color0, "COLOR_0");
+	addAttr(VertexAttr_UV0, "TEXCOORD_0");
+//	addAttr(VertexAttr_UV1, "TANGENT");
 	primitive["attributes"] = attributes;
 
 	// write buffer nodes
@@ -173,14 +173,14 @@ static void ExportModel(cMesh *model, cResources *res) {
 	}
 	nextBufferPos += vb->GetIndexNum();
 	
-	const auto writeAttr = [vb, &nextBufferPos](tFlag attrMask) {
+	const auto writeAttr = [vb, &nextBufferPos](VertexAttributes attrMask) {
 		auto arr = vb->GetArray(attrMask);
 		if (arr == NULL) {
 			return;
 		}
 		int count = vb->GetVertexNum();
 		int arrElements = kvVertexElements[cMath::Log2ToInt(attrMask)];
-		int bufElements = attrMask == eVertexFlag_Texture0 ? 2 : 3;
+		int bufElements = attrMask == VertexAttr_UV0 ? 2 : 3;
 		
 		if (arrElements == bufElements) {
 			int sizeBytes = sizeof(float) * count * arrElements;
@@ -203,10 +203,10 @@ static void ExportModel(cMesh *model, cResources *res) {
 		}
 		
 	};
-	writeAttr(eVertexFlag_Normal);
-	writeAttr(eVertexFlag_Position);
-//	writeAttr(eVertexFlag_Color0);
-	writeAttr(eVertexFlag_Texture0);
+	writeAttr(VertexAttr_Normal);
+	writeAttr(VertexAttr_Position);
+//	writeAttr(VertexAttr_Color0);
+	writeAttr(VertexAttr_UV0);
 
 	
 	FILE *pFile = fopen(binFilePath.c_str(),"wb+");

@@ -120,16 +120,16 @@ namespace hpl {
 			//Get the vertices
 			TiXmlElement* pVtxElem = pSubMeshElem->FirstChildElement("Vertices");
 			int lVtxSize = cString::ToInt(pVtxElem->Attribute("size"),0);
-			tVertexFlag vtxFlags =0;
+			VertexAttributes vtxFlags =0;
 			bool bTangents = false;
 
 			//Check what type of vertices are included.
-			if(pVtxElem->FirstChild("Normal"))vtxFlags |= eVertexFlag_Normal;
-			if(pVtxElem->FirstChild("Position"))vtxFlags |= eVertexFlag_Position;
-			if(pVtxElem->FirstChild("Texture"))vtxFlags |= eVertexFlag_Texture0;
-			if(pVtxElem->FirstChild("Color"))vtxFlags |= eVertexFlag_Color0;
+			if(pVtxElem->FirstChild("Normal"))vtxFlags |= VertexAttr_Normal;
+			if(pVtxElem->FirstChild("Position"))vtxFlags |= VertexAttr_Position;
+			if(pVtxElem->FirstChild("Texture"))vtxFlags |= VertexAttr_UV0;
+			if(pVtxElem->FirstChild("Color"))vtxFlags |= VertexAttr_Color0;
 			if(pVtxElem->FirstChild("Tangent")){
-				vtxFlags |= eVertexFlag_Texture1;
+				vtxFlags |= VertexAttr_UV1;
 				bTangents = true;
 			}
 
@@ -147,7 +147,7 @@ namespace hpl {
 				if(kvVertexFlags[i] & vtxFlags)
 				{
 					int lElemPerVtx = 3;
-					if(kvVertexFlags[i] & eVertexFlag_Texture1 || kvVertexFlags[i] & eVertexFlag_Color0){
+					if(kvVertexFlags[i] & VertexAttr_UV1 || kvVertexFlags[i] & VertexAttr_Color0){
 						lElemPerVtx = 4;
 					}
 
@@ -238,7 +238,7 @@ namespace hpl {
 				{
 					int lSizeMul = kvVertexElements[i];
 					//Only support texture1 coordinate as tangent for now.
-					if(kvVertexFlags[j] & eVertexFlag_Texture1)	lSizeMul = 4;
+					if(kvVertexFlags[j] & VertexAttr_UV1)	lSizeMul = 4;
 
 					SaveFloatData(pVtxElem,lVtxSize * lSizeMul, GetVertexName(kvVertexFlags[j]),
 									pVtxBuff->GetArray(kvVertexFlags[j]));
@@ -329,15 +329,15 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	const char* cMeshLoaderMSH::GetVertexName(tVertexFlag aFlag)
+	const char* cMeshLoaderMSH::GetVertexName(VertexAttributes aFlag)
 	{
 		switch(aFlag)
 		{
-			case eVertexFlag_Normal:	return "Normal";
-			case eVertexFlag_Position:	return "Position";
-			case eVertexFlag_Color0:	return "Color";
-			case eVertexFlag_Texture0:	return "Texture";
-			case eVertexFlag_Texture1:	return "Tangent";
+			case VertexAttr_Normal:	return "Normal";
+			case VertexAttr_Position:	return "Position";
+			case VertexAttr_Color0:	return "Color";
+			case VertexAttr_UV0:	return "Texture";
+			case VertexAttr_UV1:	return "Tangent";
 		}
 		return "";
 	}

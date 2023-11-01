@@ -112,20 +112,20 @@ namespace hpl {
 
 			if(mpMesh->GetNodeNum()<=0)
 			{
-				mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(eVertexFlag_Position),
+				mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(VertexAttr_Position),
 												pVtxBuffer->GetVertexNum());
 			}
 			else
 			{
-				pSub->mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(eVertexFlag_Position),
+				pSub->mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(VertexAttr_Position),
 														pVtxBuffer->GetVertexNum());
-				pSub->mBoundingVolume.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(eVertexFlag_Position)]);
+				pSub->mBoundingVolume.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)]);
 			}
 		}
 
 		if(mpMesh->GetNodeNum()<=0)
 		{
-			mBoundingVolume.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(eVertexFlag_Position)]);
+			mBoundingVolume.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)]);
 
 			//Log("CREATED BV Min: %s Max: %s\n",	mBoundingVolume.GetMin().ToString().c_str(),
 			//									mBoundingVolume.GetMax().ToString().c_str());
@@ -1465,10 +1465,10 @@ namespace hpl {
 
 					iVertexBuffer *pVtxBuffer = pSub->GetVertexBuffer();
 
-					mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(eVertexFlag_Position),
+					mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(VertexAttr_Position),
 																	pVtxBuffer->GetVertexNum());
 				}
-				mBoundingVolume.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(eVertexFlag_Position)]);
+				mBoundingVolume.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)]);
 			}
 			else
 			{

@@ -685,10 +685,10 @@ namespace hpl {
 
 		/////////////////////////////////////////////////////////
 		//Get the data arrays
-		const float *pPosArray = pSubEntity->GetVertexBuffer()->GetArray(eVertexFlag_Position);
+		const float *pPosArray = pSubEntity->GetVertexBuffer()->GetArray(VertexAttr_Position);
 		unsigned int* pIdxArray = pSubEntity->GetVertexBuffer()->GetIndices();
 
-		int lVtxStride = kvVertexElements[cMath::Log2ToInt(eVertexFlag_Position)];
+		int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)];
 
 		const bool bDoubleSided = pSubMesh->GetDoubleSided();
 
@@ -762,8 +762,8 @@ namespace hpl {
 					apLowLevelGraphics->SetDepthTestActive(false);
 					apLowLevelGraphics->SetStencilActive(false);
 					apLowLevelGraphics->DrawLine(
-						pSubMesh->GetVertexBuffer()->GetVector3(eVertexFlag_Position,Edge.point1),
-						pSubMesh->GetVertexBuffer()->GetVector3(eVertexFlag_Position,Edge.point2),
+						pSubMesh->GetVertexBuffer()->GetVector3(VertexAttr_Position,Edge.point1),
+						pSubMesh->GetVertexBuffer()->GetVector3(VertexAttr_Position,Edge.point2),
 						cColor(1,0.9f,0,1));
 					apLowLevelGraphics->SetStencilActive(true);
 					apLowLevelGraphics->SetDepthTestActive(true);

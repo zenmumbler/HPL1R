@@ -227,13 +227,13 @@ namespace hpl {
 		if(lIdxNum > 400*3) return; //Just skip larger buffers for now, they should never be planes.
 
 		unsigned int* pIndices = mpVtxBuffer->GetIndices();
-		float *pPositions = mpVtxBuffer->GetArray(eVertexFlag_Position);
+		float *pPositions = mpVtxBuffer->GetArray(VertexAttr_Position);
 
 		bool bFirst = true;
 		cVector3f vNormalSum;
 		cVector3f vFirstNormal;
 		int vTri[3];
-		const int lVtxStride = kvVertexElements[cMath::Log2ToInt(eVertexFlag_Position)];
+		const int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)];
 		float fCount=0;
 
 		for(int i=0; i< lIdxNum; i+=3)
