@@ -510,41 +510,26 @@ namespace hpl {
 	{
 		/// POSITION /////////////////////////
 		if (aFlags & VertexAttr_Position) {
-			if constexpr (USE_FIXED_FUNCTION)
-				glEnableClientState(GL_VERTEX_ARRAY );
-			else
-				glEnableVertexAttribArray(0);
+			glEnableVertexAttribArray(0);
 
 			int idx = cMath::Log2ToInt(VertexAttr_Position);
 			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
 
-			if constexpr (USE_FIXED_FUNCTION)
-				glVertexPointer(kvVertexElements[idx],GL_FLOAT, 0, (char*)NULL);
-			else
-				glVertexAttribPointer(0, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
+			glVertexAttribPointer(0, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
 		}
 		else
 		{
-			if constexpr (USE_FIXED_FUNCTION)
-				glDisableClientState(GL_VERTEX_ARRAY);
-			else
-				glDisableVertexAttribArray(0);
+			glDisableVertexAttribArray(0);
 		}
 
 		/// COLOR 0 /////////////////////////
 		if (aFlags & VertexAttr_Color0) {
-			if constexpr (USE_FIXED_FUNCTION)
-				glEnableClientState(GL_COLOR_ARRAY);
-			else
-				glEnableVertexAttribArray(1);
+			glEnableVertexAttribArray(1);
 
 			int idx = cMath::Log2ToInt(VertexAttr_Color0);
 			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 
-			if constexpr (USE_FIXED_FUNCTION)
-				glColorPointer(kvVertexElements[idx],GL_FLOAT, 0, (char*)NULL);
-			else
-				glVertexAttribPointer(1, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
+			glVertexAttribPointer(1, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
 		}
 		else {
 			if constexpr (USE_FIXED_FUNCTION)
@@ -555,18 +540,12 @@ namespace hpl {
 
 		/// NORMAL /////////////////////////
 		if (aFlags & VertexAttr_Normal) {
-			if constexpr (USE_FIXED_FUNCTION)
-				glEnableClientState(GL_NORMAL_ARRAY);
-			else
-				glEnableVertexAttribArray(3);
+			glEnableVertexAttribArray(3);
 
 			int idx = cMath::Log2ToInt(VertexAttr_Normal);
 			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
 
-			if constexpr (USE_FIXED_FUNCTION)
-				glNormalPointer(GL_FLOAT, 0, (char*)NULL);
-			else
-				glVertexAttribPointer(3, 3, GL_FLOAT, false, 0, nullptr);
+			glVertexAttribPointer(3, 3, GL_FLOAT, false, 0, nullptr);
 		}
 		else {
 			if constexpr (USE_FIXED_FUNCTION)
@@ -577,38 +556,20 @@ namespace hpl {
 
 		/// TEXTURE 0 /////////////////////////
 		if (aFlags & VertexAttr_UV0) {
-			if constexpr (USE_FIXED_FUNCTION) {
-				glClientActiveTexture(GL_TEXTURE0);
-				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-			}
-			else {
-				glActiveTexture(GL_TEXTURE0);
-				glEnableVertexAttribArray(2);
-			}
+			glEnableVertexAttribArray(2);
 
 			int idx =  cMath::Log2ToInt(VertexAttr_UV0);
 			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
 
-			if constexpr (USE_FIXED_FUNCTION)
-				glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL);
-			else
-				glVertexAttribPointer(2, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
+			glVertexAttribPointer(2, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
 		}
 		else {
-			if constexpr (USE_FIXED_FUNCTION) {
-				glClientActiveTexture(GL_TEXTURE0);
-				glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-			}
-			else {
-				glActiveTexture(GL_TEXTURE0);
-				glDisableVertexAttribArray(2);
-			}
+			glDisableVertexAttribArray(2);
 		}
 
 /*
-		/// TEXTURE 1 /////////////////////////
+		/// TANGENT  /////////////////////////
 		if(aFlags & VertexAttr_UV1){
-			glClientActiveTexture(GL_TEXTURE1);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
 
 			int idx =  cMath::Log2ToInt(VertexAttr_UV1);
