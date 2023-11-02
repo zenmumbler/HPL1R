@@ -71,7 +71,7 @@ static void ExportModel(cMesh *model, cResources *res) {
 	json roughMetal;
 	roughMetal["baseColorTexture"]["index"] = 0;
 	roughMetal["metallicFactor"] = 0.0;
-	roughMetal["roughnessFactor"] = 0.5;
+	roughMetal["roughnessFactor"] = 0.9;
 	matNode["pbrMetallicRoughness"] = roughMetal;
 	
 //					"baseColorFactor": [ 1.000, 0.766, 0.336, 1.0 ],
@@ -238,7 +238,7 @@ void ExportModels(cGame *apGame) {
 	const auto res = apGame->GetResources();
 	const auto mm = res->GetMeshManager();
 	
-	const auto model = mm->CreateMesh("boat_life_ring.dae");
+	const auto model = mm->CreateMesh("door_shaft_meat.dae");
 	if (model) {
 		ExportModel(model, res);
 		model->Destroy();
