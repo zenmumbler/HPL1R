@@ -110,7 +110,6 @@
 		DBF84B0C0AC76F1E00BB15CD /* MeshLoaderCollada.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849940AC76D5800BB15CD /* MeshLoaderCollada.cpp */; };
 		DBF84B0D0AC76F1E00BB15CD /* MeshLoaderColladaHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849950AC76D5800BB15CD /* MeshLoaderColladaHelpers.cpp */; };
 		DBF84B0F0AC76F1E00BB15CD /* MeshLoaderHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849E00AC76D5800BB15CD /* MeshLoaderHandler.cpp */; };
-		DBF84B100AC76F1E00BB15CD /* MeshLoaderMSH.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849970AC76D5800BB15CD /* MeshLoaderMSH.cpp */; };
 		DBF84B110AC76F1E00BB15CD /* MeshManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849E10AC76D5800BB15CD /* MeshManager.cpp */; };
 		DBF84B120AC76F1E00BB15CD /* MeshTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849C20AC76D5800BB15CD /* MeshTypes.cpp */; };
 		DBF84B130AC76F1E00BB15CD /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849BC0AC76D5800BB15CD /* Mouse.cpp */; };
@@ -342,7 +341,6 @@
 		DB27F0690ACB9AB90054ACA3 /* LowLevelInputSDL.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LowLevelInputSDL.h; sourceTree = "<group>"; };
 		DB27F06A0ACB9AB90054ACA3 /* LowLevelPhysicsNewton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LowLevelPhysicsNewton.h; sourceTree = "<group>"; };
 		DB27F06E0ACB9AB90054ACA3 /* MeshLoaderCollada.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MeshLoaderCollada.h; sourceTree = "<group>"; };
-		DB27F0700ACB9AB90054ACA3 /* MeshLoaderMSH.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MeshLoaderMSH.h; sourceTree = "<group>"; };
 		DB27F0710ACB9AB90054ACA3 /* MouseSDL.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MouseSDL.h; sourceTree = "<group>"; };
 		DB27F0720ACB9AB90054ACA3 /* OcclusionQueryOGL.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = OcclusionQueryOGL.h; sourceTree = "<group>"; };
 		DB27F0740ACB9AB90054ACA3 /* PhysicsBodyNewton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PhysicsBodyNewton.h; sourceTree = "<group>"; };
@@ -523,7 +521,6 @@
 		DBF849900AC76D5800BB15CD /* LowLevelPhysicsNewton.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = LowLevelPhysicsNewton.cpp; sourceTree = "<group>"; };
 		DBF849940AC76D5800BB15CD /* MeshLoaderCollada.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MeshLoaderCollada.cpp; sourceTree = "<group>"; };
 		DBF849950AC76D5800BB15CD /* MeshLoaderColladaHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MeshLoaderColladaHelpers.cpp; sourceTree = "<group>"; };
-		DBF849970AC76D5800BB15CD /* MeshLoaderMSH.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MeshLoaderMSH.cpp; sourceTree = "<group>"; };
 		DBF849980AC76D5800BB15CD /* MouseSDL.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MouseSDL.cpp; sourceTree = "<group>"; };
 		DBF849990AC76D5800BB15CD /* OcclusionQueryOGL.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = OcclusionQueryOGL.cpp; sourceTree = "<group>"; };
 		DBF8499B0AC76D5800BB15CD /* PhysicsBodyNewton.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsBodyNewton.cpp; sourceTree = "<group>"; };
@@ -886,8 +883,6 @@
 				DBCEE6250B4B35D50088A7E3 /* MeshLoaderColladaLoader.cpp */,
 				8E11637426C1D4620065E04C /* MeshLoaderGLTF2.cpp */,
 				8E11637326C1D1930065E04C /* MeshLoaderGLTF2.h */,
-				DBF849970AC76D5800BB15CD /* MeshLoaderMSH.cpp */,
-				DB27F0700ACB9AB90054ACA3 /* MeshLoaderMSH.h */,
 			);
 			path = impl;
 			sourceTree = "<group>";
@@ -1472,7 +1467,6 @@
 				8EA4871F2610A67C000D1AB7 /* scriptstdstring_utils.cpp in Sources */,
 				8E11637A26C1FDD40065E04C /* Files.cpp in Sources */,
 				DBF84B0F0AC76F1E00BB15CD /* MeshLoaderHandler.cpp in Sources */,
-				DBF84B100AC76F1E00BB15CD /* MeshLoaderMSH.cpp in Sources */,
 				DBF84B110AC76F1E00BB15CD /* MeshManager.cpp in Sources */,
 				DBF84B120AC76F1E00BB15CD /* MeshTypes.cpp in Sources */,
 				DBF84B130AC76F1E00BB15CD /* Mouse.cpp in Sources */,
