@@ -24,7 +24,6 @@
 #include <list>
 #include <set>
 #include <vector>
-#include <optional>
 
 #include "system/Container.h"
 
@@ -57,11 +56,6 @@ namespace hpl {
 	typedef std::vector<int> tIntVec;
 	typedef std::vector<float> tFloatVec;
 	typedef std::list<unsigned int> tUIntList;
-
-	//--------------------------------------------------------
-
-	template <typename T>
-	using Maybe = std::optional<T>;
 
 	//--------------------------------------------------------
 
