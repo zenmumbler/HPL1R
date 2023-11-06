@@ -38,54 +38,51 @@ namespace hpl {
 		Stream
 	};
 
-	enum class VertexAttr {
-		Position,
-		Normal,
-		Tangent,
-		Color,
-		UV,
-	};
+//	enum class VertexAttr {
+//		Position,
+//		Normal,
+//		Tangent,
+//		Color,
+//		UV,
+//	};
 
-	const int VERTEX_ATTR_COUNT = 5;
+//	const int VERTEX_ATTR_COUNT = 5;
 
 	using VertexAttributes = tFlag;
 
-	enum VertexAttrFlag : tFlag {
-		PositionFlag = 1u << static_cast<uint32_t>(VertexAttr::Position),
-		NormalFlag   = 1u << static_cast<uint32_t>(VertexAttr::Normal),
-		TangentFlag  = 1u << static_cast<uint32_t>(VertexAttr::Tangent),
-		ColorFlag    = 1u << static_cast<uint32_t>(VertexAttr::Color),
-		UVFlag       = 1u << static_cast<uint32_t>(VertexAttr::UV)
-	};
+//	enum VertexAttrFlag : tFlag {
+//		PositionFlag = 1u << static_cast<uint32_t>(VertexAttr::Position),
+//		NormalFlag   = 1u << static_cast<uint32_t>(VertexAttr::Normal),
+//		TangentFlag  = 1u << static_cast<uint32_t>(VertexAttr::Tangent),
+//		ColorFlag    = 1u << static_cast<uint32_t>(VertexAttr::Color),
+//		UVFlag       = 1u << static_cast<uint32_t>(VertexAttr::UV)
+//	};
 
 	enum VertexAttribute {
-		VertexAttr_Normal	= 0x00000001,
-		VertexAttr_Position = 0x00000002,
+		VertexAttr_Position = 0x00000001,
+		VertexAttr_Normal	= 0x00000002,
 		VertexAttr_Color0	= 0x00000004,
-		VertexAttr_Color1	= 0x00000008, // Unused
-		VertexAttr_UV0      = 0x00000010,
-		VertexAttr_Tangent  = 0x00000020,
-		VertexAttr_UV2      = 0x00000040, // Unused
-		VertexAttr_UV3      = 0x00000080, // Unused
-		VertexAttr_UV4      = 0x00000100, // Unused
+		VertexAttr_UV0      = 0x00000008,
+		VertexAttr_Tangent  = 0x00000010,
 	};
 
-	const int klNumOfVertexFlags = 9;
+	const int klNumOfVertexFlags = 5;
 
-	const VertexAttribute kvVertexFlags[] = {VertexAttr_Normal,VertexAttr_Position,VertexAttr_Color0,
-				VertexAttr_Color1,VertexAttr_UV0,VertexAttr_Tangent,VertexAttr_UV2,
-				VertexAttr_UV3,VertexAttr_UV4};
+	const VertexAttribute kvVertexFlags[] = {
+		VertexAttr_Position,
+		VertexAttr_Normal,
+		VertexAttr_Color0,
+		VertexAttr_UV0,
+		VertexAttr_Tangent,
+	};
 
-	const int kvVertexElements[] = {3, //Normal
-									4, //Position
-									4, //Color0
-									4, //Color1
-									3, //Texture0
-									3, //Texture1
-									3, //Texture2
-									3, //Texture3
-									3 //Texture4
-								};
+	const int kvVertexElements[] = {
+		4, // Position
+		3, // Normal
+		4, // Color0
+		3, // UV0
+		3, // Tangent
+	};
 
 
 	using VertexCompileOptions = tFlag;
