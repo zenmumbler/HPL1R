@@ -193,6 +193,8 @@ namespace hpl {
 		//Set the output to body space
 		vVec = cMath::MatrixMul(mpBody->GetLocalMatrix().GetRotation(), vVec);
 
+		if(mbLogInfo)
+			Log("%s | ForceVec: [%f, %f, %f]\n",msName.c_str(), vVec.x, vVec.y, vVec.z);
 
 		switch(aOutput)
 		{
