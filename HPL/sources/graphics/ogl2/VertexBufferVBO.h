@@ -39,8 +39,6 @@ namespace hpl {
 		bool Compile(VertexCompileOptions options);
 		void UpdateData(VertexAttributes aTypes, bool abIndices);
 
-		void CreateShadowDouble(bool abUpdateData);
-
 		void Transform(const cMatrixf &mtxTransform);
 
 		void Draw();

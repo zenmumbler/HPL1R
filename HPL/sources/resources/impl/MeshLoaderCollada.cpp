@@ -742,9 +742,6 @@ namespace hpl {
 			iVertexBuffer *pVtxBuffer = CreateVertexBuffer(Geom, UsageType);//, vExtraVtxVec);
 			pSubMesh->SetVertexBuffer(pVtxBuffer);
 
-			//Create an extra set of vertices for shadow rendering
-			pVtxBuffer->CreateShadowDouble(true);
-
 			/////////////////////////////
 			//Add material
 			tString sMatName = GetMaterialTextureFile(Geom.msMaterial,vColladaMaterials,vColladaTextures,
@@ -1482,9 +1479,6 @@ namespace hpl {
 			//Create vertex buffer
 			//tColladaExtraVtxListVec vExtraVtxVec;
 			pVtxBuffer = CreateVertexBuffer(*apGeom, VertexBufferUsageType::Static); ///,&apNode->m_mtxWorldTransform);
-
-			//Check if If the mesh casts shadows:
-			pVtxBuffer->CreateShadowDouble(true);
 
 			//Transform vertex buffer with world transform
 			pVtxBuffer->Transform(apNode->m_mtxWorldTransform);

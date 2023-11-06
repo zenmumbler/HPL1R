@@ -28,8 +28,6 @@
 
 namespace hpl {
 
-#define BUFFER_OFFSET(i) ((void*)(i*sizeof(float)))
-
 	//////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
 	//////////////////////////////////////////////////////////////////////////
@@ -221,33 +219,6 @@ namespace hpl {
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mlElementHandle);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum()*sizeof(unsigned int), &mvIndexArray[0], usageType);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cVertexBufferVBO::CreateShadowDouble(bool abUpdateData)
-	{
-		int lIdx = cMath::Log2ToInt(VertexAttr_Position);
-
-		//Set to new size.
-		int lSize = (int)mvVertexArray[lIdx].size();
-		mvVertexArray[lIdx].reserve(lSize*2);
-
-		int lCount = lSize /4;
-		for(int i=0; i< lCount; i++)
-		{
-			mvVertexArray[lIdx].push_back(mvVertexArray[lIdx][i*4+0]);
-			mvVertexArray[lIdx].push_back(mvVertexArray[lIdx][i*4+1]);
-			mvVertexArray[lIdx].push_back(mvVertexArray[lIdx][i*4+2]);
-			mvVertexArray[lIdx].push_back(0);//0);
-		}
-
-		mbHasShadowDouble = true;
-
-		if(abUpdateData)
-		{
-			UpdateData(VertexAttr_Position, false);
 		}
 	}
 

@@ -26,21 +26,37 @@
 
 namespace hpl {
 
-	enum class VertexBufferPrimitiveType
-	{
+	enum class VertexBufferPrimitiveType {
 		Triangles,
 		Quads,
 		LineStrips
 	};
 
-	enum VertexBufferUsageType
-	{
+	enum class VertexBufferUsageType {
 		Static,
 		Dynamic,
 		Stream
 	};
 
+	enum class VertexAttr {
+		Position,
+		Normal,
+		Tangent,
+		Color,
+		UV,
+	};
+
+	const int VERTEX_ATTR_COUNT = 5;
+
 	using VertexAttributes = tFlag;
+
+	enum VertexAttrFlag : tFlag {
+		PositionFlag = 1u << static_cast<uint32_t>(VertexAttr::Position),
+		NormalFlag   = 1u << static_cast<uint32_t>(VertexAttr::Normal),
+		TangentFlag  = 1u << static_cast<uint32_t>(VertexAttr::Tangent),
+		ColorFlag    = 1u << static_cast<uint32_t>(VertexAttr::Color),
+		UVFlag       = 1u << static_cast<uint32_t>(VertexAttr::UV)
+	};
 
 	enum VertexAttribute {
 		VertexAttr_Normal	= 0x00000001,
@@ -71,6 +87,7 @@ namespace hpl {
 									3 //Texture4
 								};
 
+
 	using VertexCompileOptions = tFlag;
 
 	enum VertexCompileOption {
@@ -100,12 +117,6 @@ namespace hpl {
 
 		virtual bool Compile(VertexCompileOptions options)=0;
 		virtual void UpdateData(VertexAttributes aTypes, bool abIndices)=0;
-
-		/**
-		* This creates a double of the vertex array with w=0.
-		* \param abUpdateData if the hardware buffer should be updated aswell.
-		*/
-		virtual void CreateShadowDouble(bool abUpdateData)=0;
 
 		/**
 		 * Transform the entire buffer with transform.
@@ -164,4 +175,4 @@ namespace hpl {
 	};
 
 };
-#endif // HPL_RENDERER3D_H
+#endif // HPL_VERTEXBUFFER_H
