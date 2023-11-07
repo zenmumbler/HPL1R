@@ -583,6 +583,10 @@ namespace hpl {
 	void iLight3D::RenderShadow(iRenderable *apObject,cRenderSettings *apRenderSettings,
 				iLowLevelGraphics *apLowLevelGraphics)
 	{
+#pragma unused(apObject)
+#pragma unused(apRenderSettings)
+#pragma unused(apLowLevelGraphics)
+		/*
 		int lIndexCount = 0;
 
 		////////////////////////////////////////////////////////////////////////
@@ -660,7 +664,7 @@ namespace hpl {
 
 		//////////////////////////////////////////
 		//Check if the cache as data.
-		/* TO BE IMPLEMENTED*/
+		// TO BE IMPLEMENTED
 
 		///////////////////////////////////////////
 		//Get local light position
@@ -756,7 +760,9 @@ namespace hpl {
 				}
 
 				//DEBUG:
-				/*if(!(bDoubleSided && Edge.invert_tri2==false))
+
+				// Rehatched: this was commented out
+				if(!(bDoubleSided && Edge.invert_tri2==false))
 				{
 					//apRenderSettings->mpExtrudeProgram->UnBind();
 					apLowLevelGraphics->SetDepthTestActive(false);
@@ -767,7 +773,8 @@ namespace hpl {
 						cColor(1,0.9f,0,1));
 					apLowLevelGraphics->SetStencilActive(true);
 					apLowLevelGraphics->SetDepthTestActive(true);
-				}*/
+				}
+				// Rehatched: end of commented block
 			}
 		}
 
@@ -783,9 +790,9 @@ namespace hpl {
 				if(Data.facingLight){
 					memcpy(pCurrentIndexPos,&pIdxArray[idx],3*sizeof(unsigned int));
 					pCurrentIndexPos += 3; lIndexCount+=3;
-					/*mpIndexArray[lIndexCount+0] = pIdxArray[idx+0];
-					mpIndexArray[lIndexCount+1] = pIdxArray[idx+1];
-					mpIndexArray[lIndexCount+2] = pIdxArray[idx+2];*/
+					// mpIndexArray[lIndexCount+0] = pIdxArray[idx+0];
+					// mpIndexArray[lIndexCount+1] = pIdxArray[idx+1];
+					// mpIndexArray[lIndexCount+2] = pIdxArray[idx+2];
 
 					if(bDoubleSided){
 						mpIndexArray[lIndexCount+0] = pIdxArray[idx+2]+lOffset;
@@ -839,6 +846,7 @@ namespace hpl {
 		if(apRenderSettings->mbLog) Log( " Drawing front and back simultaneously.\n");
 
 		apRenderSettings->mlLastShadowAlgo=0;
+	*/
 	}
 
 

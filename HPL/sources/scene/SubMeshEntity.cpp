@@ -63,7 +63,6 @@ namespace hpl {
 		if(mpMeshEntity->GetMesh()->GetSkeleton())
 		{
 			mpDynVtxBuffer = mpSubMesh->GetVertexBuffer()->CreateCopy(VertexBufferUsageType::Dynamic);
-			mvDynTriangles = *mpSubMesh->GetTriangleVecPtr();
 		}
 		else
 		{
@@ -270,85 +269,7 @@ namespace hpl {
 
 			//Update buffer
 			mpDynVtxBuffer->UpdateData(VertexAttr_Position | VertexAttr_Normal | VertexAttr_Tangent,false);
-
-			if(mpMeshEntity->IsShadowCaster())
-			{
-				//Update triangles
-				cMath::CreateTriangleData(mvDynTriangles,
-					mpDynVtxBuffer->GetIndices(), mpDynVtxBuffer->GetIndexNum(),
-					pSkinPosArray, lVtxStride, lVtxNum);
-			}
 		}
-
-
-
-		/*if(mpDynVtxBuffer)
-		{
-		const float *pBindPosArray = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_Position);
-		const float *pBindNormalArray = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_Normal);
-		const float *pBindTangentArray = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_UV1);
-
-		float *pSkinPosArray = mpDynVtxBuffer->GetArray(VertexAttr_Position);
-		float *pSkinNormalArray = mpDynVtxBuffer->GetArray(VertexAttr_Normal);
-		float *pSkinTangentArray = mpDynVtxBuffer->GetArray(VertexAttr_UV1);
-
-		int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)];
-		int lVtxNum = mpDynVtxBuffer->GetVertexNum();
-
-		memset(pSkinPosArray,0,sizeof(float)*lVtxStride*lVtxNum);
-		memset(pSkinNormalArray,0,sizeof(float)*3*lVtxNum);
-		memset(pSkinTangentArray,0,sizeof(float)*4*lVtxNum);
-
-		int lSize = mpSubMesh->GetVertexBonePairNum();
-		for(int i=0; i<lSize; i++)
-		{
-		const cVertexBonePair& VBPair = mpSubMesh->GetVertexBonePair(i);
-
-		//Log("%d: Vtx: %d Bone: %d\n",i,VBPair.vtxIdx, VBPair.boneIdx);
-
-		const float* pBindPos = &pBindPosArray[VBPair.vtxIdx*lVtxStride];
-		float* pSkinPos = &pSkinPosArray[VBPair.vtxIdx*lVtxStride];
-
-		const float* pBindNorm = &pBindNormalArray[VBPair.vtxIdx*3];
-		float* pSkinNorm = &pSkinNormalArray[VBPair.vtxIdx*3];
-
-		const float* pBindTan = &pBindTangentArray[VBPair.vtxIdx*4];
-		float* pSkinTan = &pSkinTangentArray[VBPair.vtxIdx*4];
-
-		const cMatrixf &mtxTransform = mpMeshEntity->mvBoneMatrices[VBPair.boneIdx];
-
-		//Transform with the local movement of the bone.
-		MatrixFloatTransform(pSkinPos,mtxTransform, pBindPos, VBPair.weight);
-		pSkinPos[3] = 1;
-
-		MatrixFloatRotate(pSkinNorm,mtxTransform, pBindNorm, VBPair.weight);
-
-		MatrixFloatRotate(pSkinTan,mtxTransform, pBindTan, VBPair.weight);
-		pSkinTan[3] = pBindTan[3];
-
-		//cVector3f vSkin = cMath::MatrixMul(mpMeshEntity->mvBoneMatrices[VBPair.boneIdx],
-		//									cVector3f(pBindPos[0],pBindPos[1],pBindPos[2]));
-
-		//pSkinPos[0] += vSkin.x * VBPair.weight;
-		//pSkinPos[1] += vSkin.y * VBPair.weight;
-		//pSkinPos[2] += vSkin.z * VBPair.weight;
-		}
-
-		//Update the shadow double
-		memcpy(&pSkinPosArray[lVtxStride*lVtxNum],pSkinPosArray,sizeof(float)*lVtxStride*lVtxNum);
-		for(int vtx=lVtxStride*lVtxNum + lVtxStride-1; vtx < lVtxStride*lVtxNum*2; vtx+=lVtxStride)
-		{
-		pSkinPosArray[vtx] = 0;
-		}
-
-		//Update buffer
-		mpDynVtxBuffer->UpdateData(VertexAttr_Position | VertexAttr_Normal | VertexAttr_UV1,false);
-
-		//Update triangles
-		cMath::CreateTriangleData(mvDynTriangles,
-		mpDynVtxBuffer->GetIndices(), mpDynVtxBuffer->GetIndexNum(),
-		pSkinPosArray, lVtxStride, lVtxNum);
-		}*/
 	}
 
 	iVertexBuffer* cSubMeshEntity::GetVertexBuffer()
@@ -440,31 +361,6 @@ namespace hpl {
 	bool cSubMeshEntity::GetUpdateBody()
 	{
 		return mbUpdateBody;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cTriangleData& cSubMeshEntity::GetTriangle(int alIndex)
-	{
-		if(mpDynVtxBuffer)
-			return mvDynTriangles[alIndex];
-		else
-			return (*mpSubMesh->GetTriangleVecPtr())[alIndex];
-	}
-	int cSubMeshEntity::GetTriangleNum()
-	{
-		if(mpDynVtxBuffer)
-			return (int)mvDynTriangles.size();
-		else
-			return (int)mpSubMesh->GetTriangleVecPtr()->size();
-	}
-
-	tTriangleDataVec* cSubMeshEntity::GetTriangleVecPtr()
-	{
-		if(mpDynVtxBuffer)
-			return &mvDynTriangles;
-		else
-			return mpSubMesh->GetTriangleVecPtr();
 	}
 
 	//-----------------------------------------------------------------------

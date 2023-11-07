@@ -129,10 +129,6 @@ namespace hpl {
 
 		void UpdateLogic(float afTimeStep);
 
-		cTriangleData& GetTriangle(int alIndex);
-		int GetTriangleNum();
-		tTriangleDataVec* GetTriangleVecPtr();
-
 		iPhysicsBody* GetBody(){ return mpBody;}
 		void SetBody(iPhysicsBody* apBody){ mpBody = apBody;}
 

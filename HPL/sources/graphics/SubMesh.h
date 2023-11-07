@@ -60,16 +60,6 @@ namespace hpl {
 
 		void CompileBonePairs();
 
-		const cTriEdge& GetEdge(int alIndex) const{ return mvEdges[alIndex];}
-		int GetEdgeNum(){ return (int)mvEdges.size();}
-
-		tTriEdgeVec* GetEdgeVecPtr(){ return &mvEdges;}
-
-		tTriangleDataVec* GetTriangleVecPtr(){ return &mvTriangles;}
-
-		void SetDoubleSided(bool abX){ mbDoubleSided = abX;}
-		bool GetDoubleSided(){ return mbDoubleSided;}
-
 		const tString& GetGroup(){ return msGroup;}
 		void SetGroup(const tString& asGroup){ msGroup =asGroup;}
 
@@ -96,14 +86,9 @@ namespace hpl {
 		float *mpVertexWeights;
 		unsigned char *mpVertexBones;
 
-		tTriEdgeVec mvEdges;
-		tTriangleDataVec mvTriangles;
-
 		cVector3f mvModelScale;
 
 		tString msName;
-
-		bool mbDoubleSided;
 
 		cMaterialManager* mpMaterialManager;
 

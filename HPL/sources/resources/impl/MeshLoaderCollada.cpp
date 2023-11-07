@@ -857,23 +857,6 @@ namespace hpl {
 					}
 				}
 			}
-
-			//Create triangle data for the geometry
-			cMath::CreateTriangleData(*pSubMesh->GetTriangleVecPtr(),
-								pVtxBuffer->GetIndices(), pVtxBuffer->GetIndexNum(),
-								pVtxBuffer->GetArray(VertexAttr_Position),
-								kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)],
-								pVtxBuffer->GetVertexNum());
-
-			//Create edges for the geometry.
-			bool bDoubleSided = false;
-			cMath::CreateEdges(*pSubMesh->GetEdgeVecPtr(),
-								pVtxBuffer->GetIndices(), pVtxBuffer->GetIndexNum(),
-								pVtxBuffer->GetArray(VertexAttr_Position),
-								kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)],
-								pVtxBuffer->GetVertexNum(),
-								&bDoubleSided);
-			pSubMesh->SetDoubleSided(bDoubleSided);
 		}
 
 		///////////////////////////////////////////////
@@ -1483,24 +1466,6 @@ namespace hpl {
 			//Log("%s transform: (%s)\n", apNode->msName.c_str(), apNode->m_mtxWorldTransform.ToString().c_str());
 
 			pSubMesh->SetVertexBuffer(pVtxBuffer);
-
-			//Create triangle data for the geometry
-			cMath::CreateTriangleData(*pSubMesh->GetTriangleVecPtr(),
-				pVtxBuffer->GetIndices(), pVtxBuffer->GetIndexNum(),
-				pVtxBuffer->GetArray(VertexAttr_Position),
-				kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)],
-				pVtxBuffer->GetVertexNum());
-
-			//Create edges for the geometry.
-			bool bDoubleSided = false;
-			cMath::CreateEdges(*pSubMesh->GetEdgeVecPtr(),
-				pVtxBuffer->GetIndices(), pVtxBuffer->GetIndexNum(),
-				pVtxBuffer->GetArray(VertexAttr_Position),
-				kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)],
-				pVtxBuffer->GetVertexNum(),
-				&bDoubleSided);
-
-			pSubMesh->SetDoubleSided(bDoubleSided);
 
 			//Add material
 			iMaterial *pMaterial;

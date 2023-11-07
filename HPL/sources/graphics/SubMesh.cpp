@@ -48,8 +48,6 @@ namespace hpl {
 		mpMaterial = NULL;
 		mpVtxBuffer = NULL;
 
-		mbDoubleSided = false;
-
 		mpVertexWeights = NULL;
 		mpVertexBones = NULL;
 
