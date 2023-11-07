@@ -37,14 +37,6 @@ namespace hpl {
 		eLight3DType_LastEnum
 	};
 
-	enum eShadowVolumeType
-	{
-		eShadowVolumeType_None,
-		eShadowVolumeType_ZPass,
-		eShadowVolumeType_ZFail,
-		eShadowVolumeType_LastEnum,
-	};
-
 	class iLowLevelGraphics;
 	class cRenderSettings;
 	class cCamera;
