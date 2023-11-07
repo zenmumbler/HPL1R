@@ -463,8 +463,6 @@ namespace hpl {
 	}
 	//-----------------------------------------------------------------------
 
-	constexpr const bool USE_FIXED_FUNCTION = false;
-
 	void cVertexBufferVBO::SetVertexStates(VertexAttributes aFlags)
 	{
 		/// POSITION /////////////////////////
@@ -476,49 +474,29 @@ namespace hpl {
 
 			glVertexAttribPointer(0, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
 		}
-		else
-		{
-			glDisableVertexAttribArray(0);
-		}
-
-		/// COLOR 0 /////////////////////////
-		if (aFlags & VertexAttr_Color0) {
-			glEnableVertexAttribArray(1);
-
-			int idx = cMath::Log2ToInt(VertexAttr_Color0);
-			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
-
-			glVertexAttribPointer(1, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
-		}
 		else {
-			if constexpr (USE_FIXED_FUNCTION)
-				glDisableClientState(GL_COLOR_ARRAY);
-			else
-				glDisableVertexAttribArray(1);
+			glDisableVertexAttribArray(0);
 		}
 
 		/// NORMAL /////////////////////////
 		if (aFlags & VertexAttr_Normal) {
-			glEnableVertexAttribArray(3);
+			glEnableVertexAttribArray(1);
 
 			int idx = cMath::Log2ToInt(VertexAttr_Normal);
 			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
 
-			glVertexAttribPointer(3, 3, GL_FLOAT, false, 0, nullptr);
+			glVertexAttribPointer(1, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
 		}
 		else {
-			if constexpr (USE_FIXED_FUNCTION)
-				glDisableClientState(GL_NORMAL_ARRAY);
-			else
-				glDisableVertexAttribArray(3);
+			glDisableVertexAttribArray(1);
 		}
 
-		/// TEXTURE 0 /////////////////////////
-		if (aFlags & VertexAttr_UV0) {
+		/// COLOR 0 /////////////////////////
+		if (aFlags & VertexAttr_Color0) {
 			glEnableVertexAttribArray(2);
 
-			int idx =  cMath::Log2ToInt(VertexAttr_UV0);
-			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
+			int idx = cMath::Log2ToInt(VertexAttr_Color0);
+			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
 
 			glVertexAttribPointer(2, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
 		}
@@ -526,66 +504,31 @@ namespace hpl {
 			glDisableVertexAttribArray(2);
 		}
 
-/*
-		/// TANGENT  /////////////////////////
-		if(aFlags & VertexAttr_UV1){
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
+		/// UV 0 /////////////////////////
+		if (aFlags & VertexAttr_UV0) {
+			glEnableVertexAttribArray(3);
 
-			int idx =  cMath::Log2ToInt(VertexAttr_UV1);
-			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
+			int idx =  cMath::Log2ToInt(VertexAttr_UV0);
+			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
 
-			if(mbTangents)
-				glTexCoordPointer(4,GL_FLOAT,0,(char*)NULL );
-			else
-				glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL );
+			glVertexAttribPointer(3, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
 		}
 		else {
-			glClientActiveTexture(GL_TEXTURE1);
-			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
+			glDisableVertexAttribArray(3);
 		}
 
-		/// TEXTURE 2 /////////////////////////
-		if(aFlags & VertexAttr_UV2){
-			glClientActiveTexture(GL_TEXTURE2);
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
+		/// TANGENT /////////////////////////
+		if(aFlags & VertexAttr_Tangent){
+			glEnableVertexAttribArray(4);
 
-			int idx =  cMath::Log2ToInt(VertexAttr_UV2);
-			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
-			glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL );
+			int idx =  cMath::Log2ToInt(VertexAttr_Tangent);
+			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
+
+			glVertexAttribPointer(4, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
 		}
 		else {
-			glClientActiveTexture(GL_TEXTURE2);
-			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
+			glDisableVertexAttribArray(4);
 		}
-
-		/// TEXTURE 3 /////////////////////////
-		if(aFlags & VertexAttr_UV3){
-			glClientActiveTexture(GL_TEXTURE3);
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
-
-			int idx =  cMath::Log2ToInt(VertexAttr_UV3);
-			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
-			glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL );
-		}
-		else {
-			glClientActiveTexture(GL_TEXTURE3);
-			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
-		}
-
-		/// TEXTURE 4 /////////////////////////
-		if(aFlags & VertexAttr_UV4){
-			glClientActiveTexture(GL_TEXTURE4);
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY );
-
-			int idx =  cMath::Log2ToInt(VertexAttr_UV4);
-			glBindBuffer(GL_ARRAY_BUFFER,mvArrayHandle[idx]);
-			glTexCoordPointer(kvVertexElements[idx],GL_FLOAT,0,(char*)NULL );
-		}
-		else {
-			glClientActiveTexture(GL_TEXTURE4);
-			glDisableClientState(GL_TEXTURE_COORD_ARRAY );
-		}
-*/
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}

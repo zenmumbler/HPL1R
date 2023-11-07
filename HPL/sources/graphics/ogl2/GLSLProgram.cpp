@@ -96,9 +96,10 @@ namespace hpl {
 		glUseProgram(mProgram);
 
 		glBindAttribLocation(mProgram, 0, "position");
-		glBindAttribLocation(mProgram, 1, "color");
-		glBindAttribLocation(mProgram, 2, "uv");
-		glBindAttribLocation(mProgram, 3, "normal");
+		glBindAttribLocation(mProgram, 1, "normal");
+		glBindAttribLocation(mProgram, 2, "color");
+		glBindAttribLocation(mProgram, 3, "uv");
+		glBindAttribLocation(mProgram, 4, "tangent");
 
 		glAttachShader(mProgram, vtxShader);
 		glAttachShader(mProgram, fragShader);

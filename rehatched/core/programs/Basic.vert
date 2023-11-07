@@ -1,7 +1,6 @@
-///////////////////////////////////////////////////////
-/// SIMPLE DIFFUSE COLOR VERTEX PROGRAM ////////////
-///////////////////////////////////////////////////////
-
+/*
+Vertex Program for GraphicsDrawer element
+*/
 attribute vec4 position;
 attribute vec4 color;
 attribute vec2 uv;
