@@ -386,7 +386,8 @@ namespace hpl {
 		switch(apObject->GetRenderType())
 		{
 			//Add a normal renderable
-		case eRenderableType_Normal: case eRenderableType_ParticleSystem:
+		case eRenderableType_Normal:
+		case eRenderableType_ParticleSystem:
 			if(apObject->GetMaterial()->IsTransperant())
 			{
 				//Calculate the Z for the trans object

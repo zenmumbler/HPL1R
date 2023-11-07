@@ -38,25 +38,7 @@ namespace hpl {
 		Stream
 	};
 
-//	enum class VertexAttr {
-//		Position,
-//		Normal,
-//		Tangent,
-//		Color,
-//		UV,
-//	};
-
-//	const int VERTEX_ATTR_COUNT = 5;
-
 	using VertexAttributes = tFlag;
-
-//	enum VertexAttrFlag : tFlag {
-//		PositionFlag = 1u << static_cast<uint32_t>(VertexAttr::Position),
-//		NormalFlag   = 1u << static_cast<uint32_t>(VertexAttr::Normal),
-//		TangentFlag  = 1u << static_cast<uint32_t>(VertexAttr::Tangent),
-//		ColorFlag    = 1u << static_cast<uint32_t>(VertexAttr::Color),
-//		UVFlag       = 1u << static_cast<uint32_t>(VertexAttr::UV)
-//	};
 
 	enum VertexAttribute {
 		VertexAttr_Position = 0x00000001,
