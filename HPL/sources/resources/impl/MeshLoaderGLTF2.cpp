@@ -100,6 +100,7 @@ namespace hpl {
 			pVtxBuff->SetTangents((vtxFlags & VertexAttr_Tangent) != 0);
 
 			//Fill the arrays
+			/*
 			for (int i = 0; i < klNumOfVertexFlags; i++) {
 				if (kvVertexFlags[i] & vtxFlags) {
 					int lElemPerVtx = 3;
@@ -107,17 +108,15 @@ namespace hpl {
 						lElemPerVtx = 4;
 					}
 
-					/*
 					TiXmlElement* pElem = pVtxElem->FirstChildElement(GetVertexName(kvVertexFlags[i]));
 
 					pVtxBuff->ResizeArray(kvVertexFlags[i], lVtxSize * lElemPerVtx);
 					float *pArray = pVtxBuff->GetArray(kvVertexFlags[i]);
 
 					FillVtxArray(pArray, pElem->Attribute("data"), lVtxSize * lElemPerVtx);
-					*/
 				}
 			}
-
+			*/
 
 			++curPrim;
 		}

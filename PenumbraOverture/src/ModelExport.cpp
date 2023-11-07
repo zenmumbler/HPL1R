@@ -6,11 +6,15 @@
 
 using json = nlohmann::json;
 
+static void WriteSubMesh() {
+
+}
+
 static void ExportModel(cMesh *model, cResources *res) {
 	json gltf;
 	json asset;
 	asset["version"] = "2.0";
-	asset["generator"] = "HPL1 Model Exporter - by zenmumbler";
+	asset["generator"] = "HPL1R Model Exporter - by zenmumbler";
 	asset["copyright"] = "(c) 2006 Frictional Games";
 	gltf["asset"] = asset;
 //	gltf["extensionsUsed"].push_back("KHR_materials_pbrSpecularGlossiness");
@@ -63,7 +67,7 @@ static void ExportModel(cMesh *model, cResources *res) {
 	// -- add material mapped as specular gloss
 	json matNode;
 	matNode["name"] = mat->GetName();
-	matNode["doubleSided"] = mesh->GetDoubleSided();
+	matNode["doubleSided"] = true; // for now, easies debug viewing
 //	json specGloss;
 //	specGloss["glossinessFactor"] = 0.0f;
 //	specGloss["diffuseTexture"]["index"] = 0;
@@ -143,7 +147,7 @@ static void ExportModel(cMesh *model, cResources *res) {
 	addAttr(VertexAttr_Position, "POSITION");
 //	addAttr(VertexAttr_Color0, "COLOR_0");
 	addAttr(VertexAttr_UV0, "TEXCOORD_0");
-//	addAttr(VertexAttr_UV1, "TANGENT");
+//	addAttr(VertexAttr_Tangent, "TANGENT");
 	primitive["attributes"] = attributes;
 
 	// write buffer nodes
@@ -238,7 +242,7 @@ void ExportModels(cGame *apGame) {
 	const auto res = apGame->GetResources();
 	const auto mm = res->GetMeshManager();
 	
-	const auto model = mm->CreateMesh("door_shaft_meat.dae");
+	const auto model = mm->CreateMesh("ice_cave_hand_whole.dae");
 	if (model) {
 		ExportModel(model, res);
 		model->Destroy();
