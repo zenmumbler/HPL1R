@@ -64,7 +64,7 @@ namespace hpl {
 
 
 		mpVtxBuffer = mpLowLevelGraphics->CreateVertexBuffer(
-								VertexAttr_Position | VertexAttr_Color0 | VertexAttr_UV0 | VertexAttr_Normal,
+								VertexMask_Position | VertexMask_Color0 | VertexMask_UV0 | VertexMask_Normal,
 								VertexBufferPrimitiveType::Triangles, VertexBufferUsageType::Dynamic,
 								4, 6);
 
@@ -82,10 +82,10 @@ namespace hpl {
 
 		for(int i=0;i<4;i++)
 		{
-			mpVtxBuffer->AddVertex(VertexAttr_Position, vCoords[i]);
-			mpVtxBuffer->AddColor(VertexAttr_Color0, cColor(1,1,1,1));
-			mpVtxBuffer->AddVertex(VertexAttr_UV0, (vTexCoords[i] + cVector2f(1,1))/2);
-			mpVtxBuffer->AddVertex(VertexAttr_Normal,cVector3f(0,0,1));
+			mpVtxBuffer->AddVertex(VertexMask_Position, vCoords[i]);
+			mpVtxBuffer->AddColor(VertexMask_Color0, cColor(1,1,1,1));
+			mpVtxBuffer->AddVertex(VertexMask_UV0, (vTexCoords[i] + cVector2f(1,1))/2);
+			mpVtxBuffer->AddVertex(VertexMask_Normal,cVector3f(0,0,1));
 		}
 
 		for(int i=0;i<3;i++) mpVtxBuffer->AddIndex(i);
@@ -155,7 +155,7 @@ namespace hpl {
 
 		mColor = aColor;
 
-		float *pColors = mpVtxBuffer->GetArray(VertexAttr_Color0);
+		float *pColors = mpVtxBuffer->GetArray(VertexMask_Color0);
 
 		//Change "lower colors"
 		if(mbMultiplyAlphaWithColor)
@@ -180,7 +180,7 @@ namespace hpl {
 				pColors+=4;
 			}
 		}
-		mpVtxBuffer->UpdateData(VertexAttr_Color0,false);
+		mpVtxBuffer->UpdateData(VertexMask_Color0,false);
 	}
 
 	//-----------------------------------------------------------------------
@@ -242,8 +242,8 @@ namespace hpl {
 		//Update vertex buffer
 		cVector2f vBeamSize = cVector2f(mvSize.x, fDist);
 
-		float *pPos = mpVtxBuffer->GetArray(VertexAttr_Position);
-		float *pTex = mpVtxBuffer->GetArray(VertexAttr_UV0);
+		float *pPos = mpVtxBuffer->GetArray(VertexMask_Position);
+		float *pTex = mpVtxBuffer->GetArray(VertexMask_UV0);
 
 		cVector3f vCoords[4] = {cVector3f((vBeamSize.x/2),-(vBeamSize.y/2),0),
 								cVector3f(-(vBeamSize.x/2),-(vBeamSize.y/2),0),
@@ -280,11 +280,11 @@ namespace hpl {
 
 		if(mpMaterial->IsTransperant())
 		{
-			mpVtxBuffer->UpdateData(VertexAttr_Position | VertexAttr_UV0,false);
+			mpVtxBuffer->UpdateData(VertexMask_Position | VertexMask_UV0,false);
 		}
 		else
 		{
-			mpVtxBuffer->UpdateData(VertexAttr_Position | VertexAttr_UV0,false);
+			mpVtxBuffer->UpdateData(VertexMask_Position | VertexMask_UV0,false);
 		}
 
 
@@ -451,7 +451,7 @@ namespace hpl {
 
 		mColor = aColor;
 
-		float *pColors = mpBeam->mpVtxBuffer->GetArray(VertexAttr_Color0);
+		float *pColors = mpBeam->mpVtxBuffer->GetArray(VertexMask_Color0);
 
 		//Change "upper colors"
 		pColors+= 4*2;
@@ -478,7 +478,7 @@ namespace hpl {
 			}
 		}
 
-		mpBeam->mpVtxBuffer->UpdateData(VertexAttr_Color0,false);
+		mpBeam->mpVtxBuffer->UpdateData(VertexMask_Color0,false);
 	}
 
 	//-----------------------------------------------------------------------

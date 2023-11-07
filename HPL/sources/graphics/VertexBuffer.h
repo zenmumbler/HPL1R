@@ -40,22 +40,22 @@ namespace hpl {
 
 	using VertexAttributes = tFlag;
 
-	enum VertexAttribute {
-		VertexAttr_Position = 0x00000001,
-		VertexAttr_Normal	= 0x00000002,
-		VertexAttr_Color0	= 0x00000004,
-		VertexAttr_UV0      = 0x00000008,
-		VertexAttr_Tangent  = 0x00000010,
+	enum VertexAttributeMask {
+		VertexMask_Position = 0x00000001,
+		VertexMask_Normal	= 0x00000002,
+		VertexMask_Color0	= 0x00000004,
+		VertexMask_UV0      = 0x00000008,
+		VertexMask_Tangent  = 0x00000010,
 	};
 
 	const int klNumOfVertexFlags = 5;
 
-	const VertexAttribute kvVertexFlags[] = {
-		VertexAttr_Position,
-		VertexAttr_Normal,
-		VertexAttr_Color0,
-		VertexAttr_UV0,
-		VertexAttr_Tangent,
+	const VertexAttributeMask kvVertexFlags[] = {
+		VertexMask_Position,
+		VertexMask_Normal,
+		VertexMask_Color0,
+		VertexMask_UV0,
+		VertexMask_Tangent,
 	};
 
 	const int kvVertexElements[] = {

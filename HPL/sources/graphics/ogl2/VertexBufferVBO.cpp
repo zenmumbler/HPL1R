@@ -120,10 +120,10 @@ namespace hpl {
 	{
 		cBoundingVolume bv;
 
-		int lNum = cMath::Log2ToInt((int)VertexAttr_Position);
+		int lNum = cMath::Log2ToInt((int)VertexMask_Position);
 
 		bv.AddArrayPoints(&(mvVertexArray[lNum][0]), GetVertexNum());
-		bv.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)]);
+		bv.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(VertexMask_Position)]);
 
 		return bv;
 	}
@@ -140,22 +140,22 @@ namespace hpl {
 		{
 			mbTangents = true;
 
-			mVertexFlags |= VertexAttr_Tangent;
+			mVertexFlags |= VertexMask_Tangent;
 
-			int idx = cMath::Log2ToInt((int)VertexAttr_Tangent);
+			int idx = cMath::Log2ToInt((int)VertexMask_Tangent);
 
 			int lSize = GetVertexNum()*4;
 			mvVertexArray[idx].resize(lSize);
 
 			cMath::CreateTriTangentVectors(
-				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_Tangent)][0]),
+				&(mvVertexArray[cMath::Log2ToInt((int)VertexMask_Tangent)][0]),
 				&mvIndexArray[0], GetIndexNum(),
 
-				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_Position)][0]),
-				kvVertexElements[cMath::Log2ToInt((int)VertexAttr_Position)],
+				&(mvVertexArray[cMath::Log2ToInt((int)VertexMask_Position)][0]),
+				kvVertexElements[cMath::Log2ToInt((int)VertexMask_Position)],
 
-				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_UV0)][0]),
-				&(mvVertexArray[cMath::Log2ToInt((int)VertexAttr_Normal)][0]),
+				&(mvVertexArray[cMath::Log2ToInt((int)VertexMask_UV0)][0]),
+				&(mvVertexArray[cMath::Log2ToInt((int)VertexMask_Normal)][0]),
 				GetVertexNum()
 			);
 		}
@@ -222,16 +222,16 @@ namespace hpl {
 
 	void cVertexBufferVBO::Transform(const cMatrixf &a_mtxTransform)
 	{
-		float *pPosArray = GetArray(VertexAttr_Position);
-		float *pNormalArray = GetArray(VertexAttr_Normal);
+		float *pPosArray = GetArray(VertexMask_Position);
+		float *pNormalArray = GetArray(VertexMask_Normal);
 		float *pTangentArray = NULL;
-		if(mbTangents)pTangentArray = GetArray(VertexAttr_Tangent);
+		if(mbTangents)pTangentArray = GetArray(VertexMask_Tangent);
 
 		int lVtxNum = GetVertexNum();
 
 		cMatrixf mtxRot = a_mtxTransform.GetRotation();
 
-		int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)];
+		int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexMask_Position)];
 
 		int lOffset = GetVertexNum()*4;
 
@@ -259,9 +259,9 @@ namespace hpl {
 		if(mbCompiled)
 		{
 			if(mbTangents)
-				UpdateData(VertexAttr_Position | VertexAttr_Normal | VertexAttr_Tangent,false);
+				UpdateData(VertexMask_Position | VertexMask_Normal | VertexMask_Tangent,false);
 			else
-				UpdateData(VertexAttr_Position | VertexAttr_Normal,false);
+				UpdateData(VertexMask_Position | VertexMask_Normal,false);
 		}
 	}
 
@@ -376,7 +376,7 @@ namespace hpl {
 			if(kvVertexFlags[i] & mVertexFlags)
 			{
 				int lElements = kvVertexElements[i];
-				if(mbTangents && kvVertexFlags[i] == VertexAttr_Tangent)
+				if(mbTangents && kvVertexFlags[i] == VertexMask_Tangent)
 					lElements=4;
 
 				pVtxBuff->ResizeArray(kvVertexFlags[i], (int)mvVertexArray[i].size());
@@ -401,7 +401,7 @@ namespace hpl {
 
 	int cVertexBufferVBO::GetVertexNum()
 	{
-		int idx = cMath::Log2ToInt((int)VertexAttr_Position);
+		int idx = cMath::Log2ToInt((int)VertexMask_Position);
 		int lSize = (int)mvVertexArray[idx].size()/kvVertexElements[idx];
 
 		return lSize;

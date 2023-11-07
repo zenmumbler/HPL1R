@@ -43,7 +43,7 @@ namespace hpl {
 	:iRenderable(asName),iParticleEmitter(avMaterials, alMaxParticles,avSize,apGraphics,apResources)
 	{
 		mpVtxBuffer = apGraphics->GetLowLevel()->CreateVertexBuffer(
-							VertexAttr_Position | VertexAttr_Color0 | VertexAttr_UV0,
+							VertexMask_Position | VertexMask_Color0 | VertexMask_UV0,
 							VertexBufferPrimitiveType::Triangles, VertexBufferUsageType::Stream,
 							alMaxParticles * 4, alMaxParticles * 6);
 
@@ -58,16 +58,16 @@ namespace hpl {
 		//Fill with tetxure coords (will do for most particle systems)
 		for(int i=0;i<(int)alMaxParticles;i++)
 		{
-			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(1,1,0));
-			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(0,1,0));
-			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(0,0,0));
-			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(1,0,0));
+			mpVtxBuffer->AddVertex(VertexMask_UV0, cVector3f(1,1,0));
+			mpVtxBuffer->AddVertex(VertexMask_UV0, cVector3f(0,1,0));
+			mpVtxBuffer->AddVertex(VertexMask_UV0, cVector3f(0,0,0));
+			mpVtxBuffer->AddVertex(VertexMask_UV0, cVector3f(1,0,0));
 		}
 
 		//Set default values for pos and col
 		for(int i=0;i<(int)alMaxParticles*4;i++){
-			mpVtxBuffer->AddVertex(VertexAttr_Position, 0);
-			mpVtxBuffer->AddColor(VertexAttr_Color0, cColor(1,1));
+			mpVtxBuffer->AddVertex(VertexMask_Position, 0);
+			mpVtxBuffer->AddColor(VertexMask_Color0, cColor(1,1));
 		}
 
 		mpVtxBuffer->Compile(0);
@@ -199,8 +199,8 @@ namespace hpl {
 
 		if(mbUpdateGfx)
 		{
-			float *pPosArray = mpVtxBuffer->GetArray(VertexAttr_Position);
-			float *pColArray = mpVtxBuffer->GetArray(VertexAttr_Color0);
+			float *pPosArray = mpVtxBuffer->GetArray(VertexMask_Position);
+			float *pColArray = mpVtxBuffer->GetArray(VertexMask_Color0);
 // NEW
 			if ( mPEType == ePEType_Beam)
 			{
@@ -221,7 +221,7 @@ namespace hpl {
 			// SUB DIVISION SET UP
 				if(mvSubDivUV.size() > 1)
 				{
-					float *pTexArray = mpVtxBuffer->GetArray(VertexAttr_UV0);
+					float *pTexArray = mpVtxBuffer->GetArray(VertexMask_UV0);
 
 					for(int i=0;i<(int)mlNumOfParticles;i++)
 					{
@@ -257,7 +257,7 @@ namespace hpl {
 				// ---
 
 
-					int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)];
+					int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexMask_Position)];
 					int lVtxQuadSize = lVtxStride*4;
 
 					for(int i=0;i<(int)mlNumOfParticles;i++)
@@ -298,7 +298,7 @@ namespace hpl {
 							cVector3f( mvDrawSize.x, mvDrawSize.y,0)
 					};
 
-					int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)];
+					int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexMask_Position)];
 					int lVtxQuadSize = lVtxStride*4;
 
 					for(int i=0;i<(int)mlNumOfParticles;i++)
@@ -369,7 +369,7 @@ namespace hpl {
 						cVector3f( mvDrawSize.x, mvDrawSize.y,0)
 					};
 
-					int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)];
+					int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexMask_Position)];
 					int lVtxQuadSize = lVtxStride*4;
 
 					for(int i=0;i<(int)mlNumOfParticles;i++)
@@ -442,7 +442,7 @@ namespace hpl {
 						mvRight		 +	mvForward * -1
 					};*/
 
-					int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)];
+					int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexMask_Position)];
 					int lVtxQuadSize = lVtxStride*4;
 
 					for(int i=0;i<(int)mlNumOfParticles;i++)
@@ -488,9 +488,9 @@ namespace hpl {
 				//Update the vertex buffer data
 
 				if(mvSubDivUV.size() > 1)
-					mpVtxBuffer->UpdateData(VertexAttr_Position | VertexAttr_Color0 | VertexAttr_UV0, false);
+					mpVtxBuffer->UpdateData(VertexMask_Position | VertexMask_Color0 | VertexMask_UV0, false);
 				else
-					mpVtxBuffer->UpdateData(VertexAttr_Position | VertexAttr_Color0, false);
+					mpVtxBuffer->UpdateData(VertexMask_Position | VertexMask_Color0, false);
 
 				}
 			}

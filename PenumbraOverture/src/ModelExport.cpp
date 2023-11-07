@@ -133,7 +133,7 @@ static void ExportModel(cMesh *model, cResources *res) {
 			return;
 		}
 		int count = vb->GetVertexNum();
-		int elements = attrMask == VertexAttr_UV0 ? 2 : 3;
+		int elements = attrMask == VertexMask_UV0 ? 2 : 3;
 		int arrSizeBytes = sizeof(float) * count * elements;
 
 		addAccessor(bufferViewIndex, 0, 0x1406, count, tString("VEC") + std::to_string(elements)); // FLOAT
@@ -143,11 +143,11 @@ static void ExportModel(cMesh *model, cResources *res) {
 		attrSize += arrSizeBytes;
 	};
 	
-	addAttr(VertexAttr_Normal, "NORMAL");
-	addAttr(VertexAttr_Position, "POSITION");
-//	addAttr(VertexAttr_Color0, "COLOR_0");
-	addAttr(VertexAttr_UV0, "TEXCOORD_0");
-//	addAttr(VertexAttr_Tangent, "TANGENT");
+	addAttr(VertexMask_Normal, "NORMAL");
+	addAttr(VertexMask_Position, "POSITION");
+//	addAttr(VertexMask_Color0, "COLOR_0");
+	addAttr(VertexMask_UV0, "TEXCOORD_0");
+//	addAttr(VertexMask_Tangent, "TANGENT");
 	primitive["attributes"] = attributes;
 
 	// write buffer nodes
@@ -184,7 +184,7 @@ static void ExportModel(cMesh *model, cResources *res) {
 		}
 		int count = vb->GetVertexNum();
 		int arrElements = kvVertexElements[cMath::Log2ToInt(attrMask)];
-		int bufElements = attrMask == VertexAttr_UV0 ? 2 : 3;
+		int bufElements = attrMask == VertexMask_UV0 ? 2 : 3;
 		
 		if (arrElements == bufElements) {
 			int sizeBytes = sizeof(float) * count * arrElements;
@@ -207,10 +207,10 @@ static void ExportModel(cMesh *model, cResources *res) {
 		}
 		
 	};
-	writeAttr(VertexAttr_Normal);
-	writeAttr(VertexAttr_Position);
-//	writeAttr(VertexAttr_Color0);
-	writeAttr(VertexAttr_UV0);
+	writeAttr(VertexMask_Normal);
+	writeAttr(VertexMask_Position);
+//	writeAttr(VertexMask_Color0);
+	writeAttr(VertexMask_UV0);
 
 	
 	FILE *pFile = fopen(binFilePath.c_str(),"wb+");

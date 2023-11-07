@@ -457,7 +457,7 @@ namespace hpl {
 
 		mSkyBoxColor = aColor;
 
-		float *pColors = mpSkyBox->GetArray(VertexAttr_Color0);
+		float *pColors = mpSkyBox->GetArray(VertexMask_Color0);
 
 		int lNum = mpSkyBox->GetVertexNum();
 		for(int i=0; i<lNum;++i)
@@ -469,7 +469,7 @@ namespace hpl {
 			pColors+=4;
 		}
 
-		mpSkyBox->UpdateData(VertexAttr_Color0,false);
+		mpSkyBox->UpdateData(VertexMask_Color0,false);
 	}
 
 	//-----------------------------------------------------------------------
@@ -1435,17 +1435,17 @@ namespace hpl {
 		//Draw the debug graphics for the object.
 		for(int i=0; i< pVtxBuffer->GetVertexNum(); i++)
 		{
-			cVector3f vPos = pVtxBuffer->GetVector3(VertexAttr_Position,i);
+			cVector3f vPos = pVtxBuffer->GetVector3(VertexMask_Position,i);
 
 			if(mDebugFlags & eRendererDebugFlag_DrawNormals)
 			{
-				cVector3f vNormal = pVtxBuffer->GetVector3(VertexAttr_Normal,i);
+				cVector3f vNormal = pVtxBuffer->GetVector3(VertexMask_Normal,i);
 
 				mpLowLevelGraphics->DrawLine(vPos,vPos+(vNormal*0.1f),cColor(0.5f,0.5f,1,1));
 			}
 			if(mDebugFlags & eRendererDebugFlag_DrawTangents)
 			{
-				cVector3f vTan = pVtxBuffer->GetVector4(VertexAttr_Tangent,i);
+				cVector3f vTan = pVtxBuffer->GetVector4(VertexMask_Tangent,i);
 
 				mpLowLevelGraphics->DrawLine(vPos,vPos+(vTan*0.2f),cColor(1,0.0f,0.0f,1));
 			}
