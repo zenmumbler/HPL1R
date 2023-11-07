@@ -887,26 +887,6 @@ namespace hpl {
 
 			if(bLog) Log(" Rendering '%s'\n",pObject->GetName().c_str());
 
-			/*if(pObject->GetIsOneSided())
-			{
-				cVector3f vNormal;
-
-				if(pObject->GetModelMatrix(apCamera))
-				{
-					vNormal = cMath::MatrixMul(pObject->GetWorldMatrix().GetRotation(), pObject->GetOneSidedNormal());
-					vNormal = cMath::MatrixMul(apCamera->GetViewMatrix().GetRotation(), vNormal);
-				}
-				else
-				{
-					vNormal = cMath::MatrixMul(apCamera->GetViewMatrix().GetRotation(), pObject->GetOneSidedNormal());
-				}
-
-				if(cMath::Vector3Dot(vNormal, cVector3f(0,0,1)) < -0.5f)
-				{
-					continue;
-				}
-			}*/
-
 			/////////////////////////////////////////
 			// Get all data needed
 			iMaterial *pMaterial = pObject->GetMaterial();

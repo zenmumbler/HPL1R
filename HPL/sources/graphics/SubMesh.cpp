@@ -54,9 +54,6 @@ namespace hpl {
 		mpVertexBones = NULL;
 
 		m_mtxLocalTransform = cMatrixf::Identity;
-
-		mbIsOneSided = false;
-		mvOneSidedNormal =0;
 	}
 
 	//-----------------------------------------------------------------------
@@ -203,76 +200,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cSubMesh::Compile()
-	{
-		CheckOneSided();
-	}
-
-	//-----------------------------------------------------------------------
-
 	//////////////////////////////////////////////////////////////////////////
-	// PRIAVTE METHODS
+	// PRIVATE METHODS
 	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	void cSubMesh::CheckOneSided()
-	{
-		//Log("--- %s\n",GetName().c_str());
-
-		if(mpVtxBuffer==NULL) return;
-
-		int lIdxNum = mpVtxBuffer->GetIndexNum();
-
-		if(lIdxNum > 400*3) return; //Just skip larger buffers for now, they should never be planes.
-
-		unsigned int* pIndices = mpVtxBuffer->GetIndices();
-		float *pPositions = mpVtxBuffer->GetArray(VertexAttr_Position);
-
-		bool bFirst = true;
-		cVector3f vNormalSum;
-		cVector3f vFirstNormal;
-		int vTri[3];
-		const int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexAttr_Position)];
-		float fCount=0;
-
-		for(int i=0; i< lIdxNum; i+=3)
-		{
-			//Log("%d \n",i);
-
-			vTri[0] = pIndices[i+0];
-			vTri[1] = pIndices[i+1];
-			vTri[2] = pIndices[i+2];
-
-			const float *pVtx0 = &pPositions[vTri[0]*	lVtxStride];
-			const float *pVtx1 = &pPositions[vTri[1]*	lVtxStride];
-			const float *pVtx2 = &pPositions[vTri[2]*	lVtxStride];
-
-			cVector3f vEdge1( pVtx1[0] - pVtx0[0], pVtx1[1] - pVtx0[1], pVtx1[2] - pVtx0[2]);
-			cVector3f vEdge2( pVtx2[0] - pVtx0[0], pVtx2[1] - pVtx0[1], pVtx2[2] - pVtx0[2]);
-
-			cVector3f vNormal = cMath::Vector3Normalize(cMath::Vector3Cross(vEdge2, vEdge1));
-
-			//Log(" normal: %s\n",vNormal.ToString().c_str());
-
-			if(bFirst)
-			{
-				bFirst = false;
-				vFirstNormal = vNormal;
-				vNormalSum = vNormal;
-			}
-			else
-			{
-				if(cMath::Vector3Dot(vFirstNormal, vNormal) < 0.9f) return;
-				vNormalSum += vNormal;
-			}
-
-			fCount += 1;
-		}
-
-		mbIsOneSided = true;
-		mvOneSidedNormal = cMath::Vector3Normalize(vNormalSum / fCount);
-	}
 
 	//-----------------------------------------------------------------------
 }

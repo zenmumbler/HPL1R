@@ -44,9 +44,6 @@ namespace hpl {
 		mvCalcScale = cVector3f(1,1,1);
 
 		mbForceShadow = false;
-
-		mbIsOneSided = false;
-		mvOneSidedNormal =0;
 	}
 
 	//-----------------------------------------------------------------------

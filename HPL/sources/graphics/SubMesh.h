@@ -82,14 +82,7 @@ namespace hpl {
 		const cMatrixf& GetLocalTransform(){ return m_mtxLocalTransform;}
 		void SetLocalTransform(const cMatrixf& a_mtxTrans){ m_mtxLocalTransform = a_mtxTrans;}
 
-		bool GetIsOneSided(){ return mbIsOneSided;}
-		const cVector3f& GetOneSidedNormal(){ return mvOneSidedNormal;}
-
-		void Compile();
 	private:
-		void CheckOneSided();
-
-
 		iMaterial* mpMaterial;
 		iVertexBuffer* mpVtxBuffer;
 
@@ -111,9 +104,6 @@ namespace hpl {
 		tString msName;
 
 		bool mbDoubleSided;
-
-		bool mbIsOneSided;
-		cVector3f mvOneSidedNormal;
 
 		cMaterialManager* mpMaterialManager;
 

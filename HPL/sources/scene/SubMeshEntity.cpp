@@ -52,9 +52,6 @@ namespace hpl {
 		mpMeshEntity = apMeshEntity;
 		mpSubMesh = apSubMesh;
 
-		mbIsOneSided = mpSubMesh->GetIsOneSided();
-		mvOneSidedNormal = mpSubMesh->GetOneSidedNormal();
-
 		mpMaterialManager = apMaterialManager;
 
 		mbCastShadows = false;

@@ -114,9 +114,6 @@ namespace hpl {
 		void SetForceShadow(bool abX){ mbForceShadow = abX;}
 		bool GetForceShadow(){ return mbForceShadow;}
 
-		bool GetIsOneSided(){ return mbIsOneSided;}
-		const cVector3f& GetOneSidedNormal(){ return mvOneSidedNormal;}
-
 		//SaveObject implementation
 		virtual iSaveData* CreateSaveData();
 		virtual void SaveToSaveData(iSaveData *apSaveData);
@@ -126,9 +123,6 @@ namespace hpl {
 	protected:
 		cMatrixf m_mtxInvModel;
 		cMatrixf m_mtxPrevious;
-
-		bool mbIsOneSided;
-		cVector3f mvOneSidedNormal;
 
 		int mlLastMatrixCount;
 

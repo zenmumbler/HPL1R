@@ -874,8 +874,6 @@ namespace hpl {
 								pVtxBuffer->GetVertexNum(),
 								&bDoubleSided);
 			pSubMesh->SetDoubleSided(bDoubleSided);
-
-			pSubMesh->Compile();
 		}
 
 		///////////////////////////////////////////////
@@ -1503,8 +1501,6 @@ namespace hpl {
 				&bDoubleSided);
 
 			pSubMesh->SetDoubleSided(bDoubleSided);
-
-			pSubMesh->Compile();
 
 			//Add material
 			iMaterial *pMaterial;
