@@ -55,13 +55,9 @@ namespace hpl {
 		if(alReserveIdxSize>0)
 			mvIndexArray.reserve(alReserveIdxSize);
 
-		mlElementHandle =0;
-
+		mlElementHandle = 0;
 		mbTangents = false;
-
 		mbCompiled = false;
-
-		mbHasShadowDouble = false;
 	}
 
 	cVertexBufferVBO::~cVertexBufferVBO()
@@ -249,11 +245,6 @@ namespace hpl {
 			cVector3f vPos = cMath::MatrixMul(a_mtxTransform, cVector3f(pPos[0],pPos[1],pPos[2]));
 			pPos[0] = vPos.x; pPos[1] = vPos.y; pPos[2] = vPos.z;
 
-			if(mbHasShadowDouble){
-				float* pExtraPos = &pPosArray[i*lVtxStride + lOffset];
-				pExtraPos[0] = vPos.x; pExtraPos[1] = vPos.y; pExtraPos[2] = vPos.z;
-			}
-
 			cVector3f vNorm = cMath::MatrixMul(mtxRot, cVector3f(pNorm[0],pNorm[1],pNorm[2]));
 			vNorm.Normalise();
 			pNorm[0] = vNorm.x; pNorm[1] = vNorm.y; pNorm[2] = vNorm.z;
@@ -400,7 +391,6 @@ namespace hpl {
 		memcpy(pVtxBuff->GetIndices(), GetIndices(), GetIndexNum() * sizeof(unsigned int) );
 
 		pVtxBuff->mbTangents = mbTangents;
-		pVtxBuff->mbHasShadowDouble = mbHasShadowDouble;
 
 		pVtxBuff->Compile(0);
 
@@ -414,9 +404,7 @@ namespace hpl {
 		int idx = cMath::Log2ToInt((int)VertexAttr_Position);
 		int lSize = (int)mvVertexArray[idx].size()/kvVertexElements[idx];
 
-		//If there is a shadow double, just return the length of the first half.
-		if(mbHasShadowDouble) return lSize / 2;
-		else return lSize;
+		return lSize;
 	}
 	int cVertexBufferVBO::GetIndexNum()
 	{

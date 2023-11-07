@@ -256,17 +256,6 @@ namespace hpl {
 				pSkinTangent += 4;
 			}
 
-			float *pSkinPosArray = mpDynVtxBuffer->GetArray(VertexAttr_Position);
-			if(mpMeshEntity->IsShadowCaster())
-			{
-				//Update the shadow double
-				memcpy(&pSkinPosArray[lVtxStride*lVtxNum],pSkinPosArray,sizeof(float)*lVtxStride*lVtxNum);
-				for(int vtx=lVtxStride*lVtxNum + lVtxStride-1; vtx < lVtxStride*lVtxNum*2; vtx+=lVtxStride)
-				{
-					pSkinPosArray[vtx] = 0;
-				}
-			}
-
 			//Update buffer
 			mpDynVtxBuffer->UpdateData(VertexAttr_Position | VertexAttr_Normal | VertexAttr_Tangent,false);
 		}

@@ -80,8 +80,6 @@ namespace hpl {
 
 		tUIntVec mvIndexArray;
 
-		bool mbHasShadowDouble;
-
 		bool mbCompiled;
 	};
 
