@@ -36,14 +36,14 @@ namespace hpl {
 
 	cVertexBufferVBO::cVertexBufferVBO(VertexAttributes aFlags,
 		VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
-		int alReserveVtxSize,int alReserveIdxSize) :
-	iVertexBuffer(aFlags, aDrawType,aUsageType, alReserveVtxSize, alReserveIdxSize)
+		int alReserveVtxSize,int alReserveIdxSize
+	) : iVertexBuffer(aFlags, aDrawType, aUsageType)
 	{
-		if(alReserveVtxSize>0)
+		if (alReserveVtxSize > 0)
 		{
-			for(int i=0; i< klNumOfVertexFlags; i++)
+			for (int i=0; i < klNumOfVertexFlags; i++)
 			{
-				if(aFlags & kvVertexFlags[i])
+				if (aFlags & kvVertexFlags[i])
 				{
 					mvVertexArray[i].reserve(alReserveVtxSize * kvVertexElements[i]);
 				}
@@ -52,7 +52,7 @@ namespace hpl {
 			}
 		}
 
-		if(alReserveIdxSize>0)
+		if (alReserveIdxSize>0)
 			mvIndexArray.reserve(alReserveIdxSize);
 
 		mlElementHandle = 0;

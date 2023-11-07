@@ -79,14 +79,14 @@ namespace hpl {
 	public:
 		iVertexBuffer(VertexAttributes aFlags,
 			VertexBufferPrimitiveType aDrawType,
-			VertexBufferUsageType aUsageType,
-			int alReserveVtxSize, int alReserveIdxSize
+			VertexBufferUsageType aUsageType
 		) :
 			mVertexFlags(aFlags),
 			mDrawType(aDrawType), mUsageType(aUsageType), mlElementNum(-1),
-			mbTangents(false){}
+			mbTangents(false)
+		{}
 
-		virtual ~iVertexBuffer(){}
+		virtual ~iVertexBuffer() = default;
 
 		VertexAttributes GetFlags(){ return mVertexFlags;}
 
@@ -149,7 +149,6 @@ namespace hpl {
 		VertexBufferUsageType mUsageType;
 
 		int mlElementNum;
-
 		bool mbTangents;
 	};
 
