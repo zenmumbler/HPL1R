@@ -70,7 +70,7 @@ namespace hpl {
 	private:
 		int GetElementNum(VertexAttributes aFlag);
 
-		void SetVertexStates(VertexAttributes aFlags);
+		void SetVertexStates(VertexAttributes attrs);
 
 		unsigned int mlElementHandle;
 

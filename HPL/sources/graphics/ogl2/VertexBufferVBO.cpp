@@ -463,71 +463,19 @@ namespace hpl {
 	}
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::SetVertexStates(VertexAttributes aFlags)
+	void cVertexBufferVBO::SetVertexStates(VertexAttributes attrs)
 	{
-		/// POSITION /////////////////////////
-		if (aFlags & VertexAttr_Position) {
-			glEnableVertexAttribArray(0);
-
-			int idx = cMath::Log2ToInt(VertexAttr_Position);
-			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
-
-			glVertexAttribPointer(0, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
-		}
-		else {
-			glDisableVertexAttribArray(0);
-		}
-
-		/// NORMAL /////////////////////////
-		if (aFlags & VertexAttr_Normal) {
-			glEnableVertexAttribArray(1);
-
-			int idx = cMath::Log2ToInt(VertexAttr_Normal);
-			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
-
-			glVertexAttribPointer(1, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
-		}
-		else {
-			glDisableVertexAttribArray(1);
-		}
-
-		/// COLOR 0 /////////////////////////
-		if (aFlags & VertexAttr_Color0) {
-			glEnableVertexAttribArray(2);
-
-			int idx = cMath::Log2ToInt(VertexAttr_Color0);
-			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
-
-			glVertexAttribPointer(2, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
-		}
-		else {
-			glDisableVertexAttribArray(2);
-		}
-
-		/// UV 0 /////////////////////////
-		if (aFlags & VertexAttr_UV0) {
-			glEnableVertexAttribArray(3);
-
-			int idx =  cMath::Log2ToInt(VertexAttr_UV0);
-			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
-
-			glVertexAttribPointer(3, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
-		}
-		else {
-			glDisableVertexAttribArray(3);
-		}
-
-		/// TANGENT /////////////////////////
-		if(aFlags & VertexAttr_Tangent){
-			glEnableVertexAttribArray(4);
-
-			int idx =  cMath::Log2ToInt(VertexAttr_Tangent);
-			glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[idx]);
-
-			glVertexAttribPointer(4, kvVertexElements[idx], GL_FLOAT, false, 0, nullptr);
-		}
-		else {
-			glDisableVertexAttribArray(4);
+		// iterate over each attribute and set vertex state accordingly
+		for (int index = 0; index < klNumOfVertexFlags; ++index) {
+			const tFlag mask = 1 << index;
+			if (attrs & mask) {
+				glEnableVertexAttribArray(index);
+				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[index]);
+				glVertexAttribPointer(index, kvVertexElements[index], GL_FLOAT, false, 0, nullptr);
+			}
+			else {
+				glDisableVertexAttribArray(index);
+			}
 		}
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
