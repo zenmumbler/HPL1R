@@ -13,10 +13,9 @@ namespace hpl {
 	typedef uint32_t tGfxBatchAttrs;
 
 	enum eGfxBatchAttr {
-		eGfxBatchAttr_Position =	0x0001,
-		eGfxBatchAttr_Normal =		0x0002,
-		eGfxBatchAttr_Color0 =		0x0004,
-		eGfxBatchAttr_Texture0 =	0x0008
+		eGfxBatchAttr_Position = 0x0001,
+		eGfxBatchAttr_Color0 =   0x0002,
+		eGfxBatchAttr_Texture0 = 0x0004
 	};
 
 	enum eBatchDrawMode

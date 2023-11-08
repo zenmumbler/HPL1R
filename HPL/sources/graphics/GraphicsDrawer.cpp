@@ -32,16 +32,26 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	const int BATCH_VERTEX_COUNT = 20'000;
+
 	cGraphicsDrawer::cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics,	cImageManager* apImageManager)
 	{
 		mpLowLevelGraphics = apLowLevelGraphics;
 		mpImageManager = apImageManager;
+//		_batchVB = mpLowLevelGraphics->CreateVertexBuffer(
+//			VertexMask_Position | VertexMask_Color0 | VertexMask_UV0,
+//			VertexBufferPrimitiveType::Quads, VertexBufferUsageType::Stream,
+//			BATCH_VERTEX_COUNT, BATCH_VERTEX_COUNT
+//		);
+//		_batchVB->Compile(0);
 	}
 
 	//-----------------------------------------------------------------------
 
 	cGraphicsDrawer::~cGraphicsDrawer()
 	{
+//		delete _batchVB;
+
 		for (auto pGo : mvGfxObjects) {
 			mpImageManager->Destroy(pGo->mpImage);
 		}
@@ -156,6 +166,12 @@ namespace hpl {
 			{
 				mpLowLevelGraphics->DrawBatch(mBatch, eGfxBatchAttr_Position | eGfxBatchAttr_Texture0 | eGfxBatchAttr_Color0, eBatchDrawMode_Quads);
 				mBatch.Clear();
+
+				// _batchVB->UpdateData(VertexMask_Position | VertexMask_Color0 | VertexMask_UV0, true);
+				// _batchVB->Bind();
+				// _batchVB->Draw();
+				// _batchVB->UnBind();
+
 				lIdxAdd = 0;
 			}
 		};
@@ -197,6 +213,11 @@ namespace hpl {
 					const auto& vtx = pObj.mpObject->mvVtx[i];
 					mBatch.AddVertex(vPos[i], pObj.mColor, vtx.tex);
 					mBatch.AddIndex(lIdxAdd++);
+
+					// _batchVB->AddVertex(VertexAttr_Position, vPos[i]);
+					// _batchVB->AddColor(VertexAttr_Color0, pObj.mColor);
+					// _batchVB->AddVertex(VertexAttr_UV0, vtx.tex);
+					// _batchVB->AddIndex(lIdxAdd++);
 				}
 			}
 			else
@@ -206,6 +227,11 @@ namespace hpl {
 					const auto& vtx = pObj.mpObject->mvVtx[i];
 					mBatch.AddVertex(vtx.pos + pObj.mvPosition, vtx.col, vtx.tex);
 					mBatch.AddIndex(lIdxAdd++);
+
+					// _batchVB->AddVertex(VertexAttr_Position, vtx.pos + pObj.mvPosition);
+					// _batchVB->AddColor(VertexAttr_Color0, vtx.col);
+					// _batchVB->AddVertex(VertexAttr_UV0, vtx.tex);
+					// _batchVB->AddIndex(lIdxAdd++);
 				}
 			}
 		}

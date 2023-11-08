@@ -26,18 +26,18 @@ namespace hpl {
 	}
 
 	void cGfxBatch::AddVertex(const cVector3f &position, const cColor &color, const cVector3f& tex) {
-		//Coord
+		// Position
 		mpVertexArray[mlVertexCount + 0] =	position.x;
 		mpVertexArray[mlVertexCount + 1] =	position.y;
 		mpVertexArray[mlVertexCount + 2] =	position.z;
 
-		//Color
+		// Color
 		mpVertexArray[mlVertexCount + 3] =	color.r;
 		mpVertexArray[mlVertexCount + 4] =	color.g;
 		mpVertexArray[mlVertexCount + 5] =	color.b;
 		mpVertexArray[mlVertexCount + 6] =	color.a;
 
-		//Texture coord
+		// UV
 		mpVertexArray[mlVertexCount + 7] =	tex.x;
 		mpVertexArray[mlVertexCount + 8] =	tex.y;
 

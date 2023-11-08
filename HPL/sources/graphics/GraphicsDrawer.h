@@ -23,6 +23,7 @@
 #include "graphics/GraphicsTypes.h"
 #include "graphics/Bitmap.h"
 #include "graphics/GfxBatch.h"
+//#include "graphics/VertexBuffer.h"
 
 namespace hpl {
 
@@ -128,6 +129,7 @@ namespace hpl {
 		cImageManager *mpImageManager;
 		tGfxBufferSet m_setGfxBuffer;
 		cGfxBatch mBatch;
+//		iVertexBuffer* _batchVB;
 		std::vector<const cGfxObject*> mvGfxObjects;
 	};
 

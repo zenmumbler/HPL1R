@@ -291,20 +291,6 @@ namespace hpl {
 
 	bool iLight3D::BeginDraw(cRenderSettings *apRenderSettings,iLowLevelGraphics *apLowLevelGraphics)
 	{
-		// Clear Stencil Buffer
-/*		apLowLevelGraphics->SetClearStencilActive(true);
-		apLowLevelGraphics->SetClearDepthActive(false);
-		apLowLevelGraphics->SetClearColorActive(false);
-
-		apLowLevelGraphics->SetClearStencil(0);
-
-		apLowLevelGraphics->ClearScreen();
-
-		apLowLevelGraphics->SetClearStencilActive(false);
-		apLowLevelGraphics->SetClearDepthActive(true);
-		apLowLevelGraphics->SetClearColorActive(true);*/
-
-
 		cRect2l ClipRect;
 		bool bVisible = CreateClipRect(ClipRect, apRenderSettings,apLowLevelGraphics);
 
