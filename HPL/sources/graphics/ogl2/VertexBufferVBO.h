@@ -39,6 +39,7 @@ namespace hpl {
 		void AddColor(VertexAttr attr,const cColor& aColor) override;
 		void AddIndex(unsigned int alIndex) override;
 
+		bool GenerateTangents() override;
 		void Transform(const cMatrixf &mtxTransform) override;
 
 		// <-- start hw buffer section

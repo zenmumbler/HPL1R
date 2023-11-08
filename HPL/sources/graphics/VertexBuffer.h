@@ -84,6 +84,7 @@ namespace hpl {
 		virtual void AddColor(VertexAttr attr,const cColor& aColor) = 0;
 		virtual void AddIndex(unsigned int alIndex)=0;
 
+		virtual bool GenerateTangents() = 0;
 		virtual bool Compile(VertexCompileOptions options) = 0;
 		virtual void UpdateData(VertexAttributes attrs, bool updateIndices) = 0;
 

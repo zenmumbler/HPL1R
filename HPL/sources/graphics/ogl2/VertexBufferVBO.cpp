@@ -148,30 +148,43 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	bool cVertexBufferVBO::GenerateTangents() {
+		// check that the 3 attributes required to generate tangents are present
+		VertexAttributes requiredAttrs = VertexMask_Position | VertexMask_Normal | VertexMask_UV0;
+		if ((mVertexFlags & requiredAttrs) != requiredAttrs)
+			return false;
+
+		mVertexFlags |= VertexMask_Tangent;
+
+		int vertexCount = GetVertexNum();
+		int tanElemCount = vertexCount * AttrElemCount(VertexAttr_Tangent);
+		mvVertexArray[VertexAttr_Tangent].resize(tanElemCount);
+
+		cMath::CreateTriTangentVectors(
+			GetArray(VertexAttr_Tangent),
+			GetIndices(), GetIndexNum(),
+
+			GetArray(VertexAttr_Position), AttrElemCount(VertexAttr_Position),
+
+			GetArray(VertexAttr_UV0),
+			GetArray(VertexAttr_Normal),
+			vertexCount
+		);
+
+		return true;
+	}
+
+	//-----------------------------------------------------------------------
+
 	bool cVertexBufferVBO::Compile(VertexCompileOptions options)
 	{
 		if(mbCompiled) return false;
 		mbCompiled = true;
 
-		//Create tangents if requested
+		// Create tangents if requested
 		if (options & VertexCompileOption::CreateTangents)
 		{
-			mVertexFlags |= VertexMask_Tangent;
-
-			int lSize = GetVertexNum() * AttrElemCount(VertexAttr_Tangent);
-			mvVertexArray[VertexAttr_Tangent].resize(lSize);
-
-			cMath::CreateTriTangentVectors(
-				GetArray(VertexAttr_Tangent),
-				GetIndices(), GetIndexNum(),
-
-				GetArray(VertexAttr_Position),
-				AttrElemCount(VertexAttr_Position),
-
-				GetArray(VertexAttr_UV0),
-				GetArray(VertexAttr_Normal),
-				GetVertexNum()
-			);
+			GenerateTangents();
 		}
 
 		GLenum usageType = GL_STATIC_DRAW;

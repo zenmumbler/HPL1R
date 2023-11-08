@@ -521,7 +521,8 @@ namespace hpl {
 			VertexMask_Position | VertexMask_Normal | VertexMask_UV0 | VertexMask_Color0 |
 			VertexMask_Tangent,
 			VertexBufferPrimitiveType::Triangles, aUsageType,
-			(int)aGeometry.mvVertexVec.size(), (int)aGeometry.mvIndexVec.size());
+			(int)aGeometry.mvVertexVec.size(), (int)aGeometry.mvIndexVec.size()
+		);
 
 		pVtxBuff->ResizeArray(VertexAttr_Tangent, (int)aGeometry.mvTangents.size());
 
