@@ -39,14 +39,16 @@ namespace hpl {
 		void AddColor(VertexAttr attr,const cColor& aColor) override;
 		void AddIndex(unsigned int alIndex) override;
 
+		void Transform(const cMatrixf &mtxTransform) override;
+
+		// <-- start hw buffer section
 		bool Compile(VertexCompileOptions options) override;
 		void UpdateData(VertexAttributes attrs, bool updateIndices) override;
-
-		void Transform(const cMatrixf &mtxTransform) override;
 
 		void Draw() override;
 		void DrawWireframe() override;
 		void DrawIndices(unsigned int *apIndices, int alCount) override;
+		// --> end hw buffer section
 
 		void Bind() override;
 		void UnBind() override;
@@ -62,6 +64,7 @@ namespace hpl {
 		int GetArrayStride(VertexAttr attr) override;
 		unsigned int* GetIndices() override;
 
+		// these 2 methods will be deprecated
 		void ResizeArray(VertexAttr attr, int newCount) override;
 		void ResizeIndices(int newCount) override;
 
