@@ -209,7 +209,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::UpdateData(VertexAttributes aTypes, bool abIndices)
+	void cVertexBufferVBO::UpdateData(VertexAttributes attrs, bool abIndices)
 	{
 		GLenum usageType = GL_STATIC_DRAW;
 		if (mUsageType== VertexBufferUsageType::Dynamic) usageType = GL_DYNAMIC_DRAW;
@@ -218,7 +218,7 @@ namespace hpl {
 		//Create the VBO vertex arrays
 		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
 		{
-			if ((mVertexFlags & ATTR_TO_MASK[attr]) && (aTypes & ATTR_TO_MASK[attr]))
+			if ((mVertexFlags & ATTR_TO_MASK[attr]) && (attrs & ATTR_TO_MASK[attr]))
 			{
 				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[attr]);
 				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[attr].size() * sizeof(float), mvVertexArray[attr].data(), usageType);
@@ -229,9 +229,9 @@ namespace hpl {
 		//Create the VBO index array
 		if (abIndices)
 		{
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mlElementHandle);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mlElementHandle);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum() * sizeof(unsigned int), mvIndexArray.data(), usageType);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		}
 	}
 
@@ -334,7 +334,19 @@ namespace hpl {
 
 	void cVertexBufferVBO::Bind()
 	{
-		SetVertexStates(mVertexFlags);
+		// iterate over each attribute and set vertex state accordingly
+		for (int attr = 0; attr < VERTEX_ATTR_COUNT; ++attr) {
+			if (mVertexFlags & ATTR_TO_MASK[attr]) {
+				glEnableVertexAttribArray(attr);
+				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[attr]);
+				glVertexAttribPointer(attr, AttrElemCount(attr), GL_FLOAT, false, 0, nullptr);
+			}
+			else {
+				glDisableVertexAttribArray(attr);
+			}
+		}
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
 	//-----------------------------------------------------------------------
@@ -452,25 +464,6 @@ namespace hpl {
 	/////////////////////////////////////////////////////////////////////////
 	// PRIVATE METHODS
 	/////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	void cVertexBufferVBO::SetVertexStates(VertexAttributes attrs)
-	{
-		// iterate over each attribute and set vertex state accordingly
-		for (int attr = 0; attr < VERTEX_ATTR_COUNT; ++attr) {
-			if (attrs & ATTR_TO_MASK[attr]) {
-				glEnableVertexAttribArray(attr);
-				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[attr]);
-				glVertexAttribPointer(attr, AttrElemCount(attr), GL_FLOAT, false, 0, nullptr);
-			}
-			else {
-				glDisableVertexAttribArray(attr);
-			}
-		}
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-	}
 
 	//-----------------------------------------------------------------------
 

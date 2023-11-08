@@ -71,8 +71,6 @@ namespace hpl {
 		unsigned int GetIndex(unsigned index) override;
 
 	private:
-		void SetVertexStates(VertexAttributes attrs);
-
 		tFloatVec mvVertexArray[VERTEX_ATTR_COUNT];
 		unsigned int mvArrayHandle[VERTEX_ATTR_COUNT];
 
