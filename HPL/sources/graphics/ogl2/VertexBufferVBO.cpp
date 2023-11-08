@@ -29,27 +29,46 @@
 namespace hpl {
 
 	//////////////////////////////////////////////////////////////////////////
+	// UTILITY
+	//////////////////////////////////////////////////////////////////////////
+
+	//-----------------------------------------------------------------------
+
+	static const VertexAttributes ATTR_TO_MASK[VERTEX_ATTR_COUNT] = {
+		VertexMask_Position,
+		VertexMask_Normal,
+		VertexMask_Color0,
+		VertexMask_UV0,
+		VertexMask_Tangent
+	};
+
+	constexpr int AttrElemCount(int attr) {
+		return (attr == VertexAttr_Position || attr == VertexAttr_Color0 || attr == VertexAttr_Tangent) ? 4 : 3;
+	}
+
+	//-----------------------------------------------------------------------
+
+	//////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
 	//////////////////////////////////////////////////////////////////////////
 
 	//-----------------------------------------------------------------------
 
-	cVertexBufferVBO::cVertexBufferVBO(VertexAttributes aFlags,
+	cVertexBufferVBO::cVertexBufferVBO(VertexAttributes attrs,
 		VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
 		int alReserveVtxSize,int alReserveIdxSize
-	) : iVertexBuffer(aFlags, aDrawType, aUsageType)
+	) : iVertexBuffer(attrs, aDrawType, aUsageType)
 	{
-		if (alReserveVtxSize > 0)
+		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
 		{
-			for (int i=0; i < klNumOfVertexFlags; i++)
+			if (alReserveVtxSize > 0)
 			{
-				if (aFlags & kvVertexFlags[i])
-				{
-					mvVertexArray[i].reserve(alReserveVtxSize * kvVertexElements[i]);
+				if (attrs & ATTR_TO_MASK[attr]) {
+					mvVertexArray[attr].reserve(alReserveVtxSize * AttrElemCount(attr));
 				}
-
-				mvArrayHandle[i] = 0;
 			}
+
+			mvArrayHandle[attr] = 0;
 		}
 
 		if (alReserveIdxSize>0)
@@ -62,18 +81,19 @@ namespace hpl {
 
 	cVertexBufferVBO::~cVertexBufferVBO()
 	{
-		for(int i=0;i< klNumOfVertexFlags; i++)
+		for (int i=0; i < VERTEX_ATTR_COUNT; i++)
 		{
-			mvVertexArray[i].clear();
-			if(mVertexFlags & kvVertexFlags[i])
+			if(mVertexFlags & ATTR_TO_MASK[i])
 			{
-				glDeleteBuffers(1,(GLuint *)&mvArrayHandle[i]);
+				mvVertexArray[i].clear();
+				if (mbCompiled)
+					glDeleteBuffers(1, &mvArrayHandle[i]);
 			}
 		}
 
 		mvIndexArray.clear();
-
-		glDeleteBuffers(1,(GLuint *)&mlElementHandle);
+		if (mbCompiled)
+			glDeleteBuffers(1,(GLuint *)&mlElementHandle);
 	}
 
 	//-----------------------------------------------------------------------
@@ -84,34 +104,34 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::AddVertex(VertexAttributes aType,const cVector3f& avVtx)
+	void cVertexBufferVBO::AddVertex(VertexAttr attr, const cVector3f& avVtx)
 	{
-		int idx = cMath::Log2ToInt((int)aType);
+		auto& array = mvVertexArray[attr];
 
-		mvVertexArray[idx].push_back(avVtx.x);
-		mvVertexArray[idx].push_back(avVtx.y);
-		mvVertexArray[idx].push_back(avVtx.z);
-		if(kvVertexElements[idx]==4)
-			mvVertexArray[idx].push_back(1);
+		array.push_back(avVtx.x);
+		array.push_back(avVtx.y);
+		array.push_back(avVtx.z);
+		if (AttrElemCount(attr) == 4)
+			array.push_back(1);
 	}
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::AddColor(VertexAttributes aType,const cColor& aColor)
+	void cVertexBufferVBO::AddColor(VertexAttr attr, const cColor& aColor)
 	{
-		int idx = cMath::Log2ToInt((int)aType);
+		auto& array = mvVertexArray[attr];
 
-		mvVertexArray[idx].push_back(aColor.r);
-		mvVertexArray[idx].push_back(aColor.g);
-		mvVertexArray[idx].push_back(aColor.b);
-		mvVertexArray[idx].push_back(aColor.a);
+		array.push_back(aColor.r);
+		array.push_back(aColor.g);
+		array.push_back(aColor.b);
+		array.push_back(aColor.a);
 	}
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::AddIndex(unsigned int alIndex)
+	void cVertexBufferVBO::AddIndex(unsigned int index)
 	{
-		mvIndexArray.push_back(alIndex);
+		mvIndexArray.push_back(index);
 	}
 
 	//-----------------------------------------------------------------------
@@ -120,10 +140,9 @@ namespace hpl {
 	{
 		cBoundingVolume bv;
 
-		int lNum = cMath::Log2ToInt((int)VertexMask_Position);
-
-		bv.AddArrayPoints(&(mvVertexArray[lNum][0]), GetVertexNum());
-		bv.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(VertexMask_Position)]);
+		auto positions = GetArray(VertexAttr_Position);
+		bv.AddArrayPoints(positions, GetVertexNum());
+		bv.CreateFromPoints(AttrElemCount(VertexAttr_Position));
 
 		return bv;
 	}
@@ -135,53 +154,51 @@ namespace hpl {
 		if(mbCompiled) return false;
 		mbCompiled = true;
 
-		//Create tangents
+		//Create tangents if requested
 		if (options & VertexCompileOption::CreateTangents)
 		{
 			mbTangents = true;
 
 			mVertexFlags |= VertexMask_Tangent;
 
-			int idx = cMath::Log2ToInt((int)VertexMask_Tangent);
-
-			int lSize = GetVertexNum()*4;
-			mvVertexArray[idx].resize(lSize);
+			int lSize = GetVertexNum() * AttrElemCount(VertexAttr_Tangent);
+			mvVertexArray[VertexAttr_Tangent].resize(lSize);
 
 			cMath::CreateTriTangentVectors(
-				&(mvVertexArray[cMath::Log2ToInt((int)VertexMask_Tangent)][0]),
-				&mvIndexArray[0], GetIndexNum(),
+				GetArray(VertexAttr_Tangent),
+				GetIndices(), GetIndexNum(),
 
-				&(mvVertexArray[cMath::Log2ToInt((int)VertexMask_Position)][0]),
-				kvVertexElements[cMath::Log2ToInt((int)VertexMask_Position)],
+				GetArray(VertexAttr_Position),
+				AttrElemCount(VertexAttr_Position),
 
-				&(mvVertexArray[cMath::Log2ToInt((int)VertexMask_UV0)][0]),
-				&(mvVertexArray[cMath::Log2ToInt((int)VertexMask_Normal)][0]),
+				GetArray(VertexAttr_UV0),
+				GetArray(VertexAttr_Normal),
 				GetVertexNum()
 			);
 		}
 
 		GLenum usageType = GL_STATIC_DRAW;
-		if(mUsageType== VertexBufferUsageType::Dynamic) usageType = GL_DYNAMIC_DRAW;
-		else if(mUsageType== VertexBufferUsageType::Stream) usageType = GL_STREAM_DRAW;
+		if (mUsageType== VertexBufferUsageType::Dynamic) usageType = GL_DYNAMIC_DRAW;
+		else if (mUsageType== VertexBufferUsageType::Stream) usageType = GL_STREAM_DRAW;
 
 		//Create the VBO vertex arrays
-		for(int i=0;i< klNumOfVertexFlags; i++)
+		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
 		{
-			if(mVertexFlags & kvVertexFlags[i])
+			if (mVertexFlags & ATTR_TO_MASK[attr])
 			{
-				glGenBuffers(1,(GLuint *)&mvArrayHandle[i]);
-				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[i]);
-				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[i].size() * sizeof(float), &(mvVertexArray[i][0]), usageType);
+				glGenBuffers(1, &mvArrayHandle[attr]);
+				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[attr]);
+				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[attr].size() * sizeof(float), mvVertexArray[attr].data(), usageType);
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-				//Log("%d-Handle: %d, size: %d \n",i,mvArrayHandle[i], mvVertexArray);
+				//Log("%d-Handle: %d, size: %d \n", attr, mvArrayHandle[attr], mvVertexArray);
 			}
 		}
 
 		//Create the VBO index array
-		glGenBuffers(1,(GLuint *)&mlElementHandle);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mlElementHandle);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum()*sizeof(unsigned int), &mvIndexArray[0], usageType);
+		glGenBuffers(1, &mlElementHandle);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mlElementHandle);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum() * sizeof(unsigned int), mvIndexArray.data(), usageType);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
 
 		//Log("VBO compile done!\n");
@@ -199,12 +216,12 @@ namespace hpl {
 		else if (mUsageType== VertexBufferUsageType::Stream) usageType = GL_STREAM_DRAW;
 
 		//Create the VBO vertex arrays
-		for (int i=0; i < klNumOfVertexFlags; i++)
+		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
 		{
-			if ((mVertexFlags & kvVertexFlags[i]) && (aTypes & kvVertexFlags[i]))
+			if ((mVertexFlags & ATTR_TO_MASK[attr]) && (aTypes & ATTR_TO_MASK[attr]))
 			{
-				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[i]);
-				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[i].size() * sizeof(float), &(mvVertexArray[i][0]), usageType);
+				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[attr]);
+				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[attr].size() * sizeof(float), mvVertexArray[attr].data(), usageType);
 			}
 		}
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -213,7 +230,7 @@ namespace hpl {
 		if (abIndices)
 		{
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mlElementHandle);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum()*sizeof(unsigned int), &mvIndexArray[0], usageType);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum() * sizeof(unsigned int), mvIndexArray.data(), usageType);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
 		}
 	}
@@ -222,25 +239,18 @@ namespace hpl {
 
 	void cVertexBufferVBO::Transform(const cMatrixf &a_mtxTransform)
 	{
-		float *pPosArray = GetArray(VertexMask_Position);
-		float *pNormalArray = GetArray(VertexMask_Normal);
-		float *pTangentArray = NULL;
-		if(mbTangents)pTangentArray = GetArray(VertexMask_Tangent);
+		float *pPosArray = GetArray(VertexAttr_Position);
+		float *pNormalArray = GetArray(VertexAttr_Normal);
+		float *pTangentArray = mbTangents ? GetArray(VertexAttr_Tangent) : nullptr;
 
 		int lVtxNum = GetVertexNum();
 
 		cMatrixf mtxRot = a_mtxTransform.GetRotation();
 
-		int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexMask_Position)];
-
-		int lOffset = GetVertexNum()*4;
-
-		for(int i=0; i<lVtxNum; i++)
+		for (int i=0; i < lVtxNum; i++)
 		{
-			float* pPos = &pPosArray[i*lVtxStride];
-			float* pNorm = &pNormalArray[i*3];
-			float* pTan = NULL;
-			if(mbTangents)pTan = &pTangentArray[i*4];
+			float* pPos = pPosArray + (i * AttrElemCount(VertexAttr_Position));
+			float* pNorm = pNormalArray + (i * AttrElemCount(VertexAttr_Normal));
 
 			cVector3f vPos = cMath::MatrixMul(a_mtxTransform, cVector3f(pPos[0],pPos[1],pPos[2]));
 			pPos[0] = vPos.x; pPos[1] = vPos.y; pPos[2] = vPos.z;
@@ -249,8 +259,10 @@ namespace hpl {
 			vNorm.Normalise();
 			pNorm[0] = vNorm.x; pNorm[1] = vNorm.y; pNorm[2] = vNorm.z;
 
-			if(mbTangents){
-				cVector3f vTan = cMath::MatrixMul(mtxRot, cVector3f(pTan[0],pTan[1],pTan[2]));
+			if (mbTangents) {
+				float* pTan = pTangentArray + (i * AttrElemCount(VertexAttr_Tangent));
+
+				cVector3f vTan = cMath::MatrixMul(mtxRot, cVector3f(pTan[0], pTan[1], pTan[2]));
 				vTan.Normalise();
 				pTan[0] = vTan.x; pTan[1] = vTan.y; pTan[2] = vTan.z;
 			}
@@ -259,9 +271,9 @@ namespace hpl {
 		if(mbCompiled)
 		{
 			if(mbTangents)
-				UpdateData(VertexMask_Position | VertexMask_Normal | VertexMask_Tangent,false);
+				UpdateData(VertexMask_Position | VertexMask_Normal | VertexMask_Tangent, false);
 			else
-				UpdateData(VertexMask_Position | VertexMask_Normal,false);
+				UpdateData(VertexMask_Position | VertexMask_Normal, false);
 		}
 	}
 
@@ -272,7 +284,7 @@ namespace hpl {
 		///////////////////////////////
 		//Get the draw type
 		GLenum mode = GL_TRIANGLES;
-		if (mDrawType == VertexBufferPrimitiveType::Quads)		mode = GL_QUADS;
+		if (mDrawType == VertexBufferPrimitiveType::Quads) mode = GL_QUADS;
 		else if(mDrawType == VertexBufferPrimitiveType::LineStrips)	mode = GL_LINE_STRIP;
 
 		//////////////////////////////////
@@ -282,9 +294,9 @@ namespace hpl {
 		int lSize = mlElementNum;
 		if(mlElementNum<0) lSize = GetIndexNum();
 
-		glDrawElements(mode,lSize,GL_UNSIGNED_INT, (char*) NULL);
+		glDrawElements(mode, lSize, GL_UNSIGNED_INT, NULL);
 
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
 	//-----------------------------------------------------------------------
@@ -309,8 +321,8 @@ namespace hpl {
 		///////////////////////////////
 		//Get the draw type
 		GLenum mode = GL_TRIANGLES;
-		if (mDrawType == VertexBufferPrimitiveType::Quads)		mode = GL_QUADS;
-		else if (mDrawType == VertexBufferPrimitiveType::LineStrips)	mode = GL_LINE_STRIP;
+		if (mDrawType == VertexBufferPrimitiveType::Quads) mode = GL_QUADS;
+		else if (mDrawType == VertexBufferPrimitiveType::LineStrips) mode = GL_LINE_STRIP;
 
 		//////////////////////////////////
 		//Bind and draw the buffer
@@ -329,16 +341,20 @@ namespace hpl {
 
 	void cVertexBufferVBO::UnBind()
 	{
-		glBindBuffer(GL_ARRAY_BUFFER,0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
 	//-----------------------------------------------------------------------
 
-	float* cVertexBufferVBO::GetArray(VertexAttributes aType)
+	float* cVertexBufferVBO::GetArray(VertexAttr attr)
 	{
-		int idx = cMath::Log2ToInt((int)aType);
+		return mvVertexArray[attr].data();
+	}
 
-		return &mvVertexArray[idx][0];
+	//-----------------------------------------------------------------------
+
+	int cVertexBufferVBO::GetArrayStride(VertexAttr attr) {
+		return AttrElemCount(attr);
 	}
 
 	//-----------------------------------------------------------------------
@@ -350,18 +366,16 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::ResizeArray(VertexAttributes aType, int alSize)
+	void cVertexBufferVBO::ResizeArray(VertexAttr attr, int newCount)
 	{
-		int idx = cMath::Log2ToInt((int)aType);
-
-		mvVertexArray[idx].resize(alSize);
+		mvVertexArray[attr].resize(newCount);
 	}
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::ResizeIndices(int alSize)
+	void cVertexBufferVBO::ResizeIndices(int newCount)
 	{
-		mvIndexArray.resize(alSize);
+		mvIndexArray.resize(newCount);
 	}
 
 	//-----------------------------------------------------------------------
@@ -371,24 +385,25 @@ namespace hpl {
 		cVertexBufferVBO *pVtxBuff = new cVertexBufferVBO(mVertexFlags, mDrawType, aUsageType, GetVertexNum(), GetIndexNum());
 
 		//Copy the vertices to the new buffer.
-		for(int i=0; i < klNumOfVertexFlags; i++)
+		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
 		{
-			if(kvVertexFlags[i] & mVertexFlags)
+			if (mVertexFlags * ATTR_TO_MASK[attr])
 			{
-				int lElements = kvVertexElements[i];
-				if(mbTangents && kvVertexFlags[i] == VertexMask_Tangent)
-					lElements=4;
+				auto va = static_cast<VertexAttr>(attr);
+				int lElements = AttrElemCount(va);
+				pVtxBuff->ResizeArray(va, (int)mvVertexArray[attr].size());
 
-				pVtxBuff->ResizeArray(kvVertexFlags[i], (int)mvVertexArray[i].size());
-
-				memcpy(pVtxBuff->GetArray(kvVertexFlags[i]),
-						&mvVertexArray[i][0], mvVertexArray[i].size() * sizeof(float));
+				memcpy(
+					pVtxBuff->GetArray(va),
+					mvVertexArray[attr].data(),
+					mvVertexArray[attr].size() * sizeof(float)
+				);
 			}
 		}
 
 		//Copy indices to the new buffer
 		pVtxBuff->ResizeIndices(GetIndexNum());
-		memcpy(pVtxBuff->GetIndices(), GetIndices(), GetIndexNum() * sizeof(unsigned int) );
+		memcpy(pVtxBuff->GetIndices(), GetIndices(), GetIndexNum() * sizeof(unsigned int));
 
 		pVtxBuff->mbTangents = mbTangents;
 
@@ -401,49 +416,34 @@ namespace hpl {
 
 	int cVertexBufferVBO::GetVertexNum()
 	{
-		int idx = cMath::Log2ToInt((int)VertexMask_Position);
-		int lSize = (int)mvVertexArray[idx].size()/kvVertexElements[idx];
-
-		return lSize;
+		return (int)mvVertexArray[VertexAttr_Position].size() / AttrElemCount(VertexAttr_Position);
 	}
 	int cVertexBufferVBO::GetIndexNum()
 	{
 		return (int)mvIndexArray.size();
 	}
 
-	cVector3f cVertexBufferVBO::GetVector3(VertexAttributes aType, unsigned alIdx)
+	cVector3f cVertexBufferVBO::GetVector3(VertexAttr attr, unsigned index)
 	{
-		if(!(aType & mVertexFlags)) return cVector3f(0,0,0);
+		if(!(attr & mVertexFlags)) return cVector3f(0,0,0);
 
-		int idx = cMath::Log2ToInt((int)aType);
-		int pos = alIdx * kvVertexElements[idx];
+		int pos = index * AttrElemCount(attr);
+		auto& array = mvVertexArray[attr];
 
-		return cVector3f(mvVertexArray[idx][pos+0],mvVertexArray[idx][pos+1],
-			mvVertexArray[idx][pos+2]);
+		return cVector3f(array[pos+0], array[pos+1], array[pos+2]);
 	}
-	cVector3f cVertexBufferVBO::GetVector4(VertexAttributes aType, unsigned alIdx)
+	cColor cVertexBufferVBO::GetColor(VertexAttr attr, unsigned index)
 	{
-		if(!(aType & mVertexFlags)) return cVector3f(0,0,0);
+		if(!(attr & mVertexFlags)) return cColor{};
 
-		int idx = cMath::Log2ToInt((int)aType);
-		int pos = alIdx * 4;//kvVertexElements[idx];
+		int pos = index * AttrElemCount(attr);
+		auto& array = mvVertexArray[attr];
 
-		return cVector3f(mvVertexArray[idx][pos+0],mvVertexArray[idx][pos+1],
-			mvVertexArray[idx][pos+2]);
+		return cColor(array[pos+0], array[pos+1], array[pos+2], array[pos+3]);
 	}
-	cColor cVertexBufferVBO::GetColor(VertexAttributes aType, unsigned alIdx)
+	unsigned int cVertexBufferVBO::GetIndex(unsigned index)
 	{
-		if(!(aType & mVertexFlags)) return cColor();
-
-		int idx = cMath::Log2ToInt((int)aType);
-		int pos = alIdx * kvVertexElements[idx];
-
-		return cColor(mvVertexArray[idx][pos+0],mvVertexArray[idx][pos+1],
-			mvVertexArray[idx][pos+2],mvVertexArray[idx][pos+3]);
-	}
-	unsigned int cVertexBufferVBO::GetIndex(VertexAttributes aType, unsigned alIdx)
-	{
-		return mvIndexArray[alIdx];
+		return mvIndexArray[index];
 	}
 
 
@@ -455,26 +455,17 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	int cVertexBufferVBO::GetElementNum(VertexAttributes aFlag)
-	{
-		int idx = cMath::Log2ToInt((int)aFlag);
-
-		return kvVertexElements[idx];
-	}
-	//-----------------------------------------------------------------------
-
 	void cVertexBufferVBO::SetVertexStates(VertexAttributes attrs)
 	{
 		// iterate over each attribute and set vertex state accordingly
-		for (int index = 0; index < klNumOfVertexFlags; ++index) {
-			const tFlag mask = 1 << index;
-			if (attrs & mask) {
-				glEnableVertexAttribArray(index);
-				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[index]);
-				glVertexAttribPointer(index, kvVertexElements[index], GL_FLOAT, false, 0, nullptr);
+		for (int attr = 0; attr < VERTEX_ATTR_COUNT; ++attr) {
+			if (attrs & ATTR_TO_MASK[attr]) {
+				glEnableVertexAttribArray(attr);
+				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[attr]);
+				glVertexAttribPointer(attr, AttrElemCount(attr), GL_FLOAT, false, 0, nullptr);
 			}
 			else {
-				glDisableVertexAttribArray(index);
+				glDisableVertexAttribArray(attr);
 			}
 		}
 

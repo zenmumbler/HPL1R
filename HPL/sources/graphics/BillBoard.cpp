@@ -82,23 +82,22 @@ namespace hpl {
 								cVector3f(-1,-1,0),
 								cVector3f(-1,1,0),
 								cVector3f(1,1,0)};
-		for(int i=0;i<4;i++)
+		for (int i=0; i<4; i++)
 		{
-			mpVtxBuffer->AddVertex(VertexMask_Position, vCoords[i]);
-			mpVtxBuffer->AddColor(VertexMask_Color0, cColor(1,1,1,1));
-			mpVtxBuffer->AddVertex(VertexMask_UV0, (vTexCoords[i] + cVector2f(1,1))/2 );
-			mpVtxBuffer->AddVertex(VertexMask_Normal,cVector3f(0,0,1));
+			mpVtxBuffer->AddVertex(VertexAttr_Position, vCoords[i]);
+			mpVtxBuffer->AddColor(VertexAttr_Color0, cColor(1,1,1,1));
+			mpVtxBuffer->AddVertex(VertexAttr_UV0, (vTexCoords[i] + cVector2f(1,1))/2 );
+			mpVtxBuffer->AddVertex(VertexAttr_Normal, cVector3f(0,0,1));
 		}
 
-		for(int i=0;i<3;i++) mpVtxBuffer->AddIndex(i);
-		for(int i=2;i<5;i++) mpVtxBuffer->AddIndex(i==4?0:i);
+		for (int i=0; i<3; i++) mpVtxBuffer->AddIndex(i);
+		for (int i=2; i<5; i++) mpVtxBuffer->AddIndex(i==4 ? 0 : i);
 
 		mpVtxBuffer->Compile(VertexCompileOption::CreateTangents);
 
 		mbIsHalo = false;
 		mbHaloSourceIsParent = false;
 		mvHaloSourceSize = 1;
-
 
 		mBoundingVolume.SetSize(cVector3f(mvSize.x, mvSize.y, mvSize.x));
 	}
@@ -130,7 +129,8 @@ namespace hpl {
 		mvSize = avSize;
 		mBoundingVolume.SetSize(cVector3f(mvSize.x, mvSize.y, mvSize.x));
 
-		float *pPos = mpVtxBuffer->GetArray(VertexMask_Position);
+		float *pPos = mpVtxBuffer->GetArray(VertexAttr_Position);
+		int posStride = mpVtxBuffer->GetArrayStride(VertexAttr_Position);
 
 		cVector3f vCoords[4] = {cVector3f((mvSize.x/2),-(mvSize.y/2),0),
 								cVector3f(-(mvSize.x/2),-(mvSize.y/2),0),
@@ -142,7 +142,7 @@ namespace hpl {
 			pPos[0] = vCoords[i].x;
 			pPos[1] = vCoords[i].y;
 			pPos[2] = vCoords[i].z;
-			pPos+=4;
+			pPos += posStride;
 		}
 
 		mpVtxBuffer->UpdateData(VertexMask_Position,false);
@@ -190,7 +190,8 @@ namespace hpl {
 
 		mColor = aColor;
 
-		float *pColors = mpVtxBuffer->GetArray(VertexMask_Color0);
+		float *pColors = mpVtxBuffer->GetArray(VertexAttr_Color0);
+		int colorStride = mpVtxBuffer->GetArrayStride(VertexAttr_Color0);
 
 		for(int i=0; i<4;++i)
 		{
@@ -198,7 +199,7 @@ namespace hpl {
 			pColors[1] = mColor.g * mfHaloAlpha;
 			pColors[2] = mColor.b * mfHaloAlpha;
 			pColors[3] = mColor.a * mfHaloAlpha;
-			pColors+=4;
+			pColors += colorStride;
 		}
 
 		mpVtxBuffer->UpdateData(VertexMask_Color0,false);
@@ -215,7 +216,8 @@ namespace hpl {
 
 		mfHaloAlpha = afX;
 
-		float *pColors = mpVtxBuffer->GetArray(VertexMask_Color0);
+		float *pColors = mpVtxBuffer->GetArray(VertexAttr_Color0);
+		int colorStride = mpVtxBuffer->GetArrayStride(VertexAttr_Color0);
 
 		for(int i=0; i<4;++i)
 		{
@@ -223,7 +225,7 @@ namespace hpl {
 			pColors[1] = mColor.g * mfHaloAlpha;
 			pColors[2] = mColor.b * mfHaloAlpha;
 			pColors[3] = mColor.a * mfHaloAlpha;
-			pColors+=4;
+			pColors += colorStride;
 		}
 
 		mpVtxBuffer->UpdateData(VertexMask_Color0,false);
@@ -529,7 +531,8 @@ namespace hpl {
 	void cBillboard::UpdateSourceBufferSize()
 	{
 		int lNum = mpHaloSourceBuffer->GetVertexNum();
-		float *pPositions = mpHaloSourceBuffer->GetArray(VertexMask_Position);
+		float *pPositions = mpHaloSourceBuffer->GetArray(VertexAttr_Position);
+		int posStride = mpHaloSourceBuffer->GetArrayStride(VertexAttr_Position);
 
 		for(int i=0; i<lNum;++i)
 		{
@@ -549,7 +552,7 @@ namespace hpl {
 			else
 				pPositions[2] = mvHaloSourceSize.z*0.5f;
 
-			pPositions += 4;
+			pPositions += posStride;
 		}
 
 		mpHaloSourceBuffer->UpdateData(VertexMask_Position, false);

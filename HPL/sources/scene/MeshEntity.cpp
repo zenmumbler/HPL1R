@@ -98,6 +98,8 @@ namespace hpl {
 
 		////////////////////////////////////////////////
 		//Create sub entities
+		int positionStride = 0;
+
 		for(int i=0;i<mpMesh->GetSubMeshNum();i++)
 		{
 			cSubMesh *pSubMesh = mpMesh->GetSubMesh(i);
@@ -109,23 +111,24 @@ namespace hpl {
 			m_mapSubMeshes.insert(tSubMeshEntityMap::value_type(mpMesh->GetSubMesh(i)->GetName(), pSub));
 
 			iVertexBuffer *pVtxBuffer = mpMesh->GetSubMesh(i)->GetVertexBuffer();
+			positionStride = pVtxBuffer->GetArrayStride(VertexAttr_Position);
 
 			if(mpMesh->GetNodeNum()<=0)
 			{
-				mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(VertexMask_Position),
+				mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(VertexAttr_Position),
 												pVtxBuffer->GetVertexNum());
 			}
 			else
 			{
-				pSub->mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(VertexMask_Position),
+				pSub->mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(VertexAttr_Position),
 														pVtxBuffer->GetVertexNum());
-				pSub->mBoundingVolume.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(VertexMask_Position)]);
+				pSub->mBoundingVolume.CreateFromPoints(pVtxBuffer->GetArrayStride(VertexAttr_Position));
 			}
 		}
 
-		if(mpMesh->GetNodeNum()<=0)
+		if(mpMesh->GetNodeNum()<=0 && positionStride > 0)
 		{
-			mBoundingVolume.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(VertexMask_Position)]);
+			mBoundingVolume.CreateFromPoints(positionStride);
 
 			//Log("CREATED BV Min: %s Max: %s\n",	mBoundingVolume.GetMin().ToString().c_str(),
 			//									mBoundingVolume.GetMax().ToString().c_str());
@@ -1459,16 +1462,18 @@ namespace hpl {
 				//Using vertices
 
 				//Go through all the sub meshes and build BV from vertices.
+				int positionStride = 0;
 				for(int i=0;i<GetSubMeshEntityNum();i++)
 				{
 					cSubMeshEntity* pSub = GetSubMeshEntity(i);
 
 					iVertexBuffer *pVtxBuffer = pSub->GetVertexBuffer();
+					positionStride = pVtxBuffer->GetArrayStride(VertexAttr_Position);
 
-					mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(VertexMask_Position),
+					mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(VertexAttr_Position),
 																	pVtxBuffer->GetVertexNum());
 				}
-				mBoundingVolume.CreateFromPoints(kvVertexElements[cMath::Log2ToInt(VertexMask_Position)]);
+				mBoundingVolume.CreateFromPoints(positionStride);
 			}
 			else
 			{

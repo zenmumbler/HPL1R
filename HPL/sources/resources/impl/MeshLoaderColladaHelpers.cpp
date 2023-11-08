@@ -524,21 +524,21 @@ namespace hpl {
 			(int)aGeometry.mvVertexVec.size(), (int)aGeometry.mvIndexVec.size());
 
 		pVtxBuff->SetTangents(true);
-		pVtxBuff->ResizeArray(VertexMask_Tangent,(int)aGeometry.mvTangents.size());
+		pVtxBuff->ResizeArray(VertexAttr_Tangent, (int)aGeometry.mvTangents.size());
 
 		//Add vertices
 		for(size_t j=0; j<aGeometry.mvVertexVec.size();j++)
 		{
-			pVtxBuff->AddVertex(VertexMask_Position,aGeometry.mvVertexVec[j].pos);
-			pVtxBuff->AddVertex(VertexMask_Normal,aGeometry.mvVertexVec[j].norm);
-			pVtxBuff->AddVertex(VertexMask_UV0,aGeometry.mvVertexVec[j].tex);
+			pVtxBuff->AddVertex(VertexAttr_Position, aGeometry.mvVertexVec[j].pos);
+			pVtxBuff->AddVertex(VertexAttr_Normal, aGeometry.mvVertexVec[j].norm);
+			pVtxBuff->AddVertex(VertexAttr_UV0, aGeometry.mvVertexVec[j].tex);
 
-			pVtxBuff->AddColor(VertexMask_Color0,cColor(1,1));
+			pVtxBuff->AddColor(VertexAttr_Color0, cColor(1,1));
 		}
 
 		//Add tangents
-		memcpy(pVtxBuff->GetArray(VertexMask_Tangent),&aGeometry.mvTangents[0],
-				aGeometry.mvTangents.size()*sizeof(float));
+		memcpy(pVtxBuff->GetArray(VertexAttr_Tangent),&aGeometry.mvTangents[0],
+				aGeometry.mvTangents.size() * sizeof(float));
 
 		//Add indices
 		for(size_t j=0; j<aGeometry.mvIndexVec.size();j++)

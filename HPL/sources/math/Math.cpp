@@ -555,27 +555,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	int cMath::Log2ToInt(int alX)
-	{
-		switch(alX)
-		{
-		case 1:		return 0;
-		case 2:		return 1;
-		case 4:		return 2;
-		case 8:		return 3;
-		case 16:	return 4;
-		case 32:	return 5;
-		case 64:	return 6;
-		case 128:	return 7;
-		case 256:	return 8;
-		case 512:	return 9;
-		default: return (int)floor((log((float)alX) / log(2.0f)) + 0.5f);
-		}
-		//return (int)floor((log((float)aX) / log(2.0f)) + 0.5f);
-	}
-
-	//-----------------------------------------------------------------------
-
 	bool cMath::IsPow2(int alX)
 	{
 		if (alX < 0) {

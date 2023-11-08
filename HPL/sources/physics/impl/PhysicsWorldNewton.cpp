@@ -263,8 +263,8 @@ namespace hpl {
 		cCollideShapeNewton *pShape = new cCollideShapeNewton(eCollideShapeType_Mesh, 0, NULL, mpNewtonWorld,this);
 
 		pShape->CreateFromVertices(apVtxBuffer->GetIndices(),apVtxBuffer->GetIndexNum(),
-									apVtxBuffer->GetArray(VertexMask_Position),
-									kvVertexElements[cMath::Log2ToInt(VertexMask_Position)],
+									apVtxBuffer->GetArray(VertexAttr_Position),
+								    apVtxBuffer->GetArrayStride(VertexAttr_Position),
 									apVtxBuffer->GetVertexNum());
 		mlstShapes.push_back(pShape);
 

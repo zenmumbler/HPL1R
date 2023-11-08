@@ -58,16 +58,16 @@ namespace hpl {
 		//Fill with tetxure coords (will do for most particle systems)
 		for(int i=0;i<(int)alMaxParticles;i++)
 		{
-			mpVtxBuffer->AddVertex(VertexMask_UV0, cVector3f(1,1,0));
-			mpVtxBuffer->AddVertex(VertexMask_UV0, cVector3f(0,1,0));
-			mpVtxBuffer->AddVertex(VertexMask_UV0, cVector3f(0,0,0));
-			mpVtxBuffer->AddVertex(VertexMask_UV0, cVector3f(1,0,0));
+			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(1,1,0));
+			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(0,1,0));
+			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(0,0,0));
+			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(1,0,0));
 		}
 
 		//Set default values for pos and col
 		for(int i=0;i<(int)alMaxParticles*4;i++){
-			mpVtxBuffer->AddVertex(VertexMask_Position, 0);
-			mpVtxBuffer->AddColor(VertexMask_Color0, cColor(1,1));
+			mpVtxBuffer->AddVertex(VertexAttr_Position, 0);
+			mpVtxBuffer->AddColor(VertexAttr_Color0, cColor(1,1));
 		}
 
 		mpVtxBuffer->Compile(0);
@@ -76,14 +76,14 @@ namespace hpl {
 		mlDirectionUpdateCount = -1;
 		mvDirection = cVector3f(0,0,0);
 
-		mvMaxDrawSize =0;
+		mvMaxDrawSize = 0;
 
 		mlAxisDrawUpdateCount = -1;
 
 		mbApplyTransformToBV = false;
 
-		mlUpdateCount =0;
-		mfTimeStepAccum =0;
+		mlUpdateCount = 0;
+		mfTimeStepAccum = 0;
 
 		//If Direction should be udpdated
 		mbUsesDirection = false;
@@ -199,8 +199,12 @@ namespace hpl {
 
 		if(mbUpdateGfx)
 		{
-			float *pPosArray = mpVtxBuffer->GetArray(VertexMask_Position);
-			float *pColArray = mpVtxBuffer->GetArray(VertexMask_Color0);
+			float *pPosArray = mpVtxBuffer->GetArray(VertexAttr_Position);
+			float *pColArray = mpVtxBuffer->GetArray(VertexAttr_Color0);
+			int posStride = mpVtxBuffer->GetArrayStride(VertexAttr_Position);
+			int colStride = mpVtxBuffer->GetArrayStride(VertexAttr_Color0);
+			int posStrideQuad = 4 * posStride;
+			int colStrideQuad = 4 * colStride;
 // NEW
 			if ( mPEType == ePEType_Beam)
 			{
@@ -221,7 +225,9 @@ namespace hpl {
 			// SUB DIVISION SET UP
 				if(mvSubDivUV.size() > 1)
 				{
-					float *pTexArray = mpVtxBuffer->GetArray(VertexMask_UV0);
+					float *pTexArray = mpVtxBuffer->GetArray(VertexAttr_UV0);
+					int texStride = mpVtxBuffer->GetArrayStride(VertexAttr_UV0);
+					int texStrideQuad = 4 * texStride;
 
 					for(int i=0;i<(int)mlNumOfParticles;i++)
 					{
@@ -229,10 +235,10 @@ namespace hpl {
 
 						cPESubDivision &subDiv = mvSubDivUV[pParticle->mlSubDivNum];
 
-						SetTex(&pTexArray[i*12 + 0*3],subDiv.mvUV[0]);
-						SetTex(&pTexArray[i*12 + 1*3],subDiv.mvUV[1]);
-						SetTex(&pTexArray[i*12 + 2*3],subDiv.mvUV[2]);
-						SetTex(&pTexArray[i*12 + 3*3],subDiv.mvUV[3]);
+						SetTex(&pTexArray[i*texStrideQuad + 0*texStride],subDiv.mvUV[0]);
+						SetTex(&pTexArray[i*texStrideQuad + 1*texStride],subDiv.mvUV[1]);
+						SetTex(&pTexArray[i*texStrideQuad + 2*texStride],subDiv.mvUV[2]);
+						SetTex(&pTexArray[i*texStrideQuad + 3*texStride],subDiv.mvUV[3]);
 
 						/*SetTex(&pTexArray[i*12 + 0*3], cVector3f(1,1,0));
 						SetTex(&pTexArray[i*12 + 1*3], cVector3f(0,1,0));
@@ -256,10 +262,6 @@ namespace hpl {
 
 				// ---
 
-
-					int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexMask_Position)];
-					int lVtxQuadSize = lVtxStride*4;
-
 					for(int i=0;i<(int)mlNumOfParticles;i++)
 					{
 						cParticle *pParticle = mvParticles[i];
@@ -274,17 +276,17 @@ namespace hpl {
 						cVector3f vPos = cMath::MatrixMul(apCamera->GetViewMatrix(), vParticlePos);
 
 
-						SetPos(&pPosArray[i*lVtxQuadSize + 0*lVtxStride], vPos + vAdd[0]);
-						SetCol(&pColArray[i*16 + 0*4], pParticle->mColor);
+						SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos + vAdd[0]);
+						SetCol(&pColArray[i*colStrideQuad + 0*colStride], pParticle->mColor);
 
-						SetPos(&pPosArray[i*lVtxQuadSize + 1*lVtxStride], vPos + vAdd[1]);
-						SetCol(&pColArray[i*16 + 1*4], pParticle->mColor);
+						SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos + vAdd[1]);
+						SetCol(&pColArray[i*colStrideQuad + 1*colStride], pParticle->mColor);
 
-						SetPos(&pPosArray[i*lVtxQuadSize + 2*lVtxStride], vPos + vAdd[2]);
-						SetCol(&pColArray[i*16 + 2*4], pParticle->mColor);
+						SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos + vAdd[2]);
+						SetCol(&pColArray[i*colStrideQuad + 2*colStride], pParticle->mColor);
 
-						SetPos(&pPosArray[i*lVtxQuadSize + 3*lVtxStride], vPos + vAdd[3]);
-						SetCol(&pColArray[i*16 + 3*4], pParticle->mColor);
+						SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos + vAdd[3]);
+						SetCol(&pColArray[i*colStrideQuad + 3*colStride], pParticle->mColor);
 					}
 				}
 				//////////////////////////////////////////////////
@@ -292,14 +294,11 @@ namespace hpl {
 				else if(mDrawType == eParticleEmitter3DType_DynamicPoint)
 				{
 					cVector3f vAdd[4] = {
-						cVector3f( mvDrawSize.x,-mvDrawSize.y,0),
-							cVector3f(-mvDrawSize.x,-mvDrawSize.y,0),
-							cVector3f(-mvDrawSize.x, mvDrawSize.y,0),
-							cVector3f( mvDrawSize.x, mvDrawSize.y,0)
+						cVector3f( mvDrawSize.x,-mvDrawSize.y, 0),
+						cVector3f(-mvDrawSize.x,-mvDrawSize.y, 0),
+						cVector3f(-mvDrawSize.x, mvDrawSize.y, 0),
+						cVector3f( mvDrawSize.x, mvDrawSize.y, 0)
 					};
-
-					int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexMask_Position)];
-					int lVtxQuadSize = lVtxStride*4;
 
 					for(int i=0;i<(int)mlNumOfParticles;i++)
 					{
@@ -326,34 +325,34 @@ namespace hpl {
 							cMatrixf mtxRotationMatrix = cMath::MatrixRotateZ(pParticle->mfSpin);
 
 
-							SetPos(&pPosArray[i*lVtxQuadSize + 0*lVtxStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[0]*vParticleSize));
-							SetCol(&pColArray[i*16 + 0*4], colParticleColor);
+							SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[0]*vParticleSize));
+							SetCol(&pColArray[i*colStrideQuad + 0*colStride], colParticleColor);
 
-							SetPos(&pPosArray[i*lVtxQuadSize + 1*lVtxStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[1]*vParticleSize));
-							SetCol(&pColArray[i*16 + 1*4], colParticleColor);
+							SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[1]*vParticleSize));
+							SetCol(&pColArray[i*colStrideQuad + 1*colStride], colParticleColor);
 
-							SetPos(&pPosArray[i*lVtxQuadSize + 2*lVtxStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[2]*vParticleSize));
-							SetCol(&pColArray[i*16 + 2*4], colParticleColor);
+							SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[2]*vParticleSize));
+							SetCol(&pColArray[i*colStrideQuad + 2*colStride], colParticleColor);
 
-							SetPos(&pPosArray[i*lVtxQuadSize + 3*lVtxStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[3]*vParticleSize));
-							SetCol(&pColArray[i*16 + 3*4], colParticleColor);
+							SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[3]*vParticleSize));
+							SetCol(&pColArray[i*colStrideQuad + 3*colStride], colParticleColor);
 
 						}
 						else
 						{
 						//--
 
-							SetPos(&pPosArray[i*lVtxQuadSize + 0*lVtxStride], vPos + vAdd[0]*vParticleSize);
-							SetCol(&pColArray[i*16 + 0*4], colParticleColor);
+							SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos + vAdd[0]*vParticleSize);
+							SetCol(&pColArray[i*colStrideQuad + 0*colStride], colParticleColor);
 
-							SetPos(&pPosArray[i*lVtxQuadSize + 1*lVtxStride], vPos + vAdd[1]*vParticleSize);
-							SetCol(&pColArray[i*16 + 1*4], colParticleColor);
+							SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos + vAdd[1]*vParticleSize);
+							SetCol(&pColArray[i*colStrideQuad + 1*colStride], colParticleColor);
 
-							SetPos(&pPosArray[i*lVtxQuadSize + 2*lVtxStride], vPos + vAdd[2]*vParticleSize);
-							SetCol(&pColArray[i*16 + 2*4], colParticleColor);
+							SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos + vAdd[2]*vParticleSize);
+							SetCol(&pColArray[i*colStrideQuad + 2*colStride], colParticleColor);
 
-							SetPos(&pPosArray[i*lVtxQuadSize + 3*lVtxStride], vPos + vAdd[3]*vParticleSize);
-							SetCol(&pColArray[i*16 + 3*4], colParticleColor);
+							SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos + vAdd[3]*vParticleSize);
+							SetCol(&pColArray[i*colStrideQuad + 3*colStride], colParticleColor);
 
 						}
 					}
@@ -368,9 +367,6 @@ namespace hpl {
 						cVector3f(-mvDrawSize.x, mvDrawSize.y,0),
 						cVector3f( mvDrawSize.x, mvDrawSize.y,0)
 					};
-
-					int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexMask_Position)];
-					int lVtxQuadSize = lVtxStride*4;
 
 					for(int i=0;i<(int)mlNumOfParticles;i++)
 					{
@@ -408,17 +404,17 @@ namespace hpl {
 						vDirX = vDirX * mvDrawSize.x * pParticle->mvSize.x;
 						vDirY = vDirY * mvDrawSize.y * pParticle->mvSize.y;
 
-						SetPos(&pPosArray[i*lVtxQuadSize + 0*lVtxStride], vPos2 + vDirY*-1 + vDirX);
-						SetCol(&pColArray[i*16 + 0*4], pParticle->mColor);
+						SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos2 + vDirY*-1 + vDirX);
+						SetCol(&pColArray[i*colStrideQuad + 0*colStride], pParticle->mColor);
 
-						SetPos(&pPosArray[i*lVtxQuadSize + 1*lVtxStride], vPos2 + vDirY*-1 + vDirX*-1);
-						SetCol(&pColArray[i*16 + 1*4], pParticle->mColor);
+						SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos2 + vDirY*-1 + vDirX*-1);
+						SetCol(&pColArray[i*colStrideQuad + 1*colStride], pParticle->mColor);
 
-						SetPos(&pPosArray[i*lVtxQuadSize + 2*lVtxStride], vPos1 + vDirY + vDirX*-1);
-						SetCol(&pColArray[i*16 + 2*4], pParticle->mColor);
+						SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos1 + vDirY + vDirX*-1);
+						SetCol(&pColArray[i*colStrideQuad + 2*colStride], pParticle->mColor);
 
-						SetPos(&pPosArray[i*lVtxQuadSize + 3*lVtxStride], vPos1 + vDirY + vDirX);
-						SetCol(&pColArray[i*16 + 3*4], pParticle->mColor);
+						SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos1 + vDirY + vDirX);
+						SetCol(&pColArray[i*colStrideQuad + 3*colStride], pParticle->mColor);
 					}
 				}
 				//////////////////////////////////////////////////
@@ -442,9 +438,6 @@ namespace hpl {
 						mvRight		 +	mvForward * -1
 					};*/
 
-					int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexMask_Position)];
-					int lVtxQuadSize = lVtxStride*4;
-
 					for(int i=0;i<(int)mlNumOfParticles;i++)
 					{
 						cParticle *pParticle = mvParticles[i];
@@ -460,24 +453,24 @@ namespace hpl {
 						cVector3f vPos = vParticlePos;//cMath::MatrixMul(apCamera->GetViewMatrix(), vParticlePos);
 						cVector2f &vSize = pParticle->mvSize;
 
-						vAdd[0] = mvRight	* vSize.x	 +	mvForward * vSize.y;
-						vAdd[1] = mvRight * -vSize.x	 +	mvForward * vSize.y;
-						vAdd[2] = mvRight * -vSize.x	 +	mvForward * -vSize.y;
-						vAdd[3] = mvRight	* vSize.x	 +	mvForward * -vSize.y;
+						vAdd[0] = mvRight * vSize.x  + mvForward * vSize.y;
+						vAdd[1] = mvRight * -vSize.x + mvForward * vSize.y;
+						vAdd[2] = mvRight * -vSize.x + mvForward * -vSize.y;
+						vAdd[3] = mvRight * vSize.x  + mvForward * -vSize.y;
 
 						cColor& colParticleColor = pParticle->mColor;
 
-						SetPos(&pPosArray[i*lVtxQuadSize + 0*lVtxStride], vPos + vAdd[0]);
-						SetCol(&pColArray[i*16 + 0*4], colParticleColor);
+						SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos + vAdd[0]);
+						SetCol(&pColArray[i*colStrideQuad + 0*colStride], colParticleColor);
 
-						SetPos(&pPosArray[i*lVtxQuadSize + 1*lVtxStride], vPos + vAdd[1]);
-						SetCol(&pColArray[i*16 + 1*4], colParticleColor);
+						SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos + vAdd[1]);
+						SetCol(&pColArray[i*colStrideQuad + 1*colStride], colParticleColor);
 
-						SetPos(&pPosArray[i*lVtxQuadSize + 2*lVtxStride], vPos + vAdd[2]);
-						SetCol(&pColArray[i*16 + 2*4], colParticleColor);
+						SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos + vAdd[2]);
+						SetCol(&pColArray[i*colStrideQuad + 2*colStride], colParticleColor);
 
-						SetPos(&pPosArray[i*lVtxQuadSize + 3*lVtxStride], vPos + vAdd[3]);
-						SetCol(&pColArray[i*16 + 3*4], colParticleColor);
+						SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos + vAdd[3]);
+						SetCol(&pColArray[i*colStrideQuad + 3*colStride], colParticleColor);
 					}
 				}
 

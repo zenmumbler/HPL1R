@@ -38,34 +38,25 @@ namespace hpl {
 		Stream
 	};
 
+	enum VertexAttr {
+		VertexAttr_Position = 0,
+		VertexAttr_Normal,
+		VertexAttr_Color0,
+		VertexAttr_UV0,
+		VertexAttr_Tangent
+	};
+
 	using VertexAttributes = tFlag;
 
 	enum VertexAttributeMask {
-		VertexMask_Position = 0x00000001,
-		VertexMask_Normal	= 0x00000002,
-		VertexMask_Color0	= 0x00000004,
-		VertexMask_UV0      = 0x00000008,
-		VertexMask_Tangent  = 0x00000010,
+		VertexMask_Position = 1,
+		VertexMask_Normal	= 2,
+		VertexMask_Color0	= 4,
+		VertexMask_UV0      = 8,
+		VertexMask_Tangent  = 16
 	};
 
-	const int klNumOfVertexFlags = 5;
-
-	const VertexAttributeMask kvVertexFlags[] = {
-		VertexMask_Position,
-		VertexMask_Normal,
-		VertexMask_Color0,
-		VertexMask_UV0,
-		VertexMask_Tangent,
-	};
-
-	const int kvVertexElements[] = {
-		4, // Position
-		3, // Normal
-		4, // Color0
-		3, // UV0
-		3, // Tangent
-	};
-
+	const int VERTEX_ATTR_COUNT = 5;
 
 	using VertexCompileOptions = tFlag;
 
@@ -77,11 +68,11 @@ namespace hpl {
 	class iVertexBuffer
 	{
 	public:
-		iVertexBuffer(VertexAttributes aFlags,
+		iVertexBuffer(VertexAttributes attrs,
 			VertexBufferPrimitiveType aDrawType,
 			VertexBufferUsageType aUsageType
 		) :
-			mVertexFlags(aFlags),
+			mVertexFlags(attrs),
 			mDrawType(aDrawType), mUsageType(aUsageType), mlElementNum(-1),
 			mbTangents(false)
 		{}
@@ -90,12 +81,12 @@ namespace hpl {
 
 		VertexAttributes GetFlags(){ return mVertexFlags;}
 
-		virtual void AddVertex(VertexAttributes aType,const cVector3f& avVtx)=0;
-		virtual void AddColor(VertexAttributes aType,const cColor& aColor)=0;
+		virtual void AddVertex(VertexAttr attr,const cVector3f& avVtx) = 0;
+		virtual void AddColor(VertexAttr attr,const cColor& aColor) = 0;
 		virtual void AddIndex(unsigned int alIndex)=0;
 
-		virtual bool Compile(VertexCompileOptions options)=0;
-		virtual void UpdateData(VertexAttributes aTypes, bool abIndices)=0;
+		virtual bool Compile(VertexCompileOptions options) = 0;
+		virtual void UpdateData(VertexAttributes attrs, bool updateIndices) = 0;
 
 		/**
 		 * Transform the entire buffer with transform.
@@ -111,25 +102,25 @@ namespace hpl {
 
 		virtual iVertexBuffer* CreateCopy(VertexBufferUsageType aUsageType)=0;
 
-		virtual cBoundingVolume CreateBoundingVolume()=0;
+		virtual cBoundingVolume CreateBoundingVolume() = 0;
 
-		virtual float* GetArray(VertexAttributes aType)=0;
+		virtual float* GetArray(VertexAttr attr) = 0;
+		virtual int GetArrayStride(VertexAttr attr) = 0;
 		virtual unsigned int* GetIndices()=0;
 
-		virtual int GetVertexNum()=0;
-		virtual int GetIndexNum()=0;
+		virtual int GetVertexNum() = 0;
+		virtual int GetIndexNum() = 0;
 
 		/**
 		 * Resizes an array to a custom size, the size is number of elements and NOT number of vertices.
 		 */
-		virtual void ResizeArray(VertexAttributes aType, int alSize)=0;
-		virtual void ResizeIndices(int alSize)=0;
+		virtual void ResizeArray(VertexAttr attr, int newCount)=0;
+		virtual void ResizeIndices(int newCount) = 0;
 
 		//For debugging purposes, quite slow to use.
-		virtual cVector3f GetVector3(VertexAttributes aType, unsigned alIdx)=0;
-		virtual cVector3f GetVector4(VertexAttributes aType, unsigned alIdx)=0;
-		virtual cColor GetColor(VertexAttributes aType, unsigned alIdx)=0;
-		virtual unsigned int GetIndex(VertexAttributes aType, unsigned alIdx)=0;
+		virtual cVector3f GetVector3(VertexAttr attr, unsigned index)=0;
+		virtual cColor GetColor(VertexAttr attr, unsigned index)=0;
+		virtual unsigned int GetIndex(unsigned index)=0;
 
 		/**
 		 * Set the number of of elements to draw.

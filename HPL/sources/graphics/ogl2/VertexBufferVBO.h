@@ -27,58 +27,57 @@ namespace hpl {
 	class cVertexBufferVBO : public iVertexBuffer
 	{
 	public:
-		cVertexBufferVBO(VertexAttributes aFlags,
+		cVertexBufferVBO(VertexAttributes attrs,
 			VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
 			int alReserveVtxSize,int alReserveIdxSize);
 		~cVertexBufferVBO();
 
-		void AddVertex(VertexAttributes aType,const cVector3f& avVtx);
-		void AddColor(VertexAttributes aType,const cColor& aColor);
-		void AddIndex(unsigned int alIndex);
+		cVertexBufferVBO(const cVertexBufferVBO& vb) = delete;
+		cVertexBufferVBO(cVertexBufferVBO&& vb) = delete;
 
-		bool Compile(VertexCompileOptions options);
-		void UpdateData(VertexAttributes aTypes, bool abIndices);
+		void AddVertex(VertexAttr attr,const cVector3f& avVtx) override;
+		void AddColor(VertexAttr attr,const cColor& aColor) override;
+		void AddIndex(unsigned int alIndex) override;
 
-		void Transform(const cMatrixf &mtxTransform);
+		bool Compile(VertexCompileOptions options) override;
+		void UpdateData(VertexAttributes attrs, bool updateIndices) override;
 
-		void Draw();
-		void DrawWireframe();
-		void DrawIndices(unsigned int *apIndices, int alCount);
+		void Transform(const cMatrixf &mtxTransform) override;
 
-		void Bind();
-		void UnBind();
+		void Draw() override;
+		void DrawWireframe() override;
+		void DrawIndices(unsigned int *apIndices, int alCount) override;
 
-		iVertexBuffer* CreateCopy(VertexBufferUsageType aUsageType);
+		void Bind() override;
+		void UnBind() override;
 
-		cBoundingVolume CreateBoundingVolume();
+		iVertexBuffer* CreateCopy(VertexBufferUsageType aUsageType) override;
 
-		int GetVertexNum();
-		int GetIndexNum();
+		cBoundingVolume CreateBoundingVolume() override;
 
-		float* GetArray(VertexAttributes aType);
-		unsigned int* GetIndices();
+		int GetVertexNum() override;
+		int GetIndexNum() override;
 
-		void ResizeArray(VertexAttributes aType, int alSize);
-		void ResizeIndices(int alSize);
+		float* GetArray(VertexAttr attr) override;
+		int GetArrayStride(VertexAttr attr) override;
+		unsigned int* GetIndices() override;
+
+		void ResizeArray(VertexAttr attr, int newCount) override;
+		void ResizeIndices(int newCount) override;
 
 		//For debugging purposes
-		cVector3f GetVector3(VertexAttributes aType, unsigned alIdx);
-		cVector3f GetVector4(VertexAttributes aType, unsigned alIdx);
-		cColor GetColor(VertexAttributes aType, unsigned alIdx);
-		unsigned int GetIndex(VertexAttributes aType, unsigned alIdx);
+		cVector3f GetVector3(VertexAttr attr, unsigned index) override;
+		cColor GetColor(VertexAttr attr, unsigned index) override;
+		unsigned int GetIndex(unsigned index) override;
 
 	private:
-		int GetElementNum(VertexAttributes aFlag);
-
 		void SetVertexStates(VertexAttributes attrs);
 
-		unsigned int mlElementHandle;
-
-		tFloatVec mvVertexArray[klNumOfVertexFlags];
-
-		unsigned int mvArrayHandle[klNumOfVertexFlags];
+		tFloatVec mvVertexArray[VERTEX_ATTR_COUNT];
+		unsigned int mvArrayHandle[VERTEX_ATTR_COUNT];
 
 		tUIntVec mvIndexArray;
+		unsigned int mlElementHandle;
 
 		bool mbCompiled;
 	};

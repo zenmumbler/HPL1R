@@ -191,18 +191,18 @@ namespace hpl {
 
 			mbGraphicsUpdated = true;
 
-			const float *pBindPos = mpSubMesh->GetVertexBuffer()->GetArray(VertexMask_Position);
-			const float *pBindNormal = mpSubMesh->GetVertexBuffer()->GetArray(VertexMask_Normal);
-			const float *pBindTangent = mpSubMesh->GetVertexBuffer()->GetArray(VertexMask_Tangent);
+			const float *pBindPos = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_Position);
+			const float *pBindNormal = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_Normal);
+			const float *pBindTangent = mpSubMesh->GetVertexBuffer()->GetArray(VertexAttr_Tangent);
 
-			float *pSkinPos = mpDynVtxBuffer->GetArray(VertexMask_Position);
-			float *pSkinNormal = mpDynVtxBuffer->GetArray(VertexMask_Normal);
-			float *pSkinTangent = mpDynVtxBuffer->GetArray(VertexMask_Tangent);
+			float *pSkinPos = mpDynVtxBuffer->GetArray(VertexAttr_Position);
+			float *pSkinNormal = mpDynVtxBuffer->GetArray(VertexAttr_Normal);
+			float *pSkinTangent = mpDynVtxBuffer->GetArray(VertexAttr_Tangent);
 
-			const int lVtxStride = kvVertexElements[cMath::Log2ToInt(VertexMask_Position)];
+			const int lVtxStride = mpDynVtxBuffer->GetArrayStride(VertexAttr_Position);
 			const int lVtxNum = mpDynVtxBuffer->GetVertexNum();
 
-			for(int vtx=0; vtx < lVtxNum; vtx++)
+			for (int vtx=0; vtx < lVtxNum; vtx++)
 			{
 				//To count the bone bindings
 				int lCount = 0;

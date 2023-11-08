@@ -133,11 +133,6 @@ namespace hpl {
 		static float ToDeg(float afAngle);
 
 		/**
-		 * Get the Log 2 of an int.
-		 */
-		static int Log2ToInt(int alX);
-
-		/**
 		 * Checks if the number is a power of two.
 		 */
 		static bool IsPow2(int alX);

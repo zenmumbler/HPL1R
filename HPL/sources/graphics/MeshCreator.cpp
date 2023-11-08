@@ -120,11 +120,11 @@ namespace hpl {
 					for(int i=0;i<4;i++)
 					{
 						int idx = i;
-						if(x + y + z < 0) idx = 3-i;
+						if (x + y + z < 0) idx = 3-i;
 
-						pSkyBox->AddColor(VertexMask_Color0, cColor(1,1,1,1));
-						pSkyBox->AddVertex(VertexMask_Position, (vDir+vAdd[idx])*fSize);
-						pSkyBox->AddVertex(VertexMask_UV0, vDir+vAdd[idx]);
+						pSkyBox->AddColor(VertexAttr_Color0, cColor(1,1,1,1));
+						pSkyBox->AddVertex(VertexAttr_Position, (vDir+vAdd[idx])*fSize);
+						pSkyBox->AddVertex(VertexAttr_UV0, vDir+vAdd[idx]);
 
 						vSide = vDir+vAdd[idx];
 						//Log("%d: (%.1f : %.1f : %.1f) ", i,vSide.x,  vSide.y,vSide.z);
@@ -199,13 +199,13 @@ namespace hpl {
 						int idx = GetBoxIdx(i,x,y,z);
 						cVector3f vTex = GetBoxTex(i,x,y,z,vAdd);
 
-						pBox->AddColor(VertexMask_Color0, cColor(1,1,1,1));
-						pBox->AddVertex(VertexMask_Position, (vDir+vAdd[idx])*avSize);
-						pBox->AddVertex(VertexMask_Normal, vDir);
+						pBox->AddColor(VertexAttr_Color0, cColor(1,1,1,1));
+						pBox->AddVertex(VertexAttr_Position, (vDir+vAdd[idx])*avSize);
+						pBox->AddVertex(VertexAttr_Normal, vDir);
 
 						//texture coord
 						cVector3f vCoord = cVector3f((vTex.x+1)*0.5f,(vTex.y+1)*0.5f,0);
-						pBox->AddVertex(VertexMask_UV0,vCoord);
+						pBox->AddVertex(VertexAttr_UV0,vCoord);
 
 						vSide = vDir+vAdd[idx];
 						//Log("%d: Tex: (%.1f : %.1f : %.1f) ", i,vTex.x,  vTex.y,vTex.z);
