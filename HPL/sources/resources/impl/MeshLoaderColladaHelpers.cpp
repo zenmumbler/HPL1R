@@ -523,7 +523,6 @@ namespace hpl {
 			VertexBufferPrimitiveType::Triangles, aUsageType,
 			(int)aGeometry.mvVertexVec.size(), (int)aGeometry.mvIndexVec.size());
 
-		pVtxBuff->SetTangents(true);
 		pVtxBuff->ResizeArray(VertexAttr_Tangent, (int)aGeometry.mvTangents.size());
 
 		//Add vertices

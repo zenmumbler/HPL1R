@@ -73,8 +73,7 @@ namespace hpl {
 			VertexBufferUsageType aUsageType
 		) :
 			mVertexFlags(attrs),
-			mDrawType(aDrawType), mUsageType(aUsageType), mlElementNum(-1),
-			mbTangents(false)
+			mDrawType(aDrawType), mUsageType(aUsageType), mlElementNum(-1)
 		{}
 
 		virtual ~iVertexBuffer() = default;
@@ -127,12 +126,10 @@ namespace hpl {
 		 * \param alNum If < 0, draw all indices.
 		 */
 		void SetElementNum(int alNum){ mlElementNum = alNum;}
-		int GetElementNum(){ return mlElementNum;}
+		int GetElementNum(){ return mlElementNum; }
 
 		VertexAttributes GetVertexFlags(){ return mVertexFlags;}
-
-		bool HasTangents(){ return mbTangents;}
-		void SetTangents(bool abX){ mbTangents = abX;}
+		bool HasAttribute(VertexAttr attr) { return (mVertexFlags & attr) != 0; }
 
 	protected:
 		VertexAttributes mVertexFlags;
@@ -140,8 +137,8 @@ namespace hpl {
 		VertexBufferUsageType mUsageType;
 
 		int mlElementNum;
-		bool mbTangents;
 	};
 
 };
+
 #endif // HPL_VERTEXBUFFER_H

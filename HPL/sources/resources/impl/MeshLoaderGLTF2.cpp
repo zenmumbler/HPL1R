@@ -97,8 +97,6 @@ namespace hpl {
 							VertexBufferUsageType::Static,
 							0, 0);
 
-			pVtxBuff->SetTangents((vtxFlags & VertexMask_Tangent) != 0);
-
 			//Fill the arrays
 			/*
 			for (int i = 0; i < klNumOfVertexFlags; i++) {
@@ -121,95 +119,7 @@ namespace hpl {
 			++curPrim;
 		}
 
-		/*
-		TiXmlElement* pSubMeshElem = pSubMeshesRootElem->FirstChildElement();
-		while(pSubMeshElem)
-		{
-			//////////////////
-			//Create sub mesh
-			cSubMesh *pSubMesh = pMesh->CreateSubMesh(pSubMeshElem->Attribute("name"));
-
-			//////////////////
-			//Set material
-			const char *pMatName = pSubMeshElem->Attribute("material");
-			if(pMatName==NULL){
-				Error("No material found for mesh '%s'\n",asFile.c_str());
-				ExitLoad();
-			}
-
-			iMaterial *pMaterial = mpMaterialManager->CreateMaterial(pMatName);
-			pSubMesh->SetMaterial(pMaterial);
-
-
-			////////////////////
-			//Get the vertices
-			TiXmlElement* pVtxElem = pSubMeshElem->FirstChildElement("Vertices");
-			int lVtxSize = cString::ToInt(pVtxElem->Attribute("size"),0);
-			tVertexFlag vtxFlags =0;
-			bool bTangents = false;
-
-			//Check what type of vertices are included.
-			if(pVtxElem->FirstChild("Normal"))vtxFlags |= VertexMask_Normal;
-			if(pVtxElem->FirstChild("Position"))vtxFlags |= VertexMask_Position;
-			if(pVtxElem->FirstChild("Texture"))vtxFlags |= VertexMask_UV0;
-			if(pVtxElem->FirstChild("Color"))vtxFlags |= VertexMask_Color0;
-			if(pVtxElem->FirstChild("Tangent")){
-				vtxFlags |= VertexAttr_UV1;
-				bTangents = true;
-			}
-
-			//Create the vertex buffer
-			eVertexBufferUsageType usageType = VertexBufferUsageType::Static;
-			iVertexBuffer* pVtxBuff = mpLowLevelGraphics->CreateVertexBuffer(vtxFlags,
-							eVertexBufferDrawType_Tri,
-							usageType,
-							0,0);
-
-			pVtxBuff->SetTangents(bTangents);
-
-			//Fill the arrays
-			for(int i=0;i<klNumOfVertexFlags;i++)
-			{
-				if(kvVertexFlags[i] & vtxFlags)
-				{
-					int lElemPerVtx = 3;
-					if(kvVertexFlags[i] & VertexAttr_UV1 || kvVertexFlags[i] & VertexMask_Color0){
-						lElemPerVtx = 4;
-					}
-
-					TiXmlElement* pElem = pVtxElem->FirstChildElement(GetVertexName(kvVertexFlags[i]));
-
-					pVtxBuff->ResizeArray(kvVertexFlags[i],lVtxSize * lElemPerVtx);
-					float *pArray = pVtxBuff->GetArray(kvVertexFlags[i]);
-
-					//Log("TYPE: %s:\n",GetVertexName(kvVertexFlags[i]));
-					FillVtxArray(pArray, pElem->Attribute("data"),lVtxSize * lElemPerVtx);
-				}
-			}
-
-			////////////////////
-			//Get Indices
-
-			TiXmlElement* pIdxElem = pSubMeshElem->FirstChildElement("Indices");
-			int lIdxSize = cString::ToInt(pIdxElem->Attribute("size"),0);
-
-			//Log("TYPE: Indices\n");
-			pVtxBuff->ResizeIndices(lIdxSize);
-			FillIdxArray(pVtxBuff->GetIndices(), pIdxElem->Attribute("data"),lIdxSize);
-
-			///////////////////
-			//Compile vertex buffer
-			pVtxBuff->Compile(0);
-
-			pSubMesh->SetVertexBuffer(pVtxBuff);
-
-
-			/////////////////
-			//Next element
-			pSubMeshElem = pSubMeshesRootElem->NextSiblingElement();
-		}
-
-		*/
+		// read submeshes, etc
 
 		delete[] bufferData;
 		cgltf_free(model);

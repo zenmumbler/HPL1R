@@ -75,7 +75,6 @@ namespace hpl {
 			mvIndexArray.reserve(alReserveIdxSize);
 
 		mlElementHandle = 0;
-		mbTangents = false;
 		mbCompiled = false;
 	}
 
@@ -157,8 +156,6 @@ namespace hpl {
 		//Create tangents if requested
 		if (options & VertexCompileOption::CreateTangents)
 		{
-			mbTangents = true;
-
 			mVertexFlags |= VertexMask_Tangent;
 
 			int lSize = GetVertexNum() * AttrElemCount(VertexAttr_Tangent);
@@ -241,7 +238,8 @@ namespace hpl {
 	{
 		float *pPosArray = GetArray(VertexAttr_Position);
 		float *pNormalArray = GetArray(VertexAttr_Normal);
-		float *pTangentArray = mbTangents ? GetArray(VertexAttr_Tangent) : nullptr;
+		bool hasTangents = HasAttribute(VertexAttr_Tangent);
+		float *pTangentArray = hasTangents ? GetArray(VertexAttr_Tangent) : nullptr;
 
 		int lVtxNum = GetVertexNum();
 
@@ -259,7 +257,7 @@ namespace hpl {
 			vNorm.Normalise();
 			pNorm[0] = vNorm.x; pNorm[1] = vNorm.y; pNorm[2] = vNorm.z;
 
-			if (mbTangents) {
+			if (hasTangents) {
 				float* pTan = pTangentArray + (i * AttrElemCount(VertexAttr_Tangent));
 
 				cVector3f vTan = cMath::MatrixMul(mtxRot, cVector3f(pTan[0], pTan[1], pTan[2]));
@@ -270,7 +268,7 @@ namespace hpl {
 
 		if(mbCompiled)
 		{
-			if(mbTangents)
+			if(hasTangents)
 				UpdateData(VertexMask_Position | VertexMask_Normal | VertexMask_Tangent, false);
 			else
 				UpdateData(VertexMask_Position | VertexMask_Normal, false);
@@ -416,8 +414,6 @@ namespace hpl {
 		//Copy indices to the new buffer
 		pVtxBuff->ResizeIndices(GetIndexNum());
 		memcpy(pVtxBuff->GetIndices(), GetIndices(), GetIndexNum() * sizeof(unsigned int));
-
-		pVtxBuff->mbTangents = mbTangents;
 
 		pVtxBuff->Compile(0);
 
