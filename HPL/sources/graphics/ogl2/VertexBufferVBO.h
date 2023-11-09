@@ -80,8 +80,6 @@ namespace hpl {
 
 		tUIntVec mvIndexArray;
 		unsigned int mlElementHandle;
-
-		bool mbCompiled;
 	};
 
 };

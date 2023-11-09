@@ -83,7 +83,6 @@ namespace hpl {
 			mvIndexArray.reserve(alReserveIdxSize);
 
 		mlElementHandle = 0;
-		mbCompiled = false;
 	}
 
 	cVertexBufferVBO::~cVertexBufferVBO()
@@ -93,13 +92,13 @@ namespace hpl {
 			if(mVertexFlags & ATTR_TO_MASK[i])
 			{
 				mvVertexArray[i].clear();
-				if (mbCompiled)
+				if (mlElementHandle)
 					glDeleteBuffers(1, &mvArrayHandle[i]);
 			}
 		}
 
 		mvIndexArray.clear();
-		if (mbCompiled)
+		if (mlElementHandle)
 			glDeleteBuffers(1,(GLuint *)&mlElementHandle);
 	}
 
@@ -193,8 +192,7 @@ namespace hpl {
 
 	bool cVertexBufferVBO::Compile()
 	{
-		if(mbCompiled) return false;
-		mbCompiled = true;
+		if (mlElementHandle) return false;
 
 		GLenum usageType = GetGLUsageType(mUsageType);
 
@@ -284,7 +282,7 @@ namespace hpl {
 			}
 		}
 
-		if(mbCompiled)
+		if (mlElementHandle)
 		{
 			if(hasTangents)
 				UpdateData(VertexMask_Position | VertexMask_Normal | VertexMask_Tangent, false);
