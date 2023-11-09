@@ -46,6 +46,13 @@ namespace hpl {
 		return (attr == VertexAttr_Position || attr == VertexAttr_Color0 || attr == VertexAttr_Tangent) ? 4 : 3;
 	}
 
+	constexpr GLenum GetGLUsageType(VertexBufferUsageType vbut) {
+		GLenum usageType = GL_STATIC_DRAW;
+		if (vbut == VertexBufferUsageType::Dynamic) usageType = GL_DYNAMIC_DRAW;
+		else if (vbut == VertexBufferUsageType::Stream) usageType = GL_STREAM_DRAW;
+		return usageType;
+	}
+
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////
@@ -186,9 +193,7 @@ namespace hpl {
 		if(mbCompiled) return false;
 		mbCompiled = true;
 
-		GLenum usageType = GL_STATIC_DRAW;
-		if (mUsageType== VertexBufferUsageType::Dynamic) usageType = GL_DYNAMIC_DRAW;
-		else if (mUsageType== VertexBufferUsageType::Stream) usageType = GL_STREAM_DRAW;
+		GLenum usageType = GetGLUsageType(mUsageType);
 
 		//Create the VBO vertex arrays
 		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
@@ -198,11 +203,11 @@ namespace hpl {
 				glGenBuffers(1, &mvArrayHandle[attr]);
 				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[attr]);
 				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[attr].size() * sizeof(float), mvVertexArray[attr].data(), usageType);
-				glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 				//Log("%d-Handle: %d, size: %d \n", attr, mvArrayHandle[attr], mvVertexArray);
 			}
 		}
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		//Create the VBO index array
 		glGenBuffers(1, &mlElementHandle);
@@ -220,9 +225,7 @@ namespace hpl {
 
 	void cVertexBufferVBO::UpdateData(VertexAttributes attrs, bool abIndices)
 	{
-		GLenum usageType = GL_STATIC_DRAW;
-		if (mUsageType== VertexBufferUsageType::Dynamic) usageType = GL_DYNAMIC_DRAW;
-		else if (mUsageType== VertexBufferUsageType::Stream) usageType = GL_STREAM_DRAW;
+		GLenum usageType = GetGLUsageType(mUsageType);
 
 		//Create the VBO vertex arrays
 		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
