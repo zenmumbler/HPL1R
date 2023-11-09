@@ -43,7 +43,8 @@ namespace hpl {
 	};
 
 	constexpr int AttrElemCount(int attr) {
-		return (attr == VertexAttr_Position || attr == VertexAttr_Color0 || attr == VertexAttr_Tangent) ? 4 : 3;
+		if (attr == VertexAttr_UV0) return 2;
+		return (attr == VertexAttr_Color0 || attr == VertexAttr_Tangent) ? 4 : 3;
 	}
 
 	constexpr GLenum GetGLUsageType(VertexBufferUsageType vbut) {
