@@ -81,7 +81,7 @@ namespace hpl {
 	class cPESubDivision
 	{
 	public:
-		cVector3f mvUV[4];
+		cVector2f mvUV[4];
 	};
 
 	//------------------------------------------

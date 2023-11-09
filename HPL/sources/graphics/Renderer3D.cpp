@@ -454,10 +454,10 @@ namespace hpl {
 	void cRenderer3D::SetSkyBoxColor(const cColor& aColor)
 	{
 		if(mSkyBoxColor == aColor) return;
-
 		mSkyBoxColor = aColor;
 
 		float *pColors = mpSkyBox->GetArray(VertexAttr_Color0);
+		int colorStride = mpSkyBox->GetArrayStride(VertexAttr_Color0);
 
 		int lNum = mpSkyBox->GetVertexNum();
 		for(int i=0; i<lNum;++i)
@@ -466,7 +466,7 @@ namespace hpl {
 			pColors[1] = mSkyBoxColor.g;
 			pColors[2] = mSkyBoxColor.b;
 			pColors[3] = mSkyBoxColor.a;
-			pColors+=4;
+			pColors += colorStride;
 		}
 
 		mpSkyBox->UpdateData(VertexMask_Color0, false);

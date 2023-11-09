@@ -113,11 +113,13 @@ namespace hpl {
 	void cVertexBufferVBO::AddVertex(VertexAttr attr, const cVector3f& avVtx)
 	{
 		auto& array = mvVertexArray[attr];
+		int elemCount = AttrElemCount(attr);
 
 		array.push_back(avVtx.x);
 		array.push_back(avVtx.y);
-		array.push_back(avVtx.z);
-		if (AttrElemCount(attr) == 4)
+		if (elemCount > 2)
+			array.push_back(avVtx.z);
+		if (elemCount > 3)
 			array.push_back(1);
 	}
 

@@ -199,7 +199,10 @@ namespace hpl {
 			float *pSkinNormal = mpDynVtxBuffer->GetArray(VertexAttr_Normal);
 			float *pSkinTangent = mpDynVtxBuffer->GetArray(VertexAttr_Tangent);
 
-			const int lVtxStride = mpDynVtxBuffer->GetArrayStride(VertexAttr_Position);
+			const int posStride = mpDynVtxBuffer->GetArrayStride(VertexAttr_Position);
+			const int normalStride = mpDynVtxBuffer->GetArrayStride(VertexAttr_Normal);
+			const int tangentStride = mpDynVtxBuffer->GetArrayStride(VertexAttr_Tangent);
+
 			const int lVtxNum = mpDynVtxBuffer->GetVertexNum();
 
 			for (int vtx=0; vtx < lVtxNum; vtx++)
@@ -246,14 +249,14 @@ namespace hpl {
 					++pWeight; ++pBoneIdx; ++lCount;
 				}
 
-				pBindPos += lVtxStride;
-				pSkinPos += lVtxStride;
+				pBindPos += posStride;
+				pSkinPos += posStride;
 
-				pBindNormal += 3;
-				pSkinNormal += 3;
+				pBindNormal += normalStride;
+				pSkinNormal += normalStride;
 
-				pBindTangent += 4;
-				pSkinTangent += 4;
+				pBindTangent += tangentStride;
+				pSkinTangent += tangentStride;
 			}
 
 			//Update buffer

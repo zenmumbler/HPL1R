@@ -133,10 +133,10 @@ namespace hpl {
 
 				cPESubDivision *pSubDiv = &mvSubDivUV[lIdx];
 
-				pSubDiv->mvUV[0] = cVector3f( (fX +1)*fInvW,	(fY +1)*fInvH,0);	//1,1
-				pSubDiv->mvUV[1] = cVector3f( fX*fInvW,			(fY +1)*fInvH,0);	//0,1
-				pSubDiv->mvUV[2] = cVector3f( fX*fInvW,			fY*fInvH,0);		//0,0
-				pSubDiv->mvUV[3] = cVector3f( (fX +1)*fInvW,	fY*fInvH,0);		//1,0
+				pSubDiv->mvUV[0] = cVector2f( (fX +1)*fInvW,	(fY +1)*fInvH);	//1,1
+				pSubDiv->mvUV[1] = cVector2f( fX*fInvW,			(fY +1)*fInvH);	//0,1
+				pSubDiv->mvUV[2] = cVector2f( fX*fInvW,			fY*fInvH);		//0,0
+				pSubDiv->mvUV[3] = cVector2f( (fX +1)*fInvW,	fY*fInvH);		//1,0
 			}
 		}
 
@@ -186,11 +186,10 @@ namespace hpl {
 		apPos[2] = aPos.z;
 	}
 
-	static inline void SetTex(float *apTex, const cVector3f &aPos)
+	static inline void SetTex(float *apTex, const cVector2f &aPos)
 	{
 		apTex[0] = aPos.x;
 		apTex[1] = aPos.y;
-		apTex[2] = aPos.z;
 	}
 
 	void iParticleEmitter3D::UpdateGraphics(cCamera *apCamera,float afFrameTime, cRenderList *apRenderList)
@@ -240,10 +239,10 @@ namespace hpl {
 						SetTex(&pTexArray[i*texStrideQuad + 2*texStride],subDiv.mvUV[2]);
 						SetTex(&pTexArray[i*texStrideQuad + 3*texStride],subDiv.mvUV[3]);
 
-						/*SetTex(&pTexArray[i*12 + 0*3], cVector3f(1,1,0));
-						SetTex(&pTexArray[i*12 + 1*3], cVector3f(0,1,0));
-						SetTex(&pTexArray[i*12 + 2*3], cVector3f(0,0,0));
-						SetTex(&pTexArray[i*12 + 3*3], cVector3f(1,0,0));*/
+						/*SetTex(&pTexArray[i*12 + 0*3], cVector2f(1,1));
+						SetTex(&pTexArray[i*12 + 1*3], cVector2f(0,1));
+						SetTex(&pTexArray[i*12 + 2*3], cVector2f(0,0));
+						SetTex(&pTexArray[i*12 + 3*3], cVector2f(1,0));*/
 					}
 				}
 
