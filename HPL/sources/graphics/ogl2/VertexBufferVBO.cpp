@@ -149,10 +149,15 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	bool cVertexBufferVBO::GenerateTangents() {
-		// check that the 3 attributes required to generate tangents are present
+		// only try to generate tangents if the data supports it
 		VertexAttributes requiredAttrs = VertexMask_Position | VertexMask_Normal | VertexMask_UV0;
-		if ((mVertexFlags & requiredAttrs) != requiredAttrs)
+		if (
+			(mVertexFlags & requiredAttrs) != requiredAttrs
+			||
+			mDrawType != VertexBufferPrimitiveType::Triangles
+		) {
 			return false;
+		}
 
 		mVertexFlags |= VertexMask_Tangent;
 
@@ -176,16 +181,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cVertexBufferVBO::Compile(VertexCompileOptions options)
+	bool cVertexBufferVBO::Compile()
 	{
 		if(mbCompiled) return false;
 		mbCompiled = true;
-
-		// Create tangents if requested
-		if (options & VertexCompileOption::CreateTangents)
-		{
-			GenerateTangents();
-		}
 
 		GLenum usageType = GL_STATIC_DRAW;
 		if (mUsageType== VertexBufferUsageType::Dynamic) usageType = GL_DYNAMIC_DRAW;
@@ -428,7 +427,7 @@ namespace hpl {
 		pVtxBuff->ResizeIndices(GetIndexNum());
 		memcpy(pVtxBuff->GetIndices(), GetIndices(), GetIndexNum() * sizeof(unsigned int));
 
-		pVtxBuff->Compile(0);
+		pVtxBuff->Compile();
 
 		return pVtxBuff;
 	}

@@ -550,7 +550,7 @@ namespace hpl {
 		}
 
 		//Compile the vertex buffer
-		pVtxBuff->Compile(0);//eVertexCompileFlag_CreateTangents);
+		pVtxBuff->Compile();
 
 		return pVtxBuff;
 	}

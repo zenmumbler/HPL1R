@@ -58,12 +58,6 @@ namespace hpl {
 
 	const int VERTEX_ATTR_COUNT = 5;
 
-	using VertexCompileOptions = tFlag;
-
-	enum VertexCompileOption {
-		CreateTangents = 1
-	};
-
 
 	class iVertexBuffer
 	{
@@ -85,7 +79,7 @@ namespace hpl {
 		virtual void AddIndex(unsigned int alIndex)=0;
 
 		virtual bool GenerateTangents() = 0;
-		virtual bool Compile(VertexCompileOptions options) = 0;
+		virtual bool Compile() = 0;
 		virtual void UpdateData(VertexAttributes attrs, bool updateIndices) = 0;
 
 		/**

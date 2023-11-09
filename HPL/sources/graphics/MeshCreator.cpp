@@ -134,7 +134,7 @@ namespace hpl {
 
 		for(int i=0;i<24;i++) pSkyBox->AddIndex(i);
 
-		if(!pSkyBox->Compile(0))
+		if(!pSkyBox->Compile())
 		{
 			delete pSkyBox;
 			return NULL;
@@ -222,7 +222,8 @@ namespace hpl {
 					//Log("\n");
 				}
 
-		if (! pBox->Compile(VertexCompileOption::CreateTangents))
+		pBox->GenerateTangents();
+		if (! pBox->Compile())
 		{
 			delete pBox;
 			return NULL;

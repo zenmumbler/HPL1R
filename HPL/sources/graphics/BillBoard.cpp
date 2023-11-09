@@ -93,7 +93,8 @@ namespace hpl {
 		for (int i=0; i<3; i++) mpVtxBuffer->AddIndex(i);
 		for (int i=2; i<5; i++) mpVtxBuffer->AddIndex(i==4 ? 0 : i);
 
-		mpVtxBuffer->Compile(VertexCompileOption::CreateTangents);
+		mpVtxBuffer->GenerateTangents();
+		mpVtxBuffer->Compile();
 
 		mbIsHalo = false;
 		mbHaloSourceIsParent = false;

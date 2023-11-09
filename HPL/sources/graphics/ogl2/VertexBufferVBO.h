@@ -43,7 +43,7 @@ namespace hpl {
 		void Transform(const cMatrixf &mtxTransform) override;
 
 		// <-- start hw buffer section
-		bool Compile(VertexCompileOptions options) override;
+		bool Compile() override;
 		void UpdateData(VertexAttributes attrs, bool updateIndices) override;
 
 		void Draw() override;

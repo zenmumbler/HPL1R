@@ -70,7 +70,7 @@ namespace hpl {
 			mpVtxBuffer->AddColor(VertexAttr_Color0, cColor(1,1));
 		}
 
-		mpVtxBuffer->Compile(0);
+		mpVtxBuffer->Compile();
 
 		//Setup vars
 		mlDirectionUpdateCount = -1;
