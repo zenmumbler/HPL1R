@@ -328,21 +328,6 @@ namespace hpl {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
 	}
 
-	//-----------------------------------------------------------------------
-
-	void cVertexBufferVBO::DrawIndices(unsigned int *apIndices, int alCount)
-	{
-		///////////////////////////////
-		//Get the draw type
-		GLenum mode = GL_TRIANGLES;
-		if (mDrawType == VertexBufferPrimitiveType::Quads) mode = GL_QUADS;
-		else if (mDrawType == VertexBufferPrimitiveType::LineStrips) mode = GL_LINE_STRIP;
-
-		//////////////////////////////////
-		//Bind and draw the buffer
-		glDrawElements(mode, alCount, GL_UNSIGNED_INT, apIndices);
-	}
-
 
 	//-----------------------------------------------------------------------
 

@@ -48,11 +48,10 @@ namespace hpl {
 
 		void Draw() override;
 		void DrawWireframe() override;
-		void DrawIndices(unsigned int *apIndices, int alCount) override;
-		// --> end hw buffer section
 
 		void Bind() override;
 		void UnBind() override;
+		// --> end hw buffer section
 
 		iVertexBuffer* CreateCopy(VertexBufferUsageType aUsageType) override;
 

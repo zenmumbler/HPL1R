@@ -89,7 +89,6 @@ namespace hpl {
 
 		virtual void Draw() = 0;
 		virtual void DrawWireframe() = 0;
-		virtual void DrawIndices(unsigned int *apIndices, int alCount) = 0;
 
 		virtual void Bind()=0;
 		virtual void UnBind()=0;
