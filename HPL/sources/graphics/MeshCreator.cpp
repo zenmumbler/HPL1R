@@ -72,9 +72,11 @@ namespace hpl {
 
 	iVertexBuffer* cMeshCreator::CreateSkyBoxVertexBuffer(float afSize)
 	{
-		iVertexBuffer* pSkyBox = mpLowLevelGraphics->CreateVertexBuffer(
-										VertexMask_Color0 | VertexMask_Position | VertexMask_UV0,
-										VertexBufferPrimitiveType::Quads, VertexBufferUsageType::Static);
+		auto pSkyBox = mpLowLevelGraphics->CreateVertexBuffer(
+			VertexMask_Color0 | VertexMask_Position | VertexMask_UV0,
+			VertexBufferPrimitiveType::Quads, VertexBufferUsageType::Static,
+			24, 24
+		);
 
 		float fSize = afSize;
 
@@ -109,6 +111,10 @@ namespace hpl {
 					else if(std::abs(z)){
 						vDir.z = (float)z;
 
+						vAdd[0].y =  1; vAdd[0].x =  1;
+						vAdd[1].y =  1; vAdd[1].x = -1;
+						vAdd[2].y = -1; vAdd[2].x = -1;
+						vAdd[3].y = -1; vAdd[3].x =  1;
 					}
 
 

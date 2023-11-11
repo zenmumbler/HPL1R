@@ -29,7 +29,7 @@ namespace hpl {
 	public:
 		cVertexBufferVBO(VertexAttributes attrs,
 			VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
-			int alReserveVtxSize,int alReserveIdxSize);
+			int alReserveVtxSize, int alReserveIdxSize);
 		~cVertexBufferVBO();
 
 		cVertexBufferVBO(const cVertexBufferVBO& vb) = delete;

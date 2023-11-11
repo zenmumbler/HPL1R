@@ -64,7 +64,7 @@ namespace hpl {
 
 	cVertexBufferVBO::cVertexBufferVBO(VertexAttributes attrs,
 		VertexBufferPrimitiveType aDrawType,VertexBufferUsageType aUsageType,
-		int alReserveVtxSize,int alReserveIdxSize
+		int alReserveVtxSize, int alReserveIdxSize
 	) : iVertexBuffer(attrs, aDrawType, aUsageType)
 	{
 		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
@@ -323,11 +323,10 @@ namespace hpl {
 		int lSize = mlElementNum;
 		if (mlElementNum < 0) lSize = GetIndexNum();
 
-		glDrawElements(GL_LINE_STRIP, lSize, GL_UNSIGNED_INT, (char*) NULL);
+		glDrawElements(GL_LINE_STRIP, lSize, GL_UNSIGNED_INT, NULL);
 
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
-
 
 	//-----------------------------------------------------------------------
 
@@ -398,7 +397,7 @@ namespace hpl {
 		//Copy the vertices to the new buffer.
 		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
 		{
-			if (mVertexFlags * ATTR_TO_MASK[attr])
+			if (mVertexFlags & ATTR_TO_MASK[attr])
 			{
 				auto va = static_cast<VertexAttr>(attr);
 				int lElements = AttrElemCount(va);
