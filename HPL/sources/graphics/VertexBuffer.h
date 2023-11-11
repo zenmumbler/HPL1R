@@ -23,6 +23,7 @@
 #include "math/MathTypes.h"
 #include "system/SystemTypes.h"
 #include "math/BoundingVolume.h"
+#include "system/STLHelpers.h"
 
 namespace hpl {
 
@@ -102,6 +103,18 @@ namespace hpl {
 		virtual int GetVertexNum() = 0;
 		virtual int GetIndexNum() = 0;
 
+		STLBufferIterator<cVector2f> GetVec2View(VertexAttr attr) {
+			return { GetArray(attr), static_cast<int>(GetArrayStride(attr) * sizeof(float)) };
+		}
+
+		STLBufferIterator<cVector3f> GetVec3View(VertexAttr attr) {
+			return { GetArray(attr), static_cast<int>(GetArrayStride(attr) * sizeof(float)) };
+		}
+
+		STLBufferIterator<cColor> GetColorView(VertexAttr attr) {
+			return { GetArray(attr), static_cast<int>(GetArrayStride(attr) * sizeof(float)) };
+		}
+
 		/**
 		 * Resizes an array to a custom size, the size is number of elements and NOT number of vertices.
 		 */
@@ -130,7 +143,6 @@ namespace hpl {
 
 		int mlElementNum;
 	};
-
 };
 
 #endif // HPL_VERTEXBUFFER_H
