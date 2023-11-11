@@ -254,6 +254,7 @@
 		8E5BCD5E2AD5958700B64AD3 /* Material_Universal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material_Universal.cpp; sourceTree = "<group>"; };
 		8E5BCD5F2AD5958700B64AD3 /* Material_Universal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Material_Universal.h; sourceTree = "<group>"; };
 		8E77420528989E02008E9570 /* Bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
+		8E7FAB6B2B0011040069D40B /* STLHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLHelpers.h; sourceTree = "<group>"; };
 		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
 		8E815947260C1127001CBF63 /* GLSLProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLProgram.cpp; sourceTree = "<group>"; };
 		8E84E75925FD062A00DC6065 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -1299,6 +1300,7 @@
 				DB27F1090ACB9AB90054ACA3 /* System.h */,
 				DB27F10A0ACB9AB90054ACA3 /* SystemTypes.h */,
 				8E079520289D3AFB0043A26A /* UpdateTimerMacros.h */,
+				8E7FAB6B2B0011040069D40B /* STLHelpers.h */,
 			);
 			name = system;
 			path = sources/system;

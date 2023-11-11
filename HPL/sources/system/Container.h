@@ -278,5 +278,5 @@ namespace hpl {
 
 	//---------------------------------
 
-};
+}
 #endif // HPL_CONTAINER_H
