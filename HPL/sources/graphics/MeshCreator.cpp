@@ -93,41 +93,37 @@ namespace hpl {
 					if(std::abs(x)){
 						vDir.x = (float)x;
 
-						vAdd[0].y = 1;vAdd[0].z = 1;
-						vAdd[1].y = -1;vAdd[1].z = 1;
-						vAdd[2].y = -1;vAdd[2].z = -1;
-						vAdd[3].y = 1;vAdd[3].z = -1;
+						vAdd[0].y =  1; vAdd[0].z =  1;
+						vAdd[1].y = -1; vAdd[1].z =  1;
+						vAdd[2].y = -1; vAdd[2].z = -1;
+						vAdd[3].y =  1; vAdd[3].z = -1;
 					}
 					else if(std::abs(y)){
 						vDir.y = (float)y;
 
-						vAdd[0].z = 1;vAdd[0].x = 1;
-						vAdd[1].z = -1;vAdd[1].x = 1;
-						vAdd[2].z = -1;vAdd[2].x = -1;
-						vAdd[3].z = 1;vAdd[3].x = -1;
+						vAdd[0].z =  1; vAdd[0].x =  1;
+						vAdd[1].z = -1; vAdd[1].x =  1;
+						vAdd[2].z = -1; vAdd[2].x = -1;
+						vAdd[3].z =  1; vAdd[3].x = -1;
 					}
 					else if(std::abs(z)){
-						vAdd[0].y = 1;vAdd[0].x = 1;
-						vAdd[1].y = 1;vAdd[1].x = -1;
-						vAdd[2].y = -1;vAdd[2].x = -1;
-						vAdd[3].y = -1;vAdd[3].x = 1;
-
 						vDir.z = (float)z;
+
 					}
 
 
 					//Log("Side: (%.0f : %.0f : %.0f) [ ", vDir.x,  vDir.y,vDir.z);
-					for(int i=0;i<4;i++)
+					for (int i=0; i < 4; i++)
 					{
 						int idx = i;
 						if (x + y + z < 0) idx = 3-i;
 
 						pSkyBox->AddColor(VertexAttr_Color0, cColor(1,1,1,1));
-						pSkyBox->AddVertex(VertexAttr_Position, (vDir+vAdd[idx])*fSize);
-						pSkyBox->AddVertex(VertexAttr_UV0, vDir+vAdd[idx]);
+						pSkyBox->AddVertex(VertexAttr_Position, (vDir + vAdd[idx]) * fSize);
+						pSkyBox->AddVertex(VertexAttr_UV0, vDir + vAdd[idx]);
 
-						vSide = vDir+vAdd[idx];
-						//Log("%d: (%.1f : %.1f : %.1f) ", i,vSide.x,  vSide.y,vSide.z);
+						vSide = vDir + vAdd[idx];
+						//Log("%d: (%.1f : %.1f : %.1f) ", i, vSide.x, vSide.y, vSide.z);
 					}
 					//Log("\n");
 				}
@@ -149,9 +145,10 @@ namespace hpl {
 		iVertexBuffer* pBox = mpLowLevelGraphics->CreateVertexBuffer(
 			VertexMask_Color0 | VertexMask_Position | VertexMask_UV0 |
 			VertexMask_Tangent | VertexMask_Normal,
-			VertexBufferPrimitiveType::Triangles, VertexBufferUsageType::Static);
+			VertexBufferPrimitiveType::Triangles, VertexBufferUsageType::Static,
+			24, 36);
 
-		avSize = avSize*0.5;
+		avSize = avSize * 0.5;
 
 		int lVtxIdx =0;
 
@@ -167,31 +164,30 @@ namespace hpl {
 					cVector3f vSide;
 
 					cVector3f vAdd[4];
-					if(std::abs(x)){
+					if(std::abs(x)) {
 						vDir.x = (float)x;
 
-						vAdd[0].y = 1;vAdd[0].z = 1;
-						vAdd[1].y = -1;vAdd[1].z = 1;
-						vAdd[2].y = -1;vAdd[2].z = -1;
-						vAdd[3].y = 1;vAdd[3].z = -1;
+						vAdd[0].y =  1; vAdd[0].z =  1;
+						vAdd[1].y = -1; vAdd[1].z =  1;
+						vAdd[2].y = -1; vAdd[2].z = -1;
+						vAdd[3].y =  1; vAdd[3].z = -1;
 					}
-					else if(std::abs(y)){
+					else if(std::abs(y)) {
 						vDir.y = (float)y;
 
-						vAdd[0].z = 1;vAdd[0].x = 1;
-						vAdd[1].z = -1;vAdd[1].x = 1;
-						vAdd[2].z = -1;vAdd[2].x = -1;
-						vAdd[3].z = 1;vAdd[3].x = -1;
+						vAdd[0].z =  1; vAdd[0].x =  1;
+						vAdd[1].z = -1; vAdd[1].x =  1;
+						vAdd[2].z = -1; vAdd[2].x = -1;
+						vAdd[3].z =  1; vAdd[3].x = -1;
 					}
-					else if(std::abs(z)){
-						vAdd[0].y = 1;vAdd[0].x = 1;
-						vAdd[1].y = 1;vAdd[1].x = -1;
-						vAdd[2].y = -1;vAdd[2].x = -1;
-						vAdd[3].y = -1;vAdd[3].x = 1;
-
+					else if(std::abs(z)) {
 						vDir.z = (float)z;
-					}
 
+						vAdd[0].y =  1; vAdd[0].x =  1;
+						vAdd[1].y =  1; vAdd[1].x = -1;
+						vAdd[2].y = -1; vAdd[2].x = -1;
+						vAdd[3].y = -1; vAdd[3].x =  1;
+					}
 
 					//Log("Side: (%.0f : %.0f : %.0f) [ ", vDir.x,  vDir.y,vDir.z);
 					for(int i=0;i<4;i++)
@@ -200,19 +196,22 @@ namespace hpl {
 						cVector3f vTex = GetBoxTex(i,x,y,z,vAdd);
 
 						pBox->AddColor(VertexAttr_Color0, cColor(1,1,1,1));
-						pBox->AddVertex(VertexAttr_Position, (vDir+vAdd[idx])*avSize);
+						pBox->AddVertex(VertexAttr_Position, (vDir + vAdd[idx]) * avSize);
 						pBox->AddVertex(VertexAttr_Normal, vDir);
 
 						//texture coord
-						cVector3f vCoord = cVector3f((vTex.x+1)*0.5f,(vTex.y+1)*0.5f,0);
+						cVector3f vCoord = cVector3f((vTex.x+1) * 0.5f, (vTex.y+1) * 0.5f,0);
 						pBox->AddVertex(VertexAttr_UV0,vCoord);
 
-						vSide = vDir+vAdd[idx];
+						vSide = vDir + vAdd[idx];
 						//Log("%d: Tex: (%.1f : %.1f : %.1f) ", i,vTex.x,  vTex.y,vTex.z);
 						//Log("%d: (%.1f : %.1f : %.1f) ", i,vSide.x,  vSide.y,vSide.z);
 					}
 
-					for(int i=0;i<3;i++)pBox->AddIndex(lVtxIdx + i);
+					pBox->AddIndex(lVtxIdx + 0);
+					pBox->AddIndex(lVtxIdx + 1);
+					pBox->AddIndex(lVtxIdx + 2);
+
 					pBox->AddIndex(lVtxIdx + 2);
 					pBox->AddIndex(lVtxIdx + 3);
 					pBox->AddIndex(lVtxIdx + 0);

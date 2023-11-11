@@ -48,15 +48,21 @@ namespace hpl {
 							alMaxParticles * 4, alMaxParticles * 6);
 
 		//Fill the indices with quads
-		for(int i=0;i<(int)alMaxParticles;i++)
+		for (int i=0; i < (int)alMaxParticles; i++)
 		{
-			int lStart = i*4;
-			for(int j=0;j<3;j++) mpVtxBuffer->AddIndex(lStart + j);
-			for(int j=2;j<5;j++) mpVtxBuffer->AddIndex(lStart + (j==4?0:j));
+			int lStart = i * 4;
+
+			mpVtxBuffer->AddIndex(lStart + 0);
+			mpVtxBuffer->AddIndex(lStart + 1);
+			mpVtxBuffer->AddIndex(lStart + 2);
+
+			mpVtxBuffer->AddIndex(lStart + 2);
+			mpVtxBuffer->AddIndex(lStart + 3);
+			mpVtxBuffer->AddIndex(lStart + 0);
 		}
 
 		//Fill with tetxure coords (will do for most particle systems)
-		for(int i=0;i<(int)alMaxParticles;i++)
+		for (int i=0; i < (int)alMaxParticles; i++)
 		{
 			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(1,1,0));
 			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(0,1,0));
@@ -65,7 +71,7 @@ namespace hpl {
 		}
 
 		//Set default values for pos and col
-		for(int i=0;i<(int)alMaxParticles*4;i++){
+		for (int i=0;i <(int)alMaxParticles * 4; i++) {
 			mpVtxBuffer->AddVertex(VertexAttr_Position, 0);
 			mpVtxBuffer->AddColor(VertexAttr_Color0, cColor(1,1));
 		}

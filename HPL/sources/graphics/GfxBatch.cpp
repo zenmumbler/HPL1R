@@ -41,7 +41,7 @@ namespace hpl {
 		mpVertexArray[mlVertexCount + 7] =	tex.x;
 		mpVertexArray[mlVertexCount + 8] =	tex.y;
 
-		mlVertexCount = mlVertexCount + mlBatchStride;
+		mlVertexCount += mlBatchStride;
 
 		if (mlVertexCount / mlBatchStride >= mlBatchArraySize)
 		{

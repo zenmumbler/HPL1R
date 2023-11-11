@@ -72,8 +72,6 @@ namespace hpl {
 
 		virtual ~iVertexBuffer() = default;
 
-		VertexAttributes GetFlags(){ return mVertexFlags;}
-
 		virtual void AddVertex(VertexAttr attr,const cVector3f& avVtx) = 0;
 		virtual void AddColor(VertexAttr attr,const cColor& aColor) = 0;
 		virtual void AddIndex(unsigned int alIndex)=0;
@@ -122,7 +120,7 @@ namespace hpl {
 		void SetElementNum(int alNum){ mlElementNum = alNum;}
 		int GetElementNum(){ return mlElementNum; }
 
-		VertexAttributes GetVertexFlags(){ return mVertexFlags;}
+		VertexAttributes HasAllAttributes(VertexAttributeMask mask) { return (mVertexFlags & mask) == mask;}
 		bool HasAttribute(VertexAttr attr) { return (mVertexFlags & attr) != 0; }
 
 	protected:

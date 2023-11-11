@@ -314,7 +314,7 @@ namespace hpl {
 		// POLYGONS
 		virtual iVertexBuffer* CreateVertexBuffer(VertexAttributes aFlags, VertexBufferPrimitiveType aDrawType,
 								VertexBufferUsageType aUsageType,
-								int alReserveVtxSize=0,int alReserveIdxSize=0)=0;
+								int alReserveVtxSize, int alReserveIdxSize)=0;
 
 		virtual void DrawQuad(const tVertexVec &avVtx)=0;
 		virtual void DrawQuad(const tVertexVec &avVtx, const cColor aCol)=0;
