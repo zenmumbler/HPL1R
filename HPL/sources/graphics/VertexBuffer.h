@@ -68,7 +68,7 @@ namespace hpl {
 			VertexBufferUsageType aUsageType
 		) :
 			mVertexFlags(attrs),
-			mDrawType(aDrawType), mUsageType(aUsageType), mlElementNum(-1)
+			mDrawType(aDrawType), mUsageType(aUsageType), _indexCount(-1)
 		{}
 
 		virtual ~iVertexBuffer() = default;
@@ -96,8 +96,9 @@ namespace hpl {
 		virtual int GetArrayStride(VertexAttr attr) = 0;
 		virtual unsigned int* GetIndices()=0;
 
-		virtual int GetVertexNum() = 0;
-		virtual int GetIndexNum() = 0;
+		virtual int GetVertexCount() = 0;
+		virtual int GetMaxIndexCount() = 0; // maximum number of indices this buffer can hold
+		virtual int GetIndexCount() = 0;
 
 		STLBufferIterator<cVector2f> GetVec2View(VertexAttr attr) {
 			return { GetArray(attr), static_cast<int>(GetArrayStride(attr) * sizeof(float)) };
@@ -122,10 +123,9 @@ namespace hpl {
 
 		/**
 		 * Set the number of of elements to draw.
-		 * \param alNum If < 0, draw all indices.
+		 * \param count If < 0, draw all indices.
 		 */
-		void SetElementNum(int alNum){ mlElementNum = alNum;}
-		int GetElementNum(){ return mlElementNum; }
+		void SetIndexCount(int count) { _indexCount = count <= GetMaxIndexCount() ? count : GetMaxIndexCount(); }
 
 		VertexAttributes HasAllAttributes(VertexAttributeMask mask) { return (mVertexFlags & mask) == mask;}
 		bool HasAttribute(VertexAttr attr) { return (mVertexFlags & attr) != 0; }
@@ -135,7 +135,7 @@ namespace hpl {
 		VertexBufferPrimitiveType mDrawType;
 		VertexBufferUsageType mUsageType;
 
-		int mlElementNum;
+		int _indexCount;
 	};
 };
 

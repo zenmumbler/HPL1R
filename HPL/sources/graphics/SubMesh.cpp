@@ -134,11 +134,11 @@ namespace hpl {
 	///normalize weights here?
 	void cSubMesh::CompileBonePairs()
 	{
-		mpVertexWeights = new float[4 * mpVtxBuffer->GetVertexNum()];
-		mpVertexBones = new unsigned char[4 * mpVtxBuffer->GetVertexNum()];
-		memset(mpVertexWeights,0,4 * mpVtxBuffer->GetVertexNum()*sizeof(float));
+		mpVertexWeights = new float[4 * mpVtxBuffer->GetVertexCount()];
+		mpVertexBones = new unsigned char[4 * mpVtxBuffer->GetVertexCount()];
+		memset(mpVertexWeights, 0, 4 * mpVtxBuffer->GetVertexCount() * sizeof(float));
 
-		for(int i=0; i < (int)mvVtxBonePairs.size(); i++)
+		for (int i=0; i < (int)mvVtxBonePairs.size(); i++)
 		{
 			cVertexBonePair &Pair = mvVtxBonePairs[i];
 
@@ -166,7 +166,7 @@ namespace hpl {
 		bool bUnconnectedVertexes=false;
 
 		//Normalize the weights
-		for(int vtx =0; vtx < mpVtxBuffer->GetVertexNum(); ++vtx)
+		for(int vtx =0; vtx < mpVtxBuffer->GetVertexCount(); ++vtx)
 		{
 			float *pWeight = &mpVertexWeights[vtx*4];
 

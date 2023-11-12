@@ -484,7 +484,7 @@ namespace hpl {
 					}
 				}
 
-				mpVtxBuffer->SetElementNum(mlNumOfParticles * 6);
+				mpVtxBuffer->SetIndexCount(mlNumOfParticles * 6);
 
 				mbUpdateGfx = false;
 

@@ -110,7 +110,7 @@ namespace hpl {
 		cBoundingVolume bv;
 
 		auto positions = GetArray(VertexAttr_Position);
-		bv.AddArrayPoints(positions, GetVertexNum());
+		bv.AddArrayPoints(positions, GetVertexCount());
 		bv.CreateFromPoints(AttrElemCount(VertexAttr_Position));
 
 		return bv;
@@ -131,13 +131,13 @@ namespace hpl {
 
 		cMath::CreateTriTangentVectors(
 			GetArray(VertexAttr_Tangent),
-			GetIndices(), GetIndexNum(),
+			GetIndices(), GetIndexCount(),
 
 			GetArray(VertexAttr_Position), AttrElemCount(VertexAttr_Position),
 
 			GetArray(VertexAttr_UV0),
 			GetArray(VertexAttr_Normal),
-			GetVertexNum()
+			GetVertexCount()
 		);
 
 		return true;
@@ -168,7 +168,7 @@ namespace hpl {
 		//Create the VBO index array
 		glGenBuffers(1, &mlElementHandle);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mlElementHandle);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum() * sizeof(unsigned int), mvIndexArray.data(), usageType);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexCount() * sizeof(unsigned int), mvIndexArray.data(), usageType);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
 
 		//Log("VBO compile done!\n");
@@ -198,7 +198,7 @@ namespace hpl {
 		if (abIndices)
 		{
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mlElementHandle);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexNum() * sizeof(unsigned int), mvIndexArray.data(), usageType);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexCount() * sizeof(unsigned int), mvIndexArray.data(), usageType);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		}
 	}
@@ -212,7 +212,7 @@ namespace hpl {
 		bool hasTangents = HasAttribute(VertexAttr_Tangent);
 		float *pTangentArray = hasTangents ? GetArray(VertexAttr_Tangent) : nullptr;
 
-		int lVtxNum = GetVertexNum();
+		int lVtxNum = GetVertexCount();
 
 		cMatrixf mtxRot = a_mtxTransform.GetRotation();
 
@@ -259,12 +259,7 @@ namespace hpl {
 		//////////////////////////////////
 		//Bind and draw the buffer
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mlElementHandle);
-
-		int lSize = mlElementNum;
-		if(mlElementNum<0) lSize = GetIndexNum();
-
-		glDrawElements(mode, lSize, GL_UNSIGNED_INT, NULL);
-
+		glDrawElements(mode, GetIndexCount(), GL_UNSIGNED_INT, NULL);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
@@ -274,12 +269,7 @@ namespace hpl {
 	// To be obsoleted
 	void cVertexBufferVBO::DrawWireframe() {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mlElementHandle);
-
-		int lSize = mlElementNum;
-		if (mlElementNum < 0) lSize = GetIndexNum();
-
-		glDrawElements(GL_LINE_STRIP, lSize, GL_UNSIGNED_INT, NULL);
-
+		glDrawElements(GL_LINE_STRIP, GetIndexCount(), GL_UNSIGNED_INT, NULL);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
@@ -333,9 +323,9 @@ namespace hpl {
 
 	iVertexBuffer* cVertexBufferVBO::CreateCopy(VertexBufferUsageType aUsageType)
 	{
-		cVertexBufferVBO *pVtxBuff = new cVertexBufferVBO(mVertexFlags, mDrawType, aUsageType, GetVertexNum(), GetIndexNum());
+		cVertexBufferVBO *pVtxBuff = new cVertexBufferVBO(mVertexFlags, mDrawType, aUsageType, GetVertexCount(), GetIndexCount());
 
-		//Copy the vertices to the new buffer.
+		// Copy the vertices to the new buffer.
 		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
 		{
 			if (mVertexFlags & ATTR_TO_MASK[attr])
@@ -348,8 +338,8 @@ namespace hpl {
 			}
 		}
 
-		//Copy indices to the new buffer
-		memcpy(pVtxBuff->GetIndices(), GetIndices(), GetIndexNum() * sizeof(unsigned int));
+		// Copy indices to the new buffer
+		memcpy(pVtxBuff->GetIndices(), GetIndices(), GetIndexCount() * sizeof(unsigned int));
 
 		pVtxBuff->Compile();
 
@@ -358,14 +348,21 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	int cVertexBufferVBO::GetVertexNum()
+	int cVertexBufferVBO::GetVertexCount()
 	{
 		return (int)mvVertexArray[VertexAttr_Position].size() / AttrElemCount(VertexAttr_Position);
 	}
-	int cVertexBufferVBO::GetIndexNum()
-	{
-		return (int)mvIndexArray.size();
+
+	int cVertexBufferVBO::GetMaxIndexCount() {
+		return static_cast<int>(mvIndexArray.size());
 	}
+
+	int cVertexBufferVBO::GetIndexCount()
+	{
+		return _indexCount < 0 ? GetMaxIndexCount() : _indexCount;
+	}
+
+	//-----------------------------------------------------------------------
 
 	cVector3f cVertexBufferVBO::GetVector3(VertexAttr attr, unsigned index)
 	{
@@ -389,7 +386,6 @@ namespace hpl {
 	{
 		return mvIndexArray[index];
 	}
-
 
 	//-----------------------------------------------------------------------
 

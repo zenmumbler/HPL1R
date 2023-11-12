@@ -53,8 +53,9 @@ namespace hpl {
 
 		cBoundingVolume CreateBoundingVolume() override;
 
-		int GetVertexNum() override;
-		int GetIndexNum() override;
+		int GetVertexCount() override;
+		int GetMaxIndexCount() override; // maximum number of indices this buffer can hold
+		int GetIndexCount() override;
 
 		float* GetArray(VertexAttr attr) override;
 		int GetArrayStride(VertexAttr attr) override;

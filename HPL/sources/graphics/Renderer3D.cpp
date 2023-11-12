@@ -459,7 +459,7 @@ namespace hpl {
 		float *pColors = mpSkyBox->GetArray(VertexAttr_Color0);
 		int colorStride = mpSkyBox->GetArrayStride(VertexAttr_Color0);
 
-		int lNum = mpSkyBox->GetVertexNum();
+		int lNum = mpSkyBox->GetVertexCount();
 		for(int i=0; i<lNum;++i)
 		{
 			pColors[0] = mSkyBoxColor.r;
@@ -1433,7 +1433,7 @@ namespace hpl {
 		mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,mtxModel);
 
 		//Draw the debug graphics for the object.
-		for(int i=0; i< pVtxBuffer->GetVertexNum(); i++)
+		for(int i=0; i< pVtxBuffer->GetVertexCount(); i++)
 		{
 			cVector3f vPos = pVtxBuffer->GetVector3(VertexAttr_Position, i);
 

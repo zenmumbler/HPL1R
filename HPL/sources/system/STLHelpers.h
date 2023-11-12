@@ -1,5 +1,5 @@
 /*
- * 2021 by zenmumbler
+ * 2023 by zenmumbler
  * This file is part of Rehatched
  */
 
@@ -118,4 +118,4 @@ namespace hpl {
 
 }
 
-#endif /* STLHelpers_h */
+#endif /* HPL_STL_HELPERS_H */

@@ -543,7 +543,7 @@ namespace hpl {
 
 	void cBillboard::UpdateSourceBufferSize()
 	{
-		int lNum = mpHaloSourceBuffer->GetVertexNum();
+		int lNum = mpHaloSourceBuffer->GetVertexCount();
 		float *pPositions = mpHaloSourceBuffer->GetArray(VertexAttr_Position);
 		int posStride = mpHaloSourceBuffer->GetArrayStride(VertexAttr_Position);
 

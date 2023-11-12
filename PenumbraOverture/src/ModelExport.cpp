@@ -121,9 +121,9 @@ static void ExportModel(cMesh *model, cResources *res) {
 	};
 
 	// indices
-	int indicesSizeBytes = vb->GetIndexNum() * sizeof(int);
+	int indicesSizeBytes = vb->GetIndexCount() * sizeof(int);
 	addBufferView(indicesSizeBytes, 34963); // ELEMENT_ARRAY_BUFFER
-	addAccessor(0, 0, 0x1405, vb->GetIndexNum(), "SCALAR"); // UINT
+	addAccessor(0, 0, 0x1405, vb->GetIndexCount(), "SCALAR"); // UINT
 	primitive["indices"] = attrIndex++;
 
 	const auto addAttr = [&attrIndex, &bufferViewIndex, &attrSize, &attributes, vb, &addBufferView, &addAccessor](VertexAttr vertAttr, const tString& name) {
@@ -132,7 +132,7 @@ static void ExportModel(cMesh *model, cResources *res) {
 		if (arr == NULL) {
 			return;
 		}
-		int count = vb->GetVertexNum();
+		int count = vb->GetVertexCount();
 		int elements = vertAttr == VertexAttr_UV0 ? 2 : 3;
 		int arrSizeBytes = sizeof(float) * count * elements;
 
@@ -164,7 +164,7 @@ static void ExportModel(cMesh *model, cResources *res) {
 	float *nextBufferPos = binData;
 	
 	// write indices
-	int triCount = vb->GetIndexNum() / 3;
+	int triCount = vb->GetIndexCount() / 3;
 	unsigned int *indexBufferPos = reinterpret_cast<unsigned int*>(nextBufferPos);
 	unsigned int *indexData = vb->GetIndices();
 //	memcpy(nextBufferPos, vb->GetIndices(), indicesSizeBytes);
@@ -175,14 +175,14 @@ static void ExportModel(cMesh *model, cResources *res) {
 		*indexBufferPos++ = vC;
 		*indexBufferPos++ = vB;
 	}
-	nextBufferPos += vb->GetIndexNum();
-	
+	nextBufferPos += vb->GetIndexCount();
+
 	const auto writeAttr = [vb, &nextBufferPos](VertexAttr vertAttr) {
 		auto arr = vb->GetArray(vertAttr);
 		if (arr == NULL) {
 			return;
 		}
-		int count = vb->GetVertexNum();
+		int count = vb->GetVertexCount();
 		int arrElements = vb->GetArrayStride(vertAttr);
 		int bufElements = vertAttr == VertexAttr_UV0 ? 2 : 3;
 

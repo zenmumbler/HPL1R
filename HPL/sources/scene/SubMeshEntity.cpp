@@ -203,7 +203,7 @@ namespace hpl {
 			const int normalStride = mpDynVtxBuffer->GetArrayStride(VertexAttr_Normal);
 			const int tangentStride = mpDynVtxBuffer->GetArrayStride(VertexAttr_Tangent);
 
-			const int lVtxNum = mpDynVtxBuffer->GetVertexNum();
+			const int lVtxNum = mpDynVtxBuffer->GetVertexCount();
 
 			for (int vtx=0; vtx < lVtxNum; vtx++)
 			{

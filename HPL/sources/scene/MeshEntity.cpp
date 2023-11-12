@@ -116,12 +116,12 @@ namespace hpl {
 			if(mpMesh->GetNodeNum()<=0)
 			{
 				mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(VertexAttr_Position),
-												pVtxBuffer->GetVertexNum());
+												pVtxBuffer->GetVertexCount());
 			}
 			else
 			{
 				pSub->mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(VertexAttr_Position),
-														pVtxBuffer->GetVertexNum());
+														pVtxBuffer->GetVertexCount());
 				pSub->mBoundingVolume.CreateFromPoints(pVtxBuffer->GetArrayStride(VertexAttr_Position));
 			}
 		}
@@ -1470,8 +1470,7 @@ namespace hpl {
 					iVertexBuffer *pVtxBuffer = pSub->GetVertexBuffer();
 					positionStride = pVtxBuffer->GetArrayStride(VertexAttr_Position);
 
-					mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(VertexAttr_Position),
-																	pVtxBuffer->GetVertexNum());
+					mBoundingVolume.AddArrayPoints(pVtxBuffer->GetArray(VertexAttr_Position), pVtxBuffer->GetVertexCount());
 				}
 				mBoundingVolume.CreateFromPoints(positionStride);
 			}
