@@ -31,6 +31,7 @@ namespace hpl {
 			struct {
 				T x,y,z;
 			};
+			cVector2<T> xy;
 			T v[3];
 		};
 
