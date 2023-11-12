@@ -173,4 +173,9 @@ namespace hpl {
 
 
 	//-----------------------------------------------------------------------
+
+
+	const cColor cColor::White{ 1, 1, 1, 1 };
+	const cColor cColor::Black{ 0, 0, 0, 1 };
+
 }

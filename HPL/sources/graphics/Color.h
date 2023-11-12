@@ -52,6 +52,9 @@ namespace hpl {
 		tString ToFileString() const;
 
 		void FromVec(float *apV);
+
+		static const cColor White;
+		static const cColor Black;
 	};
 
 	typedef std::list<cColor> tColorList;
