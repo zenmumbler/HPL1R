@@ -61,8 +61,8 @@ namespace hpl {
 		, strideBytes_{ strideBytes }
 		{}
 
-		constexpr ValueRef operator *() { return *(static_cast<ValueType*>(position_)); }
-		constexpr ValueType* operator ->() { return static_cast<ValueType*>(position_); };
+		constexpr ValueRef operator *() { return *(reinterpret_cast<ValueType*>(position_)); }
+		constexpr ValueType* operator ->() { return reinterpret_cast<ValueType*>(position_); };
 
 		constexpr ValueRef operator [](int index) {
 			auto indexedPos = position_ + (strideBytes_	* index);
