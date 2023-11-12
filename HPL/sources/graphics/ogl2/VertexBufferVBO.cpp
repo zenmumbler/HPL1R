@@ -105,40 +105,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::AddVertex(VertexAttr attr, const cVector3f& avVtx)
-	{
-		auto& array = mvVertexArray[attr];
-		int elemCount = AttrElemCount(attr);
-
-		array.push_back(avVtx.x);
-		array.push_back(avVtx.y);
-		if (elemCount > 2)
-			array.push_back(avVtx.z);
-		if (elemCount > 3)
-			array.push_back(1);
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cVertexBufferVBO::AddColor(VertexAttr attr, const cColor& aColor)
-	{
-		auto& array = mvVertexArray[attr];
-
-		array.push_back(aColor.r);
-		array.push_back(aColor.g);
-		array.push_back(aColor.b);
-		array.push_back(aColor.a);
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cVertexBufferVBO::AddIndex(unsigned int index)
-	{
-		mvIndexArray.push_back(index);
-	}
-
-	//-----------------------------------------------------------------------
-
 	cBoundingVolume cVertexBufferVBO::CreateBoundingVolume()
 	{
 		cBoundingVolume bv;
@@ -360,21 +326,7 @@ namespace hpl {
 
 	unsigned int* cVertexBufferVBO::GetIndices()
 	{
-		return &mvIndexArray[0];
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cVertexBufferVBO::ResizeArray(VertexAttr attr, int newCount)
-	{
-		mvVertexArray[attr].resize(newCount);
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cVertexBufferVBO::ResizeIndices(int newCount)
-	{
-		mvIndexArray.resize(newCount);
+		return mvIndexArray.data();
 	}
 
 	//-----------------------------------------------------------------------

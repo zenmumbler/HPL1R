@@ -73,10 +73,6 @@ namespace hpl {
 
 		virtual ~iVertexBuffer() = default;
 
-		virtual void AddVertex(VertexAttr attr,const cVector3f& avVtx) = 0;
-		virtual void AddColor(VertexAttr attr,const cColor& aColor) = 0;
-		virtual void AddIndex(unsigned int alIndex)=0;
-
 		virtual bool GenerateTangents() = 0;
 		virtual bool Compile() = 0;
 		virtual void UpdateData(VertexAttributes attrs, bool updateIndices) = 0;
@@ -115,11 +111,6 @@ namespace hpl {
 			return { GetArray(attr), static_cast<int>(GetArrayStride(attr) * sizeof(float)) };
 		}
 
-		/**
-		 * Resizes an array to a custom size, the size is number of elements and NOT number of vertices.
-		 */
-		virtual void ResizeArray(VertexAttr attr, int newCount)=0;
-		virtual void ResizeIndices(int newCount) = 0;
 		STLBufferIterator<int> GetIndexView() {
 			return { GetIndices(), sizeof(int) };
 		}

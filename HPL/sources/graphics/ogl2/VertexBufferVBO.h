@@ -35,10 +35,6 @@ namespace hpl {
 		cVertexBufferVBO(const cVertexBufferVBO& vb) = delete;
 		cVertexBufferVBO(cVertexBufferVBO&& vb) = delete;
 
-		void AddVertex(VertexAttr attr,const cVector3f& avVtx) override;
-		void AddColor(VertexAttr attr,const cColor& aColor) override;
-		void AddIndex(unsigned int alIndex) override;
-
 		bool GenerateTangents() override;
 		void Transform(const cMatrixf &mtxTransform) override;
 
@@ -63,10 +59,6 @@ namespace hpl {
 		float* GetArray(VertexAttr attr) override;
 		int GetArrayStride(VertexAttr attr) override;
 		unsigned int* GetIndices() override;
-
-		// these 2 methods will be deprecated
-		void ResizeArray(VertexAttr attr, int newCount) override;
-		void ResizeIndices(int newCount) override;
 
 		//For debugging purposes
 		cVector3f GetVector3(VertexAttr attr, unsigned index) override;
