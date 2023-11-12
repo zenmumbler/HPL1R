@@ -412,7 +412,7 @@ namespace hpl {
 
 		////////////////////////////
 		if(mbLog) Log("Rendering Skybox:\n");
-//		RenderSkyBox(apCamera);
+		RenderSkyBox(apCamera);
 
 		//Render transparent
 		if(mbLog) Log("Rendering Transperant:\n");
