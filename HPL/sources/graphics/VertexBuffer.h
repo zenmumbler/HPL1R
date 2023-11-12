@@ -120,6 +120,9 @@ namespace hpl {
 		 */
 		virtual void ResizeArray(VertexAttr attr, int newCount)=0;
 		virtual void ResizeIndices(int newCount) = 0;
+		STLBufferIterator<int> GetIndexView() {
+			return { GetIndices(), sizeof(int) };
+		}
 
 		//For debugging purposes, quite slow to use.
 		virtual cVector3f GetVector3(VertexAttr attr, unsigned index)=0;

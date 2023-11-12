@@ -80,6 +80,10 @@ namespace hpl {
 
 		float fSize = afSize;
 
+		auto posView = pSkyBox->GetVec3View(VertexAttr_Position);
+		auto colorView = pSkyBox->GetColorView(VertexAttr_Color0);
+		auto uvView = pSkyBox->GetVec2View(VertexAttr_UV0);
+
 		for(int x=-1; x<=1;x++)
 			for(int y=-1; y<=1;y++)
 				for(int z=-1; z<=1;z++)
@@ -117,16 +121,15 @@ namespace hpl {
 						vAdd[3].y = -1; vAdd[3].x =  1;
 					}
 
-
 					//Log("Side: (%.0f : %.0f : %.0f) [ ", vDir.x,  vDir.y,vDir.z);
 					for (int i=0; i < 4; i++)
 					{
 						int idx = i;
 						if (x + y + z < 0) idx = 3-i;
 
-						pSkyBox->AddColor(VertexAttr_Color0, cColor(1,1,1,1));
-						pSkyBox->AddVertex(VertexAttr_Position, (vDir + vAdd[idx]) * fSize);
-						pSkyBox->AddVertex(VertexAttr_UV0, vDir + vAdd[idx]);
+						*colorView++ = { 1, 1, 1, 1 };
+						*posView++ = (vDir + vAdd[idx]) * fSize;
+						*uvView++ = (vDir + vAdd[idx]).xy;
 
 						vSide = vDir + vAdd[idx];
 						//Log("%d: (%.1f : %.1f : %.1f) ", i, vSide.x, vSide.y, vSide.z);
@@ -134,7 +137,8 @@ namespace hpl {
 					//Log("\n");
 				}
 
-		for(int i=0;i<24;i++) pSkyBox->AddIndex(i);
+		auto indexView = pSkyBox->GetIndexView();
+		for (int i=0; i < 24; i++) *indexView++ = i;
 
 		if(!pSkyBox->Compile())
 		{
@@ -154,16 +158,21 @@ namespace hpl {
 			VertexBufferPrimitiveType::Triangles, VertexBufferUsageType::Static,
 			24, 36);
 
-		avSize = avSize * 0.5;
+		auto posView = pBox->GetVec3View(VertexAttr_Position);
+		auto colorView = pBox->GetColorView(VertexAttr_Color0);
+		auto uvView = pBox->GetVec2View(VertexAttr_UV0);
+		auto normalView = pBox->GetVec3View(VertexAttr_Normal);
+		auto indexView = pBox->GetIndexView();
 
-		int lVtxIdx =0;
+		avSize = avSize * 0.5;
+		int lVtxIdx = 0;
 
 		for(int x=-1; x<=1;x++)
 			for(int y=-1; y<=1;y++)
 				for(int z=-1; z<=1;z++)
 				{
-					if(x==0 && y==0 && z==0)continue;
-					if(std::abs(x) + std::abs(y) + std::abs(z) > 1)continue;
+					if (x==0 && y==0 && z==0) continue;
+					if (std::abs(x) + std::abs(y) + std::abs(z) > 1) continue;
 
 					//Direction (could say inverse normal) of the quad.
 					cVector3f vDir;
@@ -199,30 +208,30 @@ namespace hpl {
 					for(int i=0;i<4;i++)
 					{
 						int idx = GetBoxIdx(i,x,y,z);
-						cVector3f vTex = GetBoxTex(i,x,y,z,vAdd);
+						auto vTex = GetBoxTex(i,x,y,z,vAdd);
 
-						pBox->AddColor(VertexAttr_Color0, cColor(1,1,1,1));
-						pBox->AddVertex(VertexAttr_Position, (vDir + vAdd[idx]) * avSize);
-						pBox->AddVertex(VertexAttr_Normal, vDir);
+						*colorView++ = cColor::White;
+						*posView++ = (vDir + vAdd[idx]) * avSize;
+						*normalView++ = vDir;
 
 						//texture coord
-						cVector3f vCoord = cVector3f((vTex.x+1) * 0.5f, (vTex.y+1) * 0.5f,0);
-						pBox->AddVertex(VertexAttr_UV0,vCoord);
+						cVector2f vCoord = { (vTex.x+1) * 0.5f, (vTex.y+1) * 0.5f };
+						*uvView++ = vCoord;
 
 						vSide = vDir + vAdd[idx];
 						//Log("%d: Tex: (%.1f : %.1f : %.1f) ", i,vTex.x,  vTex.y,vTex.z);
 						//Log("%d: (%.1f : %.1f : %.1f) ", i,vSide.x,  vSide.y,vSide.z);
 					}
 
-					pBox->AddIndex(lVtxIdx + 0);
-					pBox->AddIndex(lVtxIdx + 1);
-					pBox->AddIndex(lVtxIdx + 2);
+					*indexView++ = lVtxIdx + 0;
+					*indexView++ = lVtxIdx + 1;
+					*indexView++ = lVtxIdx + 2;
 
-					pBox->AddIndex(lVtxIdx + 2);
-					pBox->AddIndex(lVtxIdx + 3);
-					pBox->AddIndex(lVtxIdx + 0);
+					*indexView++ = lVtxIdx + 2;
+					*indexView++ = lVtxIdx + 3;
+					*indexView++ = lVtxIdx + 0;
 
-					lVtxIdx +=4;
+					lVtxIdx += 4;
 
 					//Log("\n");
 				}
@@ -236,9 +245,9 @@ namespace hpl {
 		return pBox;
 	}
 
-	cVector3f cMeshCreator::GetBoxTex(int i,int x, int y, int z, cVector3f *vAdd)
+	cVector2f cMeshCreator::GetBoxTex(int i,int x, int y, int z, cVector3f *vAdd)
 	{
-		cVector3f vTex;
+		cVector2f vTex;
 
 		if(std::abs(x)){
 			vTex.x = vAdd[i].z;
@@ -262,6 +271,7 @@ namespace hpl {
 
 		return vTex;
 	}
+
 	int cMeshCreator::GetBoxIdx(int i,int x, int y, int z)
 	{
 		int idx = i;

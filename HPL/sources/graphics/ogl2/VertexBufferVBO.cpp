@@ -69,18 +69,13 @@ namespace hpl {
 	{
 		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
 		{
-			if (alReserveVtxSize > 0)
-			{
-				if (attrs & ATTR_TO_MASK[attr]) {
-					mvVertexArray[attr].reserve(alReserveVtxSize * AttrElemCount(attr));
-				}
+			if (attrs & ATTR_TO_MASK[attr]) {
+				mvVertexArray[attr].resize(alReserveVtxSize * AttrElemCount(attr));
 			}
-
 			mvArrayHandle[attr] = 0;
 		}
 
-		if (alReserveIdxSize>0)
-			mvIndexArray.reserve(alReserveIdxSize);
+		mvIndexArray.resize(alReserveIdxSize);
 
 		mlElementHandle = 0;
 	}
@@ -159,7 +154,7 @@ namespace hpl {
 
 	bool cVertexBufferVBO::GenerateTangents() {
 		// only try to generate tangents if the data supports it
-		VertexAttributes requiredAttrs = VertexMask_Position | VertexMask_Normal | VertexMask_UV0;
+		VertexAttributes requiredAttrs = VertexMask_Position | VertexMask_Normal | VertexMask_UV0 | VertexMask_Tangent;
 		if (
 			(mVertexFlags & requiredAttrs) != requiredAttrs
 			||
@@ -167,12 +162,6 @@ namespace hpl {
 		) {
 			return false;
 		}
-
-		mVertexFlags |= VertexMask_Tangent;
-
-		int vertexCount = GetVertexNum();
-		int tanElemCount = vertexCount * AttrElemCount(VertexAttr_Tangent);
-		mvVertexArray[VertexAttr_Tangent].resize(tanElemCount);
 
 		cMath::CreateTriTangentVectors(
 			GetArray(VertexAttr_Tangent),
@@ -182,7 +171,7 @@ namespace hpl {
 
 			GetArray(VertexAttr_UV0),
 			GetArray(VertexAttr_Normal),
-			vertexCount
+			GetVertexNum()
 		);
 
 		return true;
@@ -399,12 +388,8 @@ namespace hpl {
 		{
 			if (mVertexFlags & ATTR_TO_MASK[attr])
 			{
-				auto va = static_cast<VertexAttr>(attr);
-				int lElements = AttrElemCount(va);
-				pVtxBuff->ResizeArray(va, (int)mvVertexArray[attr].size());
-
 				memcpy(
-					pVtxBuff->GetArray(va),
+					pVtxBuff->GetArray(static_cast<VertexAttr>(attr)),
 					mvVertexArray[attr].data(),
 					mvVertexArray[attr].size() * sizeof(float)
 				);
@@ -412,7 +397,6 @@ namespace hpl {
 		}
 
 		//Copy indices to the new buffer
-		pVtxBuff->ResizeIndices(GetIndexNum());
 		memcpy(pVtxBuff->GetIndices(), GetIndices(), GetIndexNum() * sizeof(unsigned int));
 
 		pVtxBuff->Compile();

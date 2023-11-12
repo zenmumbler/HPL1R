@@ -42,7 +42,7 @@ namespace hpl {
 		iVertexBuffer* CreateBoxVertexBuffer(cVector3f avSize);
 
 	private:
-		cVector3f GetBoxTex(int i,int x, int y, int z, cVector3f *vAdd);
+		cVector2f GetBoxTex(int i,int x, int y, int z, cVector3f *vAdd);
 		int GetBoxIdx(int i,int x, int y, int z);
 
 		iLowLevelGraphics *mpLowLevelGraphics;

@@ -69,29 +69,41 @@ namespace hpl {
 		mlLastRenderCount = -1;
 
 		mpVtxBuffer = mpLowLevelGraphics->CreateVertexBuffer(
-								VertexMask_Position | VertexMask_Color0 | VertexMask_UV0 | VertexMask_Normal,
+								VertexMask_Position | VertexMask_Color0 | VertexMask_UV0 | VertexMask_Normal | VertexMask_Tangent,
 								VertexBufferPrimitiveType::Triangles, VertexBufferUsageType::Dynamic,
 								4, 6);
 
-		cVector3f vCoords[4] = {cVector3f((mvSize.x/2),-(mvSize.y/2),0),
-								cVector3f(-(mvSize.x/2),-(mvSize.y/2),0),
-								cVector3f(-(mvSize.x/2),(mvSize.y/2),0),
-								cVector3f((mvSize.x/2),(mvSize.y/2),0)};
+		cVector3f vCoords[4] = {{  (mvSize.x/2), -(mvSize.y/2), 0 },
+								{ -(mvSize.x/2), -(mvSize.y/2), 0 },
+								{ -(mvSize.x/2),  (mvSize.y/2), 0 },
+								{  (mvSize.x/2),  (mvSize.y/2), 0 }};
 
-		cVector3f vTexCoords[4] = {cVector3f(1,-1,0),
-								cVector3f(-1,-1,0),
-								cVector3f(-1,1,0),
-								cVector3f(1,1,0)};
+		cVector2f vTexCoords[4] = {{ 1,-1},
+								   {-1,-1},
+								   {-1, 1},
+								   { 1, 1}};
+
+		auto posView = mpVtxBuffer->GetVec3View(VertexAttr_Position);
+		auto normalView = mpVtxBuffer->GetVec3View(VertexAttr_Normal);
+		auto uvView = mpVtxBuffer->GetVec2View(VertexAttr_UV0);
+		auto colorView = mpVtxBuffer->GetColorView(VertexAttr_Color0);
+
 		for (int i=0; i<4; i++)
 		{
-			mpVtxBuffer->AddVertex(VertexAttr_Position, vCoords[i]);
-			mpVtxBuffer->AddColor(VertexAttr_Color0, cColor(1,1,1,1));
-			mpVtxBuffer->AddVertex(VertexAttr_UV0, (vTexCoords[i] + cVector2f(1,1))/2 );
-			mpVtxBuffer->AddVertex(VertexAttr_Normal, cVector3f(0,0,1));
+			*posView++ = vCoords[i];
+			*colorView++ = cColor::White;
+			*uvView++ = (vTexCoords[i] + cVector2f(1,1))/2;
+			*normalView++ = { 0,0,1 };
 		}
 
-		for (int i=0; i<3; i++) mpVtxBuffer->AddIndex(i);
-		for (int i=2; i<5; i++) mpVtxBuffer->AddIndex(i==4 ? 0 : i);
+		auto indexView = mpVtxBuffer->GetIndexView();
+		*indexView++ = 0;
+		*indexView++ = 1;
+		*indexView++ = 2;
+
+		*indexView++ = 2;
+		*indexView++ = 3;
+		*indexView++ = 0;
 
 		mpVtxBuffer->GenerateTangents();
 		mpVtxBuffer->Compile();

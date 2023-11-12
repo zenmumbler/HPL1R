@@ -48,32 +48,37 @@ namespace hpl {
 							alMaxParticles * 4, alMaxParticles * 6);
 
 		//Fill the indices with quads
+		auto indexView = mpVtxBuffer->GetIndexView();
 		for (int i=0; i < (int)alMaxParticles; i++)
 		{
 			int lStart = i * 4;
 
-			mpVtxBuffer->AddIndex(lStart + 0);
-			mpVtxBuffer->AddIndex(lStart + 1);
-			mpVtxBuffer->AddIndex(lStart + 2);
+			*indexView++ = lStart + 0;
+			*indexView++ = lStart + 1;
+			*indexView++ = lStart + 2;
 
-			mpVtxBuffer->AddIndex(lStart + 2);
-			mpVtxBuffer->AddIndex(lStart + 3);
-			mpVtxBuffer->AddIndex(lStart + 0);
+			*indexView++ = lStart + 2;
+			*indexView++ = lStart + 3;
+			*indexView++ = lStart + 0;
 		}
 
 		//Fill with tetxure coords (will do for most particle systems)
+		auto uvView = mpVtxBuffer->GetVec2View(VertexAttr_UV0);
 		for (int i=0; i < (int)alMaxParticles; i++)
 		{
-			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(1,1,0));
-			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(0,1,0));
-			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(0,0,0));
-			mpVtxBuffer->AddVertex(VertexAttr_UV0, cVector3f(1,0,0));
+			*uvView++ = { 1, 1 };
+			*uvView++ = { 0, 1 };
+			*uvView++ = { 0, 0 };
+			*uvView++ = { 1, 0 };
 		}
 
 		//Set default values for pos and col
+		auto posView = mpVtxBuffer->GetVec3View(VertexAttr_Position);
+		auto colorView = mpVtxBuffer->GetColorView(VertexAttr_Color0);
+
 		for (int i=0;i <(int)alMaxParticles * 4; i++) {
-			mpVtxBuffer->AddVertex(VertexAttr_Position, 0);
-			mpVtxBuffer->AddColor(VertexAttr_Color0, cColor(1,1));
+			*posView++ = { 0, 0, 0 };
+			*colorView++ = cColor::White;
 		}
 
 		mpVtxBuffer->Compile();

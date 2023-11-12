@@ -524,27 +524,37 @@ namespace hpl {
 			(int)aGeometry.mvVertexVec.size(), (int)aGeometry.mvIndexVec.size()
 		);
 
-		//Add vertices
-		for(size_t j=0; j<aGeometry.mvVertexVec.size();j++)
+
+		auto posView = pVtxBuff->GetVec3View(VertexAttr_Position);
+		auto normalView = pVtxBuff->GetVec3View(VertexAttr_Normal);
+		auto uvView = pVtxBuff->GetVec2View(VertexAttr_UV0);
+		auto colorView = pVtxBuff->GetColorView(VertexAttr_Color0);
+
+		//Add attributes
+		for (size_t j=0; j<aGeometry.mvVertexVec.size(); j++)
 		{
-			pVtxBuff->AddVertex(VertexAttr_Position, aGeometry.mvVertexVec[j].pos);
-			pVtxBuff->AddVertex(VertexAttr_Normal, aGeometry.mvVertexVec[j].norm);
-			pVtxBuff->AddVertex(VertexAttr_UV0, aGeometry.mvVertexVec[j].tex);
-			pVtxBuff->AddColor(VertexAttr_Color0, cColor(1,1));
+			*posView++ = aGeometry.mvVertexVec[j].pos;
+			*normalView++ = aGeometry.mvVertexVec[j].norm;
+			*uvView++ = aGeometry.mvVertexVec[j].tex.xy;
+			*colorView++ = cColor::White;
 		}
 
-		//Add tangents
-		pVtxBuff->ResizeArray(VertexAttr_Tangent, (int)aGeometry.mvTangents.size());
-		memcpy(pVtxBuff->GetArray(VertexAttr_Tangent),&aGeometry.mvTangents[0],
-				aGeometry.mvTangents.size() * sizeof(float));
+		//Copy tangents
+		memcpy(
+			pVtxBuff->GetArray(VertexAttr_Tangent),
+			&aGeometry.mvTangents[0],
+			aGeometry.mvTangents.size() * sizeof(float)
+		);
 
 		//Add indices
+		auto indexView = pVtxBuff->GetIndexView();
+
 		for(size_t j=0; j<aGeometry.mvIndexVec.size();j++)
 		{
 			//Flip order of indices
 			size_t idx = (j/3)*3 + (2-(j%3));
 
-			pVtxBuff->AddIndex(aGeometry.mvIndexVec[idx]);
+			*indexView++ = aGeometry.mvIndexVec[idx];
 		}
 
 		//Compile the vertex buffer
@@ -552,8 +562,6 @@ namespace hpl {
 
 		return pVtxBuff;
 	}
-
-
 
 	//-----------------------------------------------------------------------
 
