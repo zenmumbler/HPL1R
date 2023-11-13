@@ -43,8 +43,7 @@ namespace hpl {
 
 	template <typename ValueType>
 	class STLBufferIterator
-	: public std::iterator<std::random_access_iterator_tag, ValueType>
-	, public FullyComparableTrait<STLBufferIterator<ValueType>>
+	: public FullyComparableTrait<STLBufferIterator<ValueType>>
 	{
 	protected:
 		uint8_t* position_ = nullptr;
