@@ -981,6 +981,7 @@ void cNotebook::Update(float afTimeStep)
 void cNotebook::Reset()
 {
 	mbActive = false;
+	mbInventoryWasActive = false;
 	mfAlpha = 0;
 
 	STLDeleteAll(mlstTasks);

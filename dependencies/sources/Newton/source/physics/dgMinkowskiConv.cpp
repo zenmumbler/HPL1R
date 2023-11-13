@@ -1110,7 +1110,7 @@ class dgContactSolver
       for (dgInt32 i0 = 0; i0 < shape2VertexCount; i0++)
       {
         subdivision[i0].m_vertex = &shape2[i0];
-        subdivision[i0].m_prev = &subdivision[i0 - 1];
+        subdivision[i0].m_prev = i0 > 0 ? &subdivision[i0 - 1] : NULL;
         subdivision[i0].m_next = &subdivision[i0 + 1];
       }
       //i0 --;

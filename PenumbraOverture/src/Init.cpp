@@ -205,7 +205,8 @@ bool cInit::Init(tString asCommandLine)
 	mbLogResources = mpConfig->GetBool("Debug", "LogResources", false);
 	mbDebugInteraction = mpConfig->GetBool("Debug", "DebugInteraction", false);
 	
-	mbSubtitles  = mpConfig->GetBool("Game","Subtitles",true); 
+	mbSubtitles  = mpConfig->GetBool("Game","Subtitles",true);
+	mbDisablePersonalNotes = mpConfig->GetBool("Game","DisablePersonalNotes",false);
 	mbAllowQuickSave  = mpConfig->GetBool("Game","AllowQuickSave",false);
 	mbFlashItems  = mpConfig->GetBool("Game","FlashItems",true);
 	mbShowCrossHair  = mpConfig->GetBool("Game","ShowCrossHair",false);

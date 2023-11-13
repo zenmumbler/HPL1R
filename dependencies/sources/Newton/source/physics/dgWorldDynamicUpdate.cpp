@@ -72,8 +72,8 @@ public:
   dgInt32 m_bodyStart;
   dgInt32 m_jointCount;
   dgInt32 m_jointStart;
-  dgInt32 m_hasUnilateralJoints :1;
-  dgInt32 m_isContinueCollision :1;
+  dgUnsigned32 m_hasUnilateralJoints :1;
+  dgUnsigned32 m_isContinueCollision :1;
 };
 
 //////////////////////////////////////////////////////////////////////

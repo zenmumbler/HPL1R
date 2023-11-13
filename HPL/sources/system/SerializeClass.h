@@ -20,6 +20,7 @@
 #define HPL_SERIALIZE_CLASS_H
 
 #include <map>
+#include <cstddef>
 #include "system/SystemTypes.h"
 
 class TiXmlElement;
@@ -91,8 +92,8 @@ namespace hpl {
 
 	#define kMaxSerializeClasses 1000
 
-	#define ClassMemberOffset(aClass,aMember)		( size_t(&(( (aClass*)1)->aMember)) -1	)
-	#define ClassMemberSize(aClass,aMember)			( sizeof( ((aClass*)1)->aMember)		)
+	#define ClassMemberOffset(aClass,aMember)		( size_t(&(( (aClass*)8)->aMember)) -8	)
+	#define ClassMemberSize(aClass,aMember)			( sizeof( ((aClass*)0)->aMember)		)
 
 	/**
 	 * This inits a class and must be first in a serializable class
