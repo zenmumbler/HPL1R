@@ -415,18 +415,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::SetMultisamplingActive(bool abX)
-	{
-		if(mlMultisampling<=0) return;
-
-		if(abX)
-			glEnable(GL_MULTISAMPLE);
-		else
-			glDisable(GL_MULTISAMPLE);
-	}
-
-	//-----------------------------------------------------------------------
-
 	Bitmap cLowLevelGraphicsSDL::GetScreenPixels()
 	{
 		glFinish();
@@ -539,37 +527,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-
-	void cLowLevelGraphicsSDL::TranslateMatrix(eMatrix aMtxType, const cVector3f &avPos)
-	{
-		SetMatrixMode(aMtxType);
-		glTranslatef(avPos.x,avPos.y,avPos.z);
-	}
-
-	//-----------------------------------------------------------------------
-
-
-	/**
-	 * \todo fix so that there are X, Y , Z versions of this one.
-	 * \param aMtxType
-	 * \param &avRot
-	 */
-	void cLowLevelGraphicsSDL::RotateMatrix(eMatrix aMtxType, const cVector3f &avRot)
-	{
-		SetMatrixMode(aMtxType);
-		glRotatef(1,avRot.x,avRot.y,avRot.z);
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::ScaleMatrix(eMatrix aMtxType, const cVector3f &avScale)
-	{
-		SetMatrixMode(aMtxType);
-		glScalef(avScale.x,avScale.y,avScale.z);
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cLowLevelGraphicsSDL::SetOrthoProjection(const cVector2f& avSize, float afMin, float afMax)
 	{
 		glMatrixMode(GL_PROJECTION);
@@ -620,44 +577,6 @@ namespace hpl {
 		}
 
 		mpCurrentTexture[alUnit] = apTex;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetActiveTextureUnit(unsigned int alUnit)
-	{
-		glActiveTexture(GL_TEXTURE0 + alUnit);
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetTextureEnv(eTextureParam aParam, int alVal)
-	{
-		GLenum lParam = GetGLTextureParamEnum(aParam);
-
-		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE);
-
-		if(aParam==eTextureParam_ColorFunc || aParam==eTextureParam_AlphaFunc){
-			glTexEnvi(GL_TEXTURE_ENV,lParam,GetGLTextureFuncEnum((eTextureFunc)alVal));
-		}
-		else if(aParam>=eTextureParam_ColorSource0 && aParam<=eTextureParam_AlphaSource2){
-			glTexEnvi(GL_TEXTURE_ENV,lParam,GetGLTextureSourceEnum((eTextureSource)alVal));
-		}
-		else if(aParam>=eTextureParam_ColorOp0 && aParam<=eTextureParam_ColorOp2){
-			glTexEnvi(GL_TEXTURE_ENV,lParam,GetGLTextureOpEnum((eTextureOp)alVal));
-		}
-		else {
-			glTexEnvi(GL_TEXTURE_ENV,lParam,alVal);
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetTextureConstantColor(const cColor &aColor)
-	{
-		float vColor[4] = {	aColor.r, aColor.g, aColor.b, aColor.a	};
-
-		glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, &vColor[0]);
 	}
 
 	//-----------------------------------------------------------------------
@@ -953,26 +872,6 @@ namespace hpl {
 			}
 		}
 		glEnd();
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::DrawBatch(const cGfxBatch &batch)
-	{
-		auto vbo = batch.vertexBuffer;
-
-		glVertexPointer(3, GL_FLOAT, 0, vbo->GetArray(VertexAttr_Position));
-		glColorPointer(4, GL_FLOAT, 0, vbo->GetArray(VertexAttr_Color0));
-		glTexCoordPointer(2, GL_FLOAT, 0, vbo->GetArray(VertexAttr_UV0));
-
-		glClientActiveTexture(GL_TEXTURE0);
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_COLOR_ARRAY);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glDisableClientState(GL_NORMAL_ARRAY);
-
-		vbo->Draw();
-		// glDrawElements(GL_QUADS, vbo->GetIndexCount(), GL_UNSIGNED_INT, vbo->GetIndices());
 	}
 
 	//-----------------------------------------------------------------------

@@ -59,9 +59,6 @@ namespace hpl {
 
 		void SetVsyncActive(bool abX) override;
 
-		void SetMultisamplingActive(bool abX) override;
-		int GetMultisampling() override { return mlMultisampling;}
-
 		cVector2f GetScreenSize() override;
 		cVector2f GetVirtualSize() override;
 		void SetVirtualSize(cVector2f avSize) override;
@@ -83,10 +80,6 @@ namespace hpl {
 		void SetIdentityMatrix(eMatrix aMtxType) override;
 
 		void SetMatrix(eMatrix aMtxType, const cMatrixf& a_mtxA) override;
-
-		void TranslateMatrix(eMatrix aMtxType, const cVector3f &avPos) override;
-		void RotateMatrix(eMatrix aMtxType, const cVector3f &avRot) override;
-		void ScaleMatrix(eMatrix aMtxType, const cVector3f &avScale) override;
 
 		void SetOrthoProjection(const cVector2f& avSize, float afMin, float afMax) override;
 
@@ -143,9 +136,6 @@ namespace hpl {
 
 		// TEXTURE
 		void SetTexture(unsigned int alUnit,iTexture* apTex) override;
-		void SetActiveTextureUnit(unsigned int alUnit) override;
-		void SetTextureEnv(eTextureParam aParam, int alVal) override;
-		void SetTextureConstantColor(const cColor &aColor) override;
 
 		// POLYGONS
 		iVertexBuffer* CreateVertexBuffer(VertexAttributes aFlags, VertexBufferPrimitiveType aDrawType,
@@ -155,8 +145,6 @@ namespace hpl {
 		void DrawQuad(const tVertexVec &avVtx) override;
 		void DrawQuad(const tVertexVec &avVtx, const cColor aCol) override;
 		void DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs) override;
-
-		void DrawBatch(const cGfxBatch &batch) override;
 
 		//PRIMITIVES
 		void DrawLine(const cVector3f& avBegin, const cVector3f& avEnd, cColor aCol) override;
@@ -199,10 +187,6 @@ namespace hpl {
 
 		//Multisample
 		void CheckMultisampleCaps();
-
-		//CG Helper
-		void InitCG();
-		void ExitCG();
 
 		//Depth helper
 		GLenum GetGLDepthTestFuncEnum(eDepthTestFunc aType);

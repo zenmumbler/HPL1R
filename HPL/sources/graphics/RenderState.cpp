@@ -146,19 +146,7 @@ namespace hpl {
 	void iRenderState::SetSectorMode(cRenderSettings* apSettings)
 	{
 		if(apSettings->mbLog) Log("Sector: %d\n",mpSector);
-
 		apSettings->mpSector = mpSector;
-		if(mpSector)
-		{
-			apSettings->mpLowLevel->SetTextureConstantColor(apSettings->mAmbientColor * mpSector->GetAmbientColor());
-		}
-		else
-		{
-			apSettings->mpLowLevel->SetTextureConstantColor(apSettings->mAmbientColor);
-		}
-
-		//To make sure that new ambient is set: [ZM] hmmmm
-//		apSettings->mpFragmentProgram = NULL;
 	}
 
 	//-----------------------------------------------------------------------

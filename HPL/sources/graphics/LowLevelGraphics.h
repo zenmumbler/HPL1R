@@ -208,8 +208,6 @@ namespace hpl {
 		 * \param aX
 		 */
 		virtual void ShowCursor(bool abX)=0;
-
-		virtual int GetMultisampling()=0;
 		/**
 		 * Get Size of screen
 		 * \return
@@ -227,8 +225,6 @@ namespace hpl {
 		 * \param abX
 		 */
 		virtual void SetVsyncActive(bool abX)=0;
-
-		virtual void SetMultisamplingActive(bool abX)=0;
 
 		virtual iTexture* CreateTexture(bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
 		virtual iTexture* CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
@@ -248,11 +244,6 @@ namespace hpl {
 		virtual void SetIdentityMatrix(eMatrix aMtxType)=0;
 
 		virtual void SetMatrix(eMatrix aMtxType, const cMatrixf& a_mtxA)=0;
-
-		virtual void TranslateMatrix(eMatrix aMtxType, const cVector3f &avPos)=0;
-		virtual void RotateMatrix(eMatrix aMtxType, const cVector3f &avRot)=0;
-		virtual void ScaleMatrix(eMatrix aMtxType, const cVector3f &avScale)=0;
-
 		virtual void SetOrthoProjection(const cVector2f& avSize, float afMin, float afMax)=0;
 
 		/////////// DRAWING METHODS /////////////////////////
@@ -301,9 +292,6 @@ namespace hpl {
 
 		//TEXTURE
 		virtual void SetTexture(unsigned int alUnit,iTexture* apTex)=0;
-		virtual void SetActiveTextureUnit(unsigned int alUnit)=0;
-		virtual void SetTextureEnv(eTextureParam aParam, int alVal)=0;
-		virtual void SetTextureConstantColor(const cColor &aColor)=0;
 
 		//BLENDING
 		virtual void SetBlendActive(bool abX)=0;
@@ -319,9 +307,6 @@ namespace hpl {
 		virtual void DrawQuad(const tVertexVec &avVtx)=0;
 		virtual void DrawQuad(const tVertexVec &avVtx, const cColor aCol)=0;
 		virtual void DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs)=0;
-
-		//VERTEX BATCHER
-		virtual void DrawBatch(const cGfxBatch &batch)=0;
 
 		//some primitive:
 		virtual void DrawLine(const cVector3f& avBegin, const cVector3f& avEnd, cColor aCol)=0;
