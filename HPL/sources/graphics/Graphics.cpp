@@ -104,7 +104,7 @@ namespace hpl {
 
 		Log(" Creating graphic systems\n");
 		mpMaterialHandler = new cMaterialHandler(this, apResources);
-		mpDrawer = new cGraphicsDrawer(mpLowLevelGraphics, apResources->GetImageManager());
+		mpDrawer = new cGraphicsDrawer(mpLowLevelGraphics, apResources->GetImageManager(), apResources->GetGpuProgramManager());
 		mpRenderList = new cRenderList(this);
 		mpMeshCreator = new cMeshCreator(mpLowLevelGraphics, apResources);
 		mpRenderer3D = new cRenderer3D(mpLowLevelGraphics,apResources,mpMeshCreator,mpRenderList);

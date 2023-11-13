@@ -34,11 +34,16 @@ namespace hpl {
 
 	const int BATCH_VERTEX_COUNT = 20'000;
 
-	cGraphicsDrawer::cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics,	cImageManager* apImageManager)
-	: mBatch(BATCH_VERTEX_COUNT, apLowLevelGraphics)
+	cGraphicsDrawer::cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics,	cImageManager* apImageManager, cGpuProgramManager* programManager)
+	: mpLowLevelGraphics{apLowLevelGraphics}
+	, mpImageManager{apImageManager}
+	, _programManager{programManager}
+	, _batch(BATCH_VERTEX_COUNT, apLowLevelGraphics)
 	{
-		mpLowLevelGraphics = apLowLevelGraphics;
-		mpImageManager = apImageManager;
+		_program = _programManager->CreateProgram("Drawer.vert", "Drawer.frag");
+		_program->Bind();
+		_program->SetTextureBindingIndex("image", 0);
+		_program->UnBind();
 	}
 
 	//-----------------------------------------------------------------------
@@ -48,6 +53,7 @@ namespace hpl {
 		for (auto pGo : mvGfxObjects) {
 			mpImageManager->Destroy(pGo->mpImage);
 		}
+		_programManager->Destroy(_program);
 		STLDeleteAll(mvGfxObjects);
 	}
 
@@ -89,13 +95,13 @@ namespace hpl {
 	{
 		FlushImage(apObject);
 
-		cGfxBufferObject BuffObj;
-		BuffObj.mpObject = apObject;
-		BuffObj.mvPosition = avPos;
-		BuffObj.mvSize= avSize;
-		BuffObj.mColor = aColor;
-
-		BuffObj.mbIsColorAndSize = true;
+		cGfxBufferObject BuffObj {
+			.mpObject = apObject,
+			.mvPosition = avPos,
+			.mvSize = avSize,
+			.mColor = aColor,
+			.mbIsColorAndSize = true
+		};
 
 		m_setGfxBuffer.insert(BuffObj);
 	}
@@ -106,10 +112,11 @@ namespace hpl {
 	{
 		FlushImage(apObject);
 
-		cGfxBufferObject BuffObj;
-		BuffObj.mpObject = apObject;
-		BuffObj.mvPosition = avPos;
-		BuffObj.mbIsColorAndSize = false;
+		cGfxBufferObject BuffObj {
+			.mpObject = apObject,
+			.mvPosition = avPos,
+			.mbIsColorAndSize = false
+		};
 
 		m_setGfxBuffer.insert(BuffObj);
 	}
@@ -147,17 +154,26 @@ namespace hpl {
 		//Set all states
 		mpLowLevelGraphics->SetDepthTestActive(false);
 		mpLowLevelGraphics->SetBlendActive(true);
-		mpLowLevelGraphics->SetIdentityMatrix(eMatrix_ModelView);
-		mpLowLevelGraphics->SetOrthoProjection(mpLowLevelGraphics->GetVirtualSize(), -1000, 1000);
+		_program->Bind();
+
+//		mpLowLevelGraphics->SetIdentityMatrix(eMatrix_ModelView);
+//		mpLowLevelGraphics->SetOrthoProjection(mpLowLevelGraphics->GetVirtualSize(), -1000, 1000);
+
+		auto orthoDim = mpLowLevelGraphics->GetVirtualSize();
+		cMatrixf orthoProjection = cMatrixf::CreateOrtho(0, orthoDim.x, orthoDim.y, 0, -1000, 1000);
+		_program->SetMatrixf("projection", orthoProjection);
 
 		eGfxMaterialType matType = eGfxMaterialType::Null;
 		iTexture *curTexture = nullptr;
 		
 		const auto renderBatch = [this]() {
-			if (mBatch.HasContent()) {
-				mBatch.vertexBuffer->UpdateData(0xff, true);
-				mpLowLevelGraphics->DrawBatch(mBatch);
-				mBatch.Clear();
+			if (_batch.HasContent()) {
+				_batch.vertexBuffer->UpdateData(0xff, true);
+				// mpLowLevelGraphics->DrawBatch(_batch);
+				_batch.vertexBuffer->Bind();
+				_batch.vertexBuffer->Draw();
+				_batch.vertexBuffer->UnBind();
+				_batch.Clear();
 			}
 		};
 
@@ -196,7 +212,7 @@ namespace hpl {
 				for (int i = 0; i < 4; i++)
 				{
 					const auto& vtx = pObj.mpObject->mvVtx[i];
-					mBatch.AddVertex(vPos[i], pObj.mColor, vtx.tex.xy);
+					_batch.AddVertex(vPos[i], pObj.mColor, vtx.tex.xy);
 				}
 			}
 			else
@@ -204,7 +220,7 @@ namespace hpl {
 				for (int i = 0; i < 4; i++)
 				{
 					const auto& vtx = pObj.mpObject->mvVtx[i];
-					mBatch.AddVertex(vtx.pos + pObj.mvPosition, vtx.col, vtx.tex.xy);
+					_batch.AddVertex(vtx.pos + pObj.mvPosition, vtx.col, vtx.tex.xy);
 				}
 			}
 		}
@@ -216,6 +232,7 @@ namespace hpl {
 		m_setGfxBuffer.clear();
 
 		//Reset all states
+		_program->UnBind();
 		mpLowLevelGraphics->SetDepthTestActive(true);
 		mpLowLevelGraphics->SetBlendActive(false);
 		UseMaterialType(eGfxMaterialType::Null);

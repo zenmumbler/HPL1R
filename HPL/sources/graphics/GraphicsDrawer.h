@@ -20,10 +20,11 @@
 #define HPL_GRAPHICSDRAWER_H
 
 #include "resources/ImageManager.h"
+#include "resources/GpuProgramManager.h"
 #include "graphics/GraphicsTypes.h"
 #include "graphics/Bitmap.h"
 #include "graphics/GfxBatch.h"
-//#include "graphics/VertexBuffer.h"
+#include "graphics/GPUProgram.h"
 
 namespace hpl {
 
@@ -76,7 +77,7 @@ namespace hpl {
 	class cGraphicsDrawer
 	{
 	public:
-		cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics, cImageManager* apImageManager);
+		cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics, cImageManager* apImageManager, cGpuProgramManager* programManager);
 		~cGraphicsDrawer();
 
 		/**
@@ -127,8 +128,11 @@ namespace hpl {
 
 		iLowLevelGraphics *mpLowLevelGraphics;
 		cImageManager *mpImageManager;
+		cGpuProgramManager* _programManager;
+
 		tGfxBufferSet m_setGfxBuffer;
-		cGfxBatch mBatch;
+		cGfxBatch _batch;
+		iGpuProgram *_program;
 		std::vector<const cGfxObject*> mvGfxObjects;
 	};
 
