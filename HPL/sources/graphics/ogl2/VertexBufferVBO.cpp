@@ -179,26 +179,24 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cVertexBufferVBO::UpdateData(VertexAttributes attrs, bool abIndices)
+	void cVertexBufferVBO::UpdateData(VertexAttributes attrs, bool updateIndices)
 	{
 		GLenum usageType = GetGLUsageType(mUsageType);
 
-		//Create the VBO vertex arrays
 		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
 		{
-			if ((mVertexFlags & ATTR_TO_MASK[attr]) && (attrs & ATTR_TO_MASK[attr]))
+			if (mVertexFlags & attrs & ATTR_TO_MASK[attr])
 			{
 				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[attr]);
-				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[attr].size() * sizeof(float), mvVertexArray[attr].data(), usageType);
+				glBufferSubData(GL_ARRAY_BUFFER, 0, mvVertexArray[attr].size() * sizeof(float), mvVertexArray[attr].data());
 			}
 		}
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-		//Create the VBO index array
-		if (abIndices)
+		if (updateIndices)
 		{
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mlElementHandle);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexCount() * sizeof(unsigned int), mvIndexArray.data(), usageType);
+			glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, GetIndexCount() * sizeof(unsigned int), mvIndexArray.data());
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		}
 	}
