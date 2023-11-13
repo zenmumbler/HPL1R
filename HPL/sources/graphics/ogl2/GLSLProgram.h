@@ -34,7 +34,7 @@ namespace hpl {
 		bool SetMatrixf(const tString& asName, const cMatrixf& mMtx);
 		bool SetMatrixIdentityf(const tString& asName);
 
-		bool SetTexture(const tString& asName,iTexture* apTexture);
+		bool SetTextureBindingIndex(const tString& asName, int index);
 
 	protected:
 		unsigned int mProgram;

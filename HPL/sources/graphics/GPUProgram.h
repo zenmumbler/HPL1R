@@ -81,7 +81,7 @@ namespace hpl {
 		virtual bool SetMatrixf(const tString& asName, const cMatrixf& mMtx)=0;
 		virtual bool SetMatrixIdentityf(const tString& asName)=0;
 
-		virtual bool SetTexture(const tString& asName,iTexture* apTexture)=0;
+		virtual bool SetTextureBindingIndex(const tString& asName, int index)=0;
 
 	protected:
 		static bool mbDebugInfo;

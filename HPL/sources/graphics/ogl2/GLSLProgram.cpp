@@ -205,22 +205,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cGLSLProgram::SetTexture(const tString& asName, iTexture* apTexture)
+	bool cGLSLProgram::SetTextureBindingIndex(const tString& asName, int index)
 	{
 		auto loc = glGetUniformLocation(mProgram, asName.c_str());
 		if (loc < 0) return false;
 
-		if(apTexture)
-		{
-			auto pSDLTex = static_cast<cSDLTexture*>(apTexture);
-			glUniform1i(loc, pSDLTex->GetTextureHandle());
-		}
-		else
-		{
-			glUniform1i(loc, 0);
-		}
+		glUniform1i(loc, index);
 		return true;
 	}
 
 }
-
