@@ -128,7 +128,7 @@ class dgCollisionParamProxy
 	const dgPolygonMeshDesc* m_polyMeshData;
 
 	dgInt32 m_isTriggerVolume : 1;
-	dgInt32 m_inTriggerVolume : 1;
+	dgUnsigned32 m_inTriggerVolume : 1;
 
 
 	dgCollisionParamProxy(dgInt32 threadIndex)
