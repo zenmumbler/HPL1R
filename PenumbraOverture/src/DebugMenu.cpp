@@ -8,6 +8,7 @@
 #include "MapHandler.h"
 #include "ModelExport.h"
 
+#define IMGUI_DISABLE_OBSOLETE_FUNCTIONS
 #include "imgui/imgui.h"
 
 using namespace hpl;

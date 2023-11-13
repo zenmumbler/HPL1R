@@ -31,6 +31,7 @@
 #include <assert.h>
 #include <stdlib.h>
 
+#define IMGUI_DISABLE_OBSOLETE_FUNCTIONS
 #include "imgui/backends/imgui_impl_sdl.h"
 #include "imgui/backends/imgui_impl_opengl2.h"
 
@@ -674,7 +675,7 @@ namespace hpl {
 
 	void cLowLevelGraphicsSDL::StartFrame() {
 		ImGui_ImplOpenGL2_NewFrame();
-		ImGui_ImplSDL2_NewFrame(mpWindow);
+		ImGui_ImplSDL2_NewFrame();
 		ImGui::NewFrame();
 	}
 	
