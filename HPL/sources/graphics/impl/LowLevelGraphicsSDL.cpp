@@ -956,32 +956,22 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::DrawBatch(const cGfxBatch &batch, tGfxBatchAttrs attrs, eBatchDrawMode drawMode)
+	void cLowLevelGraphicsSDL::DrawBatch(const cGfxBatch &batch)
 	{
-		glVertexPointer(3, GL_FLOAT, sizeof(float) * batch.mlBatchStride, batch.mpVertexArray);
-		glColorPointer(4, GL_FLOAT, sizeof(float) * batch.mlBatchStride, &batch.mpVertexArray[3]);
+		auto vbo = batch.vertexBuffer;
+
+		glVertexPointer(3, GL_FLOAT, 0, vbo->GetArray(VertexAttr_Position));
+		glColorPointer(4, GL_FLOAT, 0, vbo->GetArray(VertexAttr_Color0));
+		glTexCoordPointer(2, GL_FLOAT, 0, vbo->GetArray(VertexAttr_UV0));
 
 		glClientActiveTexture(GL_TEXTURE0);
-		glTexCoordPointer(2, GL_FLOAT, sizeof(float) * batch.mlBatchStride, &batch.mpVertexArray[7]);
-
-		if(attrs & eGfxBatchAttr_Position) glEnableClientState(GL_VERTEX_ARRAY);
-		else glDisableClientState(GL_VERTEX_ARRAY);
-
-		if(attrs & eGfxBatchAttr_Color0) glEnableClientState(GL_COLOR_ARRAY);
-		else glDisableClientState(GL_COLOR_ARRAY);
-
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glDisableClientState(GL_NORMAL_ARRAY);
 
-		glClientActiveTexture(GL_TEXTURE0);
-		if(attrs & eGfxBatchAttr_Texture0){
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		}
-		else {
-			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		}
-
-		GLenum glMode = drawMode == eBatchDrawMode_Tris ? GL_TRIANGLES : GL_QUADS;
-		glDrawElements(glMode, batch.mlIndexCount, GL_UNSIGNED_INT, batch.mpIndexArray);
+		vbo->Draw();
+		// glDrawElements(GL_QUADS, vbo->GetIndexCount(), GL_UNSIGNED_INT, vbo->GetIndices());
 	}
 
 	//-----------------------------------------------------------------------

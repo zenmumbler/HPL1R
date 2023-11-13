@@ -4,64 +4,45 @@
  */
 
 #include "GfxBatch.h"
+#include "graphics/LowLevelGraphics.h"
+#include "graphics/VertexBuffer.h"
 
 namespace hpl {
 
-	cGfxBatch::cGfxBatch() : cGfxBatch(20'000) {}
+	cGfxBatch::cGfxBatch(iLowLevelGraphics *llGfx) : cGfxBatch(20'000, llGfx) {}
 	
-	cGfxBatch::cGfxBatch(int vertexCount) {
-		mlBatchArraySize = vertexCount;
-		mlVertexCount = 0;
-		mlIndexCount = 0;
+	cGfxBatch::cGfxBatch(int vertexCount, iLowLevelGraphics *llGfx) {
+		vertexBuffer = llGfx->CreateVertexBuffer(
+			VertexMask_Position | VertexMask_Color0 | VertexMask_UV0,
+			VertexBufferPrimitiveType::Quads,
+			VertexBufferUsageType::Stream,
+			vertexCount, vertexCount
+		);
+		vertexBuffer->Compile();
 
-		// 3 pos floats, 4 color floats, 2 tex coord floats
-		mlBatchStride = 9;
-		mpVertexArray = new float[mlBatchStride * mlBatchArraySize];
-		mpIndexArray = new unsigned int[mlBatchArraySize];
+		Clear();
 	}
 
 	cGfxBatch::~cGfxBatch() {
-		delete[] mpVertexArray;
-		delete[] mpIndexArray;
+		delete vertexBuffer;
 	}
 
-	void cGfxBatch::AddVertex(const cVector3f &position, const cColor &color, const cVector3f& tex) {
-		// Position
-		mpVertexArray[mlVertexCount + 0] =	position.x;
-		mpVertexArray[mlVertexCount + 1] =	position.y;
-		mpVertexArray[mlVertexCount + 2] =	position.z;
-
-		// Color
-		mpVertexArray[mlVertexCount + 3] =	color.r;
-		mpVertexArray[mlVertexCount + 4] =	color.g;
-		mpVertexArray[mlVertexCount + 5] =	color.b;
-		mpVertexArray[mlVertexCount + 6] =	color.a;
-
-		// UV
-		mpVertexArray[mlVertexCount + 7] =	tex.x;
-		mpVertexArray[mlVertexCount + 8] =	tex.y;
-
-		mlVertexCount += mlBatchStride;
-
-		if (mlVertexCount / mlBatchStride >= mlBatchArraySize)
-		{
-			//Make the array larger.
-		}
-	}
-
-	void cGfxBatch::AddIndex(uint32_t index) {
-		mpIndexArray[mlIndexCount] = index;
-		mlIndexCount++;
-
-		if (mlIndexCount >= mlBatchArraySize)
-		{
-			//Make the array larger.
-		}
+	void cGfxBatch::AddVertex(const cVector3f &position, const cColor &color, const cVector2f& tex) {
+		*posView++ = position;
+		*colorView++ = color;
+		*uvView++ = tex;
+		*indexView++ = indexCount++;
+		vertexBuffer->SetIndexCount(indexCount);
 	}
 
 	void cGfxBatch::Clear() {
-		mlIndexCount = 0;
-		mlVertexCount = 0;
+		posView = vertexBuffer->GetVec3View(VertexAttr_Position);
+		colorView = vertexBuffer->GetColorView(VertexAttr_Color0);
+		uvView = vertexBuffer->GetVec2View(VertexAttr_UV0);
+		indexView = vertexBuffer->GetIndexView();
+
+		indexCount = 0;
+		vertexBuffer->SetIndexCount(indexCount);
 	}
 
 }

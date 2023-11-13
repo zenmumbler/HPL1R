@@ -7,9 +7,12 @@
 
 #include "math/MathTypes.h"
 #include "graphics/Color.h"
+#include "graphics/VertexBuffer.h"
 
 namespace hpl {
-	
+
+	class iLowLevelGraphics;
+
 	typedef uint32_t tGfxBatchAttrs;
 
 	enum eGfxBatchAttr {
@@ -27,21 +30,20 @@ namespace hpl {
 	class cGfxBatch
 	{
 	public:
-		cGfxBatch();
-		cGfxBatch(int vertexCount);
+		cGfxBatch(iLowLevelGraphics *llGfx);
+		cGfxBatch(int vertexCount, iLowLevelGraphics *llGfx);
 		~cGfxBatch();
 
-		void AddVertex(const cVector3f &position, const cColor &color, const cVector3f& tex);
-		void AddIndex(uint32_t index);
+		void AddVertex(const cVector3f &position, const cColor &color, const cVector2f& tex);
 		void Clear();
+		bool HasContent() { return indexCount > 0; }
 
-		float* mpVertexArray;
-		unsigned int mlVertexCount;
-		unsigned int* mpIndexArray;
-		unsigned int mlIndexCount;
-
-		unsigned int mlBatchStride;
-		unsigned int mlBatchArraySize;
+		iVertexBuffer *vertexBuffer;
+		STLBufferIterator<cVector3f> posView;
+		STLBufferIterator<cColor> colorView;
+		STLBufferIterator<cVector2f> uvView;
+		STLBufferIterator<int> indexView;
+		int indexCount;
 	};
 }
 

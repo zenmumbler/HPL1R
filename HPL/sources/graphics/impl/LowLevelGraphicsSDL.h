@@ -156,7 +156,7 @@ namespace hpl {
 		void DrawQuad(const tVertexVec &avVtx, const cColor aCol) override;
 		void DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs) override;
 
-		void DrawBatch(const cGfxBatch &batch, tGfxBatchAttrs attrs, eBatchDrawMode drawMode) override;
+		void DrawBatch(const cGfxBatch &batch) override;
 
 		//PRIMITIVES
 		void DrawLine(const cVector3f& avBegin, const cVector3f& avEnd, cColor aCol) override;
