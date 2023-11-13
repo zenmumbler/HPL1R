@@ -271,6 +271,33 @@ template <class T> 	class cMatrix {
 
 	//-----------------------------------------------------------------------
 
+	// Rehatched: lifted this from glmatrix (https://github.com/toji/gl-matrix/blob/master/src/mat4.js)
+	static cMatrix<T> CreateOrtho(float left, float right, float bottom, float top, float near, float far) {
+		cMatrix<T> ortho{};
+		float lr = 1 / (left - right);
+		float bt = 1 / (bottom - top);
+		float nf = 1 / (near - far);
+		ortho.v[0] = -2 * lr;
+		ortho.v[1] = 0;
+		ortho.v[2] = 0;
+		ortho.v[3] = 0;
+		ortho.v[4] = 0;
+		ortho.v[5] = -2 * bt;
+		ortho.v[6] = 0;
+		ortho.v[7] = 0;
+		ortho.v[8] = 0;
+		ortho.v[9] = 0;
+		ortho.v[10] = 2 * nf;
+		ortho.v[11] = 0;
+		ortho.v[12] = (left + right) * lr;
+		ortho.v[13] = (top + bottom) * bt;
+		ortho.v[14] = (far + near) * nf;
+		ortho.v[15] = 1;
+		return ortho.GetTranspose(); // Rehatched: quick hack since all other matrices are in DX order
+	}
+
+	//-----------------------------------------------------------------------
+
 	tString ToString()
 	{
 		char buf[512];
