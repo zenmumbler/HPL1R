@@ -386,58 +386,64 @@ namespace hpl {
 		switch(apObject->GetRenderType())
 		{
 			//Add a normal renderable
-		case eRenderableType_Normal:
-		case eRenderableType_ParticleSystem:
-			if(apObject->GetMaterial()->IsTransperant())
-			{
-				//Calculate the Z for the trans object
-				cVector3f vCameraPos = cMath::MatrixMul(cRenderList::GetCamera()->GetViewMatrix(),
-					apObject->GetBoundingVolume()->GetWorldCenter());
-				apObject->SetZ(vCameraPos.z);
-
-				m_setObjects.insert(apObject);
-			}
-			else
-			{
-				m_setObjects.insert(apObject);
-
-				//MotionBlur
-				if(false // mpGraphics->GetRendererPostEffects()->GetMotionBlurActive()
-					|| mpGraphics->GetRenderer3D()->GetRenderSettings()->mbFogActive
-					|| false // mpGraphics->GetRendererPostEffects()->GetDepthOfFieldActive()
-				)
+			case eRenderableType_Normal:
+			case eRenderableType_ParticleSystem:
+				if(apObject->GetMaterial()->IsTransperant())
 				{
-					m_setMotionBlurObjects.insert(apObject);
+					//Calculate the Z for the trans object
+					cVector3f vCameraPos = cMath::MatrixMul(cRenderList::GetCamera()->GetViewMatrix(),
+						apObject->GetBoundingVolume()->GetWorldCenter());
+					apObject->SetZ(vCameraPos.z);
 
-					if(apObject->GetPrevRenderCount() != GetLastRenderCount())
-					{
-						cMatrixf *pMtx = apObject->GetModelMatrix(mpCamera);
-						if(pMtx)
-						{
-							apObject->SetPrevMatrix(*pMtx);
-						}
-					}
-					apObject->SetPrevRenderCount(mlRenderCount);
+					m_setObjects.insert(apObject);
 				}
-			}
-
-			break;
-			//Add all sub meshes of the mesh
-		case eRenderableType_Mesh:
-			{
-				cMeshEntity* pMesh = static_cast<cMeshEntity*>(apObject);
-				for(int i=0;i<pMesh->GetSubMeshEntityNum();i++)
+				else
 				{
-					Add(pMesh->GetSubMeshEntity(i));
+					m_setObjects.insert(apObject);
+
+					//MotionBlur
+					if(false // mpGraphics->GetRendererPostEffects()->GetMotionBlurActive()
+						|| mpGraphics->GetRenderer3D()->GetRenderSettings()->mbFogActive
+						|| false // mpGraphics->GetRendererPostEffects()->GetDepthOfFieldActive()
+					)
+					{
+						m_setMotionBlurObjects.insert(apObject);
+
+						if(apObject->GetPrevRenderCount() != GetLastRenderCount())
+						{
+							cMatrixf *pMtx = apObject->GetModelMatrix(mpCamera);
+							if(pMtx)
+							{
+								apObject->SetPrevMatrix(*pMtx);
+							}
+						}
+						apObject->SetPrevRenderCount(mlRenderCount);
+					}
 				}
 				break;
-			}
-			//Add a light to a special container
-		case eRenderableType_Light:
-			iLight3D *pLight = static_cast<iLight3D*>(apObject);
 
-			m_setLights.insert(pLight);
-			break;
+			//Add all sub meshes of the mesh
+			case eRenderableType_Mesh:
+				{
+					cMeshEntity* pMesh = static_cast<cMeshEntity*>(apObject);
+					for(int i=0;i<pMesh->GetSubMeshEntityNum();i++)
+					{
+						Add(pMesh->GetSubMeshEntity(i));
+					}
+					break;
+				}
+
+			//Add a light to a special container
+			case eRenderableType_Light:
+				{
+					iLight3D *pLight = static_cast<iLight3D*>(apObject);
+					m_setLights.insert(pLight);
+				}
+				break;
+
+			default:
+				// no action
+				break;
 		}
 
 		return true;

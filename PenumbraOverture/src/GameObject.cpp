@@ -509,9 +509,10 @@ void cGameObject::OnPlayerInteract()
 
 	switch(mInteractMode)
 	{
-	case eObjectInteractMode_Push: PushObject(); break;
-	case eObjectInteractMode_Move: MoveObject(); break;
-	case eObjectInteractMode_Grab: GrabObject(); break;
+		case eObjectInteractMode_Push: PushObject(); break;
+		case eObjectInteractMode_Move: MoveObject(); break;
+		case eObjectInteractMode_Grab: GrabObject(); break;
+		default: break;
 	}
 }
 

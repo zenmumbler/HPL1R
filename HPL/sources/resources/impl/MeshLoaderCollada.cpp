@@ -2287,10 +2287,11 @@ namespace hpl {
 				}
 
 				//Get number of digits
-				lDigits =1;
-				while(	apNode->msName.length() > lStartChar+4+lDigits &&
+				lDigits = 1;
+				auto nameLength = static_cast<int>(apNode->msName.length());
+				while(	nameLength > lStartChar+4+lDigits &&
 						apNode->msName[lStartChar+4+lDigits] != '_' &&
-						apNode->msName.length() >= 7+lDigits &&
+						nameLength >= 7+lDigits &&
 						apNode->msName[7+lDigits] != 0)
 				{
 					lDigits++;

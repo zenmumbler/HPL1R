@@ -145,12 +145,12 @@ namespace hpl {
 	{
 		switch(aInput)
 		{
-		case ePhysicsControllerInput_AngularSpeed: return mpBody ? mpBody->GetAngularVelocity() : 0;
-		case ePhysicsControllerInput_LinearSpeed: return mpBody ? mpBody->GetLinearVelocity() : 0;
-		case ePhysicsControllerInput_JointAngle: return mpJoint ? mpJoint->GetAngle() : 0;
-		case ePhysicsControllerInput_JointDist: return mpJoint ? mpJoint->GetDistance() : 0;
+			case ePhysicsControllerInput_AngularSpeed: return mpBody ? mpBody->GetAngularVelocity() : 0;
+			case ePhysicsControllerInput_LinearSpeed: return mpBody ? mpBody->GetLinearVelocity() : 0;
+			case ePhysicsControllerInput_JointAngle: return mpJoint ? mpJoint->GetAngle() : 0;
+			case ePhysicsControllerInput_JointDist: return mpJoint ? mpJoint->GetDistance() : 0;
+			default: return 0;
 		}
-		return 0;
 	}
 
 	//-----------------------------------------------------------------------
@@ -183,9 +183,10 @@ namespace hpl {
 
 		switch(aAxis)
 		{
-		case ePhysicsControllerAxis_X: vVec.x = afVal; break;
-		case ePhysicsControllerAxis_Y: vVec.y = afVal; break;
-		case ePhysicsControllerAxis_Z: vVec.z = afVal; break;
+			case ePhysicsControllerAxis_X: vVec.x = afVal; break;
+			case ePhysicsControllerAxis_Y: vVec.y = afVal; break;
+			case ePhysicsControllerAxis_Z: vVec.z = afVal; break;
+			default: /* invalid axis value */ break;
 		}
 
 		if(mbMulMassWithOutput) vVec = vVec * mpBody->GetMass();
@@ -198,8 +199,9 @@ namespace hpl {
 
 		switch(aOutput)
 		{
-		case ePhysicsControllerOutput_Torque: mpBody->AddTorque(vVec); break;
-		case ePhysicsControllerOutput_Force: mpBody->AddForce(vVec); break;
+			case ePhysicsControllerOutput_Torque: mpBody->AddTorque(vVec); break;
+			case ePhysicsControllerOutput_Force: mpBody->AddForce(vVec); break;
+			default: /* invalid controller value */ break;
 		}
 	}
 
@@ -209,11 +211,11 @@ namespace hpl {
 	{
 		switch(aAxis)
 		{
-		case ePhysicsControllerAxis_X: return avVec.x;
-		case ePhysicsControllerAxis_Y: return avVec.y;
-		case ePhysicsControllerAxis_Z: return avVec.z;
+			case ePhysicsControllerAxis_X: return avVec.x;
+			case ePhysicsControllerAxis_Y: return avVec.y;
+			case ePhysicsControllerAxis_Z: return avVec.z;
+			default: /* invalid axis value */ return 0;
 		}
-		return 0;
 	}
 
 	//-----------------------------------------------------------------------

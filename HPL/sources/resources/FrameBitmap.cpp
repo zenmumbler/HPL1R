@@ -58,7 +58,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	#define DEBUG_BTREE (false)
+	constexpr const bool DEBUG_BTREE = false;
 
 	cResourceImage *cFrameBitmap::AddBitmap(const Bitmap &aSrc)
 	{

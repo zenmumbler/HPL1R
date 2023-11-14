@@ -1427,7 +1427,7 @@ namespace hpl {
 
 		switch(apEvent->mType)
 		{
-		case eAnimationEventType_PlaySound:
+			case eAnimationEventType_PlaySound:
 			{
 				cSoundEntity *pSound = mpWorld->CreateSoundEntity("AnimEvent",apEvent->msValue,true);
 				if(pSound)
@@ -1445,6 +1445,9 @@ namespace hpl {
 				}
 				break;
 			}
+			default:
+				// no action
+				break;
 		}
 	}
 

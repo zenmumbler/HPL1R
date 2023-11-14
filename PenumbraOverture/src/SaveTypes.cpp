@@ -107,34 +107,34 @@ void cEngineJoint_SaveData::FromJoint(iPhysicsJoint *apJoint)
     //Type specific
 	switch(apJoint->GetType())
 	{
-	case ePhysicsJointType_Ball:
-		{
-			iPhysicsJointBall *pBallJoint = static_cast<iPhysicsJointBall*>(apJoint);
-			mfMaxLimit = pBallJoint->GetMaxConeAngle();
-			mfMinLimit = pBallJoint->GetMaxTwistAngle();
-			break;
-		}
-	case ePhysicsJointType_Hinge:
-		{
-			iPhysicsJointHinge *pHingeJoint = static_cast<iPhysicsJointHinge*>(apJoint);
-			mfMaxLimit = pHingeJoint->GetMaxAngle();
-			mfMinLimit = pHingeJoint->GetMinAngle();
-			break;
-		}
-	case ePhysicsJointType_Screw:
-		{
-			iPhysicsJointScrew *pScrewJoint = static_cast<iPhysicsJointScrew*>(apJoint);
-			mfMinLimit = pScrewJoint->GetMinDistance();
-			mfMaxLimit = pScrewJoint->GetMaxDistance();
-			break;
-		}
-	case ePhysicsJointType_Slider:
-		{
-			iPhysicsJointSlider *pSliderJoint = static_cast<iPhysicsJointSlider*>(apJoint);
-			mfMinLimit = pSliderJoint->GetMinDistance();
-			mfMaxLimit = pSliderJoint->GetMaxDistance();
-			break;
-		}
+		case ePhysicsJointType_Ball:
+			{
+				iPhysicsJointBall *pBallJoint = static_cast<iPhysicsJointBall*>(apJoint);
+				mfMaxLimit = pBallJoint->GetMaxConeAngle();
+				mfMinLimit = pBallJoint->GetMaxTwistAngle();
+				break;
+			}
+		case ePhysicsJointType_Hinge:
+			{
+				iPhysicsJointHinge *pHingeJoint = static_cast<iPhysicsJointHinge*>(apJoint);
+				mfMaxLimit = pHingeJoint->GetMaxAngle();
+				mfMinLimit = pHingeJoint->GetMinAngle();
+				break;
+			}
+		case ePhysicsJointType_Screw:
+			{
+				iPhysicsJointScrew *pScrewJoint = static_cast<iPhysicsJointScrew*>(apJoint);
+				mfMinLimit = pScrewJoint->GetMinDistance();
+				mfMaxLimit = pScrewJoint->GetMaxDistance();
+				break;
+			}
+		case ePhysicsJointType_Slider:
+			{
+				iPhysicsJointSlider *pSliderJoint = static_cast<iPhysicsJointSlider*>(apJoint);
+				mfMinLimit = pSliderJoint->GetMinDistance();
+				mfMaxLimit = pSliderJoint->GetMaxDistance();
+				break;
+			}
 	}
 }
 

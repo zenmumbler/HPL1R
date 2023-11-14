@@ -423,19 +423,18 @@ namespace hpl {
 	{
 		switch((eCollideShapeType)apData->mType)
 		{
-		case eCollideShapeType_Box:
-			return apWorld->CreateBoxShape(apData->mvSize,&apData->m_mtxOffset);
-		case eCollideShapeType_Sphere:
-			return apWorld->CreateSphereShape(apData->mvSize,&apData->m_mtxOffset);
-		case eCollideShapeType_Cylinder:
-			return apWorld->CreateCylinderShape(apData->mvSize.x,apData->mvSize.y,&apData->m_mtxOffset);
-		case eCollideShapeType_Capsule:
-			return apWorld->CreateCapsuleShape(apData->mvSize.x,apData->mvSize.y,&apData->m_mtxOffset);
+			case eCollideShapeType_Box:
+				return apWorld->CreateBoxShape(apData->mvSize,&apData->m_mtxOffset);
+			case eCollideShapeType_Sphere:
+				return apWorld->CreateSphereShape(apData->mvSize,&apData->m_mtxOffset);
+			case eCollideShapeType_Cylinder:
+				return apWorld->CreateCylinderShape(apData->mvSize.x,apData->mvSize.y,&apData->m_mtxOffset);
+			case eCollideShapeType_Capsule:
+				return apWorld->CreateCapsuleShape(apData->mvSize.x,apData->mvSize.y,&apData->m_mtxOffset);
+			default:
+				Warning("Invalid shape type %d!\n", apData->mType);
+				return NULL;
 		}
-
-		Warning("Invalid shape type %d!\n",apData->mType);
-
-		return NULL;
 	}
 
 	static iCollideShape* CreateCollideShapeFromSave(cContainerList<cSaveData_iCollideShape> *apShapeList,

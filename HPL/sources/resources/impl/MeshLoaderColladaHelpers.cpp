@@ -443,22 +443,11 @@ namespace hpl {
 		return pTrack;
 	}
 
-	static tString gsTemp;
-	static const char* GetTabs(int alDepth)
-	{
-		gsTemp = "";
-
-		for(int i=0;i<alDepth;i++)gsTemp+="\t";
-
-		return gsTemp.c_str();
-	}
-
 	//-----------------------------------------------------------------------
-
 
 	void cMeshLoaderCollada::CalcLocalMatrixRec(cBone* apBone, cMatrixf a_mtxParentGlobal, int alDepth)
 	{
-		//Log("%s %s \n",GetTabs(alDepth),apBone->GetName().c_str());
+		//Log("%s%s\n", std::string('\t', alDepth).c_str(), apBone->GetName().c_str());
 
 		if(apBone->GetValue()==0){
 			Warning("Bone '%s' is not attached to skin!\n",apBone->GetName().c_str());

@@ -966,38 +966,41 @@ void cMapHandler::LoadSaveData(cSavedWorld* apSavedWorld)
 			//Get type and size
 			switch(pSaveEntity->mType)
 			{
-			case eGameEntityType_Area:
-				vSize = static_cast<cGameArea_SaveData*>(pSaveEntity)->mvSize;
-				sType = "script";
-				break;
-			case eGameEntityType_Link:
-				vSize = static_cast<cGameLink_SaveData*>(pSaveEntity)->mvSize;
-				sType = "link";
-				break;
-			case eGameEntityType_StickArea:
-				vSize = static_cast<cGameStickArea_SaveData*>(pSaveEntity)->mvSize;
-				sType = "stick";
-				break;
-			case eGameEntityType_SaveArea:
-				vSize = static_cast<cGameStickArea_SaveData*>(pSaveEntity)->mvSize;
-				sType = "save";
-				break;
-			case eGameEntityType_Ladder:
-				vSize = static_cast<cGameLadder_SaveData*>(pSaveEntity)->mvSize;
-				sType = "ladder";
-				break;
-			case eGameEntityType_DamageArea:
-				vSize = static_cast<cGameDamageArea_SaveData*>(pSaveEntity)->mvSize;
-				sType = "damage";
-				break;
-			case eGameEntityType_ForceArea:
-				vSize = static_cast<cGameDamageArea_SaveData*>(pSaveEntity)->mvSize;
-				sType = "force";
-				break;
-			case eGameEntityType_LiquidArea:
-				vSize = static_cast<cGameLiquidArea_SaveData*>(pSaveEntity)->mvSize;
-				sType = "liquid";
-				break;
+				case eGameEntityType_Area:
+					vSize = static_cast<cGameArea_SaveData*>(pSaveEntity)->mvSize;
+					sType = "script";
+					break;
+				case eGameEntityType_Link:
+					vSize = static_cast<cGameLink_SaveData*>(pSaveEntity)->mvSize;
+					sType = "link";
+					break;
+				case eGameEntityType_StickArea:
+					vSize = static_cast<cGameStickArea_SaveData*>(pSaveEntity)->mvSize;
+					sType = "stick";
+					break;
+				case eGameEntityType_SaveArea:
+					vSize = static_cast<cGameStickArea_SaveData*>(pSaveEntity)->mvSize;
+					sType = "save";
+					break;
+				case eGameEntityType_Ladder:
+					vSize = static_cast<cGameLadder_SaveData*>(pSaveEntity)->mvSize;
+					sType = "ladder";
+					break;
+				case eGameEntityType_DamageArea:
+					vSize = static_cast<cGameDamageArea_SaveData*>(pSaveEntity)->mvSize;
+					sType = "damage";
+					break;
+				case eGameEntityType_ForceArea:
+					vSize = static_cast<cGameDamageArea_SaveData*>(pSaveEntity)->mvSize;
+					sType = "force";
+					break;
+				case eGameEntityType_LiquidArea:
+					vSize = static_cast<cGameLiquidArea_SaveData*>(pSaveEntity)->mvSize;
+					sType = "liquid";
+					break;
+				default:
+					// not saved
+					break;
 			}
 
 			//Load entity

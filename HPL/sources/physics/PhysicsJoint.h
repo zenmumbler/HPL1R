@@ -49,7 +49,6 @@ namespace hpl {
 		ePhysicsJointType_Hinge,
 		ePhysicsJointType_Slider,
 		ePhysicsJointType_Screw,
-		ePhysicsJointType_LastEnum
 	};
 
 	//-----------------------------------

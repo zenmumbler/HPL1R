@@ -1001,7 +1001,7 @@ namespace hpl {
 					return pSliderJoint->GetMinDistance();
 				}
 			case ePhysicsJointType_Ball:
-			case ePhysicsJointType_LastEnum:
+				// do nothing
 				break;
 			}
 		}
@@ -1027,7 +1027,7 @@ namespace hpl {
 					return pSliderJoint->GetMaxDistance();
 				}
 			case ePhysicsJointType_Ball:
-			case ePhysicsJointType_LastEnum:
+				// do nothing
 				break;
 			}
 
@@ -1195,7 +1195,7 @@ namespace hpl {
 					break;
 				}
 			case ePhysicsJointType_Ball:
-			case ePhysicsJointType_LastEnum:
+				// do nothing
 				break;
 			}
 		}
@@ -1224,7 +1224,7 @@ namespace hpl {
 					break;
 				}
 			case ePhysicsJointType_Ball:
-			case ePhysicsJointType_LastEnum:
+				// do nothing
 				break;
 			}
 		}

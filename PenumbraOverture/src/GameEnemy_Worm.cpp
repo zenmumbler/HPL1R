@@ -114,7 +114,8 @@ void cGameEnemyState_Worm_Idle::OnLeaveState(iGameEnemyState *apNextState)
 void cGameEnemyState_Worm_Idle::OnUpdate(float afTimeStep)
 {
 	mpEnemy->ChangeState(STATE_HUNT);
-	return;
+
+#if 0
 	if(mpMover->IsMoving()==false || mpMover->GetStuckCounter() > 2.0f)
 	{
 		mpMover->ResetStuckCounter();
@@ -166,6 +167,7 @@ void cGameEnemyState_Worm_Idle::OnUpdate(float afTimeStep)
 			mfNextWalkTime -= afTimeStep;
 		}
 	}
+#endif
 }
 
 //-----------------------------------------------------------------------

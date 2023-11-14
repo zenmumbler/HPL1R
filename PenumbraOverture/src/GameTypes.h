@@ -120,8 +120,7 @@ enum eGameDifficulty
 {
 	eGameDifficulty_Easy =0,
 	eGameDifficulty_Normal =1,
-	eGameDifficulty_Hard =2,
-	eGameDifficulty_LastEnum
+	eGameDifficulty_Hard =2
 };
 
 //---------------------------------
@@ -155,7 +154,6 @@ enum eObjectInteractMode
 	eObjectInteractMode_Push,
 	eObjectInteractMode_Move,
 	eObjectInteractMode_Grab,
-	eObjectInteractMode_LastEnum,
 };
 
 enum eGameDoorState
@@ -164,7 +162,6 @@ enum eGameDoorState
 	eGameDoorState_Opening,
 	eGameDoorState_Closed,
 	eGameDoorState_Closing,
-	eGameDoorState_LastEnum,
 };
 
 //---------------------------------

@@ -55,25 +55,31 @@ namespace hpl {
 		////////////////////////////////////////////
 		// Create Newton collision
 
-		switch(aType)
+		switch(mType)
 		{
-		case eCollideShapeType_Null:		mpNewtonCollision = NewtonCreateNull(apNewtonWorld); break;
+			case eCollideShapeType_Null:
+				mpNewtonCollision = NewtonCreateNull(apNewtonWorld);
+				break;
 
-		case eCollideShapeType_Box:			mpNewtonCollision = NewtonCreateBox(apNewtonWorld,
-												mvSize.x, mvSize.y, mvSize.z,
-												0, pMtx); break;
+			case eCollideShapeType_Box:
+				mpNewtonCollision = NewtonCreateBox(apNewtonWorld, mvSize.x, mvSize.y, mvSize.z, 0, pMtx);
+				break;
 
-		case eCollideShapeType_Sphere:		mpNewtonCollision = NewtonCreateSphere(apNewtonWorld,
-												mvSize.x, mvSize.y, mvSize.z,
-												0, pMtx); break;
+			case eCollideShapeType_Sphere:
+				mpNewtonCollision = NewtonCreateSphere(apNewtonWorld, mvSize.x, mvSize.y, mvSize.z, 0, pMtx);
+				break;
 
-		case eCollideShapeType_Cylinder:	mpNewtonCollision = NewtonCreateCylinder(apNewtonWorld,
-												mvSize.x, mvSize.y,
-												0, pMtx); break;
+			case eCollideShapeType_Cylinder:
+				mpNewtonCollision = NewtonCreateCylinder(apNewtonWorld, mvSize.x, mvSize.y, 0, pMtx);
+				break;
 
-		case eCollideShapeType_Capsule:		mpNewtonCollision = NewtonCreateCapsule(apNewtonWorld,
-												mvSize.x, mvSize.y,
-												0, pMtx); break;
+			case eCollideShapeType_Capsule:
+				mpNewtonCollision = NewtonCreateCapsule(apNewtonWorld, mvSize.x, mvSize.y, 0, pMtx);
+				break;
+
+			default:
+				// unsupported shape type
+				break;
 		}
 
 		////////////////////////////////////////////

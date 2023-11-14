@@ -376,8 +376,8 @@ namespace hpl {
 			{
 				iParticleEmitter3D *pPE = GetEmitter(i);
 				pPE->KillInstantly();
-				return;
 			}
+			return;
 		}
 
 		for(int i=0; i< GetEmitterNum(); ++i)

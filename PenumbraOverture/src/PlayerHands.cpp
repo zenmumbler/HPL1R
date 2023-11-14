@@ -465,9 +465,11 @@ bool cPlayerHands::AddModelFromFile(const tString &asFile)
 	
 	switch(handType)
 	{
-	case ePlayerHandType_Normal:		pHudModel = new cHudModel_Normal(); break;
-	case ePlayerHandType_WeaponMelee:	pHudModel = new cHudModel_WeaponMelee(); break;
-	case ePlayerHandType_Throw:			pHudModel = new cHudModel_Throw(); break;
+		case ePlayerHandType_Normal:		pHudModel = new cHudModel_Normal(); break;
+		case ePlayerHandType_WeaponMelee:	pHudModel = new cHudModel_WeaponMelee(); break;
+		case ePlayerHandType_Throw:			pHudModel = new cHudModel_Throw(); break;
+		default:
+			Warning("Invalid hand type! %d\n", handType); break;
 	}
 
 	pHudModel->msName = cString::ToString(pMainElem->Attribute("Name"),"");
