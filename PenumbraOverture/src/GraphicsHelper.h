@@ -33,27 +33,20 @@ class cGraphicsHelper
 {
 public:
 	cGraphicsHelper(cInit *apInit);
-	~cGraphicsHelper();
 
-	void ClearScreen(const cColor &aColor);
-	
+	void ClearScreen(const cColor &aColor = cColor::Black);
 	void DrawLoadingScreen(const tString &asFile);
-
 	void SwapBuffers();
 
 private:
-	tVertexVec mvVtx;
-	
 	cInit *mpInit;
 	iLowLevelGraphics *mpLowLevelGfx;
 	cTextureManager *mpTexManager;
-	
     cGraphicsDrawer *mpDrawer;
 
 	FontData *mpFont;
 };
 
 //---------------------------------------------
-
 
 #endif // GAME_GRAPHICS_HELPER_H

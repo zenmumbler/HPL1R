@@ -184,7 +184,7 @@ void cPreMenu::Reset()
 
 void cPreMenu::OnPostSceneDraw()
 {
-	mpInit->mpGraphicsHelper->ClearScreen(cColor(0,0));
+	mpInit->mpGraphicsHelper->ClearScreen();
 	
 	if(mlState == 1 || mlState == 2)
 	{

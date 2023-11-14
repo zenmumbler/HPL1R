@@ -30,21 +30,12 @@
 
 cGraphicsHelper::cGraphicsHelper(cInit *apInit)
 {
-	mpInit = apInit;
+	mpInit = apInit; // for Translate
+	mpLowLevelGfx = apInit->mpGame->GetGraphics()->GetLowLevel();
+	mpTexManager = apInit->mpGame->GetResources()->GetTextureManager();
+	mpDrawer = apInit->mpGame->GetGraphics()->GetDrawer();
 
-	mpLowLevelGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
-	mpTexManager = mpInit->mpGame->GetResources()->GetTextureManager();
-
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
-
-	mpFont =mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt");
-
-	mvVtx.resize(4);
-}
-
-cGraphicsHelper::~cGraphicsHelper()
-{
-
+	mpFont = apInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt");
 }
 
 //-----------------------------------------------------------------------

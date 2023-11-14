@@ -76,7 +76,7 @@ void cCredits::Reset()
 
 void cCredits::OnPostSceneDraw()
 {
-	mpInit->mpGraphicsHelper->ClearScreen(cColor(0,0));
+	mpInit->mpGraphicsHelper->ClearScreen();
 	
 }
 
