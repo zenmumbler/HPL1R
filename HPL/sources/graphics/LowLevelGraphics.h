@@ -77,7 +77,6 @@ namespace hpl {
 		eTextureSource_Constant,
 		eTextureSource_Primary,
 		eTextureSource_Previous,
-		eTextureSource_LastEnum
 	};
 
 	enum eTextureFunc
@@ -90,7 +89,6 @@ namespace hpl {
 		eTextureFunc_Interpolate,
 		eTextureFunc_Dot3RGB,
 		eTextureFunc_Dot3RGBA,
-		eTextureFunc_LastEnum
 	};
 
 	enum eStencilFunc
@@ -102,15 +100,13 @@ namespace hpl {
 		eStencilFunc_GreaterOrEqual,
 		eStencilFunc_Equal,
 		eStencilFunc_NotEqual,
-		eStencilFunc_Always,
-		eStencilFunc_LastEnum
+		eStencilFunc_Always
 	};
 
 	enum eStencilFace
 	{
 		eStencilFace_Front,
-		eStencilFace_Back,
-		eStencilFace_LastEnum,
+		eStencilFace_Back
 	};
 
 	enum eDepthTestFunc
@@ -122,8 +118,7 @@ namespace hpl {
 		eDepthTestFunc_GreaterOrEqual,
 		eDepthTestFunc_Equal,
 		eDepthTestFunc_NotEqual,
-		eDepthTestFunc_Always,
-		eDepthTestFunc_LastEnum
+		eDepthTestFunc_Always
 	};
 
 	enum eAlphaTestFunc
@@ -135,8 +130,7 @@ namespace hpl {
 		eAlphaTestFunc_GreaterOrEqual,
 		eAlphaTestFunc_Equal,
 		eAlphaTestFunc_NotEqual,
-		eAlphaTestFunc_Always,
-		eAlphaTestFunc_LastEnum
+		eAlphaTestFunc_Always
 	};
 
 	enum eStencilOp
@@ -149,35 +143,21 @@ namespace hpl {
 		eStencilOp_Invert,
 		eStencilOp_IncrementWrap,
 		eStencilOp_DecrementWrap,
-		eStencilOp_LastEnum
 	};
 
 	enum eCullMode
 	{
 		eCullMode_Clockwise,
-		eCullMode_CounterClockwise,
-		eCullMode_LastEnum
+		eCullMode_CounterClockwise
 	};
 
 	enum eGraphicCaps
 	{
-		eGraphicCaps_TextureTargetRectangle,
-		eGraphicCaps_VertexBufferObject,
-
 		eGraphicCaps_MaxTextureImageUnits,
 		eGraphicCaps_MaxTextureCoordUnits,
 
 		eGraphicCaps_AnisotropicFiltering,
-		eGraphicCaps_MaxAnisotropicFiltering,
-
-		eGraphicCaps_Multisampling,
-
-		eGraphicCaps_GL_VertexProgram,
-		eGraphicCaps_GL_FragmentProgram,
-		
-		eGraphicCaps_GL_CoreProfile,
-
-		eGraphicCaps_LastEnum
+		eGraphicCaps_MaxAnisotropicFiltering
 	};
 
 	class iOcclusionQuery;

@@ -280,16 +280,10 @@ namespace hpl {
 		//Show some info
 		Log("  Max texture image units: %d\n",GetCaps(eGraphicCaps_MaxTextureImageUnits));
 		Log("  Max texture coord units: %d\n",GetCaps(eGraphicCaps_MaxTextureCoordUnits));
-		Log("  Vertex Buffer Object: %d\n",GetCaps(eGraphicCaps_VertexBufferObject));
 
 		Log("  Anisotropic filtering: %d\n",GetCaps(eGraphicCaps_AnisotropicFiltering));
 		if(GetCaps(eGraphicCaps_AnisotropicFiltering))
 			Log("  Max Anisotropic degree: %d\n",GetCaps(eGraphicCaps_MaxAnisotropicFiltering));
-
-		Log("  Multisampling: %d\n",GetCaps(eGraphicCaps_Multisampling));
-
-		Log("  Vertex Program: %d\n",GetCaps(eGraphicCaps_GL_VertexProgram));
-		Log("  Fragment Program: %d\n",GetCaps(eGraphicCaps_GL_FragmentProgram));
 	}
 	//-----------------------------------------------------------------------
 
@@ -297,21 +291,8 @@ namespace hpl {
 	{
 		switch(aType)
 		{
-		//Texture Rectangle
-		case eGraphicCaps_TextureTargetRectangle:
-			{
-				return 1;
-			}
-
-
-		//Vertex Buffer Object
-		case eGraphicCaps_VertexBufferObject:
-			{
-				return SDL_GL_ExtensionSupported("GL_ARB_vertex_buffer_object") ? 1 : 0;
-			}
-
-		//Max Texture Image Units
-		case eGraphicCaps_MaxTextureImageUnits:
+			//Max Texture Image Units
+			case eGraphicCaps_MaxTextureImageUnits:
 			{
 				//DEBUG:
 				//return 2;
@@ -344,34 +325,6 @@ namespace hpl {
 				float fMax;
 				glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT,&fMax);
 				return (int)fMax;
-			}
-
-			//Multisampling
-			case eGraphicCaps_Multisampling:
-			{
-				return SDL_GL_ExtensionSupported("GL_ARB_multisample") ? 1 : 0;
-			}
-
-
-			//GL Vertex program
-			case eGraphicCaps_GL_VertexProgram:
-			{
-				//Debbug:
-				//return 0;
-				return SDL_GL_ExtensionSupported("GL_ARB_vertex_program") ? 1 : 0;
-			}
-
-			//GL Fragment program
-			case eGraphicCaps_GL_FragmentProgram:
-			{
-				//Debbug:
-				//return 0;
-				return SDL_GL_ExtensionSupported("GL_ARB_fragment_program") ? 1 : 0;
-			}
-
-			case eGraphicCaps_GL_CoreProfile:
-			{
-				return 1;
 			}
 		
 			default:
