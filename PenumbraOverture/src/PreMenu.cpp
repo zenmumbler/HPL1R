@@ -160,8 +160,8 @@ void cPreMenu::Reset()
 
 	mvRaindropVector.resize(100);
 
-	mpRaindropGfx = mpInit->mpGame->GetGraphics()->GetDrawer()->CreateGfxObject("menu_rain_drop.jpg",eGfxMaterial::DiffuseAdditive);
-	mpFlashGfx = mpInit->mpGame->GetGraphics()->GetDrawer()->CreateGfxObject("effect_white.jpg",eGfxMaterial::DiffuseAdditive);
+	mpRaindropGfx = mpDrawer->CreateGfxObject("menu_rain_drop.jpg",eGfxMaterial::DiffuseAdditive);
+	mpFlashGfx = mpDrawer->CreateGfxObject("effect_white.jpg",eGfxMaterial::DiffuseAdditive);
 
 	
 	for ( int i =0; i< (int)mvRaindropVector.size(); ++i )
@@ -186,17 +186,15 @@ void cPreMenu::OnPostSceneDraw()
 {
 	mpInit->mpGraphicsHelper->ClearScreen(cColor(0,0));
 	
-	if(mlState == 1 || mlState ==2)
+	if(mlState == 1 || mlState == 2)
 	{
-		mpInit->mpGraphicsHelper->DrawTexture(mvTextures[mlCurrentLogo],cVector3f(0,0,-10),cVector3f(800,600,0),
-												cColor(mfAlpha,1));
+		mpDrawer->DrawTexture(mvTextures[mlCurrentLogo], {0,0,-10}, {800,600}, cColor(mfAlpha,1));
 	}
 	if (mlState == 4)
 	{
-		mpInit->mpGraphicsHelper->DrawTexture(mpLogoTexture,cVector3f(400,300,-10)-(mvecLogoSize/2),mvecLogoSize, cColor(mfLogoFade,1));
-		// mpInit->mpGraphicsHelper->DrawTexture(mpEpTexture,cVector3f(276,440,-10), cVector3f(248,46,0), cColor(mfEpFade,1));
+		mpDrawer->DrawTexture(mpLogoTexture, cVector3f{400,300,-10}-(mvecLogoSize/2), mvecLogoSize.xy, cColor(mfLogoFade,1));
 		if (mbFlash)
-			mpInit->mpGame->GetGraphics()->GetDrawer()->DrawGfxObject( mpFlashGfx, cVector3f(0,0,10), cVector2f(800,600), cColor(1,0.9f));
+			mpDrawer->DrawGfxObject( mpFlashGfx, cVector3f(0,0,10), cVector2f(800,600), cColor(1,0.9f));
 	}
 
 	if (mlState == 1 || mlState == 2 || mlState == 4)
@@ -206,7 +204,7 @@ void cPreMenu::OnPostSceneDraw()
 			cRaindrop* pRaindrop = &(mvRaindropVector[i]);
 			if (pRaindrop->fColor >= 0)
 			{
-				mpInit->mpGame->GetGraphics()->GetDrawer()->DrawGfxObject( pRaindrop->mpGfx, cVector3f(pRaindrop->vPos) + cVector3f(0,0,5), cVector2f(20,6*pRaindrop->fLength), cColor(pRaindrop->fColor,1));
+				mpDrawer->DrawGfxObject( pRaindrop->mpGfx, cVector3f(pRaindrop->vPos) + cVector3f(0,0,5), cVector2f(20,6*pRaindrop->fLength), cColor(pRaindrop->fColor,1));
 			}
 		}
 	}
@@ -691,9 +689,9 @@ void cPreMenu::SetActive(bool abX)
 	{
 		mvRaindropVector.clear();
 		if (mpRaindropGfx)
-			mpInit->mpGame->GetGraphics()->GetDrawer()->DestroyGfxObject(mpRaindropGfx);
+			mpDrawer->DestroyGfxObject(mpRaindropGfx);
 		if (mpFlashGfx)
-			mpInit->mpGame->GetGraphics()->GetDrawer()->DestroyGfxObject(mpFlashGfx);
+			mpDrawer->DestroyGfxObject(mpFlashGfx);
 
 		mpRaindropGfx = NULL;
 		mpFlashGfx = NULL;

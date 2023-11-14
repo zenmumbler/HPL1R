@@ -95,7 +95,7 @@ namespace hpl {
 		 */
 		void DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos, const cVector2f& avSize, const cColor& aColor);
 
-		void DrawTexture(iTexture *apTex, const cVector3f& avPos, const cVector2f& avSize, const cColor &aColor);
+		void DrawTexture(iTexture *apTex, const cVector3f& avPos, const cVector2f& avSize, const cColor &aColor = cColor::White);
 
 		/**
 		 * Draw all gfx obejcts, Called after world is rendered by cScene.

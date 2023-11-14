@@ -1971,14 +1971,14 @@ void cMainMenu::Reset()
 
 void cMainMenu::OnPostSceneDraw()
 {
-	mpDrawer->DrawTexture(mpLogo, 0, {800,180}, cColor::White);
-	mpDrawer->DrawTexture(mpBackground, {0,180,0}, {800,420}, cColor::White);
+	mpDrawer->DrawTexture(mpLogo, 0, {800,180});
+	mpDrawer->DrawTexture(mpBackground, {0,180,0}, {800,420});
 
 	////////////////////////////////
 	// Fade in
 	if (mbFadeIn)
 	{
-		mpDrawer->DrawGfxObject(mpGfxBlackQuad,cVector3f(0,0,120),cVector2f(800,600), cColor(1,1-mfFadeAmount));
+		mpDrawer->DrawGfxObject(mpGfxBlackQuad, {0,0,120}, {800,600}, cColor(1,1-mfFadeAmount));
 	}
 }
 

@@ -506,8 +506,9 @@ void cIntroStory::OnPostSceneDraw()
 		if(mvImages[i].mbActive) mvImages[i].OnDraw();
 	}
 
-	mpInit->mpGraphicsHelper->DrawTexture(mpBlackTexture,cVector3f(0,0,140),cVector2f(800,75),cColor(1,1));
-	mpInit->mpGraphicsHelper->DrawTexture(mpBlackTexture,cVector3f(0,525,140),cVector2f(800,75),cColor(1,1));
+	auto drawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	drawer->DrawTexture(mpBlackTexture, {0,0,140}, {800,75});
+	drawer->DrawTexture(mpBlackTexture, {0,525,140}, {800,75});
 
 	mpLowGfx->PopMatrix(eMatrix_ModelView);
 }
