@@ -101,29 +101,30 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	[[noreturn]]
 	void FatalError(const char* fmt,... )
 	{
 		char text[2048];
 		va_list ap;
-		if (fmt == NULL)
-			return;
-		va_start(ap, fmt);
-			vsnprintf(text, 2048, fmt, ap);
-		va_end(ap);
+		if (fmt) {
+			va_start(ap, fmt);
+				vsnprintf(text, 2048, fmt, ap);
+			va_end(ap);
 
 #ifdef STD_LOGGING
-		fprintf(stderr, "FATAL ERROR: %s", text);
+			fprintf(stderr, "FATAL ERROR: %s", text);
 #endif
 
-		std::string sMess = "FATAL ERROR: ";
-		sMess += text;
-		gLogWriter.Write(sMess.c_str());
+			std::string sMess = "FATAL ERROR: ";
+			sMess += text;
+			gLogWriter.Write(sMess.c_str());
 
 #ifdef WIN32
-//		MessageBox( NULL, cString::To16Char(text).c_str(), _W("FATAL ERROR"), MB_ICONERROR);
+//			MessageBox( NULL, cString::To16Char(text).c_str(), _W("FATAL ERROR"), MB_ICONERROR);
 #elif __MACOSX__
-//		MacOSAlertBox(eMsgBoxType_Error, sMess, "");
+//			MacOSAlertBox(eMsgBoxType_Error, sMess, "");
 #endif
+		}
 
 		exit(1);
 	}

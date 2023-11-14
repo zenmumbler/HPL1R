@@ -9,6 +9,7 @@
 namespace hpl {
 
 	void SetLogFile(const char* filePath);
+	[[noreturn]]
 	void FatalError(const char* fmt,... );
 	void Error(const char* fmt, ...);
 	void Warning(const char* fmt, ...);
