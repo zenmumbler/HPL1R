@@ -38,7 +38,7 @@ cEffect_Underwater::cEffect_Underwater(cInit *apInit, cGraphicsDrawer *apDrawer)
 	mpInit = apInit;
 	mpDrawer = apDrawer;
 
-	mpWhiteGfx = mpDrawer->CreateGfxObject("effect_white.jpg",eGfxMaterialType::Smoke);
+	mpWhiteGfx = mpDrawer->CreateGfxObject("effect_white.jpg",eGfxMaterial::Smoke);
 
 	Reset();
 }
@@ -178,7 +178,7 @@ cEffect_SaveEffect::cEffect_SaveEffect(cInit *apInit, cGraphicsDrawer *apDrawer)
 	mpInit = apInit;
 	mpDrawer = apDrawer;
 
-	mpFlashGfx = mpDrawer->CreateGfxObject("effect_white.jpg",eGfxMaterialType::DiffuseAlpha);
+	mpFlashGfx = mpDrawer->CreateGfxObject("effect_white.jpg",eGfxMaterial::DiffuseAlpha);
 
 	Reset();
 }
@@ -567,7 +567,7 @@ cEffect_Flash::cEffect_Flash(cInit *apInit, cGraphicsDrawer *apDrawer)
 	mpInit = apInit;
 	mpDrawer = apDrawer;
 
-	mpWhiteGfx = mpDrawer->CreateGfxObject("effect_white.jpg",eGfxMaterialType::DiffuseAdditive);
+	mpWhiteGfx = mpDrawer->CreateGfxObject("effect_white.jpg",eGfxMaterial::DiffuseAdditive);
 
 	Reset();
 }

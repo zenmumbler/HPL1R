@@ -548,7 +548,7 @@ cPlayerHealth::cPlayerHealth(cInit *apInit)
 
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
 	
-	mpDamageGfx = mpDrawer->CreateGfxObject("player_hurt.bmp",eGfxMaterialType::DiffuseAlpha);
+	mpDamageGfx = mpDrawer->CreateGfxObject("player_hurt.bmp",eGfxMaterial::DiffuseAlpha);
 
 	mfGfxAlpha =0;
 	mfGfxAlphaAdd =0;
@@ -1039,8 +1039,8 @@ cPlayerDamage::cPlayerDamage(cInit *apInit)
 
 	mType = ePlayerDamageType_BloodSplash;
 
-	mvHitGfx[ePlayerDamageType_BloodSplash] = mpDrawer->CreateGfxObject("player_hit_blood_splash.bmp",eGfxMaterialType::DiffuseAlpha);
-	mvHitGfx[ePlayerDamageType_Ice] = mpDrawer->CreateGfxObject("player_hit_ice.bmp",eGfxMaterialType::DiffuseAlpha);
+	mvHitGfx[ePlayerDamageType_BloodSplash] = mpDrawer->CreateGfxObject("player_hit_blood_splash.bmp",eGfxMaterial::DiffuseAlpha);
+	mvHitGfx[ePlayerDamageType_Ice] = mpDrawer->CreateGfxObject("player_hit_ice.bmp",eGfxMaterial::DiffuseAlpha);
 
 	mvHeadSwingAcc = cVector2f(17.0f, 17.0f);
 }
@@ -1172,8 +1172,8 @@ cPlayerDeath::cPlayerDeath(cInit *apInit)
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
 //	mpPostEffects = mpInit->mpGame->GetGraphics()->GetRendererPostEffects();
 
-	mpFadeGfx = mpDrawer->CreateGfxObject("player_death_fade.bmp",eGfxMaterialType::Smoke);
-	mpBlackGfx = mpDrawer->CreateGfxObject("player_death_black.bmp",eGfxMaterialType::Smoke);
+	mpFadeGfx = mpDrawer->CreateGfxObject("player_death_fade.bmp",eGfxMaterial::Smoke);
+	mpBlackGfx = mpDrawer->CreateGfxObject("player_death_black.bmp",eGfxMaterial::Smoke);
 }
 
 cPlayerDeath::~cPlayerDeath()
@@ -1858,7 +1858,7 @@ cPlayerNoiseFilter::cPlayerNoiseFilter(cInit *apInit)
     for(int i=0; i<mlAmount; ++i)
 	{
 		tString sFileName = "effect_noise0"+cString::ToString(i);
-		const cGfxObject *pObject = mpDrawer->CreateGfxObject(sFileName,eGfxMaterialType::Smoke);
+		const cGfxObject *pObject = mpDrawer->CreateGfxObject(sFileName,eGfxMaterial::Smoke);
 		if(pObject==NULL)
 		{
 			FatalError("Error loading noise filter!\n");
@@ -2128,7 +2128,7 @@ cPlayerHidden::cPlayerHidden(cInit *apInit)
 	Reset();
 	
 	//Get images
-	mpInShadowGfx =  mpDrawer->CreateGfxObject("player_in_shadow.jpg",eGfxMaterialType::DiffuseAdditive);
+	mpInShadowGfx =  mpDrawer->CreateGfxObject("player_in_shadow.jpg",eGfxMaterial::DiffuseAdditive);
 
 	//Get font
 	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt");

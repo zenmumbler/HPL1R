@@ -31,7 +31,7 @@ namespace hpl {
 	class iLowLevelGraphics;
 	class iTexture;
 
-	enum class eGfxMaterialType
+	enum class eGfxMaterial
 	{
 		Null,
 
@@ -41,10 +41,19 @@ namespace hpl {
    };
 
 	struct cGfxObject {
-		tString msSourceFile;
-		eGfxMaterialType mMatType;
-		cResourceImage* mpImage;
-		tVertexVec mvVtx;
+		tString sourceFile;
+		union {
+			cResourceImage* image;
+			iTexture *texture;
+		};
+		eGfxMaterial material;
+		tVertexVec vertexes;
+
+		bool isImage;
+		bool isManaged;
+
+		cVector2l GetSize() const;
+		cVector2f GetFloatSize() const;
 	};
 	
 	class cGfxBufferObject
@@ -58,8 +67,8 @@ namespace hpl {
 		cVector2f mvSize;
 
 		iTexture *GetTexture() const;
-		eGfxMaterialType GetMaterialType() const { return mpObject->mMatType; }
-		float GetZ() const { return mvPosition.z;}
+		eGfxMaterial GetMaterial() const { return mpObject->material; }
+		float GetZ() const { return mvPosition.z; }
 	};
 
 
@@ -103,20 +112,25 @@ namespace hpl {
 		 */
 		void DrawAll();
 
+
+		const cGfxObject* CreateGfxObject(iTexture *texture, eGfxMaterial material);
+
 		/**
 		 * Create Gfx object from file
-		 * \param &asFileName Filename of image
-		 * \param matType material to use
+		 * \param &fileName Filename of image
+		 * \param material material to use
 		 * \return
 		 */
-		const cGfxObject* CreateGfxObject(const tString &asFileName, eGfxMaterialType matType);
+		const cGfxObject* CreateGfxObject(const tString &fileName, eGfxMaterial material);
+
+
 		/**
 		 * Create unmanaged gfx object from Bitmap
-		 * \param *apBmp bitmap
-		 * \param matType material to use
+		 * \param *bitmap bitmap
+		 * \param material material to use
 		 * \return
 		 */
-		const cGfxObject* CreateUnmanagedGfxObject(const Bitmap &bmp, eGfxMaterialType matType);
+		const cGfxObject* CreateUnmanagedGfxObject(const Bitmap &bitmap, eGfxMaterial material);
 
 		/**
 		 * Destroys a gfx object.
@@ -124,7 +138,7 @@ namespace hpl {
 		void DestroyGfxObject(const cGfxObject* apObject);
 
 	private:
-		void UseMaterialType(eGfxMaterialType matType);
+		void UseMaterial(eGfxMaterial material);
 
 		iLowLevelGraphics *mpLowLevelGraphics;
 		cImageManager *mpImageManager;

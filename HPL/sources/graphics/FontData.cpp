@@ -449,7 +449,7 @@ namespace hpl {
 
 		//////////////////////////
 		//Gfx object
-		const cGfxObject* pObject = mpGraphicsDrawer->CreateUnmanagedGfxObject(aBmp, eGfxMaterialType::DiffuseAlpha);
+		const cGfxObject* pObject = mpGraphicsDrawer->CreateUnmanagedGfxObject(aBmp, eGfxMaterial::DiffuseAlpha);
 
 		//////////////////////////
 		//Gui gfx

@@ -160,8 +160,8 @@ void cPreMenu::Reset()
 
 	mvRaindropVector.resize(100);
 
-	mpRaindropGfx = mpInit->mpGame->GetGraphics()->GetDrawer()->CreateGfxObject("menu_rain_drop.jpg",eGfxMaterialType::DiffuseAdditive);
-	mpFlashGfx = mpInit->mpGame->GetGraphics()->GetDrawer()->CreateGfxObject("effect_white.jpg",eGfxMaterialType::DiffuseAdditive);
+	mpRaindropGfx = mpInit->mpGame->GetGraphics()->GetDrawer()->CreateGfxObject("menu_rain_drop.jpg",eGfxMaterial::DiffuseAdditive);
+	mpFlashGfx = mpInit->mpGame->GetGraphics()->GetDrawer()->CreateGfxObject("effect_white.jpg",eGfxMaterial::DiffuseAdditive);
 
 	
 	for ( int i =0; i< (int)mvRaindropVector.size(); ++i )

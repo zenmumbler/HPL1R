@@ -53,8 +53,9 @@ namespace hpl {
 
 	cGraphicsDrawer::~cGraphicsDrawer()
 	{
-		for (auto pGo : mvGfxObjects) {
-			mpImageManager->Destroy(pGo->mpImage);
+		for (auto obj : mvGfxObjects) {
+			if (obj->isImage)
+				mpImageManager->Destroy(obj->image);
 		}
 		_programManager->Destroy(_program);
 		STLDeleteAll(mvGfxObjects);
@@ -68,9 +69,21 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 	
+	cVector2l cGfxObject::GetSize() const {
+		if (isImage) return image->GetSize();
+		return cVector2l(texture->GetWidth(), texture->GetHeight());
+	}
+
+	cVector2f cGfxObject::GetFloatSize() const {
+		auto size = GetSize();
+		return { static_cast<float>(size.x), static_cast<float>(size.y) };
+	}
+
+	//-----------------------------------------------------------------------
+	
 	iTexture *cGfxBufferObject::GetTexture() const
 	{
-		return mpObject->mpImage->GetTexture();
+		return mpObject->isImage ? mpObject->image->GetTexture() : mpObject->texture;
 	}
 
 	bool cGfxBufferCompare::operator()(const cGfxBufferObject& aObjectA, const cGfxBufferObject& aObjectB) const
@@ -88,9 +101,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	static void FlushImage(const cGfxObject* apObject)
+	static void FlushImage(const cGfxObject* object)
 	{
-		apObject->mpImage->GetFrameBitmap()->FlushToTexture();
+		if (object->isImage)
+			object->image->GetFrameBitmap()->FlushToTexture();
 	}
 
 	void cGraphicsDrawer::DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos,
@@ -126,21 +140,21 @@ namespace hpl {
 	
 	//-----------------------------------------------------------------------
 
-	void cGraphicsDrawer::UseMaterialType(eGfxMaterialType matType) {
-		switch (matType) {
-			case eGfxMaterialType::DiffuseAlpha:
+	void cGraphicsDrawer::UseMaterial(eGfxMaterial material) {
+		switch (material) {
+			case eGfxMaterial::DiffuseAlpha:
 				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_OneMinusSrcAlpha);
 				break;
 
-			case eGfxMaterialType::DiffuseAdditive:
+			case eGfxMaterial::DiffuseAdditive:
 				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_One);
 				break;
 
-			case eGfxMaterialType::Smoke:
+			case eGfxMaterial::Smoke:
 				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_Zero, eBlendFunc_OneMinusSrcColor);
 				break;
 
-			case eGfxMaterialType::Null:
+			case eGfxMaterial::Null:
 				// reset to defaults
 				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_OneMinusSrcAlpha);
 				break;
@@ -163,7 +177,7 @@ namespace hpl {
 		cMatrixf orthoProjection = cMatrixf::CreateOrtho(0, orthoDim.x, orthoDim.y, 0, -1000, 1000);
 		_program->SetMatrixf("projection", orthoProjection);
 
-		eGfxMaterialType matType = eGfxMaterialType::Null;
+		eGfxMaterial material = eGfxMaterial::Null;
 		iTexture *curTexture = nullptr;
 		
 		const auto renderBatch = [this]() {
@@ -180,10 +194,10 @@ namespace hpl {
 		for (const auto &pObj : m_setGfxBuffer)
 		{
 			// get next settings
-			auto newMatType = pObj.GetMaterialType();
+			auto newMaterial = pObj.GetMaterial();
 			auto newTexture = pObj.GetTexture();
 
-			if (newMatType != matType || newTexture != curTexture) {
+			if (newMaterial != material || newTexture != curTexture) {
 				renderBatch();
 
 				// apply changes to shader
@@ -191,9 +205,9 @@ namespace hpl {
 					curTexture = newTexture;
 					mpLowLevelGraphics->SetTexture(0, curTexture);
 				}
-				if (newMatType != matType) {
-					matType = newMatType;
-					UseMaterialType(matType);
+				if (newMaterial != material) {
+					material = newMaterial;
+					UseMaterial(material);
 				}
 			}
 
@@ -211,7 +225,7 @@ namespace hpl {
 
 				for (int i = 0; i < 4; i++)
 				{
-					const auto& vtx = pObj.mpObject->mvVtx[i];
+					const auto& vtx = pObj.mpObject->vertexes[i];
 					_batch.AddVertex(vPos[i], pObj.mColor, vtx.tex.xy);
 				}
 			}
@@ -219,7 +233,7 @@ namespace hpl {
 			{
 				for (int i = 0; i < 4; i++)
 				{
-					const auto& vtx = pObj.mpObject->mvVtx[i];
+					const auto& vtx = pObj.mpObject->vertexes[i];
 					_batch.AddVertex(vtx.pos + pObj.mvPosition, vtx.col, vtx.tex.xy);
 				}
 			}
@@ -235,12 +249,26 @@ namespace hpl {
 		_program->UnBind();
 		mpLowLevelGraphics->SetDepthTestActive(true);
 		mpLowLevelGraphics->SetBlendActive(false);
-		UseMaterialType(eGfxMaterialType::Null);
+		UseMaterial(eGfxMaterial::Null);
 	}
 
 	//-----------------------------------------------------------------------
 
-	const cGfxObject* cGraphicsDrawer::CreateGfxObject(const tString &asFileName, eGfxMaterialType matType)
+	const cGfxObject* cGraphicsDrawer::CreateGfxObject(iTexture *texture, eGfxMaterial material)
+	{
+		return new cGfxObject{
+			.sourceFile = "",
+			.texture = texture,
+			.material = material,
+			.vertexes = {},
+			.isImage = false,
+			.isManaged = false
+		};
+	}
+
+	//-----------------------------------------------------------------------
+
+	const cGfxObject* cGraphicsDrawer::CreateGfxObject(const tString &asFileName, eGfxMaterial material)
 	{
 		cResourceImage* pImage = mpImageManager->CreateImage(asFileName);
 		if (pImage == nullptr) {
@@ -248,32 +276,50 @@ namespace hpl {
 			return nullptr;
 		}
 
-		cGfxObject *go = new cGfxObject({asFileName, matType, pImage, pImage->GetVertexVecCopy(0, -1) });
+		cGfxObject *go = new cGfxObject{
+			.sourceFile = asFileName,
+			.image = pImage,
+			.material = material,
+			.vertexes = pImage->GetVertexVecCopy(0, -1),
+			.isImage = true,
+			.isManaged = true
+		};
+
+		Log("GO %s: %d, %d\n", asFileName.c_str(), go->vertexes[0].pos.x, go->vertexes[0].pos.y);
+
 		mvGfxObjects.push_back(go);
 		return go;
 	}
 
 	//-----------------------------------------------------------------------
 
-	const cGfxObject* cGraphicsDrawer::CreateUnmanagedGfxObject(const Bitmap &bmp, eGfxMaterialType matType)
+	const cGfxObject* cGraphicsDrawer::CreateUnmanagedGfxObject(const Bitmap &bitmap, eGfxMaterial material)
 	{
-		cResourceImage* pImage = mpImageManager->CreateFromBitmap(bmp);
-		if(pImage == nullptr){
+		cResourceImage* pImage = mpImageManager->CreateFromBitmap(bitmap);
+		if (pImage == nullptr) {
 			Error("Couldn't create image from bitmap!\n");
 			return nullptr;
 		}
 
-		return new cGfxObject({ "", matType, pImage, pImage->GetVertexVecCopy(0, -1) });
+		return new cGfxObject{
+			.sourceFile = "",
+			.image = pImage,
+			.material = material,
+			.vertexes = pImage->GetVertexVecCopy(0, -1),
+			.isImage = true,
+			.isManaged = false
+		};
 	}
 
 	//-----------------------------------------------------------------------
 
-	void cGraphicsDrawer::DestroyGfxObject(const cGfxObject* apObject)
+	void cGraphicsDrawer::DestroyGfxObject(const cGfxObject* obj)
 	{
-		mpImageManager->Destroy(apObject->mpImage);
-		
-		if (apObject->msSourceFile.length() > 0) {
-			STLFindAndDelete(mvGfxObjects, apObject);
+		if (obj->isImage) {
+			mpImageManager->Destroy(obj->image);
+			if (obj->isManaged) {
+				STLFindAndDelete(mvGfxObjects, obj);
+			}
 		}
 	}
 

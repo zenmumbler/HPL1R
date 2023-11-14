@@ -211,7 +211,7 @@ class cMainMenuWidget_Image : public cMainMenuWidget
 {
 public:
 	cMainMenuWidget_Image(cInit *apInit, const cVector3f &avPos,const cVector2f& avSize,
-							const tString& asImageFile, eGfxMaterialType matType,
+							const tString& asImageFile, eGfxMaterial material,
 							const cColor& aColor);
 	~cMainMenuWidget_Image();
 
