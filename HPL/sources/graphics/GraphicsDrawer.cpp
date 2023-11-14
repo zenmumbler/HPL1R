@@ -107,6 +107,8 @@ namespace hpl {
 			object->image->GetFrameBitmap()->FlushToTexture();
 	}
 
+	//-----------------------------------------------------------------------
+
 	void cGraphicsDrawer::DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos,
 										const cVector2f& avSize, const cColor& aColor)
 	{
@@ -117,7 +119,6 @@ namespace hpl {
 			.mvPosition = avPos,
 			.mvSize = avSize,
 			.mColor = aColor,
-			.mbIsColorAndSize = true
 		};
 
 		m_setGfxBuffer.insert(BuffObj);
@@ -132,7 +133,8 @@ namespace hpl {
 		cGfxBufferObject BuffObj {
 			.mpObject = apObject,
 			.mvPosition = avPos,
-			.mbIsColorAndSize = false
+			.mvSize = apObject->GetFloatSize(),
+			.mColor = cColor::White,
 		};
 
 		m_setGfxBuffer.insert(BuffObj);
@@ -214,8 +216,8 @@ namespace hpl {
 			// determine object attributes
 			auto [fX, fY, fZ] = pObj.mvPosition.v;
 			auto objectSize = pObj.mpObject->GetFloatSize();
-			auto [fW, fH] = pObj.mbIsColorAndSize ? pObj.mvSize.v : objectSize.v;
-			auto color = pObj.mbIsColorAndSize ? pObj.mColor : cColor::White;
+			auto [fW, fH] = pObj.mvSize.v;
+			auto color = pObj.mColor;
 			cVector3f vPos[4] = {
 				{ fX,      fY,      fZ },
 				{ fX + fW, fY,      fZ },

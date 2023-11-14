@@ -61,8 +61,6 @@ namespace hpl {
 	public:
 		const cGfxObject* mpObject;
 		cVector3f mvPosition;
-
-		bool mbIsColorAndSize;
 		cColor mColor;
 		cVector2f mvSize;
 
@@ -103,8 +101,7 @@ namespace hpl {
 		 * \param avSize Size of object
 		 * \param aColor color to use
 		 */
-		void DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos,
-						   const cVector2f& avSize, const cColor& aColor);
+		void DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos, const cVector2f& avSize, const cColor& aColor);
 
 
 		/**
