@@ -41,6 +41,9 @@ namespace hpl {
 	, _batch(BATCH_VERTEX_COUNT, apLowLevelGraphics)
 	{
 		_program = _programManager->CreateProgram("Drawer.vert", "Drawer.frag");
+		if (! _program) {
+			FatalError("Could not create GraphicsDrawer program!");
+		}
 		_program->Bind();
 		_program->SetTextureBindingIndex("image", 0);
 		_program->UnBind();
@@ -156,9 +159,6 @@ namespace hpl {
 		mpLowLevelGraphics->SetBlendActive(true);
 		_program->Bind();
 
-//		mpLowLevelGraphics->SetIdentityMatrix(eMatrix_ModelView);
-//		mpLowLevelGraphics->SetOrthoProjection(mpLowLevelGraphics->GetVirtualSize(), -1000, 1000);
-
 		auto orthoDim = mpLowLevelGraphics->GetVirtualSize();
 		cMatrixf orthoProjection = cMatrixf::CreateOrtho(0, orthoDim.x, orthoDim.y, 0, -1000, 1000);
 		_program->SetMatrixf("projection", orthoProjection);
@@ -168,8 +168,8 @@ namespace hpl {
 		
 		const auto renderBatch = [this]() {
 			if (_batch.HasContent()) {
+				// TODO: clean this up when upgrading to GL Core
 				_batch.vertexBuffer->UpdateData(0xff, true);
-				// mpLowLevelGraphics->DrawBatch(_batch);
 				_batch.vertexBuffer->Bind();
 				_batch.vertexBuffer->Draw();
 				_batch.vertexBuffer->UnBind();
