@@ -211,7 +211,7 @@ namespace hpl {
 				}
 			}
 
-			// add quad data
+			// determine object attributes
 			auto [fX, fY, fZ] = pObj.mvPosition.v;
 			auto objectSize = pObj.mpObject->GetFloatSize();
 			auto [fW, fH] = pObj.mbIsColorAndSize ? pObj.mvSize.v : objectSize.v;
@@ -223,10 +223,14 @@ namespace hpl {
 				{ fX,      fY + fH, fZ }
 			};
 
-			for (int i = 0; i < 4; i++)
-			{
-				_batch.AddVertex(vPos[i], color, pObj.mpObject->uvs[i]);
-			}
+			// add quad as 2 triangles
+			_batch.AddVertex(vPos[0], color, pObj.mpObject->uvs[0]);
+			_batch.AddVertex(vPos[1], color, pObj.mpObject->uvs[1]);
+			_batch.AddVertex(vPos[2], color, pObj.mpObject->uvs[2]);
+
+			_batch.AddVertex(vPos[2], color, pObj.mpObject->uvs[2]);
+			_batch.AddVertex(vPos[3], color, pObj.mpObject->uvs[3]);
+			_batch.AddVertex(vPos[0], color, pObj.mpObject->uvs[0]);
 		}
 		
 		// render final batch, if any

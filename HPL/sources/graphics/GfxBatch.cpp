@@ -1,5 +1,5 @@
 /*
- * 2021 by zenmumbler
+ * 2021-3 by zenmumbler
  * This file is part of Rehatched
  */
 
@@ -14,7 +14,7 @@ namespace hpl {
 	cGfxBatch::cGfxBatch(int vertexCount, iLowLevelGraphics *llGfx) {
 		vertexBuffer = llGfx->CreateVertexBuffer(
 			VertexMask_Position | VertexMask_Color0 | VertexMask_UV0,
-			VertexBufferPrimitiveType::Quads,
+			VertexBufferPrimitiveType::Triangles,
 			VertexBufferUsageType::Stream,
 			vertexCount, vertexCount
 		);
