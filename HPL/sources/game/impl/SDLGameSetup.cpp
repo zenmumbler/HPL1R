@@ -43,8 +43,7 @@ namespace hpl {
 	cSDLGameSetup::cSDLGameSetup()
 	{
 		if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_TIMER ) < 0) {
-			FatalError("Error Initializing Display: %s",SDL_GetError());
-			exit(1);
+			FatalError("Error Initializing SDL: %s", SDL_GetError());
 		}
 
 		mpLowLevelGraphics = new cLowLevelGraphicsSDL();
