@@ -414,7 +414,7 @@ private:
 
 	iTexture *mpLogo;
 	iTexture *mpBackground;
-	
+
 	tString msCurrentActionName;
 	cMainMenuWidget_Text *mpCurrentActionText;
 

@@ -94,24 +94,22 @@ void cGraphicsHelper::DrawTexture(iTexture *apTex, const cVector3f& avPos, const
 void cGraphicsHelper::DrawLoadingScreen(const tString &asFile)
 {
 	iTexture *pTex= NULL;
-	
-	if(asFile != "")
-		pTex = mpTexManager->Create2D(asFile,false);
-	
-	if(pTex || asFile == "")
-	{
-		ClearScreen(cColor(0,0));
-		
-		if(pTex) DrawTexture(pTex,cVector3f(0,0,0),cVector2f(800,600),cColor(1,1));
-		
-		mpFont->Draw(cVector3f(400,300,50),22,cColor(1,1),eFontAlign_Center,
-					_W("%ls"),kTranslate("LoadTexts", "Loading").c_str());
 
-		mpDrawer->DrawAll();
-		
-		SwapBuffers();
+	ClearScreen(cColor::Black);
+
+	if (asFile != "")
+		pTex = mpTexManager->Create2D(asFile,false);
+	if(pTex) {
+		mpDrawer->DrawTexture(pTex, 0, {800, 600}, cColor::White);
 	}
-	
+
+	mpFont->Draw(cVector3f(400,300,50),22,cColor(1,1),eFontAlign_Center,
+				_W("%ls"),kTranslate("LoadTexts", "Loading").c_str());
+
+	mpDrawer->DrawAll();
+
+	SwapBuffers();
+
 	if(pTex) mpTexManager->Destroy(pTex);
 }
 

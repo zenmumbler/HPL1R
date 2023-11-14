@@ -1971,9 +1971,8 @@ void cMainMenu::Reset()
 
 void cMainMenu::OnPostSceneDraw()
 {
-	mpInit->mpGraphicsHelper->ClearScreen(cColor(0,0));
-	mpInit->mpGraphicsHelper->DrawTexture(mpLogo,0,cVector3f(800,180,30),cColor(1,1));
-	mpInit->mpGraphicsHelper->DrawTexture(mpBackground,cVector3f(0,180,0),cVector3f(800,420,0),cColor(1,1));
+	mpDrawer->DrawTexture(mpLogo, 0, {800,180}, cColor::White);
+	mpDrawer->DrawTexture(mpBackground, {0,180,0}, {800,420}, cColor::White);
 
 	////////////////////////////////
 	// Fade in
@@ -2374,12 +2373,11 @@ void cMainMenu::SetActive(bool abX)
 		mpCurrentActionText = NULL;
 
 		mpLogo = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("menu_logo.jpg",false);
-		
+
 		if(mbGameActive)
 			mpBackground = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("menu_background_ingame.jpg",false);
 		else
 			mpBackground = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("menu_background.jpg",false);
-
 	}
 	else
 	{
