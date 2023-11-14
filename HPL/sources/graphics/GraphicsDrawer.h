@@ -47,7 +47,7 @@ namespace hpl {
 			iTexture *texture;
 		};
 		eGfxMaterial material;
-		tVertexVec vertexes;
+		std::vector<cVector2f> uvs;
 
 		bool isImage;
 		bool isManaged;

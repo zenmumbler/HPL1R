@@ -212,30 +212,20 @@ namespace hpl {
 			}
 
 			// add quad data
-			if(pObj.mbIsColorAndSize)
-			{
-				auto [fX, fY, fZ] = pObj.mvPosition.v;
-				auto [fW, fH] = pObj.mvSize.v;
-				cVector3f vPos[4] = {
-					{ fX,      fY,      fZ },
-					{ fX + fW, fY,      fZ },
-					{ fX + fW, fY + fH, fZ },
-					{ fX,      fY + fH, fZ }
-				};
+			auto [fX, fY, fZ] = pObj.mvPosition.v;
+			auto objectSize = pObj.mpObject->GetFloatSize();
+			auto [fW, fH] = pObj.mbIsColorAndSize ? pObj.mvSize.v : objectSize.v;
+			auto color = pObj.mbIsColorAndSize ? pObj.mColor : cColor::White;
+			cVector3f vPos[4] = {
+				{ fX,      fY,      fZ },
+				{ fX + fW, fY,      fZ },
+				{ fX + fW, fY + fH, fZ },
+				{ fX,      fY + fH, fZ }
+			};
 
-				for (int i = 0; i < 4; i++)
-				{
-					const auto& vtx = pObj.mpObject->vertexes[i];
-					_batch.AddVertex(vPos[i], pObj.mColor, vtx.tex.xy);
-				}
-			}
-			else
+			for (int i = 0; i < 4; i++)
 			{
-				for (int i = 0; i < 4; i++)
-				{
-					const auto& vtx = pObj.mpObject->vertexes[i];
-					_batch.AddVertex(vtx.pos + pObj.mvPosition, vtx.col, vtx.tex.xy);
-				}
+				_batch.AddVertex(vPos[i], color, pObj.mpObject->uvs[i]);
 			}
 		}
 		
@@ -260,7 +250,7 @@ namespace hpl {
 			.sourceFile = "",
 			.texture = texture,
 			.material = material,
-			.vertexes = {},
+			.uvs = { {0,0}, {1,0}, {1,1}, {0,1} },
 			.isImage = false,
 			.isManaged = false
 		};
@@ -280,12 +270,10 @@ namespace hpl {
 			.sourceFile = asFileName,
 			.image = pImage,
 			.material = material,
-			.vertexes = pImage->GetVertexVecCopy(0, -1),
+			.uvs = pImage->GetUVs(),
 			.isImage = true,
 			.isManaged = true
 		};
-
-		Log("GO %s: %d, %d\n", asFileName.c_str(), go->vertexes[0].pos.x, go->vertexes[0].pos.y);
 
 		mvGfxObjects.push_back(go);
 		return go;
@@ -305,7 +293,7 @@ namespace hpl {
 			.sourceFile = "",
 			.image = pImage,
 			.material = material,
-			.vertexes = pImage->GetVertexVecCopy(0, -1),
+			.uvs = pImage->GetUVs(),
 			.isImage = true,
 			.isManaged = false
 		};

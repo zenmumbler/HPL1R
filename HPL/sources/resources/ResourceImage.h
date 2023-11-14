@@ -50,13 +50,11 @@ namespace hpl {
 		int GetSourceWidth()const{return mvSourceSize.x;}
 		int GetSourceHeight()const{return mvSourceSize.y;}
 
-		iTexture *GetTexture()const;
+		iTexture *GetTexture() const;
+		const std::vector<cVector2f>& GetUVs() const { return _uvs; };
 
 		cFrameTexture *GetFrameTexture()const{return mpFrameTexture;}
 		cFrameBitmap *GetFrameBitmap()const{return mpFrameBitmap;}
-
-		tVertexVec GetVertexVecCopy(const cVector2f &avPos, const cVector2f &avSize);
-		const tVertexVec& GetVertexVec(){return mvVtx;}
 
 	private:
 		~cResourceImage();
@@ -66,7 +64,7 @@ namespace hpl {
 
 		cVector2l mvSourceSize;
 		cRect2l mRect;
-		tVertexVec mvVtx;
+		std::vector<cVector2f> _uvs;
 
 		int mlHandle;
 	};
