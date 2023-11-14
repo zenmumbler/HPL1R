@@ -423,13 +423,6 @@ namespace hpl {
 		static cMatrixf MatrixTranspose(const cMatrixf &mtx);
 
 		/**
-		 * Converts the matrix into Euler angles, XYZ only supported at the moment.
-		 * \param &a_mtxA
-		 * \param aOrder
-		 */
-		static cVector3f MatrixToEulerAngles(const cMatrixf &a_mtxA, eEulerRotationOrder aOrder);
-
-		/**
 		 * Create a char string from the matrix
 		 */
 		static const char* MatrixToChar(const cMatrixf &a_mtxA);
@@ -454,33 +447,6 @@ namespace hpl {
 										const float* apVertexArray, int alVtxStride,
 										const float *apTexArray,
 										const float *apNormalArray,int alVertexNum);
-
-		/**
-		* Creates triangle data for a triangle mesh. alIndexNum % 3 must be 0.
-		* \param avTriangles Where the data will be stored. If empty, this function resizes it.
-		* \param apIndexArray The indices
-		* \param alIndexNum Number of indices
-		* \param apVertexArray Vertices indexed by the indices
-		* \param  alVertexNum Number of vertices
-		* \return true if success, else false
-		*/
-		static bool CreateTriangleData(tTriangleDataVec &avTriangles,
-										const unsigned int* apIndexArray,int alIndexNum,
-										const float* apVertexArray, int alVtxStride, int alVertexNum);
-
-		/**
-		* Creates edges for a triangle mesh. alIndexNum % 3 must be 0.
-		* \param avEdges An empty edge vector, this is where the edges will be stored.
-		* \param apIndexArray The indices
-		* \param alIndexNum Number of indices
-		* \param apVertexArray Vertices indexed by the indices
-		* \param  alVertexNum Number of vertices
-		* \return true if success, else false
-		*/
-		static bool CreateEdges(tTriEdgeVec &avEdges,
-								const unsigned int* apIndexArray,int alIndexNum,
-								const float* apVertexArray, int alVtxStride, int alVertexNum,
-								bool *apIsDoubleSided);
 
 
 };
