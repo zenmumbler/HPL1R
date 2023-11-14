@@ -54,8 +54,7 @@ namespace hpl {
 	cGraphicsDrawer::~cGraphicsDrawer()
 	{
 		for (auto obj : mvGfxObjects) {
-			if (obj->isImage)
-				mpImageManager->Destroy(obj->image);
+			mpImageManager->Destroy(obj->image);
 		}
 		_programManager->Destroy(_program);
 		STLDeleteAll(mvGfxObjects);
@@ -70,8 +69,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 	
 	cVector2l cGfxObject::GetSize() const {
-		if (isImage) return image->GetSize();
-		return cVector2l(texture->GetWidth(), texture->GetHeight());
+		return image->GetSize();
 	}
 
 	cVector2f cGfxObject::GetFloatSize() const {
@@ -81,20 +79,17 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 	
-	iTexture *cGfxBufferObject::GetTexture() const
-	{
-		return mpObject->isImage ? mpObject->image->GetTexture() : mpObject->texture;
-	}
-
 	bool cGfxBufferCompare::operator()(const cGfxBufferObject& aObjectA, const cGfxBufferObject& aObjectB) const
 	{
-		if (aObjectA.GetZ() != aObjectB.GetZ())
+		float zA = aObjectA.mvPosition.z;
+		float zB = aObjectB.mvPosition.z;
+		if (zA != zB)
 		{
-			return aObjectA.GetZ() < aObjectB.GetZ();
+			return zA < zB;
 		}
-		else if (aObjectA.GetTexture() != aObjectB.GetTexture())
+		else if (aObjectA.texture != aObjectB.texture)
 		{
-			return aObjectA.GetTexture() > aObjectB.GetTexture();
+			return aObjectA.texture > aObjectB.texture;
 		}
 		return false;
 	}
@@ -103,8 +98,7 @@ namespace hpl {
 
 	static void FlushImage(const cGfxObject* object)
 	{
-		if (object->isImage)
-			object->image->GetFrameBitmap()->FlushToTexture();
+		object->image->GetFrameBitmap()->FlushToTexture();
 	}
 
 	//-----------------------------------------------------------------------
@@ -115,10 +109,12 @@ namespace hpl {
 		FlushImage(apObject);
 
 		cGfxBufferObject BuffObj {
-			.mpObject = apObject,
+			.texture = apObject->image->GetTexture(),
+			.material = apObject->material,
 			.mvPosition = avPos,
 			.mvSize = avSize,
 			.mColor = aColor,
+			.uv0 = apObject->uvs[0], .uv1 = apObject->uvs[1], .uv2 = apObject->uvs[2], .uv3 = apObject->uvs[3]
 		};
 
 		m_setGfxBuffer.insert(BuffObj);
@@ -128,18 +124,24 @@ namespace hpl {
 
 	void cGraphicsDrawer::DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos)
 	{
-		FlushImage(apObject);
+		DrawGfxObject(apObject, avPos, apObject->GetFloatSize(), cColor::White);
+	}
 
+	//-----------------------------------------------------------------------
+
+	void cGraphicsDrawer::DrawTexture(iTexture *apTex, const cVector3f& avPos, const cVector2f& avSize, const cColor &aColor) {
 		cGfxBufferObject BuffObj {
-			.mpObject = apObject,
+			.texture = apTex,
+			.material = eGfxMaterial::DiffuseAlpha,
 			.mvPosition = avPos,
-			.mvSize = apObject->GetFloatSize(),
-			.mColor = cColor::White,
+			.mvSize = avSize,
+			.mColor = aColor,
+			.uv0 = {0,0}, .uv1 = {1,0}, .uv2 = {1,1}, .uv3 = {0,1}
 		};
 
 		m_setGfxBuffer.insert(BuffObj);
 	}
-	
+
 	//-----------------------------------------------------------------------
 
 	void cGraphicsDrawer::UseMaterial(eGfxMaterial material) {
@@ -196,8 +198,8 @@ namespace hpl {
 		for (const auto &pObj : m_setGfxBuffer)
 		{
 			// get next settings
-			auto newMaterial = pObj.GetMaterial();
-			auto newTexture = pObj.GetTexture();
+			auto newMaterial = pObj.material;
+			auto newTexture = pObj.texture;
 
 			if (newMaterial != material || newTexture != curTexture) {
 				renderBatch();
@@ -215,7 +217,6 @@ namespace hpl {
 
 			// determine object attributes
 			auto [fX, fY, fZ] = pObj.mvPosition.v;
-			auto objectSize = pObj.mpObject->GetFloatSize();
 			auto [fW, fH] = pObj.mvSize.v;
 			auto color = pObj.mColor;
 			cVector3f vPos[4] = {
@@ -226,13 +227,13 @@ namespace hpl {
 			};
 
 			// add quad as 2 triangles
-			_batch.AddVertex(vPos[0], color, pObj.mpObject->uvs[0]);
-			_batch.AddVertex(vPos[1], color, pObj.mpObject->uvs[1]);
-			_batch.AddVertex(vPos[2], color, pObj.mpObject->uvs[2]);
+			_batch.AddVertex(vPos[0], color, pObj.uv0);
+			_batch.AddVertex(vPos[1], color, pObj.uv1);
+			_batch.AddVertex(vPos[2], color, pObj.uv2);
 
-			_batch.AddVertex(vPos[2], color, pObj.mpObject->uvs[2]);
-			_batch.AddVertex(vPos[3], color, pObj.mpObject->uvs[3]);
-			_batch.AddVertex(vPos[0], color, pObj.mpObject->uvs[0]);
+			_batch.AddVertex(vPos[2], color, pObj.uv2);
+			_batch.AddVertex(vPos[3], color, pObj.uv3);
+			_batch.AddVertex(vPos[0], color, pObj.uv0);
 		}
 		
 		// render final batch, if any
@@ -250,20 +251,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	const cGfxObject* cGraphicsDrawer::CreateGfxObject(iTexture *texture, eGfxMaterial material)
-	{
-		return new cGfxObject{
-			.sourceFile = "",
-			.texture = texture,
-			.material = material,
-			.uvs = { {0,0}, {1,0}, {1,1}, {0,1} },
-			.isImage = false,
-			.isManaged = false
-		};
-	}
-
-	//-----------------------------------------------------------------------
-
 	const cGfxObject* cGraphicsDrawer::CreateGfxObject(const tString &asFileName, eGfxMaterial material)
 	{
 		cResourceImage* pImage = mpImageManager->CreateImage(asFileName);
@@ -277,7 +264,6 @@ namespace hpl {
 			.image = pImage,
 			.material = material,
 			.uvs = pImage->GetUVs(),
-			.isImage = true,
 			.isManaged = true
 		};
 
@@ -300,7 +286,6 @@ namespace hpl {
 			.image = pImage,
 			.material = material,
 			.uvs = pImage->GetUVs(),
-			.isImage = true,
 			.isManaged = false
 		};
 	}
@@ -309,11 +294,9 @@ namespace hpl {
 
 	void cGraphicsDrawer::DestroyGfxObject(const cGfxObject* obj)
 	{
-		if (obj->isImage) {
-			mpImageManager->Destroy(obj->image);
-			if (obj->isManaged) {
-				STLFindAndDelete(mvGfxObjects, obj);
-			}
+		mpImageManager->Destroy(obj->image);
+		if (obj->isManaged) {
+			STLFindAndDelete(mvGfxObjects, obj);
 		}
 	}
 

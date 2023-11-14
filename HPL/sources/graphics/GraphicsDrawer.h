@@ -42,31 +42,23 @@ namespace hpl {
 
 	struct cGfxObject {
 		tString sourceFile;
-		union {
-			cResourceImage* image;
-			iTexture *texture;
-		};
+		cResourceImage* image;
 		eGfxMaterial material;
 		std::vector<cVector2f> uvs;
-
-		bool isImage;
 		bool isManaged;
 
 		cVector2l GetSize() const;
 		cVector2f GetFloatSize() const;
 	};
 	
-	class cGfxBufferObject
+	struct cGfxBufferObject
 	{
-	public:
-		const cGfxObject* mpObject;
+		iTexture* texture;
+		eGfxMaterial material;
 		cVector3f mvPosition;
-		cColor mColor;
 		cVector2f mvSize;
-
-		iTexture *GetTexture() const;
-		eGfxMaterial GetMaterial() const { return mpObject->material; }
-		float GetZ() const { return mvPosition.z; }
+		cColor mColor;
+		cVector2f uv0, uv1, uv2, uv3;
 	};
 
 
@@ -103,14 +95,12 @@ namespace hpl {
 		 */
 		void DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos, const cVector2f& avSize, const cColor& aColor);
 
+		void DrawTexture(iTexture *apTex, const cVector3f& avPos, const cVector2f& avSize, const cColor &aColor);
 
 		/**
 		 * Draw all gfx obejcts, Called after world is rendered by cScene.
 		 */
 		void DrawAll();
-
-
-		const cGfxObject* CreateGfxObject(iTexture *texture, eGfxMaterial material);
 
 		/**
 		 * Create Gfx object from file
