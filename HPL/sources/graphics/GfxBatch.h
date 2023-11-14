@@ -1,5 +1,5 @@
 /*
- * 2021 by zenmumbler
+ * 2021-3 by zenmumbler
  * This file is part of Rehatched
  */
 #ifndef HPL_GFXBATCH_H
@@ -12,20 +12,6 @@
 namespace hpl {
 
 	class iLowLevelGraphics;
-
-	typedef uint32_t tGfxBatchAttrs;
-
-	enum eGfxBatchAttr {
-		eGfxBatchAttr_Position = 0x0001,
-		eGfxBatchAttr_Color0 =   0x0002,
-		eGfxBatchAttr_Texture0 = 0x0004
-	};
-
-	enum eBatchDrawMode
-	{
-		eBatchDrawMode_Tris,
-		eBatchDrawMode_Quads
-	};
 
 	class cGfxBatch
 	{
