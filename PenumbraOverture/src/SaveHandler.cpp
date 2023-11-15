@@ -391,7 +391,7 @@ void cSaveHandler::LoadData(const tString &asName)
 	pRenderer->SetSkyBoxColor(pSavedWorld->mSkyboxColor);
 
 	if(pSavedWorld->msSkyboxFile != "") {
-		iTexture *pTex = pResources->GetTextureManager()->CreateCubeMap(pSavedWorld->msSkyboxFile,false);
+		iTexture *pTex = pResources->GetTextureManager()->CreateCubeMap(pSavedWorld->msSkyboxFile);
 		pRenderer->SetSkyBox(pTex,true);
 	}
 	else {

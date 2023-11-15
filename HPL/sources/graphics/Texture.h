@@ -73,10 +73,9 @@ namespace hpl {
 	class iTexture : public iResourceBase
 	{
 	public:
-		iTexture(tString asName, iLowLevelGraphics* apLowLevelGraphics, bool abUseMipMaps, eTextureTarget aTarget)
+		iTexture(tString asName, iLowLevelGraphics* apLowLevelGraphics, eTextureTarget aTarget)
 			: iResourceBase(asName,0),
 				mlWidth(0), mlHeight(0), mlDepth(1),
-				mbUseMipMaps(abUseMipMaps),
 				mpLowLevelGraphics(apLowLevelGraphics),
 				mTarget(aTarget),
 				mWrapS(eTextureWrap_Repeat), mWrapT(eTextureWrap_Repeat),mWrapR(eTextureWrap_Repeat),
@@ -136,8 +135,7 @@ namespace hpl {
 		eTextureAnimMode GetAnimMode() { return mAnimMode;}
 		void SetAnimMode(eTextureAnimMode aMode) {mAnimMode = aMode;};
 
-		bool UsesMipMaps(){ return mbUseMipMaps; }
-		void SetMipMapUse(bool abX){mbUseMipMaps = abX;}
+		bool UsesMipMaps(){ return false; }
 		eTextureTarget GetTarget(){ return mTarget;}
 
 		virtual bool HasAnimation()=0;
@@ -165,7 +163,6 @@ namespace hpl {
 		eTextureFilter mFilter;
 		float mfAnisotropyDegree;
 
-		bool mbUseMipMaps;
 		iLowLevelGraphics* mpLowLevelGraphics;
 		float mfFrameTime;
 		eTextureAnimMode mAnimMode;

@@ -168,7 +168,7 @@ void cMapLoadText::SetActive(bool abX)
 
 		mpInit->mpButtonHandler->ChangeState(eButtonHandlerState_MapLoadText);
 
-		mpBack = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("other_load_text_back.jpg",false);
+		mpBack = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("other_load_text_back.jpg");
 		
 		mpInit->mpGraphicsHelper->ClearScreen();
 		mpDrawer->DrawTexture(mpBack, 0, {800,600});

@@ -61,7 +61,7 @@ void cGraphicsHelper::DrawLoadingScreen(const tString &asFile)
 	ClearScreen(cColor::Black);
 
 	if (asFile != "")
-		pTex = mpTexManager->Create2D(asFile,false);
+		pTex = mpTexManager->Create2D(asFile);
 	if(pTex) {
 		mpDrawer->DrawTexture(pTex, 0, {800,600});
 	}

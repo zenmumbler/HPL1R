@@ -57,7 +57,7 @@ namespace hpl {
 		mpTextureManager = apResources->GetTextureManager();
 		mpFileSearcher = apResources->GetFileSearcher();
 
-		mpFalloffMap = mpTextureManager->Create1D("core_falloff_linear",false);
+		mpFalloffMap = mpTextureManager->Create1D("core_falloff_linear");
 		mpFalloffMap->SetWrapS(eTextureWrap_ClampToEdge);
 		mpFalloffMap->SetWrapT(eTextureWrap_ClampToEdge);
 
@@ -509,7 +509,7 @@ namespace hpl {
 					mDiffuseColor.a = cString::ToFloat(pMainElem->Attribute("Specular"),mDiffuseColor.a);
 
 					tString sFalloffImage = cString::ToString(pMainElem->Attribute("FalloffImage"),"");
-					iTexture *pTexture = mpTextureManager->Create1D(sFalloffImage,false);
+					iTexture *pTexture = mpTextureManager->Create1D(sFalloffImage);
 					if(pTexture) SetFalloffMap(pTexture);
 
 					ExtraXMLProperties(pMainElem);
@@ -731,7 +731,7 @@ namespace hpl {
 		//////////////////////////
 		// Data
 		if(pData->msFalloffMap != ""){
-			iTexture *pTex = mpTextureManager->Create1D(pData->msFalloffMap,false);
+			iTexture *pTex = mpTextureManager->Create1D(pData->msFalloffMap);
 			if(pTex) SetFalloffMap(pTex);
 		}
 

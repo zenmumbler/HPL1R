@@ -346,9 +346,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cLowLevelGraphicsSDL::CreateTexture(const tString &asName,bool abUseMipMaps, eTextureTarget aTarget)
+	iTexture* cLowLevelGraphicsSDL::CreateTexture(const tString &asName, eTextureTarget aTarget)
 	{
-		return new cSDLTexture(asName, this, abUseMipMaps, aTarget);
+		return new cSDLTexture(asName, this, aTarget);
 	}
 
 	//-----------------------------------------------------------------------

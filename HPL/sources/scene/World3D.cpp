@@ -555,7 +555,7 @@ namespace hpl {
 
 		if(asGobo != "")
 		{
-			iTexture *pTexture = mpResources->GetTextureManager()->Create2D(asGobo,true);
+			iTexture *pTexture = mpResources->GetTextureManager()->Create2D(asGobo);
 			if(pTexture!=NULL)
 				pLight->SetTexture(pTexture);
 			else

@@ -35,8 +35,7 @@ namespace hpl {
 	class cSDLTexture : public iTexture
 	{
 	public:
-		cSDLTexture(const tString &asName, iLowLevelGraphics* apLowLevelGraphics,
-					bool abUseMipMaps, eTextureTarget aTarget);
+		cSDLTexture(const tString &asName, iLowLevelGraphics* apLowLevelGraphics, eTextureTarget aTarget);
 		~cSDLTexture();
 
 		bool CreateFromBitmap(const Bitmap &bmp) override;

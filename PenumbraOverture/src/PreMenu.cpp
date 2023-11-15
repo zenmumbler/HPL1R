@@ -675,13 +675,12 @@ void cPreMenu::SetActive(bool abX)
 
 		for(size_t i=0; i< mvTexNames.size(); ++i)
 		{
-			iTexture *pTex = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D(mvTexNames[i],false);
+			iTexture *pTex = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D(mvTexNames[i]);
 			if(pTex) mvTextures.push_back(pTex);
 		}
 
-		mpLogoTexture = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("title_logo.jpg",false);
-		// mpEpTexture = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("title_ep1.jpg",false);
-
+		mpLogoTexture = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("title_logo.jpg");
+		// mpEpTexture = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("title_ep1.jpg");
 
 		mfAlpha =0;
 	}

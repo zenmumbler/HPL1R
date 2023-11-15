@@ -17,9 +17,9 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #if defined(__APPLE__)&&defined(__MACH__)
-#include <OpenGL/glu.h>
+#include <OpenGL/gl.h>
 #else
-#include <GL/glu.h>
+#include <GL/gl.h>
 #endif
 
 #include "graphics/Bitmap.h"
@@ -36,13 +36,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cSDLTexture::cSDLTexture(const tString &asName, iLowLevelGraphics* apLowLevelGraphics,
-								bool abUseMipMaps, eTextureTarget aTarget)
-	: iTexture(asName, apLowLevelGraphics, abUseMipMaps, aTarget)
+	cSDLTexture::cSDLTexture(const tString &asName, iLowLevelGraphics* apLowLevelGraphics, eTextureTarget aTarget)
+	: iTexture(asName, apLowLevelGraphics, aTarget)
 	{
 		mbContainsData = false;
-
-		if(aTarget != eTextureTarget_2D) mbUseMipMaps = false;
 
 		mpGfxSDL = static_cast<cLowLevelGraphicsSDL*>(mpLowLevelGraphics);
 
@@ -210,11 +207,6 @@ namespace hpl {
 			glTexImage3D(GLTarget, 0, lChannels, avSize.x, avSize.y,avSize.z, 0, format, GL_UNSIGNED_BYTE, apPixelData);
 		}
 
-		if(mbUseMipMaps && mTarget == eTextureTarget_2D)
-		{
-			gluBuild2DMipmaps(GLTarget, lChannels, mlWidth, mlHeight, format, GL_UNSIGNED_BYTE, apPixelData);
-		}
-
 		PostCreation(GLTarget);
 
 		return true;
@@ -367,7 +359,7 @@ namespace hpl {
 			{
 				glBindTexture(GLTarget, mvTextureHandles[i]);
 
-				if(mbUseMipMaps && mTarget != eTextureTarget_Rect){
+				if(UsesMipMaps() && mTarget != eTextureTarget_Rect){
 					if(mFilter == eTextureFilter_Bilinear)
 						glTexParameteri(GLTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
 					else
@@ -510,16 +502,6 @@ namespace hpl {
 
 		if(glGetError()!=GL_NO_ERROR) return false;
 
-		if(mbUseMipMaps && mTarget != eTextureTarget_Rect)
-		{
-			if(mTarget == eTextureTarget_1D)
-				gluBuild1DMipmaps(GLTarget,lChannels,mlWidth,
-				format, GL_UNSIGNED_BYTE, pPixelSrc);
-			else
-				gluBuild2DMipmaps(GLTarget,lChannels,mlWidth, mlHeight,
-				format, GL_UNSIGNED_BYTE, pPixelSrc);
-		}
-
 		PostCreation(GLTarget);
 
 		return true;
@@ -538,7 +520,7 @@ namespace hpl {
 
 	void cSDLTexture::PostCreation(GLenum aGLTarget)
 	{
-		if(mbUseMipMaps && mTarget != eTextureTarget_Rect)
+		if(UsesMipMaps() && mTarget != eTextureTarget_Rect)
 		{
 			if(mFilter == eTextureFilter_Bilinear)
 				glTexParameteri(aGLTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);

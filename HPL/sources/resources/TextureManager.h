@@ -37,28 +37,27 @@ namespace hpl {
 		~cTextureManager();
 
 		iResourceBase* Create(const tString& asName);
-		iTexture* Create1D(const tString& asName, bool abUseMipMaps);
+		iTexture* Create1D(const tString& asName);
 
-		iTexture* Create2D(const tString& asName, bool abUseMipMaps, eTextureTarget aTarget= eTextureTarget_2D);
+		iTexture* Create2D(const tString& asName);
 
 		/**
 		 * Creates an animated texture. The name must be [name].[ext]. And then the textures in the animtion must
 		 * be named [name]01.[ext], [name]02.[ext], etc
 		 * \param asName
-		 * \param abUseMipMaps
 		 * \param aType
 		 * \return
 		 */
-		iTexture* CreateAnim2D(const tString& asName, bool abUseMipMaps);
+		iTexture* CreateAnim2D(const tString& asName);
 
-		iTexture* CreateCubeMap(const tString& asName, bool abUseMipMaps);
+		iTexture* CreateCubeMap(const tString& asName);
 
 		void Destroy(iResourceBase* apResource);
 
 		void Update(float afTimeStep);
 
 	private:
-		iTexture* CreateFlatTexture(const tString& asName,bool abUseMipMaps, eTextureTarget aTarget);
+		iTexture* CreateFlatTexture(const tString& asName, eTextureTarget aTarget);
 
 		iTexture* FindTexture2D(const tString &asName, tString &asFilePath);
 

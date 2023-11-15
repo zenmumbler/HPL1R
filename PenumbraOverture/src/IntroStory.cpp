@@ -323,7 +323,7 @@ void cIntroStory::SetActive(bool abX)
 		//LoadImages
 		for(int i=0; i<INTRO_IMAGE_NUM; ++i)
 		{
-			mvImages[i].mpTexture = mpTexManager->Create2D("intro_image0"+cString::ToString(i+1),false);
+			mvImages[i].mpTexture = mpTexManager->Create2D("intro_image0"+cString::ToString(i+1));
 			if(mvImages[i].mpTexture==NULL){
 				FatalError("Couldn't load an intro image!\n");
 			}
@@ -331,7 +331,7 @@ void cIntroStory::SetActive(bool abX)
 			mvImages[i].mlstPrevPos.clear();
 		}
 
-		mpBlackTexture = mpTexManager->Create2D("effect_black.bmp",false);
+		mpBlackTexture = mpTexManager->Create2D("effect_black.bmp");
 
 		mfTimerCount = 0.01f;
 		mlNextStop = kIntro_Image00_Start;

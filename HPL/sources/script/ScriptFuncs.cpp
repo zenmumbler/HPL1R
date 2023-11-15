@@ -195,7 +195,7 @@ namespace hpl {
 	{
 		if(asTexture!="")
 		{
-			iTexture *pTex = gpResources->GetTextureManager()->CreateCubeMap(asTexture,false);
+			iTexture *pTex = gpResources->GetTextureManager()->CreateCubeMap(asTexture);
 			gpGraphics->GetRenderer3D()->SetSkyBox(pTex,true);
 		}
 		else

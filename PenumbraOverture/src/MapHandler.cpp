@@ -297,7 +297,7 @@ cMapHandler::cMapHandler(cInit *apInit) : iUpdateable("MapHandler")
 	mpSoundCallback = new cMapHandlerSoundCallback(apInit);
 	cSoundEntity::AddGlobalCallback(mpSoundCallback);
 
-	mpMapChangeTexture = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("other_mapchange.jpg",false);
+	mpMapChangeTexture = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("other_mapchange.jpg");
 }
 
 //-----------------------------------------------------------------------

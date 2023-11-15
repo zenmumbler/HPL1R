@@ -254,13 +254,13 @@ namespace hpl {
 
 		if(animMode != eTextureAnimMode_None)
 		{
-			pTex = mpTextureManager->CreateAnim2D(sTexture,true);
+			pTex = mpTextureManager->CreateAnim2D(sTexture);
 			pTex->SetAnimMode(animMode);
 			pTex->SetFrameTime(fFrameTime);
 		}
 		else
 		{
-			pTex = mpTextureManager->Create2D(sTexture,true);
+			pTex = mpTextureManager->Create2D(sTexture);
 		}
 
 
@@ -321,7 +321,7 @@ namespace hpl {
 
 		cLight3DSpot *pLight = pWorld->CreateLightSpot(msName);
 		if(pLight && msTexture!=""){
-			iTexture *pTex = pResources->GetTextureManager()->Create2D(msTexture,false);
+			iTexture *pTex = pResources->GetTextureManager()->Create2D(msTexture);
 			if(pTex) pLight->SetTexture(pTex);
 		}
 
