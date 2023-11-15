@@ -1010,54 +1010,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	GLenum cLowLevelGraphicsSDL::GetGLTextureParamEnum(eTextureParam aType)
-	{
-		switch(aType)
-		{
-			case eTextureParam_ColorFunc:		return GL_COMBINE_RGB;
-			case eTextureParam_AlphaFunc:		return GL_COMBINE_ALPHA;
-			case eTextureParam_ColorSource0:	return GL_SOURCE0_RGB;
-			case eTextureParam_ColorSource1:	return GL_SOURCE1_RGB;
-			case eTextureParam_ColorSource2:	return GL_SOURCE2_RGB;
-			case eTextureParam_AlphaSource0:	return GL_SOURCE0_ALPHA;
-			case eTextureParam_AlphaSource1:	return GL_SOURCE1_ALPHA;
-			case eTextureParam_AlphaSource2:	return GL_SOURCE2_ALPHA;
-			case eTextureParam_ColorOp0:		return GL_OPERAND0_RGB;
-			case eTextureParam_ColorOp1:		return GL_OPERAND1_RGB;
-			case eTextureParam_ColorOp2:		return GL_OPERAND2_RGB;
-			default: return 0;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	GLenum cLowLevelGraphicsSDL::GetGLTextureOpEnum(eTextureOp aType)
-	{
-		switch(aType)
-		{
-			case eTextureOp_Color:			return GL_SRC_COLOR;
-			case eTextureOp_OneMinusColor:	return GL_ONE_MINUS_SRC_COLOR;
-			case eTextureOp_Alpha:			return GL_SRC_ALPHA;
-			case eTextureOp_OneMinusAlpha:	return GL_ONE_MINUS_SRC_ALPHA;
-			default: return 0;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	GLenum cLowLevelGraphicsSDL::GetGLTextureSourceEnum(eTextureSource aType)
-	{
-		switch(aType)
-		{
-			case eTextureSource_Texture:	return GL_TEXTURE;
-			case eTextureSource_Constant:	return GL_CONSTANT;
-			case eTextureSource_Primary:	return GL_PRIMARY_COLOR;
-			case eTextureSource_Previous:	return GL_PREVIOUS;
-			default: return 0;
-		}
-	}
-	//-----------------------------------------------------------------------
-
 	GLenum cLowLevelGraphicsSDL::GetGLTextureTargetEnum(eTextureTarget aType)
 	{
 		switch(aType)
@@ -1073,23 +1025,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	GLenum cLowLevelGraphicsSDL::GetGLTextureFuncEnum(eTextureFunc aType)
-	{
-		switch(aType)
-		{
-			case eTextureFunc_Modulate:		return GL_MODULATE;
-			case eTextureFunc_Replace:		return GL_REPLACE;
-			case eTextureFunc_Add:			return GL_ADD;
-			case eTextureFunc_Substract:	return GL_SUBTRACT;
-			case eTextureFunc_AddSigned:	return GL_ADD_SIGNED;
-			case eTextureFunc_Interpolate:	return GL_INTERPOLATE;
-			case eTextureFunc_Dot3RGB:		return GL_DOT3_RGB;
-			case eTextureFunc_Dot3RGBA:		return GL_DOT3_RGBA;
-			default: return 0;
-		}
-	}
-
-	//-----------------------------------------------------------------------
 	GLenum cLowLevelGraphicsSDL::GetGLDepthTestFuncEnum(eDepthTestFunc aType)
 	{
 		switch(aType)

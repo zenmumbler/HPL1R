@@ -46,51 +46,6 @@ namespace hpl {
 		eBlendFunc_LastEnum
 	};
 
-	enum eTextureParam
-	{
-		eTextureParam_ColorFunc,
-		eTextureParam_AlphaFunc,
-		eTextureParam_ColorSource0,
-		eTextureParam_ColorSource1,
-		eTextureParam_ColorSource2,
-		eTextureParam_AlphaSource0,
-		eTextureParam_AlphaSource1,
-		eTextureParam_AlphaSource2,
-		eTextureParam_ColorOp0,
-		eTextureParam_ColorOp1,
-		eTextureParam_ColorOp2,
-		eTextureParam_LastEnum
-	};
-
-	enum eTextureOp
-	{
-		eTextureOp_Color,
-		eTextureOp_OneMinusColor,
-		eTextureOp_Alpha,
-		eTextureOp_OneMinusAlpha,
-		eTextureOp_LasEnum
-	};
-
-	enum eTextureSource
-	{
-		eTextureSource_Texture,
-		eTextureSource_Constant,
-		eTextureSource_Primary,
-		eTextureSource_Previous,
-	};
-
-	enum eTextureFunc
-	{
-		eTextureFunc_Modulate,
-		eTextureFunc_Replace,
-		eTextureFunc_Add,
-		eTextureFunc_Substract,
-		eTextureFunc_AddSigned,
-		eTextureFunc_Interpolate,
-		eTextureFunc_Dot3RGB,
-		eTextureFunc_Dot3RGBA,
-	};
-
 	enum eStencilFunc
 	{
 		eStencilFunc_Never,

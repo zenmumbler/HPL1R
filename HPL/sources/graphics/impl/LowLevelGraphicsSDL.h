@@ -201,12 +201,6 @@ namespace hpl {
 		//Matrix Helper
 		void SetMatrixMode(eMatrix mType);
 
-		//Texture helper
-		GLenum GetGLTextureParamEnum(eTextureParam aType);
-		GLenum GetGLTextureOpEnum(eTextureOp aType);
-		GLenum GetGLTextureFuncEnum(eTextureFunc aType);
-		GLenum GetGLTextureSourceEnum(eTextureSource aType);
-
 		//Blend helper
 		GLenum GetGLBlendEnum(eBlendFunc aType);
 	};
