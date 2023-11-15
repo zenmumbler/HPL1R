@@ -26,8 +26,6 @@
 #else
 #include <GL/gltypes.h>
 #endif
-#include <SDL2/SDL.h>
-
 
 namespace hpl {
 
@@ -67,11 +65,7 @@ namespace hpl {
 		float GetT() override;
 		float GetTimeCount() override;
 		void SetTimeCount(float afX) override;
-		int GetCurrentLowlevelHandle() override;
-
-		/// SDL / OGL Specific ///////////
-
-		unsigned int GetTextureHandle();
+		unsigned int GetCurrentLowlevelHandle() override;
 
 	private:
 		bool CreateFromBitmapToHandle(const Bitmap &bmp, int alHandleIdx);

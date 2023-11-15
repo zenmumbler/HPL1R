@@ -360,9 +360,18 @@ namespace hpl {
 	{
 		mfTimeCount = afX;
 	}
-	int cSDLTexture::GetCurrentLowlevelHandle()
+
+	unsigned int cSDLTexture::GetCurrentLowlevelHandle()
 	{
-		return GetTextureHandle();
+		if(mvTextureHandles.size() > 1)
+		{
+			int lFrame = (int) mfTimeCount;
+			return mvTextureHandles[lFrame];
+		}
+		else
+		{
+			return mvTextureHandles[0];
+		}
 	}
 
 	//-----------------------------------------------------------------------
@@ -454,21 +463,6 @@ namespace hpl {
 				glBindTexture(GLTarget, mvTextureHandles[i]);
 				glTexParameteri(GLTarget, GL_TEXTURE_WRAP_R, GetGLWrap(aMode));
 			}
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	unsigned int cSDLTexture::GetTextureHandle()
-	{
-		if(mvTextureHandles.size() > 1)
-		{
-			int lFrame = (int) mfTimeCount;
-			return mvTextureHandles[lFrame];
-		}
-		else
-		{
-			return mvTextureHandles[0];
 		}
 	}
 

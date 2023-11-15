@@ -446,11 +446,10 @@ namespace hpl {
 
 		if (apTex != NULL) {
 			GLenum target = TextureTargetToGL(apTex->GetTarget());
-			cSDLTexture *pSDLTex = static_cast<cSDLTexture*>(apTex);
-			glBindTexture(target, pSDLTex->GetTextureHandle());
+			glBindTexture(target, apTex->GetCurrentLowlevelHandle());
 		}
 		else {
-			glBindTexture(GL_TEXTURE_2D, 0); // use arbitrary target
+			// glBindTexture(GL_TEXTURE_2D, 0); // use arbitrary target
 		}
 
 		mpCurrentTexture[alUnit] = apTex;

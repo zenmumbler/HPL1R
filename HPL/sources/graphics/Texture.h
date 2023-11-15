@@ -138,7 +138,7 @@ namespace hpl {
 		virtual float GetT()=0;
 		virtual float GetTimeCount()=0;
 		virtual void SetTimeCount(float afX)=0;
-		virtual int GetCurrentLowlevelHandle()=0;
+		virtual unsigned int GetCurrentLowlevelHandle()=0;
 
 		int GetWidth() const { return mlWidth; }
 		int GetHeight() const { return mlHeight; }
