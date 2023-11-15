@@ -161,20 +161,18 @@ namespace hpl {
 		 */
 		virtual void SetVsyncActive(bool abX)=0;
 
-		virtual iTexture* CreateTexture(bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
-		virtual iTexture* CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
-		virtual iTexture* CreateTexture(const Bitmap& source, bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
-		virtual iTexture* CreateTexture(const cVector2l& avSize,int alBpp,cColor aFillCol,
-									bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
-
-
+		// RESOURCES
+		virtual iTexture* CreateTexture(const tString &asName, bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
 		virtual iGpuProgram* CreateGpuProgram(const tString& asName)=0;
+		virtual iVertexBuffer* CreateVertexBuffer(VertexAttributes aFlags, VertexBufferPrimitiveType aDrawType,
+								VertexBufferUsageType aUsageType,
+								int alReserveVtxSize, int alReserveIdxSize)=0;
 
 		virtual Bitmap GetScreenPixels()=0;
 
 		/////////// DRAWING METHODS /////////////////////////
 
-		//OCCLUSION
+		// OCCLUSION
 		virtual iOcclusionQuery* CreateOcclusionQuery()=0;
 		virtual void DestroyOcclusionQuery(iOcclusionQuery *apQuery)=0;
 
@@ -225,11 +223,7 @@ namespace hpl {
 		virtual void SetBlendFuncSeparate(eBlendFunc aSrcFactorColor, eBlendFunc aDestFactorColor,
 										eBlendFunc aSrcFactorAlpha, eBlendFunc aDestFactorAlpha)=0;
 
-		// POLYGONS
-		virtual iVertexBuffer* CreateVertexBuffer(VertexAttributes aFlags, VertexBufferPrimitiveType aDrawType,
-								VertexBufferUsageType aUsageType,
-								int alReserveVtxSize, int alReserveIdxSize)=0;
-
+		// FRAME
 		virtual void StartFrame()=0;
 		virtual void FlushRendering()=0;
 		virtual void SwapBuffers()=0;

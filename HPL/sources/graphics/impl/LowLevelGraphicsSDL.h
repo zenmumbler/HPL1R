@@ -63,13 +63,12 @@ namespace hpl {
 		cVector2f GetVirtualSize() override;
 		void SetVirtualSize(cVector2f avSize) override;
 
-		iTexture* CreateTexture(bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
+		// RESOURCES
 		iTexture* CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
-		iTexture* CreateTexture(const Bitmap& source, bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
-		iTexture* CreateTexture(const cVector2l& avSize,int alBpp,cColor aFillCol,
-								bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
-
 		iGpuProgram* CreateGpuProgram(const tString& asName) override;
+		iVertexBuffer* CreateVertexBuffer(VertexAttributes aFlags, VertexBufferPrimitiveType aDrawType,
+										VertexBufferUsageType aUsageType,
+										int alReserveVtxSize, int alReserveIdxSize) override;
 
 		Bitmap GetScreenPixels() override;
 
@@ -123,15 +122,10 @@ namespace hpl {
 		void SetBlendFuncSeparate(eBlendFunc aSrcFactorColor, eBlendFunc aDestFactorColor,
 			eBlendFunc aSrcFactorAlpha, eBlendFunc aDestFactorAlpha) override;
 
-
 		// TEXTURE
 		void SetTexture(unsigned int alUnit,iTexture* apTex) override;
 
-		// POLYGONS
-		iVertexBuffer* CreateVertexBuffer(VertexAttributes aFlags, VertexBufferPrimitiveType aDrawType,
-										VertexBufferUsageType aUsageType,
-										int alReserveVtxSize, int alReserveIdxSize) override;
-
+		// FRAME
 		void StartFrame() override;
 		void FlushRendering() override;
 		void SwapBuffers() override;

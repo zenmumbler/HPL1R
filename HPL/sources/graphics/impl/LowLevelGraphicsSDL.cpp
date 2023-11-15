@@ -346,55 +346,19 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cLowLevelGraphicsSDL::CreateTexture(bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)
-	{
-		return new cSDLTexture("",this,aType, abUseMipMaps, aTarget);
-	}
-
-	//-----------------------------------------------------------------------
-
 	iTexture* cLowLevelGraphicsSDL::CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)
 	{
-		return new cSDLTexture(asName,this,aType, abUseMipMaps, aTarget);
+		return new cSDLTexture(asName, this, aType, abUseMipMaps, aTarget);
 	}
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cLowLevelGraphicsSDL::CreateTexture(const Bitmap& source, bool abUseMipMaps, eTextureType aType,
-												eTextureTarget aTarget)
+	iVertexBuffer* cLowLevelGraphicsSDL::CreateVertexBuffer(VertexAttributes aFlags,
+														VertexBufferPrimitiveType aDrawType,
+														VertexBufferUsageType aUsageType,
+														int alReserveVtxSize,int alReserveIdxSize)
 	{
-		cSDLTexture *pTex = new cSDLTexture("",this,aType, abUseMipMaps, aTarget);
-		pTex->CreateFromBitmap(source);
-
-		return pTex;
-	}
-
-	//-----------------------------------------------------------------------
-
-	iTexture* cLowLevelGraphicsSDL::CreateTexture(const cVector2l& avSize, int alBpp,cColor aFillCol,
-											bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)
-	{
-		cSDLTexture *pTex=NULL;
-
-		if(aType==eTextureType_RenderTarget)
-		{
-			pTex = new cSDLTexture("",this,aType, abUseMipMaps, aTarget);
-			pTex->Create(avSize.x, avSize.y, aFillCol);
-		}
-		else
-		{
-			Bitmap bmp{avSize.x, avSize.y};
-			bmp.FillRect(cRect2l(0,0,0,0),aFillCol);
-
-			pTex = new cSDLTexture("",this,aType, abUseMipMaps, aTarget);
-			bool bRet = pTex->CreateFromBitmap(bmp);
-
-			if(bRet==false){
-				delete pTex;
-				return NULL;
-			}
-		}
-		return pTex;
+		return new cVertexBufferVBO(aFlags, aDrawType, aUsageType, alReserveVtxSize, alReserveIdxSize);
 	}
 
 	//-----------------------------------------------------------------------
@@ -422,36 +386,13 @@ namespace hpl {
 			}
 		}
 
-		//Disable this unit if NULL
-		if(apTex == NULL)
-		{
-			glDisable(LastTarget);
-			//glBindTexture(LastTarget,0);
-		}
-		//Enable the unit, set the texture handle
-		else
-		{
-			if(NewTarget != LastTarget) glDisable(LastTarget);
-
+		if (apTex != NULL) {
 			cSDLTexture *pSDLTex = static_cast<cSDLTexture*> (apTex);
-
 			glBindTexture(NewTarget, pSDLTex->GetTextureHandle());
-			glEnable(NewTarget);
 		}
 
 		mpCurrentTexture[alUnit] = apTex;
 	}
-
-	//-----------------------------------------------------------------------
-
-	iVertexBuffer* cLowLevelGraphicsSDL::CreateVertexBuffer(VertexAttributes aFlags,
-														VertexBufferPrimitiveType aDrawType,
-														VertexBufferUsageType aUsageType,
-														int alReserveVtxSize,int alReserveIdxSize)
-	{
-		return new cVertexBufferVBO(aFlags, aDrawType, aUsageType, alReserveVtxSize, alReserveIdxSize);
-	}
-
 
 	//-----------------------------------------------------------------------
 
