@@ -30,7 +30,6 @@ namespace hpl {
 	{
 		eTextureTarget_1D,
 		eTextureTarget_2D,
-		eTextureTarget_Rect,
 		eTextureTarget_CubeMap,
 		eTextureTarget_3D,
 		eTextureTarget_LastEnum

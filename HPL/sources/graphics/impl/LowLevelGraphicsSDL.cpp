@@ -73,7 +73,6 @@ namespace hpl {
 		switch (aTarget) {
 			case eTextureTarget_1D:		return GL_TEXTURE_1D;
 			case eTextureTarget_2D:		return GL_TEXTURE_2D;
-			case eTextureTarget_Rect:	return GL_TEXTURE_RECTANGLE_ARB;
 			case eTextureTarget_CubeMap:	return GL_TEXTURE_CUBE_MAP;
 			case eTextureTarget_3D:		return GL_TEXTURE_3D;
 			default:					return 0;

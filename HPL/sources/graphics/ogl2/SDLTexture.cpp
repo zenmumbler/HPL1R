@@ -218,7 +218,7 @@ namespace hpl {
 	void cSDLTexture::SetPixels2D(	int alLevel, const cVector2l& avOffset, const cVector2l& avSize,
 									eColorDataFormat aDataFormat, void *apPixelData)
 	{
-		if(mTarget != eTextureTarget_2D && mTarget != eTextureTarget_Rect) return;
+		if(mTarget != eTextureTarget_2D) return;
 
 		glTexSubImage2D(TextureTargetToGL(mTarget),alLevel,avOffset.x,avOffset.y, avSize.x,avSize.y,
 						ColorFormatToGL(aDataFormat),GL_UNSIGNED_BYTE,apPixelData);
@@ -359,7 +359,7 @@ namespace hpl {
 			{
 				glBindTexture(GLTarget, mvTextureHandles[i]);
 
-				if(UsesMipMaps() && mTarget != eTextureTarget_Rect){
+				if(UsesMipMaps()) {
 					if(mFilter == eTextureFilter_Bilinear)
 						glTexParameteri(GLTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
 					else
@@ -474,7 +474,7 @@ namespace hpl {
 		mlWidth = bmp.GetWidth();
 		mlHeight = bmp.GetHeight();
 
-		if((!cMath::IsPow2(mlHeight) || !cMath::IsPow2(mlWidth)) && mTarget != eTextureTarget_Rect)
+		if (!cMath::IsPow2(mlHeight) || !cMath::IsPow2(mlWidth))
 		{
 			Warning("Texture '%s' does not have a pow2 size!\n",msName.c_str());
 		}
