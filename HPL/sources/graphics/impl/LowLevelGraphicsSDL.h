@@ -134,8 +134,6 @@ namespace hpl {
 		///// SDL Specific ////////////////////////////
 		void SetupGL();
 
-		GLenum GetGLTextureTargetEnum(eTextureTarget aType);
-
 	private:
 		cVector2l mvScreenSize;
 		cVector2f mvVirtualSize;

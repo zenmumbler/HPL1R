@@ -20,7 +20,6 @@
 #define HPL_SDL_TEXTURE_H
 
 #include "graphics/Texture.h"
-#include "graphics/impl/LowLevelGraphicsSDL.h"
 
 #if defined(__APPLE__)&&defined(__MACH__)
 #include <OpenGL/gltypes.h>
@@ -35,7 +34,7 @@ namespace hpl {
 	class cSDLTexture : public iTexture
 	{
 	public:
-		cSDLTexture(const tString &asName, iLowLevelGraphics* apLowLevelGraphics, eTextureTarget aTarget);
+		cSDLTexture(const tString &asName, eTextureTarget aTarget);
 		~cSDLTexture();
 
 		bool CreateFromBitmap(const Bitmap &bmp) override;
@@ -86,7 +85,6 @@ namespace hpl {
 
 		tUIntVec mvTextureHandles;
 		bool mbContainsData;
-		cLowLevelGraphicsSDL* mpGfxSDL;
 
 		float mfTimeCount;
 		int mlTextureIndex;

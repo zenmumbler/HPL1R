@@ -140,7 +140,7 @@ namespace hpl {
 		mlMultisampling = alMultisampling;
 
 		//Set some GL Attributes
-		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER,1);
+		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 		SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 		SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
@@ -151,17 +151,17 @@ namespace hpl {
 		SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 
 		// Multisampling
-		if(mlMultisampling > 0)
+		if (mlMultisampling > 0)
 		{
-			if(SDL_GL_SetAttribute( SDL_GL_MULTISAMPLEBUFFERS, 1)==-1)
+			if (SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1) == -1)
 			{
 				Error("Multisample buffers not supported!\n");
 			}
 			else
 			{
-				if(SDL_GL_SetAttribute( SDL_GL_MULTISAMPLESAMPLES, mlMultisampling)==-1)
+				if (SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, mlMultisampling) == -1)
 				{
-					Error("Couldn't set multisampling samples to %d\n",mlMultisampling);
+					Error("Couldn't set multisampling samples to %d\n", mlMultisampling);
 				}
 			}
 		}
@@ -207,9 +207,6 @@ namespace hpl {
 		Log(" Setting up OpenGL\n");
 		SetupGL();
 
-		//Set the clear color
-		SDL_GL_SwapWindow(mpWindow);
-		
 		//Setup ImGui
 		mpImGuiContext = ImGui::CreateContext();
 		ImGui_ImplOpenGL2_Init();
@@ -347,7 +344,7 @@ namespace hpl {
 
 	iTexture* cLowLevelGraphicsSDL::CreateTexture(const tString &asName, eTextureTarget aTarget)
 	{
-		return new cSDLTexture(asName, this, aTarget);
+		return new cSDLTexture(asName, aTarget);
 	}
 
 	//-----------------------------------------------------------------------
@@ -369,7 +366,7 @@ namespace hpl {
 		glActiveTexture(GL_TEXTURE0 + alUnit);
 
 		if (apTex != NULL) {
-			GLenum target = GetGLTextureTargetEnum(apTex->GetTarget());
+			GLenum target = TextureTargetToGL(apTex->GetTarget());
 			cSDLTexture *pSDLTex = static_cast<cSDLTexture*>(apTex);
 			glBindTexture(target, pSDLTex->GetTextureHandle());
 		}
@@ -647,21 +644,6 @@ namespace hpl {
 			case eBlendFunc_DestAlpha:				return GL_DST_ALPHA;
 			case eBlendFunc_OneMinusDestAlpha:		return GL_ONE_MINUS_DST_ALPHA;
 			case eBlendFunc_SrcAlphaSaturate:		return GL_SRC_ALPHA_SATURATE;
-			default: return 0;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	GLenum cLowLevelGraphicsSDL::GetGLTextureTargetEnum(eTextureTarget aType)
-	{
-		switch(aType)
-		{
-			case eTextureTarget_1D:		return GL_TEXTURE_1D;
-			case eTextureTarget_2D:		return GL_TEXTURE_2D;
-			case eTextureTarget_Rect:   return GL_TEXTURE_RECTANGLE_ARB;
-			case eTextureTarget_CubeMap:	return GL_TEXTURE_CUBE_MAP;
-			case eTextureTarget_3D:		return GL_TEXTURE_3D;
 			default: return 0;
 		}
 	}

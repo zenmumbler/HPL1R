@@ -24,6 +24,7 @@
 
 #include "graphics/Bitmap.h"
 #include "graphics/ogl2/SDLTexture.h"
+#include "graphics/impl/LowLevelGraphicsSDL.h"
 
 #include "math/Math.h"
 #include "system/Log.h"
@@ -36,27 +37,21 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cSDLTexture::cSDLTexture(const tString &asName, iLowLevelGraphics* apLowLevelGraphics, eTextureTarget aTarget)
-	: iTexture(asName, apLowLevelGraphics, aTarget)
+	cSDLTexture::cSDLTexture(const tString &asName, eTextureTarget aTarget)
+	: iTexture(asName, aTarget)
 	{
 		mbContainsData = false;
-
-		mpGfxSDL = static_cast<cLowLevelGraphicsSDL*>(mpLowLevelGraphics);
 
 		mlTextureIndex = 0;
 		mfTimeCount = 0;
 		mfTimeDir = 1;
 
 		mlBpp = 0;
-
 	}
 
 	cSDLTexture::~cSDLTexture()
 	{
-		for(size_t i=0; i<mvTextureHandles.size(); ++i)
-		{
-			glDeleteTextures(1,(GLuint *)&mvTextureHandles[i]);
-		}
+		glDeleteTextures((int)mvTextureHandles.size(), mvTextureHandles.data());
 	}
 
 
@@ -353,7 +348,7 @@ namespace hpl {
 		mFilter = aFilter;
 		if(mbContainsData)
 		{
-			GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
+			GLenum GLTarget = TextureTargetToGL(mTarget);
 
 			for(size_t i=0; i < mvTextureHandles.size(); ++i)
 			{
@@ -376,21 +371,15 @@ namespace hpl {
 
 	void cSDLTexture::SetAnisotropyDegree(float afX)
 	{
-		if(!mpLowLevelGraphics->GetCaps(eGraphicCaps_AnisotropicFiltering)) return;
-		if(afX < 1.0f) return;
-		if(afX > (float) mpLowLevelGraphics->GetCaps(eGraphicCaps_MaxAnisotropicFiltering)) return;
-
 		if(mfAnisotropyDegree == afX) return;
-
 		mfAnisotropyDegree = afX;
 
-		GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
+		GLenum GLTarget = TextureTargetToGL(mTarget);
 
 		for(size_t i=0; i < mvTextureHandles.size(); ++i)
 		{
 			glBindTexture(GLTarget, mvTextureHandles[i]);
-
-			glTexParameterf(GLTarget,GL_TEXTURE_MAX_ANISOTROPY_EXT ,mfAnisotropyDegree);
+			glTexParameterf(GLTarget,GL_TEXTURE_MAX_ANISOTROPY_EXT, mfAnisotropyDegree);
 		}
 	}
 
@@ -400,7 +389,7 @@ namespace hpl {
 	{
 		if(mbContainsData)
 		{
-			GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
+			GLenum GLTarget = TextureTargetToGL(mTarget);
 
 			for(size_t i=0; i < mvTextureHandles.size(); ++i)
 			{
@@ -417,7 +406,7 @@ namespace hpl {
 	{
 		if(mbContainsData)
 		{
-			GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
+			GLenum GLTarget = TextureTargetToGL(mTarget);
 
 			for(size_t i=0; i < mvTextureHandles.size(); ++i)
 			{
@@ -433,7 +422,7 @@ namespace hpl {
 	{
 		if(mbContainsData)
 		{
-			GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
+			GLenum GLTarget = TextureTargetToGL(mTarget);
 
 			for(size_t i=0; i < mvTextureHandles.size(); ++i)
 			{
@@ -511,7 +500,7 @@ namespace hpl {
 
 	GLenum cSDLTexture::InitCreation(int alHandleIdx)
 	{
-		GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
+		GLenum GLTarget = TextureTargetToGL(mTarget);
 		glBindTexture(GLTarget, mvTextureHandles[alHandleIdx]);
 		return GLTarget;
 	}
@@ -520,7 +509,7 @@ namespace hpl {
 
 	void cSDLTexture::PostCreation(GLenum aGLTarget)
 	{
-		if(UsesMipMaps() && mTarget != eTextureTarget_Rect)
+		if(UsesMipMaps())
 		{
 			if(mFilter == eTextureFilter_Bilinear)
 				glTexParameteri(aGLTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
