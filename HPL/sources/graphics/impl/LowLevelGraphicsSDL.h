@@ -37,8 +37,6 @@ namespace hpl {
 
 	//-------------------------------------------------
 
-	GLenum ColorFormatToGL(eColorDataFormat aFormat);
-
 	GLenum TextureTargetToGL(eTextureTarget aTarget);
 
 	//-------------------------------------------------
@@ -153,19 +151,6 @@ namespace hpl {
 
 		// ImGui Setup
 		ImGuiContext* mpImGuiContext;
-
-		//Depth helper
-		GLenum GetGLDepthTestFuncEnum(eDepthTestFunc aType);
-
-		//Alpha Helper
-		GLenum GetGLAlphaTestFuncEnum(eAlphaTestFunc aType);
-
-		//Stencil helper
-		GLenum GetGLStencilFuncEnum(eStencilFunc aType);
-		GLenum GetGLStencilOpEnum(eStencilOp aType);
-
-		//Blend helper
-		GLenum GetGLBlendEnum(eBlendFunc aType);
 	};
 };
 #endif // HPL_LOWLEVELGRAPHICS_SDL_H

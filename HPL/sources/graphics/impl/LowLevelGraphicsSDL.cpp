@@ -54,20 +54,99 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	GLenum ColorFormatToGL(eColorDataFormat aFormat)
+	static GLenum GetGLBlendEnum(eBlendFunc aType)
 	{
-		switch (aFormat) {
-			case eColorDataFormat_RGB:		return GL_RGB;
-			case eColorDataFormat_RGBA:		return GL_RGBA;
-			case eColorDataFormat_ALPHA:	return GL_ALPHA;
-			case eColorDataFormat_BGR:		return GL_BGR;
-			case eColorDataFormat_BGRA:		return GL_BGRA;
-			default:						return 0;
+		switch(aType)
+		{
+			case eBlendFunc_Zero:					return GL_ZERO;
+			case eBlendFunc_One:					return GL_ONE;
+			case eBlendFunc_SrcColor:				return GL_SRC_COLOR;
+			case eBlendFunc_OneMinusSrcColor:		return GL_ONE_MINUS_SRC_COLOR;
+			case eBlendFunc_DestColor:				return GL_DST_COLOR;
+			case eBlendFunc_OneMinusDestColor:		return GL_ONE_MINUS_DST_COLOR;
+			case eBlendFunc_SrcAlpha:				return GL_SRC_ALPHA;
+			case eBlendFunc_OneMinusSrcAlpha:		return GL_ONE_MINUS_SRC_ALPHA;
+			case eBlendFunc_DestAlpha:				return GL_DST_ALPHA;
+			case eBlendFunc_OneMinusDestAlpha:		return GL_ONE_MINUS_DST_ALPHA;
+			case eBlendFunc_SrcAlphaSaturate:		return GL_SRC_ALPHA_SATURATE;
+			default: return 0;
+		}
+	}
+
+	//-----------------------------------------------------------------------
+
+	static GLenum GetGLDepthTestFuncEnum(eDepthTestFunc aType)
+	{
+		switch(aType)
+		{
+			case eDepthTestFunc_Never:			return GL_NEVER;
+			case eDepthTestFunc_Less:				return GL_LESS;
+			case eDepthTestFunc_LessOrEqual:		return GL_LEQUAL;
+			case eDepthTestFunc_Greater:			return GL_GREATER;
+			case eDepthTestFunc_GreaterOrEqual:	return GL_GEQUAL;
+			case eDepthTestFunc_Equal:			return GL_EQUAL;
+			case eDepthTestFunc_NotEqual:			return GL_NOTEQUAL;
+			case eDepthTestFunc_Always:			return GL_ALWAYS;
+			default: return 0;
+		}
+	}
+
+	//-----------------------------------------------------------------------
+
+	static GLenum GetGLAlphaTestFuncEnum(eAlphaTestFunc aType)
+	{
+		switch(aType)
+		{
+			case eAlphaTestFunc_Never:			return GL_NEVER;
+			case eAlphaTestFunc_Less:				return GL_LESS;
+			case eAlphaTestFunc_LessOrEqual:		return GL_LEQUAL;
+			case eAlphaTestFunc_Greater:			return GL_GREATER;
+			case eAlphaTestFunc_GreaterOrEqual:	return GL_GEQUAL;
+			case eAlphaTestFunc_Equal:			return GL_EQUAL;
+			case eAlphaTestFunc_NotEqual:			return GL_NOTEQUAL;
+			case eAlphaTestFunc_Always:			return GL_ALWAYS;
+			default: return 0;
+		}
+	}
+
+	//-----------------------------------------------------------------------
+
+	static GLenum GetGLStencilFuncEnum(eStencilFunc aType)
+	{
+		switch(aType)
+		{
+			case eStencilFunc_Never:			return GL_NEVER;
+			case eStencilFunc_Less:				return GL_LESS;
+			case eStencilFunc_LessOrEqual:		return GL_LEQUAL;
+			case eStencilFunc_Greater:			return GL_GREATER;
+			case eStencilFunc_GreaterOrEqual:	return GL_GEQUAL;
+			case eStencilFunc_Equal:			return GL_EQUAL;
+			case eStencilFunc_NotEqual:			return GL_NOTEQUAL;
+			case eStencilFunc_Always:			return GL_ALWAYS;
+			default: return 0;
+		}
+	}
+
+	//-----------------------------------------------------------------------
+
+	static GLenum GetGLStencilOpEnum(eStencilOp aType)
+	{
+		switch(aType) {
+			case eStencilOp_Keep:			return GL_KEEP;
+			case eStencilOp_Zero:			return GL_ZERO;
+			case eStencilOp_Replace:		return GL_REPLACE;
+			case eStencilOp_Increment:		return GL_INCR;
+			case eStencilOp_Decrement:		return GL_DECR;
+			case eStencilOp_Invert:			return GL_INVERT;
+			case eStencilOp_IncrementWrap:	return GL_INCR_WRAP;
+			case eStencilOp_DecrementWrap:	return GL_DECR_WRAP;
+			default: return 0;
 		}
 	}
 
 	//-------------------------------------------------
 
+	// used by SDLTexture.cpp
 	GLenum TextureTargetToGL(eTextureTarget aTarget)
 	{
 		switch (aTarget) {
@@ -619,104 +698,6 @@ namespace hpl {
 	void cLowLevelGraphicsSDL::SetVirtualSize(cVector2f avSize)
 	{
 		mvVirtualSize = avSize;
-	}
-
-	//-----------------------------------------------------------------------
-
-	//////////////////////////////////////////////////////////////////////////
-	// PRIVATE METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	GLenum cLowLevelGraphicsSDL::GetGLBlendEnum(eBlendFunc aType)
-	{
-		switch(aType)
-		{
-			case eBlendFunc_Zero:					return GL_ZERO;
-			case eBlendFunc_One:					return GL_ONE;
-			case eBlendFunc_SrcColor:				return GL_SRC_COLOR;
-			case eBlendFunc_OneMinusSrcColor:		return GL_ONE_MINUS_SRC_COLOR;
-			case eBlendFunc_DestColor:				return GL_DST_COLOR;
-			case eBlendFunc_OneMinusDestColor:		return GL_ONE_MINUS_DST_COLOR;
-			case eBlendFunc_SrcAlpha:				return GL_SRC_ALPHA;
-			case eBlendFunc_OneMinusSrcAlpha:		return GL_ONE_MINUS_SRC_ALPHA;
-			case eBlendFunc_DestAlpha:				return GL_DST_ALPHA;
-			case eBlendFunc_OneMinusDestAlpha:		return GL_ONE_MINUS_DST_ALPHA;
-			case eBlendFunc_SrcAlphaSaturate:		return GL_SRC_ALPHA_SATURATE;
-			default: return 0;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	GLenum cLowLevelGraphicsSDL::GetGLDepthTestFuncEnum(eDepthTestFunc aType)
-	{
-		switch(aType)
-		{
-			case eDepthTestFunc_Never:			return GL_NEVER;
-			case eDepthTestFunc_Less:				return GL_LESS;
-			case eDepthTestFunc_LessOrEqual:		return GL_LEQUAL;
-			case eDepthTestFunc_Greater:			return GL_GREATER;
-			case eDepthTestFunc_GreaterOrEqual:	return GL_GEQUAL;
-			case eDepthTestFunc_Equal:			return GL_EQUAL;
-			case eDepthTestFunc_NotEqual:			return GL_NOTEQUAL;
-			case eDepthTestFunc_Always:			return GL_ALWAYS;
-			default: return 0;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	GLenum cLowLevelGraphicsSDL::GetGLAlphaTestFuncEnum(eAlphaTestFunc aType)
-	{
-		switch(aType)
-		{
-			case eAlphaTestFunc_Never:			return GL_NEVER;
-			case eAlphaTestFunc_Less:				return GL_LESS;
-			case eAlphaTestFunc_LessOrEqual:		return GL_LEQUAL;
-			case eAlphaTestFunc_Greater:			return GL_GREATER;
-			case eAlphaTestFunc_GreaterOrEqual:	return GL_GEQUAL;
-			case eAlphaTestFunc_Equal:			return GL_EQUAL;
-			case eAlphaTestFunc_NotEqual:			return GL_NOTEQUAL;
-			case eAlphaTestFunc_Always:			return GL_ALWAYS;
-			default: return 0;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	GLenum cLowLevelGraphicsSDL::GetGLStencilFuncEnum(eStencilFunc aType)
-	{
-		switch(aType)
-		{
-			case eStencilFunc_Never:			return GL_NEVER;
-			case eStencilFunc_Less:				return GL_LESS;
-			case eStencilFunc_LessOrEqual:		return GL_LEQUAL;
-			case eStencilFunc_Greater:			return GL_GREATER;
-			case eStencilFunc_GreaterOrEqual:	return GL_GEQUAL;
-			case eStencilFunc_Equal:			return GL_EQUAL;
-			case eStencilFunc_NotEqual:			return GL_NOTEQUAL;
-			case eStencilFunc_Always:			return GL_ALWAYS;
-			default: return 0;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	GLenum cLowLevelGraphicsSDL::GetGLStencilOpEnum(eStencilOp aType)
-	{
-		switch(aType) {
-			case eStencilOp_Keep:			return GL_KEEP;
-			case eStencilOp_Zero:			return GL_ZERO;
-			case eStencilOp_Replace:		return GL_REPLACE;
-			case eStencilOp_Increment:		return GL_INCR;
-			case eStencilOp_Decrement:		return GL_DECR;
-			case eStencilOp_Invert:			return GL_INVERT;
-			case eStencilOp_IncrementWrap:	return GL_INCR_WRAP;
-			case eStencilOp_DecrementWrap:	return GL_DECR_WRAP;
-			default: return 0;
-		}
 	}
 
 	//-----------------------------------------------------------------------

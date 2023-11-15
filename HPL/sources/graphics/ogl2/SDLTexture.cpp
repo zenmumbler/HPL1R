@@ -31,6 +31,32 @@
 
 namespace hpl {
 
+	//-----------------------------------------------------------------------
+
+	static GLenum GetGLWrap(eTextureWrap aMode)
+	{
+		switch(aMode)
+		{
+			case eTextureWrap_Clamp: return GL_CLAMP;
+			case eTextureWrap_Repeat: return GL_REPEAT;
+			case eTextureWrap_ClampToEdge: return GL_CLAMP_TO_EDGE;
+			case eTextureWrap_ClampToBorder: return GL_CLAMP_TO_BORDER;
+			default: return GL_REPEAT;
+		}
+	}
+
+	static GLenum ColorFormatToGL(eColorDataFormat aFormat)
+	{
+		switch (aFormat) {
+			case eColorDataFormat_RGB:		return GL_RGB;
+			case eColorDataFormat_RGBA:		return GL_RGBA;
+			case eColorDataFormat_ALPHA:	return GL_ALPHA;
+			case eColorDataFormat_BGR:		return GL_BGR;
+			case eColorDataFormat_BGRA:		return GL_BGRA;
+			default:						return 0;
+		}
+	}
+
 	//////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
 	//////////////////////////////////////////////////////////////////////////
@@ -379,7 +405,7 @@ namespace hpl {
 		for(size_t i=0; i < mvTextureHandles.size(); ++i)
 		{
 			glBindTexture(GLTarget, mvTextureHandles[i]);
-			glTexParameterf(GLTarget,GL_TEXTURE_MAX_ANISOTROPY_EXT, mfAnisotropyDegree);
+			glTexParameterf(GLTarget, GL_TEXTURE_MAX_ANISOTROPY_EXT, mfAnisotropyDegree);
 		}
 	}
 
@@ -394,8 +420,7 @@ namespace hpl {
 			for(size_t i=0; i < mvTextureHandles.size(); ++i)
 			{
 				glBindTexture(GLTarget, mvTextureHandles[i]);
-
-				glTexParameteri(GLTarget,GL_TEXTURE_WRAP_S,GetGLWrap(aMode));
+				glTexParameteri(GLTarget, GL_TEXTURE_WRAP_S, GetGLWrap(aMode));
 			}
 		}
 	}
@@ -411,7 +436,7 @@ namespace hpl {
 			for(size_t i=0; i < mvTextureHandles.size(); ++i)
 			{
 				glBindTexture(GLTarget, mvTextureHandles[i]);
-				glTexParameteri(GLTarget,GL_TEXTURE_WRAP_T,GetGLWrap(aMode));
+				glTexParameteri(GLTarget, GL_TEXTURE_WRAP_T, GetGLWrap(aMode));
 			}
 		}
 	}
@@ -427,8 +452,7 @@ namespace hpl {
 			for(size_t i=0; i < mvTextureHandles.size(); ++i)
 			{
 				glBindTexture(GLTarget, mvTextureHandles[i]);
-
-				glTexParameteri(GLTarget,GL_TEXTURE_WRAP_R,GetGLWrap(aMode));
+				glTexParameteri(GLTarget, GL_TEXTURE_WRAP_R, GetGLWrap(aMode));
 			}
 		}
 	}
@@ -482,12 +506,10 @@ namespace hpl {
 		//Clear error flags
 		while(glGetError()!=GL_NO_ERROR);
 
-		if(mTarget == eTextureTarget_1D)
-			glTexImage1D(GLTarget, 0, lChannels, mlWidth,0,format,
-			GL_UNSIGNED_BYTE, pPixelSrc);
+		if (mTarget == eTextureTarget_1D)
+			glTexImage1D(GLTarget, 0, lChannels, mlWidth, 0,format, GL_UNSIGNED_BYTE, pPixelSrc);
 		else
-			glTexImage2D(GLTarget, 0, lChannels, mlWidth, mlHeight,
-			0, format, GL_UNSIGNED_BYTE, pPixelSrc);
+			glTexImage2D(GLTarget, 0, lChannels, mlWidth, mlHeight, 0, format, GL_UNSIGNED_BYTE, pPixelSrc);
 
 		if(glGetError()!=GL_NO_ERROR) return false;
 
@@ -546,21 +568,6 @@ namespace hpl {
 			aFormat = GL_ALPHA;
 		}
 	}
-
-	//-----------------------------------------------------------------------
-
-	GLenum cSDLTexture::GetGLWrap(eTextureWrap aMode)
-	{
-		switch(aMode)
-		{
-		case eTextureWrap_Clamp: return GL_CLAMP;
-		case eTextureWrap_Repeat: return GL_REPEAT;
-		case eTextureWrap_ClampToEdge: return GL_CLAMP_TO_EDGE;
-		case eTextureWrap_ClampToBorder: return GL_CLAMP_TO_BORDER;
-		default: return GL_REPEAT;
-		}
-	}
-
 
 	//-----------------------------------------------------------------------
 
