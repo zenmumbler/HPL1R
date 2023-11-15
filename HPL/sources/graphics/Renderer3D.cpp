@@ -422,7 +422,7 @@ namespace hpl {
 
 		////////////////////////////
 		//Render debug
-		RenderDebug(apCamera);
+//		RenderDebug(apCamera);
 //		RenderPhysicsDebug(apWorld, apCamera);
 
 		mpLowLevelGraphics->SetDepthWriteActive(true);

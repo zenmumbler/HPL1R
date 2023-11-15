@@ -1157,8 +1157,8 @@ void cMapHandler::OnPostSceneDraw()
 	RenderItemEffect();
 
 
-	auto pCam = mpScene->GetCamera();
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetMatrix(eMatrix_ModelView, pCam->GetViewMatrix());
+	// auto pCam = mpScene->GetCamera();
+	// mpInit->mpGame->GetGraphics()->GetLowLevel()->SetMatrix(eMatrix_ModelView, pCam->GetViewMatrix());
 
 	//mpScene->GetWorld3D()->GetPhysicsWorld()->RenderDebugGeometry(
 	//	mpInit->mpGame->GetGraphics()->GetLowLevel(),cColor(1,0.5f,1));

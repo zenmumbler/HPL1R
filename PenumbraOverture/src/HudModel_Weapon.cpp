@@ -410,6 +410,7 @@ void cHudModel_WeaponMelee::DestroyExtraEntities()
 
 void cHudModel_WeaponMelee::PostSceneDraw()
 {
+/*
 	if(mbDrawDebug==false) return;
 
 	auto pCamera = mpInit->mpGame->GetScene()->GetCamera();
@@ -429,13 +430,13 @@ void cHudModel_WeaponMelee::PostSceneDraw()
 	mtxDamage.SetTranslation(vCenter);
 
 	bool bCollide=false;
-	/*{
-		cWorld3D *pWorld = mpInit->mpGame->GetScene()->GetWorld3D();
-		iPhysicsWorld *pPhysicsWorld = pWorld->GetPhysicsWorld();
-		
-		bCollide = pPhysicsWorld->CheckShapeWorldCollision(NULL,mvAttacks[mlCurrentAttack].mpCollider,
-															mtxDamage,NULL,false,false,NULL,false);
-	}*/
+	{
+	//	cWorld3D *pWorld = mpInit->mpGame->GetScene()->GetWorld3D();
+	//	iPhysicsWorld *pPhysicsWorld = pWorld->GetPhysicsWorld();
+
+	//	bCollide = pPhysicsWorld->CheckShapeWorldCollision(NULL,mvAttacks[mlCurrentAttack].mpCollider,
+	//														mtxDamage,NULL,false,false,NULL,false);
+	}
 
 
 	
@@ -451,6 +452,7 @@ void cHudModel_WeaponMelee::PostSceneDraw()
 	else
 		mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(vSize*0.5f,vSize*-0.5f,
 																cColor(1,0,1,1));
+*/
 }
 
 //-----------------------------------------------------------------------

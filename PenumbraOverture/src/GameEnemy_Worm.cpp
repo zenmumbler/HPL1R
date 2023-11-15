@@ -426,6 +426,7 @@ void cGameEnemyState_Worm_Hunt::OnDraw()
 
 void cGameEnemyState_Worm_Hunt::OnPostSceneDraw()
 {
+/*
 	auto pCamera = mpInit->mpGame->GetScene()->GetCamera();
 
 	cVector3f vPos =	mpMover->GetCharBody()->GetPosition() +
@@ -444,6 +445,7 @@ void cGameEnemyState_Worm_Hunt::OnPostSceneDraw()
 	cVector3f vSize = mpEnemyWorm->GetAttackShape()->GetSize();
 	mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(vSize*0.5f,vSize*-0.5f,
 		cColor(1,0,1,1));
+*/
 }
 
 //-----------------------------------------------------------------------

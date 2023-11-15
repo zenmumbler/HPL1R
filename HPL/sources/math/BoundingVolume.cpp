@@ -383,6 +383,7 @@ namespace hpl {
 
 	void cBoundingVolume::DrawEdges(const cVector3f& avLightPos,float afLightRange, iLowLevelGraphics *apLowLevelGraphics)
 	{
+	/*
 		cShadowVolumeBV *pVolume = GetShadowVolume(avLightPos, afLightRange, false);
 
 		apLowLevelGraphics->SetBlendActive(true);
@@ -416,6 +417,7 @@ namespace hpl {
 
 		apLowLevelGraphics->SetBlendActive(false);
 		apLowLevelGraphics->SetDepthWriteActive(true);
+	*/
 	}
 
 	//-----------------------------------------------------------------------

@@ -497,6 +497,7 @@ void cGameEnemyState_Spider_Attack::OnAnimationOver(const tString &asName)
 
 void cGameEnemyState_Spider_Attack::OnPostSceneDraw()
 {
+/*
 	auto pCamera = mpInit->mpGame->GetScene()->GetCamera();
 	
 	cVector3f vPos =	mpMover->GetCharBody()->GetPosition() +
@@ -515,6 +516,7 @@ void cGameEnemyState_Spider_Attack::OnPostSceneDraw()
 	cVector3f vSize = mpEnemySpider->GetAttackShape()->GetSize();
 	mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(vSize*0.5f,vSize*-0.5f,
 		cColor(1,0,1,1));
+*/
 }
 
 //-----------------------------------------------------------------------

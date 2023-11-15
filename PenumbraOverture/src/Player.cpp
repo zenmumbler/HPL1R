@@ -1559,6 +1559,7 @@ void cPlayer::OnDraw()
 
 void cPlayer::OnPostSceneDraw()
 {
+/*
 	auto pCam = mpScene->GetCamera();
 	iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
 	pLowGfx->SetMatrix(eMatrix_ModelView, pCam->GetViewMatrix());
@@ -1566,13 +1567,14 @@ void cPlayer::OnPostSceneDraw()
 	pLowGfx->SetTexture(0,NULL);
 	pLowGfx->SetBlendActive(false);
 
-	/*mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawLine(mvLineStart,mvLineEnd,cColor(1,1,1,1));
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawSphere(mvLineStart,0.1f,cColor(1,0,1,1));
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawSphere(mvLineEnd,0.1f,cColor(1,0,1,1));*/
-	
+	//mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawLine(mvLineStart,mvLineEnd,cColor(1,1,1,1));
+	//mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawSphere(mvLineStart,0.1f,cColor(1,0,1,1));
+	//mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawSphere(mvLineEnd,0.1f,cColor(1,0,1,1));
+
 	mpFlashLight->OnPostSceneDraw();
 
 	mvStates[mState]->OnPostSceneDraw();
+*/
 }
 
 //////////////////////////////////////////////////////////////////////////

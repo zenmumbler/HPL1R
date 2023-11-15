@@ -1170,6 +1170,7 @@ void cGameEnemyState_Dog_Attack::OnAnimationOver(const tString &asName)
 
 void cGameEnemyState_Dog_Attack::OnPostSceneDraw()
 {
+/*
 	auto pCamera = mpInit->mpGame->GetScene()->GetCamera();
 	
 	cVector3f vPos =	mpMover->GetCharBody()->GetPosition() +
@@ -1188,6 +1189,7 @@ void cGameEnemyState_Dog_Attack::OnPostSceneDraw()
 	cVector3f vSize = mpEnemyDog->GetAttackShape()->GetSize();
 	mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(vSize*0.5f,vSize*-0.5f,
 		cColor(1,0,1,1));
+*/
 }
 
 //-----------------------------------------------------------------------
@@ -1577,6 +1579,7 @@ void cGameEnemyState_Dog_BreakDoor::OnAnimationOver(const tString &asName)
 
 void cGameEnemyState_Dog_BreakDoor::OnPostSceneDraw()
 {
+/*
 	auto pCamera = mpInit->mpGame->GetScene()->GetCamera();
 
 	cVector3f vPos =	mpMover->GetCharBody()->GetPosition() +
@@ -1595,6 +1598,7 @@ void cGameEnemyState_Dog_BreakDoor::OnPostSceneDraw()
 	cVector3f vSize = mpEnemyDog->GetBreakDoorShape()->GetSize();
 	mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(vSize*0.5f,vSize*-0.5f,
 		cColor(1,0,1,1));
+*/
 }
 
 //-----------------------------------------------------------------------
