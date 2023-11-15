@@ -22,6 +22,7 @@
 #include "StdAfx.h"
 
 #include "GameTypes.h"
+#include "GraphicsHelper.h"
 
 using namespace hpl;
 
@@ -35,11 +36,10 @@ class cIntroImage
 {
 public:
 	cIntroImage();
-	~cIntroImage();
 
 	void Update(float afTimeStep);
 
-	void OnDraw();
+	void OnDraw(cGraphicsDrawer *drawer);
 
 	void FadeBrightnessTo(float afDarkness,float afTime);
 	void FadeAlphaTo(float afDarkness,float afTime);
@@ -71,12 +71,7 @@ public:
 	float mfAlphaStep;
 	float mfFinalAlpha;
 
-
-	tVertexVec mvVtxVec;
-
-	cInit *mpInit;
-	iLowLevelGraphics *mpLowGfx;
-	cTextureManager *mpTexManager;
+	int index;
 };
 
 
@@ -86,7 +81,6 @@ class cIntroStory : public iUpdateable
 {
 public:
 	cIntroStory(cInit *apInit);
-	~cIntroStory();
 
 	void Update(float afTimeStep);
 	void Reset();
@@ -111,7 +105,6 @@ private:
 	bool mbSearchNext;
 
 	cInit *mpInit;
-	iLowLevelGraphics *mpLowGfx;
 	cTextureManager *mpTexManager;
 	cSoundHandler *mpSoundHandler;
 

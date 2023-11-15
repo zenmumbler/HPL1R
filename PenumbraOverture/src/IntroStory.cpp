@@ -73,21 +73,11 @@
 cIntroImage::cIntroImage()
 {
 	mvCameraPosition = cVector3f(0,0,1);
-
 	mpTexture = NULL;
-
-	mvVtxVec.resize(4);
-
 	mlMaxPrevPos = 35;
-
+	index = 0;
 	Reset();
 }
-
-cIntroImage::~cIntroImage()
-{
-
-}
-
 
 //-----------------------------------------------------------------------
 
@@ -163,7 +153,7 @@ void cIntroImage::Reset()
 
 	mvPosDistMul = 1;
 
-	mlstPrevPos .clear();
+	mlstPrevPos.clear();
 }
 
 //-----------------------------------------------------------------------
@@ -238,7 +228,7 @@ void cIntroImage::Update(float afTimeStep)
 
 //-----------------------------------------------------------------------
 
-void cIntroImage::OnDraw()
+void cIntroImage::OnDraw(cGraphicsDrawer *drawer)
 {
 	cVector3f vCamDrawPos;
 	
@@ -260,58 +250,21 @@ void cIntroImage::OnDraw()
 
 	/////////////////////////////////
 	// Set up position variables
-	cVector3f vPos =	cVector3f(-vCamDrawPos.x, -vCamDrawPos.y,0); 
-						
+	cVector3f vPos =	cVector3f(-vCamDrawPos.x, -vCamDrawPos.y, 0);
+
 	float fAlpha = mfAlpha;
 	float fBrightness = cMath::Min(1.0f,mfBrightness);
 	cVector2f vSize(1024, 784);
 	vSize  = vSize * (1/vCamDrawPos.z);
-	vPos = vPos * (1/vCamDrawPos.z) + cVector3f(400, 300,0);;
-	
-	///////////////////////////
-	//Set up vertexes
-	mvVtxVec[0] = cVertex(vPos + cVector3f(0,0,0),
-								cVector2f(0,0),cColor(fBrightness,fAlpha) );
-	
-	mvVtxVec[1] = cVertex(vPos + cVector3f(vSize.x,0,40),
-								cVector2f(1,0),cColor(fBrightness,fAlpha));
-	
-	mvVtxVec[2] = cVertex(vPos + cVector3f(vSize.x,vSize.y,40),
-								cVector2f(1,1),cColor(fBrightness,fAlpha));
-	
-	mvVtxVec[3] = cVertex(vPos +  cVector3f(0,vSize.y,40),
-									cVector2f(0,1),cColor(fBrightness,fAlpha));
+	vPos = vPos * (1/vCamDrawPos.z) + cVector3f(400, 300, 0);
 
 	//////////////////////////
-	///Draw
-	mpLowGfx->SetTexture(0, mpTexture);
-	mpLowGfx->SetBlendActive(true);
-	mpLowGfx->SetBlendFunc(eBlendFunc_SrcAlpha,eBlendFunc_OneMinusSrcAlpha);
-
-	mpLowGfx->DrawQuad(mvVtxVec);
-
-	if(mfBrightness>1)
-	{
-		float fWhite = mfBrightness -1;
-
-		mvVtxVec[0] = cVertex(cVector3f(0,0,0),cVector2f(0,0),cColor(fWhite,1) );
-		mvVtxVec[1] = cVertex(cVector3f(800,0,40),cVector2f(1,0),cColor(fWhite,1));
-		mvVtxVec[2] = cVertex(cVector3f(800,600,40),	cVector2f(1,1),cColor(fWhite,1));
-		mvVtxVec[3] = cVertex(cVector3f(0,600,40),cVector2f(0,1),cColor(fWhite,1));
-		
-		mpLowGfx->SetTexture(0, NULL);
-
-		mpLowGfx->SetBlendFunc(eBlendFunc_One,eBlendFunc_One);
-
-		mpLowGfx->DrawQuad(mvVtxVec);
-
-	}
-	mpLowGfx->SetBlendActive(false);
-
+	// Draw
+	vPos.z = 10 + index;
+	drawer->DrawTexture(mpTexture, vPos, vSize, cColor(fBrightness,fAlpha));
 }
 
 //-----------------------------------------------------------------------
-
 
 //////////////////////////////////////////////////////////////////////////
 // CONSTRUCTORS
@@ -322,15 +275,12 @@ void cIntroImage::OnDraw()
 cIntroStory::cIntroStory(cInit *apInit)  : iUpdateable("StoryIntro")
 {
 	mpInit = apInit;
-	mpLowGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
 	mpTexManager = mpInit->mpGame->GetResources()->GetTextureManager();
 	mpSoundHandler = mpInit->mpGame->GetSound()->GetSoundHandler();
 	
 	for(int i=0; i<INTRO_IMAGE_NUM; ++i)
 	{
-		mvImages[i].mpLowGfx = mpLowGfx;
-		mvImages[i].mpTexManager = mpTexManager;
-		mvImages[i].mpInit	= mpInit;
+		mvImages[i].index = i;
 		mvImages[i].mpTexture = NULL;
 	}
 
@@ -342,13 +292,6 @@ cIntroStory::cIntroStory(cInit *apInit)  : iUpdateable("StoryIntro")
 	mfVoiceVol = 0.9f;
 
 	Reset();
-}
-
-//-----------------------------------------------------------------------
-
-cIntroStory::~cIntroStory(void)
-{
-	
 }
 
 //-----------------------------------------------------------------------
@@ -462,30 +405,23 @@ void cIntroStory::Reset()
 
 void cIntroStory::OnDraw()
 {
-	cVector3f vPos = cVector3f(15,526,10);
-	cVector2f vSize = 16;
-
 	if(msCentreText != _W(""))
 	{
 		float fAlpha = mvImages[5].mfBrightness;
-		mpFont->Draw(	cVector3f(400,300,2),18,cColor(1,1,1,fAlpha),
-						eFontAlign_Center,msCentreText.c_str());
-		mpFont->Draw(	cVector3f(400+1,300+1,1),18,cColor(0,fAlpha),
-						eFontAlign_Center,msCentreText.c_str());
-		mpFont->Draw(	cVector3f(400-1,300-1,1),18,cColor(0,fAlpha),
-						eFontAlign_Center,msCentreText.c_str());
-		mpFont->Draw(	cVector3f(400-1,300+1,1),18,cColor(0,fAlpha),
-			eFontAlign_Center,msCentreText.c_str());
-		mpFont->Draw(	cVector3f(400+1,300-1,1),18,cColor(0,fAlpha),
-			eFontAlign_Center,msCentreText.c_str());
+		auto text = msCentreText.c_str();
+		cColor fillColor{1,fAlpha};
+		cColor edgeColor{0,fAlpha};
+
+		mpFont->Draw({400,  300,   32}, 18, fillColor, eFontAlign_Center, text);
+		mpFont->Draw({400+1,300+1, 30}, 18, edgeColor, eFontAlign_Center, text);
+		mpFont->Draw({400-1,300-1, 30}, 18, edgeColor, eFontAlign_Center, text);
+		mpFont->Draw({400-1,300+1, 30}, 18, edgeColor, eFontAlign_Center, text);
+		mpFont->Draw({400+1,300-1, 30}, 18, edgeColor, eFontAlign_Center, text);
 	}
 	
-	//mpFont->DrawWordWrap(vPos + cVector3f(3,3,-1),760,21,vSize,cColor(1,0),eFontAlign_Left,msMessage);
-	//mpFont->DrawWordWrap(vPos + cVector3f(-2,-2,-1),760,21,vSize,cColor(1,0),eFontAlign_Left,msMessage);
-
 	if(mpInit->mbSubtitles)
 	{
-		mpFont->DrawWordWrap(vPos, 760,18,vSize,cColor(1,1,1,1),eFontAlign_Left,msMessage);
+		mpFont->DrawWordWrap({15,526, 30}, 760, 18, {16,16}, cColor::White, eFontAlign_Left, msMessage);
 	}
 }
 
@@ -493,24 +429,16 @@ void cIntroStory::OnDraw()
 
 void cIntroStory::OnPostSceneDraw()
 {
-	mpLowGfx->SetClearColor(cColor(0,0,0,0));
-	mpLowGfx->ClearScreen();
+	mpInit->mpGraphicsHelper->ClearScreen();
+	auto drawer = mpInit->mpGame->GetGraphics()->GetDrawer();
 
-	mpLowGfx->SetDepthTestActive(false);
-	mpLowGfx->PushMatrix(eMatrix_ModelView);
-	mpLowGfx->SetIdentityMatrix(eMatrix_ModelView);
-	mpLowGfx->SetOrthoProjection(mpLowGfx->GetVirtualSize(),-1000,1000);
-	
 	for(int i=0; i< INTRO_IMAGE_NUM; ++i)
 	{
-		if(mvImages[i].mbActive) mvImages[i].OnDraw();
+		if(mvImages[i].mbActive) mvImages[i].OnDraw(drawer);
 	}
 
-	auto drawer = mpInit->mpGame->GetGraphics()->GetDrawer();
-	drawer->DrawTexture(mpBlackTexture, {0,0,140}, {800,75});
-	drawer->DrawTexture(mpBlackTexture, {0,525,140}, {800,75});
-
-	mpLowGfx->PopMatrix(eMatrix_ModelView);
+	drawer->DrawTexture(mpBlackTexture, {0,0,20}, {800,82});
+	drawer->DrawTexture(mpBlackTexture, {0,518,20}, {800,82});
 }
 
 //-----------------------------------------------------------------------
@@ -529,9 +457,6 @@ void cIntroStory::Exit()
 	
 	SetActive(false);
 
-	//mpInit->mpGame->Exit();
-	//return;
-	
 	mpInit->mpGraphicsHelper->DrawLoadingScreen("");
 
 	mpInit->mpGame->GetUpdater()->SetContainer("Default");
