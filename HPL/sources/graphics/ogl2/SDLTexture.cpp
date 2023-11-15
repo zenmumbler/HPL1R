@@ -43,8 +43,7 @@ namespace hpl {
 	{
 		mbContainsData = false;
 
-		//Cubemap does not like mipmaps
-		if(aTarget == eTextureTarget_CubeMap) mbUseMipMaps = false;
+		if(aTarget != eTextureTarget_2D) mbUseMipMaps = false;
 
 		mpGfxSDL = static_cast<cLowLevelGraphicsSDL*>(mpLowLevelGraphics);
 
@@ -152,13 +151,6 @@ namespace hpl {
 			glTexImage2D(target, 0, lChannels, bmp.GetWidth(), bmp.GetHeight(),
 				0, format, GL_UNSIGNED_BYTE, bmp.GetRawData());
 
-			//No mip maps for cubemap
-			//if(mbUseMipMaps)
-			//{
-			//	int x = gluBuild2DMipmaps(target,4,pSrc->GetWidth(), pSrc->GetHeight(),
-			//		GL_RGBA, GL_UNSIGNED_BYTE, pSrc->GetSurface()->pixels);
-			//}
-
 			mlWidth = bmp.GetWidth();
 			mlHeight = bmp.GetHeight();
 			mlBpp = lChannels * 8;
@@ -196,7 +188,6 @@ namespace hpl {
 
 			GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
 
-			glEnable(GLTarget);
 			glBindTexture(GLTarget, mvTextureHandles[0]);
 			if(mbUseMipMaps && mTarget != eTextureTarget_Rect){
 				if(mFilter == eTextureFilter_Bilinear)
@@ -210,8 +201,6 @@ namespace hpl {
 			glTexParameteri(GLTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			glTexParameteri(GLTarget,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
 			glTexParameteri(GLTarget,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-
-			glDisable(GLTarget);
 
 			mbContainsData = true;
 		}
@@ -257,28 +246,20 @@ namespace hpl {
 
 		if(mTarget == eTextureTarget_1D)
 		{
-			glTexImage1D(GLTarget, 0, lChannels, mlWidth,0,format,
-							GL_UNSIGNED_BYTE, apPixelData);
+			glTexImage1D(GLTarget, 0, lChannels, mlWidth,0,format, GL_UNSIGNED_BYTE, apPixelData);
 		}
 		else if(mTarget == eTextureTarget_2D)
 		{
-			glTexImage2D(GLTarget, 0, lChannels, mlWidth, mlHeight,
-						0, format, GL_UNSIGNED_BYTE, apPixelData);
+			glTexImage2D(GLTarget, 0, lChannels, mlWidth, mlHeight, 0, format, GL_UNSIGNED_BYTE, apPixelData);
 		}
 		else if(mTarget == eTextureTarget_3D)
 		{
-			glTexImage3D(GLTarget, 0, lChannels, avSize.x, avSize.y,avSize.z,
-				0, format, GL_UNSIGNED_BYTE, apPixelData);
+			glTexImage3D(GLTarget, 0, lChannels, avSize.x, avSize.y,avSize.z, 0, format, GL_UNSIGNED_BYTE, apPixelData);
 		}
 
-		if(mbUseMipMaps && mTarget != eTextureTarget_Rect && mTarget != eTextureTarget_3D)
+		if(mbUseMipMaps && mTarget == eTextureTarget_2D)
 		{
-			if(mTarget == eTextureTarget_1D)
-				gluBuild1DMipmaps(GLTarget,lChannels,mlWidth,
-				format, GL_UNSIGNED_BYTE, apPixelData);
-			else
-				gluBuild2DMipmaps(GLTarget,lChannels,mlWidth, mlHeight,
-				format, GL_UNSIGNED_BYTE, apPixelData);
+			gluBuild2DMipmaps(GLTarget, lChannels, mlWidth, mlHeight, format, GL_UNSIGNED_BYTE, apPixelData);
 		}
 
 		PostCreation(GLTarget);
@@ -429,7 +410,6 @@ namespace hpl {
 		{
 			GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
 
-			glEnable(GLTarget);
 			for(size_t i=0; i < mvTextureHandles.size(); ++i)
 			{
 				glBindTexture(GLTarget, mvTextureHandles[i]);
@@ -444,8 +424,6 @@ namespace hpl {
 					glTexParameteri(GLTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 				}
 			}
-
-			glDisable(GLTarget);
 		}
 	}
 
@@ -463,15 +441,12 @@ namespace hpl {
 
 		GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
 
-		glEnable(GLTarget);
 		for(size_t i=0; i < mvTextureHandles.size(); ++i)
 		{
 			glBindTexture(GLTarget, mvTextureHandles[i]);
 
 			glTexParameterf(GLTarget,GL_TEXTURE_MAX_ANISOTROPY_EXT ,mfAnisotropyDegree);
 		}
-
-		glDisable(GLTarget);
 	}
 
 	//-----------------------------------------------------------------------
@@ -482,15 +457,12 @@ namespace hpl {
 		{
 			GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
 
-			glEnable(GLTarget);
 			for(size_t i=0; i < mvTextureHandles.size(); ++i)
 			{
 				glBindTexture(GLTarget, mvTextureHandles[i]);
 
 				glTexParameteri(GLTarget,GL_TEXTURE_WRAP_S,GetGLWrap(aMode));
 			}
-
-			glDisable(GLTarget);
 		}
 	}
 
@@ -502,15 +474,11 @@ namespace hpl {
 		{
 			GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
 
-			glEnable(GLTarget);
 			for(size_t i=0; i < mvTextureHandles.size(); ++i)
 			{
 				glBindTexture(GLTarget, mvTextureHandles[i]);
-
 				glTexParameteri(GLTarget,GL_TEXTURE_WRAP_T,GetGLWrap(aMode));
 			}
-
-			glDisable(GLTarget);
 		}
 	}
 
@@ -522,15 +490,12 @@ namespace hpl {
 		{
 			GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
 
-			glEnable(GLTarget);
 			for(size_t i=0; i < mvTextureHandles.size(); ++i)
 			{
 				glBindTexture(GLTarget, mvTextureHandles[i]);
 
 				glTexParameteri(GLTarget,GL_TEXTURE_WRAP_R,GetGLWrap(aMode));
 			}
-
-			glDisable(GLTarget);
 		}
 	}
 
@@ -625,10 +590,7 @@ namespace hpl {
 	GLenum cSDLTexture::InitCreation(int alHandleIdx)
 	{
 		GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
-
-		glEnable(GLTarget);
 		glBindTexture(GLTarget, mvTextureHandles[alHandleIdx]);
-
 		return GLTarget;
 	}
 
@@ -650,8 +612,6 @@ namespace hpl {
 		glTexParameteri(aGLTarget,GL_TEXTURE_WRAP_S,GL_REPEAT);
 		glTexParameteri(aGLTarget,GL_TEXTURE_WRAP_T,GL_REPEAT);
 		glTexParameteri(aGLTarget,GL_TEXTURE_WRAP_R,GL_REPEAT);
-
-		glDisable(aGLTarget);
 
 		mbContainsData = true;
 	}

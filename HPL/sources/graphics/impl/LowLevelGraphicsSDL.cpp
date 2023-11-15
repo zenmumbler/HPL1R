@@ -223,56 +223,21 @@ namespace hpl {
 
 	void cLowLevelGraphicsSDL::SetupGL()
 	{
-		//Inits GL stuff
-		//Set Shade model and clear color.
-		glShadeModel(GL_SMOOTH);
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
-		//Depth Test setup
-		glClearDepth(1.0f);//VAlues buffer is cleared with
-		glEnable(GL_DEPTH_TEST); //enable depth testing
-		glDepthFunc(GL_LEQUAL); //function to do depth test with
-		glDisable(GL_ALPHA_TEST);
-
-		//Set best perspective correction
-		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-
-		//int lStencilBits=-1;
-		//glGetIntegerv(GL_STENCIL_BITS,&lStencilBits);
-		//Log(" Stencil bits: %d\n",lStencilBits);
-
-		//Stencil setup
+		glClearDepth(1.0f);
 		glClearStencil(0);
 
-		//Clear the screen
+		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LEQUAL);
+		glDisable(GL_ALPHA_TEST);
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-
-		//glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_REPLACE);
-
-		/////  BEGIN BATCH ARRAY STUFF ///////////////
-
-		//Enable all the vertex arrays that are used:
-		glEnableClientState(GL_VERTEX_ARRAY ); //The positions
-		glEnableClientState(GL_COLOR_ARRAY ); //The color
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY); //Tex coords
-		glDisableClientState(GL_NORMAL_ARRAY);
-		//Disable the once not used.
-		glDisableClientState(GL_INDEX_ARRAY); //color index
-		glDisableClientState(GL_EDGE_FLAG_ARRAY);
-
-		///// END BATCH ARRAY STUFF ///////////////
 
 		//Show some info
 		Log("  Max texture image units: %d\n",GetCaps(eGraphicCaps_MaxTextureImageUnits));
 		Log("  Max texture coord units: %d\n",GetCaps(eGraphicCaps_MaxTextureCoordUnits));
 
-		Log("  Anisotropic filtering: %d\n",GetCaps(eGraphicCaps_AnisotropicFiltering));
-		if(GetCaps(eGraphicCaps_AnisotropicFiltering))
+		if (GetCaps(eGraphicCaps_AnisotropicFiltering))
 			Log("  Max Anisotropic degree: %d\n",GetCaps(eGraphicCaps_MaxAnisotropicFiltering));
 	}
 	//-----------------------------------------------------------------------
