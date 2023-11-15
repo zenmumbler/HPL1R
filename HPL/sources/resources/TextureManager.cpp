@@ -53,7 +53,6 @@ namespace hpl {
 
 	cTextureManager::~cTextureManager()
 	{
-		STLMapDeleteAll(m_mapAttenuationTextures);
 		DestroyAll();
 		Log(" Destroyed all textures\n");
 	}
@@ -274,89 +273,6 @@ namespace hpl {
 
 			pTexture->Update(afTimeStep);
 		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	iTexture* cTextureManager::CreateAttenuation(const tString& asFallOffName)
-	{
-		tString sName = cString::ToLowerCase(asFallOffName);
-		tTextureAttenuationMapIt it = m_mapAttenuationTextures.find(sName);
-		if(it !=  m_mapAttenuationTextures.end()) return it->second;
-
-		tString sPath="";
-
-		if(cString::GetFileExt(asFallOffName)!="")
-		{
-			sPath = mpFileSearcher->GetFilePath(asFallOffName);
-		}
-		else
-		{
-			for(const tString& sExt : mvFileFormats)
-			{
-				tString sFileName = cString::SetFileExt(asFallOffName, sExt);
-				sPath = mpFileSearcher->GetFilePath(sFileName);
-				if (sPath!="") break;
-			}
-		}
-		if(sPath == "")
-		{
-			Log("Couldn't find falloff map file '%s'\n",asFallOffName.c_str());
-			return NULL;
-		}
-
-		auto pBmp = LoadBitmapFile(sPath);
-		if (! pBmp)
-		{
-			Log("Couldn't load bitmap '%s'\n",asFallOffName.c_str());
-			return NULL;
-		}
-
-		int lBmpChannels = pBmp->GetNumChannels();
-		int lWidth = pBmp->GetWidth();
-		unsigned char* pPixels = (unsigned char*)pBmp->GetRawData();
-
-		iTexture *pTexture = mpGraphics->GetLowLevel()->CreateTexture("Attenuation",false,eTextureType_Normal,eTextureTarget_3D);
-		int lSize=16;
-		int lAttChannels = 2;
-
-		cVector3f vCentre = ((float)lSize)/2.0f;
-		float fMaxDist = ((float)lSize)/2.0f; //radius of sphere
-
-		std::vector<unsigned char> vAttenMap;
-		vAttenMap.resize(lSize*lSize*lSize*lAttChannels);
-
-		//Log("CREATTING ATTENUTAION MAP\n");
-		for(int z=0;z<lSize;++z)
-		for(int y=0;y<lSize;++y)
-		for(int x=0;x<lSize;++x)
-		{
-			cVector3f vPos((float)x, (float)y,(float)z);
-			vPos = vPos - vCentre;
-
-			float fDist = vPos.Length();
-			if(fDist > fMaxDist) fDist = fMaxDist;
-			float fNormDist = fDist / fMaxDist;
-
-			//unsigned char val = 255 - (unsigned char)(fNormDist * 255.0f);
-			int lTexPos = (int) (fNormDist*(float)lWidth);
-			if(lTexPos>=lWidth)lTexPos = lWidth-1;
-			unsigned char val = pPixels[lTexPos*lBmpChannels];
-
-			for(int i=0; i< lAttChannels;++i)
-			{
-				vAttenMap[z*lSize*lSize*lAttChannels + y*lSize*lAttChannels + x*lAttChannels+i] = val;
-			}
-		}
-
-		pTexture->CreateFromArray(&vAttenMap[0],lAttChannels,cVector3l(16,16,16));
-		pTexture->SetWrapS(eTextureWrap_ClampToBorder);
-		pTexture->SetWrapT(eTextureWrap_ClampToBorder);
-		pTexture->SetWrapR(eTextureWrap_ClampToBorder);
-
-		m_mapAttenuationTextures.insert(tTextureAttenuationMap::value_type(sName,pTexture));
-
-		return pTexture;
 	}
 
 	//-----------------------------------------------------------------------
