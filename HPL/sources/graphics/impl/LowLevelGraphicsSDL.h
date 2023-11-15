@@ -132,19 +132,6 @@ namespace hpl {
 										VertexBufferUsageType aUsageType,
 										int alReserveVtxSize, int alReserveIdxSize) override;
 
-		void DrawQuad(const tVertexVec &avVtx) override;
-		void DrawQuad(const tVertexVec &avVtx, const cColor aCol) override;
-		void DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs) override;
-
-		//PRIMITIVES
-		void DrawLine(const cVector3f& avBegin, const cVector3f& avEnd, cColor aCol) override;
-		void DrawBoxMaxMin(const cVector3f& avMax, const cVector3f& avMin, cColor aCol) override;
-		void DrawSphere(const cVector3f& avPos, float afRadius, cColor aCol) override;
-
-		//FRAMEBUFFER
-		void CopyContextToTexure(iTexture* apTex, const cVector2l &avPos,
-			const cVector2l &avSize, const cVector2l &avTexOffset=0) override;
-
 		void StartFrame() override;
 		void FlushRendering() override;
 		void SwapBuffers() override;

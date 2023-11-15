@@ -230,26 +230,6 @@ namespace hpl {
 								VertexBufferUsageType aUsageType,
 								int alReserveVtxSize, int alReserveIdxSize)=0;
 
-		virtual void DrawQuad(const tVertexVec &avVtx)=0;
-		virtual void DrawQuad(const tVertexVec &avVtx, const cColor aCol)=0;
-		virtual void DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs)=0;
-
-		//some primitive:
-		virtual void DrawLine(const cVector3f& avBegin, const cVector3f& avEnd, cColor aCol)=0;
-		virtual void DrawBoxMaxMin(const cVector3f& avMax, const cVector3f& avMin, cColor aCol)=0;
-		virtual void DrawSphere(const cVector3f& avPos, float afRadius, cColor aCol)=0;
-
-		// GENERAL
-		/**
-		 * Copies the current frame buffer to a texture.
-		 * \param apTex The texture the framebuffer is copied to.
-		 * \param &avPos The Screenpositon
-		 * \param &avSize The size of the screen.
-		 * \param &avTexOffset The position on the texture.
-		 */
-		virtual void CopyContextToTexure(iTexture* apTex, const cVector2l &avPos,
-										const cVector2l &avSize, const cVector2l &avTexOffset=0)=0;
-
 		virtual void StartFrame()=0;
 		virtual void FlushRendering()=0;
 		virtual void SwapBuffers()=0;

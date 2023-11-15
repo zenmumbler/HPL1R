@@ -894,6 +894,7 @@ void cGameEnemy_Worm::OnUpdate(float afTimeStep)
 
 void cGameEnemy_Worm::ExtraPostSceneDraw()
 {
+/*
 	iLowLevelGraphics *pLowLevelGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
 	
 	pLowLevelGfx->SetDepthTestActive(false);
@@ -933,6 +934,7 @@ void cGameEnemy_Worm::ExtraPostSceneDraw()
 	}
 
 	pLowLevelGfx->SetDepthTestActive(true);
+*/
 }
 
 //-----------------------------------------------------------------------

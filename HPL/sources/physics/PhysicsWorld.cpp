@@ -358,10 +358,10 @@ namespace hpl {
 	{
 		for(size_t i=0; i < mvContactPoints.size(); i++)
 		{
-			apLowLevel->DrawSphere(mvContactPoints[i].mvPoint,0.2f, aPointColor);
-			apLowLevel->DrawLine(mvContactPoints[i].mvPoint,
-								mvContactPoints[i].mvNormal * mvContactPoints[i].mfDepth *0.2f,
-								aLineColor);
+			//apLowLevel->DrawSphere(mvContactPoints[i].mvPoint,0.2f, aPointColor);
+			//apLowLevel->DrawLine(mvContactPoints[i].mvPoint,
+			//					mvContactPoints[i].mvNormal * mvContactPoints[i].mfDepth *0.2f,
+			//					aLineColor);
 			//Log("Rendering\n");
 		}
 	}

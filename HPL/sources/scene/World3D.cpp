@@ -525,7 +525,7 @@ namespace hpl {
 			if(abStatic==false && pEntity->IsStatic()) continue;
 
 			cBoundingVolume *pBV = pEntity->GetBoundingVolume();
-			mpGraphics->GetLowLevel()->DrawBoxMaxMin(pBV->GetMax(), pBV->GetMin(), aColor);
+			// mpGraphics->GetLowLevel()->DrawBoxMaxMin(pBV->GetMax(), pBV->GetMin(), aColor);
 		}
 	}
 

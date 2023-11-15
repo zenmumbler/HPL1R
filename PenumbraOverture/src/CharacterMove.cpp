@@ -605,6 +605,7 @@ void cCharacterMove::OnDraw(cInit *apInit)
 
 void cCharacterMove::OnPostSceneDraw(iLowLevelGraphics *apLowLevelGfx)
 {
+/*
 	apLowLevelGfx->SetDepthTestActive(true);
 
 	for(int i=0; i<mpContainer->GetNodeNum(); ++i)
@@ -667,6 +668,7 @@ void cCharacterMove::OnPostSceneDraw(iLowLevelGraphics *apLowLevelGfx)
 	apLowLevelGfx->DrawSphere(mvTempStart,0.2f,cColor(0,1,1));
 	apLowLevelGfx->DrawSphere(mvTempEnd,0.2f,cColor(0,1,1));
 	apLowLevelGfx->DrawLine(mvTempStart, mvTempEnd,cColor(0,1,1));
+*/
 }
 
 //-----------------------------------------------------------------------

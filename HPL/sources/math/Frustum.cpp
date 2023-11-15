@@ -405,6 +405,7 @@ namespace hpl {
 
 	void cFrustum::Draw(iLowLevelGraphics *apLowLevelGraphics)
 	{
+	/*
 		apLowLevelGraphics->DrawLine(mvOrigin, mvEndPoints[0],cColor(1,1,1,1));
 		apLowLevelGraphics->DrawLine(mvOrigin, mvEndPoints[1],cColor(1,1,1,1));
 		apLowLevelGraphics->DrawLine(mvOrigin, mvEndPoints[2],cColor(1,1,1,1));
@@ -417,6 +418,7 @@ namespace hpl {
 
 		apLowLevelGraphics->DrawLine(mvEndPoints[0], mvEndPoints[2],cColor(1,1,1,1));
 		apLowLevelGraphics->DrawLine(mvEndPoints[1], mvEndPoints[3],cColor(1,1,1,1));
+	*/
 	}
 
 	//-----------------------------------------------------------------------
