@@ -148,10 +148,6 @@ namespace hpl {
 		void SetAmbientColor(const cColor& aColor){ mRenderSettings.mAmbientColor = aColor;}
 		cColor GetAmbientColor(){ return mRenderSettings.mAmbientColor;}
 
-		iTexture* GetFogSolidTexture(){ return mpFogLinearSolidTexture;}
-		iTexture* GetFogAddTexture(){ return mpFogLinearAddTexture;}
-		iTexture* GetFogAlphaTexture(){ return mpFogLinearAlphaTexture;}
-
 		void SetRefractionUsed(bool abX){ mbRefractionUsed = abX;}
 		bool GetRefractionUsed(){  return mbRefractionUsed;}
 
@@ -223,12 +219,6 @@ namespace hpl {
 		float mfRenderTime;
 
 		iGpuProgram *mpDiffuseProgram;
-		iGpuProgram *mpSolidFogProgram;
-
-		iTexture *mpFogLinearSolidTexture;
-
-		iTexture *mpFogLinearAddTexture;
-		iTexture *mpFogLinearAlphaTexture;
 
 		iGpuProgram *mpRefractProgram;
 		iGpuProgram *mpRefractSpecProgram;

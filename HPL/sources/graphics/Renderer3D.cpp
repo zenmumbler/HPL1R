@@ -125,84 +125,18 @@ namespace hpl {
 			Error("Couldn't load Diffuse shader\n");
 		}
 
-		///////////////////////////////////
-		//Fog Vertex Program Init
-		Log("    Fog\n");
-		mpSolidFogProgram = pProgramManager->CreateProgram("Fog_Solid_vp.cg", "Fog_Solid_fp.cg");
-		if(mpSolidFogProgram==NULL)
-			Error("Couldn't load 'Fog_Solid_vp.cg'\n");
-
-
-		///////////////////////////////////
-		//Fog Texture Init
-
-		Log("   Creating fog textures: ");
-		unsigned char* pFogArray = new unsigned char[256 *2];
-
-
-		//Solid
-		Log("Solid ");
-		iTexture *pTex = mpLowLevelGraphics->CreateTexture("FogLinearSolid",
-														false,eTextureType_Normal,eTextureTarget_1D);
-
-		for(int i=0; i<256; ++i) {
-			pFogArray[i*2 + 0] = 255;
-			//pFogArray[i*2 + 0] = 255 - (unsigned char)i;
-			pFogArray[i*2 + 1] = 255 - (unsigned char)i;
-		}
-
-		pTex->CreateFromArray(pFogArray,2,cVector3l(256,1,1));
-		pTex->SetWrapR(eTextureWrap_ClampToEdge);
-		pTex->SetWrapS(eTextureWrap_ClampToEdge);
-		pTex->SetWrapT(eTextureWrap_ClampToEdge);
-
-		mpFogLinearSolidTexture = pTex;
-
-		//Additive
-		Log("Additive ");
-		pTex = mpLowLevelGraphics->CreateTexture("FogLinearAdd",
-												false,eTextureType_Normal,eTextureTarget_1D);
-		for(int i=0; i<256; ++i) {
-			pFogArray[i*2 + 0] = (unsigned char)i;
-			pFogArray[i*2 + 1] = (unsigned char)i;
-		}
-
-		pTex->CreateFromArray(pFogArray,2,cVector3l(256,1,1));
-		pTex->SetWrapR(eTextureWrap_ClampToEdge); pTex->SetWrapS(eTextureWrap_ClampToEdge);
-
-		mpFogLinearAddTexture = pTex;
-
-		//Alpha
-		Log("Alpha ");
-		pTex = mpLowLevelGraphics->CreateTexture("FogLinearAlpha",
-													false,eTextureType_Normal,eTextureTarget_1D);
-		for(int i=0; i<256; ++i) {
-			pFogArray[i*2 + 0] = 255;
-			pFogArray[i*2 + 1] = (unsigned char)i;
-		}
-
-		pTex->CreateFromArray(pFogArray,2,cVector3l(256,1,1));
-		pTex->SetWrapR(eTextureWrap_ClampToEdge); pTex->SetWrapS(eTextureWrap_ClampToEdge);
-
-		mpFogLinearAlphaTexture = pTex;
-
-		delete[] pFogArray;
-
-		Log("\n");
-
 		/////////////////////////////////////////////
 		//Create Refraction programs
 		mbRefractionAvailable = true;
 
-		mpRefractProgram = pProgramManager->CreateProgram("refract_vp.cg", "refract_fp.cg");
-		mpRefractSpecProgram = pProgramManager->CreateProgram("refract_vp.cg", "refract_special_fp.cg");
+		mpRefractProgram = NULL; // pProgramManager->CreateProgram("refract_vp.cg", "refract_fp.cg");
+		mpRefractSpecProgram = NULL; // pProgramManager->CreateProgram("refract_vp.cg", "refract_special_fp.cg");
 
 		if(mpRefractProgram==NULL || mpRefractSpecProgram==NULL)
 		{
 			mbRefractionAvailable = false;
 			Log("   Refraction will not be supported!\n");
 		}
-
 
 		/////////////////////////////////////////////
 		//Create sky box graphics.
@@ -223,8 +157,6 @@ namespace hpl {
 
 		if(mpDiffuseProgram) mpResources->GetGpuProgramManager()->Destroy(mpDiffuseProgram);
 
-		if(mpSolidFogProgram)mpResources->GetGpuProgramManager()->Destroy(mpSolidFogProgram);
-
 		if(mpRefractProgram)mpResources->GetGpuProgramManager()->Destroy(mpRefractProgram);
 		if(mpRefractSpecProgram)mpResources->GetGpuProgramManager()->Destroy(mpRefractSpecProgram);
 
@@ -234,10 +166,6 @@ namespace hpl {
 		{
 			mpResources->GetTextureManager()->Destroy(mpSkyBoxTexture);
 		}
-
-		if(mpFogLinearSolidTexture) delete mpFogLinearSolidTexture;
-		if(mpFogLinearAddTexture) delete mpFogLinearAddTexture;
-		if(mpFogLinearAlphaTexture) delete mpFogLinearAlphaTexture;
 	}
 
 	//-----------------------------------------------------------------------
@@ -474,14 +402,12 @@ namespace hpl {
 
 	void cRenderer3D::SetFogActive(bool abX)
 	{
-		if(mpSolidFogProgram)
-			mRenderSettings.mbFogActive = abX;
+		mRenderSettings.mbFogActive = abX;
 	}
 	void cRenderer3D::SetFogStart(float afX)
 	{
 		mRenderSettings.mfFogStart = afX;
 	}
-
 	void cRenderer3D::SetFogEnd(float afX)
 	{
 		mRenderSettings.mfFogEnd = afX;
