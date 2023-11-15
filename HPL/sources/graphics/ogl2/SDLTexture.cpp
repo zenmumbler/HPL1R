@@ -37,9 +37,8 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cSDLTexture::cSDLTexture(const tString &asName, iLowLevelGraphics* apLowLevelGraphics,
-								eTextureType aType, bool abUseMipMaps, eTextureTarget aTarget,
-								bool abCompress)
-	: iTexture(asName,"OGL",apLowLevelGraphics,aType,abUseMipMaps, aTarget, abCompress)
+								bool abUseMipMaps, eTextureTarget aTarget)
+	: iTexture(asName, apLowLevelGraphics, abUseMipMaps, aTarget)
 	{
 		mbContainsData = false;
 
@@ -113,7 +112,7 @@ namespace hpl {
 
 	bool cSDLTexture::CreateCubeFromBitmapVec(const std::vector<Bitmap>& bitmaps)
 	{
-		if(mType == eTextureType_RenderTarget || mTarget != eTextureTarget_CubeMap)
+		if (mTarget != eTextureTarget_CubeMap)
 		{
 			return false;
 		}
@@ -162,52 +161,6 @@ namespace hpl {
 		}
 
 		PostCreation(GLTarget);
-
-		return true;
-	}
-
-
-	//-----------------------------------------------------------------------
-
-	bool cSDLTexture::Create(unsigned int alWidth, unsigned int alHeight, cColor aCol)
-	{
-		//Generate handles
-		mvTextureHandles.resize(1);
-		glGenTextures(1,(GLuint *)&mvTextureHandles[0]);
-
-
-		if(mType == eTextureType_RenderTarget)
-		{
-			mlWidth = alWidth;
-			mlHeight = alHeight;
-
-			if((!cMath::IsPow2(mlHeight) || !cMath::IsPow2(mlWidth)) && mTarget != eTextureTarget_Rect)
-			{
-				Warning("Texture '%s' does not have a pow2 size!\n",msName.c_str());
-			}
-
-			GLenum GLTarget = mpGfxSDL->GetGLTextureTargetEnum(mTarget);
-
-			glBindTexture(GLTarget, mvTextureHandles[0]);
-			if(mbUseMipMaps && mTarget != eTextureTarget_Rect){
-				if(mFilter == eTextureFilter_Bilinear)
-					glTexParameteri(GLTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
-				else
-					glTexParameteri(GLTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-			}
-			else{
-				glTexParameteri(GLTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			}
-			glTexParameteri(GLTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			glTexParameteri(GLTarget,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
-			glTexParameteri(GLTarget,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
-
-			mbContainsData = true;
-		}
-		else
-		{
-			return false;
-		}
 
 		return true;
 	}
@@ -524,19 +477,6 @@ namespace hpl {
 
 	bool cSDLTexture::CreateFromBitmapToHandle(const Bitmap &bmp, int alHandleIdx)
 	{
-		if(mType == eTextureType_RenderTarget)
-		{
-			Error("Rendertarget cannot be created from bitmap\n");
-			return false;
-		}
-
-		//For some reason checking for ARB texture is not working on radeon cards.
-		/*if(mTarget == eTextureTarget_Rect && !GLEE_ARB_texture_rectangle)
-		{
-		Error("Rectangle texture target not supported\n");
-		return false;
-		}*/
-
 		GLenum GLTarget = InitCreation(alHandleIdx);
 
 		mlWidth = bmp.GetWidth();

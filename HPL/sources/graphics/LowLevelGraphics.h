@@ -162,7 +162,7 @@ namespace hpl {
 		virtual void SetVsyncActive(bool abX)=0;
 
 		// RESOURCES
-		virtual iTexture* CreateTexture(const tString &asName, bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)=0;
+		virtual iTexture* CreateTexture(const tString &asName, bool abUseMipMaps, eTextureTarget aTarget)=0;
 		virtual iGpuProgram* CreateGpuProgram(const tString& asName)=0;
 		virtual iVertexBuffer* CreateVertexBuffer(VertexAttributes aFlags, VertexBufferPrimitiveType aDrawType,
 								VertexBufferUsageType aUsageType,

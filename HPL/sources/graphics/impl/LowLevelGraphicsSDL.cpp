@@ -346,9 +346,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cLowLevelGraphicsSDL::CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget)
+	iTexture* cLowLevelGraphicsSDL::CreateTexture(const tString &asName,bool abUseMipMaps, eTextureTarget aTarget)
 	{
-		return new cSDLTexture(asName, this, aType, abUseMipMaps, aTarget);
+		return new cSDLTexture(asName, this, abUseMipMaps, aTarget);
 	}
 
 	//-----------------------------------------------------------------------
@@ -363,32 +363,19 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::SetTexture(unsigned int alUnit,iTexture* apTex)
+	void cLowLevelGraphicsSDL::SetTexture(unsigned int alUnit, iTexture* apTex)
 	{
 		if(apTex == mpCurrentTexture[alUnit]) return;
 
-		GLenum NewTarget=0;
-		if(apTex)
-			NewTarget = GetGLTextureTargetEnum(apTex->GetTarget());
-		GLenum LastTarget=0;
-		if(mpCurrentTexture[alUnit])
-			LastTarget = GetGLTextureTargetEnum(mpCurrentTexture[alUnit]->GetTarget());
-
 		glActiveTexture(GL_TEXTURE0 + alUnit);
 
-		//If the current texture in this unit is a render target, unbind it.
-		if(mpCurrentTexture[alUnit]){
-			if(mpCurrentTexture[alUnit]->GetTextureType() == eTextureType_RenderTarget)
-			{
-				cSDLTexture *pSDLTex = static_cast<cSDLTexture *> (mpCurrentTexture[alUnit]);
-
-				glBindTexture(LastTarget, pSDLTex->GetTextureHandle());
-			}
-		}
-
 		if (apTex != NULL) {
-			cSDLTexture *pSDLTex = static_cast<cSDLTexture*> (apTex);
-			glBindTexture(NewTarget, pSDLTex->GetTextureHandle());
+			GLenum target = GetGLTextureTargetEnum(apTex->GetTarget());
+			cSDLTexture *pSDLTex = static_cast<cSDLTexture*>(apTex);
+			glBindTexture(target, pSDLTex->GetTextureHandle());
+		}
+		else {
+			glBindTexture(GL_TEXTURE_2D, 0); // use arbitrary target
 		}
 
 		mpCurrentTexture[alUnit] = apTex;

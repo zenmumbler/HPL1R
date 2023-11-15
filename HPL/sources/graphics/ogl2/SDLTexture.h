@@ -36,15 +36,13 @@ namespace hpl {
 	{
 	public:
 		cSDLTexture(const tString &asName, iLowLevelGraphics* apLowLevelGraphics,
-					eTextureType aType, bool abUseMipMaps, eTextureTarget aTarget,
-					bool abCompress=false);
+					bool abUseMipMaps, eTextureTarget aTarget);
 		~cSDLTexture();
 
 		bool CreateFromBitmap(const Bitmap &bmp) override;
 
 		bool CreateAnimFromBitmapVec(const std::vector<Bitmap>& bitmaps) override;
 		bool CreateCubeFromBitmapVec(const std::vector<Bitmap>& bitmaps) override;
-		bool Create(unsigned int alWidth, unsigned int alHeight, cColor aCol) override;
 
 		bool CreateFromArray(unsigned char *apPixelData, int alChannels, const cVector3l &avSize) override;
 

@@ -296,7 +296,6 @@ namespace hpl {
 			eTextureTarget target = GetTarget(cString::ToString(pTexChild->Attribute("Type"),""));
 			tString sFile = cString::ToString(pTexChild->Attribute("File"),"");
 			bool bMipMaps = cString::ToBool(pTexChild->Attribute("Mipmaps"),true);
-			bool bCompress = cString::ToBool(pTexChild->Attribute("Compress"),false);
 			eTextureWrap wrap = GetWrap(cString::ToString(pTexChild->Attribute("Wrap"),""));
 
 			eTextureAnimMode animMode = GetAnimMode(cString::ToString(pTexChild->Attribute("AnimMode"),"None"));
@@ -309,29 +308,21 @@ namespace hpl {
 
 			if(animMode != eTextureAnimMode_None)
 			{
-				pTex = mpResources->GetTextureManager()->CreateAnim2D(sFile,bMipMaps,bCompress,
-																		eTextureType_Normal,
-																		mlTextureSizeLevel);
+				pTex = mpResources->GetTextureManager()->CreateAnim2D(sFile, bMipMaps);
 			}
 			else
 			{
 				if(target == eTextureTarget_2D)
 				{
-					pTex = mpResources->GetTextureManager()->Create2D(sFile,bMipMaps,bCompress,
-																		eTextureType_Normal,
-																		mlTextureSizeLevel);
+					pTex = mpResources->GetTextureManager()->Create2D(sFile, bMipMaps);
 				}
 				else if(target == eTextureTarget_1D)
 				{
-					pTex = mpResources->GetTextureManager()->Create1D(sFile,bMipMaps,bCompress,
-																			eTextureType_Normal,
-																			mlTextureSizeLevel);
+					pTex = mpResources->GetTextureManager()->Create1D(sFile, bMipMaps);
 				}
 				else if(eTextureTarget_CubeMap)
 				{
-					pTex = mpResources->GetTextureManager()->CreateCubeMap(sFile,bMipMaps,bCompress,
-																			eTextureType_Normal,
-																			mlTextureSizeLevel);
+					pTex = mpResources->GetTextureManager()->CreateCubeMap(sFile, bMipMaps);
 				}
 			}
 

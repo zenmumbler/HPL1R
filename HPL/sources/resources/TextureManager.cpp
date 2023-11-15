@@ -65,24 +65,21 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cTextureManager::Create1D(const tString& asName,bool abUseMipMaps, bool abCompress,
-									eTextureType aType, unsigned int alTextureSizeLevel)
+	iTexture* cTextureManager::Create1D(const tString& asName,bool abUseMipMaps)
 	{
-		return CreateFlatTexture(asName,abUseMipMaps,abCompress,aType, eTextureTarget_1D,alTextureSizeLevel);
+		return CreateFlatTexture(asName, abUseMipMaps, eTextureTarget_1D);
 	}
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cTextureManager::Create2D(const tString& asName,bool abUseMipMaps,bool abCompress,
-									eTextureType aType, unsigned int alTextureSizeLevel, eTextureTarget aTarget)
+	iTexture* cTextureManager::Create2D(const tString& asName, bool abUseMipMaps, eTextureTarget aTarget)
 	{
-		return CreateFlatTexture(asName,abUseMipMaps,abCompress,aType, aTarget,alTextureSizeLevel);
+		return CreateFlatTexture(asName, abUseMipMaps, aTarget);
 	}
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cTextureManager::CreateAnim2D(const tString& asName,bool abUseMipMaps, bool abCompress,
-									eTextureType aType, unsigned int alTextureSizeLevel)
+	iTexture* cTextureManager::CreateAnim2D(const tString& asName,bool abUseMipMaps)
 	{
 		BeginLoad(asName);
 
@@ -141,10 +138,7 @@ namespace hpl {
 			}
 
 			//Create the animated texture
-			pTexture = mpGraphics->GetLowLevel()->CreateTexture(asName,abUseMipMaps,aType,
-															eTextureTarget_2D);
-
-			pTexture->SetSizeLevel(alTextureSizeLevel);
+			pTexture = mpGraphics->GetLowLevel()->CreateTexture(asName, abUseMipMaps, eTextureTarget_2D);
 
 			if(pTexture->CreateAnimFromBitmapVec(vBitmaps)==false)
 			{
@@ -166,9 +160,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cTextureManager::CreateCubeMap(const tString& asPathName,bool abUseMipMaps,
-											bool abCompress, eTextureType aType,
-											unsigned int alTextureSizeLevel)
+	iTexture* cTextureManager::CreateCubeMap(const tString& asPathName, bool abUseMipMaps)
 	{
 		tString sName = cString::SetFileExt(asPathName,"");
 
@@ -216,8 +208,7 @@ namespace hpl {
 			}
 
 			//Create the cubemap
-			pTexture = mpGraphics->GetLowLevel()->CreateTexture(sName, abUseMipMaps, aType, eTextureTarget_CubeMap);
-			pTexture->SetSizeLevel(alTextureSizeLevel);
+			pTexture = mpGraphics->GetLowLevel()->CreateTexture(sName, abUseMipMaps, eTextureTarget_CubeMap);
 
 			if (pTexture->CreateCubeFromBitmapVec(vBitmaps)==false)
 			{
@@ -283,9 +274,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cTextureManager::CreateFlatTexture(const tString& asName,bool abUseMipMaps,
-										bool abCompress, eTextureType aType, eTextureTarget aTarget,
-										unsigned int alTextureSizeLevel)
+	iTexture* cTextureManager::CreateFlatTexture(const tString& asName,bool abUseMipMaps, eTextureTarget aTarget)
 	{
 		tString sPath;
 		iTexture* pTexture;
@@ -306,9 +295,7 @@ namespace hpl {
 			}
 
 			//Create the texture and load from bitmap
-			pTexture = mpGraphics->GetLowLevel()->CreateTexture(asName,abUseMipMaps,aType,
-																aTarget);
-			pTexture->SetSizeLevel(alTextureSizeLevel);
+			pTexture = mpGraphics->GetLowLevel()->CreateTexture(asName, abUseMipMaps, aTarget);
 			if(pTexture->CreateFromBitmap(*pBmp)==false)
 			{
 				delete pTexture;

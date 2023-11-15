@@ -64,7 +64,7 @@ namespace hpl {
 		void SetVirtualSize(cVector2f avSize) override;
 
 		// RESOURCES
-		iTexture* CreateTexture(const tString &asName,bool abUseMipMaps, eTextureType aType, eTextureTarget aTarget) override;
+		iTexture* CreateTexture(const tString &asName,bool abUseMipMaps, eTextureTarget aTarget) override;
 		iGpuProgram* CreateGpuProgram(const tString& asName) override;
 		iVertexBuffer* CreateVertexBuffer(VertexAttributes aFlags, VertexBufferPrimitiveType aDrawType,
 										VertexBufferUsageType aUsageType,

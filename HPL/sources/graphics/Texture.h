@@ -26,15 +26,6 @@
 
 namespace hpl {
 
-	enum eTextureType
-	{
-		eTextureType_Normal,
-		eTextureType_RenderTarget,
-		eTextureType_LastEnum
-	};
-
-	//-----------------------------------------
-
 	enum eTextureTarget
 	{
 		eTextureTarget_1D,
@@ -46,7 +37,6 @@ namespace hpl {
 	};
 
 	//-----------------------------------------
-
 
 	enum eTextureWrap
 	{
@@ -83,13 +73,11 @@ namespace hpl {
 	class iTexture : public iResourceBase
 	{
 	public:
-		iTexture(tString asName,tString asType, iLowLevelGraphics* apLowLevelGraphics,
-				eTextureType aType,bool abUseMipMaps, eTextureTarget aTarget,
-				bool abCompress=false)
+		iTexture(tString asName, iLowLevelGraphics* apLowLevelGraphics, bool abUseMipMaps, eTextureTarget aTarget)
 			: iResourceBase(asName,0),
 				mlWidth(0), mlHeight(0), mlDepth(1),
-				mType(aType), mbUseMipMaps(abUseMipMaps),
-				mpLowLevelGraphics(apLowLevelGraphics), mbCompress(abCompress),
+				mbUseMipMaps(abUseMipMaps),
+				mpLowLevelGraphics(apLowLevelGraphics),
 				mTarget(aTarget),
 				mWrapS(eTextureWrap_Repeat), mWrapT(eTextureWrap_Repeat),mWrapR(eTextureWrap_Repeat),
 				mfFrameTime(1), mAnimMode(eTextureAnimMode_Loop), mlSizeLevel(0), mvMinLevelSize(16,16),
@@ -115,17 +103,7 @@ namespace hpl {
 		 * \return
 		 */
 		virtual bool CreateCubeFromBitmapVec(const std::vector<Bitmap>& bitmaps)=0;
-		/**
-		 * Create a texture with color, works with all target types. Works with render targets.
-		 * \param alWidth
-		 * \param alHeight
-		 * \param aCol
-		 * \return
-		 */
-		virtual bool Create(unsigned int alWidth, unsigned int alHeight, cColor aCol)=0;
-
 		virtual bool CreateAnimFromBitmapVec(const std::vector<Bitmap>& bitmaps)=0;
-
 		virtual bool CreateFromArray(unsigned char *apPixelData, int alChannels, const cVector3l &avSize)=0;
 
 		virtual void Update(float afTimeStep)=0;
@@ -158,7 +136,6 @@ namespace hpl {
 		eTextureAnimMode GetAnimMode() { return mAnimMode;}
 		void SetAnimMode(eTextureAnimMode aMode) {mAnimMode = aMode;};
 
-		eTextureType GetTextureType(){ return mType; }
 		bool UsesMipMaps(){ return mbUseMipMaps; }
 		void SetMipMapUse(bool abX){mbUseMipMaps = abX;}
 		eTextureTarget GetTarget(){ return mTarget;}
@@ -181,7 +158,6 @@ namespace hpl {
 		int mlDepth;
 		int mlBpp;
 
-		eTextureType mType;
 		eTextureTarget mTarget;
 		eTextureWrap mWrapS;
 		eTextureWrap mWrapT;
@@ -190,7 +166,6 @@ namespace hpl {
 		float mfAnisotropyDegree;
 
 		bool mbUseMipMaps;
-		bool mbCompress;
 		iLowLevelGraphics* mpLowLevelGraphics;
 		float mfFrameTime;
 		eTextureAnimMode mAnimMode;
