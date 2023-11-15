@@ -287,8 +287,6 @@ namespace hpl {
 			if(mpTexture[i])
 			{
 				apLowLevel->SetTexture(i,NULL);
-				//mpLowLevelGraphics->SetTextureParam(eTextureParam_ColorOp1,eTextureOp_Color);
-				//mpLowLevelGraphics->SetTextureParam(eTextureParam_ColorFunc, eTextureFunc_Modulate);
 			}
 		}
 
@@ -542,8 +540,6 @@ namespace hpl {
 
 		mpLowLevelGraphics->SetCullMode(eCullMode_CounterClockwise);
 		mpLowLevelGraphics->SetDepthTestActive(true);
-
-//		mpLowLevelGraphics->SetMatrix(eMatrix_Projection, apCamera->GetProjectionMatrix());
 
 		mRenderSettings.mpCamera = apCamera;
 

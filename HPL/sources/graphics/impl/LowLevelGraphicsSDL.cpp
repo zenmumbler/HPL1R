@@ -201,9 +201,6 @@ namespace hpl {
 			return false;
 		}
 
-		//Check Multisample properties
-		CheckMultisampleCaps();
-
 		//Turn off cursor as default
 		ShowCursor(false);
 
@@ -220,13 +217,6 @@ namespace hpl {
 		ImGui_ImplSDL2_InitForOpenGL(mpWindow, mpGLContext);
 
 		return true;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::CheckMultisampleCaps()
-	{
-
 	}
 
 	//-----------------------------------------------------------------------
@@ -442,51 +432,6 @@ namespace hpl {
 		return pTex;
 	}
 
-
-	//-----------------------------------------------------------------------
-
-
-	void cLowLevelGraphicsSDL::PushMatrix(eMatrix aMtxType)
-	{
-		SetMatrixMode(aMtxType);
-		glPushMatrix();
-	}
-
-	//-----------------------------------------------------------------------
-
-
-	void cLowLevelGraphicsSDL::PopMatrix(eMatrix aMtxType)
-	{
-		SetMatrixMode(aMtxType);
-		glPopMatrix();
-	}
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetMatrix(eMatrix aMtxType, const cMatrixf& a_mtxA)
-	{
-		SetMatrixMode(aMtxType);
-		cMatrixf mtxTranpose = a_mtxA.GetTranspose();
-		glLoadMatrixf(mtxTranpose.v);
-	}
-
-	//-----------------------------------------------------------------------
-
-
-	void cLowLevelGraphicsSDL::SetIdentityMatrix(eMatrix aMtxType)
-	{
-		SetMatrixMode(aMtxType);
-		glLoadIdentity();
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetOrthoProjection(const cVector2f& avSize, float afMin, float afMax)
-	{
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0,avSize.x,avSize.y,0,afMin,afMax);
-	}
-
 	//-----------------------------------------------------------------------
 
 	void cLowLevelGraphicsSDL::SetTexture(unsigned int alUnit,iTexture* apTex)
@@ -572,49 +517,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelGraphicsSDL::DrawQuad(const tVertexVec &avVtx)
-	{
-		assert(avVtx.size()==4);
-
-		glBegin(GL_QUADS);
-		{
-			for(int i=0;i<4;i++){
-				glTexCoord3f(avVtx[i].tex.x,avVtx[i].tex.y,avVtx[i].tex.z);
-				glColor4f(avVtx[i].col.r,avVtx[i].col.g,avVtx[i].col.b,avVtx[i].col.a);
-				glVertex3f(avVtx[i].pos.x,avVtx[i].pos.y,avVtx[i].pos.z);
-			}
-		}
-		glEnd();
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs)
-	{
-		int lExtraUnits = (int)avExtraUvs.size()/4;
-		glBegin(GL_QUADS);
-		{
-			for(int i=0;i<4;i++)
-			{
-				glMultiTexCoord3f(GL_TEXTURE0,avVtx[i].tex.x,avVtx[i].tex.y,avVtx[i].tex.z);
-
-				for(int unit=0; unit<lExtraUnits; ++unit)
-				{
-					glMultiTexCoord3f(GL_TEXTURE0 + unit + 1,
-										avExtraUvs[unit*4 + i].x, avExtraUvs[unit*4 + i].y, avExtraUvs[unit*4 + i].z);
-				}
-
-				glColor4f(avVtx[i].col.r,avVtx[i].col.g,avVtx[i].col.b,avVtx[i].col.a);
-				glVertex3f(avVtx[i].pos.x,avVtx[i].pos.y,avVtx[i].pos.z);
-			}
-		}
-		glEnd();
-
-	}
-
-
-	//-----------------------------------------------------------------------
-
 	iOcclusionQuery* cLowLevelGraphicsSDL::CreateOcclusionQuery()
 	{
 		return new cOcclusionQueryOGL();
@@ -631,11 +533,11 @@ namespace hpl {
 
 	void cLowLevelGraphicsSDL::ClearScreen()
 	{
-		GLbitfield bitmask=0;
+		GLbitfield bitmask = 0;
 
-		if(mbClearColor)bitmask |= GL_COLOR_BUFFER_BIT;
-		if(mbClearDepth)bitmask |= GL_DEPTH_BUFFER_BIT;
-		if(mbClearStencil)bitmask |= GL_STENCIL_BUFFER_BIT;
+		if (mbClearColor)   bitmask |= GL_COLOR_BUFFER_BIT;
+		if (mbClearDepth)   bitmask |= GL_DEPTH_BUFFER_BIT;
+		if (mbClearStencil) bitmask |= GL_STENCIL_BUFFER_BIT;
 
 		glClear(bitmask);
 	}
@@ -757,6 +659,7 @@ namespace hpl {
 		else glDisable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 	}
+
 	void cLowLevelGraphicsSDL::SetCullMode(eCullMode aMode)
 	{
 		glCullFace(GL_BACK);
@@ -821,6 +724,47 @@ namespace hpl {
 			for(int i=0;i<4;i++){
 				glTexCoord3f(avVtx[i].tex.x,avVtx[i].tex.y,avVtx[i].tex.z);
 				glColor4f(aCol.r,aCol.g,aCol.b,aCol.a);
+				glVertex3f(avVtx[i].pos.x,avVtx[i].pos.y,avVtx[i].pos.z);
+			}
+		}
+		glEnd();
+	}
+
+	//-----------------------------------------------------------------------
+
+	void cLowLevelGraphicsSDL::DrawQuad(const tVertexVec &avVtx)
+	{
+		assert(avVtx.size()==4);
+
+		glBegin(GL_QUADS);
+		{
+			for(int i=0;i<4;i++){
+				glTexCoord3f(avVtx[i].tex.x,avVtx[i].tex.y,avVtx[i].tex.z);
+				glColor4f(avVtx[i].col.r,avVtx[i].col.g,avVtx[i].col.b,avVtx[i].col.a);
+				glVertex3f(avVtx[i].pos.x,avVtx[i].pos.y,avVtx[i].pos.z);
+			}
+		}
+		glEnd();
+	}
+
+	//-----------------------------------------------------------------------
+
+	void cLowLevelGraphicsSDL::DrawQuadMultiTex(const tVertexVec &avVtx,const tVector3fVec &avExtraUvs)
+	{
+		int lExtraUnits = (int)avExtraUvs.size()/4;
+		glBegin(GL_QUADS);
+		{
+			for(int i=0;i<4;i++)
+			{
+				glMultiTexCoord3f(GL_TEXTURE0,avVtx[i].tex.x,avVtx[i].tex.y,avVtx[i].tex.z);
+
+				for(int unit=0; unit<lExtraUnits; ++unit)
+				{
+					glMultiTexCoord3f(GL_TEXTURE0 + unit + 1,
+										avExtraUvs[unit*4 + i].x, avExtraUvs[unit*4 + i].y, avExtraUvs[unit*4 + i].z);
+				}
+
+				glColor4f(avVtx[i].col.r,avVtx[i].col.g,avVtx[i].col.b,avVtx[i].col.a);
 				glVertex3f(avVtx[i].pos.x,avVtx[i].pos.y,avVtx[i].pos.z);
 			}
 		}
@@ -961,7 +905,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-
 	cVector2f cLowLevelGraphicsSDL::GetScreenSize()
 	{
 		return cVector2f((float)mvScreenSize.x, (float)mvScreenSize.y);
@@ -1091,17 +1034,6 @@ namespace hpl {
 			case eStencilOp_IncrementWrap:	return GL_INCR_WRAP;
 			case eStencilOp_DecrementWrap:	return GL_DECR_WRAP;
 			default: return 0;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetMatrixMode(eMatrix mType)
-	{
-		switch(mType)
-		{
-			case eMatrix_ModelView: glMatrixMode(GL_MODELVIEW);break;
-			case eMatrix_Projection: glMatrixMode(GL_PROJECTION); break;
 		}
 	}
 

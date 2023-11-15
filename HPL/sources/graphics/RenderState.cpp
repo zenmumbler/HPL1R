@@ -402,8 +402,6 @@ namespace hpl {
 
 			if(apSettings->mbLog)Log("Setting model matrix: %s ", cMath::MatrixToChar(*mpModelMatrix));
 
-			apSettings->mpLowLevel->SetMatrix(eMatrix_ModelView, mvMatrix);
-
 			apSettings->mbMatrixWasNULL = false;
 		}
 		//NULL matrix
@@ -415,7 +413,6 @@ namespace hpl {
 			if(apSettings->mbLog)Log("Setting model matrix: Identity (NULL) ");
 
 			mvMatrix = apSettings->mpCamera->GetViewMatrix();
-			apSettings->mpLowLevel->SetMatrix(eMatrix_ModelView, mvMatrix);
 
 			apSettings->mbMatrixWasNULL = true;
 		}

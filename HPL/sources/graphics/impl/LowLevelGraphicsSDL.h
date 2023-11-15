@@ -73,16 +73,6 @@ namespace hpl {
 
 		Bitmap GetScreenPixels() override;
 
-		/////////// MATRIX METHODS /////////////////////////
-
-		void PushMatrix(eMatrix aMtxType) override;
-		void PopMatrix(eMatrix aMtxType) override;
-		void SetIdentityMatrix(eMatrix aMtxType) override;
-
-		void SetMatrix(eMatrix aMtxType, const cMatrixf& a_mtxA) override;
-
-		void SetOrthoProjection(const cVector2f& avSize, float afMin, float afMax) override;
-
 		/////////// DRAWING METHODS /////////////////////////
 
 		// OCCLUSION
@@ -185,9 +175,6 @@ namespace hpl {
 		// ImGui Setup
 		ImGuiContext* mpImGuiContext;
 
-		//Multisample
-		void CheckMultisampleCaps();
-
 		//Depth helper
 		GLenum GetGLDepthTestFuncEnum(eDepthTestFunc aType);
 
@@ -197,9 +184,6 @@ namespace hpl {
 		//Stencil helper
 		GLenum GetGLStencilFuncEnum(eStencilFunc aType);
 		GLenum GetGLStencilOpEnum(eStencilOp aType);
-
-		//Matrix Helper
-		void SetMatrixMode(eMatrix mType);
 
 		//Blend helper
 		GLenum GetGLBlendEnum(eBlendFunc aType);

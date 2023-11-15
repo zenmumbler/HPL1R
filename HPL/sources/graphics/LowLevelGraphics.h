@@ -172,15 +172,6 @@ namespace hpl {
 
 		virtual Bitmap GetScreenPixels()=0;
 
-		/////////// MATRIX METHODS //////////////////////////
-
-		virtual void PushMatrix(eMatrix aMtxType)=0;
-		virtual void PopMatrix(eMatrix aMtxType)=0;
-		virtual void SetIdentityMatrix(eMatrix aMtxType)=0;
-
-		virtual void SetMatrix(eMatrix aMtxType, const cMatrixf& a_mtxA)=0;
-		virtual void SetOrthoProjection(const cVector2f& avSize, float afMin, float afMax)=0;
-
 		/////////// DRAWING METHODS /////////////////////////
 
 		//OCCLUSION
