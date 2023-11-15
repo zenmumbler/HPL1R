@@ -31,8 +31,7 @@ namespace hpl {
 		eTextureTarget_1D,
 		eTextureTarget_2D,
 		eTextureTarget_CubeMap,
-		eTextureTarget_3D,
-		eTextureTarget_LastEnum
+		eTextureTarget_3D
 	};
 
 	//-----------------------------------------
@@ -42,8 +41,7 @@ namespace hpl {
 		eTextureWrap_Repeat,
 		eTextureWrap_Clamp,
 		eTextureWrap_ClampToEdge,
-		eTextureWrap_ClampToBorder,
-		eTextureWrap_LastEnum
+		eTextureWrap_ClampToBorder
 	};
 
 	//-----------------------------------------
@@ -51,8 +49,7 @@ namespace hpl {
 	enum eTextureFilter
 	{
 		eTextureFilter_Bilinear,
-		eTextureFilter_Trilinear,
-		eTextureFilter_LastEnum
+		eTextureFilter_Trilinear
 	};
 
 	//-----------------------------------------
@@ -61,8 +58,7 @@ namespace hpl {
 	{
 		eTextureAnimMode_None,
 		eTextureAnimMode_Loop,
-		eTextureAnimMode_Oscillate,
-		eTextureAnimMode_LastEnum
+		eTextureAnimMode_Oscillate
 	};
 
 	//-----------------------------------------
