@@ -1,8 +1,6 @@
+// Fragment func for GraphicsDrawer objects
 #version 410
 
-/*
-Fragment Program for GraphicsDrawer objects
-*/
 in vec4 oColor;
 in vec2 oUV;
 

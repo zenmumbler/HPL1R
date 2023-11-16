@@ -1,7 +1,6 @@
+// Vertex func for GraphicsDrawer objects
 #version 410
-/*
-Vertex Program for GraphicsDrawer objects
-*/
+
 in vec3 position;
 in vec4 color;
 in vec2 uv;
