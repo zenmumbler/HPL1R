@@ -177,7 +177,7 @@ namespace hpl {
 		_program->Bind();
 
 		auto orthoDim = mpLowLevelGraphics->GetVirtualSize();
-		cMatrixf orthoProjection = cMatrixf::CreateOrtho(0, orthoDim.x, orthoDim.y, 0, -1000, 1000);
+		cMatrixf orthoProjection = cMatrixf::CreateOrtho(0, orthoDim.x, orthoDim.y, 0, -1, 1);
 		_program->SetMatrixf("projection", orthoProjection);
 
 		eGfxMaterial material = eGfxMaterial::Null;
@@ -218,11 +218,12 @@ namespace hpl {
 			auto [fX, fY, fZ] = pObj.mvPosition.v;
 			auto [fW, fH] = pObj.mvSize.v;
 			auto color = pObj.mColor;
-			cVector3f vPos[4] = {
-				{ fX,      fY,      fZ },
-				{ fX + fW, fY,      fZ },
-				{ fX + fW, fY + fH, fZ },
-				{ fX,      fY + fH, fZ }
+
+			cVector2f vPos[4] = {
+				{ fX,      fY      },
+				{ fX + fW, fY      },
+				{ fX + fW, fY + fH },
+				{ fX,      fY + fH }
 			};
 
 			// add quad as 2 triangles

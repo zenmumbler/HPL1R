@@ -27,7 +27,7 @@ namespace hpl {
 		delete vertexBuffer;
 	}
 
-	void cGfxBatch::AddVertex(const cVector3f &position, const cColor &color, const cVector2f& tex) {
+	void cGfxBatch::AddVertex(const cVector2f &position, const cColor &color, const cVector2f& tex) {
 		*posView++ = position;
 		*colorView++ = color;
 		*uvView++ = tex;

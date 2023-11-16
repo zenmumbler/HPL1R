@@ -20,7 +20,7 @@ namespace hpl {
 		cGfxBatch(int vertexCount, iLowLevelGraphics *llGfx);
 		~cGfxBatch();
 
-		void AddVertex(const cVector3f &position, const cColor &color, const cVector2f& tex);
+		void AddVertex(const cVector2f &position, const cColor &color, const cVector2f& tex);
 		void Clear();
 		bool HasContent() { return indexCount > 0; }
 
