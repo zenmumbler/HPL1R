@@ -30,23 +30,7 @@
 #include "system/Log.h"
 
 // Materials
-#ifdef OLD_MATS
-#include "graphics/Material_Alpha.h"
-#include "graphics/Material_Diffuse.h"
-#include "graphics/Material_DiffuseSpec.h"
-#include "graphics/Material_Bump.h"
-#include "graphics/Material_BumpSpec.h"
-#include "graphics/Material_BumpColorSpec.h"
-#include "graphics/Material_Additive.h"
-#include "graphics/Material_Flat.h"
-#include "graphics/Material_Modulative.h"
-#include "graphics/Material_ModulativeX2.h"
-#include "graphics/Material_Alpha.h"
-#include "graphics/Material_EnvMap_Reflect.h"
-#include "graphics/Material_Water.h"
-#else
 #include "graphics/Material_Universal.h"
-#endif
 
 namespace hpl {
 
@@ -115,23 +99,6 @@ namespace hpl {
 		//Add all the materials.
 		Log(" Adding engine materials\n");
 		mpMaterialHandler->Add(new MaterialType_Universal());
-		/*
-		mpMaterialHandler->Add(new cMaterialType_Diffuse());
-		mpMaterialHandler->Add(new cMaterialType_Bump());
-		mpMaterialHandler->Add(new cMaterialType_DiffuseSpec());
-		mpMaterialHandler->Add(new cMaterialType_BumpSpec());
-		mpMaterialHandler->Add(new cMaterialType_BumpColorSpec());
-
-		mpMaterialHandler->Add(new cMaterialType_Additive());
-		mpMaterialHandler->Add(new cMaterialType_Alpha());
-		mpMaterialHandler->Add(new cMaterialType_Flat());
-		mpMaterialHandler->Add(new cMaterialType_Modulative());
-		mpMaterialHandler->Add(new cMaterialType_ModulativeX2());
-
-		mpMaterialHandler->Add(new cMaterialType_EnvMap_Reflect());
-
-		mpMaterialHandler->Add(new cMaterialType_Water());
-		*/
 
 		Log("--------------------------------------------------------\n\n");
 
