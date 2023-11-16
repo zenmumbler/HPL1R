@@ -46,9 +46,8 @@ cGraphicsHelper::cGraphicsHelper(cInit *apInit)
 
 //-----------------------------------------------------------------------
 
-void cGraphicsHelper::ClearScreen(const cColor &aColor)
+void cGraphicsHelper::ClearScreen()
 {
-	mpLowLevelGfx->SetClearColor(aColor);
 	mpLowLevelGfx->ClearScreen();
 }
 
@@ -58,7 +57,7 @@ void cGraphicsHelper::DrawLoadingScreen(const tString &asFile)
 {
 	iTexture *pTex= NULL;
 
-	ClearScreen(cColor::Black);
+	ClearScreen();
 
 	if (asFile != "")
 		pTex = mpTexManager->Create2D(asFile);

@@ -233,9 +233,6 @@ namespace hpl {
 		else
 		{
 			apUpdater->OnPostSceneDraw();
-			//S
-			//mpGraphics->GetLowLevel()->SetClearColor(cColor(0,1));
-			//mpGraphics->GetLowLevel()->ClearScreen();
 		}
 		mpGraphics->GetDrawer()->DrawAll();
 

@@ -34,7 +34,7 @@ class cGraphicsHelper
 public:
 	cGraphicsHelper(cInit *apInit);
 
-	void ClearScreen(const cColor &aColor = cColor::Black);
+	void ClearScreen();
 	void DrawLoadingScreen(const tString &asFile);
 	void SwapBuffers();
 
