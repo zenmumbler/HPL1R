@@ -376,6 +376,9 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	void cLowLevelGraphicsSDL::StartFrame() {
+		SetScissorActive(false);
+		ClearScreen();
+
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplSDL2_NewFrame();
 		ImGui::NewFrame();

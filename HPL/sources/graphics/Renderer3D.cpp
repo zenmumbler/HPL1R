@@ -437,31 +437,17 @@ namespace hpl {
 	void cRenderer3D::BeginRendering(cCamera *apCamera)
 	{
 		//////////////////////////////////////////////////
-		/////Setup for clearing the screen
-		//turn of scissor test.
-		mpLowLevelGraphics->SetScissorActive(false);
-
-		mpLowLevelGraphics->SetClearColor(cColor(0,0));
-		mpLowLevelGraphics->SetClearColorActive(true);
-		mpLowLevelGraphics->SetClearDepthActive(true);
-		mpLowLevelGraphics->SetClearDepth(1);
-
-		mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
-
-		mpLowLevelGraphics->SetClearStencilActive(false);
-		mpLowLevelGraphics->ClearScreen();
-
-		//////////////////////////////////////////////////
 		// Cull and depth mode.
 		mpLowLevelGraphics->SetCullActive(true);
-
 		mpLowLevelGraphics->SetCullMode(eCullMode_CounterClockwise);
+
 		mpLowLevelGraphics->SetDepthTestActive(true);
+		mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
 
 		mRenderSettings.mpCamera = apCamera;
 
-		for(int i=0; i<MAX_TEXTUREUNITS; ++i)
-			mpLowLevelGraphics->SetTexture(i,NULL);
+		for (int i=0; i < MAX_TEXTUREUNITS; ++i)
+			mpLowLevelGraphics->SetTexture(i, NULL);
 	}
 
 	//-----------------------------------------------------------------------
