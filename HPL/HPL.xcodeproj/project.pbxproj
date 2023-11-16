@@ -28,6 +28,7 @@
 		8E3A72852611363F0086F8ED /* Script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A72832611363F0086F8ED /* Script.cpp */; };
 		8E5BCD602AD5958700B64AD3 /* Material_Universal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BCD5E2AD5958700B64AD3 /* Material_Universal.cpp */; };
 		8E71FB182B06346A00A842AE /* imgui_impl_sdl2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E71FB172B06346A00A842AE /* imgui_impl_sdl2.cpp */; };
+		8E71FB1C2B0635D000A842AE /* imgui_impl_opengl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E71FB192B0635D000A842AE /* imgui_impl_opengl3.cpp */; };
 		8E77420628989E02008E9570 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E77420528989E02008E9570 /* Bitmap.cpp */; };
 		8E815948260C1127001CBF63 /* GLSLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E815947260C1127001CBF63 /* GLSLProgram.cpp */; };
 		8E84E7892605487F00DC6065 /* LowLevelSoundOAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */; };
@@ -253,6 +254,9 @@
 		8E5BCD5F2AD5958700B64AD3 /* Material_Universal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Material_Universal.h; sourceTree = "<group>"; };
 		8E71FB162B06346A00A842AE /* imgui_impl_sdl2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_sdl2.h; sourceTree = "<group>"; };
 		8E71FB172B06346A00A842AE /* imgui_impl_sdl2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_sdl2.cpp; sourceTree = "<group>"; };
+		8E71FB192B0635D000A842AE /* imgui_impl_opengl3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_opengl3.cpp; sourceTree = "<group>"; };
+		8E71FB1A2B0635D000A842AE /* imgui_impl_opengl3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_opengl3.h; sourceTree = "<group>"; };
+		8E71FB1B2B0635D000A842AE /* imgui_impl_opengl3_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_opengl3_loader.h; sourceTree = "<group>"; };
 		8E77420528989E02008E9570 /* Bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
 		8E7FAB6B2B0011040069D40B /* STLHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLHelpers.h; sourceTree = "<group>"; };
 		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
@@ -665,6 +669,9 @@
 		8E11632226BED4E00065E04C /* backends */ = {
 			isa = PBXGroup;
 			children = (
+				8E71FB1B2B0635D000A842AE /* imgui_impl_opengl3_loader.h */,
+				8E71FB192B0635D000A842AE /* imgui_impl_opengl3.cpp */,
+				8E71FB1A2B0635D000A842AE /* imgui_impl_opengl3.h */,
 				8E71FB172B06346A00A842AE /* imgui_impl_sdl2.cpp */,
 				8E71FB162B06346A00A842AE /* imgui_impl_sdl2.h */,
 				8E11632526BED4E00065E04C /* imgui_impl_opengl2.h */,
@@ -1396,6 +1403,7 @@
 				DBF84AAD0AC76F1E00BB15CD /* AINodeGenerator.cpp in Sources */,
 				DBF84AAE0AC76F1E00BB15CD /* Animation.cpp in Sources */,
 				8E11637526C1D4620065E04C /* MeshLoaderGLTF2.cpp in Sources */,
+				8E71FB1C2B0635D000A842AE /* imgui_impl_opengl3.cpp in Sources */,
 				DBF84AAF0AC76F1E00BB15CD /* AnimationManager.cpp in Sources */,
 				DBF84AB00AC76F1E00BB15CD /* AnimationState.cpp in Sources */,
 				DBF84AB10AC76F1E00BB15CD /* AnimationTrack.cpp in Sources */,

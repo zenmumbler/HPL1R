@@ -150,7 +150,7 @@ namespace hpl {
 		iTexture* mpCurrentTexture[MAX_TEXTUREUNITS];
 
 		// ImGui Setup
-		ImGuiContext* mpImGuiContext;
+//		ImGuiContext* mpImGuiContext;
 	};
 };
 #endif // HPL_LOWLEVELGRAPHICS_SDL_H
