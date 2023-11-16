@@ -72,6 +72,8 @@ namespace hpl {
 
 		tUIntVec mvIndexArray;
 		unsigned int mlElementHandle;
+
+		unsigned int _vaoHandle;
 	};
 
 };

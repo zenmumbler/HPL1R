@@ -78,6 +78,7 @@ namespace hpl {
 		mvIndexArray.resize(alReserveIdxSize);
 
 		mlElementHandle = 0;
+		_vaoHandle = 0;
 	}
 
 	cVertexBufferVBO::~cVertexBufferVBO()
@@ -95,6 +96,8 @@ namespace hpl {
 		mvIndexArray.clear();
 		if (mlElementHandle)
 			glDeleteBuffers(1,(GLuint *)&mlElementHandle);
+		if (_vaoHandle)
+			glDeleteVertexArrays(1, &_vaoHandle);
 	}
 
 	//-----------------------------------------------------------------------
@@ -147,9 +150,12 @@ namespace hpl {
 
 	bool cVertexBufferVBO::Compile()
 	{
-		if (mlElementHandle) return false;
+		if (_vaoHandle) return false;
 
 		GLenum usageType = GetGLUsageType(mUsageType);
+
+		glGenVertexArrays(1, &_vaoHandle);
+		glBindVertexArray(_vaoHandle);
 
 		//Create the VBO vertex arrays
 		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
@@ -160,18 +166,20 @@ namespace hpl {
 				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[attr]);
 				glBufferData(GL_ARRAY_BUFFER, mvVertexArray[attr].size() * sizeof(float), mvVertexArray[attr].data(), usageType);
 
-				//Log("%d-Handle: %d, size: %d \n", attr, mvArrayHandle[attr], mvVertexArray);
+				glEnableVertexAttribArray(attr);
+				glVertexAttribPointer(attr, AttrElemCount(attr), GL_FLOAT, false, 0, nullptr);
+			}
+			else {
+				glDisableVertexAttribArray(attr);
 			}
 		}
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		//Create the VBO index array
 		glGenBuffers(1, &mlElementHandle);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mlElementHandle);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, GetIndexCount() * sizeof(unsigned int), mvIndexArray.data(), usageType);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
 
-		//Log("VBO compile done!\n");
+		glBindVertexArray(0);
 
 		return true;
 	}
@@ -181,8 +189,6 @@ namespace hpl {
 
 	void cVertexBufferVBO::UpdateData(VertexAttributes attrs, bool updateIndices)
 	{
-		GLenum usageType = GetGLUsageType(mUsageType);
-
 		for (int attr=0; attr < VERTEX_ATTR_COUNT; attr++)
 		{
 			if (mVertexFlags & attrs & ATTR_TO_MASK[attr])
@@ -256,9 +262,7 @@ namespace hpl {
 
 		//////////////////////////////////
 		//Bind and draw the buffer
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mlElementHandle);
 		glDrawElements(mode, GetIndexCount(), GL_UNSIGNED_INT, NULL);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
 	//-----------------------------------------------------------------------
@@ -266,35 +270,21 @@ namespace hpl {
 	// Rehatched: this method is introduced to support the hacky wireframe debug view
 	// To be obsoleted
 	void cVertexBufferVBO::DrawWireframe() {
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mlElementHandle);
 		glDrawElements(GL_LINE_STRIP, GetIndexCount(), GL_UNSIGNED_INT, NULL);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
 	//-----------------------------------------------------------------------
 
 	void cVertexBufferVBO::Bind()
 	{
-		// iterate over each attribute and set vertex state accordingly
-		for (int attr = 0; attr < VERTEX_ATTR_COUNT; ++attr) {
-			if (mVertexFlags & ATTR_TO_MASK[attr]) {
-				glEnableVertexAttribArray(attr);
-				glBindBuffer(GL_ARRAY_BUFFER, mvArrayHandle[attr]);
-				glVertexAttribPointer(attr, AttrElemCount(attr), GL_FLOAT, false, 0, nullptr);
-			}
-			else {
-				glDisableVertexAttribArray(attr);
-			}
-		}
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindVertexArray(_vaoHandle);
 	}
 
 	//-----------------------------------------------------------------------
 
 	void cVertexBufferVBO::UnBind()
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindVertexArray(0);
 	}
 
 	//-----------------------------------------------------------------------
