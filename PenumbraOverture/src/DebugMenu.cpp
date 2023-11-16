@@ -92,6 +92,10 @@ void cDebugMenu::OnDraw() {
 				ExportModels(mpInit->mpGame);
 			}
 		}
+
+		if (ImGui::Button("Quit")) {
+			mpInit->mpGame->Exit();
+		}
 	}
 	ImGui::End();
 }
