@@ -310,78 +310,8 @@ namespace hpl {
 
 		//////////////////////////////////////////////////////////
 		// Cast shadows
-		if(mbCastShadows && apRenderSettings->mShowShadows != eRendererShowShadows_None
-			&& apRenderSettings->mpExtrudeProgram != NULL)
+		if(mbCastShadows && apRenderSettings->mShowShadows != eRendererShowShadows_None)
 		{
-			//Get temp index array. (Remove this when the index pool
-			// is implemented.).
-			mpIndexArray = apRenderSettings->mpTempIndexArray;
-
-			//Setup for shadow drawing
-			apLowLevelGraphics->SetStencilActive(true);
-			//Do no set this when debugging.
-			apLowLevelGraphics->SetColorWriteActive(false, false, false,false);
-
-			///////////////////////////////////////////////////////////////////////////
-			//Clear stencil, since scissor is set this should be fast.
-			apLowLevelGraphics->SetClearStencilActive(true);
-			apLowLevelGraphics->SetClearDepthActive(false);
-			apLowLevelGraphics->SetClearColorActive(false);
-
-			apLowLevelGraphics->SetClearStencil(0);
-
-			apLowLevelGraphics->ClearScreen();
-
-			apLowLevelGraphics->SetClearStencilActive(false);
-			apLowLevelGraphics->SetClearDepthActive(true);
-			apLowLevelGraphics->SetClearColorActive(true);
-
-			apLowLevelGraphics->SetCullActive(false);
-
-			apLowLevelGraphics->SetDepthWriteActive(false);
-
-			//Setup the depth test so that shadow volume is not rendered in front
-			//off the normal graphics.
-			apLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_Less);
-
-			//Resert the algo (zfail or zpass) used.
-			apRenderSettings->mlLastShadowAlgo=0;
-
-			//Reset this variable so it can be used when rendering shadows.
-			apRenderSettings->mbMatrixWasNULL = false;
-
-			//Set the program.
-			if(apRenderSettings->mbLog)Log("Setting program: '%s'\n",
-											apRenderSettings->mpExtrudeProgram->GetName().c_str());
-			apRenderSettings->mpExtrudeProgram->Bind();
-			apRenderSettings->mpProgram = apRenderSettings->mpExtrudeProgram;
-
-			//Render shadows
-			tCasterCacheSetIt it = m_setDynamicCasters.begin();
-
-			if(apRenderSettings->mShowShadows == eRendererShowShadows_All)
-			{
-				it = m_setDynamicCasters.begin();
-				for(; it!= m_setDynamicCasters.end(); ++it)
-				{
-					RenderShadow(*it,apRenderSettings,apLowLevelGraphics);
-				}
-			}
-
-			it = m_setStaticCasters.begin();
-			for(; it!= m_setStaticCasters.end(); ++it)
-			{
-				RenderShadow(*it,apRenderSettings,apLowLevelGraphics);
-			}
-
-			//Make rendering ready for the objects.
-			apLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_Equal);
-
-			apLowLevelGraphics->SetColorWriteActive(true, true, true,true);
-			apLowLevelGraphics->SetCullActive(true);
-
-			apLowLevelGraphics->SetStencil(eStencilFunc_Equal,0,0xFF,
-											eStencilOp_Keep,eStencilOp_Keep, eStencilOp_Keep);
 		}
 
 		//Reset this var so that the new light properties are set.

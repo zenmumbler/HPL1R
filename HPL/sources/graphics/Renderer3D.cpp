@@ -107,14 +107,7 @@ namespace hpl {
 
 		Log("   Load Renderer3D gpu programs:\n");
 
-		Log("    Extrude\n");
-
 		cGpuProgramManager *pProgramManager = apResources->GetGpuProgramManager();
-		mRenderSettings.mpExtrudeProgram = pProgramManager->CreateProgram("ShadowExtrude_vp.cg", "ShadowExtrude_fp.cg");
-		if(mRenderSettings.mpExtrudeProgram==NULL)
-		{
-			Error("Couldn't load 'ShadowExtrude_vp.cg' program! Shadows will be disabled.\n");
-		}
 
 		///////////////////////////////////
 		//Load diffuse program, for stuff like query rendering
@@ -152,8 +145,6 @@ namespace hpl {
 	cRenderer3D::~cRenderer3D()
 	{
 		delete[] mRenderSettings.mpTempIndexArray;
-
-		if(mRenderSettings.mpExtrudeProgram) mpResources->GetGpuProgramManager()->Destroy(mRenderSettings.mpExtrudeProgram);
 
 		if(mpDiffuseProgram) mpResources->GetGpuProgramManager()->Destroy(mpDiffuseProgram);
 

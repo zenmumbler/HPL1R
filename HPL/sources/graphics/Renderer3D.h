@@ -75,7 +75,6 @@ namespace hpl {
 		void Reset(iLowLevelGraphics *apLowLevel);
 
 		//Setings that doesn't change:
-		iGpuProgram *mpExtrudeProgram;
 		iLowLevelGraphics* mpLowLevel;
 
 		unsigned int *mpTempIndexArray;
