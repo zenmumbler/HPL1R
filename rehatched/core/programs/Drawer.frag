@@ -4,7 +4,7 @@
 in vec4 oColor;
 in vec2 oUV;
 
-out vec4 fragColor;
+layout(location = 0) out vec4 fragColor;
 
 uniform sampler2D image;
 

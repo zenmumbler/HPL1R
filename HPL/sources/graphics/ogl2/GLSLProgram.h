@@ -32,7 +32,6 @@ namespace hpl {
 		bool SetVec4f(const tString& asName, float afX,float afY,float afZ, float afW);
 
 		bool SetMatrixf(const tString& asName, const cMatrixf& mMtx);
-		bool SetMatrixIdentityf(const tString& asName);
 
 		bool SetTextureBindingIndex(const tString& asName, int index);
 

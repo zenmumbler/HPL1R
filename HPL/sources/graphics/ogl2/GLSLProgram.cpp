@@ -9,7 +9,6 @@
 #include "system/Files.h"
 #include "system/Log.h"
 
-#define GL_GLEXT_LEGACY
 #ifdef __APPLE__
 #include <OpenGL/gl3.h>
 #else
@@ -93,18 +92,12 @@ namespace hpl {
 		}
 
 		mProgram = glCreateProgram();
-		glUseProgram(mProgram);
-
-		glBindAttribLocation(mProgram, 0, "position");
-		glBindAttribLocation(mProgram, 1, "normal");
-		glBindAttribLocation(mProgram, 2, "color");
-		glBindAttribLocation(mProgram, 3, "uv");
-		glBindAttribLocation(mProgram, 4, "tangent");
-
 		glAttachShader(mProgram, vtxShader);
 		glAttachShader(mProgram, fragShader);
 		glLinkProgram(mProgram);
 
+		glDetachShader(mProgram, vtxShader);
+		glDetachShader(mProgram, fragShader);
 		glDeleteShader(vtxShader);
 		glDeleteShader(fragShader);
 
@@ -176,7 +169,10 @@ namespace hpl {
 	bool  cGLSLProgram::SetVec4f(const tString& asName, float afX,float afY,float afZ, float afW)
 	{
 		auto loc = glGetUniformLocation(mProgram, asName.c_str());
-		if (loc < 0) return false;
+		if (loc < 0) {
+			Warning("Could not get vec4 uniform location for %s!", asName.c_str());
+			return false;
+		}
 		glUniform4f(loc, afX, afY, afZ, afW);
 		return true;
 	}
@@ -186,20 +182,13 @@ namespace hpl {
 	bool cGLSLProgram::SetMatrixf(const tString& asName, const cMatrixf& mMtx)
 	{
 		auto loc = glGetUniformLocation(mProgram, asName.c_str());
-		if (loc < 0) return false;
+		if (loc < 0) {
+			Warning("Could not get matrix uniform location for %s!\n", asName.c_str());
+			return false;
+		}
+
 		// transpose matrix for GL
-		const auto glMat = cMath::MatrixTranspose(mMtx);
-		glUniformMatrix4fv(loc, 1, false, &glMat.v[0]);
-		return true;
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cGLSLProgram::SetMatrixIdentityf(const tString& asName)
-	{
-		auto loc = glGetUniformLocation(mProgram, asName.c_str());
-		if (loc < 0) return false;
-		glUniformMatrix4fv(loc, 1, false, &cMatrixf::Identity.v[0]);
+		glUniformMatrix4fv(loc, 1, GL_TRUE, &mMtx.v[0]);
 		return true;
 	}
 
@@ -208,7 +197,10 @@ namespace hpl {
 	bool cGLSLProgram::SetTextureBindingIndex(const tString& asName, int index)
 	{
 		auto loc = glGetUniformLocation(mProgram, asName.c_str());
-		if (loc < 0) return false;
+		if (loc < 0) {
+			Warning("Could not get texture uniform location for %s!\n", asName.c_str());
+			return false;
+		}
 
 		glUniform1i(loc, index);
 		return true;
