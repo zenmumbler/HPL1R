@@ -609,8 +609,6 @@
 		DBF84A1B0AC76D5800BB15CD /* SerializeClass.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = SerializeClass.cpp; sourceTree = "<group>"; };
 		DBF84A1C0AC76D5800BB15CD /* String.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = String.cpp; sourceTree = "<group>"; };
 		DBF84A1D0AC76D5800BB15CD /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
-		DBF9A1F6119A58DB00CCFDC9 /* VideoStreamTheora.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoStreamTheora.cpp; sourceTree = "<group>"; };
-		DBF9A1F7119A58E600CCFDC9 /* VideoStreamTheora.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoStreamTheora.h; sourceTree = "<group>"; };
 		DBFBA0180B65E42A0021DAE2 /* Material_Water.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Material_Water.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -854,8 +852,6 @@
 			children = (
 				DBF8498E0AC76D5800BB15CD /* LowLevelGraphicsSDL.cpp */,
 				DB27F0680ACB9AB90054ACA3 /* LowLevelGraphicsSDL.h */,
-				DBF9A1F6119A58DB00CCFDC9 /* VideoStreamTheora.cpp */,
-				DBF9A1F7119A58E600CCFDC9 /* VideoStreamTheora.h */,
 			);
 			path = impl;
 			sourceTree = "<group>";
