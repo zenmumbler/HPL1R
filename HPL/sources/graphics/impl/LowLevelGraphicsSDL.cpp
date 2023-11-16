@@ -239,26 +239,13 @@ namespace hpl {
 		mpWindow = SDL_CreateWindow(asWindowCaption.c_str(),
 									SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 									alWidth, alHeight, mlFlags);
-		if(mpWindow == NULL) {
-			Error("Could not set display mode setting a lower one!\n");
-			mvScreenSize = cVector2l(800,600);
-			mpWindow = SDL_CreateWindow(asWindowCaption.c_str(),
-										SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-										mvScreenSize.x, mvScreenSize.y, mlFlags);
-
-			if(mpWindow == NULL)
-			{
-				FatalError("Unable to initialize display!\n");
-				return false;
-			}
-			else
-			{
-				Warning("Could not set displaymode and 800x600 is used instead!\n");
-			}
+		if (mpWindow == NULL) {
+			FatalError("Unable to initialize display!\n");
+			return false;
 		}
 		
 		mpGLContext = SDL_GL_CreateContext(mpWindow);
-		if(mpGLContext == NULL) {
+		if (mpGLContext == NULL) {
 			Error(SDL_GetError());
 			FatalError("Unable to create GL context!\n");
 			return false;
@@ -272,7 +259,6 @@ namespace hpl {
 		SetupGL();
 
 		//Setup ImGui
-
 		mpImGuiContext = ImGui::CreateContext();
 		ImGui_ImplOpenGL3_Init();
 		ImGui_ImplSDL2_InitForOpenGL(mpWindow, mpGLContext);
