@@ -1,12 +1,13 @@
+#version 410
 /*
 Vertex Program for GraphicsDrawer objects
 */
-attribute vec3 position;
-attribute vec4 color;
-attribute vec2 uv;
+in vec3 position;
+in vec4 color;
+in vec2 uv;
 
-varying vec4 oColor;
-varying vec2 oUV;
+out vec4 oColor;
+out vec2 oUV;
 
 uniform mat4 projection;
 

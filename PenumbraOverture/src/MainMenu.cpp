@@ -1438,7 +1438,7 @@ public:
 	cMainMenuWidget_TextureAnisotropy(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment)
 		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
 	{
-		mlMax = mpInit->mpGame->GetGraphics()->GetLowLevel()->GetCaps(eGraphicCaps_MaxAnisotropicFiltering);
+		mlMax = 16;
 		msTip = kTranslate("MainMenu", "TipGraphicsTextureAnisotropy");
 	}
 

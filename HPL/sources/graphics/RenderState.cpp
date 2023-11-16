@@ -183,19 +183,7 @@ namespace hpl {
 			if(apSettings->mbLog) Log("Setting alpha: ");
 			apSettings->mAlphaMode = mAlphaMode;
 
-			if(mAlphaMode == eMaterialAlphaMode_Solid)
-			{
-				apSettings->mpLowLevel->SetAlphaTestActive(false);
-				if(apSettings->mbLog)Log("Solid");
-			}
-			else
-			{
-				apSettings->mpLowLevel->SetAlphaTestActive(true);
-				apSettings->mpLowLevel->SetAlphaTestFunc(eAlphaTestFunc_GreaterOrEqual, 0.6f);
-				if(apSettings->mbLog)Log("Trans");
-			}
-
-			if(apSettings->mbLog) Log("\n");
+			if(apSettings->mbLog)Log((mAlphaMode == eMaterialAlphaMode_Solid) ? "Solid\n" : "Trans\n");
 		}
 	}
 

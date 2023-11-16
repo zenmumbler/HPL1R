@@ -18,14 +18,12 @@
  */
 #ifdef WIN32
 #pragma comment(lib, "OpenGL32.lib")
-#pragma comment(lib, "GLu32.lib")
-#pragma comment(lib, "GLaux.lib")
 #endif
 
 #ifdef __APPLE__
-#include <OpenGL/gl.h>
+#include <OpenGL/gl3.h>
 #else
-#include <GL/gl.h>
+#include <GL/gl3.h>
 #endif
 
 #include <assert.h>
@@ -80,31 +78,13 @@ namespace hpl {
 		switch(aType)
 		{
 			case eDepthTestFunc_Never:			return GL_NEVER;
-			case eDepthTestFunc_Less:				return GL_LESS;
-			case eDepthTestFunc_LessOrEqual:		return GL_LEQUAL;
-			case eDepthTestFunc_Greater:			return GL_GREATER;
+			case eDepthTestFunc_Less:			return GL_LESS;
+			case eDepthTestFunc_LessOrEqual:	return GL_LEQUAL;
+			case eDepthTestFunc_Greater:		return GL_GREATER;
 			case eDepthTestFunc_GreaterOrEqual:	return GL_GEQUAL;
 			case eDepthTestFunc_Equal:			return GL_EQUAL;
-			case eDepthTestFunc_NotEqual:			return GL_NOTEQUAL;
+			case eDepthTestFunc_NotEqual:		return GL_NOTEQUAL;
 			case eDepthTestFunc_Always:			return GL_ALWAYS;
-			default: return 0;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	static GLenum GetGLAlphaTestFuncEnum(eAlphaTestFunc aType)
-	{
-		switch(aType)
-		{
-			case eAlphaTestFunc_Never:			return GL_NEVER;
-			case eAlphaTestFunc_Less:				return GL_LESS;
-			case eAlphaTestFunc_LessOrEqual:		return GL_LEQUAL;
-			case eAlphaTestFunc_Greater:			return GL_GREATER;
-			case eAlphaTestFunc_GreaterOrEqual:	return GL_GEQUAL;
-			case eAlphaTestFunc_Equal:			return GL_EQUAL;
-			case eAlphaTestFunc_NotEqual:			return GL_NOTEQUAL;
-			case eAlphaTestFunc_Always:			return GL_ALWAYS;
 			default: return 0;
 		}
 	}
@@ -152,7 +132,7 @@ namespace hpl {
 		switch (aTarget) {
 			case eTextureTarget_1D:		return GL_TEXTURE_1D;
 			case eTextureTarget_2D:		return GL_TEXTURE_2D;
-			case eTextureTarget_CubeMap:	return GL_TEXTURE_CUBE_MAP;
+			case eTextureTarget_CubeMap:return GL_TEXTURE_CUBE_MAP;
 			case eTextureTarget_3D:		return GL_TEXTURE_3D;
 			default:					return 0;
 		}
@@ -219,7 +199,11 @@ namespace hpl {
 
 		mlMultisampling = alMultisampling;
 
-		//Set some GL Attributes
+		// Request GL Core Profile context
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 		SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -306,62 +290,8 @@ namespace hpl {
 
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LEQUAL);
-		glDisable(GL_ALPHA_TEST);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-		//Show some info
-		Log("  Max texture image units: %d\n",GetCaps(eGraphicCaps_MaxTextureImageUnits));
-		Log("  Max texture coord units: %d\n",GetCaps(eGraphicCaps_MaxTextureCoordUnits));
-
-		if (GetCaps(eGraphicCaps_AnisotropicFiltering))
-			Log("  Max Anisotropic degree: %d\n",GetCaps(eGraphicCaps_MaxAnisotropicFiltering));
-	}
-	//-----------------------------------------------------------------------
-
-	int cLowLevelGraphicsSDL::GetCaps(eGraphicCaps aType)
-	{
-		switch(aType)
-		{
-			//Max Texture Image Units
-			case eGraphicCaps_MaxTextureImageUnits:
-			{
-				//DEBUG:
-				//return 2;
-
-				int lUnits;
-				glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS,(GLint *)&lUnits);
-				return lUnits;
-			}
-
-			//Max Texture Coord Units
-			case eGraphicCaps_MaxTextureCoordUnits:
-			{
-				int lUnits;
-				glGetIntegerv(GL_MAX_TEXTURE_COORDS,(GLint *)&lUnits);
-				return lUnits;
-			}
-			//Texture Anisotropy
-			case eGraphicCaps_AnisotropicFiltering:
-			{
-				return SDL_GL_ExtensionSupported("GL_EXT_texture_filter_anisotropic") ? 1 : 0;
-			}
-
-			//Texture Anisotropy
-			case eGraphicCaps_MaxAnisotropicFiltering:
-			{
-				if (SDL_GL_ExtensionSupported("GL_EXT_texture_filter_anisotropic") == false) {
-					return 0;
-				}
-
-				float fMax;
-				glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT,&fMax);
-				return (int)fMax;
-			}
-		
-			default:
-				return 0;
-		}
 	}
 
 	//-----------------------------------------------------------------------
@@ -565,21 +495,6 @@ namespace hpl {
 	void cLowLevelGraphicsSDL::SetDepthTestFunc(eDepthTestFunc aFunc)
 	{
 		glDepthFunc(GetGLDepthTestFuncEnum(aFunc));
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetAlphaTestActive(bool abX)
-	{
-		if(abX) glEnable(GL_ALPHA_TEST);
-		else glDisable(GL_ALPHA_TEST);
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetAlphaTestFunc(eAlphaTestFunc aFunc,float afRef)
-	{
-		glAlphaFunc(GetGLAlphaTestFuncEnum(aFunc),afRef);
 	}
 
 	//-----------------------------------------------------------------------

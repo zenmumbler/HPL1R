@@ -1,12 +1,15 @@
+#version 410
+
 /*
 Fragment Program for GraphicsDrawer objects
 */
+in vec4 oColor;
+in vec2 oUV;
 
-varying vec4 oColor;
-varying vec2 oUV;
+out vec4 fragColor;
 
 uniform sampler2D image;
 
 void main() {
-	gl_FragColor = texture2D(image, oUV) * oColor;
+	fragColor = texture(image, oUV) * oColor;
 }

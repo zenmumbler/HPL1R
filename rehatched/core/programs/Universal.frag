@@ -1,15 +1,18 @@
+#version 410
+
 ///////////////////////////////////////////////////////
 /// SIMPLE DIFFUSE COLOR VERTEX PROGRAM ////////////
 ///////////////////////////////////////////////////////
 
-varying vec4 oColor;
-varying vec2 oUV;
+in vec4 oColor;
+in vec2 oUV;
+
+out vec4 fragColor;
 
 uniform sampler2D diffuseMap; // TEXUNIT0
-
 uniform vec3 ambientColor;
 
 void main() {
-	// gl_FragColor = vec4(ambientColor, 1.0) * texture2D(diffuseMap, oUV) * oColor;
-	gl_FragColor = texture2D(diffuseMap, oUV) * oColor;
+	// fragColor = vec4(ambientColor, 1.0) * texture(diffuseMap, oUV) * oColor;
+	fragColor = texture(diffuseMap, oUV) * oColor;
 }

@@ -73,7 +73,7 @@ namespace hpl {
 		GLenum InitCreation(int alHandleIdx);
 		void PostCreation(GLenum aGLTarget);
 
-		void GetSettings(const Bitmap &bmp, int &alChannels, GLenum &aFormat);
+		void GetSettings(const Bitmap &bmp, int &channels, GLint &internalFormat, GLenum &format);
 
 		tUIntVec mvTextureHandles;
 		bool mbContainsData;

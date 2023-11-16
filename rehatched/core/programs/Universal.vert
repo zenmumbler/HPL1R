@@ -1,13 +1,15 @@
+#version 410
+
 ///////////////////////////////////////////////////////
 /// SIMPLE DIFFUSE COLOR VERTEX PROGRAM ////////////
 ///////////////////////////////////////////////////////
 
-attribute vec4 position;
-attribute vec4 color;
-attribute vec2 uv;
+in vec4 position;
+in vec4 color;
+in vec2 uv;
 
-varying vec4 oColor;
-varying vec2 oUV;
+out vec4 oColor;
+out vec2 oUV;
 
 uniform mat4 worldViewProj;
 

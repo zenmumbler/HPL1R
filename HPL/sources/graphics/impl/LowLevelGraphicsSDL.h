@@ -50,8 +50,6 @@ namespace hpl {
 		bool Init(int alWidth, int alHeight, bool abFullscreen, int alMultisampling,
 					const tString& asWindowCaption) override;
 
-		int GetCaps(eGraphicCaps aType) override;
-
 		void ShowCursor(bool abX) override;
 		void SetInputGrab(bool abX);
 
@@ -96,10 +94,6 @@ namespace hpl {
 		//DEPTH
 		void SetDepthTestActive(bool abX) override;
 		void SetDepthTestFunc(eDepthTestFunc aFunc) override;
-
-		//ALPHA
-		void SetAlphaTestActive(bool abX) override;
-		void SetAlphaTestFunc(eAlphaTestFunc aFunc,float afRef) override;
 
 		//STENCIL
 		void SetStencilActive(bool abX) override;

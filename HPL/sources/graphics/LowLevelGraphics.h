@@ -106,15 +106,6 @@ namespace hpl {
 		eCullMode_CounterClockwise
 	};
 
-	enum eGraphicCaps
-	{
-		eGraphicCaps_MaxTextureImageUnits,
-		eGraphicCaps_MaxTextureCoordUnits,
-
-		eGraphicCaps_AnisotropicFiltering,
-		eGraphicCaps_MaxAnisotropicFiltering
-	};
-
 	class iOcclusionQuery;
 
 	class iLowLevelGraphics
@@ -132,12 +123,6 @@ namespace hpl {
 		virtual bool Init(int alWidth, int alHeight, bool abFullscreen, int alMultisampling,
 							const tString& asWindowCaption) = 0;
 
-		/**
-		 * Get the capabilities of the graphics. Th return value depends on the capability
-		 * \param aType
-		 * \return
-		 */
-		virtual int GetCaps(eGraphicCaps aType)=0;
 		/**
 		 * Show the cursor or not. Default is false
 		 * \param aX
@@ -196,10 +181,6 @@ namespace hpl {
 		//DEPTH
 		virtual void SetDepthTestActive(bool abX)=0;
 		virtual void SetDepthTestFunc(eDepthTestFunc aFunc)=0;
-
-		//ALPHA
-		virtual void SetAlphaTestActive(bool abX)=0;
-		virtual void SetAlphaTestFunc(eAlphaTestFunc aFunc,float afRef)=0;
 
 		//STENCIL
 		virtual void SetStencilActive(bool abX)=0;

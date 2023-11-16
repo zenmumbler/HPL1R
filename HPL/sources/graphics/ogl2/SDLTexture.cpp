@@ -17,9 +17,10 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #if defined(__APPLE__)&&defined(__MACH__)
-#include <OpenGL/gl.h>
+#include <OpenGL/gl3.h>
+#include <OpenGL/gl3ext.h>
 #else
-#include <GL/gl.h>
+#include <GL/gl3.h>
 #endif
 
 #include "graphics/Bitmap.h"
@@ -37,9 +38,10 @@ namespace hpl {
 	{
 		switch(aMode)
 		{
-			case eTextureWrap_Clamp: return GL_CLAMP;
-			case eTextureWrap_Repeat: return GL_REPEAT;
 			case eTextureWrap_ClampToEdge: return GL_CLAMP_TO_EDGE;
+			case eTextureWrap_MirrorClampToEdge: return GL_MIRROR_CLAMP_TO_EDGE_EXT;
+			case eTextureWrap_Repeat: return GL_REPEAT;
+			case eTextureWrap_MirrorRepeat: return GL_MIRRORED_REPEAT;
 			case eTextureWrap_ClampToBorder: return GL_CLAMP_TO_BORDER;
 			default: return GL_REPEAT;
 		}
@@ -50,7 +52,7 @@ namespace hpl {
 		switch (aFormat) {
 			case eColorDataFormat_RGB:		return GL_RGB;
 			case eColorDataFormat_RGBA:		return GL_RGBA;
-			case eColorDataFormat_ALPHA:	return GL_ALPHA;
+			case eColorDataFormat_ALPHA:	return GL_RED;
 			case eColorDataFormat_BGR:		return GL_BGR;
 			case eColorDataFormat_BGRA:		return GL_BGRA;
 			default:						return 0;
@@ -71,8 +73,6 @@ namespace hpl {
 		mlTextureIndex = 0;
 		mfTimeCount = 0;
 		mfTimeDir = 1;
-
-		mlBpp = 0;
 	}
 
 	cSDLTexture::~cSDLTexture()
@@ -96,12 +96,6 @@ namespace hpl {
 		{
 			mvTextureHandles.resize(1);
 			glGenTextures(1, mvTextureHandles.data());
-		}
-		else
-		{
-			//Log("Delete + Generate!\n");
-			//glDeleteTextures(1,(GLuint *)&mvTextureHandles[0]);
-			//glGenTextures(1,(GLuint *)&mvTextureHandles[0]);
 		}
 
 		return CreateFromBitmapToHandle(bmp, 0);
@@ -159,18 +153,18 @@ namespace hpl {
 		{
 			const Bitmap &bmp = bitmaps[i];
 
-			GLenum target = GL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB + i;
+			GLenum target = GL_TEXTURE_CUBE_MAP_POSITIVE_X + i;
 
-			int lChannels;
+			int channels;
+			GLint internalFormat;
 			GLenum format;
-			GetSettings(bmp, lChannels,format);
+			GetSettings(bmp, channels, internalFormat, format);
 
-			glTexImage2D(target, 0, lChannels, bmp.GetWidth(), bmp.GetHeight(),
+			glTexImage2D(target, 0, internalFormat, bmp.GetWidth(), bmp.GetHeight(),
 				0, format, GL_UNSIGNED_BYTE, bmp.GetRawData());
 
 			mlWidth = bmp.GetWidth();
 			mlHeight = bmp.GetHeight();
-			mlBpp = lChannels * 8;
 
 			if(!cMath::IsPow2(mlHeight) || !cMath::IsPow2(mlWidth))
 			{
@@ -185,7 +179,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cSDLTexture::CreateFromArray(unsigned char *apPixelData, int alChannels, const cVector3l &avSize)
+	bool cSDLTexture::CreateFromArray(unsigned char *apPixelData, int channels, const cVector3l &avSize)
 	{
 		if(mvTextureHandles.empty())
 		{
@@ -195,20 +189,19 @@ namespace hpl {
 
 		GLenum GLTarget = InitCreation(0);
 
-		int lChannels = alChannels;
-		GLenum format =0;
-		switch(lChannels)
+		GLint internalFormat;
+		GLenum format;
+		switch (channels)
 		{
-		case 1: format = GL_LUMINANCE; break;
-		case 2: format = GL_LUMINANCE_ALPHA; break;
-		case 3: format = GL_RGB; break;
-		case 4: format = GL_RGBA; break;
+			case 1: format = GL_RED;  internalFormat = GL_R8; break;
+			case 2: format = GL_RG;   internalFormat = GL_RG8; break;
+			case 3: format = GL_RGB;  internalFormat = GL_RGB8; break;
+			case 4: format = GL_RGBA; internalFormat = GL_RGBA8; break;
 		}
 
 		mlWidth = avSize.x;
 		mlHeight = avSize.y;
 		mlDepth = avSize.z;
-		mlBpp = lChannels * 8;
 
 		if(!cMath::IsPow2(mlHeight) || !cMath::IsPow2(mlWidth) || !cMath::IsPow2(mlDepth))
 		{
@@ -217,15 +210,15 @@ namespace hpl {
 
 		if(mTarget == eTextureTarget_1D)
 		{
-			glTexImage1D(GLTarget, 0, lChannels, mlWidth,0,format, GL_UNSIGNED_BYTE, apPixelData);
+			glTexImage1D(GLTarget, 0, internalFormat, mlWidth, 0, format, GL_UNSIGNED_BYTE, apPixelData);
 		}
 		else if(mTarget == eTextureTarget_2D)
 		{
-			glTexImage2D(GLTarget, 0, lChannels, mlWidth, mlHeight, 0, format, GL_UNSIGNED_BYTE, apPixelData);
+			glTexImage2D(GLTarget, 0, internalFormat, mlWidth, mlHeight, 0, format, GL_UNSIGNED_BYTE, apPixelData);
 		}
 		else if(mTarget == eTextureTarget_3D)
 		{
-			glTexImage3D(GLTarget, 0, lChannels, avSize.x, avSize.y,avSize.z, 0, format, GL_UNSIGNED_BYTE, apPixelData);
+			glTexImage3D(GLTarget, 0, internalFormat, mlWidth, mlHeight, mlDepth, 0, format, GL_UNSIGNED_BYTE, apPixelData);
 		}
 
 		PostCreation(GLTarget);
@@ -486,11 +479,10 @@ namespace hpl {
 			Warning("Texture '%s' does not have a pow2 size!\n",msName.c_str());
 		}
 
-		int lChannels = 0;
-		GLenum format = 0;
-		GetSettings(bmp, lChannels, format);
-
-		mlBpp = lChannels * 8;
+		int channels;
+		GLint internalFormat;
+		GLenum format;
+		GetSettings(bmp, channels, internalFormat, format);
 
 		auto pPixelSrc = bmp.GetRawData<unsigned char>();
 
@@ -501,11 +493,15 @@ namespace hpl {
 		while(glGetError()!=GL_NO_ERROR);
 
 		if (mTarget == eTextureTarget_1D)
-			glTexImage1D(GLTarget, 0, lChannels, mlWidth, 0,format, GL_UNSIGNED_BYTE, pPixelSrc);
+			glTexImage1D(GLTarget, 0, internalFormat, mlWidth, 0, format, GL_UNSIGNED_BYTE, pPixelSrc);
 		else
-			glTexImage2D(GLTarget, 0, lChannels, mlWidth, mlHeight, 0, format, GL_UNSIGNED_BYTE, pPixelSrc);
+			glTexImage2D(GLTarget, 0, internalFormat, mlWidth, mlHeight, 0, format, GL_UNSIGNED_BYTE, pPixelSrc);
 
-		if(glGetError()!=GL_NO_ERROR) return false;
+		auto texErr = glGetError();
+		if(texErr != GL_NO_ERROR) {
+			Error("Could not upload texture to GL! Err: %d", texErr);
+			return false;
+		}
 
 		PostCreation(GLTarget);
 
@@ -545,21 +541,24 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cSDLTexture::GetSettings(const Bitmap &bmp, int &alChannels, GLenum &aFormat)
+	void cSDLTexture::GetSettings(const Bitmap &bmp, int &channels, GLint &internalFormat, GLenum &format)
 	{
-		alChannels = bmp.GetNumChannels();
+		channels = bmp.GetNumChannels();
 
-		if(alChannels==4)
+		if(channels==4)
 		{
-			aFormat = GL_BGRA;
+			internalFormat = GL_RGBA8;
+			format = GL_BGRA;
 		}
-		else if(alChannels==3)
+		else if(channels==3)
 		{
-			aFormat = GL_BGR;
+			internalFormat = GL_RGB8;
+			format = GL_BGR;
 		}
-		else if(alChannels==1)
+		else if(channels==1)
 		{
-			aFormat = GL_ALPHA;
+			internalFormat = GL_R8;
+			format = GL_RED;
 		}
 	}
 

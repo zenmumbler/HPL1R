@@ -11,9 +11,9 @@
 
 #define GL_GLEXT_LEGACY
 #ifdef __APPLE__
-#include <OpenGL/gl.h>
+#include <OpenGL/gl3.h>
 #else
-#include <GL/gl.h>
+#include <GL/gl3.h>
 #endif
 
 namespace hpl {

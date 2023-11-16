@@ -153,15 +153,6 @@ namespace hpl {
 
 	void cMaterialManager::SetTextureAnisotropy(float afX)
 	{
-		if(afX <1.0 || mpGraphics->GetLowLevel()->GetCaps(eGraphicCaps_AnisotropicFiltering)==0)
-		{
-			return;
-		}
-		if(afX > (float) mpGraphics->GetLowLevel()->GetCaps(eGraphicCaps_MaxAnisotropicFiltering))
-		{
-			return;
-		}
-
 		if(mfTextureAnisotropy == afX) return;
 		mfTextureAnisotropy = afX;
 
@@ -325,14 +316,15 @@ namespace hpl {
 				}
 			}
 
-			pTex->SetFrameTime(fFrameTime);
-			pTex->SetAnimMode(animMode);
-
 			if(pTex==NULL){
+				Error("Couldn't load texture!!\n");
 				delete pDoc;
 				delete pMat;
 				return NULL;
 			}
+
+			pTex->SetFrameTime(fFrameTime);
+			pTex->SetAnimMode(animMode);
 
 			pTex->SetWrapS(wrap);
 			pTex->SetWrapT(wrap);
@@ -388,7 +380,7 @@ namespace hpl {
 	eTextureWrap cMaterialManager::GetWrap(const tString& asType)
 	{
 		if(cString::ToLowerCase(asType) == "repeat") return eTextureWrap_Repeat;
-		else if(cString::ToLowerCase(asType) == "clamp") return eTextureWrap_Clamp;
+		else if(cString::ToLowerCase(asType) == "clamp") return eTextureWrap_ClampToBorder;
 		else if(cString::ToLowerCase(asType) == "clamptoedge") return eTextureWrap_ClampToEdge;
 
 		return eTextureWrap_Repeat;

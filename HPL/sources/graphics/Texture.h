@@ -38,9 +38,10 @@ namespace hpl {
 
 	enum eTextureWrap
 	{
-		eTextureWrap_Repeat,
-		eTextureWrap_Clamp,
 		eTextureWrap_ClampToEdge,
+		eTextureWrap_MirrorClampToEdge,
+		eTextureWrap_Repeat,
+		eTextureWrap_MirrorRepeat,
 		eTextureWrap_ClampToBorder
 	};
 
@@ -148,7 +149,6 @@ namespace hpl {
 		int mlWidth;
 		int mlHeight;
 		int mlDepth;
-		int mlBpp;
 
 		eTextureTarget mTarget;
 		eTextureWrap mWrapS;
