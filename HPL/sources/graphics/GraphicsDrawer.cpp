@@ -159,7 +159,6 @@ namespace hpl {
 				break;
 
 			case eGfxMaterial::Null:
-				// reset to defaults
 				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_OneMinusSrcAlpha);
 				break;
 				

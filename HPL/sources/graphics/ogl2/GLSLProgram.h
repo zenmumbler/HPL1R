@@ -21,18 +21,17 @@ namespace hpl {
 
 		tString GetProgramName(){ return msName; }
 
-		bool CreateFromFile(const tString& asFile, const tString& asEntry="main");
+		bool CreateFromFile(const tString& asVertexFile, const tString& asFragmentFile);
 
 		void Bind();
 		void UnBind();
 
+		// uniforms
 		bool SetFloat(const tString& asName, float afX);
 		bool SetVec2f(const tString& asName, float afX,float afY);
 		bool SetVec3f(const tString& asName, float afX,float afY,float afZ);
 		bool SetVec4f(const tString& asName, float afX,float afY,float afZ, float afW);
-
 		bool SetMatrixf(const tString& asName, const cMatrixf& mMtx);
-
 		bool SetTextureBindingIndex(const tString& asName, int index);
 
 	protected:

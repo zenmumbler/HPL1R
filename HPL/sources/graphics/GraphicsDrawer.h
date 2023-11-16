@@ -79,49 +79,14 @@ namespace hpl {
 		cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics, cImageManager* apImageManager, cGpuProgramManager* programManager);
 		~cGraphicsDrawer();
 
-		/**
-		 * Draw Gfx object during next DrawAll call.
-		 * \param apObject
-		 * \param avPos
-		 */
 		void DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos);
-
-		/**
-		 * Draw Gfx object during next DrawAll call.
-		 * \param apObject
-		 * \param avPos
-		 * \param avSize Size of object
-		 * \param aColor color to use
-		 */
 		void DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos, const cVector2f& avSize, const cColor& aColor);
-
 		void DrawTexture(iTexture *apTex, const cVector3f& avPos, const cVector2f& avSize, const cColor &aColor = cColor::White);
 
-		/**
-		 * Draw all gfx obejcts, Called after world is rendered by cScene.
-		 */
 		void DrawAll();
 
-		/**
-		 * Create Gfx object from file
-		 * \param &fileName Filename of image
-		 * \param material material to use
-		 * \return
-		 */
 		const cGfxObject* CreateGfxObject(const tString &fileName, eGfxMaterial material);
-
-
-		/**
-		 * Create unmanaged gfx object from Bitmap
-		 * \param *bitmap bitmap
-		 * \param material material to use
-		 * \return
-		 */
 		const cGfxObject* CreateUnmanagedGfxObject(const Bitmap &bitmap, eGfxMaterial material);
-
-		/**
-		 * Destroys a gfx object.
-		 */
 		void DestroyGfxObject(const cGfxObject* apObject);
 
 	private:
@@ -138,4 +103,5 @@ namespace hpl {
 	};
 
 };
+
 #endif // HPL_GRAPHICSDRAWER_H

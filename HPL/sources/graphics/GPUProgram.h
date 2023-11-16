@@ -33,25 +33,13 @@ namespace hpl {
 	{
 	public:
 		iGpuProgram(tString asName) : iResourceBase(asName, 0) {}
-		virtual ~iGpuProgram(){}
+		virtual ~iGpuProgram() = default;
 
 		static void SetLogDebugInformation(bool abX){mbDebugInfo = abX;}
 
-		/**
-		 * Create a from a file. Used internally
-		 * \param asFile
-		 * \param asEntry
-		 * \return
-		 */
 		virtual bool CreateFromFile(const tString& asVertexFile, const tString& asFragmentFile)=0;
 
-		/**
-		 * Bind the program to the GPU
-		 */
 		virtual void Bind()=0;
-		/**
-		 * Unbind the program to the GPU
-		 */
 		virtual void UnBind()=0;
 
 		virtual bool SetFloat(const tString& asName, float afX)=0;
@@ -77,13 +65,12 @@ namespace hpl {
 			return SetVec4f(asName,aCol.r, aCol.g, aCol.b, aCol.a);
 		}
 		virtual bool SetVec4f(const tString& asName, float afX,float afY,float afZ, float afW)=0;
-
 		virtual bool SetMatrixf(const tString& asName, const cMatrixf& mMtx)=0;
-
 		virtual bool SetTextureBindingIndex(const tString& asName, int index)=0;
 
 	protected:
 		static bool mbDebugInfo;
 	};
 };
+
 #endif // HPL_GPU_PROGRAM_H
