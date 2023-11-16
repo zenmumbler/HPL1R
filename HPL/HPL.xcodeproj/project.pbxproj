@@ -328,7 +328,6 @@
 		DB27F0530ACB9AB90054ACA3 /* ParticleSystem3D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ParticleSystem3D.h; sourceTree = "<group>"; };
 		DB27F0550ACB9AB90054ACA3 /* Renderable.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Renderable.h; sourceTree = "<group>"; };
 		DB27F0570ACB9AB90054ACA3 /* Renderer3D.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Renderer3D.h; sourceTree = "<group>"; };
-		DB27F0580ACB9AB90054ACA3 /* RendererPostEffects.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = RendererPostEffects.h; sourceTree = "<group>"; };
 		DB27F0590ACB9AB90054ACA3 /* RenderList.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = RenderList.h; sourceTree = "<group>"; };
 		DB27F05B0ACB9AB90054ACA3 /* RenderState.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = RenderState.h; sourceTree = "<group>"; };
 		DB27F05C0ACB9AB90054ACA3 /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Skeleton.h; sourceTree = "<group>"; };
@@ -510,7 +509,6 @@
 		DBF8497C0AC76D5800BB15CD /* ParticleSystem3D.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleSystem3D.cpp; sourceTree = "<group>"; };
 		DBF8497D0AC76D5800BB15CD /* Renderable.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Renderable.cpp; sourceTree = "<group>"; };
 		DBF8497F0AC76D5800BB15CD /* Renderer3D.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer3D.cpp; sourceTree = "<group>"; };
-		DBF849800AC76D5800BB15CD /* RendererPostEffects.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = RendererPostEffects.cpp; sourceTree = "<group>"; };
 		DBF849810AC76D5800BB15CD /* RenderList.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = RenderList.cpp; sourceTree = "<group>"; };
 		DBF849830AC76D5800BB15CD /* RenderState.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = RenderState.cpp; sourceTree = "<group>"; };
 		DBF849840AC76D5800BB15CD /* Skeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Skeleton.cpp; sourceTree = "<group>"; };
@@ -755,8 +753,6 @@
 				DB27F0480ACB9AB90054ACA3 /* Material_ModulativeX2.h */,
 				DBFBA0180B65E42A0021DAE2 /* Material_Water.cpp */,
 				DB4AFBE00D70773700809E03 /* Material_Water.h */,
-				DBF849800AC76D5800BB15CD /* RendererPostEffects.cpp */,
-				DB27F0580ACB9AB90054ACA3 /* RendererPostEffects.h */,
 			);
 			path = old;
 			sourceTree = "<group>";
