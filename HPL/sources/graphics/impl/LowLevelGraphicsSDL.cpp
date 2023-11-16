@@ -31,7 +31,7 @@
 
 #define IMGUI_DISABLE_OBSOLETE_FUNCTIONS
 #include "imgui/backends/imgui_impl_sdl2.h"
-#include "imgui/backends/imgui_impl_opengl2.h"
+#include "imgui/backends/imgui_impl_opengl3.h"
 
 #include "graphics/Bitmap.h"
 
@@ -165,13 +165,13 @@ namespace hpl {
 
 	cLowLevelGraphicsSDL::~cLowLevelGraphicsSDL()
 	{
-/*
+
 		if (mpImGuiContext) {
 			ImGui_ImplSDL2_Shutdown();
-			ImGui_ImplOpenGL2_Shutdown();
+			ImGui_ImplOpenGL3_Shutdown();
 			ImGui::DestroyContext(mpImGuiContext);
 		}
-*/
+
 		if (mpGLContext) {
 			SDL_GL_DeleteContext(mpGLContext);
 			mpGLContext = NULL;
@@ -272,11 +272,11 @@ namespace hpl {
 		SetupGL();
 
 		//Setup ImGui
-/*
+
 		mpImGuiContext = ImGui::CreateContext();
-		ImGui_ImplOpenGL2_Init();
+		ImGui_ImplOpenGL3_Init();
 		ImGui_ImplSDL2_InitForOpenGL(mpWindow, mpGLContext);
-*/
+
 		return true;
 	}
 
@@ -390,11 +390,9 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	void cLowLevelGraphicsSDL::StartFrame() {
-/*
-		ImGui_ImplOpenGL2_NewFrame();
+		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplSDL2_NewFrame();
 		ImGui::NewFrame();
-*/
 	}
 	
 	void cLowLevelGraphicsSDL::FlushRendering()
@@ -409,11 +407,10 @@ namespace hpl {
 	}
 	
 	void cLowLevelGraphicsSDL::EndFrame() {
-/*
 		// render the debug views last on top of everything else
 		ImGui::Render();
-		ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
-*/
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
 		SwapBuffers();
 	}
 

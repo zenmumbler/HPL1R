@@ -14,7 +14,6 @@
 		8E11634826BED6FF0065E04C /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11632D26BED4E00065E04C /* imgui_tables.cpp */; };
 		8E11634926BED6FF0065E04C /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11632026BED4E00065E04C /* imgui_widgets.cpp */; };
 		8E11634A26BED6FF0065E04C /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11632E26BED4E00065E04C /* imgui_demo.cpp */; };
-		8E11634E26BED7200065E04C /* imgui_impl_opengl2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11632626BED4E00065E04C /* imgui_impl_opengl2.cpp */; };
 		8E11635826BED8DC0065E04C /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E11635426BED8DC0065E04C /* stb_image.c */; };
 		8E11635926BED8DC0065E04C /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E11635526BED8DC0065E04C /* stb_vorbis.c */; };
 		8E11636526BEDA630065E04C /* tinystr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636126BEDA630065E04C /* tinystr.cpp */; };
@@ -218,8 +217,6 @@
 		8E11631F26BED4E00065E04C /* imconfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
 		8E11632026BED4E00065E04C /* imgui_widgets.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_widgets.cpp; sourceTree = "<group>"; };
 		8E11632126BED4E00065E04C /* imstb_truetype.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imstb_truetype.h; sourceTree = "<group>"; };
-		8E11632526BED4E00065E04C /* imgui_impl_opengl2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgui_impl_opengl2.h; sourceTree = "<group>"; };
-		8E11632626BED4E00065E04C /* imgui_impl_opengl2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_opengl2.cpp; sourceTree = "<group>"; };
 		8E11632926BED4E00065E04C /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
 		8E11632A26BED4E00065E04C /* imgui_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
 		8E11632B26BED4E00065E04C /* imstb_rectpack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imstb_rectpack.h; sourceTree = "<group>"; };
@@ -674,8 +671,6 @@
 				8E71FB1A2B0635D000A842AE /* imgui_impl_opengl3.h */,
 				8E71FB172B06346A00A842AE /* imgui_impl_sdl2.cpp */,
 				8E71FB162B06346A00A842AE /* imgui_impl_sdl2.h */,
-				8E11632526BED4E00065E04C /* imgui_impl_opengl2.h */,
-				8E11632626BED4E00065E04C /* imgui_impl_opengl2.cpp */,
 			);
 			path = backends;
 			sourceTree = "<group>";
@@ -1472,7 +1467,6 @@
 				DBF84B0B0AC76F1E00BB15CD /* MeshEntity.cpp in Sources */,
 				DBF84B0C0AC76F1E00BB15CD /* MeshLoaderCollada.cpp in Sources */,
 				DBF84B0D0AC76F1E00BB15CD /* MeshLoaderColladaHelpers.cpp in Sources */,
-				8E11634E26BED7200065E04C /* imgui_impl_opengl2.cpp in Sources */,
 				8EA4871F2610A67C000D1AB7 /* scriptstdstring_utils.cpp in Sources */,
 				8E11637A26C1FDD40065E04C /* Files.cpp in Sources */,
 				DBF84B0F0AC76F1E00BB15CD /* MeshLoaderHandler.cpp in Sources */,

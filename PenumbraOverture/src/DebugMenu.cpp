@@ -54,7 +54,7 @@ void cDebugMenu::OnDraw() {
 	if (! mbEnabled) {
 		return;
 	}
-/*
+
 	const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
 	ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 650, main_viewport->WorkPos.y + 20), ImGuiCond_FirstUseEver);
 	ImGui::SetNextWindowSize(ImVec2(360, 400), ImGuiCond_FirstUseEver);
@@ -94,5 +94,4 @@ void cDebugMenu::OnDraw() {
 		}
 	}
 	ImGui::End();
-*/
 }
