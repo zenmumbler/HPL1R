@@ -22,7 +22,7 @@
 #include "input/impl/KeyboardSDL.h"
 #include "graphics/impl/LowLevelGraphicsSDL.h"
 
-#include "imgui/backends/imgui_impl_sdl.h"
+#include "imgui/backends/imgui_impl_sdl2.h"
 
 namespace hpl {
 

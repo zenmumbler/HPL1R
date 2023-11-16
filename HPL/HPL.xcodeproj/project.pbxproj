@@ -14,7 +14,6 @@
 		8E11634826BED6FF0065E04C /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11632D26BED4E00065E04C /* imgui_tables.cpp */; };
 		8E11634926BED6FF0065E04C /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11632026BED4E00065E04C /* imgui_widgets.cpp */; };
 		8E11634A26BED6FF0065E04C /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11632E26BED4E00065E04C /* imgui_demo.cpp */; };
-		8E11634D26BED7200065E04C /* imgui_impl_sdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11632826BED4E00065E04C /* imgui_impl_sdl.cpp */; };
 		8E11634E26BED7200065E04C /* imgui_impl_opengl2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11632626BED4E00065E04C /* imgui_impl_opengl2.cpp */; };
 		8E11635826BED8DC0065E04C /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E11635426BED8DC0065E04C /* stb_image.c */; };
 		8E11635926BED8DC0065E04C /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E11635526BED8DC0065E04C /* stb_vorbis.c */; };
@@ -28,6 +27,7 @@
 		8E3A5C19289D5991006D99BF /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A5C17289D5991006D99BF /* Log.cpp */; };
 		8E3A72852611363F0086F8ED /* Script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A72832611363F0086F8ED /* Script.cpp */; };
 		8E5BCD602AD5958700B64AD3 /* Material_Universal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BCD5E2AD5958700B64AD3 /* Material_Universal.cpp */; };
+		8E71FB182B06346A00A842AE /* imgui_impl_sdl2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E71FB172B06346A00A842AE /* imgui_impl_sdl2.cpp */; };
 		8E77420628989E02008E9570 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E77420528989E02008E9570 /* Bitmap.cpp */; };
 		8E815948260C1127001CBF63 /* GLSLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E815947260C1127001CBF63 /* GLSLProgram.cpp */; };
 		8E84E7892605487F00DC6065 /* LowLevelSoundOAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E7882605487F00DC6065 /* LowLevelSoundOAL.cpp */; };
@@ -217,10 +217,8 @@
 		8E11631F26BED4E00065E04C /* imconfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
 		8E11632026BED4E00065E04C /* imgui_widgets.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_widgets.cpp; sourceTree = "<group>"; };
 		8E11632126BED4E00065E04C /* imstb_truetype.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imstb_truetype.h; sourceTree = "<group>"; };
-		8E11632326BED4E00065E04C /* imgui_impl_sdl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgui_impl_sdl.h; sourceTree = "<group>"; };
 		8E11632526BED4E00065E04C /* imgui_impl_opengl2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgui_impl_opengl2.h; sourceTree = "<group>"; };
 		8E11632626BED4E00065E04C /* imgui_impl_opengl2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_opengl2.cpp; sourceTree = "<group>"; };
-		8E11632826BED4E00065E04C /* imgui_impl_sdl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_sdl.cpp; sourceTree = "<group>"; };
 		8E11632926BED4E00065E04C /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
 		8E11632A26BED4E00065E04C /* imgui_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
 		8E11632B26BED4E00065E04C /* imstb_rectpack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imstb_rectpack.h; sourceTree = "<group>"; };
@@ -253,6 +251,8 @@
 		8E3A72842611363F0086F8ED /* Script.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Script.h; path = sources/script/Script.h; sourceTree = SOURCE_ROOT; };
 		8E5BCD5E2AD5958700B64AD3 /* Material_Universal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material_Universal.cpp; sourceTree = "<group>"; };
 		8E5BCD5F2AD5958700B64AD3 /* Material_Universal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Material_Universal.h; sourceTree = "<group>"; };
+		8E71FB162B06346A00A842AE /* imgui_impl_sdl2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_sdl2.h; sourceTree = "<group>"; };
+		8E71FB172B06346A00A842AE /* imgui_impl_sdl2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_sdl2.cpp; sourceTree = "<group>"; };
 		8E77420528989E02008E9570 /* Bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
 		8E7FAB6B2B0011040069D40B /* STLHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLHelpers.h; sourceTree = "<group>"; };
 		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
@@ -665,10 +665,10 @@
 		8E11632226BED4E00065E04C /* backends */ = {
 			isa = PBXGroup;
 			children = (
-				8E11632326BED4E00065E04C /* imgui_impl_sdl.h */,
+				8E71FB172B06346A00A842AE /* imgui_impl_sdl2.cpp */,
+				8E71FB162B06346A00A842AE /* imgui_impl_sdl2.h */,
 				8E11632526BED4E00065E04C /* imgui_impl_opengl2.h */,
 				8E11632626BED4E00065E04C /* imgui_impl_opengl2.cpp */,
-				8E11632826BED4E00065E04C /* imgui_impl_sdl.cpp */,
 			);
 			path = backends;
 			sourceTree = "<group>";
@@ -1458,7 +1458,6 @@
 				DBF84B040AC76F1E00BB15CD /* MaterialHandler.cpp in Sources */,
 				DBF84B050AC76F1E00BB15CD /* MaterialManager.cpp in Sources */,
 				DBF84B060AC76F1E00BB15CD /* Math.cpp in Sources */,
-				8E11634D26BED7200065E04C /* imgui_impl_sdl.cpp in Sources */,
 				DBF84B080AC76F1E00BB15CD /* Mesh.cpp in Sources */,
 				DBF84B0A0AC76F1E00BB15CD /* MeshCreator.cpp in Sources */,
 				8E11636626BEDA630065E04C /* tinyxmlparser.cpp in Sources */,
@@ -1548,6 +1547,7 @@
 				DBF84B710AC76F1E00BB15CD /* World3D.cpp in Sources */,
 				DBCEE59F0B4B33190088A7E3 /* Beam.cpp in Sources */,
 				DBCEE7390B4B56440088A7E3 /* MeshLoaderColladaLoader.cpp in Sources */,
+				8E71FB182B06346A00A842AE /* imgui_impl_sdl2.cpp in Sources */,
 				DB294E100C11DC6E005DA55C /* CRC.cpp in Sources */,
 				8E9B9332289C623F007BC193 /* LoadImage.cpp in Sources */,
 				DB4AFB9B0D70768B00809E03 /* OpenALSoundEnvironment.cpp in Sources */,

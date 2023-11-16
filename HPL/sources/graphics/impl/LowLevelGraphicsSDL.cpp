@@ -32,7 +32,7 @@
 #include <stdlib.h>
 
 #define IMGUI_DISABLE_OBSOLETE_FUNCTIONS
-#include "imgui/backends/imgui_impl_sdl.h"
+#include "imgui/backends/imgui_impl_sdl2.h"
 #include "imgui/backends/imgui_impl_opengl2.h"
 
 #include "graphics/Bitmap.h"
