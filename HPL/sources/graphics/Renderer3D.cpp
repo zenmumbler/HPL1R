@@ -439,8 +439,6 @@ namespace hpl {
 		//////////////////////////////////////////////////
 		// Cull and depth mode.
 		mpLowLevelGraphics->SetCullActive(true);
-		mpLowLevelGraphics->SetCullMode(eCullMode_CounterClockwise);
-
 		mpLowLevelGraphics->SetDepthTestActive(true);
 		mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
 

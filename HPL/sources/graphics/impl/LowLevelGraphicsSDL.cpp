@@ -153,10 +153,6 @@ namespace hpl {
 		for (int i = 0; i < MAX_TEXTUREUNITS; i++) {
 			mpCurrentTexture[i] = NULL;
 		}
-
-		mbClearColor = true;
-		mbClearDepth = true;
-		mbClearStencil = false;
 	}
 
 	//-----------------------------------------------------------------------
@@ -211,7 +207,7 @@ namespace hpl {
 
 		unsigned int mlFlags = SDL_WINDOW_OPENGL;
 
-		if(abFullscreen)
+		if (abFullscreen)
 			mlFlags |= SDL_WINDOW_FULLSCREEN;
 
 		Log(" Creating display: %d x %d\n", alWidth, alHeight);
@@ -223,6 +219,8 @@ namespace hpl {
 			return false;
 		}
 		
+		// GL context
+		Log(" Setting up OpenGL\n");
 		mpGLContext = SDL_GL_CreateContext(mpWindow);
 		if (mpGLContext == NULL) {
 			Error(SDL_GetError());
@@ -230,33 +228,23 @@ namespace hpl {
 			return false;
 		}
 
-		//Turn off cursor as default
-		ShowCursor(false);
+		// GL defaults
+		SetClearColor(cColor::Black);
+		SetClearDepth(1.0f);
+		SetClearStencil(0);
+		SetCullMode(eCullMode_CounterClockwise);
+		SetDepthTestActive(true);
+		SetDepthTestFunc(eDepthTestFunc_Equal);
 
-		//GL
-		Log(" Setting up OpenGL\n");
-		SetupGL();
-
-		//Setup ImGui
+		// ImGui context
 		mpImGuiContext = ImGui::CreateContext();
 		ImGui_ImplOpenGL3_Init();
 		ImGui_ImplSDL2_InitForOpenGL(mpWindow, mpGLContext);
 
+		// Hide cursor by default
+		ShowCursor(false);
+
 		return true;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetupGL()
-	{
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-		glClearDepth(1.0f);
-		glClearStencil(0);
-
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LEQUAL);
-
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	}
 
 	//-----------------------------------------------------------------------
@@ -280,17 +268,7 @@ namespace hpl {
 
 	void cLowLevelGraphicsSDL::SetVsyncActive(bool abX)
 	{
-		#if defined(WIN32)
-		if(GLEE_WGL_EXT_swap_control)
-		{
-			wglSwapIntervalEXT(abX ? 1 : 0);
-		}
-		#elif defined(__linux__)
-		if (GLEE_GLX_SGI_swap_control)
-		{
-			glXSwapIntervalSGI(abX ? 1 : 0);
-		}
-		#endif
+		SDL_GL_SetSwapInterval(abX ? 1 : 0);
 	}
 
 	//-----------------------------------------------------------------------
@@ -362,15 +340,9 @@ namespace hpl {
 		ImGui_ImplSDL2_NewFrame();
 		ImGui::NewFrame();
 	}
-	
-	void cLowLevelGraphicsSDL::FlushRendering()
-	{
-		glFlush();
-	}
 
 	void cLowLevelGraphicsSDL::SwapBuffers()
 	{
-		glFlush();
 		SDL_GL_SwapWindow(mpWindow);
 	}
 	
@@ -393,20 +365,14 @@ namespace hpl {
 
 	void cLowLevelGraphicsSDL::DestroyOcclusionQuery(iOcclusionQuery *apQuery)
 	{
-		if(apQuery)	delete apQuery;
+		if (apQuery) delete apQuery;
 	}
 
 	//-----------------------------------------------------------------------
 
 	void cLowLevelGraphicsSDL::ClearScreen()
 	{
-		GLbitfield bitmask = 0;
-
-		if (mbClearColor)   bitmask |= GL_COLOR_BUFFER_BIT;
-		if (mbClearDepth)   bitmask |= GL_DEPTH_BUFFER_BIT;
-		if (mbClearStencil) bitmask |= GL_STENCIL_BUFFER_BIT;
-
-		glClear(bitmask);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	//-----------------------------------------------------------------------
@@ -419,18 +385,6 @@ namespace hpl {
 	}
 	void cLowLevelGraphicsSDL::SetClearStencil(int alVal){
 		glClearStencil(alVal);
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cLowLevelGraphicsSDL::SetClearColorActive(bool abX){
-		mbClearColor=abX;
-	}
-	void cLowLevelGraphicsSDL::SetClearDepthActive(bool abX){
-		mbClearDepth=abX;
-	}
-	void cLowLevelGraphicsSDL::SetClearStencilActive(bool abX){
-		mbClearStencil=abX;
 	}
 
 	//-----------------------------------------------------------------------
@@ -509,14 +463,13 @@ namespace hpl {
 	{
 		if(abX) glEnable(GL_CULL_FACE);
 		else glDisable(GL_CULL_FACE);
-		glCullFace(GL_BACK);
 	}
 
 	void cLowLevelGraphicsSDL::SetCullMode(eCullMode aMode)
 	{
-		glCullFace(GL_BACK);
 		if(aMode == eCullMode_Clockwise) glFrontFace(GL_CCW);
 		else							glFrontFace(GL_CW);
+		glCullFace(GL_BACK);
 	}
 
 	//-----------------------------------------------------------------------

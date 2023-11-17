@@ -80,10 +80,6 @@ namespace hpl {
 		void SetClearDepth(float afDepth) override;
 		void SetClearStencil(int alVal) override;
 
-		void SetClearColorActive(bool abX) override;
-		void SetClearDepthActive(bool abX) override;
-		void SetClearStencilActive(bool abX) override;
-
 		void SetColorWriteActive(bool abR,bool abG,bool abB,bool abA) override;
 		void SetDepthWriteActive(bool abX) override;
 
@@ -118,12 +114,8 @@ namespace hpl {
 
 		// FRAME
 		void StartFrame() override;
-		void FlushRendering() override;
 		void SwapBuffers() override;
 		void EndFrame() override;
-		
-		///// SDL Specific ////////////////////////////
-		void SetupGL();
 
 	private:
 		cVector2l mvScreenSize;
@@ -132,11 +124,6 @@ namespace hpl {
 		//SDL Variables
 		SDL_Window *mpWindow;
 		SDL_GLContext mpGLContext;
-
-		//Clearing
-		bool mbClearColor;
-		bool mbClearDepth;
-		bool mbClearStencil;
 
 		//Texture
 		iTexture* mpCurrentTexture[MAX_TEXTUREUNITS];

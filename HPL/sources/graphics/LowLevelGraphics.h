@@ -166,10 +166,6 @@ namespace hpl {
 		virtual void SetClearDepth(float afDepth)=0;
 		virtual void SetClearStencil(int alVal)=0;
 
-		virtual void SetClearColorActive(bool abX)=0;
-		virtual void SetClearDepthActive(bool abX)=0;
-		virtual void SetClearStencilActive(bool abX)=0;
-
 		virtual void SetColorWriteActive(bool abR,bool abG,bool abB,bool abA)=0;
 		virtual void SetDepthWriteActive(bool abX)=0;
 
@@ -204,7 +200,6 @@ namespace hpl {
 
 		// FRAME
 		virtual void StartFrame()=0;
-		virtual void FlushRendering()=0;
 		virtual void SwapBuffers()=0;
 		virtual void EndFrame()=0;
 	};
