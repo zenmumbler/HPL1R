@@ -26,8 +26,6 @@
 
 namespace hpl {
 
-	class iLowLevelGraphics;
-
 	enum eFrustumPlane
 	{
 		eFrustumPlane_Left=		0,
@@ -88,7 +86,7 @@ namespace hpl {
 
 		cVector3f GetForward();
 
-		void Draw(iLowLevelGraphics *apLowLevelGraphics);
+		void Draw();
 
 	private:
 

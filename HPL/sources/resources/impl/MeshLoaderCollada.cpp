@@ -945,12 +945,9 @@ namespace hpl {
 				sLightName = vParams[0];
 			}
 
-			cMeshLight *pMeshLight = pMesh->CreateLight(eLight3DType_Point);
-
+			cMeshLight *pMeshLight = pMesh->CreateLight();
 			pMeshLight->m_mtxTransform = pLightNode->m_mtxTransform;
-
 			pMeshLight->msParent = GetParentName(pLightNode,&vColladaGeometries);
-
 			pMeshLight->mColor = ColladaLight.mDiffuseColor;
 			pMeshLight->mfFOV = cMath::ToRad(ColladaLight.mfAngle);
 			pMeshLight->mfRadius = pLightNode->mvScale.x;

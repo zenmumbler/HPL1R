@@ -162,13 +162,13 @@ namespace hpl {
 			//Log(" Deleting frame...");
 
 			//Delete the bitmap frame that has this this frame.
-			for(tFrameBitmapListIt it=mlstBitmapFrames.begin();it!=mlstBitmapFrames.end();++it)
+			for (tFrameBitmapListIt it=mlstBitmapFrames.begin();it!=mlstBitmapFrames.end();++it)
 			{
-				cFrameBitmap *pBmpFrame = *it;
-				if(pBmpFrame->GetFrameTexture() == pFrame)
+				cFrameBitmap *frameBitmap = *it;
+				if (frameBitmap->GetFrameTexture() == pFrame)
 				{
 					//Log("and bitmap...");
-					delete pBmpFrame;
+					delete frameBitmap;
 					mlstBitmapFrames.erase(it);
 					break;
 				}

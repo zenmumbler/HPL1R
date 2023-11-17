@@ -110,9 +110,9 @@ namespace hpl {
 		auto destBuffer = dest.data_ + (y * dest.GetWidth()) + x;
 		auto srcBuffer = data_;
 
-		for (int y=0; y<vertCopy; y++)
+		for (int h=0; h < vertCopy; h++)
 		{
-			for (int x=0; x<horizCopy; x++)
+			for (int w=0; w < horizCopy; w++)
 			{
 				*destBuffer++ = *srcBuffer++;
 			}
@@ -191,9 +191,9 @@ namespace hpl {
 
 		auto pixels = data_ + (y * width_) + x;
 
-		for (int y=0; y<vertFill; y++)
+		for (int j=0; j < vertFill; j++)
 		{
-			for (int x=0; x<horizFill; x++)
+			for (int i=0; i < horizFill; i++)
 			{
 				*pixels = col;
 			}

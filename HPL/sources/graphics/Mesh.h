@@ -270,7 +270,7 @@ namespace hpl {
 		iCollideShape* CreateCollideShapeFromCollider(cMeshCollider *pCollider, iPhysicsWorld *apWorld);
 
 		//Lights
-		cMeshLight* CreateLight(eLight3DType aType);
+		cMeshLight* CreateLight();
 		cMeshLight* GetLight(int alIdx);
 		int GetLightNum();
 		iLight3D* CreateLightInWorld(const tString& sNamePrefix, cMeshLight* apMeshLight,

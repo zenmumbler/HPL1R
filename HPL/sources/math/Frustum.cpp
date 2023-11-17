@@ -19,7 +19,6 @@
 #include "math/Frustum.h"
 
 #include "math/Math.h"
-#include "graphics/LowLevelGraphics.h"
 
 
 namespace hpl {
@@ -403,7 +402,7 @@ namespace hpl {
 	}
 	//-----------------------------------------------------------------------
 
-	void cFrustum::Draw(iLowLevelGraphics *apLowLevelGraphics)
+	void cFrustum::Draw()
 	{
 	/*
 		apLowLevelGraphics->DrawLine(mvOrigin, mvEndPoints[0],cColor(1,1,1,1));

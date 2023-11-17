@@ -59,6 +59,7 @@ namespace hpl {
 	 */
 	iResourceBase* cGpuProgramManager::Create(const tString& asName)
 	{
+	#pragma unused(asName)
 		return NULL;
 	}
 

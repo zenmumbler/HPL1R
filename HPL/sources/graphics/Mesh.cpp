@@ -796,7 +796,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMeshLight* cMesh::CreateLight(eLight3DType aType)
+	cMeshLight* cMesh::CreateLight()
 	{
 		cMeshLight* pLight = new cMeshLight();
 
