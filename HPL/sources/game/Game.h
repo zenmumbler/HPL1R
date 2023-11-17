@@ -57,8 +57,6 @@ namespace hpl {
 		int ScreenWidth = 800;
 		int ScreenHeight = 600;
 		bool Fullscreen = false;
-		int Multisampling = 0;
-
 		tString AudioDeviceName{};
 		tString WindowCaption{};
 	};
@@ -69,7 +67,6 @@ namespace hpl {
 	{
 	public:
 		cGame(iLowLevelGameSetup *apGameSetup, GameSetupOptions &options);
-		cGame(iLowLevelGameSetup *apGameSetup, int alWidth, int alHeight, bool abFullscreen, int alMultisampling=0);
 		~cGame();
 	private:
 		void GameInit(iLowLevelGameSetup *apGameSetup, GameSetupOptions &options);

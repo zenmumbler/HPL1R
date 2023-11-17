@@ -117,11 +117,9 @@ namespace hpl {
 		 * \param alWidth
 		 * \param alHeight
 		 * \param abFullscreen
-		 * \param alMultiSampling The amount of multisamplimg, 0 = off.
 		 * \return
 		 */
-		virtual bool Init(int alWidth, int alHeight, bool abFullscreen, int alMultisampling,
-							const tString& asWindowCaption) = 0;
+		virtual bool Init(int alWidth, int alHeight, bool abFullscreen,	const tString& asWindowCaption) = 0;
 
 		/**
 		 * Show the cursor or not. Default is false

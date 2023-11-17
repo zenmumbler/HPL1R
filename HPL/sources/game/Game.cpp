@@ -80,19 +80,6 @@ namespace hpl {
 		GameInit(apGameSetup, options);
 	}
 
-
-	//-----------------------------------------------------------------------
-
-	cGame::cGame(iLowLevelGameSetup *apGameSetup, int alWidth, int alHeight, bool abFullscreen, int alMultisampling)
-	{
-		GameSetupOptions options{};
-		options.ScreenWidth = alWidth;
-		options.ScreenHeight = alHeight;
-		options.Fullscreen = abFullscreen;
-		options.Multisampling = alMultisampling;
-		GameInit(apGameSetup, options);
-	}
-
 	//-----------------------------------------------------------------------
 
 	void cGame::GameInit(iLowLevelGameSetup *apGameSetup, GameSetupOptions &options)
@@ -137,7 +124,6 @@ namespace hpl {
 		mpGraphics->Init(options.ScreenWidth,
 			options.ScreenHeight,
 			options.Fullscreen,
-			options.Multisampling,
 			options.WindowCaption,
 			mpResources);
 

@@ -242,13 +242,10 @@ bool cInit::Init(tString asCommandLine)
 	options.ScreenWidth = mvScreenSize.x;
 	options.ScreenHeight = mvScreenSize.y;
 	options.Fullscreen = mbFullScreen;
-	options.Multisampling = mlFSAA;
 	options.AudioDeviceName = mpConfig->GetString("Sound", "DeviceName", "NULL");
 	options.WindowCaption = "Penumbra Overture";
 
-	iLowLevelGameSetup *pSetUp = NULL;
-
-	pSetUp = new cSDLGameSetup();
+	iLowLevelGameSetup *pSetUp = new cSDLGameSetup();
 	mpGame = new cGame(pSetUp, options);
 
 	mpGame->GetGraphics()->GetLowLevel()->SetVsyncActive(mbVsync);

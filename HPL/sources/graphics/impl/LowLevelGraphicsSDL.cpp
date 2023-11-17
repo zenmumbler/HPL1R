@@ -147,8 +147,6 @@ namespace hpl {
 
 	cLowLevelGraphicsSDL::cLowLevelGraphicsSDL() : iLowLevelGraphics()
 	{
-		mlMultisampling = 0;
-
 		mvVirtualSize.x = 800;
 		mvVirtualSize.y = 600;
 
@@ -191,13 +189,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cLowLevelGraphicsSDL::Init(int alWidth, int alHeight, bool abFullscreen,
-									int alMultisampling, const tString& asWindowCaption)
+	bool cLowLevelGraphicsSDL::Init(int alWidth, int alHeight, bool abFullscreen, const tString& asWindowCaption)
 	{
 		mvScreenSize.x = alWidth;
 		mvScreenSize.y = alHeight;
-
-		mlMultisampling = alMultisampling;
 
 		// Request GL Core Profile context
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
@@ -213,22 +208,6 @@ namespace hpl {
 
 		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 		SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
-
-		// Multisampling
-		if (mlMultisampling > 0)
-		{
-			if (SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1) == -1)
-			{
-				Error("Multisample buffers not supported!\n");
-			}
-			else
-			{
-				if (SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, mlMultisampling) == -1)
-				{
-					Error("Couldn't set multisampling samples to %d\n", mlMultisampling);
-				}
-			}
-		}
 
 		unsigned int mlFlags = SDL_WINDOW_OPENGL;
 

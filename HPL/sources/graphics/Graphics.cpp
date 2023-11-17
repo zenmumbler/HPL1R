@@ -75,21 +75,20 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	bool cGraphics::Init(int alWidth, int alHeight, bool abFullscreen,
-						 int alMultisampling, const tString &asWindowCaption,
-						 cResources* apResources)
+						 const tString &asWindowCaption, cResources* apResources)
 	{
 		Log("Initializing Graphics Module\n");
 		Log("--------------------------------------------------------\n");
 
 		Log(" Init low level graphics\n");
-		mpLowLevelGraphics->Init(alWidth, alHeight, abFullscreen, alMultisampling, asWindowCaption);
+		mpLowLevelGraphics->Init(alWidth, alHeight, abFullscreen, asWindowCaption);
 
 		Log(" Creating graphic systems\n");
 		mpMaterialHandler = new cMaterialHandler(this, apResources);
 		mpDrawer = new cGraphicsDrawer(mpLowLevelGraphics, apResources->GetImageManager(), apResources->GetGpuProgramManager());
-		mpRenderList = new cRenderList(this);
 		mpMeshCreator = new cMeshCreator(mpLowLevelGraphics, apResources);
-		mpRenderer3D = new cRenderer3D(mpLowLevelGraphics,apResources,mpMeshCreator,mpRenderList);
+		mpRenderList = new cRenderList(this);
+		mpRenderer3D = new cRenderer3D(mpLowLevelGraphics, apResources, mpMeshCreator, mpRenderList);
 
 		//Add all the materials.
 		Log(" Adding engine materials\n");

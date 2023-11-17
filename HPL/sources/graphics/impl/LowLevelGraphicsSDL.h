@@ -47,8 +47,7 @@ namespace hpl {
 		cLowLevelGraphicsSDL();
 		~cLowLevelGraphicsSDL();
 
-		bool Init(int alWidth, int alHeight, bool abFullscreen, int alMultisampling,
-					const tString& asWindowCaption) override;
+		bool Init(int alWidth, int alHeight, bool abFullscreen, const tString& asWindowCaption) override;
 
 		void ShowCursor(bool abX) override;
 		void SetInputGrab(bool abX);
@@ -129,7 +128,6 @@ namespace hpl {
 	private:
 		cVector2l mvScreenSize;
 		cVector2f mvVirtualSize;
-		int mlMultisampling;
 
 		//SDL Variables
 		SDL_Window *mpWindow;

@@ -37,8 +37,8 @@ namespace hpl {
 		cGraphics(iLowLevelGraphics *apLowLevelGraphics);
 		~cGraphics();
 
-		bool Init(int alWidth, int alHeight, bool abFullscreen, int alMultisampling,
-					const tString &asWindowCaption,cResources* apResources);
+		bool Init(int alWidth, int alHeight, bool abFullscreen,
+					const tString &asWindowCaption, cResources* apResources);
 
 		iLowLevelGraphics* GetLowLevel() { return mpLowLevelGraphics; }
 		cGraphicsDrawer* GetDrawer() { return mpDrawer; }
