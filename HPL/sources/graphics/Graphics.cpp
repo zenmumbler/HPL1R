@@ -44,7 +44,6 @@ namespace hpl {
 		mpLowLevelGraphics = apLowLevelGraphics;
 
 		mpDrawer = NULL;
-		mpMeshCreator = NULL;
 		mpMaterialHandler = NULL;
 		mpRenderer3D = NULL;
 		mpRenderList = NULL;
@@ -59,7 +58,6 @@ namespace hpl {
 
 		delete mpRenderer3D;
 		delete mpDrawer;
-		delete mpMeshCreator;
 		delete mpMaterialHandler;
 		delete mpRenderList;
 
@@ -86,9 +84,8 @@ namespace hpl {
 		Log(" Creating graphic systems\n");
 		mpMaterialHandler = new cMaterialHandler(this, apResources);
 		mpDrawer = new cGraphicsDrawer(mpLowLevelGraphics, apResources->GetImageManager(), apResources->GetGpuProgramManager());
-		mpMeshCreator = new cMeshCreator(mpLowLevelGraphics, apResources);
 		mpRenderList = new cRenderList(this);
-		mpRenderer3D = new cRenderer3D(mpLowLevelGraphics, apResources, mpMeshCreator, mpRenderList);
+		mpRenderer3D = new cRenderer3D(mpLowLevelGraphics, apResources, mpRenderList);
 
 		//Add all the materials.
 		Log(" Adding engine materials\n");

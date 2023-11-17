@@ -45,7 +45,6 @@ namespace hpl {
 	class cCamera;
 	class cWorld3D;
 	class iVertexBuffer;
-	class cMeshCreator;
 	class cRenderList;
 	class iRenderable;
 	class iLight3D;
@@ -128,8 +127,7 @@ namespace hpl {
 	class cRenderer3D
 	{
 	public:
-		cRenderer3D(iLowLevelGraphics *apLowLevelGraphics,cResources* apResources,
-						cMeshCreator* apMeshCreator, cRenderList *apRenderList);
+		cRenderer3D(iLowLevelGraphics *apLowLevelGraphics,cResources* apResources, cRenderList *apRenderList);
 		~cRenderer3D();
 
 		void UpdateRenderList(cWorld3D* apWorld, cCamera *apCamera, float afFrameTime);
@@ -230,7 +228,6 @@ namespace hpl {
 
 		tVertexVec mvVtxRect;
 
-		cMeshCreator* mpMeshCreator;
 		cRenderList *mpRenderList;
 
 		iVertexBuffer* mpSkyBox;

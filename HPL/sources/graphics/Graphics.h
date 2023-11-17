@@ -43,13 +43,11 @@ namespace hpl {
 		iLowLevelGraphics* GetLowLevel() { return mpLowLevelGraphics; }
 		cGraphicsDrawer* GetDrawer() { return mpDrawer; }
 		cRenderer3D* GetRenderer3D() { return mpRenderer3D; }
-		cMeshCreator* GetMeshCreator() { return mpMeshCreator; }
 		cMaterialHandler* GetMaterialHandler() { return mpMaterialHandler; }
 
 	private:
 		iLowLevelGraphics *mpLowLevelGraphics;
 		cGraphicsDrawer *mpDrawer;
-		cMeshCreator *mpMeshCreator;
 		cMaterialHandler *mpMaterialHandler;
 		cRenderer3D* mpRenderer3D;
 		cRenderList *mpRenderList;

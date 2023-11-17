@@ -17,34 +17,10 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "graphics/MeshCreator.h"
-#include "system/String.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/VertexBuffer.h"
-#include "resources/Resources.h"
-#include "graphics/Mesh.h"
-#include "graphics/SubMesh.h"
-#include "resources/MaterialManager.h"
-#include "resources/AnimationManager.h"
 
 namespace hpl {
-
-	//////////////////////////////////////////////////////////////////////////
-	// CONSTRUCTORS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	cMeshCreator::cMeshCreator(iLowLevelGraphics *apLowLevelGraphics, cResources *apResources)
-	{
-		mpLowLevelGraphics = apLowLevelGraphics;
-		mpResources = apResources;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cMeshCreator::~cMeshCreator()
-	{
-	}
 
 	//-----------------------------------------------------------------------
 
@@ -54,25 +30,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMesh* cMeshCreator::CreateBox(const tString &asName,cVector3f avSize, const tString &asMaterial)
+	iVertexBuffer* CreateSkyBoxVertexBuffer(iLowLevelGraphics* llGfx, float afSize)
 	{
-		cMesh *pMesh = new cMesh(asName, mpResources->GetMaterialManager(), mpResources->GetAnimationManager());
-
-		cSubMesh *pSubMesh = pMesh->CreateSubMesh("Main");
-
-		iMaterial *pMat = mpResources->GetMaterialManager()->CreateMaterial(asMaterial);
-		pSubMesh->SetMaterial(pMat);
-		iVertexBuffer *pVtxBuff = CreateBoxVertexBuffer(avSize);
-		pSubMesh->SetVertexBuffer(pVtxBuff);
-
-		return pMesh;
-	}
-
-	//-----------------------------------------------------------------------
-
-	iVertexBuffer* cMeshCreator::CreateSkyBoxVertexBuffer(float afSize)
-	{
-		auto pSkyBox = mpLowLevelGraphics->CreateVertexBuffer(
+		auto pSkyBox = llGfx->CreateVertexBuffer(
 			VertexMask_Color0 | VertexMask_Position | VertexMask_UV0,
 			VertexBufferPrimitiveType::Quads, VertexBufferUsageType::Static,
 			24, 24
@@ -150,9 +110,44 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iVertexBuffer* cMeshCreator::CreateBoxVertexBuffer(cVector3f avSize)
+	static cVector2f GetBoxTex(int i,int x, int y, int z, cVector3f *vAdd)
 	{
-		iVertexBuffer* pBox = mpLowLevelGraphics->CreateVertexBuffer(
+		cVector2f vTex;
+
+		if(std::abs(x)){
+			vTex.x = vAdd[i].z;
+			vTex.y = vAdd[i].y;
+		}
+		else if(std::abs(y)){
+			vTex.x = vAdd[i].x;
+			vTex.y = vAdd[i].z;
+		}
+		else if(std::abs(z)){
+			vTex.x = vAdd[i].x;
+			vTex.y = vAdd[i].y;
+		}
+
+		//Inverse for negative directions
+		if(x+y+z <0)
+		{
+			vTex.x = -vTex.x;
+			vTex.y = -vTex.y;
+		}
+
+		return vTex;
+	}
+
+	static int GetBoxIdx(int i,int x, int y, int z)
+	{
+		int idx = i;
+		if(x + y + z > 0) idx = 3-i;
+
+		return idx;
+	}
+
+	iVertexBuffer* CreateBoxVertexBuffer(iLowLevelGraphics* llGfx, cVector3f avSize)
+	{
+		iVertexBuffer* pBox = llGfx->CreateVertexBuffer(
 			VertexMask_Color0 | VertexMask_Position | VertexMask_UV0 |
 			VertexMask_Tangent | VertexMask_Normal,
 			VertexBufferPrimitiveType::Triangles, VertexBufferUsageType::Static,
@@ -244,49 +239,5 @@ namespace hpl {
 		}
 		return pBox;
 	}
-
-	cVector2f cMeshCreator::GetBoxTex(int i,int x, int y, int z, cVector3f *vAdd)
-	{
-		cVector2f vTex;
-
-		if(std::abs(x)){
-			vTex.x = vAdd[i].z;
-			vTex.y = vAdd[i].y;
-		}
-		else if(std::abs(y)){
-			vTex.x = vAdd[i].x;
-			vTex.y = vAdd[i].z;
-		}
-		else if(std::abs(z)){
-			vTex.x = vAdd[i].x;
-			vTex.y = vAdd[i].y;
-		}
-
-		//Inverse for negative directions
-		if(x+y+z <0)
-		{
-			vTex.x = -vTex.x;
-			vTex.y = -vTex.y;
-		}
-
-		return vTex;
-	}
-
-	int cMeshCreator::GetBoxIdx(int i,int x, int y, int z)
-	{
-		int idx = i;
-		if(x + y + z > 0) idx = 3-i;
-
-		return idx;
-	}
-
-	//////////////////////////////////////////////////////////////////////////
-	// PRIVATE METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-
-	//-----------------------------------------------------------------------
 
 }

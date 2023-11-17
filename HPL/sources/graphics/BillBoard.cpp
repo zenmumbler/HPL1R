@@ -51,9 +51,8 @@ namespace hpl {
 		mpMaterialManager = apResources->GetMaterialManager();
 		mpFileSearcher = apResources->GetFileSearcher();
 		mpLowLevelGraphics = apGraphics->GetLowLevel();
-		mpMeshCreator = apGraphics->GetMeshCreator();
 
-		mpHaloSourceBuffer = mpMeshCreator->CreateBoxVertexBuffer(1);
+		mpHaloSourceBuffer = CreateBoxVertexBuffer(mpLowLevelGraphics, 1);
 
 		mvSize = avSize;
 		mvAxis = cVector3f(0,1,0);

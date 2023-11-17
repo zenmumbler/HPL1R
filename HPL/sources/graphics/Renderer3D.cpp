@@ -35,7 +35,6 @@
 #include "math/BoundingVolume.h"
 #include "resources/GpuProgramManager.h"
 #include "graphics/GPUProgram.h"
-// #include "graphics/RendererPostEffects.h"
 #include "physics/PhysicsWorld.h"
 #include "physics/PhysicsBody.h"
 #include "system/Log.h"
@@ -65,15 +64,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cRenderer3D::cRenderer3D(iLowLevelGraphics *apLowLevelGraphics,cResources* apResources,
-							cMeshCreator* apMeshCreator, cRenderList *apRenderList)
+	cRenderer3D::cRenderer3D(iLowLevelGraphics *apLowLevelGraphics, cResources* apResources, cRenderList *apRenderList)
 	{
 		Log("  Creating Renderer3D\n");
 
 
 		mpLowLevelGraphics = apLowLevelGraphics;
 		mpResources = apResources;
-		mpMeshCreator = apMeshCreator;
 
 		mpSkyBoxTexture = NULL;
 		mbAutoDestroySkybox = false;
@@ -452,7 +449,7 @@ namespace hpl {
 
 	void cRenderer3D::InitSkyBox()
 	{
-		mpSkyBox = mpMeshCreator->CreateSkyBoxVertexBuffer(1);
+		mpSkyBox = CreateSkyBoxVertexBuffer(mpLowLevelGraphics, 1);
 	}
 
 	//-----------------------------------------------------------------------
