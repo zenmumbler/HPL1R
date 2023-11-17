@@ -52,8 +52,6 @@ namespace hpl {
 		mbIsTransperant = false;
 		mbUsesLights = false;
 
-		///////////////////////////////////////////
-		//Load the light pass program
 		_program = mpProgramManager->CreateProgram("Universal.vert", "Universal.frag");
 	}
 

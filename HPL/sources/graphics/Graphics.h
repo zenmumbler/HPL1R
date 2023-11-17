@@ -25,7 +25,6 @@ namespace hpl {
 
 	class cResources;
 	class cRenderer3D;
-	// class cRendererPostEffects;
 	class cRenderList;
 	class cGraphicsDrawer;
 	class iLowLevelGraphics;
@@ -41,22 +40,11 @@ namespace hpl {
 		bool Init(int alWidth, int alHeight, bool abFullscreen, int alMultisampling,
 					const tString &asWindowCaption,cResources* apResources);
 
-		/**
-		 * Get low level graphics routines
-		 * \return pointer to the low level class
-		 */
-		iLowLevelGraphics* GetLowLevel();
-
-		/**
-		 * Get the drawer
-		 * \return
-		 */
-		cGraphicsDrawer* GetDrawer();
-
-		cRenderer3D* GetRenderer3D(){ return mpRenderer3D;}
-		// cRendererPostEffects* GetRendererPostEffects(){ return mpRendererPostEffects;}
-		cMeshCreator* GetMeshCreator(){return mpMeshCreator;}
-		cMaterialHandler* GetMaterialHandler(){return mpMaterialHandler;}
+		iLowLevelGraphics* GetLowLevel() { return mpLowLevelGraphics; }
+		cGraphicsDrawer* GetDrawer() { return mpDrawer; }
+		cRenderer3D* GetRenderer3D() { return mpRenderer3D; }
+		cMeshCreator* GetMeshCreator() { return mpMeshCreator; }
+		cMaterialHandler* GetMaterialHandler() { return mpMaterialHandler; }
 
 	private:
 		iLowLevelGraphics *mpLowLevelGraphics;
@@ -64,9 +52,9 @@ namespace hpl {
 		cMeshCreator *mpMeshCreator;
 		cMaterialHandler *mpMaterialHandler;
 		cRenderer3D* mpRenderer3D;
-		// cRendererPostEffects* mpRendererPostEffects;
 		cRenderList *mpRenderList;
 	};
 
 };
+
 #endif // HPL_GRAPHICS_H

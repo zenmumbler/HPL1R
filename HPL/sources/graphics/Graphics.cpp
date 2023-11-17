@@ -21,7 +21,6 @@
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/GraphicsDrawer.h"
 #include "graphics/Renderer3D.h"
-// #include "graphics/RendererPostEffects.h"
 #include "graphics/RenderList.h"
 #include "graphics/MaterialHandler.h"
 #include "graphics/MeshCreator.h"
@@ -48,7 +47,7 @@ namespace hpl {
 		mpMeshCreator = NULL;
 		mpMaterialHandler = NULL;
 		mpRenderer3D = NULL;
-		// mpRendererPostEffects = NULL;
+		mpRenderList = NULL;
 	}
 
 	//-----------------------------------------------------------------------
@@ -59,7 +58,6 @@ namespace hpl {
 		Log("--------------------------------------------------------\n");
 
 		delete mpRenderer3D;
-		// delete mpRendererPostEffects;
 		delete mpDrawer;
 		delete mpMeshCreator;
 		delete mpMaterialHandler;
@@ -92,9 +90,6 @@ namespace hpl {
 		mpRenderList = new cRenderList(this);
 		mpMeshCreator = new cMeshCreator(mpLowLevelGraphics, apResources);
 		mpRenderer3D = new cRenderer3D(mpLowLevelGraphics,apResources,mpMeshCreator,mpRenderList);
-//		mpRendererPostEffects = new cRendererPostEffects,(mpLowLevelGraphicsapResources, mpRenderList, mpRenderer3D);
-//		mpRenderer3D->SetPostEffects(mpRendererPostEffects);
-
 
 		//Add all the materials.
 		Log(" Adding engine materials\n");
@@ -104,21 +99,4 @@ namespace hpl {
 
 		return true;
 	}
-
-	//-----------------------------------------------------------------------
-
-	iLowLevelGraphics* cGraphics::GetLowLevel()
-	{
-		return mpLowLevelGraphics;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cGraphicsDrawer* cGraphics::GetDrawer()
-	{
-		return mpDrawer;
-	}
-
-	//-----------------------------------------------------------------------
-
 }
