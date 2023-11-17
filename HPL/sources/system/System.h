@@ -23,9 +23,6 @@
 
 namespace hpl {
 
-//	extern void CreateMessageBox ( const char* asCaption, const char *fmt, ...);
-//	extern void CreateMessageBox ( eMsgBoxType eType, const char* asCaption, const char *fmt, ...);
-
 	typedef enum
 	{
 		eMsgBoxType_Info,
@@ -41,9 +38,6 @@ namespace hpl {
 
 	void CopyTextToClipboard(const tWString &asText);
 	tWString LoadTextFromClipboard();
-
-	void SetWindowCaption(const tString &asName);
-	bool HasWindowFocus(const tWString &asWindowCaption);
 
 	void InitAppTime();
 	uint64_t GetAppTimeMS();

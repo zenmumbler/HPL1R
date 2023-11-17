@@ -448,8 +448,6 @@ bool cInit::Init(tString asCommandLine)
 		mpConfig = new cConfigFile(gsUserSettingsPath);
 		gbUsingUserSettings = true;
 	}
-
-	SetWindowCaption("Penumbra");
 	
 	return true;
 }
