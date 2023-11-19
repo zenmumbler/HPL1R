@@ -34,7 +34,6 @@ namespace hpl {
 	enum eRenderStateType
 	{
 		eRenderStateType_Sector = 0,
-		eRenderStateType_Pass = 1,
 		eRenderStateType_DepthTest = 2,
 		eRenderStateType_Depth = 3,
 		eRenderStateType_AlphaMode = 4,
@@ -64,9 +63,6 @@ namespace hpl {
 		//Sector
 		cSector *mpSector;
 
-		//Pass
-		int mlPass;
-
 		//DepthTest
 		bool mbDepthTest;
 
@@ -82,17 +78,10 @@ namespace hpl {
 
 		//Vertex program
 		iGpuProgram *mpProgram;
-		iMaterialProgramSetup* mpVtxProgramSetup;
-		bool mbUsesLight;
-		bool mbUsesEye;
-		iLight3D* mpLight;
-
-		//Fragment program
-		iMaterialProgramSetup* mpFragProgramSetup;
+		iMaterialProgramSetup* mpProgramSetup;
 
 		//Texture
 		iTexture* mpTexture[MAX_TEXTUREUNITS];
-		eMaterialBlendMode mTextureBlend[MAX_TEXTUREUNITS];
 
 		//Vertex buffer
 		iVertexBuffer *mpVtxBuffer;

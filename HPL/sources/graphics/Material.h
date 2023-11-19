@@ -29,25 +29,13 @@ class TiXmlElement;
 
 namespace hpl {
 
-
-#define kMaxProgramNum (5)
-
-	enum eMaterialQuality
-	{
-		eMaterialQuality_Classic=3,
-		eMaterialQuality_Modern=4,
-		eMaterialQuality_LastEnum=5
-	};
-
 	enum eMaterialTexture
 	{
 		eMaterialTexture_Diffuse,
 		eMaterialTexture_NMap,
 		eMaterialTexture_Specular,
-		eMaterialTexture_Alpha,
-		eMaterialTexture_Illumination,
-		eMaterialTexture_CubeMap,
-		eMaterialTexture_Refraction,
+		eMaterialTexture_CubeMap,		// used once (not in black blague)
+		eMaterialTexture_Refraction,	// used once (more often in black plague)
 		eMaterialTexture_LastEnum
 	};
 
@@ -86,12 +74,9 @@ namespace hpl {
 
 	//---------------------------------------------------
 
-	class cRenderer3D;
 	class cRenderSettings;
 	class cTextureManager;
 	class cGpuProgramManager;
-	class iLight;
-	class iLight3D;
 
 	//---------------------------------------------------------------
 
@@ -124,8 +109,7 @@ namespace hpl {
 	{
 	public:
 		iMaterial(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-				cTextureManager *apTextureManager,
-				cGpuProgramManager* apProgramManager, cRenderer3D *apRenderer3D);
+				cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager);
 		virtual ~iMaterial();
 
 		//resources stuff.
@@ -134,21 +118,15 @@ namespace hpl {
 		virtual void Update(float afTimeStep){}
 
 		//The new render system stuff
-		virtual iGpuProgram* GetProgramEx(eMaterialRenderType aType, int alPass, iLight3D *apLight){return NULL;}
-		virtual bool VertexProgramUsesLight(eMaterialRenderType aType, int alPass, iLight3D *apLight){return false;}
-		virtual bool VertexProgramUsesEye(eMaterialRenderType aType, int alPass, iLight3D *apLight){return false;}
-		virtual iMaterialProgramSetup * GetVertexProgramSetup(eMaterialRenderType aType, int alPass, iLight3D *apLight){return NULL;}
+		virtual iGpuProgram* GetProgramEx(eMaterialRenderType aType){return NULL;}
 
-		virtual iMaterialProgramSetup * GetFragmentProgramSetup(eMaterialRenderType aType, int alPass, iLight3D *apLight){return NULL;}
+		virtual iMaterialProgramSetup * GetProgramSetup(eMaterialRenderType aType){return NULL;}
 
-		virtual eMaterialAlphaMode GetAlphaMode(eMaterialRenderType aType, int alPass, iLight3D *apLight){return eMaterialAlphaMode_Solid;}
-		virtual eMaterialBlendMode GetBlendMode(eMaterialRenderType aType, int alPass, iLight3D *apLight){return eMaterialBlendMode_Replace;}
-		virtual eMaterialChannelMode GetChannelMode(eMaterialRenderType aType, int alPass, iLight3D *apLight){return eMaterialChannelMode_RGBA;}
+		virtual eMaterialAlphaMode GetAlphaMode(eMaterialRenderType aType){return eMaterialAlphaMode_Solid;}
+		virtual eMaterialBlendMode GetBlendMode(eMaterialRenderType aType){return eMaterialBlendMode_Replace;}
+		virtual eMaterialChannelMode GetChannelMode(eMaterialRenderType aType){return eMaterialChannelMode_RGBA;}
 
-		virtual iTexture* GetTexture(int alUnit,eMaterialRenderType aType, int alPass, iLight3D *apLight){ return NULL;}
-		virtual eMaterialBlendMode GetTextureBlend(int alUnit,eMaterialRenderType aType, int alPass, iLight3D *apLight){ return eMaterialBlendMode_None;}
-
-		virtual int GetNumOfPasses(eMaterialRenderType aType, iLight3D *apLight){ return 0;}
+		virtual iTexture* GetTexture(int alUnit,eMaterialRenderType aType){ return NULL;}
 
 		virtual bool UsesType(eMaterialRenderType aType){return false;}
 
@@ -158,32 +136,16 @@ namespace hpl {
 		bool GetDepthTest(){ return mbDepthTest;}
 		void SetDepthTest(bool abX){ mbDepthTest = abX;}
 
-		float GetValue() { return mfValue;}
-		void SetValue(float afX) { mfValue = afX;}
-
 		virtual bool LoadData(TiXmlElement* apRootElem){ return true; }
 
 		iTexture* GetTexture(eMaterialTexture aType);
-		cRect2f GetTextureOffset(eMaterialTexture aType);
-
 		void SetTexture(iTexture* apTex,eMaterialTexture aType){ mvTexture[aType] = apTex; }
-
-		void SetProgram(iGpuProgram* apProgram, unsigned int alNum){
-						mpProgram[alNum] = apProgram;}
-		iGpuProgram* GetProgram(unsigned int alNum){
-						return mpProgram[alNum];}
 
 		/**
 		 * return true if the material is transparent
 		 * \return
 		 */
 		virtual bool IsTransperant() {return mbIsTransperant;}
-
-		/**
-		 * return true if the material has a light pass
-		 * \return
-		 */
-		virtual bool UsesLights(){ return mbUsesLights; }
 
 		virtual tTextureTypeList GetTextureTypes(){
 			tTextureTypeList vTypes;
@@ -198,47 +160,23 @@ namespace hpl {
 		void SetId(int alId){ mlId = alId;}
 		int GetId(){ return mlId;}
 
-		virtual iGpuProgram* GetRefractionProgam(){ return NULL;}
-
-		virtual bool GetRefractionUsesDiffuse(){ return false;}
-		virtual eMaterialTexture GetRefractionDiffuseTexture(){ return eMaterialTexture_Diffuse;}
-
-		virtual bool GetRefractionUsesEye(){ return false;}
-		virtual bool GetRefractionUsesTime(){ return false;}
-		virtual bool GetRefractionSkipsStandardTrans(){ return false;}
-
 		const tString& GetPhysicsMaterial(){ return msPhysicsMaterial;}
 		void SetPhysicsMaterial(const tString& asName){ msPhysicsMaterial = asName;}
-
-		static void SetQuality(eMaterialQuality aQuality){ mQuality = aQuality;}
-		static eMaterialQuality GetQuality(){ return mQuality;}
 
 	protected:
 		iLowLevelGraphics* mpLowLevelGraphics;
 		cTextureManager* mpTextureManager;
-		cRenderer3D* mpRenderer3D;
-		cRenderSettings *mpRenderSettings;
 		cGpuProgramManager* mpProgramManager;
 
-		static eMaterialQuality	mQuality;
-
 		bool mbIsTransperant;
-		bool mbUsesLights;
 		bool mbHasAlpha;
 		bool mbDepthTest;
-		float mfValue;
 
 		int mlId;
 
 		tString msPhysicsMaterial;
 
 		tTextureVec mvTexture;
-
-		iGpuProgram *mpProgram[kMaxProgramNum];
-
-		int mlPassCount;
-
-		//void Destroy();
 	};
 
 	typedef std::vector<iMaterial*> tMaterialVec;
@@ -250,8 +188,7 @@ namespace hpl {
 		virtual ~iMaterialType() {}
 		virtual bool IsCorrect(tString asName)=0;
 		virtual iMaterial* Create(const tString& asName, iLowLevelGraphics* apLowLevelGraphics,
-			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
-			cRenderer3D *apRenderer3D)=0;
+			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager)=0;
 	};
 
 	typedef std::list<iMaterialType*> tMaterialTypeList;

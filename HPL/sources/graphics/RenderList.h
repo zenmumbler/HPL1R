@@ -187,7 +187,7 @@ namespace hpl {
 
 		void AddToTree(iRenderable* apObject,eRenderListDrawType aObjectType,
 						eMaterialRenderType mPassType,int alLightNum,iLight3D* apLight,
-						bool abUseDepth, int alPass);
+						bool abUseDepth);
 
 		static int mlGlobalRenderCount;
 

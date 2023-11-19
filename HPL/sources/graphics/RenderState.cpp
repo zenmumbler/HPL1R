@@ -51,7 +51,6 @@ namespace hpl {
 		switch(mType)
 		{
 		case eRenderStateType_Sector:				return CompareSector(apState);
-		case eRenderStateType_Pass:					return ComparePass(apState);
 		case eRenderStateType_DepthTest:			return CompareDepthTest(apState);
 		case eRenderStateType_Depth:				return CompareDepth(apState);
 		case eRenderStateType_AlphaMode:			return CompareAlpha(apState);
@@ -72,7 +71,6 @@ namespace hpl {
 		switch(mType)
 		{
 		case eRenderStateType_Sector:				SetSectorMode(apSettings); break;
-		case eRenderStateType_Pass:					SetPassMode(apSettings); break;
 		case eRenderStateType_DepthTest:			SetDepthTestMode(apSettings); break;
 		case eRenderStateType_Depth:				SetDepthMode(apSettings); break;
 		case eRenderStateType_AlphaMode:			SetAlphaMode(apSettings); break;
@@ -95,8 +93,6 @@ namespace hpl {
 		{
 		case eRenderStateType_Sector:			mpSector = apState->mpSector;
 												break;
-		case eRenderStateType_Pass:				mlPass = apState->mlPass;
-												break;
 		case eRenderStateType_DepthTest:		mbDepthTest = apState->mbDepthTest;
 												break;
 		case eRenderStateType_Depth:			mfZ = apState->mfZ;
@@ -110,11 +106,7 @@ namespace hpl {
 												break;
 
 		case eRenderStateType_GPUProgram:		mpProgram = apState->mpProgram;
-												mpVtxProgramSetup = apState->mpVtxProgramSetup;
-												mpFragProgramSetup = apState->mpFragProgramSetup;
-												mbUsesEye = apState->mbUsesEye;
-												mbUsesLight = apState->mbUsesLight;
-												mpLight = apState->mpLight;
+												mpProgramSetup = apState->mpProgramSetup;
 												break;
 
 		case eRenderStateType_Texture:			for(int i=0;i<MAX_TEXTUREUNITS;i++)
@@ -147,13 +139,6 @@ namespace hpl {
 	{
 		if(apSettings->mbLog) Log("Sector: %d\n",mpSector);
 		apSettings->mpSector = mpSector;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void iRenderState::SetPassMode(cRenderSettings* apSettings)
-	{
-		if(apSettings->mbLog) Log("Pass: %d\n",mlPass);
 	}
 
 	//-----------------------------------------------------------------------
@@ -272,8 +257,7 @@ namespace hpl {
 		{
 			if(apSettings->mbLog){
 				if(mpProgram)
-					Log("Setting gpu program: '%s'/%d ",mpProgram->GetName().c_str(),
-																		(size_t)mpProgram);
+					Log("Setting gpu program: '%s' ", mpProgram->GetName().c_str());
 				else
 					Log("Setting gpu program: NULL ");
 			}
@@ -290,50 +274,14 @@ namespace hpl {
 				if(apSettings->mbLog)Log("Binding new program");
 				mpProgram->Bind();
 
-				if(mpVtxProgramSetup)
+				if(mpProgramSetup)
 				{
-					if(apSettings->mbLog)Log("Custom vertex setup %d ", mpProgram);
-					mpVtxProgramSetup->Setup(mpProgram, apSettings);
+					if(apSettings->mbLog)Log("Custom program setup %d ", mpProgram);
+					mpProgramSetup->Setup(mpProgram, apSettings);
 				}
-				apSettings->mpVtxProgramSetup = mpVtxProgramSetup;
-
-				//reset this so all matrix setting are set to vertex program.
-				apSettings->mbMatrixWasNULL = false;
-
-				if(mpFragProgramSetup) {
-					if(apSettings->mbLog)Log("Custom fragment setup %d ", mpProgram);
-					mpFragProgramSetup->Setup(mpProgram,apSettings);
-				}
-
-				if(mbUsesLight)
-				{
-					if(apSettings->mbLog)Log("Setting light properties");
-
-					//mpProgram->SetFloat("LightRadius",mpLight->GetFarAttenuation());
-					mpProgram->SetColor4f("LightColor",mpLight->GetDiffuseColor());
-
-					apSettings->mpLight = mpLight;
-				}
-				else
-				{
-					apSettings->mpLight = NULL;
-				}
-
-				apSettings->mbUsesLight = mbUsesLight;
-				apSettings->mbUsesEye = mbUsesEye;
+				apSettings->mpProgramSetup = mpProgramSetup;
 			}
 			if(apSettings->mbLog)Log("\n");
-		}
-		else
-		{
-			if(apSettings->mpProgram && mbUsesLight && mpLight != apSettings->mpLight)
-			{
-				if(apSettings->mbLog)Log("Setting new light properties");
-				//mpProgram->SetFloat("LightRadius",mpLight->GetFarAttenuation());
-				mpProgram->SetColor4f("LightColor",mpLight->GetDiffuseColor());
-
-				apSettings->mpLight = mpLight;
-			}
 		}
 	}
 
@@ -348,10 +296,9 @@ namespace hpl {
 				if(apSettings->mbLog)
 				{
 					if(mpTexture[i]==NULL)
-						Log("Setting texture: %d / %d : NULL\n",i, (size_t)mpTexture[i]);
+						Log("Setting texture: %d : NULL\n", i);
 					else
-						Log("Setting texture: %d / %d : '%s'\n",i, (size_t)mpTexture[i],
-																	mpTexture[i]->GetName().c_str());
+						Log("Setting texture: %d : '%s'\n", i, mpTexture[i]->GetName().c_str());
 				}
 
 				apSettings->mpLowLevel->SetTexture(i,mpTexture[i]);
@@ -407,73 +354,13 @@ namespace hpl {
 
 		if(apSettings->mpProgram)
 		{
-			//Might be quicker if this is set directly
-			
 			// rehatched - use full mvp
 			auto mvpMatrix = cMath::MatrixMul(apSettings->mpCamera->GetProjectionMatrix(), mvMatrix);
 			apSettings->mpProgram->SetMatrixf("worldViewProj", mvpMatrix);
 
-			if (apSettings->mpVtxProgramSetup)
+			if (apSettings->mpProgramSetup)
 			{
-				apSettings->mpVtxProgramSetup->SetupMatrix(	mpModelMatrix,apSettings);
-			}
-
-			if(apSettings->mbUsesLight)
-			{
-				if(apSettings->mbLog)Log("Light ");
-				if(mpModelMatrix)
-				{
-					//Light position
-					cVector3f vLocalLight = cMath::MatrixMul(*mpInvModelMatrix,
-													apSettings->mpLight->GetLightPosition());
-					apSettings->mpProgram->SetVec3f("LightPos",vLocalLight);
-
-					//LightDir Div, use scale to make attenuation correct!
-					cVector3f vLightDirDiv = mvScale / apSettings->mpLight->GetFarAttenuation();
-					apSettings->mpProgram->SetVec3f("LightDirMul", vLightDirDiv);
-
-					if(apSettings->mbLog) Log("(%s) LightDirMul (%s) ",vLocalLight.ToString().c_str(),vLightDirDiv.ToString().c_str());
-
-					//Light view projection
-					if(apSettings->mpLight->GetLightType() == eLight3DType_Spot)
-					{
-						if(apSettings->mbLog)Log("SpotLightViewProj ");
-						cLight3DSpot *pSpotLight = static_cast<cLight3DSpot*>(apSettings->mpLight);
-						apSettings->mpProgram->SetMatrixf("spotViewProj",
-							cMath::MatrixMul(pSpotLight->GetViewProjMatrix(),*mpModelMatrix));
-					}
-				}
-				else
-				{
-					//Light position
-					apSettings->mpProgram->SetVec3f("LightPos",apSettings->mpLight->GetLightPosition());
-
-					//LightDir Div
-					apSettings->mpProgram->SetVec3f("LightDirMul",1.0f / apSettings->mpLight->GetFarAttenuation());
-
-					//Light view projection
-					if(apSettings->mpLight->GetLightType() == eLight3DType_Spot)
-					{
-						if(apSettings->mbLog)Log("SpotLightViewProj ");
-						cLight3DSpot *pSpotLight = static_cast<cLight3DSpot*>(apSettings->mpLight);
-						apSettings->mpProgram->SetMatrixf("spotViewProj",pSpotLight->GetViewProjMatrix());
-					}
-				}
-			}
-
-			if(apSettings->mbUsesEye)
-			{
-				if(apSettings->mbLog)Log("Eye ");
-				if(mpModelMatrix)
-				{
-					cVector3f vLocalEye =  cMath::MatrixMul(*mpInvModelMatrix,
-															apSettings->mpCamera->GetEyePosition());
-					apSettings->mpProgram->SetVec3f("EyePos",vLocalEye);
-				}
-				else
-				{
-					apSettings->mpProgram->SetVec3f("EyePos",apSettings->mpCamera->GetEyePosition());
-				}
+				apSettings->mpProgramSetup->SetupMatrix(mpModelMatrix,apSettings);
 			}
 		}
 
@@ -507,12 +394,6 @@ namespace hpl {
 	int iRenderState::CompareSector(const iRenderState* apState) const
 	{
 		return (size_t)mpSector < (size_t)apState->mpSector;
-	}
-	//-----------------------------------------------------------------------
-
-	int iRenderState::ComparePass(const iRenderState* apState) const
-	{
-		return (int)mlPass < (int)apState->mlPass;
 	}
 
 	//-----------------------------------------------------------------------

@@ -245,7 +245,6 @@ namespace hpl {
 
 		bool bUseAlpha = cString::ToBool(pMain->Attribute("UseAlpha"), false);
 		bool bDepthTest = cString::ToBool(pMain->Attribute("DepthTest"), true);
-		float fValue = cString::ToFloat(pMain->Attribute("Value"), 1);
 		tString sPhysicsMatName = cString::ToString(pMain->Attribute("PhysicsMaterial"),"Default");
 
 		iMaterial* pMat = mpGraphics->GetMaterialHandler()->Create(asName,sType);
@@ -257,9 +256,7 @@ namespace hpl {
 
 		pMat->SetHasAlpha(bUseAlpha);
 		pMat->SetDepthTest(bDepthTest);
-		pMat->SetValue(fValue);
 		pMat->SetPhysicsMaterial(sPhysicsMatName);
-
 
 		///////////////////////////
 		//Textures
@@ -363,9 +360,7 @@ namespace hpl {
 		switch(aType)
 		{
 			case eMaterialTexture_Diffuse: return "Diffuse";
-			case eMaterialTexture_Alpha: return "Alpha";
 			case eMaterialTexture_NMap: return "NMap";
-			case eMaterialTexture_Illumination: return "Illumination";
 			case eMaterialTexture_Specular: return "Specular";
 			case eMaterialTexture_CubeMap: return "CubeMap";
 			case eMaterialTexture_Refraction: return "Refraction";

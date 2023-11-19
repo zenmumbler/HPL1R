@@ -55,7 +55,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cMaterialHandler::Add(iMaterialType* apTypedata)
+	void cMaterialHandler::AddType(iMaterialType* apTypedata)
 	{
 		mlstMatTypes.push_back(apTypedata);
 	}
@@ -77,8 +77,7 @@ namespace hpl {
 			{
 				pMat = (*it)->Create(asName,mpGraphics->GetLowLevel(),
 									mpResources->GetTextureManager(),
-									mpResources->GetGpuProgramManager(),
-									mpGraphics->GetRenderer3D());
+									mpResources->GetGpuProgramManager());
 
 				//Set an id to the material for easier rendering later on.
 				pMat->SetId(lIdCount);

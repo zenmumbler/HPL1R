@@ -16,8 +16,7 @@ namespace hpl {
 		Material_Universal(const tString& asName,
 						   iLowLevelGraphics* apLowLevelGraphics,
 						   cTextureManager *apTextureManager,
-						   cGpuProgramManager* apProgramManager,
-						   cRenderer3D *apRenderer3D);
+						   cGpuProgramManager* apProgramManager);
 
 		virtual ~Material_Universal();
 
@@ -25,20 +24,15 @@ namespace hpl {
 
 		bool UsesType(eMaterialRenderType renType) override;
 
-		iGpuProgram* GetProgramEx(eMaterialRenderType aType, int alPass, iLight3D *apLight) override;
-		bool VertexProgramUsesLight(eMaterialRenderType aType, int alPass, iLight3D *apLight) override;
-		bool VertexProgramUsesEye(eMaterialRenderType aType, int alPass, iLight3D *apLight) override;
+		iGpuProgram* GetProgramEx(eMaterialRenderType aType) override;
 
-		iMaterialProgramSetup * GetFragmentProgramSetup(eMaterialRenderType aType, int alPass, iLight3D *apLight) override;
+		iMaterialProgramSetup * GetProgramSetup(eMaterialRenderType aType) override;
 
-		eMaterialAlphaMode GetAlphaMode(eMaterialRenderType aType, int alPass, iLight3D *apLight) override;
-		eMaterialBlendMode GetBlendMode(eMaterialRenderType aType, int alPass, iLight3D *apLight) override;
-		eMaterialChannelMode GetChannelMode(eMaterialRenderType aType, int alPass, iLight3D *apLight) override;
+		eMaterialAlphaMode GetAlphaMode(eMaterialRenderType aType) override;
+		eMaterialBlendMode GetBlendMode(eMaterialRenderType aType) override;
+		eMaterialChannelMode GetChannelMode(eMaterialRenderType aType) override;
 
-		iTexture* GetTexture(int alUnit,eMaterialRenderType aType, int alPass, iLight3D *apLight) override;
-		eMaterialBlendMode GetTextureBlend(int alUnit,eMaterialRenderType aType, int alPass, iLight3D *apLight) override;
-
-		int GetNumOfPasses(eMaterialRenderType aType, iLight3D *apLight) override;
+		iTexture* GetTexture(int alUnit,eMaterialRenderType aType) override;
 
 	protected:
 		iGpuProgram* _program;
@@ -52,8 +46,7 @@ namespace hpl {
 		}
 
 		iMaterial* Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
-			cRenderer3D *apRenderer3D);
+			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager);
 
 	private:
 	};

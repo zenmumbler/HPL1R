@@ -89,7 +89,7 @@ namespace hpl {
 
 		//Add all the materials.
 		Log(" Adding engine materials\n");
-		mpMaterialHandler->Add(new MaterialType_Universal());
+		mpMaterialHandler->AddType(new MaterialType_Universal());
 
 		Log("--------------------------------------------------------\n\n");
 

@@ -32,19 +32,8 @@ namespace hpl {
 		cMaterialHandler(cGraphics* apGraphics, cResources* apResources);
 		~cMaterialHandler();
 
-		/**
-		 * Add a new type of material
-		 * \param apTypedata
-		 */
-		void Add(iMaterialType* apTypedata);
-		/**
-		 * Create a new material
-		 * \param asMatName
-		 * \param mPicType
-		 * \return
-		 */
+		void AddType(iMaterialType* apTypedata);
 		iMaterial* Create(tString asMatName);
-
 		iMaterial* Create(const tString& asName,tString asMatName);
 
 	private:

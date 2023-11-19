@@ -166,8 +166,6 @@ namespace hpl {
 
 	void cRenderSettings::Clear()
 	{
-		mlLastShadowAlgo = 0;
-
 		mbDepthTest = true;
 
 		mAlphaMode = eMaterialAlphaMode_Solid;
@@ -175,19 +173,14 @@ namespace hpl {
 		mChannelMode = eMaterialChannelMode_RGBA;
 
 		mpProgram = NULL;
-		mbVertexUseLight = false;
 
 		mpSector = NULL;
-
-		mbUsesLight = false;
-		mbUsesEye = false;
 
 		mbMatrixWasNULL = false;
 
 		for(int i=0;i<MAX_TEXTUREUNITS;i++)
 		{
 			mpTexture[i] = NULL;
-			mTextureBlend[i] = eMaterialBlendMode_None;
 		}
 
 		mpVtxBuffer = NULL;
@@ -315,17 +308,9 @@ namespace hpl {
 //		RenderDiffuse(apCamera);
 
 		////////////////////////////
-		//Render fog
-		if(mbLog) Log("Rendering fog:\n");
-//		RenderFog(apCamera);
-
-
-		////////////////////////////
 		//Render sky box
-		mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
-
-		////////////////////////////
 		if(mbLog) Log("Rendering Skybox:\n");
+		mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
 		RenderSkyBox(apCamera);
 
 		//Render transparent
@@ -454,12 +439,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::RenderFog(cCamera *apCamera)
-	{
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cRenderer3D::RenderSkyBox(cCamera *apCamera)
 	{
 	/*
@@ -518,13 +497,12 @@ namespace hpl {
 		mpSkyBox->UnBind();
 	*/
 	}
+
 	//-----------------------------------------------------------------------
 
 	void cRenderer3D::RenderZ(cCamera *apCamera)
 	{
 		cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Normal, eMaterialRenderType_Z, 0);
-
-		mRenderSettings.mpLight = NULL;
 		pNode->Render(&mRenderSettings);
 	}
 
@@ -668,7 +646,6 @@ namespace hpl {
 	void cRenderer3D::RenderDiffuse(cCamera *apCamera)
 	{
 		cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Normal, eMaterialRenderType_Diffuse, 0);
-		mRenderSettings.mpLight = NULL;
 		pNode->Render(&mRenderSettings);
 	}
 

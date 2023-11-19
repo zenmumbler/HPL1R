@@ -79,7 +79,6 @@ namespace hpl {
 		unsigned int *mpTempIndexArray;
 
 		//Setting that changes
-		iLight3D* mpLight;
 		cCamera *mpCamera;
 		cFrustum* mpFrustum;
 
@@ -96,8 +95,6 @@ namespace hpl {
 		tRendererDebugFlag mDebugFlags;
 
 		//State settings
-		int mlLastShadowAlgo;
-
 		bool mbDepthTest;
 
 		eMaterialAlphaMode mAlphaMode;
@@ -105,19 +102,14 @@ namespace hpl {
 		eMaterialChannelMode mChannelMode;
 
 		iGpuProgram* mpProgram;
-		bool mbVertexUseLight;
-		iMaterialProgramSetup* mpVtxProgramSetup;
+		iMaterialProgramSetup* mpProgramSetup;
 
 		bool mbMatrixWasNULL;
-
-		bool mbUsesLight;
-		bool mbUsesEye;
 
 		cColor mAmbientColor;
 
 
 		iTexture* mpTexture[MAX_TEXTUREUNITS];
-		eMaterialBlendMode mTextureBlend[MAX_TEXTUREUNITS];
 
 		iVertexBuffer* mpVtxBuffer;
 	};
@@ -185,8 +177,6 @@ namespace hpl {
 		void InitSkyBox();
 
 		//Render steps
-		void RenderFog(cCamera *apCamera);
-
 		void RenderSkyBox(cCamera *apCamera);
 
 		void RenderZ(cCamera *apCamera);

@@ -4,7 +4,6 @@
  */
 
 #include "graphics/Material_Universal.h"
-#include "scene/Light.h"
 #include "scene/Camera.h"
 #include "resources/GpuProgramManager.h"
 #include "resources/TextureManager.h"
@@ -45,12 +44,10 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	Material_Universal::Material_Universal(const tString& asName, iLowLevelGraphics* apLowLevelGraphics,
-		cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
-		cRenderer3D *apRenderer3D)
-		: iMaterial(asName,apLowLevelGraphics,apTextureManager,apProgramManager,apRenderer3D)
+		cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager)
+		: iMaterial(asName,apLowLevelGraphics,apTextureManager,apProgramManager)
 	{
 		mbIsTransperant = false;
-		mbUsesLights = false;
 
 		_program = mpProgramManager->CreateProgram("Universal.vert", "Universal.frag");
 	}
@@ -71,28 +68,16 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iGpuProgram* Material_Universal::GetProgramEx(eMaterialRenderType aType, int alPass, iLight3D *apLight) {
+	iGpuProgram* Material_Universal::GetProgramEx(eMaterialRenderType aType) {
 		if (aType == eMaterialRenderType_Z || aType == eMaterialRenderType_Diffuse) {
 			return _program;
 		}
 		return NULL;
 	}
 
-	bool Material_Universal::VertexProgramUsesLight(eMaterialRenderType aType, int alPass, iLight3D *apLight)
-	{
-		return false;
-	}
-
 	//------------------------------------------------------------------------------------
 
-	bool Material_Universal::VertexProgramUsesEye(eMaterialRenderType aType, int alPass, iLight3D *apLight)
-	{
-		return false;
-	}
-
-	//------------------------------------------------------------------------------------
-
-	iMaterialProgramSetup * Material_Universal::GetFragmentProgramSetup(eMaterialRenderType aType, int alPass, iLight3D *apLight)
+	iMaterialProgramSetup * Material_Universal::GetProgramSetup(eMaterialRenderType aType)
 	{
 		if (aType == eMaterialRenderType_Z) {
 			return &gAmbProgramSetup;
@@ -103,46 +88,32 @@ namespace hpl {
 
 	//------------------------------------------------------------------------------------
 
-	eMaterialAlphaMode Material_Universal::GetAlphaMode(eMaterialRenderType aType, int alPass, iLight3D *apLight)
+	eMaterialAlphaMode Material_Universal::GetAlphaMode(eMaterialRenderType aType)
 	{
 		return (aType == eMaterialRenderType_Z && mbHasAlpha) ? eMaterialAlphaMode_Trans : eMaterialAlphaMode_Solid;
 	}
 
 	//------------------------------------------------------------------------------------
 
-	eMaterialBlendMode Material_Universal::GetBlendMode(eMaterialRenderType aType, int alPass, iLight3D *apLight)
+	eMaterialBlendMode Material_Universal::GetBlendMode(eMaterialRenderType aType)
 	{
 		return eMaterialBlendMode_Replace;
 	}
 
 	//------------------------------------------------------------------------------------
 
-	eMaterialChannelMode Material_Universal::GetChannelMode(eMaterialRenderType aType, int alPass, iLight3D *apLight)
+	eMaterialChannelMode Material_Universal::GetChannelMode(eMaterialRenderType aType)
 	{
 		return eMaterialChannelMode_RGBA;
 	}
 
 	//-----------------------------------------------------------------------
 
-	iTexture* Material_Universal::GetTexture(int alUnit,eMaterialRenderType aType, int alPass, iLight3D *apLight)
+	iTexture* Material_Universal::GetTexture(int alUnit,eMaterialRenderType aType)
 	{
 		if (alUnit == 0)
 			return mvTexture[eMaterialTexture_Diffuse];
 		return NULL;
-	}
-
-	//-----------------------------------------------------------------------
-
-	eMaterialBlendMode Material_Universal::GetTextureBlend(int alUnit,eMaterialRenderType aType, int alPass, iLight3D *apLight)
-	{
-		return eMaterialBlendMode_None;
-	}
-
-	//-----------------------------------------------------------------------
-
-	int Material_Universal::GetNumOfPasses(eMaterialRenderType aType, iLight3D *apLight)
-	{
-		return 1;
 	}
 
 	//-----------------------------------------------------------------------
@@ -176,10 +147,9 @@ namespace hpl {
 	//////////////////////////////////////////////////////////////////////////
 
 	iMaterial* MaterialType_Universal::Create(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-										cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
-										cRenderer3D *apRenderer3D)
+										cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager)
 	{
-		return new Material_Universal(asName, apLowLevelGraphics, apTextureManager, apProgramManager, apRenderer3D);
+		return new Material_Universal(asName, apLowLevelGraphics, apTextureManager, apProgramManager);
 	}
 
 	//-----------------------------------------------------------------------

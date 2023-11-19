@@ -30,13 +30,10 @@ namespace hpl {
 	// CONSTRUCTORS
 	//////////////////////////////////////////////////////////////////////////
 
-	eMaterialQuality iMaterial::mQuality = eMaterialQuality_Classic;
-
 	//-----------------------------------------------------------------------
 
 	iMaterial::iMaterial(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
-		cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager,
-		cRenderer3D *apRenderer3D)
+		cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager)
 		: iResourceBase(asName, 0)
 	{
 		mvTexture.resize(eMaterialTexture_LastEnum);
@@ -44,19 +41,11 @@ namespace hpl {
 
 		mpLowLevelGraphics = apLowLevelGraphics;
 		mpTextureManager = apTextureManager;
-		mpRenderer3D = apRenderer3D;
-		mpRenderSettings = mpRenderer3D->GetRenderSettings();
 		mpProgramManager = apProgramManager;
 
-		mbUsesLights = false;
 		mbIsTransperant = false;
 		mbHasAlpha = false;
 		mbDepthTest = true;
-		mfValue = 1;
-
-		for(int j=0;j<kMaxProgramNum;j++) mpProgram[j]=NULL;
-
-		mlPassCount=0;
 
 		mlId = -1;
 	}
@@ -69,12 +58,6 @@ namespace hpl {
 			if(mvTexture[i])
 				mpTextureManager->Destroy(mvTexture[i]);
 		}
-
-		for(int j=0;j<kMaxProgramNum;j++)
-		{
-			if(mpProgram[j])
-				mpProgramManager->Destroy(mpProgram[j]);
-		}
 	}
 
 	//-----------------------------------------------------------------------
@@ -85,29 +68,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	/*void iMaterial::Destroy()
-	{
-
-	}*/
-
-	//-----------------------------------------------------------------------
-
 	iTexture* iMaterial::GetTexture(eMaterialTexture aType)
 	{
 		return mvTexture[aType];
-	}
-
-	//-----------------------------------------------------------------------
-
-	cRect2f iMaterial::GetTextureOffset(eMaterialTexture aType)
-	{
-		cRect2f SizeRect;
-
-		SizeRect.x=0;SizeRect.y=0;
-		SizeRect.w = 1;//(float) mvTexture[aType]->GetWidth();
-		SizeRect.h = 1;//(float) mvTexture[aType]->GetHeight();
-
-		return SizeRect;
 	}
 
 	//-----------------------------------------------------------------------
