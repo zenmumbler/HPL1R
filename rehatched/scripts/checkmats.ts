@@ -3,6 +3,7 @@ import { extname } from "path";
 import { resolve, join } from "path/posix";
 
 const path = resolve("../../Build/Debug");
+//const path = "/Applications/Games/Penumbra Black Plague.app/Contents/Resources/game";
 
 let matCount = 0;
 const matFiles: Record<string, string[]> = {};
@@ -40,5 +41,7 @@ scan(path);
 
 console.info("====================================================================");
 console.info("Mat files: ", matCount);
-console.info(JSON.stringify(matFiles, undefined, 4));
-console.info(Object.values(matFiles).reduce((a, b) => a + b.length, 0));
+//console.info(JSON.stringify(matFiles, undefined, 4));
+// console.info(Object.values(matFiles).reduce((a, b) => a + b.length, 0));
+console.info(Object.keys(matFiles).sort());
+console.info(JSON.stringify(matFiles.alpha, undefined, 4));
