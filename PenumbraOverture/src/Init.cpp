@@ -222,14 +222,12 @@ bool cInit::Init(tString asCommandLine)
 	mlFSAA = mpConfig->GetInt("Graphics","FSAA",0);
 	mbPostEffects = mpConfig->GetBool("Graphics","PostEffects",true);
 	
-	// Rehatched: High is now Classic, lower than Classic is no longer supported
-	eMaterialQuality iQuality = static_cast<eMaterialQuality>(mpConfig->GetInt("Graphics","ShaderQuality",eMaterialQuality_Classic));
-	if (iQuality != eMaterialQuality_Classic) {
-		// until we do the work, _higher_ than classic is also not supported
-		iQuality = eMaterialQuality_Classic;
+	// Rehatched: material quality is disabled for the foreseeable future
+	int iQuality = mpConfig->GetInt("Graphics","ShaderQuality", 3); // 3 was "high"
+	if (iQuality != 3) {
+		iQuality = 3;
 	}
-	iMaterial::SetQuality(iQuality);
-	
+
 	mPhysicsAccuracy = (ePhysicsAccuracy)mpConfig->GetInt("Physics","Accuracy",ePhysicsAccuracy_High);
 	mfPhysicsUpdatesPerSec = mpConfig->GetFloat("Physics","UpdatesPerSec",60.0f);
 
@@ -580,7 +578,7 @@ void cInit::Exit()
 
 	mpConfig->SetInt("Graphics","FSAA",mlFSAA);
 	mpConfig->SetBool("Graphics","PostEffects",mbPostEffects);
-	mpConfig->SetInt("Graphics","ShaderQuality",iMaterial::GetQuality());
+	mpConfig->SetInt("Graphics","ShaderQuality", 3); // Default to old "high" setting (ignored)
 	mpConfig->SetBool("Graphics","LimitFPS",mpGame->GetLimitFPS());
 
 	mpConfig->SetInt("Graphics","Shadows",mpGame->GetGraphics()->GetRenderer3D()->GetShowShadows());

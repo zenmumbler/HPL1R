@@ -1535,13 +1535,13 @@ public:
 
 //------------------------------------------------------------
 
-const tString gvShaderQuality[] = {"","","","Classic","Modern"};
+const tString gvShaderQuality[] = {"QualityNone"};
 
 class cMainMenuWidget_ShaderQuality : public cMainMenuWidget_Button
 {
 	// Rehatched, Classic (High) is for now the only supported setting
-	int miShaderMinQuality = 3;
-	int miShaderMaxQuality = 3;
+	int miShaderMinQuality = 0;
+	int miShaderMaxQuality = 0;
 
 public:
 	cMainMenuWidget_ShaderQuality(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment)
@@ -1552,7 +1552,7 @@ public:
 
 	void OnMouseDown(eMButton aButton)
 	{
-		int iCurrent = iMaterial::GetQuality();
+		int iCurrent = 0;
 		if(aButton == eMButton_Left)
 		{
 			iCurrent++;
@@ -1564,10 +1564,8 @@ public:
 			if(iCurrent < miShaderMinQuality) iCurrent = miShaderMaxQuality;
 		}
 
-		if (iCurrent != iMaterial::GetQuality()) {
+		if (iCurrent != 0) {
 			gpShaderQualityText->msText = kTranslate("MainMenu",gvShaderQuality[iCurrent]);
-			iMaterial::SetQuality(static_cast<eMaterialQuality>(iCurrent));
-
 			if(mpInit->mpMapHandler->GetCurrentMapName() != "") gbMustRestart = true;
 		}
 	}
@@ -3238,7 +3236,7 @@ void cMainMenu::CreateWidgets()
 	gpGammaText->SetExtraWidget(pWidgetGamma);
 
 	vPos.y += 29;
-	sText = kTranslate("MainMenu",gvShaderQuality[iMaterial::GetQuality()]);
+	sText = kTranslate("MainMenu",gvShaderQuality[0]);
 	gpShaderQualityText = new cMainMenuWidget_Text(mpInit,vPos,sText,20,eFontAlign_Left);
 	AddWidgetToState(eMainMenuState_OptionsGraphics,gpShaderQualityText); 
 	gpShaderQualityText->SetExtraWidget(pWidgetShaderQuality);
