@@ -87,8 +87,6 @@ namespace hpl {
 
 		mfRenderTime =0;
 
-		mbRefractionUsed = true;
-
 		mvVtxRect.resize(4);
 		mvVtxRect[0] = cVertex(cVector3f(0,0,0),cVector2f(0,1),cColor(1,1) );
 		mvVtxRect[1] = cVertex(cVector3f(1,0,0),cVector2f(1,1),cColor(1,1));
@@ -116,19 +114,6 @@ namespace hpl {
 		}
 
 		/////////////////////////////////////////////
-		//Create Refraction programs
-		mbRefractionAvailable = true;
-
-		mpRefractProgram = NULL; // pProgramManager->CreateProgram("refract_vp.cg", "refract_fp.cg");
-		mpRefractSpecProgram = NULL; // pProgramManager->CreateProgram("refract_vp.cg", "refract_special_fp.cg");
-
-		if(mpRefractProgram==NULL || mpRefractSpecProgram==NULL)
-		{
-			mbRefractionAvailable = false;
-			Log("   Refraction will not be supported!\n");
-		}
-
-		/////////////////////////////////////////////
 		//Create sky box graphics.
 
 		Log("   init sky box\n");
@@ -144,10 +129,6 @@ namespace hpl {
 		delete[] mRenderSettings.mpTempIndexArray;
 
 		if(mpDiffuseProgram) mpResources->GetGpuProgramManager()->Destroy(mpDiffuseProgram);
-
-		if(mpRefractProgram)mpResources->GetGpuProgramManager()->Destroy(mpRefractProgram);
-		if(mpRefractSpecProgram)mpResources->GetGpuProgramManager()->Destroy(mpRefractSpecProgram);
-
 
 		if(mpSkyBox) delete mpSkyBox;
 		if(mpSkyBoxTexture && mbAutoDestroySkybox)

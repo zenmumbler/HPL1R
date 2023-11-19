@@ -137,9 +137,6 @@ namespace hpl {
 		void SetAmbientColor(const cColor& aColor){ mRenderSettings.mAmbientColor = aColor;}
 		cColor GetAmbientColor(){ return mRenderSettings.mAmbientColor;}
 
-		void SetRefractionUsed(bool abX){ mbRefractionUsed = abX;}
-		bool GetRefractionUsed(){  return mbRefractionUsed;}
-
 		//Fog properties
 		void SetFogActive(bool abX);
 		void SetFogStart(float afX);
@@ -206,11 +203,6 @@ namespace hpl {
 		float mfRenderTime;
 
 		iGpuProgram *mpDiffuseProgram;
-
-		iGpuProgram *mpRefractProgram;
-		iGpuProgram *mpRefractSpecProgram;
-		bool mbRefractionAvailable;
-		bool mbRefractionUsed;
 
 		cRenderSettings mRenderSettings;
 

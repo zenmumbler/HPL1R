@@ -303,7 +303,7 @@ bool cInit::Init(tString asCommandLine)
 //	mpGame->GetGraphics()->GetRendererPostEffects()->SetMotionBlurActive(mpConfig->GetBool("Graphics", "MotionBlur", false));
 //	mpGame->GetGraphics()->GetRendererPostEffects()->SetMotionBlurAmount(mpConfig->GetFloat("Graphics", "MotionBlurAmount", 0.3f));
 
-	mpGame->GetGraphics()->GetRenderer3D()->SetRefractionUsed(mpConfig->GetBool("Graphics", "Refractions", false));
+//	mpGame->GetGraphics()->GetRenderer3D()->SetRefractionUsed(mpConfig->GetBool("Graphics", "Refractions", false));
 
 	mpEffectHandler->GetDepthOfField()->SetDisabled(!mpConfig->GetBool("Graphics", "DepthOfField", true));
 
@@ -564,7 +564,7 @@ void cInit::Exit()
 //	mpConfig->SetBool("Graphics", "MotionBlur",mpGame->GetGraphics()->GetRendererPostEffects()->GetMotionBlurActive());
 //	mpConfig->SetFloat("Graphics", "MotionBlurAmount",mpGame->GetGraphics()->GetRendererPostEffects()->GetMotionBlurAmount());
 	mpConfig->SetBool("Graphics", "DepthOfField",!mpEffectHandler->GetDepthOfField()->IsDisabled());
-	mpConfig->GetBool("Graphics", "Refractions", mpGame->GetGraphics()->GetRenderer3D()->GetRefractionUsed());
+//	mpConfig->GetBool("Graphics", "Refractions", mpGame->GetGraphics()->GetRenderer3D()->GetRefractionUsed());
 	
 	mpConfig->SetFloat("Sound","Volume",mpGame->GetSound()->GetLowLevel()->GetVolume());
 	mpConfig->SetString("Sound","DeviceName",msDeviceName);
