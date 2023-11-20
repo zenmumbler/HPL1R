@@ -153,13 +153,6 @@ namespace hpl {
 			return vTypes;
 		}
 
-		/**
-		 * The type of the material
-		 * \param alId
-		 */
-		void SetId(int alId){ mlId = alId;}
-		int GetId(){ return mlId;}
-
 		const tString& GetPhysicsMaterial(){ return msPhysicsMaterial;}
 		void SetPhysicsMaterial(const tString& asName){ msPhysicsMaterial = asName;}
 
@@ -171,8 +164,6 @@ namespace hpl {
 		bool mbIsTransperant;
 		bool mbHasAlpha;
 		bool mbDepthTest;
-
-		int mlId;
 
 		tString msPhysicsMaterial;
 

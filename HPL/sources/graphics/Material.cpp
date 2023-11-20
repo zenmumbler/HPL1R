@@ -45,8 +45,6 @@ namespace hpl {
 		mbIsTransperant = false;
 		mbHasAlpha = false;
 		mbDepthTest = true;
-
-		mlId = -1;
 	}
 
 	iMaterial::~iMaterial()

@@ -36,7 +36,6 @@ namespace hpl {
 		~cMaterialHandler();
 
 		void AddType(iMaterialType* apTypedata);
-		iMaterial* Create(const tString& asMatName);
 		iMaterial* Create(const tString& asName,tString asMatName);
 
 	private:

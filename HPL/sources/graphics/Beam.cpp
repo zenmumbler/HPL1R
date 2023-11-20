@@ -43,7 +43,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cBeam::cBeam(const tString asName, cResources *apResources,cGraphics *apGraphics) :
+	cBeam::cBeam(const tString asName, cResources *apResources, cGraphics *apGraphics) :
 	iRenderable(asName)
 	{
 		mpMaterialManager = apResources->GetMaterialManager();

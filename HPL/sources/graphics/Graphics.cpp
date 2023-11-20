@@ -81,7 +81,6 @@ namespace hpl {
 		mpDrawer = new cGraphicsDrawer(mpLowLevelGraphics, apResources->GetImageManager(), apResources->GetGpuProgramManager());
 		mpRenderer3D = new cRenderer3D(mpLowLevelGraphics, apResources->GetTextureManager(), apResources->GetGpuProgramManager());
 
-		//Add all the materials.
 		Log(" Adding engine materials\n");
 		mpMaterialHandler = new cMaterialHandler(mpLowLevelGraphics, apResources->GetTextureManager(), apResources->GetGpuProgramManager());
 		mpMaterialHandler->AddType(new MaterialType_Universal());

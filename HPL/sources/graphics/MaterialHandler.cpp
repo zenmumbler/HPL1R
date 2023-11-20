@@ -56,32 +56,17 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iMaterial* cMaterialHandler::Create(const tString& asMatName)
-	{
-		return Create("", asMatName);
-	}
-
 	iMaterial* cMaterialHandler::Create(const tString& asName,tString asMatName)
 	{
-		iMaterial* pMat=NULL;
-		unsigned int lIdCount = 1;
-
 		for(auto &matType : _materialTypes)
 		{
-			if(matType->IsCorrect(asMatName))
+			if (matType->IsCorrect(asMatName))
 			{
-				pMat = matType->Create(asName, _llGfx, _textureManager, _programManager);
-
-				//Set an id to the material for easier rendering later on.
-				pMat->SetId(lIdCount);
-
-				break;
+				return matType->Create(asName, _llGfx, _textureManager, _programManager);
 			}
-
-			lIdCount++;
 		}
 
-		return pMat;
+		return NULL;
 	}
 
 	//-----------------------------------------------------------------------
