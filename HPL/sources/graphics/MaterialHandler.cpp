@@ -16,9 +16,11 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "graphics/MaterialHandler.h"
-#include "graphics/Graphics.h"
-#include "resources/Resources.h"
+#include "graphics/LowLevelGraphics.h"
+#include "resources/TextureManager.h"
+#include "resources/GpuProgramManager.h"
 
 namespace hpl {
 
@@ -28,23 +30,15 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMaterialHandler::cMaterialHandler(cGraphics* apGraphics, cResources* apResources)
+	cMaterialHandler::cMaterialHandler(iLowLevelGraphics *llGfx, cTextureManager* textureManager, cGpuProgramManager* programManager)
+	: _llGfx{llGfx}, _textureManager{textureManager}, _programManager{programManager}
 	{
-		mpGraphics = apGraphics;
-		mpResources = apResources;
 	}
 
-	//-----------------------------------------------------------------------
-
-	cMaterialHandler::~cMaterialHandler()
-	{
-		tMaterialTypeListIt it = mlstMatTypes.begin();
-		for(;it!=mlstMatTypes.end();it++)
-		{
-			delete *it;
+	cMaterialHandler::~cMaterialHandler() {
+		for (auto matType : _materialTypes) {
+			delete matType;
 		}
-
-		mlstMatTypes.clear();
 	}
 
 	//-----------------------------------------------------------------------
@@ -55,13 +49,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cMaterialHandler::AddType(iMaterialType* apTypedata)
+	void cMaterialHandler::AddType(iMaterialType* matType)
 	{
-		mlstMatTypes.push_back(apTypedata);
+		_materialTypes.push_back(matType);
 	}
 
 	//-----------------------------------------------------------------------
-	iMaterial* cMaterialHandler::Create(tString asMatName)
+
+	iMaterial* cMaterialHandler::Create(const tString& asMatName)
 	{
 		return Create("", asMatName);
 	}
@@ -71,13 +66,11 @@ namespace hpl {
 		iMaterial* pMat=NULL;
 		unsigned int lIdCount = 1;
 
-		for(tMaterialTypeListIt it = mlstMatTypes.begin(); it!=mlstMatTypes.end();it++)
+		for(auto &matType : _materialTypes)
 		{
-			if((*it)->IsCorrect(asMatName))
+			if(matType->IsCorrect(asMatName))
 			{
-				pMat = (*it)->Create(asName,mpGraphics->GetLowLevel(),
-									mpResources->GetTextureManager(),
-									mpResources->GetGpuProgramManager());
+				pMat = matType->Create(asName, _llGfx, _textureManager, _programManager);
 
 				//Set an id to the material for easier rendering later on.
 				pMat->SetId(lIdCount);
@@ -92,15 +85,4 @@ namespace hpl {
 	}
 
 	//-----------------------------------------------------------------------
-
-	//////////////////////////////////////////////////////////////////////////
-	// PRIVATE METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-
-
-	//-----------------------------------------------------------------------
-
 }

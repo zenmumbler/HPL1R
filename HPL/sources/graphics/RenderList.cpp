@@ -133,15 +133,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cRenderList::cRenderList(cGraphics *apGraphics)
+	cRenderList::cRenderList()
 	{
 		mfFrameTime = 0;
 		mTempNode.mpState = new iRenderState();
 
 		mlRenderCount=0;
 		mlLastRenderCount =0;
-
-		mpGraphics = apGraphics;
 
 		m_poolRenderState = new cMemoryPool<iRenderState>(3000, NULL);
 		m_poolRenderNode = new cMemoryPool<cRenderNode>(3000, NULL);
@@ -348,6 +346,7 @@ namespace hpl {
 		if(apObject->IsVisible()==false) return false;
 
 		//Check if the object is culled by fog.
+		/*
 		cRenderer3D *pRenderer = mpGraphics->GetRenderer3D();
 		if(pRenderer->GetFogActive() && pRenderer->GetFogCulling())
 		{
@@ -359,6 +358,7 @@ namespace hpl {
 				return false;
 			}
 		}
+		*/
 
 		//Check if the object as already been added.
 		if(mlRenderCount == apObject->GetRenderCount()) return false;
@@ -389,8 +389,9 @@ namespace hpl {
 					m_setObjects.insert(apObject);
 
 					//MotionBlur
+					/*
 					if(false // mpGraphics->GetRendererPostEffects()->GetMotionBlurActive()
-						|| mpGraphics->GetRenderer3D()->GetRenderSettings()->mbFogActive
+						|| false // mpGraphics->GetRenderer3D()->GetRenderSettings()->mbFogActive
 						|| false // mpGraphics->GetRendererPostEffects()->GetDepthOfFieldActive()
 					)
 					{
@@ -406,6 +407,7 @@ namespace hpl {
 						}
 						apObject->SetPrevRenderCount(mlRenderCount);
 					}
+					*/
 				}
 				break;
 
@@ -474,21 +476,6 @@ namespace hpl {
 			return pNode;
 		}
 	}
-
-	//-----------------------------------------------------------------------
-
-	/*cRenderNode* cRenderList::InsertNode(cRenderNode* apListNode, cRenderNode* apTempNode)
-	{
-		std::pair<tRenderNodeSetIt, bool> ret = apListNode->m_setNodes.insert(apTempNode);
-		if(ret.second == false)
-		{
-			m_poolRenderState->Release(apTempNode->mpState);
-			m_poolRenderNode->Release(apTempNode);
-			return *ret.first;
-		}
-
-		return apTempNode;
-	}*/
 
 	//-----------------------------------------------------------------------
 

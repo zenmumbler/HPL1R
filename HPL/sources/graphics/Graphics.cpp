@@ -21,9 +21,7 @@
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/GraphicsDrawer.h"
 #include "graphics/Renderer3D.h"
-#include "graphics/RenderList.h"
 #include "graphics/MaterialHandler.h"
-#include "graphics/MeshCreator.h"
 #include "game/Updateable.h"
 #include "resources/Resources.h"
 #include "system/Log.h"
@@ -46,7 +44,6 @@ namespace hpl {
 		mpDrawer = NULL;
 		mpMaterialHandler = NULL;
 		mpRenderer3D = NULL;
-		mpRenderList = NULL;
 	}
 
 	//-----------------------------------------------------------------------
@@ -59,7 +56,6 @@ namespace hpl {
 		delete mpRenderer3D;
 		delete mpDrawer;
 		delete mpMaterialHandler;
-		delete mpRenderList;
 
 		Log("--------------------------------------------------------\n\n");
 	}
@@ -82,13 +78,12 @@ namespace hpl {
 		mpLowLevelGraphics->Init(alWidth, alHeight, abFullscreen, asWindowCaption);
 
 		Log(" Creating graphic systems\n");
-		mpMaterialHandler = new cMaterialHandler(this, apResources);
 		mpDrawer = new cGraphicsDrawer(mpLowLevelGraphics, apResources->GetImageManager(), apResources->GetGpuProgramManager());
-		mpRenderList = new cRenderList(this);
-		mpRenderer3D = new cRenderer3D(mpLowLevelGraphics, apResources, mpRenderList);
+		mpRenderer3D = new cRenderer3D(mpLowLevelGraphics, apResources->GetTextureManager(), apResources->GetGpuProgramManager());
 
 		//Add all the materials.
 		Log(" Adding engine materials\n");
+		mpMaterialHandler = new cMaterialHandler(mpLowLevelGraphics, apResources->GetTextureManager(), apResources->GetGpuProgramManager());
 		mpMaterialHandler->AddType(new MaterialType_Universal());
 
 		Log("--------------------------------------------------------\n\n");

@@ -28,6 +28,7 @@ namespace hpl {
 	class iParticleEmitter3D;
 	class iParticleEmitterData;
 	class cParticleManager;
+	class cGraphics;
 
 	//----------------------------------------------------
 

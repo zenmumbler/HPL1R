@@ -39,7 +39,6 @@ namespace hpl {
 
 	typedef tFlag tRendererDebugFlag;
 
-	class cResources;
 	class iLowLevelGraphics;
 	class iTexture;
 	class cCamera;
@@ -48,10 +47,7 @@ namespace hpl {
 	class cRenderList;
 	class iRenderable;
 	class iLight3D;
-	// class cRendererPostEffects;
 	class cSector;
-
-	class cResources;
 
 	//---------------------------------------------
 
@@ -119,7 +115,7 @@ namespace hpl {
 	class cRenderer3D
 	{
 	public:
-		cRenderer3D(iLowLevelGraphics *apLowLevelGraphics,cResources* apResources, cRenderList *apRenderList);
+		cRenderer3D(iLowLevelGraphics *apLowLevelGraphics, cTextureManager* textureManager, cGpuProgramManager* programManager);
 		~cRenderer3D();
 
 		void UpdateRenderList(cWorld3D* apWorld, cCamera *apCamera, float afFrameTime);
@@ -152,9 +148,6 @@ namespace hpl {
 		bool GetFogCulling(){ return mRenderSettings.mbFogCulling;}
 
 		cBoundingVolume* GetFogBV(){return &mFogBV;}
-
-		// void SetPostEffects(cRendererPostEffects *apPostEffects){ mpPostEffects = apPostEffects;}
-
 
 		//Debug setup
 		void SetDebugFlags(tRendererDebugFlag aFlags){ mDebugFlags = aFlags;}
@@ -194,9 +187,9 @@ namespace hpl {
 		
 		void RenderPhysicsDebug(cWorld3D *apWorld, cCamera *apCamera);
 
-		iLowLevelGraphics *mpLowLevelGraphics;
-
-		// cRendererPostEffects *mpPostEffects;
+		iLowLevelGraphics *_llGfx;
+		cTextureManager* _textureManager;
+		cGpuProgramManager* _programManager;
 
 		bool mbLog;
 
@@ -217,8 +210,6 @@ namespace hpl {
 		bool mbAutoDestroySkybox;
 		bool mbSkyBoxActive;
 		cColor mSkyBoxColor;
-
-		cResources* mpResources;
 
 		tRendererDebugFlag mDebugFlags;
 	};

@@ -34,7 +34,6 @@ namespace hpl {
 
 	class iRenderable;
 	class cCamera;
-	class cGraphics;
 
 	class iRenderState;
 	class cRenderSettings;
@@ -146,7 +145,7 @@ namespace hpl {
 	class cRenderList
 	{
 	public:
-		cRenderList(cGraphics *apGraphics);
+		cRenderList();
 		~cRenderList();
 
 		void SetCamera(cCamera *apCamera){ mpCamera = apCamera;}
@@ -217,8 +216,6 @@ namespace hpl {
 		cMemoryPool<cRenderNode>* m_poolRenderNode;
 
 		cCamera *mpCamera;
-
-		cGraphics *mpGraphics;
 	};
 };
 #endif // HPL_RENDER_LIST_H

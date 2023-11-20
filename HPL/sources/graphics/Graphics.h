@@ -25,10 +25,8 @@ namespace hpl {
 
 	class cResources;
 	class cRenderer3D;
-	class cRenderList;
 	class cGraphicsDrawer;
 	class iLowLevelGraphics;
-	class cMeshCreator;
 	class cMaterialHandler;
 
 	class cGraphics
@@ -50,7 +48,6 @@ namespace hpl {
 		cGraphicsDrawer *mpDrawer;
 		cMaterialHandler *mpMaterialHandler;
 		cRenderer3D* mpRenderer3D;
-		cRenderList *mpRenderList;
 	};
 
 };

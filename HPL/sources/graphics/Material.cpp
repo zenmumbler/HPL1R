@@ -36,8 +36,7 @@ namespace hpl {
 		cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager)
 		: iResourceBase(asName, 0)
 	{
-		mvTexture.resize(eMaterialTexture_LastEnum);
-		mvTexture.assign(mvTexture.size(), NULL);
+		mvTexture.resize(eMaterialTexture_LastEnum, NULL);
 
 		mpLowLevelGraphics = apLowLevelGraphics;
 		mpTextureManager = apTextureManager;

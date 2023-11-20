@@ -191,8 +191,5 @@ namespace hpl {
 			cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager)=0;
 	};
 
-	typedef std::list<iMaterialType*> tMaterialTypeList;
-	typedef tMaterialTypeList::iterator tMaterialTypeListIt;
-
 };
 #endif // HPL_MATERIAL_H

@@ -21,25 +21,29 @@
 
 #include "graphics/Material.h"
 
+#include <vector>
+
 namespace hpl {
 
-	class cGraphics;
-	class cResources;
+	class iLowLevelGraphics;
+	class cTextureManager;
+	class cGpuProgramManager;
 
 	class cMaterialHandler
 	{
 	public:
-		cMaterialHandler(cGraphics* apGraphics, cResources* apResources);
+		cMaterialHandler(iLowLevelGraphics *llGfx, cTextureManager* textureManager, cGpuProgramManager* programManager);
 		~cMaterialHandler();
 
 		void AddType(iMaterialType* apTypedata);
-		iMaterial* Create(tString asMatName);
+		iMaterial* Create(const tString& asMatName);
 		iMaterial* Create(const tString& asName,tString asMatName);
 
 	private:
-		tMaterialTypeList mlstMatTypes;
-		cResources* mpResources;
-		cGraphics* mpGraphics;
+		std::vector<iMaterialType*> _materialTypes;
+		iLowLevelGraphics* _llGfx;
+		cTextureManager* _textureManager;
+		cGpuProgramManager* _programManager;
 	};
 
 };

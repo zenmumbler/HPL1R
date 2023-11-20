@@ -21,8 +21,8 @@
 #include "math/Math.h"
 #include "graphics/Texture.h"
 #include "graphics/LowLevelGraphics.h"
-#include "resources/Resources.h"
 #include "resources/TextureManager.h"
+#include "resources/GpuProgramManager.h"
 #include "graphics/VertexBuffer.h"
 #include "graphics/MeshCreator.h"
 #include "scene/Camera.h"
@@ -33,10 +33,7 @@
 #include "scene/RenderableContainer.h"
 #include "scene/Light3D.h"
 #include "math/BoundingVolume.h"
-#include "resources/GpuProgramManager.h"
 #include "graphics/GPUProgram.h"
-#include "physics/PhysicsWorld.h"
-#include "physics/PhysicsBody.h"
 #include "system/Log.h"
 
 namespace hpl {
@@ -64,13 +61,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cRenderer3D::cRenderer3D(iLowLevelGraphics *apLowLevelGraphics, cResources* apResources, cRenderList *apRenderList)
+	cRenderer3D::cRenderer3D(iLowLevelGraphics *apLowLevelGraphics, cTextureManager* textureManager, cGpuProgramManager* programManager)
 	{
 		Log("  Creating Renderer3D\n");
 
-
-		mpLowLevelGraphics = apLowLevelGraphics;
-		mpResources = apResources;
+		_llGfx = apLowLevelGraphics;
+		_programManager = programManager;
+		_textureManager = textureManager;
 
 		mpSkyBoxTexture = NULL;
 		mbAutoDestroySkybox = false;
@@ -79,7 +76,7 @@ namespace hpl {
 
 		mRenderSettings.mAmbientColor = cColor(0,1);
 
-		mpRenderList = apRenderList;
+		mpRenderList = new cRenderList{};
 
 		mDebugFlags = 0;
 
@@ -95,19 +92,17 @@ namespace hpl {
 
 
 		//Set up render settings.
-		mRenderSettings.mpLowLevel = mpLowLevelGraphics;
+		mRenderSettings.mpLowLevel = _llGfx;
 		mRenderSettings.mbLog = false;
 		mRenderSettings.mShowShadows = eRendererShowShadows_All;
 		mRenderSettings.mpTempIndexArray = new unsigned int[60000];
 
 		Log("   Load Renderer3D gpu programs:\n");
 
-		cGpuProgramManager *pProgramManager = apResources->GetGpuProgramManager();
-
 		///////////////////////////////////
 		//Load diffuse program, for stuff like query rendering
 		Log("    Diffuse\n");
-		mpDiffuseProgram = pProgramManager->CreateProgram("Universal.vert", "Universal.frag");
+		mpDiffuseProgram = _programManager->CreateProgram("Universal.vert", "Universal.frag");
 		if(mpDiffuseProgram==NULL)
 		{
 			Error("Couldn't load Diffuse shader\n");
@@ -126,14 +121,15 @@ namespace hpl {
 
 	cRenderer3D::~cRenderer3D()
 	{
+		delete mpRenderList;
 		delete[] mRenderSettings.mpTempIndexArray;
 
-		if(mpDiffuseProgram) mpResources->GetGpuProgramManager()->Destroy(mpDiffuseProgram);
+		if(mpDiffuseProgram) _programManager->Destroy(mpDiffuseProgram);
 
 		if(mpSkyBox) delete mpSkyBox;
 		if(mpSkyBoxTexture && mbAutoDestroySkybox)
 		{
-			mpResources->GetTextureManager()->Destroy(mpSkyBoxTexture);
+			_textureManager->Destroy(mpSkyBoxTexture);
 		}
 	}
 
@@ -255,7 +251,7 @@ namespace hpl {
 		////////////////////////////
 		// Render Z
 		//mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_E);
-		mpLowLevelGraphics->SetColorWriteActive(true, true, true,true);
+		_llGfx->SetColorWriteActive(true, true, true,true);
 		mRenderSettings.mChannelMode = eMaterialChannelMode_RGBA;
 
 		//mpLowLevelGraphics->SetColorWriteActive(false, false, false,false);
@@ -266,19 +262,18 @@ namespace hpl {
 
 		////////////////////////////
 		//Render Occlusion Queries
-		mpLowLevelGraphics->SetColorWriteActive(false, false, false,false);
+		_llGfx->SetColorWriteActive(false, false, false,false);
 		mRenderSettings.mChannelMode = eMaterialChannelMode_Z;
 
 		if(mbLog) Log("Rendering Occlusion Queries:\n");
-		mpLowLevelGraphics->SetDepthWriteActive(false);
+		_llGfx->SetDepthWriteActive(false);
 		RenderOcclusionQueries(apCamera);
 
 		////////////////////////////
 		//Render lighting
 		mRenderSettings.mChannelMode = eMaterialChannelMode_RGBA;
-		mpLowLevelGraphics->SetColorWriteActive(true, true, true,true);
-
-		mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_Equal);
+		_llGfx->SetColorWriteActive(true, true, true,true);
+		_llGfx->SetDepthTestFunc(eDepthTestFunc_Equal);
 
 		if(mbLog) Log("Rendering Lighting:\n");
 //		RenderLight(apCamera);
@@ -291,21 +286,21 @@ namespace hpl {
 		////////////////////////////
 		//Render sky box
 		if(mbLog) Log("Rendering Skybox:\n");
-		mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
+		_llGfx->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
 		RenderSkyBox(apCamera);
 
 		//Render transparent
 		if(mbLog) Log("Rendering Transperant:\n");
 //		RenderTrans(apCamera);
 
-		mRenderSettings.Reset(mpLowLevelGraphics);
+		mRenderSettings.Reset(_llGfx);
 
 		////////////////////////////
 		//Render debug
 //		RenderDebug(apCamera);
 //		RenderPhysicsDebug(apWorld, apCamera);
 
-		mpLowLevelGraphics->SetDepthWriteActive(true);
+		_llGfx->SetDepthWriteActive(true);
 	}
 
 	//-----------------------------------------------------------------------
@@ -314,7 +309,7 @@ namespace hpl {
 	{
 		if(mpSkyBoxTexture && mbAutoDestroySkybox)
 		{
-			mpResources->GetTextureManager()->Destroy(mpSkyBoxTexture);
+			_textureManager->Destroy(mpSkyBoxTexture);
 		}
 
 		mbAutoDestroySkybox = abAutoDestroy;
@@ -401,21 +396,21 @@ namespace hpl {
 	{
 		//////////////////////////////////////////////////
 		// Cull and depth mode.
-		mpLowLevelGraphics->SetCullActive(true);
-		mpLowLevelGraphics->SetDepthTestActive(true);
-		mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
+		_llGfx->SetCullActive(true);
+		_llGfx->SetDepthTestActive(true);
+		_llGfx->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
 
 		mRenderSettings.mpCamera = apCamera;
 
 		for (int i=0; i < MAX_TEXTUREUNITS; ++i)
-			mpLowLevelGraphics->SetTexture(i, NULL);
+			_llGfx->SetTexture(i, NULL);
 	}
 
 	//-----------------------------------------------------------------------
 
 	void cRenderer3D::InitSkyBox()
 	{
-		mpSkyBox = CreateSkyBoxVertexBuffer(mpLowLevelGraphics, 1);
+		mpSkyBox = CreateSkyBoxVertexBuffer(_llGfx, 1);
 	}
 
 	//-----------------------------------------------------------------------
@@ -444,7 +439,7 @@ namespace hpl {
 		{
 			if(mRenderSettings.mpTexture[i])
 			{
-				mpLowLevelGraphics->SetTexture(i,NULL);
+				_llGfx->SetTexture(i,NULL);
 				mRenderSettings.mpTexture[i] = NULL;
 				if(mbLog) Log(" Setting Texture %d : NULL\n",i);
 			}
@@ -465,7 +460,7 @@ namespace hpl {
 
 		mtxSky.SetTranslation(0);
 
-		mpLowLevelGraphics->SetMatrix(eMatrix_ModelView,mtxSky);
+		_llGfx->SetMatrix(eMatrix_ModelView,mtxSky);
 
 		mpLowLevelGraphics->SetTexture(0,mpSkyBoxTexture);
 		mRenderSettings.mpTexture[0] = mpSkyBoxTexture;
@@ -504,7 +499,7 @@ namespace hpl {
 
 		////////////////////////
 		// Reset texture unit 0
-		mpLowLevelGraphics->SetTexture(0,NULL);
+		_llGfx->SetTexture(0,NULL);
 		mRenderSettings.mpTexture[0] = NULL;
 
 		////////////////////////
@@ -537,9 +532,9 @@ namespace hpl {
 			{
 				//mpLowLevelGraphics->SetDepthTestActive(pObject->mbDepthTest);
 				if(pObject->mbDepthTest)
-					mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
+					_llGfx->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
 				else
-					mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_Always);
+					_llGfx->SetDepthTestFunc(eDepthTestFunc_Always);
 
 				bPrevDepthTest = pObject->mbDepthTest;
 				if(mbLog) Log(" Setting depth test %d\n",pObject->mbDepthTest?1:0);
@@ -612,11 +607,11 @@ namespace hpl {
 			cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Normal,
 															eMaterialRenderType_Light, lLightCount);
 
-			if(pLight->BeginDraw(&mRenderSettings, mpLowLevelGraphics))
+			if(pLight->BeginDraw(&mRenderSettings, _llGfx))
 			{
 				pNode->Render(&mRenderSettings);
 			}
-			pLight->EndDraw(&mRenderSettings, mpLowLevelGraphics);
+			pLight->EndDraw(&mRenderSettings, _llGfx);
 
 			lLightCount++;
 		}
