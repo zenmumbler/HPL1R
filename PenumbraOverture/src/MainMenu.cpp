@@ -1278,7 +1278,6 @@ cMainMenuWidget_Text *gpPostEffectsText=NULL;
 cMainMenuWidget_Text *gpBloomText=NULL;
 cMainMenuWidget_Text *gpMotionBlurText=NULL;
 cMainMenuWidget_Text *gpVSyncText=NULL;
-cMainMenuWidget_Text *gpTextureQualityText=NULL;
 cMainMenuWidget_Text *gpShaderQualityText=NULL;
 cMainMenuWidget_Text *gpShadowsText=NULL;
 cMainMenuWidget_Text *gpTextureFilterText=NULL;
@@ -1569,45 +1568,6 @@ public:
 			if(mpInit->mpMapHandler->GetCurrentMapName() != "") gbMustRestart = true;
 		}
 	}
-};
-
-//------------------------------------------------------------
-
-// Rehatched: 2x is an aspirational setting for when we include upscaled textures
-const tString gvTextureQuality[] = {"Classic","Upscaled2"};
-
-class cMainMenuWidget_TextureQuality : public cMainMenuWidget_Button
-{
-	int miTextureQualityNum = 1;
-
-public:
-	cMainMenuWidget_TextureQuality(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment)
-		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
-	{
-		miCurrent = apInit->mpGame->GetResources()->GetMaterialManager()->GetTextureSizeLevel();
-		msTip = kTranslate("MainMenu", "TipGraphicsTextureQuality");
-	}
-
-	void OnMouseDown(eMButton aButton)
-	{
-		if(aButton == eMButton_Right)
-		{
-			miCurrent++;
-			if(miCurrent >= miTextureQualityNum) miCurrent =0;
-		}
-		else if(aButton == eMButton_Left)
-		{
-			miCurrent--;
-			if(miCurrent < 0) miCurrent = miTextureQualityNum-1;
-		}
-
-		gpTextureQualityText->msText = kTranslate("MainMenu",gvTextureQuality[miCurrent]);
-		mpInit->mpGame->GetResources()->GetMaterialManager()->SetTextureSizeLevel(miCurrent);
-
-		gbMustRestart = true;
-	}
-
-	int miCurrent;
 };
 
 //------------------------------------------------------------
@@ -3251,9 +3211,6 @@ void cMainMenu::CreateWidgets()
 	vPos.y += 37;
 	
 	//Buttons
-	cMainMenuWidget *pTextureQualityButton = new cMainMenuWidget_TextureQuality(mpInit,vPos,kTranslate("MainMenu","Texture Quality:"),20,eFontAlign_Right);
-	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,pTextureQualityButton); 
-	vPos.y += 29;
 	cMainMenuWidget *pShadowsButton = new cMainMenuWidget_Shadows(mpInit,vPos,kTranslate("MainMenu","Shadows:"),20,eFontAlign_Right);
 	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,pShadowsButton); 
 	vPos.y += 29;
@@ -3283,12 +3240,6 @@ void cMainMenu::CreateWidgets()
 	//Text
 	vPos = cVector3f(vTextStart.x+12, vTextStart.y+37, vTextStart.z) + cVector3f(40,0,0);
 
-	sText = kTranslate("MainMenu",gvTextureQuality[mpInit->mpGame->GetResources()->GetMaterialManager()->GetTextureSizeLevel()]);
-	gpTextureQualityText = new cMainMenuWidget_Text(mpInit,vPos,sText,20,eFontAlign_Left);
-	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,gpTextureQualityText); 
-	gpTextureQualityText->SetExtraWidget(pTextureQualityButton);
-
-	vPos.y += 29;
 	sText = kTranslate("MainMenu",gvShadowTypes[mpInit->mpGame->GetGraphics()->GetRenderer3D()->GetShowShadows()]);
 	gpShadowsText = new cMainMenuWidget_Text(mpInit,vPos,sText,20,eFontAlign_Left);
 	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,gpShadowsText); 

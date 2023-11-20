@@ -42,9 +42,6 @@ namespace hpl {
 
 		void Destroy(iResourceBase* apResource);
 
-		void SetTextureSizeLevel(unsigned int alLevel){ mlTextureSizeLevel = alLevel;}
-		int GetTextureSizeLevel(){ return mlTextureSizeLevel;}
-
 		void SetTextureFilter(eTextureFilter aFilter);
 		eTextureFilter GetTextureFilter(){ return mTextureFilter;}
 
@@ -61,7 +58,6 @@ namespace hpl {
 		eTextureWrap GetWrap(const tString& asType);
 		eTextureAnimMode GetAnimMode(const tString& asType);
 
-		unsigned int mlTextureSizeLevel;
 		eTextureFilter mTextureFilter;
 		float mfTextureAnisotropy;
 

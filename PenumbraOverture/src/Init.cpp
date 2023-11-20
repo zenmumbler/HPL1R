@@ -307,13 +307,6 @@ bool cInit::Init(tString asCommandLine)
 
 	mpEffectHandler->GetDepthOfField()->SetDisabled(!mpConfig->GetBool("Graphics", "DepthOfField", true));
 
-	// Rehatched: restrict texture scale to full original size
-	int iTextureScale = mpConfig->GetInt("Graphics","TextureSizeLevel",0);
-	if (iTextureScale != 0) {
-		iTextureScale = 0;
-	}
-	mpGame->GetResources()->GetMaterialManager()->SetTextureSizeLevel(iTextureScale);
-
 	mpGame->GetResources()->GetMaterialManager()->SetTextureFilter((eTextureFilter)mpConfig->GetInt("Graphics","TextureFilter",0));
 	mpGame->GetResources()->GetMaterialManager()->SetTextureAnisotropy(mpConfig->GetFloat("Graphics","TextureAnisotropy",1.0f));
 
@@ -569,7 +562,6 @@ void cInit::Exit()
 	mpConfig->SetFloat("Sound","Volume",mpGame->GetSound()->GetLowLevel()->GetVolume());
 	mpConfig->SetString("Sound","DeviceName",msDeviceName);
 
-	mpConfig->SetInt("Graphics","TextureSizeLevel",mpGame->GetResources()->GetMaterialManager()->GetTextureSizeLevel());
 	mpConfig->SetInt("Graphics","TextureFilter",mpGame->GetResources()->GetMaterialManager()->GetTextureFilter());
 	mpConfig->SetFloat("Graphics","TextureAnisotropy",mpGame->GetResources()->GetMaterialManager()->GetTextureAnisotropy());
 
