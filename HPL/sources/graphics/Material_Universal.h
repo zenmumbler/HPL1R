@@ -6,7 +6,6 @@
 #define HPL_MATERIAL_UNIVERSAL_H
 
 #include "graphics/Material.h"
-#include "scene/Light3D.h"
 
 namespace hpl {
 
@@ -22,17 +21,15 @@ namespace hpl {
 
 		tTextureTypeList GetTextureTypes() override;
 
-		bool UsesType(eMaterialRenderType renType) override;
+		iGpuProgram* GetProgramEx() override;
 
-		iGpuProgram* GetProgramEx(eMaterialRenderType aType) override;
+		iMaterialProgramSetup* GetProgramSetup() override;
 
-		iMaterialProgramSetup * GetProgramSetup(eMaterialRenderType aType) override;
+		eMaterialAlphaMode GetAlphaMode() override;
+		eMaterialBlendMode GetBlendMode() override;
+		eMaterialChannelMode GetChannelMode() override;
 
-		eMaterialAlphaMode GetAlphaMode(eMaterialRenderType aType) override;
-		eMaterialBlendMode GetBlendMode(eMaterialRenderType aType) override;
-		eMaterialChannelMode GetChannelMode(eMaterialRenderType aType) override;
-
-		iTexture* GetTexture(int alUnit,eMaterialRenderType aType) override;
+		iTexture* GetTexture(int alUnit) override;
 
 	protected:
 		iGpuProgram* _program;

@@ -162,8 +162,6 @@ namespace hpl {
 		void FetchOcclusionQueries();
 
 	private:
-		inline void BeginRendering(cCamera *apCamera);
-
 		void InitSkyBox();
 
 		//Render steps
@@ -180,11 +178,7 @@ namespace hpl {
 		void RenderTrans(cCamera *apCamera);
 
 		void RenderDebug(cCamera *apCamera);
-
-		void RenderDebugObject(cCamera *apCamera,iRenderable* &apObject, iMaterial* apPrevMat,
-					int alPrevMatId,iVertexBuffer* apPrevVtxBuff,
-					eMaterialRenderType aRenderType, iLight3D* apLight);
-		
+		void RenderDebugObject(cCamera *apCamera,iRenderable* &apObject);
 		void RenderPhysicsDebug(cWorld3D *apWorld, cCamera *apCamera);
 
 		iLowLevelGraphics *_llGfx;

@@ -38,14 +38,6 @@ namespace hpl {
 		eMaterialTexture_None
 	};
 
-	enum eMaterialRenderType
-	{
-		eMaterialRenderType_Z,
-		eMaterialRenderType_Light,
-		eMaterialRenderType_Diffuse,
-		eMaterialRenderType_LastEnum
-	};
-
 	enum eMaterialBlendMode
 	{
 		eMaterialBlendMode_None,
@@ -117,17 +109,15 @@ namespace hpl {
 		virtual void Update(float afTimeStep){}
 
 		//The new render system stuff
-		virtual iGpuProgram* GetProgramEx(eMaterialRenderType aType){return NULL;}
+		virtual iGpuProgram* GetProgramEx(){return NULL;}
 
-		virtual iMaterialProgramSetup * GetProgramSetup(eMaterialRenderType aType){return NULL;}
+		virtual iMaterialProgramSetup * GetProgramSetup(){return NULL;}
 
-		virtual eMaterialAlphaMode GetAlphaMode(eMaterialRenderType aType){return eMaterialAlphaMode_Solid;}
-		virtual eMaterialBlendMode GetBlendMode(eMaterialRenderType aType){return eMaterialBlendMode_Replace;}
-		virtual eMaterialChannelMode GetChannelMode(eMaterialRenderType aType){return eMaterialChannelMode_RGBA;}
+		virtual eMaterialAlphaMode GetAlphaMode(){return eMaterialAlphaMode_Solid;}
+		virtual eMaterialBlendMode GetBlendMode(){return eMaterialBlendMode_Replace;}
+		virtual eMaterialChannelMode GetChannelMode(){return eMaterialChannelMode_RGBA;}
 
-		virtual iTexture* GetTexture(int alUnit,eMaterialRenderType aType){ return NULL;}
-
-		virtual bool UsesType(eMaterialRenderType aType){return false;}
+		virtual iTexture* GetTexture(int alUnit){return NULL;}
 
 		bool HasAlpha(){ return mbHasAlpha;}
 		void SetHasAlpha(bool abX){ mbHasAlpha= abX; }

@@ -38,16 +38,6 @@ namespace hpl {
 	class iRenderState;
 	class cRenderSettings;
 
-
-	//-------------------------------------------------------------
-
-	enum eRenderListDrawType
-	{
-		eRenderListDrawType_Normal,
-		eRenderListDrawType_Trans,
-		eRenderListDrawType_LastEnum
-	};
-
 	//-------------------------------------------------------------
 
 	class cRenderNode;
@@ -157,9 +147,7 @@ namespace hpl {
 		void AddOcclusionQuery(cOcclusionQueryObject *apObject);
 
 		cOcclusionQueryObjectIterator GetQueryIterator();
-
 		cMotionBlurObjectIterator GetMotionBlurIterator();
-
 		cTransperantObjectIterator GetTransperantIterator();
 
 		cLight3DIterator GetLightIt();
@@ -177,16 +165,14 @@ namespace hpl {
 
 		void SetFrameTime(float afTime){ mfFrameTime = afTime;}
 
-		cRenderNode* GetRootNode(eRenderListDrawType aObjectType ,eMaterialRenderType aPassType, int alLightNum);
+		cRenderNode* GetRootNode();
 
 		static inline int GetGlobalRenderCount(){ return mlGlobalRenderCount;}
 
 	private:
 		cRenderNode* InsertNode(cRenderNode* apListNode, cRenderNode* apTempNode);
 
-		void AddToTree(iRenderable* apObject,eRenderListDrawType aObjectType,
-						eMaterialRenderType mPassType,int alLightNum,iLight3D* apLight,
-						bool abUseDepth);
+		void AddToTree(iRenderable* apObject);
 
 		static int mlGlobalRenderCount;
 
@@ -200,10 +186,7 @@ namespace hpl {
 		tMotionBlurObjectSet m_setMotionBlurObjects;
 		tTransperantObjectSet m_setTransperantObjects;
 
-		cRenderNode mRootNodeDepth;
 		cRenderNode mRootNodeDiffuse;
-		cRenderNode mRootNodeLight[MAX_NUM_OF_LIGHTS];
-		cRenderNode mRootNodeTrans;
 
 		cRenderNode mTempNode;
 

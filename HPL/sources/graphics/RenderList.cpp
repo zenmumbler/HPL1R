@@ -178,14 +178,7 @@ namespace hpl {
 		m_setMotionBlurObjects.clear();
 		m_setTransperantObjects.clear();
 
-		mRootNodeDepth.DeleteChildren();
 		mRootNodeDiffuse.DeleteChildren();
-		mRootNodeTrans.DeleteChildren();
-
-		for(int i=0;i<MAX_NUM_OF_LIGHTS;i++)
-		{
-			mRootNodeLight[i].DeleteChildren();
-		}
 
 		mlLastRenderCount = mlRenderCount;
 		mlRenderCount++;
@@ -247,19 +240,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cRenderNode* cRenderList::GetRootNode(eRenderListDrawType aObjectType, eMaterialRenderType aPassType, int alLightNum)
+	cRenderNode* cRenderList::GetRootNode()
 	{
-		if(aObjectType== eRenderListDrawType_Normal)
-		{
-			if(aPassType == eMaterialRenderType_Z) return &mRootNodeDepth;
-			if(aPassType == eMaterialRenderType_Diffuse) return &mRootNodeDiffuse;
-			if(aPassType == eMaterialRenderType_Light) return &mRootNodeLight[alLightNum];
-			return NULL;
-		}
-		else
-		{
-			return &mRootNodeTrans;
-		}
+		return &mRootNodeDiffuse;
 	}
 
 	//-----------------------------------------------------------------------
@@ -269,67 +252,44 @@ namespace hpl {
 		int lLightNum = (int)m_setLights.size();
 		if(lLightNum > MAX_NUM_OF_LIGHTS) lLightNum = MAX_NUM_OF_LIGHTS;
 
-		for(int i=0; i<lLightNum; ++i) mvObjectsPerLight[i] =0;
+		for (int i=0; i<lLightNum; ++i) mvObjectsPerLight[i] = 0;
 
 		// Iterate the objects to be rendered and build trees with render states.
-		tRenderableSetIt it = m_setObjects.begin();
-		for(;it != m_setObjects.end();++it)
+		for (auto pObject : m_setObjects)
 		{
-			iRenderable* pObject = *it;
 			iMaterial* pMat = pObject->GetMaterial();
 
 			//Skip meshes...
 			if(pObject->GetRenderType() == eRenderableType_Mesh) continue;
 
-			//If the object is transparent add tot eh trans tree
-			if(pMat->IsTransperant())
+			if (pMat->IsTransperant())
 			{
 				//Use the set cotainer instead for now:
 				m_setTransperantObjects.insert(pObject);
-				/*for(int lPass=0; lPass< pMat->GetNumOfPasses(eMaterialRenderType_Diffuse, NULL);lPass++)
-				{
-					AddToTree(pObject,eRenderListDrawType_Trans,
-								eMaterialRenderType_Light,0,NULL, true,lPass);
-				}*/
 			}
-			//If object is not trans add to another tree.
 			else
 			{
 				//If the object uses z pass add to z tree.
-				if(pMat->UsesType(eMaterialRenderType_Z))
-				{
-					AddToTree(pObject, eRenderListDrawType_Normal, eMaterialRenderType_Z, 0, NULL, false);
-				}
+				AddToTree(pObject);
 
-				//If object uses light add the object to each light's tree.
-				if(pMat->UsesType(eMaterialRenderType_Light))
-				{
-					//Light trees that the object will belong to.
-					int lLightCount =0;
+				//Light trees that the object will belong to.
+				/*
+				int lLightCount =0;
 
-					tLight3DSetIt lightIt = m_setLights.begin();
-					for(;lightIt != m_setLights.end();++lightIt)
+				for (auto pLight : m_setLights)
+				{
+					if(	(pLight->GetOnlyAffectInSector()==false || pObject->IsInSector(pLight->GetCurrentSector())) &&
+						pLight->CheckObjectIntersection(pObject))
 					{
-						iLight3D* pLight = *lightIt;
+						if(lLightCount >= MAX_NUM_OF_LIGHTS) break;
 
-						if(	(pLight->GetOnlyAffectInSector()==false || pObject->IsInSector(pLight->GetCurrentSector())) &&
-							pLight->CheckObjectIntersection(pObject))
-						{
-							if(lLightCount >= MAX_NUM_OF_LIGHTS) break;
+						++mvObjectsPerLight[lLightCount];
 
-							++mvObjectsPerLight[lLightCount];
-
-							AddToTree(pObject, eRenderListDrawType_Normal, eMaterialRenderType_Light, lLightCount, pLight, false);
-						}
-						++lLightCount;
+						AddToTree(pObject);
 					}
+					++lLightCount;
 				}
-
-				//If it has a diffuse pass, add to the diffuse tree.
-				if(pObject->GetMaterial()->UsesType(eMaterialRenderType_Diffuse))
-				{
-					AddToTree(pObject, eRenderListDrawType_Normal, eMaterialRenderType_Diffuse, 0, NULL, false);
-				}
+				*/
 			}
 		}
 	}
@@ -474,13 +434,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderList::AddToTree(iRenderable* apObject,eRenderListDrawType aObjectType,
-								eMaterialRenderType aPassType, int alLightNum,iLight3D* apLight,
-								bool abUseDepth)
+	void cRenderList::AddToTree(iRenderable* apObject)
 	{
 		//Log("------ OBJECT ------------\n");
 
-		cRenderNode *pNode = GetRootNode(aObjectType, aPassType, alLightNum);
+		cRenderNode *pNode = GetRootNode();
 		iMaterial *pMaterial = apObject->GetMaterial();
 		iRenderState *pTempState = mTempNode.mpState;
 		cRenderNode *pTempNode = &mTempNode;
@@ -507,20 +465,9 @@ namespace hpl {
 		//-------------------------------------------------------------
 
 		/////// SECTOR //////////////
-		if(aPassType == eMaterialRenderType_Z)
 		{
 			pTempState->mType = eRenderStateType_Sector;
 			pTempState->mpSector = apObject->GetCurrentSector();
-
-			pNode = InsertNode(pNode, pTempNode);
-		}
-
-		/////// DEPTH //////////////
-		if(abUseDepth)
-		{
-			//Log("\nDepth level, Z: %f\n",apObject->GetZ());
-			pTempState->mType = eRenderStateType_Depth;
-			pTempState->mfZ = apObject->GetZ();
 
 			pNode = InsertNode(pNode, pTempNode);
 		}
@@ -529,7 +476,7 @@ namespace hpl {
 		{
 			//Log("\nAlpha level %d\n", pMaterial->GetAlphaMode(mType));
 			pTempState->mType = eRenderStateType_AlphaMode;
-			pTempState->mAlphaMode = pMaterial->GetAlphaMode(aPassType);
+			pTempState->mAlphaMode = pMaterial->GetAlphaMode();
 
 			pNode = InsertNode(pNode, pTempNode);
 		}
@@ -539,8 +486,8 @@ namespace hpl {
 			//Log("\nBlend level %d : %d\n",pMaterial->GetBlendMode(mType),pMaterial->GetChannelMode(mType));
 			pTempState->mType = eRenderStateType_BlendMode;
 
-			pTempState->mBlendMode = pMaterial->GetBlendMode(aPassType);
-			pTempState->mChannelMode = pMaterial->GetChannelMode(aPassType);
+			pTempState->mBlendMode = pMaterial->GetBlendMode();
+			pTempState->mChannelMode = pMaterial->GetChannelMode();
 
 			pNode = InsertNode(pNode, pTempNode);
 		}
@@ -550,8 +497,8 @@ namespace hpl {
 			//Log("\nVertex program level\n");
 			pTempState->mType = eRenderStateType_GPUProgram;
 
-			pTempState->mpProgram = pMaterial->GetProgramEx(aPassType);
-			pTempState->mpProgramSetup = pMaterial->GetProgramSetup(aPassType);
+			pTempState->mpProgram = pMaterial->GetProgramEx();
+			pTempState->mpProgramSetup = pMaterial->GetProgramSetup();
 
 			pNode = InsertNode(pNode, pTempNode);
 		}
@@ -562,7 +509,7 @@ namespace hpl {
 			pTempState->mType = eRenderStateType_Texture;
 			for(int i=0; i<MAX_TEXTUREUNITS;i++)
 			{
-				pTempState->mpTexture[i] = pMaterial->GetTexture(i,aPassType);
+				pTempState->mpTexture[i] = pMaterial->GetTexture(i);
 			}
 			pNode = InsertNode(pNode, pTempNode);
 		}

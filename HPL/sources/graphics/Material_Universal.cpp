@@ -4,11 +4,9 @@
  */
 
 #include "graphics/Material_Universal.h"
-#include "scene/Camera.h"
 #include "resources/GpuProgramManager.h"
 #include "resources/TextureManager.h"
 #include "graphics/GPUProgram.h"
-#include "math/Math.h"
 #include "system/String.h"
 #include "graphics/Renderer3D.h"
 #include "scene/PortalContainer.h"
@@ -16,7 +14,7 @@
 namespace hpl {
 
 	//////////////////////////////////////////////////////////////////////////
-	// FRAGMENT PRORGAM SETUP
+	// PRORGAM SETUP
 	//////////////////////////////////////////////////////////////////////////
 
 	//-----------------------------------------------------------------------
@@ -26,9 +24,9 @@ namespace hpl {
 	public:
 		void Setup(iGpuProgram *apProgram, cRenderSettings* apRenderSettings) {
 			if(apRenderSettings->mpSector)
-				apProgram->SetColor3f("ambientColor",apRenderSettings->mAmbientColor * apRenderSettings->mpSector->GetAmbientColor());
+				apProgram->SetColor3f("ambientColor", apRenderSettings->mAmbientColor * apRenderSettings->mpSector->GetAmbientColor());
 			else
-				apProgram->SetColor3f("ambientColor",apRenderSettings->mAmbientColor);
+				apProgram->SetColor3f("ambientColor", apRenderSettings->mAmbientColor);
 		}
 	};
 
@@ -68,64 +66,45 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iGpuProgram* Material_Universal::GetProgramEx(eMaterialRenderType aType) {
-		if (aType == eMaterialRenderType_Z || aType == eMaterialRenderType_Diffuse) {
-			return _program;
-		}
-		return NULL;
+	iGpuProgram* Material_Universal::GetProgramEx() {
+		return _program;
 	}
 
 	//------------------------------------------------------------------------------------
 
-	iMaterialProgramSetup * Material_Universal::GetProgramSetup(eMaterialRenderType aType)
+	iMaterialProgramSetup * Material_Universal::GetProgramSetup()
 	{
-		if (aType == eMaterialRenderType_Z) {
-			return &gAmbProgramSetup;
-		}
-
-		return NULL;
+		return &gAmbProgramSetup;
 	}
 
 	//------------------------------------------------------------------------------------
 
-	eMaterialAlphaMode Material_Universal::GetAlphaMode(eMaterialRenderType aType)
+	eMaterialAlphaMode Material_Universal::GetAlphaMode()
 	{
-		return (aType == eMaterialRenderType_Z && mbHasAlpha) ? eMaterialAlphaMode_Trans : eMaterialAlphaMode_Solid;
+		return mbHasAlpha ? eMaterialAlphaMode_Trans : eMaterialAlphaMode_Solid;
 	}
 
 	//------------------------------------------------------------------------------------
 
-	eMaterialBlendMode Material_Universal::GetBlendMode(eMaterialRenderType aType)
+	eMaterialBlendMode Material_Universal::GetBlendMode()
 	{
 		return eMaterialBlendMode_Replace;
 	}
 
 	//------------------------------------------------------------------------------------
 
-	eMaterialChannelMode Material_Universal::GetChannelMode(eMaterialRenderType aType)
+	eMaterialChannelMode Material_Universal::GetChannelMode()
 	{
 		return eMaterialChannelMode_RGBA;
 	}
 
 	//-----------------------------------------------------------------------
 
-	iTexture* Material_Universal::GetTexture(int alUnit,eMaterialRenderType aType)
+	iTexture* Material_Universal::GetTexture(int alUnit)
 	{
 		if (alUnit == 0)
 			return mvTexture[eMaterialTexture_Diffuse];
 		return NULL;
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool Material_Universal::UsesType(eMaterialRenderType renType)
-	{
-//		
-//		if (renType != eMaterialRenderType_Light)
-//		{
-//			return false;
-//		}
-		return true;
 	}
 
 	//-----------------------------------------------------------------------

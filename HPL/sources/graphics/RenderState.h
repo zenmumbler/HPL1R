@@ -34,7 +34,6 @@ namespace hpl {
 	enum eRenderStateType
 	{
 		eRenderStateType_Sector = 0,
-		eRenderStateType_Depth = 3,
 		eRenderStateType_AlphaMode = 4,
 		eRenderStateType_BlendMode = 5,
 		eRenderStateType_GPUProgram = 6,

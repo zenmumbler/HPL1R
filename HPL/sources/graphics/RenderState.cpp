@@ -51,7 +51,6 @@ namespace hpl {
 		switch(mType)
 		{
 		case eRenderStateType_Sector:				return CompareSector(apState);
-		case eRenderStateType_Depth:				return CompareDepth(apState);
 		case eRenderStateType_AlphaMode:			return CompareAlpha(apState);
 		case eRenderStateType_BlendMode:			return CompareBlend(apState);
 		case eRenderStateType_GPUProgram:		return CompareVtxProg(apState);
@@ -70,7 +69,6 @@ namespace hpl {
 		switch(mType)
 		{
 		case eRenderStateType_Sector:				SetSectorMode(apSettings); break;
-		case eRenderStateType_Depth:				SetDepthMode(apSettings); break;
 		case eRenderStateType_AlphaMode:			SetAlphaMode(apSettings); break;
 		case eRenderStateType_BlendMode:			SetBlendMode(apSettings); break;
 		case eRenderStateType_GPUProgram:		SetGPUProgMode(apSettings); break;
@@ -90,8 +88,6 @@ namespace hpl {
 		switch(mType)
 		{
 		case eRenderStateType_Sector:			mpSector = apState->mpSector;
-												break;
-		case eRenderStateType_Depth:			mfZ = apState->mfZ;
 												break;
 
 		case eRenderStateType_AlphaMode:		mAlphaMode = apState->mAlphaMode;

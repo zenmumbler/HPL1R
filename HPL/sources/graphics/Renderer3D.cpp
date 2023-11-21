@@ -192,7 +192,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-
 	void cRenderer3D::UpdateRenderList(cWorld3D* apWorld, cCamera *apCamera, float afFrameTime)
 	{
 		//Clear all objects to be rendereded
@@ -231,7 +230,7 @@ namespace hpl {
 
 		//////////////////////////////
 		//Setup render settings and logging
-		if(mDebugFlags & eRendererDebugFlag_LogRendering){
+		if(mDebugFlags & eRendererDebugFlag_LogRendering) {
 			mbLog = true;
 			mRenderSettings.mbLog = true;
 		}
@@ -244,54 +243,40 @@ namespace hpl {
 
 		/////////////////////////////////
 		//Set up rendering
-		BeginRendering(apCamera);
+		_llGfx->SetCullActive(true);
+		_llGfx->SetDepthTestActive(true);
+		_llGfx->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
+
+		mRenderSettings.mpCamera = apCamera;
+
+		for (int i=0; i < MAX_TEXTUREUNITS; ++i)
+			_llGfx->SetTexture(i, NULL);
 
 		mRenderSettings.Clear();
 
 		////////////////////////////
 		// Render Z
-		//mpLowLevelGraphics->SetDepthTestFunc(eDepthTestFunc_E);
-		_llGfx->SetColorWriteActive(true, true, true,true);
-		mRenderSettings.mChannelMode = eMaterialChannelMode_RGBA;
+//		RenderZ(apCamera);
 
-		//mpLowLevelGraphics->SetColorWriteActive(false, false, false,false);
-		//mRenderSettings.mChannelMode = eMaterialChannelMode_Z;
-
-		if(mbLog) Log("Rendering ZBuffer:\n");
-		RenderZ(apCamera);
+		////////////////////////////
+		//Render Diffuse
+		RenderDiffuse(apCamera);
 
 		////////////////////////////
 		//Render Occlusion Queries
-		_llGfx->SetColorWriteActive(false, false, false,false);
-		mRenderSettings.mChannelMode = eMaterialChannelMode_Z;
-
-		if(mbLog) Log("Rendering Occlusion Queries:\n");
-		_llGfx->SetDepthWriteActive(false);
 		RenderOcclusionQueries(apCamera);
 
 		////////////////////////////
 		//Render lighting
-		mRenderSettings.mChannelMode = eMaterialChannelMode_RGBA;
-		_llGfx->SetColorWriteActive(true, true, true,true);
-		_llGfx->SetDepthTestFunc(eDepthTestFunc_Equal);
-
-		if(mbLog) Log("Rendering Lighting:\n");
 //		RenderLight(apCamera);
 
-		////////////////////////////
-		//Render Diffuse
-		if(mbLog) Log("Rendering Diffuse:\n");
-//		RenderDiffuse(apCamera);
 
 		////////////////////////////
 		//Render sky box
-		if(mbLog) Log("Rendering Skybox:\n");
-		_llGfx->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
 		RenderSkyBox(apCamera);
 
 		//Render transparent
-		if(mbLog) Log("Rendering Transperant:\n");
-//		RenderTrans(apCamera);
+		RenderTrans(apCamera);
 
 		mRenderSettings.Reset(_llGfx);
 
@@ -300,6 +285,7 @@ namespace hpl {
 //		RenderDebug(apCamera);
 //		RenderPhysicsDebug(apWorld, apCamera);
 
+		_llGfx->SetColorWriteActive(true, true, true, true);
 		_llGfx->SetDepthWriteActive(true);
 	}
 
@@ -392,22 +378,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::BeginRendering(cCamera *apCamera)
-	{
-		//////////////////////////////////////////////////
-		// Cull and depth mode.
-		_llGfx->SetCullActive(true);
-		_llGfx->SetDepthTestActive(true);
-		_llGfx->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
-
-		mRenderSettings.mpCamera = apCamera;
-
-		for (int i=0; i < MAX_TEXTUREUNITS; ++i)
-			_llGfx->SetTexture(i, NULL);
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cRenderer3D::InitSkyBox()
 	{
 		mpSkyBox = CreateSkyBoxVertexBuffer(_llGfx, 1);
@@ -420,7 +390,8 @@ namespace hpl {
 	/*
 		if(mbSkyBoxActive==false) return;
 
-		if(mbLog) Log(" Drawing skybox\n");
+		if(mbLog) Log("Rendering Skybox:\n");
+		_llGfx->SetDepthTestFunc(eDepthTestFunc_LessOrEqual);
 
 		if(mRenderSettings.mpProgram)
 		{
@@ -478,7 +449,13 @@ namespace hpl {
 
 	void cRenderer3D::RenderZ(cCamera *apCamera)
 	{
-		cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Normal, eMaterialRenderType_Z, 0);
+		if(mbLog) Log("Rendering ZBuffer:\n");
+
+		//_llGfx->SetDepthTestFunc(eDepthTestFunc_Equal);
+		_llGfx->SetColorWriteActive(false, false, false,false);
+		mRenderSettings.mChannelMode = eMaterialChannelMode_Z;
+
+		cRenderNode* pNode = mpRenderList->GetRootNode();
 		pNode->Render(&mRenderSettings);
 	}
 
@@ -486,6 +463,11 @@ namespace hpl {
 
 	void cRenderer3D::RenderOcclusionQueries(cCamera *apCamera)
 	{
+		if(mbLog) Log("Rendering Occlusion Queries:\n");
+		_llGfx->SetColorWriteActive(false, false, false, false);
+		mRenderSettings.mChannelMode = eMaterialChannelMode_Z;
+		_llGfx->SetDepthWriteActive(false);
+
 		////////////////////////////
 		// Program
 		if(mRenderSettings.mpProgram != mpDiffuseProgram)
@@ -586,6 +568,11 @@ namespace hpl {
 	void cRenderer3D::RenderLight(cCamera *apCamera)
 	{
 		if(mDebugFlags & eRendererDebugFlag_DisableLighting) return;
+		if(mbLog) Log("Rendering Lighting:\n");
+
+		mRenderSettings.mChannelMode = eMaterialChannelMode_RGBA;
+		_llGfx->SetColorWriteActive(true, true, true, true);
+		_llGfx->SetDepthTestFunc(eDepthTestFunc_Equal);
 
 		cLight3DIterator lightIt = mpRenderList->GetLightIt();
 
@@ -596,6 +583,7 @@ namespace hpl {
 
 			iLight3D* pLight = lightIt.Next();
 
+			/*
 			if(mpRenderList->GetLightObjects(lLightCount)==0)
 			{
 				lLightCount++;
@@ -604,14 +592,14 @@ namespace hpl {
 
 			if(mbLog) Log("-----Light %s/%d ------\n",pLight->GetName().c_str(), (size_t)pLight);
 
-			cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Normal,
-															eMaterialRenderType_Light, lLightCount);
+			cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Normal);
 
 			if(pLight->BeginDraw(&mRenderSettings, _llGfx))
 			{
 				pNode->Render(&mRenderSettings);
 			}
 			pLight->EndDraw(&mRenderSettings, _llGfx);
+			*/
 
 			lLightCount++;
 		}
@@ -621,7 +609,12 @@ namespace hpl {
 
 	void cRenderer3D::RenderDiffuse(cCamera *apCamera)
 	{
-		cRenderNode* pNode = mpRenderList->GetRootNode(eRenderListDrawType_Normal, eMaterialRenderType_Diffuse, 0);
+		if(mbLog) Log("Rendering Diffuse:\n");
+
+		_llGfx->SetColorWriteActive(true, true, true, true);
+		mRenderSettings.mChannelMode = eMaterialChannelMode_RGBA;
+
+		cRenderNode* pNode = mpRenderList->GetRootNode();
 		pNode->Render(&mRenderSettings);
 	}
 
@@ -629,6 +622,7 @@ namespace hpl {
 
 	void cRenderer3D::RenderTrans(cCamera *apCamera)
 	{
+		if(mbLog) Log("Rendering Transparent:\n");
 		cVector3f vForward = apCamera->GetForward();
 
 		cTransperantObjectIterator it = mpRenderList->GetTransperantIterator();
@@ -652,12 +646,10 @@ namespace hpl {
 			while(objectIt.HasNext())
 			{
 				iRenderable* pObject = objectIt.Next();
-
-				RenderDebugObject(apCamera,pObject,NULL,NULL,NULL,eMaterialRenderType_Diffuse,NULL);
+				RenderDebugObject(apCamera, pObject);
 			}
 
 			//Render debug for lights.
-
 			if(mDebugFlags & eRendererDebugFlag_DrawLightBoundingBox)
 			{
 				mpLowLevelGraphics->SetDepthTestActive(false);
@@ -685,9 +677,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cRenderer3D::RenderDebugObject(cCamera *apCamera,iRenderable* &apObject, iMaterial* apPrevMat,
-		int alPrevMatId,iVertexBuffer* apPrevVtxBuff,
-		eMaterialRenderType aRenderType, iLight3D* apLight)
+	void cRenderer3D::RenderDebugObject(cCamera *apCamera,iRenderable* &apObject)
 	{
 	/*
 		iVertexBuffer* pVtxBuffer = apObject->GetVertexBuffer();
