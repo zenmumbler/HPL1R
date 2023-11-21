@@ -53,6 +53,7 @@ namespace hpl {
 		void SetFilter(eTextureFilter aFilter) override;
 		void SetAnisotropyDegree(float afX) override;
 
+		void SetWrapAll(eTextureWrap aMode) override;
 		void SetWrapS(eTextureWrap aMode) override;
 		void SetWrapT(eTextureWrap aMode) override;
 		void SetWrapR(eTextureWrap aMode) override;

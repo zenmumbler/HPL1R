@@ -116,6 +116,7 @@ namespace hpl {
 
 		virtual bool HasAlpha(){return false;}
 
+		virtual void SetWrapAll(eTextureWrap aMode)=0;
 		virtual void SetWrapS(eTextureWrap aMode)=0;
 		virtual void SetWrapT(eTextureWrap aMode)=0;
 		virtual void SetWrapR(eTextureWrap aMode)=0;

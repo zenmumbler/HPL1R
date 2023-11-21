@@ -413,6 +413,23 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	void cSDLTexture::SetWrapAll(eTextureWrap aMode)
+	{
+		if(mbContainsData)
+		{
+			GLenum GLTarget = TextureTargetToGL(mTarget);
+			auto glWrap = GetGLWrap(aMode);
+
+			for(size_t i=0; i < mvTextureHandles.size(); ++i)
+			{
+				glBindTexture(GLTarget, mvTextureHandles[i]);
+				glTexParameteri(GLTarget, GL_TEXTURE_WRAP_S, glWrap);
+				glTexParameteri(GLTarget, GL_TEXTURE_WRAP_T, glWrap);
+				glTexParameteri(GLTarget, GL_TEXTURE_WRAP_R, glWrap);
+			}
+		}
+	}
+
 	void cSDLTexture::SetWrapS(eTextureWrap aMode)
 	{
 		if(mbContainsData)

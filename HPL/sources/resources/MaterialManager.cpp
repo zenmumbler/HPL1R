@@ -301,9 +301,7 @@ namespace hpl {
 			pTex->SetFrameTime(fFrameTime);
 			pTex->SetAnimMode(animMode);
 
-			pTex->SetWrapS(wrap);
-			pTex->SetWrapT(wrap);
-
+			pTex->SetWrapAll(wrap);
 			pTex->SetFilter(eTextureFilter_Trilinear);
 			pTex->SetAnisotropyDegree(mfTextureAnisotropy);
 
