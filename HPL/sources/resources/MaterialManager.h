@@ -42,9 +42,6 @@ namespace hpl {
 
 		void Destroy(iResourceBase* apResource);
 
-		void SetTextureFilter(eTextureFilter aFilter);
-		eTextureFilter GetTextureFilter(){ return mTextureFilter;}
-
 		void SetTextureAnisotropy(float afX);
 		float GetTextureAnisotropy(){ return mfTextureAnisotropy;}
 
@@ -58,7 +55,6 @@ namespace hpl {
 		eTextureWrap GetWrap(const tString& asType);
 		eTextureAnimMode GetAnimMode(const tString& asType);
 
-		eTextureFilter mTextureFilter;
 		float mfTextureAnisotropy;
 
 		tStringList mlstFileFormats;

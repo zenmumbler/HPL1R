@@ -1397,40 +1397,6 @@ public:
 
 //------------------------------------------------------------
 
-tString gvTextureFilter[] = {"Bilinear","Trilinear"};
-
-class cMainMenuWidget_TextureFilter : public cMainMenuWidget_Button
-{
-public:
-	cMainMenuWidget_TextureFilter(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment)
-		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
-	{
-		mlCurrent = apInit->mpGame->GetResources()->GetMaterialManager()->GetTextureFilter();
-		msTip = kTranslate("MainMenu", "TipGraphicsTextureFilter");
-	}
-
-	void OnMouseDown(eMButton aButton)
-	{
-		if(aButton == eMButton_Left)
-		{
-			mlCurrent--;
-			if(mlCurrent<0)mlCurrent=1;
-		}
-		else if(aButton == eMButton_Right)
-		{
-			mlCurrent++;
-			if(mlCurrent>1)mlCurrent=0;
-		}
-
-		gpTextureFilterText->msText = kTranslate("MainMenu",gvTextureFilter[mlCurrent]);
-		mpInit->mpGame->GetResources()->GetMaterialManager()->SetTextureFilter((eTextureFilter)mlCurrent);
-	}
-
-	int mlCurrent;
-};
-
-//------------------------------------------------------------
-
 class cMainMenuWidget_TextureAnisotropy : public cMainMenuWidget_Button
 {
 public:
@@ -3223,9 +3189,6 @@ void cMainMenu::CreateWidgets()
 	cMainMenuWidget *pVSyncButton = new cMainMenuWidget_VSync(mpInit,vPos,kTranslate("MainMenu","VSync:"),20,eFontAlign_Right);
 	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,pVSyncButton); 
 	vPos.y += 29;
-	cMainMenuWidget *pTextureFilterButton = new cMainMenuWidget_TextureFilter(mpInit,vPos,kTranslate("MainMenu","Texture Filter:"),20,eFontAlign_Right);
-	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,pTextureFilterButton); 
-	vPos.y += 29;
 	cMainMenuWidget *pTextureAnisotropyButton = new cMainMenuWidget_TextureAnisotropy(mpInit,vPos,kTranslate("MainMenu","Anisotropy:"),20,eFontAlign_Right);
 	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,pTextureAnisotropyButton); 
 	vPos.y += 29;
@@ -3262,12 +3225,6 @@ void cMainMenu::CreateWidgets()
 	gpVSyncText = new cMainMenuWidget_Text(mpInit,vPos,sText,20,eFontAlign_Left);
 	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,gpVSyncText);
 	gpVSyncText->SetExtraWidget(pVSyncButton);
-
-	vPos.y += 29;
-	sText = kTranslate("MainMenu",gvTextureFilter[mpInit->mpGame->GetResources()->GetMaterialManager()->GetTextureFilter()]);
-	gpTextureFilterText = new cMainMenuWidget_Text(mpInit,vPos,sText,20,eFontAlign_Left);
-	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,gpTextureFilterText);
-	gpTextureFilterText->SetExtraWidget(pTextureFilterButton);
 
 	vPos.y += 29;
 	int lAniDeg = (int)mpInit->mpGame->GetResources()->GetMaterialManager()->GetTextureAnisotropy();

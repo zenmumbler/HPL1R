@@ -43,7 +43,6 @@ namespace hpl {
 		mpResources = apResources;
 
 		mlTextureSizeLevel =0;
-		mTextureFilter = eTextureFilter_Bilinear;
 		mfTextureAnisotropy = 1.0f;
 
 		mlIdCounter =0;
@@ -126,26 +125,6 @@ namespace hpl {
 		if(apResource->HasUsers()==false){
 			RemoveResource(apResource);
 			delete apResource;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cMaterialManager::SetTextureFilter(eTextureFilter aFilter)
-	{
-		if(aFilter == mTextureFilter) return;
-		mTextureFilter = aFilter;
-
-		tResourceHandleMapIt it = m_mapHandleResources.begin();
-		for(; it != m_mapHandleResources.end(); ++it)
-		{
-			iMaterial *pMat = static_cast<iMaterial*>(it->second);
-
-			for(int i=0; i<eMaterialTexture_LastEnum; ++i)
-			{
-				iTexture *pTex = pMat->GetTexture((eMaterialTexture)i);
-				if(pTex)pTex->SetFilter(aFilter);
-			}
 		}
 	}
 
@@ -326,7 +305,7 @@ namespace hpl {
 			pTex->SetWrapS(wrap);
 			pTex->SetWrapT(wrap);
 
-			pTex->SetFilter(mTextureFilter);
+			pTex->SetFilter(eTextureFilter_Trilinear);
 			pTex->SetAnisotropyDegree(mfTextureAnisotropy);
 
 			pMat->SetTexture(pTex,it->mType);
