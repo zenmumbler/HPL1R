@@ -36,7 +36,7 @@ namespace hpl {
 		cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager)
 		: iResourceBase(asName, 0)
 	{
-		mvTexture.resize(eMaterialTexture_LastEnum, NULL);
+		mvTexture.resize(eMaterialTexture_None, NULL);
 
 		mpLowLevelGraphics = apLowLevelGraphics;
 		mpTextureManager = apTextureManager;
@@ -48,11 +48,10 @@ namespace hpl {
 
 	iMaterial::~iMaterial()
 	{
-		int i;
-
-		for(i=0;i<(int)mvTexture.size();i++){
-			if(mvTexture[i])
-				mpTextureManager->Destroy(mvTexture[i]);
+		for (auto tex : mvTexture) {
+			if (tex) {
+				mpTextureManager->Destroy(tex);
+			}
 		}
 	}
 
@@ -63,11 +62,6 @@ namespace hpl {
 	//////////////////////////////////////////////////////////////////////////
 
 	//-----------------------------------------------------------------------
-
-	iTexture* iMaterial::GetTexture(eMaterialTexture aType)
-	{
-		return mvTexture[aType];
-	}
 
 	//-----------------------------------------------------------------------
 

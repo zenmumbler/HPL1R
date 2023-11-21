@@ -39,7 +39,6 @@ namespace hpl {
 		iMaterial* CreateMaterial(const tString& asName);
 
 		void Update(float afTimeStep);
-
 		void Destroy(iResourceBase* apResource);
 
 		void SetTextureAnisotropy(float afX);
@@ -50,8 +49,8 @@ namespace hpl {
 	private:
 		iMaterial* LoadFromFile(const tString& asName,const tString& asPath);
 
-		eTextureTarget GetTarget(const tString& asType);
 		tString GetTextureString(eMaterialTexture aType);
+		eMaterialTexture GetTextureType(const tString& type);
 		eTextureWrap GetWrap(const tString& asType);
 		eTextureAnimMode GetAnimMode(const tString& asType);
 
@@ -63,8 +62,6 @@ namespace hpl {
 
 		cGraphics* mpGraphics;
 		cResources* mpResources;
-
-		int mlIdCounter;
 	};
 
 };

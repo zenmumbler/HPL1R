@@ -41,11 +41,7 @@ namespace hpl {
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;
-
-		mlTextureSizeLevel =0;
-		mfTextureAnisotropy = 1.0f;
-
-		mlIdCounter =0;
+		mfTextureAnisotropy = 8.0f;
 	}
 
 	cMaterialManager::~cMaterialManager()
@@ -140,7 +136,7 @@ namespace hpl {
 		{
 			iMaterial *pMat = static_cast<iMaterial*>(it->second);
 
-			for(int i=0; i<eMaterialTexture_LastEnum; ++i)
+			for(int i=0; i<eMaterialTexture_None; ++i)
 			{
 				iTexture *pTex = pMat->GetTexture((eMaterialTexture)i);
 				if(pTex)pTex->SetAnisotropyDegree(mfTextureAnisotropy);
@@ -259,7 +255,7 @@ namespace hpl {
 				continue;
 			}
 
-			eTextureTarget target = GetTarget(cString::ToString(pTexChild->Attribute("Type"),""));
+			eTextureTarget target = eTextureTarget_2D;
 			tString sFile = cString::ToString(pTexChild->Attribute("File"),"");
 			eTextureWrap wrap = GetWrap(cString::ToString(pTexChild->Attribute("Wrap"),""));
 
@@ -277,18 +273,7 @@ namespace hpl {
 			}
 			else
 			{
-				if(target == eTextureTarget_2D)
-				{
-					pTex = mpResources->GetTextureManager()->Create2D(sFile);
-				}
-				else if(target == eTextureTarget_1D)
-				{
-					pTex = mpResources->GetTextureManager()->Create1D(sFile);
-				}
-				else if(eTextureTarget_CubeMap)
-				{
-					pTex = mpResources->GetTextureManager()->CreateCubeMap(sFile);
-				}
+				pTex = mpResources->GetTextureManager()->Create2D(sFile);
 			}
 
 			if(pTex==NULL){
@@ -305,7 +290,7 @@ namespace hpl {
 			pTex->SetFilter(eTextureFilter_Trilinear);
 			pTex->SetAnisotropyDegree(mfTextureAnisotropy);
 
-			pMat->SetTexture(pTex,it->mType);
+			pMat->SetTexture(pTex, it->mType);
 		}
 
 		///////////////////////////
@@ -319,26 +304,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	eTextureTarget cMaterialManager::GetTarget(const tString& asType)
-	{
-		const auto lowerType = cString::ToLowerCase(asType);
-		if (lowerType == "cube") return eTextureTarget_CubeMap;
-		else if (lowerType == "1d") return eTextureTarget_1D;
-		else if (lowerType == "2d") return eTextureTarget_2D;
-		else if (lowerType == "3d") return eTextureTarget_3D;
-
-		return eTextureTarget_2D;
-	}
-	//-----------------------------------------------------------------------
-
 	tString cMaterialManager::GetTextureString(eMaterialTexture aType)
 	{
 		switch(aType)
 		{
 			case eMaterialTexture_Diffuse: return "Diffuse";
-			case eMaterialTexture_NMap: return "NMap";
+			case eMaterialTexture_Normal: return "NMap";
 			case eMaterialTexture_Specular: return "Specular";
-			case eMaterialTexture_CubeMap: return "CubeMap";
 			case eMaterialTexture_Refraction: return "Refraction";
 			default: break;
 		}
@@ -346,23 +318,38 @@ namespace hpl {
 		return "";
 	}
 
+	eMaterialTexture cMaterialManager::GetTextureType(const tString& type)
+	{
+		auto typeLower = cString::ToLowerCase(type);
+		if(typeLower == "diffuse") return eMaterialTexture_Diffuse;
+		else if(typeLower == "nmap") return eMaterialTexture_Normal;
+		else if(typeLower == "specular") return eMaterialTexture_Specular;
+		else if(typeLower == "refraction") return eMaterialTexture_Refraction;
+
+		Warning("Skipping unsupported texture type `%s`\n", type.c_str());
+		return eMaterialTexture_None;
+	}
+
 	//-----------------------------------------------------------------------
 
 	eTextureWrap cMaterialManager::GetWrap(const tString& asType)
 	{
-		if(cString::ToLowerCase(asType) == "repeat") return eTextureWrap_Repeat;
-		else if(cString::ToLowerCase(asType) == "clamp") return eTextureWrap_ClampToBorder;
-		else if(cString::ToLowerCase(asType) == "clamptoedge") return eTextureWrap_ClampToEdge;
+		auto typeLower = cString::ToLowerCase(asType);
+		if(typeLower == "repeat") return eTextureWrap_Repeat;
+		else if(typeLower == "clamptoedge") return eTextureWrap_ClampToEdge;
 
+		Warning("Ignoring unsupported texture wrap mode `%s`\n", asType.c_str());
 		return eTextureWrap_Repeat;
 	}
 
 	eTextureAnimMode cMaterialManager::GetAnimMode(const tString& asType)
 	{
-		if(cString::ToLowerCase(asType) == "none") return eTextureAnimMode_None;
-		else if(cString::ToLowerCase(asType) == "loop") return eTextureAnimMode_Loop;
-		else if(cString::ToLowerCase(asType) == "oscillate") return eTextureAnimMode_Oscillate;
+		auto typeLower = cString::ToLowerCase(asType);
+		if(typeLower == "none") return eTextureAnimMode_None;
+		else if(typeLower == "loop") return eTextureAnimMode_Loop;
+		else if(typeLower == "oscillate") return eTextureAnimMode_Oscillate;
 
+		Warning("Ignoring unsupported animation mode `%s`\n", asType.c_str());
 		return eTextureAnimMode_None;
 	}
 

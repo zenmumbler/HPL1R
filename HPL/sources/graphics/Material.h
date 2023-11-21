@@ -32,11 +32,10 @@ namespace hpl {
 	enum eMaterialTexture
 	{
 		eMaterialTexture_Diffuse,
-		eMaterialTexture_NMap,
+		eMaterialTexture_Normal,
 		eMaterialTexture_Specular,
-		eMaterialTexture_CubeMap,		// used once (not in black blague)
 		eMaterialTexture_Refraction,	// used once (more often in black plague)
-		eMaterialTexture_LastEnum
+		eMaterialTexture_None
 	};
 
 	enum eMaterialRenderType
@@ -135,7 +134,7 @@ namespace hpl {
 
 		virtual bool LoadData(TiXmlElement* apRootElem){ return true; }
 
-		iTexture* GetTexture(eMaterialTexture aType);
+		iTexture* GetTexture(eMaterialTexture aType) { return mvTexture[aType]; }
 		void SetTexture(iTexture* apTex,eMaterialTexture aType){ mvTexture[aType] = apTex; }
 
 		/**

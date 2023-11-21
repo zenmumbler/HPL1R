@@ -58,7 +58,7 @@ namespace hpl {
 
 	iMaterial* cMaterialHandler::Create(const tString& asName,tString asMatName)
 	{
-		for(auto &matType : _materialTypes)
+		for (auto &matType : _materialTypes)
 		{
 			if (matType->IsCorrect(asMatName))
 			{
