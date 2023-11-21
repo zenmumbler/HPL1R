@@ -51,11 +51,6 @@ namespace hpl {
 
 	bool cTransperantObject_Compare::operator()(iRenderable* pObjectA,iRenderable* pObjectB) const
 	{
-		if(pObjectA->GetMaterial()->GetDepthTest() != pObjectA->GetMaterial()->GetDepthTest())
-		{
-			return pObjectA->GetMaterial()->GetDepthTest() < pObjectA->GetMaterial()->GetDepthTest();
-		}
-
 		return pObjectA->GetZ() < pObjectB->GetZ();
 	}
 
@@ -516,15 +511,6 @@ namespace hpl {
 		{
 			pTempState->mType = eRenderStateType_Sector;
 			pTempState->mpSector = apObject->GetCurrentSector();
-
-			pNode = InsertNode(pNode, pTempNode);
-		}
-
-		/////// DEPTH TEST //////////////
-		{
-			//Log("\nDepth level, Z: %f\n",apObject->GetZ());
-			pTempState->mType = eRenderStateType_DepthTest;
-			pTempState->mbDepthTest = pMaterial->GetDepthTest();
 
 			pNode = InsertNode(pNode, pTempNode);
 		}

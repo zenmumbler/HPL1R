@@ -234,7 +234,6 @@ namespace hpl {
 		}
 
 		pMat->SetHasAlpha(bUseAlpha);
-		pMat->SetDepthTest(bDepthTest);
 		pMat->SetPhysicsMaterial(sPhysicsMatName);
 
 		///////////////////////////

@@ -133,9 +133,6 @@ namespace hpl {
 		bool HasAlpha(){ return mbHasAlpha;}
 		void SetHasAlpha(bool abX){ mbHasAlpha= abX; }
 
-		bool GetDepthTest(){ return mbDepthTest;}
-		void SetDepthTest(bool abX){ mbDepthTest = abX;}
-
 		virtual bool LoadData(TiXmlElement* apRootElem){ return true; }
 
 		iTexture* GetTexture(eMaterialTexture aType);
@@ -163,7 +160,6 @@ namespace hpl {
 
 		bool mbIsTransperant;
 		bool mbHasAlpha;
-		bool mbDepthTest;
 
 		tString msPhysicsMaterial;
 
