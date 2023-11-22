@@ -526,11 +526,7 @@ namespace hpl {
 		{
 			//Log("\nMatrix level\n");
 			pTempState->mType = eRenderStateType_Matrix;
-
 			pTempState->mpModelMatrix = apObject->GetModelMatrix(mpCamera);
-			pTempState->mpInvModelMatrix = apObject->GetInvModelMatrix();
-			pTempState->mvScale = apObject->GetCalcScale();
-
 			pNode = InsertNode(pNode, pTempNode);
 		}
 

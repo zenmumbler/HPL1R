@@ -166,15 +166,10 @@ namespace hpl {
 
 		//Render steps
 		void RenderSkyBox(cCamera *apCamera);
-
 		void RenderZ(cCamera *apCamera);
-
 		void RenderOcclusionQueries(cCamera *apCamera);
-
 		void RenderLight(cCamera *apCamera);
-
 		void RenderDiffuse(cCamera *apCamera);
-
 		void RenderTrans(cCamera *apCamera);
 
 		void RenderDebug(cCamera *apCamera);

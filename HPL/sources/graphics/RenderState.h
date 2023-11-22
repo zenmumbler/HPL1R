@@ -61,12 +61,6 @@ namespace hpl {
 		//Sector
 		cSector *mpSector;
 
-		//DepthTest
-		bool mbDepthTest;
-
-		//Depth:
-		float mfZ;
-
 		//Alpha
 		eMaterialAlphaMode mAlphaMode;
 
@@ -86,10 +80,6 @@ namespace hpl {
 
 		//Matrix
 		cMatrixf *mpModelMatrix;
-		cMatrixf *mpInvModelMatrix;
-
-		//Scale
-		cVector3f mvScale;
 
 		//Render
 		iRenderable *mpObject;

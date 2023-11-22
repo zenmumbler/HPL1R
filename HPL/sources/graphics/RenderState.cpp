@@ -109,8 +109,6 @@ namespace hpl {
 												break;
 
 		case eRenderStateType_Matrix:			mpModelMatrix = apState->mpModelMatrix;
-												mpInvModelMatrix = apState->mpInvModelMatrix;
-												mvScale = apState->mvScale;
 												break;
 
 		case eRenderStateType_Render:			mpObject = apState->mpObject;
@@ -133,18 +131,6 @@ namespace hpl {
 		apSettings->mpSector = mpSector;
 	}
 
-	//-----------------------------------------------------------------------
-
-	void iRenderState::SetDepthTestMode(cRenderSettings* apSettings)
-	{
-		if(apSettings->mbDepthTest != mbDepthTest)
-		{
-			apSettings->mpLowLevel->SetDepthTestActive(mbDepthTest);
-			apSettings->mbDepthTest = mbDepthTest;
-
-			if(apSettings->mbLog) Log("Setting depth test: %d\n",mbDepthTest?1:0);
-		}
-	}
 	//-----------------------------------------------------------------------
 
 	void iRenderState::SetDepthMode(cRenderSettings* apSettings)
@@ -390,20 +376,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	int iRenderState::CompareDepthTest(const iRenderState* apState) const
-	{
-		return (int)mbDepthTest < (int)apState->mbDepthTest;
-	}
-
-	//-----------------------------------------------------------------------
-
-	int iRenderState::CompareDepth(const iRenderState* apState) const
-	{
-		if(std::abs(mfZ - apState->mfZ) < 0.00001f) return 0;
-		else return mfZ < apState->mfZ ? 1 : -1;
-	}
-
-	//-----------------------------------------------------------------------
 	int iRenderState::CompareAlpha(const iRenderState* apState) const
 	{
 		return GetCompareVal((int)mAlphaMode,(int)apState->mAlphaMode);
