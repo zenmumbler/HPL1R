@@ -16,33 +16,43 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef HPL_SYSTEM_H
-#define HPL_SYSTEM_H
 
+#ifndef HPL_DATE_H
+#define HPL_DATE_H
+
+#include <ctime>
 #include "system/SystemTypes.h"
 
 namespace hpl {
 
-	typedef enum
+	class cDate
 	{
-		eMsgBoxType_Info,
-		eMsgBoxType_Error,
-		eMsgBoxType_Warning,
-		eMsgBoxType_Default
-	} eMsgBoxType;
+	public:
+		int seconds;
+		int minutes;
+		int hours;
+		int month_day;
+		int month;
+		int year;
+		int week_day;
+		int year_day;
 
-	void CreateMessageBoxW(const wchar_t* asCaption, const wchar_t* fmt, ...);
-	void CreateMessageBoxW(eMsgBoxType eType, const wchar_t* asCaption, const wchar_t* fmt, ...);
+		static cDate FromGMTIme(struct tm* apClock);
 
-	void OpenBrowserWindow(const tWString& asURL);
+		tString ToString() const;
 
-	void CopyTextToClipboard(const tWString &asText);
-	tWString LoadTextFromClipboard();
+		bool operator==(const cDate &aDate) const;
+		bool operator!=(const cDate &aDate) const
+		{
+			return !(*this == aDate);
+		}
 
-	void InitAppTime();
-	uint64_t GetAppTimeMS();
-	float GetAppTimeFloat();
+		bool operator>(const cDate &aDate) const;
+		bool operator<(const cDate &aDate) const;
+	};
 
-};
+	cDate GetDate();
 
-#endif // HPL_SYSTEM_H
+}
+
+#endif /* HPL_DATE_H */

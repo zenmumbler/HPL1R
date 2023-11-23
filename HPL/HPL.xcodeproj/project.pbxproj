@@ -40,6 +40,7 @@
 		8EA4871E2610A67C000D1AB7 /* scriptarray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4871B2610A67B000D1AB7 /* scriptarray.cpp */; };
 		8EA4871F2610A67C000D1AB7 /* scriptstdstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */; };
 		8EAA07DD255C64F3007D7CD0 /* LowLevelSystemMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */; };
+		8EAEF4842B0FB7C600F3839C /* Date.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EAEF4832B0FB7C600F3839C /* Date.cpp */; };
 		8EB7C3D9254F603E00277667 /* scripthelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EB7C3D8254F603E00277667 /* scripthelper.cpp */; };
 		8EE896D1262459E800FFF4C3 /* GfxBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EE896CF262459E800FFF4C3 /* GfxBatch.cpp */; };
 		DB294E100C11DC6E005DA55C /* CRC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB294E0F0C11DC6E005DA55C /* CRC.cpp */; };
@@ -277,6 +278,8 @@
 		8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstdstring_utils.cpp; sourceTree = "<group>"; };
 		8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LowLevelSystemMac.mm; sourceTree = "<group>"; };
 		8EAEF4812B0FB3D900F3839C /* STLBufferView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLBufferView.h; sourceTree = "<group>"; };
+		8EAEF4822B0FB76000F3839C /* Date.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Date.h; sourceTree = "<group>"; };
+		8EAEF4832B0FB7C600F3839C /* Date.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Date.cpp; sourceTree = "<group>"; };
 		8EB7C3D8254F603E00277667 /* scripthelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripthelper.cpp; sourceTree = "<group>"; };
 		8EE896CF262459E800FFF4C3 /* GfxBatch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GfxBatch.cpp; sourceTree = "<group>"; };
 		8EE896D0262459E800FFF4C3 /* GfxBatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GfxBatch.h; sourceTree = "<group>"; };
@@ -1214,6 +1217,8 @@
 				DB27F1020ACB9AB90054ACA3 /* BinTree.h */,
 				DBF84A190AC76D5800BB15CD /* Container.cpp */,
 				DB27F1030ACB9AB90054ACA3 /* Container.h */,
+				8EAEF4832B0FB7C600F3839C /* Date.cpp */,
+				8EAEF4822B0FB76000F3839C /* Date.h */,
 				8E11637926C1FDD40065E04C /* Files.cpp */,
 				8E11637826C1FD520065E04C /* Files.h */,
 				8E3A5C17289D5991006D99BF /* Log.cpp */,
@@ -1224,14 +1229,14 @@
 				8E9787602617A35A00C4395C /* MemoryPool.h */,
 				DBF84A1B0AC76D5800BB15CD /* SerializeClass.cpp */,
 				DB27F1070ACB9AB90054ACA3 /* SerializeClass.h */,
+				8EAEF4812B0FB3D900F3839C /* STLBufferView.h */,
+				8E7FAB6B2B0011040069D40B /* STLHelpers.h */,
 				DBF84A1C0AC76D5800BB15CD /* String.cpp */,
 				DB27F1080ACB9AB90054ACA3 /* String.h */,
 				DBF84A1D0AC76D5800BB15CD /* System.cpp */,
 				DB27F1090ACB9AB90054ACA3 /* System.h */,
 				DB27F10A0ACB9AB90054ACA3 /* SystemTypes.h */,
 				8E079520289D3AFB0043A26A /* UpdateTimerMacros.h */,
-				8E7FAB6B2B0011040069D40B /* STLHelpers.h */,
-				8EAEF4812B0FB3D900F3839C /* STLBufferView.h */,
 			);
 			name = system;
 			path = sources/system;
@@ -1436,6 +1441,7 @@
 				DBF84B340AC76F1E00BB15CD /* PortalContainer.cpp in Sources */,
 				DBF84B360AC76F1E00BB15CD /* Quaternion.cpp in Sources */,
 				DBF84B370AC76F1E00BB15CD /* Renderable.cpp in Sources */,
+				8EAEF4842B0FB7C600F3839C /* Date.cpp in Sources */,
 				8E11634926BED6FF0065E04C /* imgui_widgets.cpp in Sources */,
 				DBF84B390AC76F1E00BB15CD /* Renderer3D.cpp in Sources */,
 				8E11635826BED8DC0065E04C /* stb_image.c in Sources */,

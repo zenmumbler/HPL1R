@@ -2,10 +2,12 @@
  * 2021 by zenmumbler
  * This file is part of Rehatched
  */
+
 #ifndef HPL_SYSTEM_FILES_H
 #define HPL_SYSTEM_FILES_H
 
 #include "system/String.h"
+#include "system/Date.h"
 
 namespace hpl {
 

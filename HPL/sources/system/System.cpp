@@ -275,17 +275,4 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cDate GetDate()
-	{
-		time_t lTime;
-		time(&lTime);
-
-		struct tm* pClock;
-		pClock = localtime(&lTime);
-
-		return cDate::FromGMTIme(pClock);
-	}
-
-	//-----------------------------------------------------------------------
-
 }
