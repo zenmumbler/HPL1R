@@ -50,13 +50,19 @@ namespace hpl {
 		if (header.channels == 0 || header.channels > 2) return 0;
 		if (header.rate < 1 || header.rate > 48000) return 0;
 		if (header.sampleBits != 8 && header.sampleBits != 16) return 0;
-		uint32_t sampleBytes = header.sampleBits >> 3;
-		if (header.bytesPerSecond != header.rate * header.channels * sampleBytes) return 0;
-		if (header.bytesPerSample != header.channels * sampleBytes) return 0;
-		
-		if (sampleBytes == 1) {
-			Error("*** 8-bit WAVs not supported\n");
+		uint32_t sampleBytesCheck = header.sampleBits >> 3;
+		if (header.bytesPerSecond != header.rate * header.channels * sampleBytesCheck) return 0;
+		if (header.bytesPerSample != header.channels * sampleBytesCheck) return 0;
+
+		// bail on 8-bit sample data
+		if (header.bytesPerSample == 1) {
+			Error("*** 8-bit WAVs not supported: %s\n", filePath.c_str());
 			return 0;
+		}
+
+		// warn when detecting very low-quality sounds
+		if (header.rate < 22000) {
+			Warning("Low quality WAV file (%d Hz): %s\n", header.rate, filePath.c_str());
 		}
 
 		// scan chunks for the "data" chunk (usually the first)
@@ -71,6 +77,7 @@ namespace hpl {
 		if (chunkHeader.chunkSize < header.bytesPerSample) return 0;
 		if (chunkHeader.chunkSize > f.sizeBytes - sizeof(WAVHeader) - sizeof(ChunkHeader)) return 0;
 
+		// read sample data from file
 		short *sampleData = static_cast<short *>(malloc(chunkHeader.chunkSize));
 		if (f.read(sampleData, chunkHeader.chunkSize) == false) {
 			Error("*** Could not read WAV sample data?\n");
@@ -78,6 +85,7 @@ namespace hpl {
 			return 0;
 		}
 
+		// set output values
 		*channels = header.channels;
 		*format = header.channels == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16;
 		*rate = header.rate;
