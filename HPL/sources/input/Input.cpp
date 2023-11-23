@@ -16,6 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#include "system/STLHelpers.h"
+#include "system/Log.h"
 #include "input/Input.h"
 #include "input/Mouse.h"
 #include "input/Keyboard.h"
@@ -23,7 +26,6 @@
 #include "input/Action.h"
 #include "input/ActionKeyboard.h"
 #include "input/ActionMouseButton.h"
-#include "system/Log.h"
 
 namespace hpl
 {

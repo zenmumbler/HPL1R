@@ -18,8 +18,9 @@
  */
 
 #include "ai/StateMachine.h"
-#include "system/Log.h"
 
+#include "system/STLHelpers.h"
+#include "system/Log.h"
 
 namespace hpl {
 

@@ -16,8 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "graphics/AnimationTrack.h"
 
+#include "system/STLHelpers.h"
 #include "math/Math.h"
 #include "graphics/Animation.h"
 #include "scene/Node3D.h"

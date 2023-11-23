@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "graphics/ParticleSystem3D.h"
 #include "graphics/ParticleEmitter3D_UserData.h"
 #include "resources/ParticleManager.h"
@@ -23,6 +24,7 @@
 #include "scene/Scene.h"
 #include "scene/World3D.h"
 #include "system/Log.h"
+#include "system/STLHelpers.h"
 
 #include "tinyXML/tinyxml.h"
 

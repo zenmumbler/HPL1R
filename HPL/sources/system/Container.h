@@ -278,5 +278,136 @@ namespace hpl {
 
 	//---------------------------------
 
+	template <class T, class CONT, class IT>
+	class cSTLIterator : public iContainerIterator
+	{
+	public:
+		///////////////////////////
+		cSTLIterator(CONT *apCont)
+		{
+			mpCont = apCont;
+			mIt = mpCont->begin();
+
+		}
+
+		///////////////////////////
+
+		bool HasNext()
+		{
+			return mIt != mpCont->end();
+		}
+
+		void* NextPtr()
+		{
+			if(mIt == mpCont->end())
+				return NULL;
+			else
+			{
+				T &temp = const_cast<T &> (*mIt);
+				mIt++;
+				return &temp;
+			}
+		}
+
+		///////////////////////////
+
+		T Next()
+		{
+			if(mIt == mpCont->end())
+				return NULL;
+			else
+			{
+				T &temp = const_cast<T &> (*mIt);
+				mIt++;
+				return temp;
+			}
+		}
+
+		///////////////////////////
+
+		T PeekNext()
+		{
+			if(mIt == mpCont->end())
+				return NULL;
+			else{
+				return *mIt;
+			}
+		}
+
+		///////////////////////////
+
+	private:
+		IT mIt;
+		CONT* mpCont;
+
+	};
+
+	//--------------------------------------------------------
+
+	template <class T, class CONT, class IT>
+	class cSTLMapIterator : public iContainerIterator
+	{
+	public:
+		///////////////////////////
+		cSTLMapIterator(CONT *apCont)
+		{
+			mpCont = apCont;
+			mIt = mpCont->begin();
+
+		}
+
+		///////////////////////////
+
+		bool HasNext()
+		{
+			return mIt != mpCont->end();
+		}
+
+		void* NextPtr()
+		{
+			if(mIt == mpCont->end())
+				return NULL;
+			else
+			{
+				T& temp = mIt->second;
+				mIt++;
+				return &temp;
+			}
+		}
+
+		///////////////////////////
+
+		T Next()
+		{
+			if(mIt == mpCont->end())
+				return NULL;
+			else
+			{
+				T temp = mIt->second;
+				mIt++;
+				return temp;
+			}
+		}
+
+		///////////////////////////
+
+		T PeekNext()
+		{
+			if(mIt == mpCont->end())
+				return NULL;
+			else{
+				return mIt->second;
+			}
+		}
+
+		///////////////////////////
+
+	private:
+		IT mIt;
+		CONT* mpCont;
+
+	};
+
+
 }
 #endif // HPL_CONTAINER_H

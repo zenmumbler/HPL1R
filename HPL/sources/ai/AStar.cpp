@@ -16,13 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "ai/AStar.h"
 
+#include "system/STLHelpers.h"
 #include "ai/AINodeContainer.h"
-
 #include "math/Math.h"
-
-
 
 namespace hpl {
 

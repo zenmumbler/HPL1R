@@ -23,7 +23,7 @@
 #include "math/MathTypes.h"
 #include "system/SystemTypes.h"
 #include "math/BoundingVolume.h"
-#include "system/STLHelpers.h"
+#include "system/STLBufferView.h"
 
 namespace hpl {
 

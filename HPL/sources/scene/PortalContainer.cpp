@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "scene/PortalContainer.h"
 
 #include "graphics/Renderable.h"
@@ -25,6 +26,7 @@
 #include "scene/Light3D.h"
 #include "scene/SectorVisibility.h"
 #include "system/Log.h"
+#include "system/STLHelpers.h"
 
 
 namespace hpl {

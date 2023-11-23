@@ -33,6 +33,7 @@
 
 #include "math/Math.h"
 #include "system/Log.h"
+#include "system/STLHelpers.h"
 
 #include "physics/PhysicsWorld.h"
 #include "physics/PhysicsBody.h"

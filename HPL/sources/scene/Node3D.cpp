@@ -16,9 +16,11 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "scene/Node3D.h"
 #include "scene/Entity3D.h"
 #include "math/Math.h"
+#include "system/STLHelpers.h"
 
 namespace hpl {
 

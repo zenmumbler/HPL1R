@@ -22,6 +22,7 @@
 #include <map>
 
 #include "system/SystemTypes.h"
+#include "system/Container.h"
 #include "system/SerializeClass.h"
 
 class TiXmlElement;

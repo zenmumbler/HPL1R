@@ -21,6 +21,7 @@
 
 #include <map>
 #include "system/SystemTypes.h"
+#include "system/Container.h"
 
 namespace hpl {
 

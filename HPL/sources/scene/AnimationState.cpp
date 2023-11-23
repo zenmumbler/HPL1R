@@ -18,11 +18,10 @@
  */
 #include "scene/AnimationState.h"
 
+#include "system/STLHelpers.h"
 #include "math/Math.h"
 #include "graphics/Animation.h"
 #include "resources/AnimationManager.h"
-
-
 
 namespace hpl {
 

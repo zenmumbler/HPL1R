@@ -19,6 +19,7 @@
 #ifndef HPL_SECTOR_VISIBILTY_H
 #define HPL_SECTOR_VISIBILTY_H
 
+#include "system/Container.h"
 #include "math/BoundingVolume.h"
 #include "math/Frustum.h"
 

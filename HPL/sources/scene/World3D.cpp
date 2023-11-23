@@ -21,6 +21,7 @@
 #include "tinyXML/tinyxml.h"
 
 #include "system/String.h"
+#include "system/STLHelpers.h"
 
 #include "math/Math.h"
 #include "math/MathTypes.h"

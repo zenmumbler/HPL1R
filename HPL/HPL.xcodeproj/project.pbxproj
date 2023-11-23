@@ -276,6 +276,7 @@
 		8EA4871C2610A67B000D1AB7 /* scriptarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptarray.h; sourceTree = "<group>"; };
 		8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstdstring_utils.cpp; sourceTree = "<group>"; };
 		8EAA07DC255C64F3007D7CD0 /* LowLevelSystemMac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LowLevelSystemMac.mm; sourceTree = "<group>"; };
+		8EAEF4812B0FB3D900F3839C /* STLBufferView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLBufferView.h; sourceTree = "<group>"; };
 		8EB7C3D8254F603E00277667 /* scripthelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripthelper.cpp; sourceTree = "<group>"; };
 		8EE896CF262459E800FFF4C3 /* GfxBatch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GfxBatch.cpp; sourceTree = "<group>"; };
 		8EE896D0262459E800FFF4C3 /* GfxBatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GfxBatch.h; sourceTree = "<group>"; };
@@ -1230,6 +1231,7 @@
 				DB27F10A0ACB9AB90054ACA3 /* SystemTypes.h */,
 				8E079520289D3AFB0043A26A /* UpdateTimerMacros.h */,
 				8E7FAB6B2B0011040069D40B /* STLHelpers.h */,
+				8EAEF4812B0FB3D900F3839C /* STLBufferView.h */,
 			);
 			name = system;
 			path = sources/system;

@@ -21,6 +21,7 @@
 
 #include "math/MathTypes.h"
 #include "system/SystemTypes.h"
+#include "system/Container.h"
 #include "game/SaveGame.h"
 
 namespace hpl {

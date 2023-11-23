@@ -27,7 +27,6 @@
 #include "scene/Camera.h"
 #include "scene/World3D.h"
 #include "graphics/Renderer3D.h"
-// #include "graphics/RendererPostEffects.h"
 #include "graphics/GraphicsDrawer.h"
 #include "graphics/RenderList.h"
 #include "resources/ScriptManager.h"
@@ -38,6 +37,7 @@
 #include "resources/MeshLoaderHandler.h"
 
 #include "system/Log.h"
+#include "system/STLHelpers.h"
 #include "system/UpdateTimerMacros.h"
 
 namespace hpl {

@@ -6,115 +6,75 @@
 #ifndef HPL_STL_HELPERS_H
 #define HPL_STL_HELPERS_H
 
-#include <cstdint>
-#include <iterator>
-
 namespace hpl {
 
-	template <typename Derived>
-	struct FullyComparableTrait {
-		// requires operator== and operator<
-		template <typename U>
-		constexpr bool operator!=(const U& other) const {
-			return !static_cast<const Derived*>(this)->operator==(other);
-		}
+	//--------------------------------------------------------
 
-		template <typename U>
-		constexpr bool operator<=(const U& other) const {
-			return static_cast<const Derived*>(this)->operator<(other) || static_cast<const Derived*>(this)->operator==(other);
-		}
-
-		template <typename U>
-		constexpr bool operator>(const U& other) const {
-			return !(static_cast<const Derived*>(this)->operator<(other) || static_cast<const Derived*>(this)->operator==(other));
-		}
-
-		template <typename U>
-		constexpr bool operator>=(const U& other) const {
-			return !static_cast<const Derived*>(this)->operator<(other);
-		}
-
-	protected:
-		// traits may not be created directly
-		FullyComparableTrait() = default;
-	};
-
-	//---------------------------------
-
-	template <typename ValueType>
-	class STLBufferIterator
-	: public FullyComparableTrait<STLBufferIterator<ValueType>>
+	template <class CONT,class T>
+	void STLFindAndRemove(CONT &aCont, T* pObject)
 	{
-	protected:
-		uint8_t* position_ = nullptr;
-		int strideBytes_ = 0;
-
-	public:
-		using ValueRef = ValueType&;
-		using ConstValueRef = const ValueType&;
-
-		constexpr STLBufferIterator() = default;
-
-		constexpr STLBufferIterator(void* basePointer, int strideBytes)
-		: position_{ static_cast<uint8_t*>(basePointer) }
-		, strideBytes_{ strideBytes }
-		{}
-
-		constexpr ValueRef operator *() { return *(reinterpret_cast<ValueType*>(position_)); }
-		constexpr ValueType* operator ->() { return reinterpret_cast<ValueType*>(position_); };
-
-		constexpr ValueRef operator [](int index) {
-			auto indexedPos = position_ + (strideBytes_	* index);
-			return *reinterpret_cast<ValueType*>(indexedPos);
+		typename CONT::iterator it = aCont.begin();
+		for(;it != aCont.end();it++)
+		{
+			if(*it == pObject){
+				aCont.erase(it);
+			}
 		}
+	}
 
-		constexpr ConstValueRef operator [](int index) const {
-			auto indexedPos = position_ + (strideBytes_ * index);
-			return const_cast<ConstValueRef>(*reinterpret_cast<const ValueType*>(indexedPos));
+	//--------------------------------------------------------
+
+	template <class CONT,class T>
+	void STLFindAndDelete(CONT &aCont, T* pObject)
+	{
+		typename CONT::iterator it = aCont.begin();
+		for(;it != aCont.end();it++)
+		{
+			if(*it == pObject){
+				aCont.erase(it);
+				break;
+			}
 		}
+		delete pObject;
+	}
 
-		const STLBufferIterator& operator ++() { position_ += strideBytes_; return *this; }
-		STLBufferIterator operator ++(int) { auto ret = *this; position_ += strideBytes_; return ret; }
+	//--------------------------------------------------------
 
-		const STLBufferIterator& operator --() { position_ -= strideBytes_; return *this; }
-		STLBufferIterator operator --(int) { auto ret = *this; position_ -= strideBytes_; return ret; }
-
-		constexpr bool operator ==(const STLBufferIterator& other) const { return position_ == other.position_; }
-		constexpr bool operator <(const STLBufferIterator& other) const { return position_ < other.position_; }
-
-		friend constexpr STLBufferIterator operator +(const STLBufferIterator& iter, int count) {
-			auto ret = iter;
-			ret.position_ += ret.strideBytes_ * count;
-			return ret;
+	template <class CONT, class STR, class ITEM = typename CONT::value_type>
+	ITEM STLFindByName(CONT &cont,const STR& asName)
+	{
+		for (auto item : cont)
+		{
+			if (item->GetName() == asName) {
+				return item;
+			}
 		}
+		return nullptr;
+	}
 
-		friend constexpr STLBufferIterator operator +(int count, const STLBufferIterator& iter) {
-			auto ret = iter;
-			ret.position_ += ret.strideBytes_ * count;
-			return ret;
-		}
+	//--------------------------------------------------------
 
-		friend constexpr STLBufferIterator operator -(const STLBufferIterator& iter, int count) {
-			auto ret = iter;
-			ret.position_ -= ret.strideBytes_ * count;
-			return ret;
+	template <class T>
+	void STLDeleteAll(T &aCont){
+		typename T::iterator it = aCont.begin();
+		for(;it != aCont.end();it++)
+		{
+			delete *it;
 		}
+		aCont.clear();
+	}
 
-		friend STLBufferIterator& operator +=(STLBufferIterator& iter, int count) {
-			iter.position_ += iter.strideBytes_ * count;
-			return iter;
-		}
+	//--------------------------------------------------------
 
-		friend STLBufferIterator& operator -=(STLBufferIterator& iter, int count) {
-			iter.position_ -= iter.strideBytes_ * count;
-			return iter;
+	template <class T>
+	void STLMapDeleteAll(T &aCont){
+		typename T::iterator it = aCont.begin();
+		for(;it != aCont.end();it++)
+		{
+			delete it->second;
 		}
-
-		constexpr ptrdiff_t operator -(const STLBufferIterator& b) {
-			return (position_ - b.position_) / static_cast<ptrdiff_t>(strideBytes_);
-		}
-	};
+		aCont.clear();
+	}
 
 }
-
 #endif /* HPL_STL_HELPERS_H */

@@ -20,15 +20,13 @@
 #define HPL_RESOURCEBASE_H
 
 #include "system/SystemTypes.h"
-//
+
 namespace hpl {
 
 	class iResourceBase
 	{
 	public:
-
 		iResourceBase(tString asName,unsigned int alPrio);
-
 		virtual ~iResourceBase();
 
 		/**

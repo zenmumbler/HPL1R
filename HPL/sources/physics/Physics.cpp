@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "physics/Physics.h"
 #include "physics/LowLevelPhysics.h"
 
@@ -23,6 +24,7 @@
 #include "physics/SurfaceData.h"
 #include "system/String.h"
 #include "system/Log.h"
+#include "system/STLHelpers.h"
 
 #include "tinyXML/tinyxml.h"
 

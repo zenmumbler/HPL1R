@@ -16,11 +16,13 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "resources/LanguageFile.h"
 #include "system/String.h"
 #include "tinyXML/tinyxml.h"
 #include "resources/Resources.h"
 #include "system/Log.h"
+#include "system/STLHelpers.h"
 
 namespace hpl {
 

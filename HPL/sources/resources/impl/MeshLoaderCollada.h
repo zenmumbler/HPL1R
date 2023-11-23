@@ -20,6 +20,7 @@
 #define HPL_MESH_LOADER_COLLADA_H
 
 
+#include "system/STLHelpers.h"
 #include "math/MathTypes.h"
 #include "resources/MeshLoader.h"
 #include "graphics/VertexBuffer.h"
@@ -359,11 +360,6 @@ namespace hpl {
 		tColladaNodeList mlstChildren;
 
 		tColladaTransformList mlstTransforms;
-
-		/*void DeleteChildren()
-		{
-			STLDeleteAll(mlstChildren);
-		}*/
 
 		cColladaNode* CreateChild()
 		{

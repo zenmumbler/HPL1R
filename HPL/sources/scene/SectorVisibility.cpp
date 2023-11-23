@@ -16,10 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "scene/SectorVisibility.h"
 
 #include "math/Math.h"
 #include "scene/PortalContainer.h"
+#include "system/STLHelpers.h"
 #include "system/Log.h"
 
 namespace hpl {

@@ -30,6 +30,7 @@
 #include "graphics/LowLevelGraphics.h"
 #include "scene/World3D.h"
 #include "scene/PortalContainer.h"
+#include "system/STLHelpers.h"
 
 namespace hpl {
 

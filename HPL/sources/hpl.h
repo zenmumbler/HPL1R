@@ -20,6 +20,7 @@
 #define HPL_HPL_H
 
 #include "system/SystemTypes.h"
+#include "system/STLHelpers.h"
 #include "system/System.h"
 #include "system/String.h"
 #include "system/Files.h"
@@ -93,7 +94,6 @@
 #include "resources/MeshLoaderHandler.h"
 #include "resources/SoundEntityManager.h"
 #include "resources/AnimationManager.h"
-#include "resources/VideoManager.h"
 #include "resources/MeshLoader.h"
 #include "resources/ConfigFile.h"
 #include "resources/EntityLoader_Object.h"

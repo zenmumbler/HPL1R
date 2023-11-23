@@ -17,12 +17,13 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "system/STLHelpers.h"
+#include "system/Log.h"
 #include "graphics/GraphicsDrawer.h"
 #include "graphics/LowLevelGraphics.h"
 #include "resources/ResourceImage.h"
 #include "resources/FrameBitmap.h"
 #include "math/Math.h"
-#include "system/Log.h"
 
 namespace hpl {
 

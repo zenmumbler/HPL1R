@@ -18,6 +18,7 @@
  */
 #include "graphics/Animation.h"
 
+#include "system/STLHelpers.h"
 #include "math/Math.h"
 #include "graphics/AnimationTrack.h"
 
