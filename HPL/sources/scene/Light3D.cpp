@@ -314,9 +314,6 @@ namespace hpl {
 		{
 		}
 
-		//Reset this var so that the new light properties are set.
-		apRenderSettings->mbMatrixWasNULL = false;
-
 		return true;
 	}
 
@@ -383,10 +380,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMatrixf* iLight3D::GetModelMatrix(cCamera *apCamera)
+	cMatrixf iLight3D::GetModelMatrix(cCamera *apCamera)
 	{
-		mtxTemp = GetWorldMatrix();
-		return &mtxTemp;
+		return GetWorldMatrix();
 	}
 
 	//-----------------------------------------------------------------------

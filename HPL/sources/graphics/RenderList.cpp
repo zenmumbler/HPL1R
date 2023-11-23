@@ -65,9 +65,6 @@ namespace hpl {
 		if(pObjectA->mpVtxBuffer != pObjectB->mpVtxBuffer)
 			return pObjectA->mpVtxBuffer < pObjectB->mpVtxBuffer;
 
-		if(pObjectA->mpMatrix != pObjectB->mpMatrix)
-			return pObjectA->mpMatrix < pObjectB->mpMatrix;
-
 		return (int)pObjectA->mbDepthTest < (int)pObjectB->mbDepthTest;
 	}
 
@@ -81,22 +78,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cRenderNodeCompare::operator()(cRenderNode* apNodeA,cRenderNode* apNodeB) const
-	{
-		int  val = apNodeA->mpState->Compare(apNodeB->mpState);
-		bool ret =  val>0 ? true : false;
-		return ret;
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cRenderNode::DeleteChildren()
 	{
-		tRenderNodeSetIt it = m_setNodes.begin();
-		for(;it != m_setNodes.end(); ++it)
+		for (auto pNode : m_setNodes)
 		{
-			cRenderNode* pNode = *it;
-
 			pNode->DeleteChildren();
 			g_poolRenderNode->Release(pNode);
 		}
@@ -110,11 +95,8 @@ namespace hpl {
 
 	void cRenderNode::Render(cRenderSettings* apSettings)
 	{
-		tRenderNodeSetIt it = m_setNodes.begin();
-		for(;it != m_setNodes.end(); ++it)
+		for (auto pNode : m_setNodes)
 		{
-			cRenderNode* pNode = *it;
-
 			pNode->mpState->SetMode(apSettings);
 			pNode->Render(apSettings);
 		}
@@ -405,31 +387,15 @@ namespace hpl {
 
 	cRenderNode* cRenderList::InsertNode(cRenderNode* apListNode, cRenderNode* apTempNode)
 	{
-		//Log("Searching for node... ");
-		//Create a node with the state.
+		cRenderNode *pNode = m_poolRenderNode->Create();
+		pNode->mpState = m_poolRenderState->Create();
 
-		tRenderNodeSetIt it = apListNode->m_setNodes.find(apTempNode);
+		//Copy the relevant values to the state.
+		pNode->mpState->Set(apTempNode->mpState);
 
-		if(it != apListNode->m_setNodes.end())
-		{
-			//Log("Node found!\n");
-			//node found, return it.
-			return *it;
-		}
-		else
-		{
-			//Log("Node NOT found, creating new.\n");
-			//no node found, create one and return it.
-			cRenderNode *pNode = m_poolRenderNode->Create();
-			pNode->mpState = m_poolRenderState->Create();
+		apListNode->m_setNodes.push_back(pNode);
 
-			//Copy the relevant values to the state.
-			pNode->mpState->Set(apTempNode->mpState);
-
-			apListNode->m_setNodes.insert(pNode);
-
-			return pNode;
-		}
+		return pNode;
 	}
 
 	//-----------------------------------------------------------------------
@@ -526,7 +492,7 @@ namespace hpl {
 		{
 			//Log("\nMatrix level\n");
 			pTempState->mType = eRenderStateType_Matrix;
-			pTempState->mpModelMatrix = apObject->GetModelMatrix(mpCamera);
+			pTempState->modelMatrix = apObject->GetModelMatrix(mpCamera);
 			pNode = InsertNode(pNode, pTempNode);
 		}
 
@@ -534,7 +500,6 @@ namespace hpl {
 		{
 			//Log("\nRender leaf!\n");
 			pTempState->mType = eRenderStateType_Render;
-			pTempState->mpObject = apObject;
 			InsertNode(pNode, pTempNode);
 		}
 

@@ -19,7 +19,7 @@
 #ifndef HPL_RENDER_LIST_H
 #define HPL_RENDER_LIST_H
 
-#include <set>
+#include <vector>
 
 #include "math/MathTypes.h"
 #include "graphics/GraphicsTypes.h"
@@ -40,17 +40,6 @@ namespace hpl {
 
 	//-------------------------------------------------------------
 
-	class cRenderNode;
-
-	class cRenderNodeCompare
-	{
-	public:
-		bool operator()(cRenderNode* apNodeA,cRenderNode* apNodeB) const;
-	};
-
-	typedef std::set<cRenderNode*, cRenderNodeCompare> tRenderNodeSet;
-	typedef tRenderNodeSet::iterator tRenderNodeSetIt;
-
 	class cRenderNode
 	{
 	public:
@@ -58,7 +47,7 @@ namespace hpl {
 
 		iRenderState *mpState;
 
-		tRenderNodeSet m_setNodes;
+		std::vector<cRenderNode*> m_setNodes;
 
 		void DeleteChildren();
 		void Render(cRenderSettings* apSettings);
@@ -98,11 +87,11 @@ namespace hpl {
 	class cOcclusionQueryObject
 	{
 	public:
-		cOcclusionQueryObject() : mpQuery(NULL), mpVtxBuffer(NULL),mpMatrix(NULL){}
+		cOcclusionQueryObject() : mpQuery(NULL), mpVtxBuffer(NULL),_matrix{} {}
 
 		iOcclusionQuery *mpQuery;
 		iVertexBuffer *mpVtxBuffer;
-		cMatrixf *mpMatrix;
+		cMatrixf _matrix;
 		bool mbDepthTest;
 	};
 

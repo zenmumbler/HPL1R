@@ -56,14 +56,11 @@ namespace hpl {
 
 	cMatrixf* iRenderable::GetInvModelMatrix()
 	{
-		cMatrixf *pModelMatrix = GetModelMatrix(NULL);
-		if(pModelMatrix==NULL) return NULL;
-
 		if(mlLastMatrixCount != GetMatrixUpdateCount())
 		{
 			mlLastMatrixCount = GetMatrixUpdateCount();
 
-			m_mtxInvModel = cMath::MatrixInverse(*pModelMatrix);
+			m_mtxInvModel = cMath::MatrixInverse(GetModelMatrix(NULL));
 		}
 
 		return &m_mtxInvModel;
@@ -73,14 +70,13 @@ namespace hpl {
 
 	const cVector3f& iRenderable::GetCalcScale()
 	{
-		cMatrixf *pModelMatrix = GetModelMatrix(NULL);
-
-		if(pModelMatrix != NULL && mlCalcScaleMatrixCount != GetMatrixUpdateCount())
+		if(mlCalcScaleMatrixCount != GetMatrixUpdateCount())
 		{
+			cMatrixf modelMatrix = GetModelMatrix(NULL);
 			mlCalcScaleMatrixCount = GetMatrixUpdateCount();
-			mvCalcScale.x = pModelMatrix->GetRight().Length();
-			mvCalcScale.y = pModelMatrix->GetUp().Length();
-			mvCalcScale.z = pModelMatrix->GetForward().Length();
+			mvCalcScale.x = modelMatrix.GetRight().Length();
+			mvCalcScale.y = modelMatrix.GetUp().Length();
+			mvCalcScale.z = modelMatrix.GetForward().Length();
 		}
 
 		return mvCalcScale;

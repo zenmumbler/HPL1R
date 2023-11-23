@@ -305,11 +305,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMatrixf* cBeam::GetModelMatrix(cCamera *apCamera)
+	cMatrixf cBeam::GetModelMatrix(cCamera *apCamera)
 	{
-		if(apCamera==NULL)return &GetWorldMatrix();
+		if(apCamera==NULL) return GetWorldMatrix();
 
-		m_mtxTempTransform = GetWorldMatrix();
+		cMatrixf xform = GetWorldMatrix();
 		cVector3f vForward, vRight, vUp;
 
 		cVector3f vCameraForward = apCamera->GetPosition() - GetWorldPosition();
@@ -330,23 +330,23 @@ namespace hpl {
 		vForward = cMath::Vector3Cross(vRight, vUp);
 
 		//Set right vector
-		m_mtxTempTransform.m[0][0] = vRight.x;
-		m_mtxTempTransform.m[1][0] = vRight.y;
-		m_mtxTempTransform.m[2][0] = vRight.z;
+		xform.m[0][0] = vRight.x;
+		xform.m[1][0] = vRight.y;
+		xform.m[2][0] = vRight.z;
 
 		//Set up vector
-		m_mtxTempTransform.m[0][1] = vUp.x;
-		m_mtxTempTransform.m[1][1] = vUp.y;
-		m_mtxTempTransform.m[2][1] = vUp.z;
+		xform.m[0][1] = vUp.x;
+		xform.m[1][1] = vUp.y;
+		xform.m[2][1] = vUp.z;
 
 		//Set forward vector
-		m_mtxTempTransform.m[0][2] = vForward.x;
-		m_mtxTempTransform.m[1][2] = vForward.y;
-		m_mtxTempTransform.m[2][2] = vForward.z;
+		xform.m[0][2] = vForward.x;
+		xform.m[1][2] = vForward.y;
+		xform.m[2][2] = vForward.z;
 
-		m_mtxTempTransform.SetTranslation(mvMidPosition);
+		xform.SetTranslation(mvMidPosition);
 
-		return &m_mtxTempTransform;
+		return xform;
 	}
 
 	//-----------------------------------------------------------------------

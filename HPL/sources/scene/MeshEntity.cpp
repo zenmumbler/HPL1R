@@ -1393,10 +1393,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMatrixf*  cMeshEntity::GetModelMatrix(cCamera *apCamera)
+	cMatrixf cMeshEntity::GetModelMatrix(cCamera *apCamera)
 	{
-		mtxTemp = GetWorldMatrix();
-		return &mtxTemp;
+		return GetWorldMatrix();
 	}
 
 	//-----------------------------------------------------------------------

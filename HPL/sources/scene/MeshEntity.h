@@ -201,7 +201,7 @@ namespace hpl {
 		iVertexBuffer* GetVertexBuffer();
 		bool IsShadowCaster();
 		cBoundingVolume* GetBoundingVolume();
-		cMatrixf* GetModelMatrix(cCamera *apCamera);
+		cMatrixf GetModelMatrix(cCamera *apCamera);
 		int GetMatrixUpdateCount();
 		eRenderableType GetRenderType();
 

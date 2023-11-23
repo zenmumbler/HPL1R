@@ -153,7 +153,7 @@ namespace hpl {
 
 		int GetMatrixUpdateCount(){ return GetTransformUpdateCount();}
 
-		cMatrixf* GetModelMatrix(cCamera *apCamera);
+		cMatrixf GetModelMatrix(cCamera *apCamera);
 
 		inline void RenderShadow(iRenderable *apObject,cRenderSettings *apRenderSettings,iLowLevelGraphics *apLowLevelGraphics);
 
@@ -195,8 +195,6 @@ namespace hpl {
 		iTexture *mvTempTextures[3];
 
 		std::vector<cBillboard*> mvBillboards;
-
-		cMatrixf mtxTemp;
 
 		tCasterCacheSet m_setStaticCasters;
 		tCasterCacheSet m_setDynamicCasters;

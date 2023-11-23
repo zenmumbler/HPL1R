@@ -33,15 +33,16 @@ namespace hpl {
 
 	enum eRenderStateType
 	{
-		eRenderStateType_Sector = 0,
-		eRenderStateType_AlphaMode = 4,
-		eRenderStateType_BlendMode = 5,
-		eRenderStateType_GPUProgram = 6,
-		eRenderStateType_Texture = 8,
-		eRenderStateType_VertexBuffer = 9,
-		eRenderStateType_Matrix = 10,
-		eRenderStateType_Render = 11,
-		eRenderStateType_LastEnum  = 12
+		eRenderStateType_Sector = 0,		// uniform data (ambientColor)
+
+		eRenderStateType_AlphaMode = 4,		// uniform data or shader variant
+		eRenderStateType_BlendMode = 5,		// colorState
+		eRenderStateType_GPUProgram = 6,	// pipeline
+		eRenderStateType_Texture = 8,		// binding
+		eRenderStateType_VertexBuffer = 9,	// render
+		eRenderStateType_Matrix = 10,		// uniform data
+		eRenderStateType_Render = 11,		// --redundant (follows after vertexbuffer)
+		eRenderStateType_LastEnum = 12
 	};
 	///////////// INTERFACE ////////////////////
 
@@ -79,39 +80,21 @@ namespace hpl {
 		iVertexBuffer *mpVtxBuffer;
 
 		//Matrix
-		cMatrixf *mpModelMatrix;
+		cMatrixf modelMatrix;
 
 		//Render
-		iRenderable *mpObject;
-
+		// iRenderable *mpObject;
 
 	private:
-		//Compare
-		int CompareSector(const iRenderState* apState)const;
-		int ComparePass(const iRenderState* apState)const;
-		int CompareDepthTest(const iRenderState* apState)const;
-		int CompareDepth(const iRenderState* apState)const;
-		int CompareAlpha(const iRenderState* apState)const;
-		int CompareBlend(const iRenderState* apState)const;
-		int CompareVtxProg(const iRenderState* apState)const;
-		int CompareFragProg(const iRenderState* apState)const;
-		int CompareTexture(const iRenderState* apState)const;
-		int CompareVtxBuff(const iRenderState* apState)const;
-		int CompareMatrix(const iRenderState* apState)const;
-		int CompareRender(const iRenderState* apState)const;
-		//Set mode
 		void SetSectorMode(cRenderSettings* apSettings);
-		void SetPassMode(cRenderSettings* apSettings);
-		void SetDepthTestMode(cRenderSettings* apSettings);
-		void SetDepthMode(cRenderSettings* apSettings);
 		void SetBlendMode(cRenderSettings* apSettings);
 		void SetAlphaMode(cRenderSettings* apSettings);
 		void SetGPUProgMode(cRenderSettings* apSettings);
-		void SetFragProgMode(cRenderSettings* apSettings);
 		void SetTextureMode(cRenderSettings* apSettings);
 		void SetVtxBuffMode(cRenderSettings* apSettings);
 		void SetMatrixMode(cRenderSettings* apSettings);
 		void SetRenderMode(cRenderSettings* apSettings);
 	};
 };
+
 #endif // HPL_RENDER_SET_H

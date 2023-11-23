@@ -40,7 +40,7 @@ namespace hpl {
 
 		cBoundingVolume* GetBoundingVolume();
 
-		cMatrixf* GetModelMatrix(cCamera *apCamera);
+		cMatrixf GetModelMatrix(cCamera *apCamera);
 		int GetMatrixUpdateCount();
 
 		eRenderableType GetRenderType(){ return eRenderableType_Dummy;}

@@ -561,22 +561,22 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMatrixf* iParticleEmitter3D::GetModelMatrix(cCamera *apCamera)
+	cMatrixf iParticleEmitter3D::GetModelMatrix(cCamera *apCamera)
 	{
 		if(apCamera)
 		{
 			if(mDrawType == eParticleEmitter3DType_Axis)
 			{
-				m_mtxTemp = cMatrixf::Identity;
+				return cMatrixf::Identity;
 			}
 			//This is really not good...
 			else if(mCoordSystem == eParticleEmitter3DCoordSystem_World)
 			{
-				m_mtxTemp = cMath::MatrixInverse(apCamera->GetViewMatrix());
+				return cMath::MatrixInverse(apCamera->GetViewMatrix());
 			}
 			else
 			{
-				m_mtxTemp = cMath::MatrixInverse(apCamera->GetViewMatrix());
+				return cMath::MatrixInverse(apCamera->GetViewMatrix());
 				//m_mtxTemp = cMath::MatrixMul(cMath::MatrixInverse(apCamera->GetViewMatrix()),
 				//								GetWorldMatrix());
 			}
@@ -587,13 +587,10 @@ namespace hpl {
 
 			//cMatrixf mtxCam = apCamera->GetViewMatrix();
 			//Log("MATRIX: %s\n",mtxCam.ToString().c_str());
-
-			return &m_mtxTemp;
-
 		}
 		else
 		{
-			return &GetWorldMatrix();
+			return GetWorldMatrix();
 		}
 	}
 

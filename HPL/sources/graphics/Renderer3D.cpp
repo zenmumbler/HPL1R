@@ -95,7 +95,6 @@ namespace hpl {
 		mRenderSettings.mpLowLevel = _llGfx;
 		mRenderSettings.mbLog = false;
 		mRenderSettings.mShowShadows = eRendererShowShadows_All;
-		mRenderSettings.mpTempIndexArray = new unsigned int[60000];
 
 		Log("   Load Renderer3D gpu programs:\n");
 
@@ -122,7 +121,6 @@ namespace hpl {
 	cRenderer3D::~cRenderer3D()
 	{
 		delete mpRenderList;
-		delete[] mRenderSettings.mpTempIndexArray;
 
 		if(mpDiffuseProgram) _programManager->Destroy(mpDiffuseProgram);
 
@@ -152,8 +150,6 @@ namespace hpl {
 		mpProgram = NULL;
 
 		mpSector = NULL;
-
-		mbMatrixWasNULL = false;
 
 		for(int i=0;i<MAX_TEXTUREUNITS;i++)
 		{
@@ -416,8 +412,6 @@ namespace hpl {
 			}
 		}
 
-		mRenderSettings.mbMatrixWasNULL = false;
-
 		cMatrixf mtxSky = cMatrixf::Identity;
 
 		//Calculate the size of the sky box need to just touch the far clip plane.
@@ -487,8 +481,7 @@ namespace hpl {
 		////////////////////////
 		// Keep track of what has been set
 		iVertexBuffer *pPrevBuffer = mRenderSettings.mpVtxBuffer;
-		cMatrixf *pPrevMatrix = NULL;
-		bool bFirstRound = true;
+		cMatrixf viewProjMatrix = cMath::MatrixMul(apCamera->GetProjectionMatrix(), apCamera->GetViewMatrix());
 		bool bPrevDepthTest = true;
 
 		//////////////////////////////////
@@ -524,19 +517,10 @@ namespace hpl {
 
 			/////////////////////
 			//Set matrix
-			if(pPrevMatrix != pObject->mpMatrix || bFirstRound)
-			{
-				cMatrixf mvpMat = cMath::MatrixMul(apCamera->GetProjectionMatrix(), apCamera->GetViewMatrix());
-				if(pObject->mpMatrix)
-				{
-					mvpMat = cMath::MatrixMul(mvpMat, *pObject->mpMatrix);
-				}
-				pPrevMatrix = pObject->mpMatrix;
-				//Set the vertex program matrix.
-				mpDiffuseProgram->SetMatrixf("worldViewProj", mvpMat);
+			cMatrixf mvpMat = cMath::MatrixMul(viewProjMatrix, pObject->_matrix);
+			mpDiffuseProgram->SetMatrixf("worldViewProj", mvpMat);
+			//if(mbLog) Log(" Setting matrix %d\n",pObject->_matrix);
 
-				if(mbLog) Log(" Setting matrix %d\n",pObject->mpMatrix);
-			}
 			/////////////////////
 			//Set Vertex buffer and draw
 			if(pPrevBuffer != pObject->mpVtxBuffer)
@@ -553,8 +537,6 @@ namespace hpl {
 			pObject->mpQuery->End();
 
 			if(mbLog) Log(" Render with query: %d\n",pObject->mpQuery);
-
-			bFirstRound = false;
 		}
 
 		mRenderSettings.mpVtxBuffer = pPrevBuffer;

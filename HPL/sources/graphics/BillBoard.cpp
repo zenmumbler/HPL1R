@@ -304,18 +304,18 @@ namespace hpl {
 				return;
 			}
 
-			mQueryObject.mpMatrix = pParent->GetModelMatrix(apCamera);
+			mQueryObject._matrix = pParent->GetModelMatrix(apCamera);
 			mQueryObject.mpVtxBuffer = pVtxBuffer;
 
-			mMaxQueryObject.mpMatrix = pParent->GetModelMatrix(apCamera);
+			mMaxQueryObject._matrix = pParent->GetModelMatrix(apCamera);
 			mMaxQueryObject.mpVtxBuffer = pVtxBuffer;
 		}
 		else
 		{
-			mQueryObject.mpMatrix = &GetWorldMatrix();
+			mQueryObject._matrix = GetWorldMatrix();
 			mQueryObject.mpVtxBuffer = mpHaloSourceBuffer;
 
-			mMaxQueryObject.mpMatrix = &GetWorldMatrix();
+			mMaxQueryObject._matrix = GetWorldMatrix();
 			mMaxQueryObject.mpVtxBuffer = mpHaloSourceBuffer;
 		}
 
@@ -329,11 +329,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMatrixf* cBillboard::GetModelMatrix(cCamera *apCamera)
+	cMatrixf cBillboard::GetModelMatrix(cCamera *apCamera)
 	{
-		if(apCamera==NULL)return &GetWorldMatrix();
+		if(apCamera==NULL)return GetWorldMatrix();
 
-		m_mtxTempTransform = GetWorldMatrix();
+		cMatrixf xform = GetWorldMatrix();
 		cVector3f vForward, vRight, vUp;
 
 		cVector3f vCameraForward = apCamera->GetPosition() - GetWorldPosition();
@@ -367,27 +367,27 @@ namespace hpl {
 
 		if(mfForwardOffset!=0)
 		{
-			cVector3f vPos = m_mtxTempTransform.GetTranslation();
-			vPos +=  vCameraForward * mfForwardOffset;
-			m_mtxTempTransform.SetTranslation(vPos);
+			cVector3f vPos = xform.GetTranslation();
+			vPos += vCameraForward * mfForwardOffset;
+			xform.SetTranslation(vPos);
 		}
 
 		//Set right vector
-		m_mtxTempTransform.m[0][0] = vRight.x;
-		m_mtxTempTransform.m[1][0] = vRight.y;
-		m_mtxTempTransform.m[2][0] = vRight.z;
+		xform.m[0][0] = vRight.x;
+		xform.m[1][0] = vRight.y;
+		xform.m[2][0] = vRight.z;
 
 		//Set up vector
-		m_mtxTempTransform.m[0][1] = vUp.x;
-		m_mtxTempTransform.m[1][1] = vUp.y;
-		m_mtxTempTransform.m[2][1] = vUp.z;
+		xform.m[0][1] = vUp.x;
+		xform.m[1][1] = vUp.y;
+		xform.m[2][1] = vUp.z;
 
 		//Set forward vector
-		m_mtxTempTransform.m[0][2] = vForward.x;
-		m_mtxTempTransform.m[1][2] = vForward.y;
-		m_mtxTempTransform.m[2][2] = vForward.z;
+		xform.m[0][2] = vForward.x;
+		xform.m[1][2] = vForward.y;
+		xform.m[2][2] = vForward.z;
 
-		return &m_mtxTempTransform;
+		return xform;
 	}
 
 	//-----------------------------------------------------------------------

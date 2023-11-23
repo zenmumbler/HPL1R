@@ -81,7 +81,7 @@ namespace hpl {
 		virtual bool CollidesWithBV(cBoundingVolume *apBV);
 		virtual bool CollidesWithFrustum(cFrustum *apFrustum);
 
-		virtual cMatrixf* GetModelMatrix(cCamera *apCamera)=0;
+		virtual cMatrixf GetModelMatrix(cCamera *apCamera)=0;
 
 		virtual eRenderableType GetRenderType()=0;
 

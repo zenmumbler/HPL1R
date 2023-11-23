@@ -33,34 +33,9 @@
 
 namespace hpl {
 
-	template<class T>
-	static int GetCompareVal(T a, T b)
-	{
-		if(a == b) return 0;
-		else return a < b ? -1 : 1;
-	}
-
 	//////////////////////////////////////////////////////////////////////////
 	// PUBLIC METHODS
 	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	int iRenderState::Compare(const iRenderState* apState)  const
-	{
-		switch(mType)
-		{
-		case eRenderStateType_Sector:				return CompareSector(apState);
-		case eRenderStateType_AlphaMode:			return CompareAlpha(apState);
-		case eRenderStateType_BlendMode:			return CompareBlend(apState);
-		case eRenderStateType_GPUProgram:		return CompareVtxProg(apState);
-		case eRenderStateType_Texture:			return CompareTexture(apState);
-		case eRenderStateType_VertexBuffer:		return CompareVtxBuff(apState);
-		case eRenderStateType_Matrix:			return CompareMatrix(apState);
-		case eRenderStateType_Render:			return CompareRender(apState);
-		default: return 0;
-		}
-	}
 
 	//-----------------------------------------------------------------------
 
@@ -108,11 +83,10 @@ namespace hpl {
 		case eRenderStateType_VertexBuffer:		mpVtxBuffer = apState->mpVtxBuffer;
 												break;
 
-		case eRenderStateType_Matrix:			mpModelMatrix = apState->mpModelMatrix;
+		case eRenderStateType_Matrix:			modelMatrix = apState->modelMatrix;
 												break;
 
-		case eRenderStateType_Render:			mpObject = apState->mpObject;
-												break;
+		case eRenderStateType_Render:			break;
 		default: break;
 		}
 	}
@@ -129,12 +103,6 @@ namespace hpl {
 	{
 		if(apSettings->mbLog) Log("Sector: %d\n",mpSector);
 		apSettings->mpSector = mpSector;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void iRenderState::SetDepthMode(cRenderSettings* apSettings)
-	{
 	}
 
 	//-----------------------------------------------------------------------
@@ -306,43 +274,21 @@ namespace hpl {
 
 	void iRenderState::SetMatrixMode(cRenderSettings* apSettings)
 	{
-		cMatrixf mvMatrix;
+		if (apSettings->mbLog)Log("Setting model matrix: %s ", cMath::MatrixToChar(modelMatrix));
 
-		//It is a normal matrix
-		if(mpModelMatrix)
+		if (apSettings->mpProgram)
 		{
-			mvMatrix = cMath::MatrixMul(apSettings->mpCamera->GetViewMatrix(), *mpModelMatrix);
-
-			if(apSettings->mbLog)Log("Setting model matrix: %s ", cMath::MatrixToChar(*mpModelMatrix));
-
-			apSettings->mbMatrixWasNULL = false;
-		}
-		//NULL matrix
-		else
-		{
-			//If NULL already is set, no need for changes.
-			if(apSettings->mbMatrixWasNULL)return;
-
-			if(apSettings->mbLog)Log("Setting model matrix: Identity (NULL) ");
-
-			mvMatrix = apSettings->mpCamera->GetViewMatrix();
-
-			apSettings->mbMatrixWasNULL = true;
-		}
-
-		if(apSettings->mpProgram)
-		{
-			// rehatched - use full mvp
+			auto mvMatrix = cMath::MatrixMul(apSettings->mpCamera->GetViewMatrix(), modelMatrix);
 			auto mvpMatrix = cMath::MatrixMul(apSettings->mpCamera->GetProjectionMatrix(), mvMatrix);
 			apSettings->mpProgram->SetMatrixf("worldViewProj", mvpMatrix);
 
 			if (apSettings->mpProgramSetup)
 			{
-				apSettings->mpProgramSetup->SetupMatrix(mpModelMatrix,apSettings);
+				// apSettings->mpProgramSetup->SetupMatrix(mpModelMatrix,apSettings);
 			}
 		}
 
-		if(apSettings->mbLog)Log("\n");
+		if (apSettings->mbLog)Log("\n");
 	}
 
 	//-----------------------------------------------------------------------
@@ -359,77 +305,6 @@ namespace hpl {
 		{
 			apSettings->mpVtxBuffer->Draw();
 		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	//////////////////////////////////////////////////////////////////////////
-	// COMPARE METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	int iRenderState::CompareSector(const iRenderState* apState) const
-	{
-		return (size_t)mpSector < (size_t)apState->mpSector;
-	}
-
-	//-----------------------------------------------------------------------
-
-	int iRenderState::CompareAlpha(const iRenderState* apState) const
-	{
-		return GetCompareVal((int)mAlphaMode,(int)apState->mAlphaMode);
-	}
-
-	//-----------------------------------------------------------------------
-
-	int iRenderState::CompareBlend(const iRenderState* apState) const
-	{
-		int lRet = GetCompareVal((int)mChannelMode,(int)apState->mChannelMode);
-		if(lRet ==0)
-		{
-			return GetCompareVal((int)mBlendMode,(int)apState->mBlendMode);
-		}
-		return lRet;
-	}
-
-	//-----------------------------------------------------------------------
-
-	int iRenderState::CompareVtxProg(const iRenderState* apState) const
-	{
-		return GetCompareVal(mpProgram, apState->mpProgram);
-	}
-
-	//-----------------------------------------------------------------------
-
-	int iRenderState::CompareTexture(const iRenderState* apState) const
-	{
-		for(int i=0; i< MAX_TEXTUREUNITS-1;++i)
-		{
-			if(mpTexture[i] != apState->mpTexture[i])
-				return GetCompareVal(mpTexture[i], apState->mpTexture[i]);
-		}
-		return GetCompareVal(mpTexture[MAX_TEXTUREUNITS-1], apState->mpTexture[MAX_TEXTUREUNITS-1]);
-	}
-	//-----------------------------------------------------------------------
-
-	int iRenderState::CompareVtxBuff(const iRenderState* apState)const
-	{
-		return GetCompareVal(mpVtxBuffer, apState->mpVtxBuffer);
-	}
-
-	//-----------------------------------------------------------------------
-
-	int iRenderState::CompareMatrix(const iRenderState* apState)const
-	{
-		return GetCompareVal(mpModelMatrix, apState->mpModelMatrix);
-	}
-
-	//-----------------------------------------------------------------------
-
-	int iRenderState::CompareRender(const iRenderState* apState) const
-	{
-		return GetCompareVal(mpObject, apState->mpObject);
 	}
 
 	//-----------------------------------------------------------------------

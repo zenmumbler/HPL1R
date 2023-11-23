@@ -293,19 +293,17 @@ namespace hpl {
 		}
 	}
 
-	cMatrixf* cSubMeshEntity::GetModelMatrix(cCamera *apCamera)
+	cMatrixf cSubMeshEntity::GetModelMatrix(cCamera *apCamera)
 	{
 		if(mpMeshEntity->HasNodes())
 		{
 			//Log("%s Matrix from local node!\n",msName.c_str());
-			return &GetWorldMatrix();
+			return GetWorldMatrix();
 		}
 		else
 		{
 			//Log("%s Matrix from mesh!\n",msName.c_str());
-
-			if(mpMeshEntity->IsStatic()) return NULL;
-
+			if(mpMeshEntity->IsStatic()) return cMatrixf::Identity;
 			return mpMeshEntity->GetModelMatrix(NULL);
 		}
 	}

@@ -132,7 +132,7 @@ namespace hpl {
 
 		cBoundingVolume* GetBoundingVolume();
 
-		cMatrixf* GetModelMatrix(cCamera *apCamera);
+		cMatrixf GetModelMatrix(cCamera *apCamera);
 
 		int GetMatrixUpdateCount();
 
@@ -158,8 +158,6 @@ namespace hpl {
 		iVertexBuffer* mpVtxBuffer;
 
 		iVertexBuffer* mpHaloSourceBuffer;
-
-		cMatrixf m_mtxTempTransform;
 
 		eBillboardType mType;
 		cVector2f mvSize;

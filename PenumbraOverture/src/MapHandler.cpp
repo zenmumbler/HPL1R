@@ -1124,7 +1124,7 @@ void cMapHandler::RenderItemEffect()
 			iVertexBuffer *pVtxBuffer = pSubEntity->GetVertexBuffer();
 			iMaterial *pMaterial = pSubEntity->GetMaterial();
 			
-			iGpuProgram *pProg = pMaterial->GetProgramEx(eMaterialRenderType_Z);
+			iGpuProgram *pProg = pMaterial->GetProgramEx();
 			if (pProg) {
 				pProg->Bind();
 				pProg->SetMatrixf("worldViewProj", mvpMat);

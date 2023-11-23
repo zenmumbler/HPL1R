@@ -109,7 +109,7 @@ namespace hpl {
 
 		cBoundingVolume* GetBoundingVolume();
 
-		cMatrixf* GetModelMatrix(cCamera *apCamera);
+		cMatrixf GetModelMatrix(cCamera *apCamera);
 
 		int GetMatrixUpdateCount();
 

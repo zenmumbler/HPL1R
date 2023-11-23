@@ -72,8 +72,6 @@ namespace hpl {
 		//Setings that doesn't change:
 		iLowLevelGraphics* mpLowLevel;
 
-		unsigned int *mpTempIndexArray;
-
 		//Setting that changes
 		cCamera *mpCamera;
 		cFrustum* mpFrustum;
@@ -100,10 +98,7 @@ namespace hpl {
 		iGpuProgram* mpProgram;
 		iMaterialProgramSetup* mpProgramSetup;
 
-		bool mbMatrixWasNULL;
-
 		cColor mAmbientColor;
-
 
 		iTexture* mpTexture[MAX_TEXTUREUNITS];
 
@@ -192,7 +187,11 @@ namespace hpl {
 
 		tVertexVec mvVtxRect;
 
+		int aaa = 0xAABBCCDD;
+		int bbb = 0x11223344;
 		cRenderList *mpRenderList;
+		int aaa2 = 0xAABBCCDD;
+		int bbb2 = 0x11223344;
 
 		iVertexBuffer* mpSkyBox;
 		iTexture* mpSkyBoxTexture;
