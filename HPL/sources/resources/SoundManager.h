@@ -44,7 +44,7 @@ namespace hpl {
 		cSound* mpSound;
 		cResources *mpResources;
 
-		tStringList mlstFileFormats;
+		tStringVec _fileFormats;
 
 		iSoundData *FindData(const tString &asName, tString &asFilePath);
 	};

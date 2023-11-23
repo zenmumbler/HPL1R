@@ -62,7 +62,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelSoundOAL::GetSupportedFormats(tStringList &alstFormats)
+	void cLowLevelSoundOAL::GetSupportedFormats(tStringVec &alstFormats)
 	{
 		alstFormats.push_back("WAV");
 		alstFormats.push_back("OGG");
@@ -70,7 +70,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cLowLevelSoundOAL::GetOutputDeviceNames(tStringList &alstDevices)
+	void cLowLevelSoundOAL::GetOutputDeviceNames(tStringVec &alstDevices)
 	{
 		const char *devices = alcGetString(nullptr, ALC_DEVICE_SPECIFIER);
 

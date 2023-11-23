@@ -21,7 +21,6 @@
 
 #include <cstdio>
 #include <string>
-#include <list>
 #include <set>
 #include <vector>
 
@@ -38,14 +37,12 @@ namespace hpl {
 	typedef unsigned int tFlag;
 
 	typedef std::string tString;
-	typedef std::list<tString> tStringList;
 	typedef std::vector<tString> tStringVec;
 	typedef std::set<tString> tStringSet;
 
 	//--------------------------------------------------------
 
 	typedef std::wstring tWString;
-	typedef std::list<tWString> tWStringList;
 	typedef std::vector<tWString> tWStringVec;
 
 	//--------------------------------------------------------
@@ -53,7 +50,6 @@ namespace hpl {
 	typedef std::vector<unsigned int> tUIntVec;
 	typedef std::vector<int> tIntVec;
 	typedef std::vector<float> tFloatVec;
-	typedef std::list<unsigned int> tUIntList;
 
 	//----------------------------------------------------------
 

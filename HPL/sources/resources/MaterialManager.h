@@ -56,8 +56,6 @@ namespace hpl {
 
 		float mfTextureAnisotropy;
 
-		tStringList mlstFileFormats;
-
 		tStringVec mvCubeSideSuffixes;
 
 		cGraphics* mpGraphics;

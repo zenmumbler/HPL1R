@@ -19,8 +19,8 @@ namespace hpl
 		cLowLevelSoundOAL();
 		~cLowLevelSoundOAL();
 
-		void GetSupportedFormats(tStringList &alstFormats) override;
-		void GetOutputDeviceNames(tStringList &alstDevices) override;
+		void GetSupportedFormats(tStringVec &formats) override;
+		void GetOutputDeviceNames(tStringVec &devices) override;
 		tString GetCurrentDeviceName() override;
 
 		iSoundData* LoadSoundData(const tString& asName,const tString& asFilePath,

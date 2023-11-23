@@ -20,6 +20,7 @@
 #define HPL_SERIALIZE_CLASS_H
 
 #include <map>
+#include <list>
 #include <cstddef>
 #include "system/SystemTypes.h"
 

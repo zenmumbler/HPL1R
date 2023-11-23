@@ -456,7 +456,7 @@ namespace hpl {
 		//Set the sector as visited.
 		mlVisitCount = mpContainer->GetSectorVisitCount();
 
-		mpContainer->GetVisibleSectorsList()->push_back(msId);
+		mpContainer->GetVisibleSectorsList().push_back(msId);
 
 		//////////////////////////////////////////////////////
 		//Add all visible objects in the room to the render list
@@ -1027,7 +1027,7 @@ namespace hpl {
 		gbCallbackActive = false;
 
 		//Clear debug
-		mlstVisibleSectors.clear();
+		_visibleSectors.clear();
 
 		////////////////////////////////////////////////
 		//Get a container with all the visible sectors
@@ -1040,7 +1040,7 @@ namespace hpl {
 			cSectorVisibility *pVisSector = SectorIt.Next();
 			cSector *pSector = pVisSector->GetSector();
 
-			mlstVisibleSectors.push_back(pSector->GetId());
+			_visibleSectors.push_back(pSector->GetId());
 
 			//////////////////////////////////////////////////////
 			//Add all visible objects in the sector to the render list

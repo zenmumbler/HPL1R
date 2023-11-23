@@ -264,7 +264,7 @@ namespace hpl {
 
 #ifdef WIN32
 
-	void FindFilesInDir(tWStringList &alstStrings,tWString asDir, tWString asMask)
+	void FindFilesInDir(tWStringVec &fileNames, tWString asDir, tWString asMask)
 	{
 		//ifdef WIN32 , these windows functions only works with "\".. sucks ...
 		asDir = cString::ReplaceCharToW(asDir,_W("/"),_W("\\"));
@@ -300,7 +300,7 @@ namespace hpl {
 		{
 			if((FileInfo.attrib & _A_SUBDIR)==0)
 			{
-				alstStrings.push_back(FileInfo.name);
+				fileNames.push_back(FileInfo.name);
 			}
 		}
 	}
@@ -324,7 +324,7 @@ namespace hpl {
 	  }
 	}
 
-	void FindFilesInDir(tWStringList &alstStrings, tWString asDir, tWString asMask)
+	void FindFilesInDir(tWStringVec &fileNames, tWString asDir, tWString asMask)
 	{
 		//Log("Find Files in '%ls' with mask '%ls'\n",asDir.c_str(), asMask.c_str());
 		//Get the search string
@@ -352,7 +352,7 @@ namespace hpl {
 			fileentry.assign(cString::To16Char(_entry->d_name));
 
 			if (!patiMatch(asMask.c_str(),fileentry.c_str())) continue;
-			alstStrings.push_back(fileentry);
+			fileNames.push_back(fileentry);
 		}
 		closedir(dirhandle);
 	}

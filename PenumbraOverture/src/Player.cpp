@@ -1545,8 +1545,8 @@ void cPlayer::OnDraw()
 	//DEBUG: Portals
 	/*tString sPortals = "Portals: ";
 	cPortalContainer *pContainer = mpInit->mpGame->GetScene()->GetWorld3D()->GetPortalContainer();
-    tStringList* pStringList = pContainer->GetVisibleSectorsList();
-	for (const tString& sPortal : *pStringList)
+    auto& portalNames = pContainer->GetVisibleSectorsList();
+	for (const tString& sPortal : portalNames)
 	{
 		sPortals += *it + ", ";
 	}

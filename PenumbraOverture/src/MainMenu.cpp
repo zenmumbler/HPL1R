@@ -1202,12 +1202,12 @@ public:
 	cMainMenuWidget_Language(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment)
 		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
 	{
-		tWStringList lstStrings;
-		FindFilesInDir(lstStrings, _W("config/"), _W("*.lang"));
+		tWStringVec fileNames;
+		FindFilesInDir(fileNames, _W("config/"), _W("*.lang"));
 
 		mlCurrentFile =0;
 		int lIdx=0;
-		for(const tWString& str : lstStrings)
+		for(const tWString& str : fileNames)
 		{
 			mvFiles.push_back(str);
 			if (cString::To16Char(cString::ToLowerCase(apInit->msLanguageFile)) == cString::ToLowerCaseW(str))
@@ -2691,13 +2691,13 @@ void cMainMenu::CreateWidgets()
 		gpSaveGameList[i] = new cMainMenuWidget_SaveGameList(mpInit,vPos,cVector2f(355,170),15,sDir,(int)i);
 		AddWidgetToState(state,gpSaveGameList[i]);
 
-		tWStringList lstFiles;
+		tWStringVec fileNames;
 		tTempFileAndDataSet setTempFiles;
 		
 		tWString sFullPath = mpInit->mpSaveHandler->GetSaveDir() + sDir;
-		FindFilesInDir(lstFiles, sFullPath, _W("*.sav"));
+		FindFilesInDir(fileNames, sFullPath, _W("*.sav"));
 
-		for (const tWString& sFile : lstFiles)
+		for (const tWString& sFile : fileNames)
 		{
 			cDate date = FileModifiedDate(sFullPath+_W("/")+sFile);
             

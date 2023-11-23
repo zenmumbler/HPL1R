@@ -247,7 +247,7 @@ namespace hpl {
 		unsigned int first_letter=0;
 		unsigned int last_space=0;
 
-		tUIntList RowLengthList;
+		std::vector<unsigned int> RowLengthList;
 
 		float fTextLength;
 
@@ -324,7 +324,7 @@ namespace hpl {
 		unsigned int first_letter=0;
 		unsigned int last_space=0;
 
-		tUIntList RowLengthList;
+		std::vector<unsigned int> RowLengthList;
 
 		float fTextLength;
 

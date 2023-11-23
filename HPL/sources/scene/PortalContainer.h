@@ -276,7 +276,7 @@ namespace hpl {
 
 		//Debug stuff
 		tSectorMap* GetSectorMap(){ return &m_mapSectors;}
-		tStringList* GetVisibleSectorsList(){ return &mlstVisibleSectors;}
+		tStringVec& GetVisibleSectorsList(){ return _visibleSectors; }
 
 		tRenderableSet* GetGlobalDynamicObjectSet(){ return &m_setGlobalDynamicObjects;}
 		tRenderableList* GetGlobalStaticObjectList(){ return &mlstGlobalStaticObjects;}
@@ -299,7 +299,7 @@ namespace hpl {
 		//Global dynamic entities
 		tEntity3DSet m_setGlobalEntities;
 
-		tStringList mlstVisibleSectors;
+		tStringVec _visibleSectors;
 
 		int mlEntityIterateCount;
 	};

@@ -38,7 +38,7 @@ namespace hpl {
 		mpSound = apSound;
 		mpResources = apResources;
 
-		mpSound->GetLowLevel()->GetSupportedFormats(mlstFileFormats);
+		mpSound->GetLowLevel()->GetSupportedFormats(_fileFormats);
 	}
 
 	cSoundManager::~cSoundManager()
@@ -143,7 +143,7 @@ namespace hpl {
 
 		if(cString::GetFileExt(asName)=="")
 		{
-			for(const tString& sExt : mlstFileFormats)
+			for(const tString& sExt : _fileFormats)
 			{
 				tString sNewName = cString::SetFileExt(asName, sExt);
 				pData = static_cast<iSoundData*> (FindLoadedResource(sNewName, asFilePath));

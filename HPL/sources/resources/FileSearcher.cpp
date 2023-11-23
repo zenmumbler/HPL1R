@@ -51,7 +51,7 @@ namespace hpl {
 
 	void cFileSearcher::AddDirectory(tString asPath, tString asMask)
 	{
-		tWStringList lstFileNames;
+		tWStringVec fileNames;
 		//Make the path with only "/" and lower case.
 		asPath = cString::ToLowerCase(cString::ReplaceCharTo(asPath,"\\","/"));
 
@@ -61,9 +61,9 @@ namespace hpl {
 		{
 			m_setLoadedDirs.insert(asPath);
 
-			FindFilesInDir(lstFileNames, cString::To16Char(asPath), cString::To16Char(asMask));
+			FindFilesInDir(fileNames, cString::To16Char(asPath), cString::To16Char(asMask));
 
-			for(const tWString& sExt : lstFileNames)
+			for(const tWString& sExt : fileNames)
 			{
 				tString sFile = cString::To8Char(sExt);
 				tString sFileAllLower = cString::ToLowerCase(sFile);

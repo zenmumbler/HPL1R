@@ -63,7 +63,7 @@ namespace hpl {
 
 	//--------------------------------------------------------
 
-	void FindFilesInDir(tWStringList &alstStrings, tWString asDir, tWString asMask);
+	void FindFilesInDir(tWStringVec &fileNames, tWString asDir, tWString asMask);
 
 }
 

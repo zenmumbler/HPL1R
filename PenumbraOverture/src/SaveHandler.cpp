@@ -718,16 +718,16 @@ void cSaveHandler::DeleteOldestIfMax(const tWString &asDir,const tWString &asMas
 {
 	tWString sPath = msSaveDir + asDir;
 
-	tWStringList lstFiles;
-	FindFilesInDir(lstFiles,sPath,asMask);
+	tWStringVec fileNames;
+	FindFilesInDir(fileNames,sPath,asMask);
 
 	//If there are too many files, remove oldest.
-	if((int)lstFiles.size() >= alMaxFiles)
+	if((int)fileNames.size() >= alMaxFiles)
 	{
 		tWString sOldest = _W("");
 		cDate oldestDate;
 
-		for (const tWString& sFile : lstFiles)
+		for (const tWString& sFile : fileNames)
 		{
 			cDate date = FileModifiedDate(sPath + _W("/") + sFile);
 			if(sOldest == _W("") || oldestDate > date)
@@ -747,13 +747,13 @@ tWString cSaveHandler::GetLatest(const tWString &asDir,const tWString &asMask)
 {
 	tWString sPath = msSaveDir + asDir;
 
-	tWStringList lstFiles;
-	FindFilesInDir(lstFiles,sPath,asMask);
+	tWStringVec fileNames;
+	FindFilesInDir(fileNames,sPath,asMask);
 
 	tWString sNewest = _W("");
 	cDate newestDate;
 
-	for (const tWString& sFile : lstFiles)
+	for (const tWString& sFile : fileNames)
 	{
 		cDate date = FileModifiedDate(sPath + _W("/") + sFile);
 		if(sNewest == _W("") || newestDate < date)
