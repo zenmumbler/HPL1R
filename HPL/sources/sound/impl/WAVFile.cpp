@@ -83,7 +83,7 @@ namespace hpl {
 		*rate = header.rate;
 		*samples = sampleData;
 
-		return header.dataSize / sampleBytes;
+		return chunkHeader.chunkSize / header.bytesPerSample;
 	}
 
 }
