@@ -426,7 +426,7 @@ static ePlayerHandType ToHandType(const char* apString)
 bool cPlayerHands::AddModelFromFile(const tString &asFile)
 {
 	tString sFileName = cString::SetFileExt(asFile,"hud");
-	tString sPath = mpInit->mpGame->GetResources()->GetFileSearcher()->GetFilePath(sFileName);
+	tString sPath = FileSearcher::GetFilePath(sFileName);
 	if(sPath=="")
 	{
 		Error("Couldn't find '%s' in resource directories!\n",sFileName.c_str());

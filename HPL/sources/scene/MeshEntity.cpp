@@ -1576,7 +1576,6 @@ namespace hpl {
 		cWorld3D *pWorld = apGame->GetScene()->GetWorld3D();
 
 		cMeshLoaderHandler *pMeshLoadHandler = pResources->GetMeshLoaderHandler();
-		cFileSearcher *pFileSearcher = pResources->GetFileSearcher();
 
 		///////////////////////////////////
 		//Load mesh

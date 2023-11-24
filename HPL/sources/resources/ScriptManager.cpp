@@ -31,7 +31,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cScriptManager::cScriptManager(cScript* apScript, cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher())
+		: iResourceManager()
 	{
 		mpScript = apScript;
 		mpResources = apResources;

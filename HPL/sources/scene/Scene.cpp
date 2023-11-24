@@ -283,7 +283,7 @@ namespace hpl {
 
 		///////////////////////////////////
 		// Load the map file
-		tString asPath = mpResources->GetFileSearcher()->GetFilePath(asFile);
+		tString asPath = FileSearcher::GetFilePath(asFile);
 		if(asPath == ""){
 			Error("World '%s' doesn't exist\n",asFile.c_str());
 			return NULL;

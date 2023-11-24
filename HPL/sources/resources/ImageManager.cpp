@@ -33,8 +33,8 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cImageManager::cImageManager(cFileSearcher *apFileSearcher, iLowLevelGraphics *apLowLevelGraphics)
-	: iResourceManager(apFileSearcher)
+	cImageManager::cImageManager(iLowLevelGraphics *apLowLevelGraphics)
+	: iResourceManager()
 	{
 	   mpLowLevelGraphics = apLowLevelGraphics;
 

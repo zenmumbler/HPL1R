@@ -54,8 +54,6 @@ namespace hpl {
 	{
 		mpLowLevelGraphics = apLowLevelGraphics;
 
-		mpFileSearcher = new cFileSearcher();
-
 		mpDefaultEntity3DLoader = NULL;
 		mpDefaultArea3DLoader = NULL;
 
@@ -86,7 +84,6 @@ namespace hpl {
 
 		Log(" All resources deleted\n");
 
-		delete mpFileSearcher;
 		delete mpMeshLoaderHandler;
 
 		if(mpLanguageFile) delete mpLanguageFile;
@@ -113,9 +110,9 @@ namespace hpl {
 
 		Log(" Creating resource managers\n");
 
-		mpImageManager = new cImageManager(mpFileSearcher, mpLowLevelGraphics);
+		mpImageManager = new cImageManager(mpLowLevelGraphics);
 		mlstManagers.push_back(mpImageManager);
-		mpGpuProgramManager = new cGpuProgramManager(mpFileSearcher, mpLowLevelGraphics);
+		mpGpuProgramManager = new cGpuProgramManager(mpLowLevelGraphics);
 		mlstManagers.push_back(mpGpuProgramManager);
 		mpParticleManager = new cParticleManager(apGraphics, this);
 		mlstManagers.push_back(mpParticleManager);
@@ -160,13 +157,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cFileSearcher* cResources::GetFileSearcher()
-	{
-		return mpFileSearcher;
-	}
-
-	//-----------------------------------------------------------------------
-
 	bool cResources::LoadResourceDirsFile(const tString &asFile)
 	{
 		TiXmlDocument* pXmlDoc = new TiXmlDocument(asFile.c_str());
@@ -205,7 +195,7 @@ namespace hpl {
 	 */
 	bool cResources::AddResourceDir(const tString &asDir, const tString &asMask)
 	{
-		mpFileSearcher->AddDirectory(asDir, asMask);
+		FileSearcher::AddDirectory(asDir, asMask);
 		if(iResourceBase::GetLogCreateAndDelete())
 			Log(" Added resource directory '%s'\n",asDir.c_str());
 		return true;
@@ -229,7 +219,7 @@ namespace hpl {
 	 */
 	void cResources::SetupResourceDirsForLanguage(const tString &asLangFile)
 	{
-		mpFileSearcher->ClearDirectories();
+		FileSearcher::ClearDirectories();
 		AddBaseDirectories();
 		LoadResourceDirsFile("resources.cfg");
 		LoadResourceDirsFile("rehatched/resources.cfg");

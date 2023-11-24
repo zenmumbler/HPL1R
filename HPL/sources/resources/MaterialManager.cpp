@@ -36,8 +36,8 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMaterialManager::cMaterialManager(cGraphics* apGraphics,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher())
+	cMaterialManager::cMaterialManager(cGraphics* apGraphics, cResources *apResources)
+		: iResourceManager()
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;

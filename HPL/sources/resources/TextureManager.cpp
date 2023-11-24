@@ -36,7 +36,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cTextureManager::cTextureManager(cGraphics* apGraphics,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher())
+		: iResourceManager()
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;
@@ -98,7 +98,7 @@ namespace hpl {
 
 			while(true)
 			{
-				tString sPath = mpFileSearcher->GetFilePath(sTest);
+				tString sPath = FileSearcher::GetFilePath(sTest);
 
 				if(sPath == "")
 				{
@@ -178,7 +178,7 @@ namespace hpl {
 				for(const tString& sExt : mvFileFormats)
 				{
 					tString sNewName = sName + mvCubeSideSuffixes[i] + "." + sExt;
-					sPath = mpFileSearcher->GetFilePath(sNewName);
+					sPath = FileSearcher::GetFilePath(sNewName);
 
 					if(sPath!="")break;
 				}

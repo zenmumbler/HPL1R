@@ -487,7 +487,7 @@ bool cInventoryItem::Init(cGameItem *apGameItem)
 bool cInventoryItem::InitFromFile(const tString &asFile)
 {
 	tString sEntityFile = cString::SetFileExt(asFile,"ent");
-	tString sPath = mpInit->mpGame->GetResources()->GetFileSearcher()->GetFilePath(sEntityFile);
+	tString sPath = FileSearcher::GetFilePath(sEntityFile);
 
 	if(sPath!="")
 	{

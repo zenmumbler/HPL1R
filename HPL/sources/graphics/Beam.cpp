@@ -47,7 +47,6 @@ namespace hpl {
 	iRenderable(asName)
 	{
 		mpMaterialManager = apResources->GetMaterialManager();
-		mpFileSearcher = apResources->GetFileSearcher();
 		mpLowLevelGraphics = apGraphics->GetLowLevel();
 
 		msFileName = "";
@@ -364,7 +363,7 @@ namespace hpl {
 		msFileName = asFile;
 
 		tString sNewFile = cString::SetFileExt(asFile,"beam");
-		tString sPath = mpFileSearcher->GetFilePath(sNewFile);
+		tString sPath = FileSearcher::GetFilePath(sNewFile);
 		if(sPath != "")
 		{
 			TiXmlDocument *pDoc = new TiXmlDocument(sPath.c_str());

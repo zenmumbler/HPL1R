@@ -19,7 +19,6 @@
 #ifndef HPL_SYSTEM_TYPES_H
 #define HPL_SYSTEM_TYPES_H
 
-#include <cstdio>
 #include <string>
 #include <set>
 #include <vector>
@@ -30,17 +29,17 @@ namespace hpl {
 	///////// TYPES //////////////////////////////////
 	//////////////////////////////////////////////////
 
-	#define _W(t) L ## t
+	typedef unsigned int tFlag;
 
 	//--------------------------------------------------------
-
-	typedef unsigned int tFlag;
 
 	typedef std::string tString;
 	typedef std::vector<tString> tStringVec;
 	typedef std::set<tString> tStringSet;
 
 	//--------------------------------------------------------
+
+	#define _W(t) L ## t
 
 	typedef std::wstring tWString;
 	typedef std::vector<tWString> tWStringVec;

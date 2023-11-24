@@ -752,7 +752,7 @@ tString iGameEntity::GetScriptCommand(eGameEntityScriptType aType)
 void iGameEntity::PreloadModel(const tString &asFile)
 {
 	tString sFileName = cString::SetFileExt(asFile,"ent");
-	tString sPath = mpInit->mpGame->GetResources()->GetFileSearcher()->GetFilePath(sFileName);
+	tString sPath = FileSearcher::GetFilePath(sFileName);
 
 	if(sPath!="")
 	{

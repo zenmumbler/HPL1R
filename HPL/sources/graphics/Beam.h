@@ -31,7 +31,6 @@ namespace hpl {
 	class cMaterialManager;
 	class cResources;
 	class cGraphics;
-	class cFileSearcher;
 	class iLowLevelGraphics;
 	class iMaterial;
 	class iVertexBuffer;
@@ -130,7 +129,6 @@ namespace hpl {
 		eRenderableType GetRenderType() override { return eRenderableType_ParticleSystem;}
 	private:
 		cMaterialManager* mpMaterialManager;
-		cFileSearcher *mpFileSearcher;
 		iLowLevelGraphics* mpLowLevelGraphics;
 
 		iMaterial *mpMaterial;

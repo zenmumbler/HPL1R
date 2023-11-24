@@ -38,7 +38,6 @@ namespace hpl {
 	class cResources;
 	class cGraphics;
 	class cMeshCreator;
-	class cFileSearcher;
 	class iLowLevelGraphics;
 	class iMaterial;
 	class iVertexBuffer;
@@ -150,7 +149,6 @@ namespace hpl {
 		void UpdateSourceBufferSize();
 
 		cMaterialManager* mpMaterialManager;
-		cFileSearcher *mpFileSearcher;
 		iLowLevelGraphics* mpLowLevelGraphics;
 		cMeshCreator *mpMeshCreator;
 

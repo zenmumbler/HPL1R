@@ -419,7 +419,7 @@ namespace hpl {
 		iEntity3D *pEntity = NULL;
 		tString sFileName = cString::SetFileExt(asFile,"ent");
 
-		tString sPath = mpResources->GetFileSearcher()->GetFilePath(sFileName);
+		tString sPath = FileSearcher::GetFilePath(sFileName);
 
 		if(sPath!="")
 		{
@@ -897,8 +897,7 @@ namespace hpl {
 
 		//////////////////////////////////
 		//Get file name
-		cFileSearcher *pFileSearcher = mpResources->GetFileSearcher();
-		tString sMapPath = pFileSearcher->GetFilePath(GetFileName());
+		tString sMapPath = FileSearcher::GetFilePath(GetFileName());
 
 		tString sAiFileName = cString::SetFileExt(sMapPath,"");
 		sAiFileName += "_"+asName;

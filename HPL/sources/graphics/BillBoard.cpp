@@ -49,7 +49,6 @@ namespace hpl {
 	iRenderable(asName)
 	{
 		mpMaterialManager = apResources->GetMaterialManager();
-		mpFileSearcher = apResources->GetFileSearcher();
 		mpLowLevelGraphics = apGraphics->GetLowLevel();
 
 		mpHaloSourceBuffer = CreateBoxVertexBuffer(mpLowLevelGraphics, 1);
@@ -403,7 +402,7 @@ namespace hpl {
 	void cBillboard::LoadXMLProperties(const tString asFile)
 	{
 		tString sNewFile = cString::SetFileExt(asFile,"bnt");
-		tString sPath = mpFileSearcher->GetFilePath(sNewFile);
+		tString sPath = FileSearcher::GetFilePath(sNewFile);
 		if(sPath != "")
 		{
 			TiXmlDocument *pDoc = new TiXmlDocument(sPath.c_str());

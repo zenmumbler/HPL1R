@@ -117,13 +117,12 @@ namespace hpl {
 		bool mbLoadFromFile=false;
 
 		cResources *pResources = apWorld->GetResources();
-		cFileSearcher *pFileSearcher = pResources->GetFileSearcher();
 
 		mpNodeList = apWorld->GetAINodeList(mpParams->msNodeType);
 
 		if(mpWorld->GetFileName() != "")
 		{
-			tString sPath = pFileSearcher->GetFilePath(mpWorld->GetFileName());
+			tString sPath = FileSearcher::GetFilePath(mpWorld->GetFileName());
 			tWString sSaveFile = cString::To16Char(cString::SetFileExt(sPath,"ainodes"));
 
 			if(sPath != "" && FileExists(sSaveFile))
@@ -279,9 +278,8 @@ namespace hpl {
 		if(mpWorld->GetFileName() == "") return;
 
 		cResources *pResources = mpWorld->GetResources();
-		cFileSearcher *pFileSearcher = pResources->GetFileSearcher();
 
-		tString sMapPath = pFileSearcher->GetFilePath(mpWorld->GetFileName());
+		tString sMapPath = FileSearcher::GetFilePath(mpWorld->GetFileName());
 		tString sSaveFile = cString::SetFileExt(sMapPath,"ainodes");
 
 		TiXmlDocument* pXmlDoc = new TiXmlDocument(sSaveFile.c_str());
@@ -315,9 +313,8 @@ namespace hpl {
 		if(mpWorld->GetFileName() == "") return;
 
 		cResources *pResources = mpWorld->GetResources();
-		cFileSearcher *pFileSearcher = pResources->GetFileSearcher();
 
-		tString sMapPath = pFileSearcher->GetFilePath(mpWorld->GetFileName());
+		tString sMapPath = FileSearcher::GetFilePath(mpWorld->GetFileName());
 		tString sSaveFile = cString::SetFileExt(sMapPath,"ainodes");
 
 		TiXmlDocument* pXmlDoc = new TiXmlDocument(sSaveFile.c_str());

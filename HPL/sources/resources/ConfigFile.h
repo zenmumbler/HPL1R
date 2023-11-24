@@ -22,7 +22,6 @@
 #include "system/SystemTypes.h"
 
 class TiXmlDocument;
-class cFileSearcher;
 
 namespace hpl {
 
@@ -55,7 +54,6 @@ namespace hpl {
 
 	private:
 		tWString msFile;
-		cFileSearcher *mpFileSearcher;
 
 		TiXmlDocument *mpXmlDoc;
 

@@ -55,7 +55,6 @@ namespace hpl {
 		mbApplyTransformToBV = false;
 
 		mpTextureManager = apResources->GetTextureManager();
-		mpFileSearcher = apResources->GetFileSearcher();
 
 		mpFalloffMap = mpTextureManager->Create1D("core_falloff_linear");
 		mpFalloffMap->SetWrapS(eTextureWrap_ClampToEdge);
@@ -419,7 +418,7 @@ namespace hpl {
 
 	void iLight3D::LoadXMLProperties(const tString asFile)
 	{
-		tString sPath = mpFileSearcher->GetFilePath(asFile);
+		tString sPath = FileSearcher::GetFilePath(asFile);
 		if(sPath != "")
 		{
 			TiXmlDocument *pDoc = new TiXmlDocument(sPath.c_str());

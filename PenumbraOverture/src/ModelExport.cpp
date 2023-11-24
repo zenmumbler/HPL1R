@@ -10,7 +10,7 @@ static void WriteSubMesh() {
 
 }
 
-static void ExportModel(cMesh *model, cResources *res) {
+static void ExportModel(cMesh *model) {
 	json gltf;
 	json asset;
 	asset["version"] = "2.0";
@@ -21,10 +21,10 @@ static void ExportModel(cMesh *model, cResources *res) {
 //	gltf["extensionsRequired"].push_back("KHR_materials_pbrSpecularGlossiness");
 	
 	auto gltfFileName = cString::SetFileExt(model->GetName(), "gltf");
-	auto gltfFilePath = cString::SetFileExt(res->GetFileSearcher()->GetFilePath(model->GetName()), "gltf");
+	auto gltfFilePath = cString::SetFileExt(FileSearcher::GetFilePath(model->GetName()), "gltf");
 	auto binFileName = cString::SetFileExt(model->GetName(), "bin");
-	auto binFilePath = cString::SetFileExt(res->GetFileSearcher()->GetFilePath(model->GetName()), "bin");
-	
+	auto binFilePath = cString::SetFileExt(FileSearcher::GetFilePath(model->GetName()), "bin");
+
 	Log("gltf path: %s\n", gltfFilePath.c_str());
 	Log("bin path: %s\n", binFilePath.c_str());
 
@@ -244,7 +244,7 @@ void ExportModels(cGame *apGame) {
 	
 	const auto model = mm->CreateMesh("ice_cave_hand_whole.dae");
 	if (model) {
-		ExportModel(model, res);
+		ExportModel(model);
 		model->Destroy();
 	}
 	else {

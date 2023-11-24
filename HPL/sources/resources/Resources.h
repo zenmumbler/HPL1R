@@ -35,7 +35,6 @@ namespace hpl {
 
 	class iLowLevelGraphics;
 	class iResourceManager;
-	class cFileSearcher;
 	class cImageManager;
 	class cGpuProgramManager;
 	class cParticleManager;
@@ -120,8 +119,6 @@ namespace hpl {
 
 		void Update(float afTimeStep);
 
-		cFileSearcher* GetFileSearcher();
-
 		void SetupResourceDirsForLanguage(const tString &asLangFile);
 		bool AddResourceDir(const tString &asDir, const tString &asMask = "*.*");
 		bool LoadResourceDirsFile(const tString &asFile);
@@ -152,7 +149,6 @@ namespace hpl {
 		bool SetLanguageFile(const tString &asFile);
 
 		iLowLevelGraphics *mpLowLevelGraphics;
-		cFileSearcher *mpFileSearcher;
 
 		tResourceManagerList mlstManagers;
 		cImageManager *mpImageManager;

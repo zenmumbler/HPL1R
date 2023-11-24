@@ -31,8 +31,8 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cParticleManager::cParticleManager(cGraphics* apGraphics,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher())
+	cParticleManager::cParticleManager(cGraphics* apGraphics, cResources *apResources)
+		: iResourceManager()
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;
@@ -84,7 +84,7 @@ namespace hpl {
 		{
 			tString sFile = cString::SetFileExt(asType,"ps");
 
-			tString sPath = mpFileSearcher->GetFilePath(sFile);
+			tString sPath = FileSearcher::GetFilePath(sFile);
 
 			if(sPath == "")
 			{
@@ -137,7 +137,7 @@ namespace hpl {
 		if(pData == NULL)
 		{
 			tString sFile = cString::SetFileExt(asFile,"ps");
-			tString sPath = mpFileSearcher->GetFilePath(sFile);
+			tString sPath = FileSearcher::GetFilePath(sFile);
 			if(sPath == "")
 			{
 				Error("Couldn't find particle system file '%s'\n",sFile.c_str());

@@ -36,10 +36,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceManager::iResourceManager(cFileSearcher *apFileSearcher)
+	iResourceManager::iResourceManager()
 	{
-		mpFileSearcher = apFileSearcher;
-		mlHandleCount=0;
+		mlHandleCount = 0;
 	}
 
 	//-----------------------------------------------------------------------
@@ -199,7 +198,7 @@ namespace hpl {
 	{
 		iResourceBase* pResource = GetByName(asName);
 		if(pResource==NULL){
-			asFilePath = mpFileSearcher->GetFilePath(asName);
+			asFilePath = FileSearcher::GetFilePath(asName);
 		}
 		else {
 			asFilePath = "";

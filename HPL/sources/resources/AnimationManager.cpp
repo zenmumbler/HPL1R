@@ -35,7 +35,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cAnimationManager::cAnimationManager(cGraphics* apGraphic,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher())
+		: iResourceManager()
 	{
 		mpGraphics = apGraphic;
 		mpResources = apResources;
@@ -74,7 +74,7 @@ namespace hpl {
 			for(size_t i=0; i< pTypes->size(); i++)
 			{
 				asNewName = cString::SetFileExt(asNewName, (*pTypes)[i]);
-				sPath = mpResources->GetFileSearcher()->GetFilePath(asNewName);
+				sPath = FileSearcher::GetFilePath(asNewName);
 				if(sPath != "")
 				{
 					bFound = true;

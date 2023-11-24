@@ -19,21 +19,12 @@
 #ifndef HPL_FILESEARCHER_H
 #define HPL_FILESEARCHER_H
 
-#include <map>
-#include "resources/ResourcesTypes.h"
 #include "system/SystemTypes.h"
 
 namespace hpl {
 
-	typedef std::map<tString, tString> tFilePathMap;
-	typedef tFilePathMap::iterator tFilePathMapIt;
-
-	class cFileSearcher
+	namespace FileSearcher
 	{
-	public:
-		cFileSearcher();
-		~cFileSearcher();
-
 		/**
 		 * Adds a directory that will be searched when looking for files.
 		 * \param asMask What files that should be searched for, for example: "*.jpeg".
@@ -52,11 +43,8 @@ namespace hpl {
 		 * \return Path to the file. "" if file is not found.
 		 */
 		tString GetFilePath(tString asName);
+	}
 
-	private:
-		tFilePathMap m_mapFiles;
-		tStringSet m_setLoadedDirs;
-	};
+}
 
-};
 #endif // HPL_FILESEARCHER_H

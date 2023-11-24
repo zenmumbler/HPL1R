@@ -30,7 +30,7 @@ namespace hpl {
 	class cGpuProgramManager : public iResourceManager
 	{
 	public:
-		cGpuProgramManager(cFileSearcher *apFileSearcher, iLowLevelGraphics *apLowLevelGraphics);
+		cGpuProgramManager(iLowLevelGraphics *apLowLevelGraphics);
 		~cGpuProgramManager();
 
 		iResourceBase* Create(const tString& asName);

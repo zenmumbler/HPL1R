@@ -25,7 +25,6 @@
 
 namespace hpl {
 
-	class cFileSearcher;
 	class iResourceBase;
 
 	typedef std::map<unsigned long, iResourceBase*> tResourceHandleMap;
@@ -43,7 +42,7 @@ namespace hpl {
 	class iResourceManager
 	{
 	public:
-		iResourceManager(cFileSearcher *apFileSearcher);
+		iResourceManager();
 		virtual ~iResourceManager() = default;
 
 		virtual iResourceBase* Create(const tString& asName)=0;
@@ -64,8 +63,6 @@ namespace hpl {
 		unsigned long mlHandleCount;
 		tResourceNameMap m_mapNameResources;
 		tResourceHandleMap m_mapHandleResources;
-
-		cFileSearcher *mpFileSearcher;
 
 		void BeginLoad(const tString& asFile);
 		void EndLoad();

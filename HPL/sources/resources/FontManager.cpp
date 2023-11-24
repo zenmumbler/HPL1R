@@ -34,7 +34,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cFontManager::cFontManager(cGraphics* apGraphics,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher())
+		: iResourceManager()
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;

@@ -34,7 +34,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cMeshManager::cMeshManager(cGraphics* apGraphic,cResources *apResources)
-		: iResourceManager(apResources->GetFileSearcher())
+		: iResourceManager()
 	{
 		mpGraphics = apGraphic;
 		mpResources = apResources;
@@ -73,7 +73,7 @@ namespace hpl {
 			for(size_t i=0; i< pTypes->size(); i++)
 			{
 				asNewName = cString::SetFileExt(asNewName, (*pTypes)[i]);
-				tString sPath = mpResources->GetFileSearcher()->GetFilePath(asNewName);
+				tString sPath = FileSearcher::GetFilePath(asNewName);
 				if(sPath != "")
 				{
 					bFound = true;

@@ -45,7 +45,6 @@ namespace hpl {
 	class iTexture;
 	class cTextureManager;
 	class cResources;
-	class cFileSearcher;
 	class cBillboard;
 	class cSectorVisibilityContainer;
 
@@ -188,7 +187,6 @@ namespace hpl {
 		eLight3DType mLightType;
 
 		cTextureManager *mpTextureManager;
-		cFileSearcher *mpFileSearcher;
 
 		iTexture *mpFalloffMap;
 
