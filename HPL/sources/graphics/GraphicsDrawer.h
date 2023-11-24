@@ -26,6 +26,8 @@
 #include "graphics/GfxBatch.h"
 #include "graphics/GPUProgram.h"
 
+#include <set>
+
 namespace hpl {
 
 	class iLowLevelGraphics;
@@ -69,7 +71,6 @@ namespace hpl {
 	};
 
 	typedef std::multiset<cGfxBufferObject,cGfxBufferCompare> tGfxBufferSet;
-	typedef tGfxBufferSet::iterator tGfxBufferSetIt;
 
 	class cResources;
 

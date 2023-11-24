@@ -22,6 +22,8 @@
 #include "system/SystemTypes.h"
 #include "math/MathTypes.h"
 
+#include <set>
+
 namespace hpl {
 
 	class cAINodeContainer;

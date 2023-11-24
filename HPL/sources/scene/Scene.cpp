@@ -328,7 +328,7 @@ namespace hpl {
 		{
 			//Check if the map has been loaded before, if not run OnStart script.
 			tString sName = cString::ToLowerCase(cString::SetFileExt(asFile,""));
-			tStringSetIt it = m_setLoadedMaps.find(sName);
+			auto it = m_setLoadedMaps.find(sName);
 			if(it == m_setLoadedMaps.end())
 			{
 				m_setLoadedMaps.insert(sName);

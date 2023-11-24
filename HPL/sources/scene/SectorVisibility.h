@@ -23,6 +23,7 @@
 #include "math/BoundingVolume.h"
 #include "math/Frustum.h"
 
+#include <set>
 
 namespace hpl {
 

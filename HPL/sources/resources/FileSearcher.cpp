@@ -5,11 +5,12 @@
 
 #include "resources/FileSearcher.h"
 
-#include <map>
-#include <set>
 #include "system/String.h"
 #include "system/Files.h"
 #include "system/Log.h"
+
+#include <map>
+#include <set>
 
 namespace hpl::FileSearcher {
 
@@ -46,8 +47,8 @@ namespace hpl::FileSearcher {
 					continue;
 				}
 
-				const auto [itElement, bInserted] = s_mapFiles.insert({ sFileAllLower, sFilePath });
-				if (bInserted == false) {
+				const auto [itElement, inserted] = s_mapFiles.insert({ sFileAllLower, sFilePath });
+				if (inserted == false) {
 					Log("Overriding resource '%s' from '%s' to '%s'\n", sFile.c_str(), cString::GetFilePath(itElement->second).c_str(), asPath.c_str());
 					itElement->second.assign(sFilePath);
 				}

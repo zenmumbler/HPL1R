@@ -482,7 +482,7 @@ void cSaveHandler::SaveGameToFile(const tWString& asFile)
 	//////////////////////////////
 	//Save loaded maps in Scene
 	mpSavedGame->mvSceneLoadedMap.Clear();
-	tStringSet* pStringSet = mpInit->mpGame->GetScene()->GetLoadedMapsSet();
+	auto pStringSet = mpInit->mpGame->GetScene()->GetLoadedMapsSet();
 	for (const tString& name : *pStringSet)
 	{
 		cSceneLoadedMap_GlobalSave loadedMap;
@@ -584,7 +584,7 @@ void cSaveHandler::LoadGameFromFile(const tWString& asFile)
 
 	////////////////////////////////
 	//Load loaded maps in Scene
-	tStringSet* pStringSet = mpInit->mpGame->GetScene()->GetLoadedMapsSet();
+	auto pStringSet = mpInit->mpGame->GetScene()->GetLoadedMapsSet();
 	cContainerListIterator<cSceneLoadedMap_GlobalSave> it = mpSavedGame->mvSceneLoadedMap.GetIterator();
 	while(it.HasNext())
 	{

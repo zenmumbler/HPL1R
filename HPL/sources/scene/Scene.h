@@ -19,8 +19,6 @@
 #ifndef HPL_SCENE_H
 #define HPL_SCENE_H
 
-#include <list>
-
 #include "system/SystemTypes.h"
 #include "script/ScriptVar.h"
 
@@ -28,6 +26,9 @@
 #include "scene/Camera.h"
 
 #include "resources/MeshLoader.h"
+
+#include <list>
+#include <set>
 
 namespace hpl {
 
@@ -65,9 +66,6 @@ namespace hpl {
 
 		void Update(float afTimeStep);
 
-		void ClearLoadedMaps(){m_setLoadedMaps.clear();}
-		tStringSet* GetLoadedMapsSet(){ return &m_setLoadedMaps;}
-
 		void SetDrawScene(bool abX);
 		bool GetDrawScene(){ return mbDrawScene;}
 
@@ -104,6 +102,8 @@ namespace hpl {
 		void SetWorld3D(cWorld3D* apWorld);
 		cWorld3D* GetWorld3D(){ return mpCurrentWorld3D;}
 
+		void ClearLoadedMaps(){m_setLoadedMaps.clear();}
+		std::set<tString>* GetLoadedMapsSet(){ return &m_setLoadedMaps;}
 		bool HasLoadedWorld(const tString &asFile);
 
 		void SetUpdateMap(bool abX){ mbUpdateMap = abX;}
@@ -129,7 +129,7 @@ namespace hpl {
 		tScriptVarMap m_mapLocalVars;
 		tScriptVarMap m_mapGlobalVars;
 
-		tStringSet m_setLoadedMaps;
+		std::set<tString> m_setLoadedMaps;
 	};
 
 };
