@@ -1,5 +1,5 @@
 /*
- * 2022 by zenmumbler
+ * 2022-3 by zenmumbler
  * This file is part of Rehatched
  */
 
@@ -51,6 +51,7 @@ namespace hpl {
 		fseek(f, bytesToSkip, SEEK_CUR);
 	}
 
+	//-----------------------------------------------------------------------
 
 	char* LoadEntireFile(const tString& asFileName, int& alLength)
 	{
@@ -179,41 +180,6 @@ namespace hpl {
 	#else
 		struct stat statbuf;
 		return (stat(cString::To8Char(asPath).c_str(), &statbuf) != -1);
-	#endif
-	}
-
-	bool IsFileLink(const tWString& asPath)
-	{
-	// Symbolic Links Not Supported under Windows
-	#ifndef WIN32
-		struct stat statbuf;
-		if (lstat(cString::To8Char(asPath).c_str(), &statbuf) == 0) {
-			return statbuf.st_mode == S_IFLNK;
-		} else {
-			return false;
-		}
-	#else
-			return false;
-	#endif
-	}
-
-	bool LinkFile(const tWString& asPointsTo, const tWString& asLink)
-	{
-	// Symbolic Links Not Supported under Windows
-	#ifndef WIN32
-		tWString cmd = _W("ln -s \"") + asPointsTo + _W("\" \"") + asLink + _W("\"");
-		return (system(cString::To8Char(cmd).c_str()) == 0);
-	#else
-		return false;
-	#endif
-	}
-
-	bool RenameFile(const tWString& asFrom, const tWString& asTo)
-	{
-	#ifdef WIN32
-		return false;
-	#else
-		return (rename(cString::To8Char(asFrom).c_str(), cString::To8Char(asTo).c_str()) == 0);
 	#endif
 	}
 

@@ -1147,8 +1147,8 @@
 			children = (
 				DBF849ED0AC76D5800BB15CD /* AnimationState.cpp */,
 				DB27F0D10ACB9AB90054ACA3 /* AnimationState.h */,
-				DB27F0D30ACB9AB90054ACA3 /* Camera.h */,
 				DBF849F00AC76D5800BB15CD /* Camera.cpp */,
+				DB27F0D30ACB9AB90054ACA3 /* Camera.h */,
 				DBF849F10AC76D5800BB15CD /* ColliderEntity.cpp */,
 				DB27F0D60ACB9AB90054ACA3 /* ColliderEntity.h */,
 				DBF849F20AC76D5800BB15CD /* Entity.cpp */,

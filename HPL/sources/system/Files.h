@@ -50,13 +50,9 @@ namespace hpl {
 	bool FileExists(const tWString& asFileName);
 	void RemoveFile(const tWString& asFileName);
 	bool CloneFile(const tWString& asSrcFileName, const tWString& asDestFileName, bool abFailIfExists);
-	bool RenameFile(const tWString& asFrom, const tWString& asTo);
 
 	bool CreateFolder(const tWString& asPath);
 	bool FolderExists(const tWString& asPath);
-
-	bool IsFileLink(const tWString& asPath);
-	bool LinkFile(const tWString& asPointsTo, const tWString& asLink);
 
 	cDate FileModifiedDate(const tWString& asFilePath);
 	cDate FileCreationDate(const tWString& asFilePath);
