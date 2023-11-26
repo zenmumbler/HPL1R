@@ -254,8 +254,7 @@ namespace hpl {
 
 		if(animMode != eTextureAnimMode_None)
 		{
-			pTex = mpTextureManager->CreateAnim2D(sTexture);
-			pTex->SetAnimMode(animMode);
+			pTex = mpTextureManager->CreateAnim2D(sTexture, animMode);
 			pTex->SetFrameTime(fFrameTime);
 		}
 		else

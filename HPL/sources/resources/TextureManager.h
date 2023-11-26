@@ -43,11 +43,8 @@ namespace hpl {
 		/**
 		 * Creates an animated texture. The name must be [name].[ext]. And then the textures in the animtion must
 		 * be named [name]01.[ext], [name]02.[ext], etc
-		 * \param asName
-		 * \param aType
-		 * \return
 		 */
-		iTexture* CreateAnim2D(const tString& asName);
+		iTexture* CreateAnim2D(const tString& asName, eTextureAnimMode animMode);
 
 		iTexture* CreateCubeMap(const tString& asName);
 

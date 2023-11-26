@@ -36,11 +36,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMaterialManager::cMaterialManager(cGraphics* apGraphics, cResources *apResources)
+	cMaterialManager::cMaterialManager(cGraphics* apGraphics, cTextureManager* textureManager, cGpuProgramManager* programManager)
 		: iResourceManager()
+		, _textureManager{textureManager}
 	{
 		mpGraphics = apGraphics;
-		mpResources = apResources;
 		mfTextureAnisotropy = 8.0f;
 	}
 
@@ -71,7 +71,7 @@ namespace hpl {
 
 		pMaterial = static_cast<iMaterial*>(this->FindLoadedResource(asNewName,sPath));
 
-		if(pMaterial==NULL && sPath!="")
+		if (pMaterial==NULL && sPath!="")
 		{
 			pMaterial = LoadFromFile(asNewName,sPath);
 
@@ -102,13 +102,10 @@ namespace hpl {
 
 	void cMaterialManager::Update(float afTimeStep)
 	{
-		tResourceHandleMapIt it = m_mapHandleResources.begin();
-		for(; it != m_mapHandleResources.end(); ++it)
+		for(auto [_, resource] : m_mapHandleResources)
 		{
-			iResourceBase *pBase = it->second;
-			iMaterial *pMat = static_cast<iMaterial*>(pBase);
-
-			pMat->Update(afTimeStep);
+			iMaterial *material = static_cast<iMaterial*>(resource);
+			material->Update(afTimeStep);
 		}
 	}
 
@@ -131,12 +128,11 @@ namespace hpl {
 		if(mfTextureAnisotropy == afX) return;
 		mfTextureAnisotropy = afX;
 
-		tResourceHandleMapIt it = m_mapHandleResources.begin();
-		for(; it != m_mapHandleResources.end(); ++it)
+		for (auto [_, resource] : m_mapHandleResources)
 		{
-			iMaterial *pMat = static_cast<iMaterial*>(it->second);
+			iMaterial *pMat = static_cast<iMaterial*>(resource);
 
-			for(int i=0; i<eMaterialTexture_None; ++i)
+			for (int i=0; i < eMaterialTexture_None; ++i)
 			{
 				iTexture *pTex = pMat->GetTexture((eMaterialTexture)i);
 				if(pTex)pTex->SetAnisotropyDegree(mfTextureAnisotropy);
@@ -192,7 +188,87 @@ namespace hpl {
 	//////////////////////////////////////////////////////////////////////////
 
 	//-----------------------------------------------------------------------
-	iMaterial* cMaterialManager::LoadFromFile(const tString& asName,const tString& asPath)
+
+	static eMaterialTexture GetTextureType(const tString& type)
+	{
+		auto typeLower = cString::ToLowerCase(type);
+		if (typeLower == "diffuse") return eMaterialTexture_Diffuse;
+		else if (typeLower == "nmap") return eMaterialTexture_Normal;
+		else if (typeLower == "specular") return eMaterialTexture_Specular;
+		else if (typeLower == "refraction") return eMaterialTexture_Refraction;
+		// Special case: "illumination" is unused but is present without data in many .mat files
+		else if (typeLower == "illumination") return eMaterialTexture_None;
+
+		Warning("Skipping unsupported texture type `%s`\n", type.c_str());
+		return eMaterialTexture_None;
+	}
+
+	static eTextureWrap GetWrap(const tString& asType)
+	{
+		auto typeLower = cString::ToLowerCase(asType);
+		if (typeLower == "repeat") return eTextureWrap_Repeat;
+		else if (typeLower == "clamptoedge") return eTextureWrap_ClampToEdge;
+		else if (typeLower == "clamp") return eTextureWrap_ClampToBorder;
+
+		Warning("Ignoring unsupported texture wrap mode `%s`\n", asType.c_str());
+		return eTextureWrap_Repeat;
+	}
+
+	static eTextureAnimMode GetAnimMode(const tString& asType)
+	{
+		auto typeLower = cString::ToLowerCase(asType);
+		if (typeLower.length() == 0 || typeLower == "none") return eTextureAnimMode_None;
+		else if (typeLower == "loop") return eTextureAnimMode_Loop;
+		else if (typeLower == "oscillate") return eTextureAnimMode_Oscillate;
+
+		Warning("Ignoring unsupported animation mode `%s`\n", asType.c_str());
+		return eTextureAnimMode_None;
+	}
+
+	//-----------------------------------------------------------------------
+
+	struct TextureWithType {
+		iTexture* texture;
+		eMaterialTexture type;
+	};
+
+	TextureWithType CreateTextureFromElement(TiXmlElement* element, cTextureManager* texMgr, float anisotropy) {
+		tString sFile = cString::ToString(element->Attribute("File"),"");
+		eTextureAnimMode animMode = GetAnimMode(cString::ToString(element->Attribute("AnimMode"), "None"));
+		eMaterialTexture textureType = GetTextureType(element->Value());
+
+		// ignore placeholder/empty nodes
+		if (textureType == eMaterialTexture_None || sFile=="")
+		{
+			return { nullptr, eMaterialTexture_None };
+		}
+
+		iTexture* texture;
+		if (animMode != eTextureAnimMode_None)
+			// TODO: [Rehatched] unify these two APIs, this is a mess
+			texture = texMgr->CreateAnim2D(sFile, animMode);
+		else
+			texture = texMgr->Create2D(sFile);
+
+		if (texture == nullptr) {
+			Error("Couldn't load material texture!\n");
+			return { nullptr, eMaterialTexture_None };
+		}
+
+		float fFrameTime = cString::ToFloat(element->Attribute("AnimFrameTime"), 1.0f);
+		eTextureWrap wrap = GetWrap(cString::ToString(element->Attribute("Wrap"),""));
+		texture->SetFrameTime(fFrameTime);
+
+		texture->SetWrapAll(wrap);
+		texture->SetFilter(eTextureFilter_Trilinear);
+		texture->SetAnisotropyDegree(anisotropy);
+
+		return { .texture = texture, .type = textureType };
+	}
+
+	//-----------------------------------------------------------------------
+
+	iMaterial* cMaterialManager::LoadFromFile(const tString& asName, const tString& asPath)
 	{
 		TiXmlDocument *pDoc = new TiXmlDocument(asPath.c_str());
 		if(!pDoc->LoadFile()){
@@ -219,10 +295,9 @@ namespace hpl {
 		}
 
 		bool bUseAlpha = cString::ToBool(pMain->Attribute("UseAlpha"), false);
-		bool bDepthTest = cString::ToBool(pMain->Attribute("DepthTest"), true);
 		tString sPhysicsMatName = cString::ToString(pMain->Attribute("PhysicsMaterial"),"Default");
 
-		iMaterial* pMat = mpGraphics->GetMaterialHandler()->Create(asName,sType);
+		iMaterial* pMat = mpGraphics->GetMaterialHandler()->Create(asName, sType);
 		if(pMat==NULL){
 			Error("Invalid material type '%s'\n",sType);
 			delete pDoc;
@@ -241,56 +316,11 @@ namespace hpl {
 			return NULL;
 		}
 
-		tTextureTypeList lstTexTypes = pMat->GetTextureTypes();
-		tTextureTypeListIt it = lstTexTypes.begin();
-		for(;it != lstTexTypes.end();it++)
+		for (auto texElem = pTexRoot->FirstChildElement(); texElem != nullptr; texElem = texElem->NextSiblingElement())
 		{
-			iTexture *pTex;
-
-			TiXmlElement *pTexChild = pTexRoot->FirstChildElement(GetTextureString(it->mType).c_str());
-			if(pTexChild==NULL){
-				/*Error("Texture unit missing!");
-				delete pMat;
-				return NULL;*/
-				continue;
-			}
-
-			eTextureTarget target = eTextureTarget_2D;
-			tString sFile = cString::ToString(pTexChild->Attribute("File"),"");
-			eTextureWrap wrap = GetWrap(cString::ToString(pTexChild->Attribute("Wrap"),""));
-
-			eTextureAnimMode animMode = GetAnimMode(cString::ToString(pTexChild->Attribute("AnimMode"),"None"));
-			float fFrameTime = cString::ToFloat(pTexChild->Attribute("AnimFrameTime"),1.0f);
-
-			if(sFile=="")
-			{
-				continue;
-			}
-
-			if(animMode != eTextureAnimMode_None)
-			{
-				pTex = mpResources->GetTextureManager()->CreateAnim2D(sFile);
-			}
-			else
-			{
-				pTex = mpResources->GetTextureManager()->Create2D(sFile);
-			}
-
-			if(pTex==NULL){
-				Error("Couldn't load texture!!\n");
-				delete pDoc;
-				delete pMat;
-				return NULL;
-			}
-
-			pTex->SetFrameTime(fFrameTime);
-			pTex->SetAnimMode(animMode);
-
-			pTex->SetWrapAll(wrap);
-			pTex->SetFilter(eTextureFilter_Trilinear);
-			pTex->SetAnisotropyDegree(mfTextureAnisotropy);
-
-			pMat->SetTexture(pTex, it->mType);
+			auto [texture, texType] = CreateTextureFromElement(texElem, _textureManager, mfTextureAnisotropy);
+			if (texture)
+				pMat->SetTexture(texture, texType);
 		}
 
 		///////////////////////////
@@ -300,57 +330,6 @@ namespace hpl {
 		delete pDoc;
 
 		return pMat;
-	}
-
-	//-----------------------------------------------------------------------
-
-	tString cMaterialManager::GetTextureString(eMaterialTexture aType)
-	{
-		switch(aType)
-		{
-			case eMaterialTexture_Diffuse: return "Diffuse";
-			case eMaterialTexture_Normal: return "NMap";
-			case eMaterialTexture_Specular: return "Specular";
-			case eMaterialTexture_Refraction: return "Refraction";
-			default: break;
-		}
-
-		return "";
-	}
-
-	eMaterialTexture cMaterialManager::GetTextureType(const tString& type)
-	{
-		auto typeLower = cString::ToLowerCase(type);
-		if(typeLower == "diffuse") return eMaterialTexture_Diffuse;
-		else if(typeLower == "nmap") return eMaterialTexture_Normal;
-		else if(typeLower == "specular") return eMaterialTexture_Specular;
-		else if(typeLower == "refraction") return eMaterialTexture_Refraction;
-
-		Warning("Skipping unsupported texture type `%s`\n", type.c_str());
-		return eMaterialTexture_None;
-	}
-
-	//-----------------------------------------------------------------------
-
-	eTextureWrap cMaterialManager::GetWrap(const tString& asType)
-	{
-		auto typeLower = cString::ToLowerCase(asType);
-		if(typeLower == "repeat") return eTextureWrap_Repeat;
-		else if(typeLower == "clamptoedge") return eTextureWrap_ClampToEdge;
-
-		Warning("Ignoring unsupported texture wrap mode `%s`\n", asType.c_str());
-		return eTextureWrap_Repeat;
-	}
-
-	eTextureAnimMode cMaterialManager::GetAnimMode(const tString& asType)
-	{
-		auto typeLower = cString::ToLowerCase(asType);
-		if(typeLower == "none") return eTextureAnimMode_None;
-		else if(typeLower == "loop") return eTextureAnimMode_Loop;
-		else if(typeLower == "oscillate") return eTextureAnimMode_Oscillate;
-
-		Warning("Ignoring unsupported animation mode `%s`\n", asType.c_str());
-		return eTextureAnimMode_None;
 	}
 
 	//-----------------------------------------------------------------------

@@ -19,8 +19,6 @@ namespace hpl {
 
 		virtual ~Material_Universal();
 
-		tTextureTypeList GetTextureTypes() override;
-
 		iGpuProgram* GetProgramEx() override;
 
 		iMaterialProgramSetup* GetProgramSetup() override;

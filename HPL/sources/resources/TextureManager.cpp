@@ -79,16 +79,16 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cTextureManager::CreateAnim2D(const tString& asName)
+	iTexture* cTextureManager::CreateAnim2D(const tString& fileName, eTextureAnimMode animMode)
 	{
-		BeginLoad(asName);
+		BeginLoad(fileName);
 
-		iTexture* pTexture = static_cast<iTexture*>(GetByName(asName));
+		iTexture* pTexture = static_cast<iTexture*>(GetByName(fileName));
 
 		if(pTexture==NULL)
 		{
-			tString sFileExt = cString::GetFileExt(asName);
-			tString sFileName = cString::SetFileExt(cString::GetFileName(asName),"");
+			tString sFileExt = cString::GetFileExt(fileName);
+			tString sFileName = cString::SetFileExt(cString::GetFileName(fileName),"");
 
 			tStringVec mvFileNames;
 
@@ -118,8 +118,8 @@ namespace hpl {
 
 			if(vPaths.empty())
 			{
-				Error("No textures found for animation %s\n",asName.c_str());
-				Error("Couldn't texture '%s'\n",asName.c_str());
+				Error("No textures found for animation %s\n", fileName.c_str());
+				Error("Couldn't texture '%s'\n", fileName.c_str());
 				EndLoad();
 				return NULL;
 			}
@@ -138,11 +138,12 @@ namespace hpl {
 			}
 
 			//Create the animated texture
-			pTexture = mpGraphics->GetLowLevel()->CreateTexture(asName, eTextureTarget_2D);
+			pTexture = mpGraphics->GetLowLevel()->CreateTexture(fileName, eTextureTarget_2D);
+			pTexture->SetAnimMode(animMode);
 
 			if(pTexture->CreateAnimFromBitmapVec(vBitmaps)==false)
 			{
-				Error("Couldn't create animated texture '%s'!\n", asName.c_str());
+				Error("Couldn't create animated texture '%s'!\n", fileName.c_str());
 				delete pTexture;
 				EndLoad();
 				return NULL;
@@ -152,7 +153,7 @@ namespace hpl {
 		}
 
 		if(pTexture)pTexture->IncUserCount();
-		else Error("Couldn't texture '%s'\n",asName.c_str());
+		else Error("Couldn't texture '%s'\n", fileName.c_str());
 
 		EndLoad();
 		return pTexture;

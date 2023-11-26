@@ -71,7 +71,6 @@ namespace hpl {
 
 	//---------------------------------------------------------------
 
-
 	class iMaterialProgramSetup
 	{
 	public:
@@ -79,20 +78,6 @@ namespace hpl {
 		virtual void Setup(iGpuProgram *apProgram,cRenderSettings* apRenderSettings)=0;
 		virtual void SetupMatrix(cMatrixf *apModelMatrix, cRenderSettings* apRenderSettings){}
 	};
-
-	//---------------------------------------------------
-
-	class cTextureType
-	{
-	public:
-		cTextureType(tString asSuffix, eMaterialTexture aType): msSuffix(asSuffix), mType(aType){}
-
-		tString msSuffix;
-		eMaterialTexture mType;
-	};
-
-	typedef std::list<cTextureType> tTextureTypeList;
-	typedef tTextureTypeList::iterator tTextureTypeListIt;
 
 	//---------------------------------------------------
 
@@ -132,12 +117,6 @@ namespace hpl {
 		 * \return
 		 */
 		virtual bool IsTransperant() {return mbIsTransperant;}
-
-		virtual tTextureTypeList GetTextureTypes(){
-			tTextureTypeList vTypes;
-			vTypes.push_back(cTextureType("",eMaterialTexture_Diffuse));
-			return vTypes;
-		}
 
 		const tString& GetPhysicsMaterial(){ return msPhysicsMaterial;}
 		void SetPhysicsMaterial(const tString& asName){ msPhysicsMaterial = asName;}

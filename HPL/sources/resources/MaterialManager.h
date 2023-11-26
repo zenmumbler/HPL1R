@@ -20,19 +20,17 @@
 #define HPL_MATERIAL_MANAGER_H
 
 #include "resources/ResourceManager.h"
-#include "graphics/Texture.h"
 #include "graphics/Material.h"
 
 namespace hpl {
 
 	class cGraphics;
-	class cResources;
 	class iMaterial;
 
 	class cMaterialManager : public iResourceManager
 	{
 	public:
-		cMaterialManager(cGraphics* apGraphics,cResources *apResources);
+		cMaterialManager(cGraphics* apGraphics, cTextureManager* textureManager, cGpuProgramManager* programManager);
 		~cMaterialManager();
 
 		iResourceBase* Create(const tString& asName);
@@ -49,17 +47,10 @@ namespace hpl {
 	private:
 		iMaterial* LoadFromFile(const tString& asName,const tString& asPath);
 
-		tString GetTextureString(eMaterialTexture aType);
-		eMaterialTexture GetTextureType(const tString& type);
-		eTextureWrap GetWrap(const tString& asType);
-		eTextureAnimMode GetAnimMode(const tString& asType);
-
 		float mfTextureAnisotropy;
 
-		tStringVec mvCubeSideSuffixes;
-
 		cGraphics* mpGraphics;
-		cResources* mpResources;
+		cTextureManager* _textureManager;
 	};
 
 };

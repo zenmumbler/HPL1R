@@ -124,7 +124,7 @@ namespace hpl {
 		mlstManagers.push_back(mpScriptManager);
 		mpTextureManager = new cTextureManager(apGraphics, this);
 		mlstManagers.push_back(mpTextureManager);
-		mpMaterialManager = new cMaterialManager(apGraphics, this);
+		mpMaterialManager = new cMaterialManager(apGraphics, mpTextureManager, mpGpuProgramManager);
 		mlstManagers.push_back(mpMaterialManager);
 		mpMeshManager = new cMeshManager(apGraphics, this);
 		mlstManagers.push_back(mpMeshManager);
