@@ -333,7 +333,6 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	void cLowLevelGraphicsSDL::StartFrame() {
-		SetScissorActive(false);
 		ClearScreen();
 
 		ImGui_ImplOpenGL3_NewFrame();
