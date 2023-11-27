@@ -51,6 +51,7 @@ namespace hpl {
 
 		cGraphics* mpGraphics;
 		cTextureManager* _textureManager;
+		cGpuProgramManager* _programManager;
 	};
 
 };

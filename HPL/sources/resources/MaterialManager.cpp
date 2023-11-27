@@ -39,6 +39,7 @@ namespace hpl {
 	cMaterialManager::cMaterialManager(cGraphics* apGraphics, cTextureManager* textureManager, cGpuProgramManager* programManager)
 		: iResourceManager()
 		, _textureManager{textureManager}
+		, _programManager{programManager}
 	{
 		mpGraphics = apGraphics;
 		mfTextureAnisotropy = 8.0f;
