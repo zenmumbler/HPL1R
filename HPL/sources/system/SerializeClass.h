@@ -19,10 +19,11 @@
 #ifndef HPL_SERIALIZE_CLASS_H
 #define HPL_SERIALIZE_CLASS_H
 
+#include "system/StringTypes.h"
+
+#include <cstddef>
 #include <map>
 #include <list>
-#include <cstddef>
-#include "system/SystemTypes.h"
 
 class TiXmlElement;
 

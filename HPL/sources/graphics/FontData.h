@@ -19,12 +19,13 @@
 #ifndef HPL_FONTDATA_H
 #define HPL_FONTDATA_H
 
-#include <vector>
 #include "math/MathTypes.h"
-#include "system/SystemTypes.h"
-#include "system/SystemTypes.h"
 #include "graphics/GraphicsTypes.h"
 #include "resources/ResourceBase.h"
+#include "system/StringTypes.h"
+#include "system/ArrayTypes.h"
+
+#include <vector>
 
 namespace hpl {
 

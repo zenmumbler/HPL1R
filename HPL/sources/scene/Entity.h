@@ -19,10 +19,10 @@
 #ifndef HPL_ENTITY_H
 #define HPL_ENTITY_H
 
-#include "math/MathTypes.h"
-#include "system/SystemTypes.h"
-#include "system/Container.h"
 #include "game/SaveGame.h"
+#include "system/Container.h"
+#include "math/MathTypes.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

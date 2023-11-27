@@ -19,14 +19,14 @@
 #ifndef HPL_LOWLEVELGRAPHICS_H
 #define HPL_LOWLEVELGRAPHICS_H
 
-#include "math/MathTypes.h"
-#include "system/SystemTypes.h"
-#include "graphics/GraphicsTypes.h"
 #include "graphics/Bitmap.h"
 #include "graphics/Texture.h"
 #include "graphics/GPUProgram.h"
 #include "graphics/VertexBuffer.h"
 #include "graphics/GfxBatch.h"
+#include "math/MathTypes.h"
+#include "graphics/GraphicsTypes.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

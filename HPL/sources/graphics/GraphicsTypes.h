@@ -23,6 +23,7 @@
 #include <vector>
 #include "graphics/Color.h"
 #include "math/MathTypes.h"
+#include "system/NumberTypes.h"
 
 namespace hpl {
 

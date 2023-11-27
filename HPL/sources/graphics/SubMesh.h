@@ -20,9 +20,9 @@
 #define HPL_SUB_MESH_H
 
 #include "math/MathTypes.h"
-#include "graphics/GraphicsTypes.h"
-#include "system/SystemTypes.h"
 #include "math/MeshTypes.h"
+#include "graphics/GraphicsTypes.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

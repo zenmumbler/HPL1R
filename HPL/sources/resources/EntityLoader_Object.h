@@ -19,11 +19,11 @@
 #ifndef HPL_ENTITY_LOADER_OBJECT_H
 #define HPL_ENTITY_LOADER_OBJECT_H
 
-#include "system/SystemTypes.h"
+#include "resources/Resources.h"
+
 #include "math/MathTypes.h"
 #include "graphics/GraphicsTypes.h"
-
-#include "resources/Resources.h"
+#include "system/StringTypes.h"
 
 class TiXmlElement;
 

@@ -19,18 +19,16 @@
 #ifndef HPL_MESH_H
 #define HPL_MESH_H
 
-#include <vector>
-#include <map>
-
-#include "math/MathTypes.h"
-#include "graphics/GraphicsTypes.h"
-#include "system/SystemTypes.h"
 #include "resources/ResourceBase.h"
-
 #include "physics/CollideShape.h"
 #include "physics/PhysicsJoint.h"
-
 #include "scene/Light3D.h"
+#include "math/MathTypes.h"
+#include "graphics/GraphicsTypes.h"
+#include "system/StringTypes.h"
+
+#include <vector>
+#include <map>
 
 namespace hpl {
 

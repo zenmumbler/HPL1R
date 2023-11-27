@@ -6,7 +6,7 @@
 #ifndef HPL_WAVFILE_H
 #define HPL_WAVFILE_H
 
-#include "system/SystemTypes.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

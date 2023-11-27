@@ -19,7 +19,7 @@
 #ifndef HPL_RESOURCEBASE_H
 #define HPL_RESOURCEBASE_H
 
-#include "system/SystemTypes.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 
@@ -67,4 +67,5 @@ namespace hpl {
 	};
 
 };
+
 #endif // HPL_RESOURCEBASE_H

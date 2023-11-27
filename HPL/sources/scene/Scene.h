@@ -19,13 +19,13 @@
 #ifndef HPL_SCENE_H
 #define HPL_SCENE_H
 
-#include "system/SystemTypes.h"
 #include "script/ScriptVar.h"
 
 #include "game/Updateable.h"
 #include "scene/Camera.h"
 
 #include "resources/MeshLoader.h"
+#include "system/StringTypes.h"
 
 #include <list>
 #include <set>

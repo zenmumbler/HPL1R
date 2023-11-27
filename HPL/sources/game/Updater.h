@@ -22,7 +22,7 @@
 #include <map>
 #include <list>
 
-#include "system/SystemTypes.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

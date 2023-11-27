@@ -19,10 +19,9 @@
 #ifndef HPL_AI_NODE_GENERATOR_H
 #define HPL_AI_NODE_GENERATOR_H
 
-#include "system/SystemTypes.h"
-
 #include "physics/PhysicsWorld.h"
 #include "scene/World3D.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

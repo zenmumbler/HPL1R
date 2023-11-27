@@ -19,10 +19,11 @@
 #ifndef HPL_SOUNDHANDLER_H
 #define HPL_SOUNDHANDLER_H
 
-#include <list>
-#include "system/SystemTypes.h"
-#include "math/MathTypes.h"
 #include "physics/PhysicsWorld.h"
+#include "math/MathTypes.h"
+#include "system/StringTypes.h"
+
+#include <list>
 
 namespace hpl {
 

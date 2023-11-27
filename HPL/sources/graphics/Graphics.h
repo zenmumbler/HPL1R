@@ -19,7 +19,7 @@
 #ifndef HPL_GRAPHICS_H
 #define HPL_GRAPHICS_H
 
-#include "system/SystemTypes.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

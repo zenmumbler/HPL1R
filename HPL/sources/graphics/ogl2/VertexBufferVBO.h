@@ -20,7 +20,7 @@
 #define HPL_VERTEXBUFFER_VBO_H
 
 #include "graphics/VertexBuffer.h"
-
+#include "system/ArrayTypes.h"
 
 namespace hpl {
 

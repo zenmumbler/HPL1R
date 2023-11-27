@@ -19,8 +19,7 @@
 #ifndef HPL_GAME_H
 #define HPL_GAME_H
 
-#include "system/SystemTypes.h"
-
+#include "system/StringTypes.h"
 
 namespace hpl {
 	class cUpdater;

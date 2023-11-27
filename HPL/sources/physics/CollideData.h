@@ -20,7 +20,6 @@
 #define HPL_COLLIDE_DATA_H
 
 #include "math/MathTypes.h"
-#include "system/SystemTypes.h"
 
 namespace hpl {
 

@@ -19,13 +19,13 @@
 #ifndef HPL_MESH_LOADER_HANDLER_H
 #define HPL_MESH_LOADER_HANDLER_H
 
-#include <list>
+#include "resources/MeshLoader.h"
 
 #include "math/MathTypes.h"
 #include "graphics/GraphicsTypes.h"
-#include "system/SystemTypes.h"
+#include "system/StringTypes.h"
 
-#include "resources/MeshLoader.h"
+#include <list>
 
 namespace hpl {
 

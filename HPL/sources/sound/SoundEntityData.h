@@ -19,8 +19,8 @@
 #ifndef HPL_SOUND_ENTITY_DATA_H
 #define HPL_SOUND_ENTITY_DATA_H
 
-#include "system/SystemTypes.h"
 #include "resources/ResourceBase.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

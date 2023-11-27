@@ -19,13 +19,12 @@
 #ifndef HPL_RESOURCES_H
 #define HPL_RESOURCES_H
 
-#include <map>
-#include "system/SystemTypes.h"
-
 #include "graphics/GPUProgram.h"
 #include "graphics/GPUProgram.h"
-
 #include "game/Updateable.h"
+#include "system/StringTypes.h"
+
+#include <map>
 
 class TiXmlElement;
 

@@ -19,8 +19,8 @@
 #ifndef HPL_LANGUAGE_FILE_H
 #define HPL_LANGUAGE_FILE_H
 
+#include "system/StringTypes.h"
 #include <map>
-#include "system/SystemTypes.h"
 
 namespace hpl {
 

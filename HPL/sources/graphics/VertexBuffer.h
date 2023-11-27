@@ -21,9 +21,9 @@
 
 #include "graphics/GraphicsTypes.h"
 #include "math/MathTypes.h"
-#include "system/SystemTypes.h"
 #include "math/BoundingVolume.h"
 #include "system/STLBufferView.h"
+#include "system/NumberTypes.h"
 
 namespace hpl {
 

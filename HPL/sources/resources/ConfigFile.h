@@ -19,7 +19,7 @@
 #ifndef HPL_CONFIGFILE_H
 #define HPL_CONFIGFILE_H
 
-#include "system/SystemTypes.h"
+#include "system/StringTypes.h"
 
 class TiXmlDocument;
 

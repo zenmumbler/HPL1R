@@ -19,19 +19,18 @@
 #ifndef HPL_MESH_ENTITY_H
 #define HPL_MESH_ENTITY_H
 
-#include <vector>
-#include <map>
-
-#include "math/MathTypes.h"
-#include "graphics/GraphicsTypes.h"
-#include "system/SystemTypes.h"
+#include "scene/SubMeshEntity.h"
+#include "scene/AnimationState.h"
 #include "scene/Entity3D.h"
 #include "graphics/Renderable.h"
 #include "math/MeshTypes.h"
+#include "math/MathTypes.h"
+#include "graphics/GraphicsTypes.h"
+#include "system/StringTypes.h"
+#include "system/ArrayTypes.h"
 
-#include "scene/SubMeshEntity.h"
-
-#include "scene/AnimationState.h"
+#include <vector>
+#include <map>
 
 namespace hpl {
 

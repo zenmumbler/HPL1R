@@ -20,6 +20,7 @@
 #define HPL_SOUND_MANAGER_H
 
 #include "resources/ResourceManager.h"
+#include "system/ArrayTypes.h"
 
 namespace hpl {
 

@@ -19,10 +19,7 @@
 #ifndef HPL_COLOR_H
 #define HPL_COLOR_H
 
-#include <list>
-#include <vector>
-
-#include "system/SystemTypes.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 
@@ -48,7 +45,6 @@ namespace hpl {
 		bool operator==(cColor aCol) const;
 
 		tString ToString() const;
-
 		tString ToFileString() const;
 
 		void FromVec(float *apV);
@@ -56,12 +52,6 @@ namespace hpl {
 		static const cColor White;
 		static const cColor Black;
 	};
-
-	typedef std::list<cColor> tColorList;
-	typedef tColorList::iterator tColorListIt;
-
-	typedef std::vector<cColor> tColorVec;
-	typedef tColorVec::iterator tColorVecIt;
 
 };
 #endif // HPL_COLOR_H

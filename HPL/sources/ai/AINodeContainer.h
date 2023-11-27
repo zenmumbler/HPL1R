@@ -19,10 +19,10 @@
 #ifndef HPL_AI_NODE_CONTAINER_H
 #define HPL_AI_NODE_CONTAINER_H
 
-#include "system/SystemTypes.h"
 #include "math/MathTypes.h"
-
 #include "physics/PhysicsWorld.h"
+#include "system/NumberTypes.h"
+
 
 namespace hpl {
 

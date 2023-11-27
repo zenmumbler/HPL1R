@@ -19,8 +19,8 @@
 #ifndef HPL_INPUTDEVICE_H
 #define HPL_INPUTDEVICE_H
 
-#include "system/SystemTypes.h"
 #include "input/InputTypes.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

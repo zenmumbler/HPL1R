@@ -19,9 +19,9 @@
 #ifndef HPL_NODE_STATE_H
 #define HPL_NODE_STATE_H
 
-#include "math/MathTypes.h"
-#include "system/SystemTypes.h"
 #include "scene/Node3D.h"
+#include "math/MathTypes.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

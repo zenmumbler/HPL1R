@@ -19,15 +19,14 @@
 #ifndef HPL_PHYSICS_WORLD_H
 #define HPL_PHYSICS_WORLD_H
 
-#include <map>
-#include "system/SystemTypes.h"
 #include "system/Container.h"
+#include "physics/CollideData.h"
+#include "game/SaveGame.h"
 #include "math/MathTypes.h"
 #include "graphics/GraphicsTypes.h"
+#include "system/StringTypes.h"
 
-#include "physics/CollideData.h"
-
-#include "game/SaveGame.h"
+#include <map>
 
 namespace hpl {
 

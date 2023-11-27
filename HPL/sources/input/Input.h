@@ -19,12 +19,12 @@
 #ifndef HPL_INPUT_H
 #define HPL_INPUT_H
 
-#include <map>
-#include <list>
-
-#include "system/SystemTypes.h"
 #include "game/Updateable.h"
 #include "input/InputTypes.h"
+#include "system/StringTypes.h"
+
+#include <map>
+#include <list>
 
 namespace hpl {
 

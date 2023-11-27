@@ -19,11 +19,12 @@
 #ifndef HPL_MATERIAL_H
 #define HPL_MATERIAL_H
 
-#include <vector>
 #include "graphics/Texture.h"
-#include "system/SystemTypes.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/GPUProgram.h"
+#include "system/StringTypes.h"
+
+#include <vector>
 
 class TiXmlElement;
 

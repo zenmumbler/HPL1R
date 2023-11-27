@@ -21,6 +21,7 @@
 
 #include "resources/ResourceManager.h"
 #include "math/MathTypes.h"
+#include "system/ArrayTypes.h"
 
 namespace hpl {
 

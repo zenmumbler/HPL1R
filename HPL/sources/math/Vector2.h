@@ -19,9 +19,10 @@
 #ifndef HPL_VECTOR2_H
 #define HPL_VECTOR2_H
 
-#include <math.h>
-#include <stdio.h>
-#include "system/SystemTypes.h"
+#include "system/StringTypes.h"
+
+#include <cmath>
+#include <cstdio>
 
 namespace hpl {
 

@@ -16,15 +16,16 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef HPL_Physics_H
-#define HPL_Physics_H
+#ifndef HPL_PHYSICS_H
+#define HPL_PHYSICS_H
+
+#include "game/Updateable.h"
+#include "physics/PhysicsMaterial.h"
+#include "physics/SurfaceData.h"
+#include "system/StringTypes.h"
 
 #include <list>
 #include <map>
-#include "game/Updateable.h"
-#include "system/SystemTypes.h"
-#include "physics/PhysicsMaterial.h"
-#include "physics/SurfaceData.h"
 
 namespace hpl {
 

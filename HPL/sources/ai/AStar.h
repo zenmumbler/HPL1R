@@ -19,7 +19,6 @@
 #ifndef HPL_A_STAR_H
 #define HPL_A_STAR_H
 
-#include "system/SystemTypes.h"
 #include "math/MathTypes.h"
 
 #include <set>

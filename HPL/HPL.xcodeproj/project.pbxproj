@@ -280,6 +280,9 @@
 		8EAEF4812B0FB3D900F3839C /* STLBufferView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLBufferView.h; sourceTree = "<group>"; };
 		8EAEF4822B0FB76000F3839C /* Date.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Date.h; sourceTree = "<group>"; };
 		8EAEF4832B0FB7C600F3839C /* Date.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Date.cpp; sourceTree = "<group>"; };
+		8EAEF4852B14D2C000F3839C /* NumberTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NumberTypes.h; sourceTree = "<group>"; };
+		8EAEF4862B14D33000F3839C /* StringTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringTypes.h; sourceTree = "<group>"; };
+		8EAEF4872B14D38C00F3839C /* ArrayTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArrayTypes.h; sourceTree = "<group>"; };
 		8EB7C3D8254F603E00277667 /* scripthelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripthelper.cpp; sourceTree = "<group>"; };
 		8EE896CF262459E800FFF4C3 /* GfxBatch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GfxBatch.cpp; sourceTree = "<group>"; };
 		8EE896D0262459E800FFF4C3 /* GfxBatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GfxBatch.h; sourceTree = "<group>"; };
@@ -442,7 +445,6 @@
 		DB27F1070ACB9AB90054ACA3 /* SerializeClass.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SerializeClass.h; sourceTree = "<group>"; };
 		DB27F1080ACB9AB90054ACA3 /* String.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = String.h; sourceTree = "<group>"; };
 		DB27F1090ACB9AB90054ACA3 /* System.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
-		DB27F10A0ACB9AB90054ACA3 /* SystemTypes.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SystemTypes.h; sourceTree = "<group>"; };
 		DB294E0F0C11DC6E005DA55C /* CRC.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = CRC.cpp; sourceTree = "<group>"; };
 		DB294E120C11DC7C005DA55C /* CRC.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRC.h; sourceTree = "<group>"; };
 		DB4AFB8C0D70768B00809E03 /* OpenALSoundEnvironment.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = OpenALSoundEnvironment.cpp; sourceTree = "<group>"; };
@@ -1235,8 +1237,10 @@
 				DB27F1080ACB9AB90054ACA3 /* String.h */,
 				DBF84A1D0AC76D5800BB15CD /* System.cpp */,
 				DB27F1090ACB9AB90054ACA3 /* System.h */,
-				DB27F10A0ACB9AB90054ACA3 /* SystemTypes.h */,
 				8E079520289D3AFB0043A26A /* UpdateTimerMacros.h */,
+				8EAEF4852B14D2C000F3839C /* NumberTypes.h */,
+				8EAEF4862B14D33000F3839C /* StringTypes.h */,
+				8EAEF4872B14D38C00F3839C /* ArrayTypes.h */,
 			);
 			name = system;
 			path = sources/system;

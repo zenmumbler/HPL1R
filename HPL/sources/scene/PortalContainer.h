@@ -19,12 +19,14 @@
 #ifndef HPL_PORTAL_CONTAINER_H
 #define HPL_PORTAL_CONTAINER_H
 
-#include <list>
-#include <map>
-#include <set>
 #include "scene/RenderableContainer.h"
 #include "math/BoundingVolume.h"
 #include "graphics/Renderable.h"
+#include "system/ArrayTypes.h"
+
+#include <list>
+#include <map>
+#include <set>
 
 namespace hpl {
 

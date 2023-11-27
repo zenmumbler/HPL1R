@@ -19,8 +19,8 @@
 #ifndef HPL_MUSICHANDLER_H
 #define HPL_MUSICHANDLER_H
 
+#include "system/StringTypes.h"
 #include <list>
-#include "system/SystemTypes.h"
 
 namespace hpl {
 

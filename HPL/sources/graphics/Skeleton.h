@@ -19,11 +19,11 @@
 #ifndef HPL_SKELETON_H
 #define HPL_SKELETON_H
 
-#include <map>
-
 #include "math/MathTypes.h"
 #include "graphics/GraphicsTypes.h"
-#include "system/SystemTypes.h"
+#include "system/StringTypes.h"
+
+#include <map>
 
 namespace hpl {
 

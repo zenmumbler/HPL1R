@@ -20,8 +20,9 @@
 #ifndef HPL_DATE_H
 #define HPL_DATE_H
 
+#include "system/StringTypes.h"
+
 #include <ctime>
-#include "system/SystemTypes.h"
 
 namespace hpl {
 

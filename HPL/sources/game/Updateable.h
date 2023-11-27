@@ -19,7 +19,7 @@
 #ifndef HPL_UPDATEABLE_H
 #define HPL_UPDATEABLE_H
 
-#include "system/SystemTypes.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

@@ -21,6 +21,7 @@
 
 #include "math/MathTypes.h"
 #include "physics/PhysicsMaterial.h"
+#include "system/NumberTypes.h"
 
 namespace hpl {
 

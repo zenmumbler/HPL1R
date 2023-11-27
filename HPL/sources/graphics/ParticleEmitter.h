@@ -19,14 +19,14 @@
 #ifndef HPL_PARTICLE_EMITTER_H
 #define HPL_PARTICLE_EMITTER_H
 
+#include "graphics/Material.h"
+#include "math/MathTypes.h"
+#include "graphics/GraphicsTypes.h"
+#include "system/StringTypes.h"
+
 #include <vector>
 #include <map>
 #include <list>
-#include "system/SystemTypes.h"
-#include "math/MathTypes.h"
-#include "system/SystemTypes.h"
-#include "graphics/GraphicsTypes.h"
-#include "graphics/Material.h"
 
 namespace hpl {
 

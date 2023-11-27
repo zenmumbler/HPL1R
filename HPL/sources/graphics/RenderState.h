@@ -19,10 +19,9 @@
 #ifndef HPL_RENDER_SET_H
 #define HPL_RENDER_SET_H
 
+#include "graphics/Material.h"
 #include "math/MathTypes.h"
 #include "graphics/GraphicsTypes.h"
-#include "system/SystemTypes.h"
-#include "graphics/Material.h"
 
 namespace hpl {
 

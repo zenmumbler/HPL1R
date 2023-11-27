@@ -19,8 +19,6 @@
 #ifndef HPL_AI_H
 #define HPL_AI_H
 
-#include "system/SystemTypes.h"
-
 #include "game/Updateable.h"
 
 namespace hpl {

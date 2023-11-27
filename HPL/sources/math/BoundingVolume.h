@@ -21,7 +21,6 @@
 
 #include "math/MathTypes.h"
 #include "graphics/GraphicsTypes.h"
-#include "system/SystemTypes.h"
 #include "system/SerializeClass.h"
 
 namespace hpl {

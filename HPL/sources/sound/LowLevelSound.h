@@ -19,9 +19,9 @@
 #ifndef HPL_LOWLEVELSOUND_H
 #define HPL_LOWLEVELSOUND_H
 
-#include "system/SystemTypes.h"
 #include "math/MathTypes.h"
-
+#include "system/StringTypes.h"
+#include "system/ArrayTypes.h"
 
 namespace hpl {
 

@@ -19,17 +19,13 @@
 #ifndef HPL_WORLD3D_H
 #define HPL_WORLD3D_H
 
-#include "system/SystemTypes.h"
-#include "graphics/GraphicsTypes.h"
-#include "math/MathTypes.h"
-
 #include "scene/Entity3D.h"
-
 #include "script/ScriptVar.h"
-
 #include "game/SaveGame.h"
 #include "system/System.h"
-
+#include "graphics/GraphicsTypes.h"
+#include "math/MathTypes.h"
+#include "system/StringTypes.h"
 
 class TiXmlElement;
 

@@ -19,13 +19,12 @@
 #ifndef HPL_PHYSICS_JOINT_H
 #define HPL_PHYSICS_JOINT_H
 
-#include <map>
-#include "system/SystemTypes.h"
-#include "math/MathTypes.h"
-
 #include "game/SaveGame.h"
-
 #include "physics/PhysicsController.h"
+#include "math/MathTypes.h"
+#include "system/StringTypes.h"
+
+#include <map>
 
 namespace hpl {
 

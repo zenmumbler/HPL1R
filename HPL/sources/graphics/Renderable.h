@@ -19,10 +19,10 @@
 #ifndef HPL_RENDERABLE_H
 #define HPL_RENDERABLE_H
 
+#include "scene/Entity3D.h"
 #include "math/MathTypes.h"
 #include "graphics/GraphicsTypes.h"
-#include "system/SystemTypes.h"
-#include "scene/Entity3D.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

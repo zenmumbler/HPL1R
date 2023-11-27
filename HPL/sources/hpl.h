@@ -19,7 +19,9 @@
 #ifndef HPL_HPL_H
 #define HPL_HPL_H
 
-#include "system/SystemTypes.h"
+#include "system/NumberTypes.h"
+#include "system/StringTypes.h"
+#include "system/ArrayTypes.h"
 #include "system/STLHelpers.h"
 #include "system/System.h"
 #include "system/String.h"

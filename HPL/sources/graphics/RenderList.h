@@ -19,16 +19,15 @@
 #ifndef HPL_RENDER_LIST_H
 #define HPL_RENDER_LIST_H
 
-#include <vector>
-
-#include "math/MathTypes.h"
-#include "graphics/GraphicsTypes.h"
-#include "system/SystemTypes.h"
 #include "system/MemoryPool.h"
 #include "scene/Light3D.h"
 #include "graphics/Material.h"
 #include "graphics/OcclusionQuery.h"
 #include "graphics/VertexBuffer.h"
+#include "math/MathTypes.h"
+#include "graphics/GraphicsTypes.h"
+
+#include <vector>
 
 namespace hpl {
 

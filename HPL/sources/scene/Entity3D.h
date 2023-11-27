@@ -16,16 +16,17 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #ifndef HPL_ENTITY3D_H
 #define HPL_ENTITY3D_H
 
-#include <list>
-#include "math/MathTypes.h"
-#include "system/SystemTypes.h"
-#include "scene/Entity.h"
-#include "system/Container.h"
-
 #include "math/BoundingVolume.h"
+#include "scene/Entity.h"
+#include "math/MathTypes.h"
+#include "system/Container.h"
+#include "system/StringTypes.h"
+
+#include <list>
 
 namespace hpl {
 
@@ -164,9 +165,11 @@ namespace hpl {
 		cSector *mpCurrentSector;
 
 		int mlIteratorCount;
+
 	private:
 		void UpdateWorldTransform();
 	};
 
 };
+
 #endif // HPL_ENTITY3D_H

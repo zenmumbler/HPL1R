@@ -21,10 +21,10 @@
 
 #include "math/MathTypes.h"
 #include "graphics/GraphicsTypes.h"
-#include "system/SystemTypes.h"
 #include "scene/Entity3D.h"
 #include "graphics/Renderable.h"
 #include "RenderList.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

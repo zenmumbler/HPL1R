@@ -21,8 +21,8 @@
 
 #include "math/MathTypes.h"
 #include "graphics/GraphicsTypes.h"
-#include "system/SystemTypes.h"
 #include "resources/ResourceBase.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

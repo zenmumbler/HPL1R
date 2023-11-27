@@ -19,10 +19,9 @@
 #ifndef HPL_FRUSTUM_H
 #define HPL_FRUSTUM_H
 
+#include "math/BoundingVolume.h"
 #include "math/MathTypes.h"
 #include "graphics/GraphicsTypes.h"
-#include "system/SystemTypes.h"
-#include "math/BoundingVolume.h"
 
 namespace hpl {
 

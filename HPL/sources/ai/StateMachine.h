@@ -19,7 +19,7 @@
 #ifndef HPL_STATE_MACHINE_H
 #define HPL_STATE_MACHINE_H
 
-#include "system/SystemTypes.h"
+#include "system/StringTypes.h"
 
 #include <map>
 

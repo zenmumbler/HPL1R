@@ -20,10 +20,10 @@
 #ifndef HPL_STRING_H
 #define HPL_STRING_H
 
-#include "system/SystemTypes.h"
-
 #include "math/MathTypes.h"
 #include "graphics/GraphicsTypes.h"
+#include "system/StringTypes.h"
+#include "system/ArrayTypes.h"
 
 namespace hpl {
 

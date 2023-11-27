@@ -19,7 +19,7 @@
 #ifndef HPL_SYSTEM_H
 #define HPL_SYSTEM_H
 
-#include "system/SystemTypes.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 

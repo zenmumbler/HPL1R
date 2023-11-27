@@ -19,10 +19,11 @@
 #ifndef HPL_KEYBOARD_SDL_H
 #define HPL_KEYBOARD_SDL_H
 
+#include "input/Keyboard.h"
+#include "system/StringTypes.h"
+
 #include <vector>
 #include <list>
-#include "system/SystemTypes.h"
-#include "input/Keyboard.h"
 
 namespace hpl {
 

@@ -20,10 +20,9 @@
 #define HPL_ANIMATION_STATE_H
 
 #include "math/MathTypes.h"
-#include "system/SystemTypes.h"
-#include "graphics/GraphicsTypes.h"
-
 #include "game/SaveGame.h"
+#include "graphics/GraphicsTypes.h"
+#include "system/StringTypes.h"
 
 namespace hpl {
 
