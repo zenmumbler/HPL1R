@@ -72,9 +72,6 @@ namespace hpl {
 		void SetPriority(int alX){ mlPriority = alX;}
 		int GetPriority(){ return mlPriority;}
 
-		//Resource implementation
-		void Destroy(){}
-
 	protected:
 		tString msMainSound;
 		tString msStartSound;

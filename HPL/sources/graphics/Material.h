@@ -89,9 +89,6 @@ namespace hpl {
 				cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager);
 		virtual ~iMaterial();
 
-		//resources stuff.
-		void Destroy(){}
-
 		virtual void Update(float afTimeStep){}
 
 		//The new render system stuff

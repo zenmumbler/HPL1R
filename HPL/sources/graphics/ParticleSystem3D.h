@@ -46,8 +46,6 @@ namespace hpl {
 
 		void AddEmitterData(iParticleEmitterData *apData);
 
-		void Destroy(){}
-
 		iParticleEmitterData* GetEmitterData(int alIdx) const { return mvEmitterData[alIdx]; }
 
 	private:

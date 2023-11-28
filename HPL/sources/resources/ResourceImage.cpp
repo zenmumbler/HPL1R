@@ -70,12 +70,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture *cResourceImage::GetTexture()const{return mpFrameTexture->GetTexture();}
-
-	//-----------------------------------------------------------------------
-
-	void cResourceImage::Destroy()
+	iTexture *cResourceImage::GetTexture() const
 	{
+		return mpFrameTexture->GetTexture();
 	}
 
 	//-----------------------------------------------------------------------

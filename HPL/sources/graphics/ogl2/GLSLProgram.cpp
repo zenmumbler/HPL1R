@@ -43,12 +43,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cGLSLProgram::Destroy()
-	{
-	}
-
-	//-----------------------------------------------------------------------
-
 	GLuint LoadShaderFromFile(const tString& shaderPath, GLint type) {
 		int sourceSize;
 		auto source = LoadEntireFile(shaderPath, sourceSize);

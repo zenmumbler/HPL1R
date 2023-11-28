@@ -61,9 +61,6 @@ namespace hpl {
 
 		bool CreateFromBitmapFile(const tString &asFileName);
 
-
-		void Destroy(){}
-
 		/**
 		 * Used internally
 		 */

@@ -67,14 +67,8 @@ namespace hpl {
 
 		virtual void CopyToTexture(iTexture *apTexture)=0;
 
-
 		const tString& GetFileName(){return msFilePath;}
 		const cVector2l& GetSize(){return mvSize;}
-
-		//////////////////////////////////
-		// ResourceBase implementation
-		void Destroy(){}
-
 
 	protected:
 		tString msFilePath;

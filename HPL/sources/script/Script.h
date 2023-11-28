@@ -23,8 +23,6 @@ namespace hpl {
 					  cScriptOutput *apScriptOutput);
 		~cScriptModule();
 
-		void Destroy(){}
-
 		bool CreateFromFile(const tString& asFile);
 
 		/**

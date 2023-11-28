@@ -17,8 +17,6 @@ namespace hpl {
 		cGLSLProgram(tString asName);
 		~cGLSLProgram();
 
-		void Destroy();
-
 		tString GetProgramName(){ return msName; }
 
 		bool CreateFromFile(const tString& asVertexFile, const tString& asFragmentFile);

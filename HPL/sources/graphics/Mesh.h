@@ -316,9 +316,6 @@ namespace hpl {
 		int GetNodeNum();
 		cNode3D* GetNode(int alIdx);
 
-		//Resources implementation
-		void Destroy(){}
-
 	private:
 		cMaterialManager* mpMaterialManager;
 		cAnimationManager * mpAnimationManager;

@@ -29,17 +29,11 @@ namespace hpl {
 		iResourceBase(tString asName);
 		virtual ~iResourceBase();
 
-		/**
-		 * Free all memory.
-		 */
-		virtual void Destroy()=0;
-
 		tString GetName(){return msName;}
 		unsigned long GetHandle(){return mlHandle;}
 		void SetHandle(unsigned long alHandle){mlHandle=alHandle;}
 		tString GetFilePath(){return msFilePath;}
 		unsigned long GetTime(){return mlTime;}
-		unsigned long GetSize(){return mlSize;}
 
 		void SetLogDestruction(bool abX){ mbLogDestruction = abX;}
 
@@ -55,7 +49,6 @@ namespace hpl {
 		static bool mbLogCreateAndDelete;
 
 		unsigned long mlTime; //Time for creation.
-		unsigned long mlSize; //for completion. Not used yet.
 
 		unsigned int mlUserCount;
 		unsigned long mlHandle;

@@ -39,8 +39,6 @@ namespace hpl {
 						cRect2l aRect,
 						cVector2l avSrcSize, int alHandle);
 
-		void Destroy();
-
 		//Image specific
 		int GetHeight()const{return mRect.h;}
 		int GetWidth()const{return mRect.w;}

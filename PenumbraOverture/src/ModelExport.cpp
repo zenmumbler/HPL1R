@@ -6,9 +6,11 @@
 
 using json = nlohmann::json;
 
+/*
 static void WriteSubMesh() {
 
 }
+*/
 
 static void ExportModel(cMesh *model) {
 	json gltf;
@@ -245,7 +247,7 @@ void ExportModels(cGame *apGame) {
 	const auto model = mm->CreateMesh("ice_cave_hand_whole.dae");
 	if (model) {
 		ExportModel(model);
-		model->Destroy();
+		mm->Destroy(model);
 	}
 	else {
 		Log("Failed to create even a lowly soup can...\n");

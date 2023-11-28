@@ -51,9 +51,6 @@ namespace hpl {
 
 		tString& GetFileName(){ return msFileName;}
 
-		//Resources implementation
-		void Destroy(){}
-
 	private:
 		tString msAnimName;
 		tString msFileName;
