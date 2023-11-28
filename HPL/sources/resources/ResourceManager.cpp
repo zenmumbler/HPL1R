@@ -54,7 +54,7 @@ namespace hpl {
 		tString sName = cString::ToLowerCase(asName);
 		//Log("Looking for '%s' \n", sName.c_str());
 
-		tResourceNameMapIt it = m_mapNameResources.find(sName);
+		auto it = m_mapNameResources.find(sName);
 		if(it == m_mapNameResources.end())return NULL;
 
 		return it->second;
@@ -64,17 +64,10 @@ namespace hpl {
 
 	iResourceBase* iResourceManager::GetByHandle(unsigned long alHandle)
 	{
-		tResourceHandleMapIt it = m_mapHandleResources.find(alHandle);
+		auto it = m_mapHandleResources.find(alHandle);
 		if(it == m_mapHandleResources.end())return NULL;
 
 		return it->second;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cResourceBaseIterator iResourceManager::GetResourceBaseIterator()
-	{
-		return cResourceBaseIterator(&m_mapNameResources);
 	}
 
 	//-----------------------------------------------------------------------
@@ -117,10 +110,9 @@ namespace hpl {
 		std::vector<iResourceBase*> vResources;
 		vResources.reserve(m_mapHandleResources.size());
 
-		tResourceHandleMapIt it = m_mapHandleResources.begin();
-		for(;it != m_mapHandleResources.end();++it)
+		for (auto [_, resource] : m_mapHandleResources)
 		{
-			vResources.push_back(it->second);
+			vResources.push_back(resource);
 		}
 
 		//Sort the sounds according to num of users and then time.
@@ -149,8 +141,8 @@ namespace hpl {
 
 	void iResourceManager::DestroyAll()
 	{
-		tResourceHandleMapIt it = m_mapHandleResources.begin();
-		while(it != m_mapHandleResources.end())
+		auto it = m_mapHandleResources.begin();
+		while (it != m_mapHandleResources.end())
 		{
 			//Log("Start destroy...");
 
@@ -158,7 +150,7 @@ namespace hpl {
 
 			//Log(" res: : %d ...",pResource->GetName().c_str(),pResource->GetUserCount());
 
-			while(pResource->HasUsers()) pResource->DecUserCount();
+			while (pResource->HasUsers()) pResource->DecUserCount();
 
 			Destroy(pResource);
 
@@ -222,10 +214,8 @@ namespace hpl {
 
 		tString sName = cString::ToLowerCase(apResource->GetName());
 
-		m_mapHandleResources.insert(tResourceHandleMap::value_type(
-									apResource->GetHandle(), apResource));
-		m_mapNameResources.insert(tResourceNameMap::value_type(
-									sName, apResource));
+		m_mapHandleResources.insert({ apResource->GetHandle(), apResource });
+		m_mapNameResources.insert({ sName, apResource });
 
 		if(abLog && iResourceBase::GetLogCreateAndDelete())
 		{

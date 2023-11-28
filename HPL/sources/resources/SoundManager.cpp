@@ -118,8 +118,8 @@ namespace hpl {
 	{
 		//FIX FIX FIX
 		//Fix what? :P
-		tResourceHandleMapIt it = m_mapHandleResources.begin();
-		while(it != m_mapHandleResources.end())
+		auto it = m_mapHandleResources.begin();
+		while (it != m_mapHandleResources.end())
 		{
 			iResourceBase* pData = it->second;
 			RemoveResource(pData);

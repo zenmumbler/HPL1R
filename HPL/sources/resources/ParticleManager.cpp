@@ -40,11 +40,9 @@ namespace hpl {
 
 	cParticleManager::~cParticleManager()
 	{
-		tResourceHandleMapIt it = m_mapHandleResources.begin();
-		for(;it != m_mapHandleResources.end(); ++it)
+		for (auto [_, resource] : m_mapHandleResources)
 		{
-			iResourceBase* pResource = it->second;
-			while(pResource->HasUsers()) pResource->DecUserCount();
+			while (resource->HasUsers()) resource->DecUserCount();
 		}
 
 		DestroyUnused(0);

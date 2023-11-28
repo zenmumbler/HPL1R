@@ -27,18 +27,6 @@ namespace hpl {
 
 	class iResourceBase;
 
-	typedef std::map<unsigned long, iResourceBase*> tResourceHandleMap;
-	typedef tResourceHandleMap::iterator tResourceHandleMapIt;
-
-	typedef std::map<tString, iResourceBase*> tResourceNameMap;
-	typedef tResourceNameMap::iterator tResourceNameMapIt;
-
-	typedef std::list<iResourceBase*> tResourceBaseList;
-	typedef tResourceBaseList::iterator tResourceBaseListIt;
-
-	typedef cSTLMapIterator<iResourceBase*, tResourceNameMap, tResourceNameMapIt> cResourceBaseIterator;
-
-
 	class iResourceManager
 	{
 	public:
@@ -50,7 +38,13 @@ namespace hpl {
 		iResourceBase* GetByName(const tString& asName);
 		iResourceBase* GetByHandle(unsigned long alHandle);
 
-		cResourceBaseIterator GetResourceBaseIterator();
+		template <typename Fn>
+		void ForEachResource(const Fn&& fn) {
+			for (auto [_, resource] : m_mapHandleResources)
+			{
+				fn(resource);
+			}
+		}
 
 		void DestroyUnused(int alMaxToKeep);
 
@@ -61,8 +55,8 @@ namespace hpl {
 
 	protected:
 		unsigned long mlHandleCount;
-		tResourceNameMap m_mapNameResources;
-		tResourceHandleMap m_mapHandleResources;
+		std::map<tString, iResourceBase*> m_mapNameResources;
+		std::map<unsigned long, iResourceBase*> m_mapHandleResources;
 
 		void BeginLoad(const tString& asFile);
 		void EndLoad();

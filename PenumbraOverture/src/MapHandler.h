@@ -86,9 +86,9 @@ private:
 
 	int mlCount;
 
-	tResourceBaseList mlstMaterials;
-	tResourceBaseList mlstMeshes;
-	tResourceBaseList mlstAnimations;
+	std::list<iResourceBase*> mlstMaterials;
+	std::list<iResourceBase*> mlstMeshes;
+	std::list<iResourceBase*> mlstAnimations;
 };
 
 //-----------------------------------------

@@ -67,37 +67,24 @@ void cWorldCache::AddResources()
 {
 	////////////////////////////
 	// Materials
-	{
-		cResourceBaseIterator it = mpResources->GetMaterialManager()->GetResourceBaseIterator();
-		while(it.HasNext())
-		{
-			iResourceBase *pResource = it.Next();
-			pResource->IncUserCount();
-			mlstMaterials.push_back(pResource);
-		}
-	}
+	mpResources->GetMaterialManager()->ForEachResource([this](iResourceBase* resource) {
+		resource->IncUserCount();
+		mlstMaterials.push_back(resource);
+	});
+
 	////////////////////////////
 	// Meshes
-	{
-		cResourceBaseIterator it = mpResources->GetMeshManager()->GetResourceBaseIterator();
-		while(it.HasNext())
-		{
-			iResourceBase *pResource = it.Next();
-			pResource->IncUserCount();
-			mlstMeshes.push_back(pResource);
-		}
-	}
+	mpResources->GetMeshManager()->ForEachResource([this](iResourceBase* resource) {
+		resource->IncUserCount();
+		mlstMeshes.push_back(resource);
+	});
+
 	////////////////////////////
 	// Animations
-	{
-		cResourceBaseIterator it = mpResources->GetAnimationManager()->GetResourceBaseIterator();
-		while(it.HasNext())
-		{
-			iResourceBase *pResource = it.Next();
-			pResource->IncUserCount();
-			mlstAnimations.push_back(pResource);
-		}
-	}
+	mpResources->GetAnimationManager()->ForEachResource([this](iResourceBase* resource) {
+		resource->IncUserCount();
+		mlstAnimations.push_back(resource);
+	});
 
 	//mlCount++;
 }
@@ -108,37 +95,27 @@ void cWorldCache::DecResources()
 {
 	////////////////////////////
 	// Materials
+	for (auto resource : mlstMaterials)
 	{
-		tResourceBaseListIt it = mlstMaterials.begin();
-		for(; it != mlstMaterials.end(); ++it)
-		{
-			iResourceBase *pResource = *it;
-			mpResources->GetMaterialManager()->Destroy(pResource);
-		}
-		mlstMaterials.clear();
+		mpResources->GetMaterialManager()->Destroy(resource);
 	}
+	mlstMaterials.clear();
+
 	////////////////////////////
 	// Meshes
+	for (auto resource : mlstMeshes)
 	{
-		tResourceBaseListIt it = mlstMeshes.begin();
-		for(; it != mlstMeshes.end(); ++it)
-		{
-			iResourceBase *pResource = *it;
-			mpResources->GetMeshManager()->Destroy(pResource);
-		}
-		mlstMeshes.clear();
+		mpResources->GetMeshManager()->Destroy(resource);
 	}
+	mlstMeshes.clear();
+
 	////////////////////////////
 	// Animations
+	for (auto resource : mlstAnimations)
 	{
-		tResourceBaseListIt it = mlstAnimations.begin();
-		for(; it != mlstAnimations.end(); ++it)
-		{
-			iResourceBase *pResource = *it;
-			mpResources->GetAnimationManager()->Destroy(pResource);
-		}
-		mlstAnimations.clear();
+		mpResources->GetAnimationManager()->Destroy(resource);
 	}
+	mlstAnimations.clear();
 
 	//mlCount--;
 }
