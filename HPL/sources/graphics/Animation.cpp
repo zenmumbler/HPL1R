@@ -30,7 +30,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cAnimation::cAnimation(const tString &asName, const tString &asFile) : iResourceBase(asName,0)
+	cAnimation::cAnimation(const tString &asName, const tString &asFile) : iResourceBase(asName)
 	{
 		msAnimName = "";
 		msFileName = asFile;

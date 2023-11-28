@@ -87,7 +87,7 @@ namespace hpl {
 
 	cScriptModule::cScriptModule(const tString& asName,asIScriptEngine *apScriptEngine,
 							cScriptOutput *apScriptOutput)
-		: iResourceBase(asName, 0)
+		: iResourceBase(asName)
 		, mpEngine{apScriptEngine}
 		, mpOutput{apScriptOutput}
 	{

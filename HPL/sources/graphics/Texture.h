@@ -70,7 +70,7 @@ namespace hpl {
 	{
 	public:
 		iTexture(tString asName, eTextureTarget aTarget)
-			: iResourceBase(asName,0),
+			: iResourceBase(asName),
 				mlWidth(0), mlHeight(0), mlDepth(1),
 				mTarget(aTarget),
 				mWrapS(eTextureWrap_Repeat), mWrapT(eTextureWrap_Repeat),mWrapR(eTextureWrap_Repeat),

@@ -38,7 +38,7 @@ namespace hpl {
 
 	cParticleSystemData3D::cParticleSystemData3D(const tString &asName,
 												cResources* apResources,cGraphics *apGraphics)
-												: iResourceBase(asName,0)
+												: iResourceBase(asName)
 	{
 		mpResources = apResources;
 		mpGraphics = apGraphics;

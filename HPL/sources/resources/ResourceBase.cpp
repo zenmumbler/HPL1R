@@ -29,9 +29,9 @@ namespace hpl {
 	//////////////////////////////////////////////////////////////////////////
 
 	//-----------------------------------------------------------------------
-	iResourceBase::iResourceBase(tString asName,unsigned int alPrio){
+
+	iResourceBase::iResourceBase(tString asName){
 		mlTime = (unsigned long)time(NULL);
-		mlPrio = alPrio;
 		mlHandle = 0;
 		mlUserCount =0;
 		msName = asName;
@@ -43,6 +43,7 @@ namespace hpl {
 		if(mbLogDestruction && mbLogCreateAndDelete)
 			Log("  Destroyed resource '%s'\n",msName.c_str());
 	}
+
 	//-----------------------------------------------------------------------
 
 	void iResourceBase::IncUserCount()

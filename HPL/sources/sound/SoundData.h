@@ -30,7 +30,7 @@ namespace hpl {
 	class iSoundData : public iResourceBase
 	{
 	public:
-		iSoundData(tString asName, bool abStream) : iResourceBase(asName, 0),
+		iSoundData(tString asName, bool abStream) : iResourceBase(asName),
 		mpSoundManger(NULL), mbStream(abStream){}
 
 		virtual ~iSoundData(){}

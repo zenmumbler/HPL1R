@@ -59,7 +59,7 @@ namespace hpl {
 
 	cMesh::cMesh(const tString asName, cMaterialManager* apMaterialManager,
 				cAnimationManager * apAnimationManager) :
-		iResourceBase(asName,0)
+		iResourceBase(asName)
 	{
 		mpMaterialManager = apMaterialManager;
 		mpAnimationManager = apAnimationManager;

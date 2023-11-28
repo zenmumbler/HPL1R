@@ -49,7 +49,7 @@ namespace hpl {
 	class iVideoStream : public iResourceBase
 	{
 	public:
-		iVideoStream(tString asName) : iResourceBase(asName,0){}
+		iVideoStream(tString asName) : iResourceBase(asName){}
 		virtual ~iVideoStream(){}
 
 		virtual bool LoadFromFile(tString asFilePath)=0;

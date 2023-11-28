@@ -32,7 +32,7 @@ namespace hpl {
 	class iGpuProgram : public iResourceBase
 	{
 	public:
-		iGpuProgram(tString asName) : iResourceBase(asName, 0) {}
+		iGpuProgram(tString asName) : iResourceBase(asName) {}
 		virtual ~iGpuProgram() = default;
 
 		static void SetLogDebugInformation(bool abX){mbDebugInfo = abX;}

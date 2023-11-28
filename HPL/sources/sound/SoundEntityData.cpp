@@ -31,7 +31,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cSoundEntityData::cSoundEntityData(tString asName) : iResourceBase(asName,0)
+	cSoundEntityData::cSoundEntityData(tString asName) : iResourceBase(asName)
 	{
 		msMainSound = "";
 		msStartSound = "";

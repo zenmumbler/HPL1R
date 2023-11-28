@@ -33,7 +33,7 @@ namespace hpl {
 
 	cResourceImage::cResourceImage(tString asName,cFrameTexture *apFrameTex,
 		cFrameBitmap *apFrameBmp, cRect2l aRect,
-		cVector2l avSrcSize, int alHandle) : iResourceBase(asName,0)
+		cVector2l avSrcSize, int alHandle) : iResourceBase(asName)
 	{
 		mpFrameTexture = apFrameTex;
 		mpFrameBitmap = apFrameBmp;

@@ -48,7 +48,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	FontData::FontData(const tString &asName)
-	: iResourceBase(asName,0)
+	: iResourceBase(asName)
 	{
 	}
 

@@ -34,7 +34,7 @@ namespace hpl {
 
 	iMaterial::iMaterial(const tString& asName,iLowLevelGraphics* apLowLevelGraphics,
 		cTextureManager *apTextureManager, cGpuProgramManager* apProgramManager)
-		: iResourceBase(asName, 0)
+		: iResourceBase(asName)
 	{
 		mvTexture.resize(eMaterialTexture_None, NULL);
 
