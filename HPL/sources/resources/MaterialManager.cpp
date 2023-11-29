@@ -96,7 +96,7 @@ namespace hpl {
 
 	void cMaterialManager::Update(float afTimeStep)
 	{
-		for(auto [_, resource] : m_mapHandleResources)
+		for(auto [_, resource] : _handleToResourceMap)
 		{
 			iMaterial *material = static_cast<iMaterial*>(resource);
 			material->Update(afTimeStep);
@@ -122,7 +122,7 @@ namespace hpl {
 		if(mfTextureAnisotropy == afX) return;
 		mfTextureAnisotropy = afX;
 
-		for (auto [_, resource] : m_mapHandleResources)
+		for (auto [_, resource] : _handleToResourceMap)
 		{
 			iMaterial *pMat = static_cast<iMaterial*>(resource);
 

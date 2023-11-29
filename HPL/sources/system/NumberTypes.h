@@ -6,6 +6,8 @@
 #ifndef HPL_NUMBER_TYPES_H
 #define HPL_NUMBER_TYPES_H
 
+#include <cstdint>
+
 namespace hpl {
 
 	using uint = unsigned int;

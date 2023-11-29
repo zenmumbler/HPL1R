@@ -23,6 +23,8 @@
 #include "math/MathTypes.h"
 #include "system/ArrayTypes.h"
 
+#include <map>
+
 namespace hpl {
 
 	class cResourceImage;

@@ -28,7 +28,7 @@
 
 namespace hpl {
 
-	int iResourceManager::mlTabCount=0;
+	int iResourceManager::_tabCount=0;
 
 	//////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
@@ -36,14 +36,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceManager::iResourceManager()
-	{
-		mlHandleCount = 0;
-	}
+	iResourceManager::iResourceManager(const tString& resourceTypeName)
+	: _resourceTypeName{ resourceTypeName }
+	, _nextHandle{1}
+	{}
 
 	iResourceManager::~iResourceManager() {
-		DestroyAll();
-		Log(" Done with RESOURCE\n");
+		//DestroyAll();
+		Log(" Done with %s resources.\n", _resourceTypeName.c_str());
 	}
 
 	//-----------------------------------------------------------------------
@@ -54,23 +54,22 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceBase* iResourceManager::GetByName(const tString& asName)
+	iResourceBase* iResourceManager::GetByName(const tString& name)
 	{
-		tString sName = cString::ToLowerCase(asName);
-		//Log("Looking for '%s' \n", sName.c_str());
+		tString sName = cString::ToLowerCase(name);
 
-		auto it = m_mapNameResources.find(sName);
-		if(it == m_mapNameResources.end())return NULL;
+		auto it = _nameToResourceMap.find(sName);
+		if (it == _nameToResourceMap.end()) return NULL;
 
 		return it->second;
 	}
 
 	//-----------------------------------------------------------------------
 
-	iResourceBase* iResourceManager::GetByHandle(unsigned long alHandle)
+	iResourceBase* iResourceManager::GetByHandle(unsigned long handle)
 	{
-		auto it = m_mapHandleResources.find(alHandle);
-		if(it == m_mapHandleResources.end())return NULL;
+		auto it = _handleToResourceMap.find(handle);
+		if (it == _handleToResourceMap.end()) return NULL;
 
 		return it->second;
 	}
@@ -92,30 +91,30 @@ namespace hpl {
 	class cSortResources
 	{
 	public:
-		bool operator()(iResourceBase* apResourceA, iResourceBase* apResourceB)
+		bool operator()(iResourceBase* resourceA, iResourceBase* resourceB)
 		{
-			if(apResourceA->GetUserCount() != apResourceB->GetUserCount())
+			if (resourceA->GetUserCount() != resourceB->GetUserCount())
 			{
-				return apResourceA->GetUserCount() > apResourceB->GetUserCount();
+				return resourceA->GetUserCount() > resourceB->GetUserCount();
 			}
 
-			return apResourceA->GetTime() > apResourceB->GetTime();
+			return resourceA->GetTime() > resourceB->GetTime();
 		}
 	};
 
 	//-----------------------------------------------------------------------
 
-	void iResourceManager::DestroyUnused(int alMaxToKeep)
+	void iResourceManager::DestroyUnused(int maxToKeep)
 	{
 		//Log("Start Num Of: %d\n",m_mapHandleResources.size());
 		//Check if there are too many resources.
-		if((int)m_mapHandleResources.size() <= alMaxToKeep) return;
+		if ((int)_handleToResourceMap.size() <= maxToKeep) return;
 
 		//Add resources to a vector
 		std::vector<iResourceBase*> vResources;
-		vResources.reserve(m_mapHandleResources.size());
+		vResources.reserve(_handleToResourceMap.size());
 
-		for (auto [_, resource] : m_mapHandleResources)
+		for (auto [_, resource] : _handleToResourceMap)
 		{
 			vResources.push_back(resource);
 		}
@@ -124,14 +123,14 @@ namespace hpl {
 		std::sort(vResources.begin(), vResources.end(), cSortResources());
 
 		//Log("-------------Num: %d-----------------\n",vResources.size());
-		for(size_t i=alMaxToKeep; i<vResources.size(); ++i)
+		for (size_t i = maxToKeep; i < vResources.size(); ++i)
 		{
 			iResourceBase *pRes = vResources[i];
 			//Log("%s count:%d time:%d\n",pRes->GetName().c_str(),
 			//							pRes->GetUserCount(),
 			//							pRes->GetTime());
 
-			if(pRes->HasUsers()==false)
+			if (pRes->HasUsers() == false)
 			{
 				RemoveResource(pRes);
 				delete pRes;
@@ -146,8 +145,8 @@ namespace hpl {
 
 	void iResourceManager::DestroyAll()
 	{
-		auto it = m_mapHandleResources.begin();
-		while (it != m_mapHandleResources.end())
+		auto it = _handleToResourceMap.begin();
+		while (it != _handleToResourceMap.end())
 		{
 			//Log("Start destroy...");
 
@@ -159,7 +158,7 @@ namespace hpl {
 
 			Destroy(pResource);
 
-			it = m_mapHandleResources.begin();
+			it = _handleToResourceMap.begin();
 
 			//Log(" Done!\n");
 		}
@@ -175,18 +174,15 @@ namespace hpl {
 
 	void iResourceManager::BeginLoad(const tString& asFile)
 	{
-		mlTimeStart = GetAppTimeMS();
-
-		//Log("Begin resource: %s\n",asFile.c_str());
-
-		mlTabCount++;
+		_timeStart = GetAppTimeMS();
+		_tabCount++;
 	}
 
 	//-----------------------------------------------------------------------
 
 	void iResourceManager::EndLoad()
 	{
-		mlTabCount--;
+		_tabCount--;
 	}
 
 	//-----------------------------------------------------------------------
@@ -212,13 +208,13 @@ namespace hpl {
 
 		tString sName = cString::ToLowerCase(apResource->GetName());
 
-		m_mapHandleResources.insert({ apResource->GetHandle(), apResource });
-		m_mapNameResources.insert({ sName, apResource });
+		_handleToResourceMap.insert({ apResource->GetHandle(), apResource });
+		_nameToResourceMap.insert({ sName, apResource });
 
-		if(abLog && iResourceBase::GetLogCreateAndDelete())
+		if (abLog && iResourceBase::GetLogCreateAndDelete())
 		{
-			unsigned long lTime = GetAppTimeMS() - mlTimeStart;
-			Log("%sLoaded resource %s in %d ms\n", tString(mlTabCount, '\t').c_str(), apResource->GetName().c_str(),lTime);
+			unsigned long lTime = GetAppTimeMS() - _timeStart;
+			Log("%sLoaded resource %s in %d ms\n", tString(_tabCount, '\t').c_str(), apResource->GetName().c_str(),lTime);
 			apResource->SetLogDestruction(true);
 		}
 
@@ -229,17 +225,15 @@ namespace hpl {
 
 	void iResourceManager::RemoveResource(iResourceBase* apResource)
 	{
-		m_mapHandleResources.erase(apResource->GetHandle());
-		m_mapNameResources.erase(cString::ToLowerCase(apResource->GetName()));
-
-		//Log("Removing %s %d %d!\n", apResource->GetName().c_str(),x,y);
+		_handleToResourceMap.erase(apResource->GetHandle());
+		_nameToResourceMap.erase(cString::ToLowerCase(apResource->GetName()));
 	}
 
 	//-----------------------------------------------------------------------
 
-	unsigned long iResourceManager::GetHandle()
+	uint32_t iResourceManager::GetHandle()
 	{
-		return mlHandleCount++;
+		return _nextHandle++;
 	}
 
 	//-----------------------------------------------------------------------

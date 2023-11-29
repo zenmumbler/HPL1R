@@ -90,18 +90,12 @@ namespace hpl {
 
 	void cSoundManager::Destroy(iResourceBase* apResource)
 	{
-		//Log("Destroying %s users: %d\n",apResource->GetName().c_str(),
-		//								apResource->GetUserCount());
-		if(apResource->HasUsers())
-		{
-			apResource->DecUserCount();
+		apResource->DecUserCount();
 
-			iSoundData *pData = static_cast<iSoundData *>(apResource);
-			if(pData->IsStream() && pData->HasUsers()==false)
-			{
-				RemoveResource(pData);
-				delete pData;
-			}
+		if (! apResource->HasUsers())
+		{
+			RemoveResource(apResource);
+			delete apResource;
 		}
 	}
 

@@ -40,16 +40,8 @@ namespace hpl {
 
 	cParticleManager::~cParticleManager()
 	{
-		for (auto [_, resource] : m_mapHandleResources)
-		{
-			while (resource->HasUsers()) resource->DecUserCount();
-		}
-
-		DestroyUnused(0);
-
+		DestroyAll();
 		Log(" Done with particles\n");
-
-
 	}
 
 	//-----------------------------------------------------------------------
@@ -152,9 +144,11 @@ namespace hpl {
 
 	void cParticleManager::Destroy(iResourceBase* apResource)
 	{
-		if(apResource->HasUsers())
-		{
-			apResource->DecUserCount();
+		apResource->DecUserCount();
+
+		if (apResource->HasUsers()==false) {
+			RemoveResource(apResource);
+			delete apResource;
 		}
 	}
 

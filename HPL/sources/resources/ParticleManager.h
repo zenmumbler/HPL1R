@@ -20,8 +20,9 @@
 #define HPL_PARTICLE_SYSTEM_MANAGER_H
 
 #include "resources/ResourceManager.h"
-
 #include "math/MathTypes.h"
+
+#include <map>
 
 namespace hpl {
 
