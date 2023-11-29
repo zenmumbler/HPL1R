@@ -79,65 +79,10 @@ namespace hpl {
 	void iResourceManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();
-		if (apResource->HasUsers()==false) {
+		if (apResource->HasUsers() == false) {
 			RemoveResource(apResource);
 			delete apResource;
 		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	class cSortResources
-	{
-	public:
-		bool operator()(iResourceBase* resourceA, iResourceBase* resourceB)
-		{
-			if (resourceA->GetUserCount() != resourceB->GetUserCount())
-			{
-				return resourceA->GetUserCount() > resourceB->GetUserCount();
-			}
-
-			return resourceA->GetTime() > resourceB->GetTime();
-		}
-	};
-
-	//-----------------------------------------------------------------------
-
-	void iResourceManager::DestroyUnused(int maxToKeep)
-	{
-		//Log("Start Num Of: %d\n",m_mapHandleResources.size());
-		//Check if there are too many resources.
-		if ((int)_handleToResourceMap.size() <= maxToKeep) return;
-
-		//Add resources to a vector
-		std::vector<iResourceBase*> vResources;
-		vResources.reserve(_handleToResourceMap.size());
-
-		for (auto [_, resource] : _handleToResourceMap)
-		{
-			vResources.push_back(resource);
-		}
-
-		//Sort the sounds according to num of users and then time.
-		std::sort(vResources.begin(), vResources.end(), cSortResources());
-
-		//Log("-------------Num: %d-----------------\n",vResources.size());
-		for (size_t i = maxToKeep; i < vResources.size(); ++i)
-		{
-			iResourceBase *pRes = vResources[i];
-			//Log("%s count:%d time:%d\n",pRes->GetName().c_str(),
-			//							pRes->GetUserCount(),
-			//							pRes->GetTime());
-
-			if (pRes->HasUsers() == false)
-			{
-				RemoveResource(pRes);
-				delete pRes;
-			}
-		}
-		//Log("--------------------------------------\n");
-		//Log("End Num Of: %d\n",m_mapHandleResources.size());
-
 	}
 
 	//-----------------------------------------------------------------------
@@ -147,19 +92,12 @@ namespace hpl {
 		auto it = _handleToResourceMap.begin();
 		while (it != _handleToResourceMap.end())
 		{
-			//Log("Start destroy...");
-
-			iResourceBase* pResource = it->second;
-
-			//Log(" res: : %d ...",pResource->GetName().c_str(),pResource->GetUserCount());
-
-			while (pResource->HasUsers()) pResource->DecUserCount();
-
-			Destroy(pResource);
+			iResourceBase* resource = it->second;
+			// bypass user counts
+			RemoveResource(resource);
+			delete resource;
 
 			it = _handleToResourceMap.begin();
-
-			//Log(" Done!\n");
 		}
 	}
 

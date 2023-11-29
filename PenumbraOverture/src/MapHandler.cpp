@@ -394,16 +394,12 @@ bool cMapHandler::Load(const tString &asFile,const tString& asStartPos)
 				return false;
 			}
 			mpInit->mpSaveHandler->LoadData(msCurrentMap);
-			mpInit->mpGame->GetResources()->GetSoundManager()->DestroyUnused(mpInit->mlMaxSoundDataNum);
-			mpInit->mpGame->GetResources()->GetParticleManager()->DestroyUnused(mpInit->mlMaxPSDataNum);
 		}
 		else
 		{
 			//Log("-------- FIRST TIME first time! ----------------\n");
 			pWorld = mpScene->LoadWorld3D(asFile,true,0);
-			mpInit->mpGame->GetResources()->GetSoundManager()->DestroyUnused(mpInit->mlMaxSoundDataNum);
-			mpInit->mpGame->GetResources()->GetParticleManager()->DestroyUnused(mpInit->mlMaxPSDataNum);
-			
+
 			if(pWorld)
 				mpScene->SetWorld3D(pWorld);
 			else {
@@ -544,14 +540,10 @@ bool cMapHandler::LoadSimple(const tString &asFile, bool abLoadEntities)
 			return false;
 		}
 		mpInit->mpSaveHandler->LoadData(msCurrentMap);
-		mpInit->mpGame->GetResources()->GetSoundManager()->DestroyUnused(mpInit->mlMaxSoundDataNum);
-		mpInit->mpGame->GetResources()->GetParticleManager()->DestroyUnused(mpInit->mlMaxPSDataNum);
 	}
 	else
 	{
 		pWorld = mpScene->LoadWorld3D(asFile,true,0);
-		mpInit->mpGame->GetResources()->GetSoundManager()->DestroyUnused(mpInit->mlMaxSoundDataNum);
-		mpInit->mpGame->GetResources()->GetParticleManager()->DestroyUnused(mpInit->mlMaxPSDataNum);
 
 		if(pWorld==NULL){
 			Error("Couldn't load map '%s'\n",asFile.c_str());	

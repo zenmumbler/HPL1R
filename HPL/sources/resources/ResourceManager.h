@@ -43,10 +43,7 @@ namespace hpl {
 			}
 		}
 
-		void DestroyUnused(int maxToKeep);
-
 		void Destroy(iResourceBase* resource);
-		void DestroyAll();
 
 		virtual void Update(float timeStep){}
 
@@ -67,6 +64,8 @@ namespace hpl {
 		uint32_t GetHandle();
 
 	private:
+		void DestroyAll();
+
 		tString _resourceTypeName;
 		uint32_t _nextHandle;
 		unsigned long _timeStart;
