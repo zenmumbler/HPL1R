@@ -36,7 +36,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cTextureManager::cTextureManager(cGraphics* apGraphics,cResources *apResources)
-		: iResourceManager()
+		: iResourceManager{"texture"}
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;

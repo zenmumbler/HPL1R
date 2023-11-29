@@ -34,7 +34,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cImageManager::cImageManager(iLowLevelGraphics *apLowLevelGraphics)
-	: iResourceManager()
+	: iResourceManager{"image"}
 	{
 	   mpLowLevelGraphics = apLowLevelGraphics;
 

@@ -32,7 +32,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cParticleManager::cParticleManager(cGraphics* apGraphics, cResources *apResources)
-		: iResourceManager()
+		: iResourceManager{"particle"}
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;

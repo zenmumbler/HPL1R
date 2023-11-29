@@ -33,7 +33,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cSoundManager::cSoundManager(cSound* apSound,cResources *apResources)
-		: iResourceManager()
+		: iResourceManager{"sound"}
 	{
 		mpSound = apSound;
 		mpResources = apResources;

@@ -19,9 +19,8 @@
 #ifndef HPL_RESOURCEMANAGER_H
 #define HPL_RESOURCEMANAGER_H
 
-#include "system/Container.h"
 #include "system/StringTypes.h"
-#include <map>
+#include <unordered_map>
 
 namespace hpl {
 
@@ -30,49 +29,52 @@ namespace hpl {
 	class iResourceManager
 	{
 	public:
-		iResourceManager();
+		iResourceManager(const tString& resourceTypeName);
 		virtual ~iResourceManager();
 
-		iResourceBase* GetByName(const tString& asName);
-		iResourceBase* GetByHandle(unsigned long alHandle);
+		iResourceBase* GetByName(const tString& name);
+		iResourceBase* GetByHandle(unsigned long handle);
 
 		template <typename Fn>
 		void ForEachResource(const Fn&& fn) {
-			for (auto [_, resource] : m_mapHandleResources)
+			for (auto [_, resource] : _nameToResourceMap)
 			{
 				fn(resource);
 			}
 		}
 
-		void DestroyUnused(int alMaxToKeep);
+		void DestroyUnused(int maxToKeep);
 
-		virtual void Destroy(iResourceBase* apResource)=0;
+		virtual void Destroy(iResourceBase* resource)=0;
 		virtual void DestroyAll();
 
-		virtual void Update(float afTimeStep){}
+		virtual void Update(float timeStep){}
 
 	protected:
-		unsigned long mlHandleCount;
-		std::map<tString, iResourceBase*> m_mapNameResources;
-		std::map<unsigned long, iResourceBase*> m_mapHandleResources;
-
-		void BeginLoad(const tString& asFile);
+		void BeginLoad(const tString& fileName);
 		void EndLoad();
 
 		/**
 		 * Checks if a resource alllready is in the manager, else searches the resources.
-		 * \param &asName Name of the resource.
-		 * \param &asFilePath If the file is not in the manager, the path is put here. "" if there is no such file.
+		 * \param &name Name of the resource.
+		 * \param &filePath If the file is not in the manager, the path is put here. "" if there is no such file.
 		 * \return A pointer to the resource. NULL if not in manager.
 		 */
-		iResourceBase* FindLoadedResource(const tString &asName, tString &asFilePath);
-		void AddResource(iResourceBase* apResource, bool abLog=true);
-		void RemoveResource(iResourceBase* apResource);
+		iResourceBase* FindLoadedResource(const tString &name, tString &filePath);
+		void AddResource(iResourceBase* resource, bool log=true);
+		void RemoveResource(iResourceBase* resource);
 
-		unsigned long GetHandle();
+		uint32_t GetHandle();
 
-		static int mlTabCount;
-		unsigned long mlTimeStart;
+		std::unordered_map<tString, iResourceBase*> _nameToResourceMap;
+		std::unordered_map<unsigned long, iResourceBase*> _handleToResourceMap;
+
+	private:
+		tString _resourceTypeName;
+		uint32_t _nextHandle;
+
+		unsigned long _timeStart;
+		static int _tabCount;
 	};
 
 };

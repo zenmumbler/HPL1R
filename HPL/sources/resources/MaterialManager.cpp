@@ -37,7 +37,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cMaterialManager::cMaterialManager(cGraphics* apGraphics, cTextureManager* textureManager, cGpuProgramManager* programManager)
-		: iResourceManager()
+		: iResourceManager{"material"}
 		, _textureManager{textureManager}
 		, _programManager{programManager}
 	{

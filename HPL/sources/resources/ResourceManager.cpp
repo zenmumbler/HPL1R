@@ -43,7 +43,7 @@ namespace hpl {
 
 	iResourceManager::~iResourceManager() {
 		//DestroyAll();
-		Log(" Done with %s resources.\n", _resourceTypeName.c_str());
+		Log(" Done with %s resources\n", _resourceTypeName.c_str());
 	}
 
 	//-----------------------------------------------------------------------

@@ -34,7 +34,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cMeshManager::cMeshManager(cGraphics* apGraphic,cResources *apResources)
-		: iResourceManager()
+		: iResourceManager{"mesh"}
 	{
 		mpGraphics = apGraphic;
 		mpResources = apResources;

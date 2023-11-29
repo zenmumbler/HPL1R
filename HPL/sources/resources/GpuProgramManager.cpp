@@ -31,7 +31,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cGpuProgramManager::cGpuProgramManager(iLowLevelGraphics *apLowLevelGraphics)
-		: iResourceManager()
+		: iResourceManager{"shader"}
 	{
 		mpLowLevelGraphics = apLowLevelGraphics;
 	}
