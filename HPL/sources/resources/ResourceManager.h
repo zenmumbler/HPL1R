@@ -66,14 +66,14 @@ namespace hpl {
 
 		uint32_t GetHandle();
 
-		std::unordered_map<tString, iResourceBase*> _nameToResourceMap;
-		std::unordered_map<unsigned long, iResourceBase*> _handleToResourceMap;
-
 	private:
 		tString _resourceTypeName;
 		uint32_t _nextHandle;
-
 		unsigned long _timeStart;
+
+		std::unordered_map<tString, iResourceBase*> _nameToResourceMap;
+		std::unordered_map<unsigned long, iResourceBase*> _handleToResourceMap;
+
 		static int _tabCount;
 	};
 

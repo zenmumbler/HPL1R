@@ -244,12 +244,10 @@ namespace hpl {
 
 	void cTextureManager::Update(float afTimeStep)
 	{
-		for (auto [_, resource] : _handleToResourceMap)
-		{
+		ForEachResource([=](iResourceBase *resource) {
 			iTexture *pTexture = static_cast<iTexture*>(resource);
-
 			pTexture->Update(afTimeStep);
-		}
+		});
 	}
 
 	//-----------------------------------------------------------------------

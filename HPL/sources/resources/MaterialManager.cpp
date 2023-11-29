@@ -89,11 +89,10 @@ namespace hpl {
 
 	void cMaterialManager::Update(float afTimeStep)
 	{
-		for(auto [_, resource] : _handleToResourceMap)
-		{
+		ForEachResource([=](iResourceBase *resource) {
 			iMaterial *material = static_cast<iMaterial*>(resource);
 			material->Update(afTimeStep);
-		}
+		});
 	}
 
 	//-----------------------------------------------------------------------
@@ -115,8 +114,7 @@ namespace hpl {
 		if(mfTextureAnisotropy == afX) return;
 		mfTextureAnisotropy = afX;
 
-		for (auto [_, resource] : _handleToResourceMap)
-		{
+		ForEachResource([this](iResourceBase *resource) {
 			iMaterial *pMat = static_cast<iMaterial*>(resource);
 
 			for (int i=0; i < eMaterialTexture_None; ++i)
@@ -124,7 +122,7 @@ namespace hpl {
 				iTexture *pTex = pMat->GetTexture((eMaterialTexture)i);
 				if(pTex)pTex->SetAnisotropyDegree(mfTextureAnisotropy);
 			}
-		}
+		});
 	}
 
 	//-----------------------------------------------------------------------
