@@ -94,13 +94,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceBase* cMaterialManager::Create(const tString& asName)
-	{
-		return CreateMaterial(asName);
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cMaterialManager::Update(float afTimeStep)
 	{
 		for(auto [_, resource] : m_mapHandleResources)

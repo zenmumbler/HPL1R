@@ -231,13 +231,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceBase* cTextureManager::Create(const tString& asName)
-	{
-		return Create2D(asName);
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cTextureManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

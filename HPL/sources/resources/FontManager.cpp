@@ -101,13 +101,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceBase* cFontManager::Create(const tString& asName)
-	{
-		return CreateFontData(asName, 16, 32, 255);
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cFontManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

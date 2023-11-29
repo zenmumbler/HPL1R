@@ -33,7 +33,6 @@ namespace hpl {
 		cFontManager(cGraphics* apGraphics, cResources *apResources);
 		~cFontManager();
 
-		iResourceBase* Create(const tString& asName);
 		/**
 		 * Create a new font
 		 * \param asName name of the font

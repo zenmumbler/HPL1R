@@ -51,20 +51,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	/**
-	 * Since further parameters are needed for the gpu prog this does not work...
-	 * For now at least.
-	 * \param asName
-	 * \return
-	 */
-	iResourceBase* cGpuProgramManager::Create(const tString& asName)
-	{
-	#pragma unused(asName)
-		return NULL;
-	}
-
-	//-----------------------------------------------------------------------
-
 	iGpuProgram* cGpuProgramManager::CreateProgram(const tString& asVertexName,
 												   const tString& asFragmentName)
 	{

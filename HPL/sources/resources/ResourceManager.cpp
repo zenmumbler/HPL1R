@@ -41,6 +41,11 @@ namespace hpl {
 		mlHandleCount = 0;
 	}
 
+	iResourceManager::~iResourceManager() {
+		DestroyAll();
+		Log(" Done with RESOURCE\n");
+	}
+
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////
@@ -201,13 +206,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	tString iResourceManager::GetTabs()
-	{
-		tString sTabs ="";
-		for(int i=0; i<mlTabCount; ++i) sTabs+="  ";
-		return sTabs;
-	}
-
 	void iResourceManager::AddResource(iResourceBase* apResource, bool abLog)
 	{
 		apResource->SetHandle(GetHandle());
@@ -220,7 +218,7 @@ namespace hpl {
 		if(abLog && iResourceBase::GetLogCreateAndDelete())
 		{
 			unsigned long lTime = GetAppTimeMS() - mlTimeStart;
-			Log("%sLoaded resource %s in %d ms\n",GetTabs().c_str(), apResource->GetName().c_str(),lTime);
+			Log("%sLoaded resource %s in %d ms\n", tString(mlTabCount, '\t').c_str(), apResource->GetName().c_str(),lTime);
 			apResource->SetLogDestruction(true);
 		}
 

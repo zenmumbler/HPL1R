@@ -60,13 +60,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceBase* cParticleManager::Create(const tString& asName)
-	{
-		return NULL;
-	}
-
-	//-----------------------------------------------------------------------
-
 	cParticleSystem3D* cParticleManager::CreatePS3D(const tString& asName,const tString& asType,
 												cVector3f avSize,const cMatrixf& a_mtxTransform)
 	{

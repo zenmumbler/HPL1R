@@ -85,13 +85,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceBase* cScriptManager::Create(const tString& asName)
-	{
-		return CreateScript(asName);
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cScriptManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

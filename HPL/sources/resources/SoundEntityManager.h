@@ -35,7 +35,6 @@ namespace hpl {
 
 		void Preload(const tString& asFile);
 
-		iResourceBase* Create(const tString& asName);
 		cSoundEntityData* CreateSoundEntity(const tString& asName);
 
 		void Destroy(iResourceBase* apResource);
@@ -46,4 +45,5 @@ namespace hpl {
 	};
 
 };
+
 #endif // HPL_SOUND_ENTITY_MANAGER_H

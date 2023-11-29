@@ -44,14 +44,6 @@ namespace hpl {
 		cParticleManager(cGraphics* apGraphics,cResources *apResources);
 		~cParticleManager();
 
-		/**
-		 * NOT USED! For now that is... there is no need for it since particle systems are not really
-		 * resources, yet
-		 * \param asName
-		 * \return
-		 */
-		iResourceBase* Create(const tString& asName);
-
 		cParticleSystem3D* CreatePS3D(const tString& asName,const tString& asType, cVector3f avSize,
 										const cMatrixf& a_mtxTransform);
 

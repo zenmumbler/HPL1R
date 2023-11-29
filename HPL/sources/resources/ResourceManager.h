@@ -31,9 +31,7 @@ namespace hpl {
 	{
 	public:
 		iResourceManager();
-		virtual ~iResourceManager() = default;
-
-		virtual iResourceBase* Create(const tString& asName)=0;
+		virtual ~iResourceManager();
 
 		iResourceBase* GetByName(const tString& asName);
 		iResourceBase* GetByHandle(unsigned long alHandle);
@@ -61,8 +59,6 @@ namespace hpl {
 		void BeginLoad(const tString& asFile);
 		void EndLoad();
 
-		unsigned long mlTimeStart;
-
 		/**
 		 * Checks if a resource alllready is in the manager, else searches the resources.
 		 * \param &asName Name of the resource.
@@ -75,9 +71,8 @@ namespace hpl {
 
 		unsigned long GetHandle();
 
-		tString GetTabs();
 		static int mlTabCount;
-
+		unsigned long mlTimeStart;
 	};
 
 };

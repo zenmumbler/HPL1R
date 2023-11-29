@@ -88,13 +88,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceBase* cSoundManager::Create(const tString& asName)
-	{
-		return	CreateSoundData(asName,false);
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cSoundManager::Destroy(iResourceBase* apResource)
 	{
 		//Log("Destroying %s users: %d\n",apResource->GetName().c_str(),
@@ -109,23 +102,6 @@ namespace hpl {
 				RemoveResource(pData);
 				delete pData;
 			}
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cSoundManager::DestroyAll()
-	{
-		//FIX FIX FIX
-		//Fix what? :P
-		auto it = m_mapHandleResources.begin();
-		while (it != m_mapHandleResources.end())
-		{
-			iResourceBase* pData = it->second;
-			RemoveResource(pData);
-			delete pData;
-
-			it= m_mapHandleResources.begin();
 		}
 	}
 

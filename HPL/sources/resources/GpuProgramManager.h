@@ -33,13 +33,6 @@ namespace hpl {
 		cGpuProgramManager(iLowLevelGraphics *apLowLevelGraphics);
 		~cGpuProgramManager();
 
-		iResourceBase* Create(const tString& asName);
-		/**
-		 * Creates a new GPU program
-		 * \param asVertexName file name of the vertex shader
-		 * \param asFragmentName file name of the fragment shader
-		 * \return
-		 */
 		iGpuProgram* CreateProgram(const tString& asVertexName,const tString& asFragmentName);
 
 		void Destroy(iResourceBase* apResource);

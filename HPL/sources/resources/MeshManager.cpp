@@ -111,13 +111,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceBase* cMeshManager::Create(const tString& asName)
-	{
-		return CreateMesh(asName);
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cMeshManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

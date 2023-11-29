@@ -59,13 +59,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceBase* cImageManager::Create(const tString& asName)
-	{
-		return CreateImage(asName);
-	}
-
-	//-----------------------------------------------------------------------
-
 	cResourceImage* cImageManager::CreateImage(const tString& asName)
 	{
 		cResourceImage *pImage = NULL;

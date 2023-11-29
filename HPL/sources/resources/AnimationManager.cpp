@@ -128,13 +128,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceBase* cAnimationManager::Create(const tString& asName)
-	{
-		return CreateAnimation(asName);
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cAnimationManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

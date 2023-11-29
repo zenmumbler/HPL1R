@@ -33,7 +33,6 @@ namespace hpl {
 		cAnimationManager(cGraphics* apGraphics,cResources *apResources);
 		~cAnimationManager();
 
-		iResourceBase* Create(const tString& asName);
 		cAnimation* CreateAnimation(const tString& asName);
 
 		void Destroy(iResourceBase* apResource);
