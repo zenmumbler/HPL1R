@@ -20,49 +20,31 @@
 #define HPL_IMAGEMANAGER_H
 
 #include "resources/ResourceManager.h"
+#include "resources/FrameBitmap.h"
 #include "math/MathTypes.h"
-#include "system/ArrayTypes.h"
-
-#include <map>
 
 namespace hpl {
 
 	class cResourceImage;
-	class cFrameTexture;
-	class cFrameBitmap;
 	class iLowLevelGraphics;
 	class Bitmap;
 
-	typedef std::list<cFrameBitmap*> tFrameBitmapList;
-	typedef tFrameBitmapList::iterator tFrameBitmapListIt;
-
-	typedef std::map<int,cFrameTexture*> tFrameTextureMap;
-	typedef tFrameTextureMap::iterator tFrameTextureMapIt;
-
-	class cImageManager :public iResourceManager
+	class cImageManager : public iResourceManager
 	{
 	public:
 		cImageManager(iLowLevelGraphics *apLowLevelGraphics);
 
-		void Destroy(iResourceBase* apResource);
-
-		//Image specifc
 		cResourceImage* CreateImage(const tString& asName);
 		cResourceImage* CreateFromBitmap(const Bitmap &bmp);
 
 	private:
 		iLowLevelGraphics *mpLowLevelGraphics;
+		std::vector<std::shared_ptr<cFrameBitmap>> _currentFrames;
 
-		tFrameBitmapList mlstBitmapFrames;
-		tFrameTextureMap m_mapTextureFrames;
-
-		tStringVec mvFileFormats;
-		cVector2l mvFrameSize;
-		int mlFrameHandle;
+		std::vector<tString> mvFileFormats;
 
 		cResourceImage *FindImage(const tString &asName, tString &asFilePath);
 		cResourceImage *AddToFrame(const Bitmap &bmp);
-		cFrameBitmap *CreateBitmapFrame(cVector2l avSize);
 	};
 
 };

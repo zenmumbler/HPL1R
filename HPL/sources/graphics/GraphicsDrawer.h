@@ -90,6 +90,8 @@ namespace hpl {
 		const cGfxObject* CreateUnmanagedGfxObject(const Bitmap &bitmap, eGfxMaterial material);
 		void DestroyGfxObject(const cGfxObject* apObject);
 
+		cImageManager *GetImageManager() const { return mpImageManager; }
+
 	private:
 		void UseMaterial(eGfxMaterial material);
 

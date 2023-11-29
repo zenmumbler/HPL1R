@@ -34,8 +34,6 @@ namespace hpl {
 
 		cScriptModule* CreateScript(const tString& asName);
 
-		void Destroy(iResourceBase* apResource);
-
 	private:
 		cScript* mpScript;
 		cResources *mpResources;

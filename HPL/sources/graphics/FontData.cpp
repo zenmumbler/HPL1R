@@ -452,13 +452,6 @@ namespace hpl {
 		const cGfxObject* pObject = mpGraphicsDrawer->CreateUnmanagedGfxObject(aBmp, eGfxMaterial::DiffuseAlpha);
 
 		//////////////////////////
-		//Gui gfx
-//		cGuiGfxElement* pGuiGfx = mpGui->CreateGfxFilledRect(cColor(1,1),eGuiMaterial_FontNormal,false);
-//		cResourceImage *pImage = pObject->GetMaterial()->GetImage();
-//		pImage->IncUserCount();
-//		pGuiGfx->AddImage(pImage);
-
-		//////////////////////////
 		//Sizes
 		cVector2f vSize;
 		vSize.x = ((float)avSize.x)/((float)avFontSize.x) * mvSizeRatio.x;

@@ -76,15 +76,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	/*void iResourceManager::Destroy(iResourceBase* apResource)
+	void iResourceManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();
-		if(apResource->HasUsers()==false){
-			m_mapHandleResources.erase(apResource->GetHandle());
-			m_mapNameResources.erase(apResource->GetName());
+		if (apResource->HasUsers()==false) {
+			RemoveResource(apResource);
 			delete apResource;
 		}
-	}*/
+	}
 
 	//-----------------------------------------------------------------------
 

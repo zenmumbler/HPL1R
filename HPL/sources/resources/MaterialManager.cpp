@@ -97,18 +97,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cMaterialManager::Destroy(iResourceBase* apResource)
-	{
-		apResource->DecUserCount();
-
-		if(apResource->HasUsers()==false){
-			RemoveResource(apResource);
-			delete apResource;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cMaterialManager::SetTextureAnisotropy(float afX)
 	{
 		if(mfTextureAnisotropy == afX) return;

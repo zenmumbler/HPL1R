@@ -46,8 +46,6 @@ namespace hpl {
 
 		iTexture* CreateCubeMap(const tString& asName);
 
-		void Destroy(iResourceBase* apResource);
-
 		void Update(float afTimeStep);
 
 	private:

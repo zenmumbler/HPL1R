@@ -35,7 +35,6 @@ namespace hpl {
 		iMaterial* CreateMaterial(const tString& asName);
 
 		void Update(float afTimeStep);
-		void Destroy(iResourceBase* apResource);
 
 		void SetTextureAnisotropy(float afX);
 		float GetTextureAnisotropy(){ return mfTextureAnisotropy;}

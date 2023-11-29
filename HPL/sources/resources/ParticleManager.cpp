@@ -136,18 +136,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cParticleManager::Destroy(iResourceBase* apResource)
-	{
-		apResource->DecUserCount();
-
-		if (apResource->HasUsers()==false) {
-			RemoveResource(apResource);
-			delete apResource;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
 	//////////////////////////////////////////////////////////////////////////
 	// PRIVATE METHODS
 	//////////////////////////////////////////////////////////////////////////

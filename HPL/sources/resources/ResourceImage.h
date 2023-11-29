@@ -19,14 +19,15 @@
 #ifndef HPL_RESOURCE_IMAGE_H
 #define HPL_RESOURCE_IMAGE_H
 
-#include <vector>
 #include "resources/ResourceBase.h"
 #include "graphics/GraphicsTypes.h"
 #include "math/MathTypes.h"
 
+#include <vector>
+#include <memory>
+
 namespace hpl {
 
-	class cFrameTexture;
 	class cFrameBitmap;
 	class iTexture;
 
@@ -34,37 +35,22 @@ namespace hpl {
 	{
 	friend class cImageManager;
 	public:
-		cResourceImage(tString asName, cFrameTexture *apFrameTex,
-						cFrameBitmap *apFrameBmp,
-						cRect2l aRect,
-						cVector2l avSrcSize, int alHandle);
+		cResourceImage(tString asName, std::shared_ptr<cFrameBitmap> frameBmp, cRect2l aRect, cVector2l avSrcSize);
 
-		//Image specific
 		int GetHeight()const{return mRect.h;}
 		int GetWidth()const{return mRect.w;}
 		cVector2l GetSize()const{return cVector2l(mRect.w,mRect.h);}
 		cVector2l GetPosition()const{return cVector2l(mRect.x,mRect.y);}
 
-		int GetSourceWidth()const{return mvSourceSize.x;}
-		int GetSourceHeight()const{return mvSourceSize.y;}
-
 		iTexture *GetTexture() const;
 		const std::vector<cVector2f>& GetUVs() const { return _uvs; };
 
-		cFrameTexture *GetFrameTexture()const{return mpFrameTexture;}
-		cFrameBitmap *GetFrameBitmap()const{return mpFrameBitmap;}
+		cFrameBitmap *GetFrameBitmap() const { return _frameBitmap.get(); }
 
 	private:
-		~cResourceImage();
-
-		cFrameTexture *mpFrameTexture;
-		cFrameBitmap *mpFrameBitmap;
-
-		cVector2l mvSourceSize;
-		cRect2l mRect;
+		std::shared_ptr<cFrameBitmap> _frameBitmap;
 		std::vector<cVector2f> _uvs;
-
-		int mlHandle;
+		cRect2l mRect;
 	};
 
 	typedef std::vector<cResourceImage*> tResourceImageVec;

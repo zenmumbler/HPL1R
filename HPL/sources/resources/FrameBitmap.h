@@ -19,15 +19,13 @@
 #ifndef HPL_FRAMEBITMAP_H
 #define HPL_FRAMEBITMAP_H
 
-#include "resources/FrameBase.h"
 #include "system/BinTree.h"
 #include "math/MathTypes.h"
 #include "graphics/Bitmap.h"
 
 namespace hpl {
 
-	class cFrameTexture;
-	class cResourceImage;
+	class iTexture;
 
 	//The frames bitmap + rect class
 	class cFBitmapRect
@@ -48,30 +46,29 @@ namespace hpl {
 	typedef std::list<tRectTreeNode*> tRectTreeNodeList;
 	typedef tRectTreeNodeList::iterator tRectTreeNodeListIt;
 
-	class cFrameBitmap : public iFrameBase
+	class cFrameBitmap
 	{
 	public:
-		cFrameBitmap(int width, int height, cFrameTexture *apFrmTex, int alHandle);
+		cFrameBitmap(int width, int height, iTexture *texture, int index);
 		~cFrameBitmap();
 
-		cResourceImage * AddBitmap(const Bitmap &aSrc);
-		bool MinimumFit(cRect2l aSrc,cRect2l aDest);
-		bool IsFull();
-		bool IsUpdated();
+		cRect2l AddBitmap(const Bitmap &aSrc);
+		bool MinimumFit(cRect2l aSrc, cRect2l aDest);
+		bool IsFull() const { return mbIsFull; }
+		bool IsUpdated() const { return mbIsUpdated; }
+		int GetIndex() const { return _index; }
 
 		bool FlushToTexture();
+		iTexture* GetTexture() const { return mpTexture; }
 
-		cFrameTexture* GetFrameTexture(){ return mpFrameTexture;}
-
-		int GetHandle()const{ return mlHandle; }
 	private:
 		Bitmap mBitmap;
-		cFrameTexture* mpFrameTexture;
+		iTexture* mpTexture;
 		tRectTree mRects;
 		int mlMinHole;
-		int mlHandle;
 		bool mbIsFull;
 		bool mbIsUpdated;
+		int _index;
 	};
 
 };

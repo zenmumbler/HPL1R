@@ -34,8 +34,6 @@ namespace hpl {
 
 		iGpuProgram* CreateProgram(const tString& asVertexName,const tString& asFragmentName);
 
-		void Destroy(iResourceBase* apResource);
-
 	private:
 		iLowLevelGraphics *mpLowLevelGraphics;
 	};

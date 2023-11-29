@@ -78,7 +78,6 @@
 		DBF84ACC0AC76F1E00BB15CD /* FontData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8495B0AC76D5700BB15CD /* FontData.cpp */; };
 		DBF84ACD0AC76F1E00BB15CD /* FontManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849D80AC76D5800BB15CD /* FontManager.cpp */; };
 		DBF84ACE0AC76F1E00BB15CD /* FrameBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849D90AC76D5800BB15CD /* FrameBitmap.cpp */; };
-		DBF84ACF0AC76F1E00BB15CD /* FrameTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849DA0AC76D5800BB15CD /* FrameTexture.cpp */; };
 		DBF84AD00AC76F1E00BB15CD /* Frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849BF0AC76D5800BB15CD /* Frustum.cpp */; };
 		DBF84AD10AC76F1E00BB15CD /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8494E0AC76D5700BB15CD /* Game.cpp */; };
 		DBF84AD20AC76F1E00BB15CD /* ScriptVar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8494F0AC76D5700BB15CD /* ScriptVar.cpp */; };
@@ -392,9 +391,7 @@
 		DB27F0B60ACB9AB90054ACA3 /* EntityLoader_Object.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = EntityLoader_Object.h; sourceTree = "<group>"; };
 		DB27F0B70ACB9AB90054ACA3 /* FileSearcher.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FileSearcher.h; sourceTree = "<group>"; };
 		DB27F0B80ACB9AB90054ACA3 /* FontManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FontManager.h; sourceTree = "<group>"; };
-		DB27F0B90ACB9AB90054ACA3 /* FrameBase.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FrameBase.h; sourceTree = "<group>"; };
 		DB27F0BA0ACB9AB90054ACA3 /* FrameBitmap.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FrameBitmap.h; sourceTree = "<group>"; };
-		DB27F0BB0ACB9AB90054ACA3 /* FrameTexture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FrameTexture.h; sourceTree = "<group>"; };
 		DB27F0BC0ACB9AB90054ACA3 /* GpuProgramManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GpuProgramManager.h; sourceTree = "<group>"; };
 		DB27F0BE0ACB9AB90054ACA3 /* ImageManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ImageManager.h; sourceTree = "<group>"; };
 		DB27F0BF0ACB9AB90054ACA3 /* LanguageFile.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LanguageFile.h; sourceTree = "<group>"; };
@@ -543,7 +540,6 @@
 		DBF849D70AC76D5800BB15CD /* FileSearcher.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = FileSearcher.cpp; sourceTree = "<group>"; };
 		DBF849D80AC76D5800BB15CD /* FontManager.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = FontManager.cpp; sourceTree = "<group>"; };
 		DBF849D90AC76D5800BB15CD /* FrameBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = FrameBitmap.cpp; sourceTree = "<group>"; };
-		DBF849DA0AC76D5800BB15CD /* FrameTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = FrameTexture.cpp; sourceTree = "<group>"; };
 		DBF849DB0AC76D5800BB15CD /* GpuProgramManager.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GpuProgramManager.cpp; sourceTree = "<group>"; };
 		DBF849DD0AC76D5800BB15CD /* ImageManager.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ImageManager.cpp; sourceTree = "<group>"; };
 		DBF849DE0AC76D5800BB15CD /* LanguageFile.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = LanguageFile.cpp; sourceTree = "<group>"; };
@@ -1100,11 +1096,8 @@
 				DB27F0B70ACB9AB90054ACA3 /* FileSearcher.h */,
 				DBF849D80AC76D5800BB15CD /* FontManager.cpp */,
 				DB27F0B80ACB9AB90054ACA3 /* FontManager.h */,
-				DB27F0B90ACB9AB90054ACA3 /* FrameBase.h */,
 				DBF849D90AC76D5800BB15CD /* FrameBitmap.cpp */,
 				DB27F0BA0ACB9AB90054ACA3 /* FrameBitmap.h */,
-				DBF849DA0AC76D5800BB15CD /* FrameTexture.cpp */,
-				DB27F0BB0ACB9AB90054ACA3 /* FrameTexture.h */,
 				DBF849DB0AC76D5800BB15CD /* GpuProgramManager.cpp */,
 				DB27F0BC0ACB9AB90054ACA3 /* GpuProgramManager.h */,
 				DBF849DD0AC76D5800BB15CD /* ImageManager.cpp */,
@@ -1370,7 +1363,6 @@
 				DBF84ACC0AC76F1E00BB15CD /* FontData.cpp in Sources */,
 				DBF84ACD0AC76F1E00BB15CD /* FontManager.cpp in Sources */,
 				DBF84ACE0AC76F1E00BB15CD /* FrameBitmap.cpp in Sources */,
-				DBF84ACF0AC76F1E00BB15CD /* FrameTexture.cpp in Sources */,
 				DBF84AD00AC76F1E00BB15CD /* Frustum.cpp in Sources */,
 				DBF84AD10AC76F1E00BB15CD /* Game.cpp in Sources */,
 				DBF84AD20AC76F1E00BB15CD /* ScriptVar.cpp in Sources */,

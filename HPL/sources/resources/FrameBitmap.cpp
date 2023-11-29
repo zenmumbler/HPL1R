@@ -18,12 +18,10 @@
  */
 
 #include "resources/FrameBitmap.h"
-#include "system/Log.h"
-#include "math/Math.h"
-#include "resources/FrameTexture.h"
-#include "resources/ResourceImage.h"
 #include "graphics/Bitmap.h"
 #include "graphics/Texture.h"
+#include "math/Math.h"
+#include "system/Log.h"
 
 
 namespace hpl {
@@ -34,20 +32,24 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cFrameBitmap::cFrameBitmap(int width, int height, cFrameTexture *apFrmTex, int alHandle)
-	: iFrameBase(), mBitmap{width, height}, mpFrameTexture(apFrmTex)
+	cFrameBitmap::cFrameBitmap(int width, int height, iTexture *texture, int index)
+	: mBitmap{width, height}, mpTexture{texture}
 	{
-		mBitmap.FillRect(cRect2l(0,0,0,0), cColor(1,1));
+		mBitmap.FillRect(cRect2l(0,0,0,0), cColor::White);
 		mlMinHole = 6;
-		mlHandle = alHandle;
 		mbIsFull = false;
+		_index = index;
 
 		//Root node in rect tree
 		mRects.Insert(cFBitmapRect(0, 0, mBitmap.GetWidth(), mBitmap.GetHeight(), -1));
+
+		// Log("FB: Created with size [%d, %d]\n", width, height);
 	}
 
 	cFrameBitmap::~cFrameBitmap()
 	{
+		// Log("FB: Deleting [%d, %d]\n", mBitmap.GetWidth(), mBitmap.GetHeight());
+		delete mpTexture;
 	}
 
 	//-----------------------------------------------------------------------
@@ -60,9 +62,8 @@ namespace hpl {
 
 	constexpr const bool DEBUG_BTREE = false;
 
-	cResourceImage *cFrameBitmap::AddBitmap(const Bitmap &aSrc)
+	cRect2l cFrameBitmap::AddBitmap(const Bitmap &aSrc)
 	{
-		cResourceImage *pImage=NULL;
 		//source size
 		//+2 because we are gonna have a border to get rid if some antialiasing problems
 		int lSW = aSrc.GetWidth()+2;
@@ -79,7 +80,7 @@ namespace hpl {
 		//Debug
 		int node=0;
 
-		if(DEBUG_BTREE)Log("**** Image %d *****\n",mlPicCount);
+		if(DEBUG_BTREE)Log("**** Image *****\n");
 
 		//Get the leaves of the tree and search it for a good pos.
 		tRectTreeNodeList lstNodes =  mRects.GetLeafList();
@@ -156,31 +157,21 @@ namespace hpl {
 					}
 					//Draw the final
 					aSrc.DrawToBitmap(mBitmap, NewRect.x+1,NewRect.y+1);
-
-
-					mlPicCount++;
-					mpFrameTexture->SetPicCount(mlPicCount);
 					break;
 				}
 			}
 		}
 
+		cRect2l destRect{0, 0, 0, 0};
 		if(bFoundNode)
 		{
-			//Create the image resource
-			pImage = new cResourceImage(aSrc.GetFileName(), mpFrameTexture, this,
-				cRect2l(vPos,cVector2l(lSW-2,lSH-2)),//-2 to get the correct size.
-				cVector2l(mBitmap.GetWidth(),mBitmap.GetHeight()),
-				mlHandle);
-
-			if(!bFoundEmptyNode)
-			{
-				mbIsFull = true;
-			}
-
+			destRect = cRect2l{vPos, cVector2l(lSW-2, lSH-2)};
 			mbIsUpdated = true;
 		}
-
+		if(!bFoundEmptyNode)
+		{
+			mbIsFull = true;
+		}
 
 
 		/// LAST DEBUG ///
@@ -215,7 +206,7 @@ namespace hpl {
 		}
 
 
-		return pImage;
+		return destRect;
 	}
 
 	//-----------------------------------------------------------------------
@@ -229,27 +220,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cFrameBitmap::IsUpdated()
-	{
-		return mbIsUpdated;
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cFrameBitmap::IsFull()
-	{
-		return mbIsFull;
-	}
-
-	//-----------------------------------------------------------------------
-
 	bool cFrameBitmap::FlushToTexture()
 	{
 		if(mbIsUpdated)
 		{
-			mpFrameTexture->GetTexture()->CreateFromBitmap(mBitmap);
-			mpFrameTexture->GetTexture()->SetWrapS(eTextureWrap_ClampToEdge);
-			mpFrameTexture->GetTexture()->SetWrapT(eTextureWrap_ClampToEdge);
+			// Log("FB: updating texture #%d\n", _index);
+			mpTexture->CreateFromBitmap(mBitmap);
+			mpTexture->SetWrapS(eTextureWrap_ClampToEdge);
+			mpTexture->SetWrapT(eTextureWrap_ClampToEdge);
 
 			mbIsUpdated = false;
 			return true;

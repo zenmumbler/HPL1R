@@ -17,7 +17,7 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/ResourceImage.h"
-#include "resources/FrameTexture.h"
+#include "resources/FrameBitmap.h"
 #include "graphics/Texture.h"
 
 
@@ -31,35 +31,21 @@ namespace hpl {
 
 #define kContractSize (0.001f)
 
-	cResourceImage::cResourceImage(tString asName,cFrameTexture *apFrameTex,
-		cFrameBitmap *apFrameBmp, cRect2l aRect,
-		cVector2l avSrcSize, int alHandle) : iResourceBase(asName)
+	cResourceImage::cResourceImage(tString asName, std::shared_ptr<cFrameBitmap> frameBmp, cRect2l aRect, cVector2l avSrcSize)
+	: iResourceBase(asName)
+	, _frameBitmap{frameBmp}
 	{
-		mpFrameTexture = apFrameTex;
-		mpFrameBitmap = apFrameBmp;
 		mRect = aRect;
-		mvSourceSize = avSrcSize;
-		mlHandle = alHandle;
 
-		cVector2f vTexSize = cVector2f((float)mRect.w,(float)mRect.h ) /
-								cVector2f((float)mvSourceSize.x,(float)mvSourceSize.y);
-		cVector2f vTexPos = cVector2f((float)mRect.x,(float)mRect.y ) /
-								cVector2f((float)mvSourceSize.x,(float)mvSourceSize.y);
+		auto sourceSize = cVector2f{(float)avSrcSize.x, (float)avSrcSize.y};
+		auto vTexSize   = cVector2f{(float)mRect.w, (float)mRect.h} / sourceSize;
+		auto vTexPos    = cVector2f{(float)mRect.x, (float)mRect.y} / sourceSize;
 
 		_uvs.reserve(4);
 		_uvs.emplace_back(vTexPos.x + kContractSize, vTexPos.y + kContractSize);
 		_uvs.emplace_back(vTexPos.x + vTexSize.x - kContractSize, vTexPos.y + kContractSize );
 		_uvs.emplace_back(vTexPos.x + vTexSize.x - kContractSize, vTexPos.y + vTexSize.y - kContractSize);
 		_uvs.emplace_back(vTexPos.x + kContractSize, vTexPos.y + vTexSize.y - kContractSize);
-	}
-
-	//-----------------------------------------------------------------------
-
-	cResourceImage::~cResourceImage()
-	{
-		//mpFrameTexture->DecPicCount();
-		mpFrameTexture = NULL;
-		mlHandle = -1;
 	}
 
 	//-----------------------------------------------------------------------
@@ -72,7 +58,7 @@ namespace hpl {
 
 	iTexture *cResourceImage::GetTexture() const
 	{
-		return mpFrameTexture->GetTexture();
+		return GetFrameBitmap()->GetTexture();
 	}
 
 	//-----------------------------------------------------------------------

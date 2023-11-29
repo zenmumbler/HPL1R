@@ -225,23 +225,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cTextureManager::Destroy(iResourceBase* apResource)
-	{
-		apResource->DecUserCount();
-
-		if(apResource->HasUsers()==false)
-		{
-			RemoveResource(apResource);
-			//Log("Deleting1 '%s'-%d\n",apResource->GetName().c_str() ,apResource);
-			//Log("Deleting2 '%s'-%d\n",apResource->GetName().c_str() ,(iTexture*)apResource);
-			//Log("Deleting1 %d\n",apResource);
-			//Log("Deleting2 %d\n",(iTexture*)apResource);
-			delete apResource;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cTextureManager::Update(float afTimeStep)
 	{
 		ForEachResource([=](iResourceBase *resource) {

@@ -20,7 +20,6 @@
 #include "system/String.h"
 #include "resources/ResourceImage.h"
 #include "resources/FrameBitmap.h"
-#include "resources/FrameTexture.h"
 #include "graphics/LowLevelGraphics.h"
 #include "resources/LoadImage.h"
 #include "system/Log.h"
@@ -39,9 +38,6 @@ namespace hpl {
 	   mpLowLevelGraphics = apLowLevelGraphics;
 
 	   GetSupportedImageFormats(mvFileFormats);
-
-	   mvFrameSize = cVector2l(512, 512);
-	   mlFrameHandle = 0;
 	}
 
 	//-----------------------------------------------------------------------
@@ -80,16 +76,9 @@ namespace hpl {
 				if(pImage) AddResource(pImage);
 			}
 		}
-		else
-		{
-			//Log("Found '%s' in stock!\n",asName.c_str());
-		}
 
 		if(pImage)pImage->IncUserCount();
 		else Error("Couldn't load image '%s'\n",asName.c_str());
-
-		//Log("Loaded image %s, it has %d users!\n", pImage->GetName().c_str(),pImage->GetUserCount());
-		//Log(" frame has %d pics\n", pImage->GetFrameTexture()->GetPicCount());
 
 		EndLoad();
 		return pImage;
@@ -107,66 +96,6 @@ namespace hpl {
 		}
 
 		return pImage;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cImageManager::Destroy(iResourceBase* apResource)
-	{
-		//Lower the user num for the the resource. If it is 0 then lower the
-		//user num for the TextureFrame and delete the resource. If the Texture
-		//frame reaches 0 it is deleted as well.
-		cResourceImage *pImage = static_cast<cResourceImage*>(apResource);
-		cFrameTexture *pFrame = pImage->GetFrameTexture();
-		cFrameBitmap *pBmpFrame = pImage->GetFrameBitmap();
-
-		//pImage->GetFrameBitmap()->FlushToTexture(); Not needed?
-
-
-		//Log("Users Before: %d\n",pImage->GetUserCount());
-		//Log("Framepics Before: %d\n",pFrame->GetPicCount());
-
-		pImage->DecUserCount();//dec frame count as well.. is that ok?
-
-		//Log("---\n");
-		//Log("Destroyed Image: '%s' Users: %d\n",pImage->GetName().c_str(),pImage->GetUserCount());
-		//Log("Frame %d has left Pics: %d\n",pFrame,pFrame->GetPicCount());
-
-		if(pImage->HasUsers()==false)
-		{
-			pFrame->DecPicCount(); // Doing it here now instead.
-			pBmpFrame->DecPicCount();
-			RemoveResource(apResource);
-			delete apResource;
-
-			//Log("deleting image and dec fram to %d images!\n",pFrame->GetPicCount());
-		}
-
-
-		if(pFrame->IsEmpty())
-		{
-			//Log(" Deleting frame...");
-
-			//Delete the bitmap frame that has this this frame.
-			for (tFrameBitmapListIt it=mlstBitmapFrames.begin();it!=mlstBitmapFrames.end();++it)
-			{
-				cFrameBitmap *frameBitmap = *it;
-				if (frameBitmap->GetFrameTexture() == pFrame)
-				{
-					//Log("and bitmap...");
-					delete frameBitmap;
-					mlstBitmapFrames.erase(it);
-					break;
-				}
-			}
-
-			//delete from list
-			m_mapTextureFrames.erase(pFrame->GetHandle());
-			delete pFrame;
-			//Log(" Deleted frame!\n");
-		}
-		//Log("---\n");
-
 	}
 
 	//-----------------------------------------------------------------------
@@ -201,56 +130,46 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	constexpr int FRAME_DIM = 512;
+	static int s_FrameIndex = 0;
+
 	cResourceImage *cImageManager::AddToFrame(const Bitmap &aBmp)
 	{
-		cResourceImage *pImage = nullptr;
+		cRect2l destRect;
 
-		for (auto frame : mlstBitmapFrames) {
-			if (! frame->IsFull()) {
-				pImage = frame->AddBitmap(aBmp);
-				if (pImage) {
-					return pImage;
-				}
-			}
+		// check if any non-full frames can fit the bitmap
+		auto frameIter = std::find_if(_currentFrames.begin(), _currentFrames.end(), [&](std::shared_ptr<cFrameBitmap>& frame) {
+			destRect = frame->AddBitmap(aBmp);
+			return destRect.w > 0;
+		});
+
+		if (frameIter == _currentFrames.end()) {
+			// No applicable frame found. Append new frame to end, update iterator
+			// Log("RESIMG: No frame with space found, creating new #%d\n", s_FrameIndex);
+			iTexture *pTex = mpLowLevelGraphics->CreateTexture(tString{"FRAME_"} + std::to_string(s_FrameIndex), eTextureTarget_2D);
+			auto newFrame = std::make_shared<cFrameBitmap>(FRAME_DIM, FRAME_DIM, pTex, s_FrameIndex++);
+			frameIter = _currentFrames.insert(_currentFrames.end(), newFrame);
+
+			// try inserting the bitmap into the new frame
+			destRect = newFrame->AddBitmap(aBmp);
 		}
 
-		// no frames had space, create new one
-		cFrameBitmap *pFrame = CreateBitmapFrame(mvFrameSize);
-		if (pFrame) {
-			pImage = pFrame->AddBitmap(aBmp);
-			if (pImage == nullptr)
-			{
-				Error("No fit in new frame!\n");
-			}
+		if (destRect.w == 0) {
+			Error("ImageManager: unable to insert bitmap into any frame!\n");
+			return nullptr;
 		}
 
-		return pImage;
+		// Log("RESIMG: Added bitmap of size [%d, %d] to frame %d\n", aBmp.GetWidth(), aBmp.GetHeight(), (*frameIter)->GetIndex());
+		auto image = new cResourceImage(aBmp.GetFileName(), *frameIter, destRect, cVector2l{FRAME_DIM, FRAME_DIM});
+
+		// did this new image fill up the frame we found, then remove from active frames
+		if ((*frameIter)->IsFull()) {
+			// Log("RESIMG: Frame %d was full, no longer tracking\n", (*frameIter)->GetIndex());
+			_currentFrames.erase(frameIter);
+		}
+
+		return image;
 	}
-
-	//-----------------------------------------------------------------------
-
-	cFrameBitmap *cImageManager::CreateBitmapFrame(cVector2l avSize)
-	{
-		iTexture *pTex = mpLowLevelGraphics->CreateTexture("", eTextureTarget_2D);
-		cFrameTexture *pTFrame = new cFrameTexture(pTex, mlFrameHandle);
-		cFrameBitmap *pBFrame = new cFrameBitmap(avSize.x, avSize.y, pTFrame, mlFrameHandle);
-
-		mlstBitmapFrames.push_back(pBFrame);
-
-		std::pair<tFrameTextureMap::iterator, bool> ret = m_mapTextureFrames.insert(tFrameTextureMap::value_type(mlFrameHandle, pTFrame));
-		if(ret.second == false)
-		{
-			Error("Could not add texture frame %d with handle %d! Handle already exist!\n", pTFrame, mlFrameHandle);
-		}
-		else
-		{
-			//Log("Added texture frame: %d\n",pTFrame);
-		}
-
-		mlFrameHandle++;
-		return pBFrame;
-	}
-
 
 	//-----------------------------------------------------------------------
 }

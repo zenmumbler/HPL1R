@@ -43,8 +43,6 @@ namespace hpl {
 		FontData* CreateFontData(const tString& asName, int alSize=16,unsigned short alFirstChar=32,
 								unsigned short alLastChar=255);
 
-		void Destroy(iResourceBase* apResource);
-
 	private:
 		cGraphics* mpGraphics;
 		cResources *mpResources;

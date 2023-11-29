@@ -82,19 +82,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cSoundManager::Destroy(iResourceBase* apResource)
-	{
-		apResource->DecUserCount();
-
-		if (! apResource->HasUsers())
-		{
-			RemoveResource(apResource);
-			delete apResource;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
 	//////////////////////////////////////////////////////////////////////////
 	// PRIVATE METHODS
 	//////////////////////////////////////////////////////////////////////////
