@@ -41,13 +41,6 @@ namespace hpl {
 		mpResources = apResources;
 	}
 
-	cAnimationManager::~cAnimationManager()
-	{
-		DestroyAll();
-
-		Log(" Done with animations\n");
-	}
-
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////

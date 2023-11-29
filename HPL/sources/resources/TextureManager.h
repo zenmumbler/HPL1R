@@ -34,7 +34,6 @@ namespace hpl {
 	{
 	public:
 		cTextureManager(cGraphics* apGraphics,cResources *apResources);
-		~cTextureManager();
 
 		iTexture* Create1D(const tString& asName);
 		iTexture* Create2D(const tString& asName);

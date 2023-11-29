@@ -38,12 +38,6 @@ namespace hpl {
 		mpResources = apResources;
 	}
 
-	cParticleManager::~cParticleManager()
-	{
-		DestroyAll();
-		Log(" Done with particles\n");
-	}
-
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////

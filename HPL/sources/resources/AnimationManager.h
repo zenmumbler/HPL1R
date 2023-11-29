@@ -31,7 +31,6 @@ namespace hpl {
 	{
 	public:
 		cAnimationManager(cGraphics* apGraphics,cResources *apResources);
-		~cAnimationManager();
 
 		cAnimation* CreateAnimation(const tString& asName);
 

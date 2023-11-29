@@ -31,7 +31,6 @@ namespace hpl {
 	{
 	public:
 		cFontManager(cGraphics* apGraphics, cResources *apResources);
-		~cFontManager();
 
 		/**
 		 * Create a new font

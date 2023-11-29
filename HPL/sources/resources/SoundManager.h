@@ -32,7 +32,6 @@ namespace hpl {
 	{
 	public:
 		cSoundManager(cSound* apSound,cResources *apResources);
-		~cSoundManager();
 
 		iSoundData* CreateSoundData(const tString& asName, bool abStream, bool abLoopStream=false);
 		void Destroy(iResourceBase* apResource);

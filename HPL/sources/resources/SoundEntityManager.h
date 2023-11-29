@@ -31,7 +31,6 @@ namespace hpl {
 	{
 	public:
 		cSoundEntityManager(cSound* apSound,cResources *apResources);
-		~cSoundEntityManager();
 
 		void Preload(const tString& asFile);
 

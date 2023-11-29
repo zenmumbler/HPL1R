@@ -40,12 +40,6 @@ namespace hpl {
 		mpResources = apResources;
 	}
 
-	cFontManager::~cFontManager()
-	{
-		DestroyAll();
-		Log(" Done with fonts\n");
-	}
-
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////

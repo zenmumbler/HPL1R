@@ -40,13 +40,6 @@ namespace hpl {
 		mpResources = apResources;
 	}
 
-	cMeshManager::~cMeshManager()
-	{
-		DestroyAll();
-
-		Log(" Done with meshes\n");
-	}
-
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////

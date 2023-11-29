@@ -31,7 +31,6 @@ namespace hpl {
 	{
 	public:
 		cMeshManager(cGraphics* apGraphics,cResources *apResources);
-		~cMeshManager();
 
 		cMesh* CreateMesh(const tString& asName);
 		void Destroy(iResourceBase* apResource);

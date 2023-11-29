@@ -31,7 +31,6 @@ namespace hpl {
 	{
 	public:
 		cMaterialManager(cGraphics* apGraphics, cTextureManager* textureManager, cGpuProgramManager* programManager);
-		~cMaterialManager();
 
 		iMaterial* CreateMaterial(const tString& asName);
 

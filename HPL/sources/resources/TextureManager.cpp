@@ -51,12 +51,6 @@ namespace hpl {
 		mvCubeSideSuffixes.push_back("_neg_z");
 	}
 
-	cTextureManager::~cTextureManager()
-	{
-		DestroyAll();
-		Log(" Destroyed all textures\n");
-	}
-
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////

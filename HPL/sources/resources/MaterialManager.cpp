@@ -45,13 +45,6 @@ namespace hpl {
 		mfTextureAnisotropy = 8.0f;
 	}
 
-	cMaterialManager::~cMaterialManager()
-	{
-		DestroyAll();
-
-		Log(" Done with materials\n");
-	}
-
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////

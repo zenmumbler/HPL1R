@@ -41,13 +41,6 @@ namespace hpl {
 		mpResources = apResources;
 	}
 
-	cSoundEntityManager::~cSoundEntityManager()
-	{
-		DestroyAll();
-
-		Log(" Done with sound entities\n");
-	}
-
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////

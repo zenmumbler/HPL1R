@@ -31,7 +31,6 @@ namespace hpl {
 	{
 	public:
 		cGpuProgramManager(iLowLevelGraphics *apLowLevelGraphics);
-		~cGpuProgramManager();
 
 		iGpuProgram* CreateProgram(const tString& asVertexName,const tString& asFragmentName);
 

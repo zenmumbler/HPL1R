@@ -37,12 +37,6 @@ namespace hpl {
 		mpResources = apResources;
 	}
 
-	cScriptManager::~cScriptManager()
-	{
-		DestroyAll();
-		Log(" Done with scripts\n");
-	}
-
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////

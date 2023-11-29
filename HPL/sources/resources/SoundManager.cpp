@@ -41,12 +41,6 @@ namespace hpl {
 		mpSound->GetLowLevel()->GetSupportedFormats(_fileFormats);
 	}
 
-	cSoundManager::~cSoundManager()
-	{
-		DestroyAll();
-		Log(" Done with sounds\n");
-	}
-
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////

@@ -31,7 +31,6 @@ namespace hpl {
 	{
 	public:
 		cScriptManager(cScript* apScript, cResources *apResources);
-		~cScriptManager();
 
 		cScriptModule* CreateScript(const tString& asName);
 

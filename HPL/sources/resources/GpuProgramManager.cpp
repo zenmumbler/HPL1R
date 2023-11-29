@@ -36,13 +36,6 @@ namespace hpl {
 		mpLowLevelGraphics = apLowLevelGraphics;
 	}
 
-	cGpuProgramManager::~cGpuProgramManager()
-	{
-		DestroyAll();
-
-		Log(" Done with Gpu programs\n");
-	}
-
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////

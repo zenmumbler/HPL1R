@@ -43,7 +43,6 @@ namespace hpl {
 	{
 	public:
 		cParticleManager(cGraphics* apGraphics,cResources *apResources);
-		~cParticleManager();
 
 		cParticleSystem3D* CreatePS3D(const tString& asName,const tString& asType, cVector3f avSize,
 										const cMatrixf& a_mtxTransform);
