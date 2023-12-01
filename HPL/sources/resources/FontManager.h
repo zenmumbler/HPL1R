@@ -32,16 +32,7 @@ namespace hpl {
 	public:
 		cFontManager(cGraphics* apGraphics, cResources *apResources);
 
-		/**
-		 * Create a new font
-		 * \param asName name of the font
-		 * \param alSize size the characters are rendered in
-		 * \param alFirstChar first ASCII character to be rendered
-		 * \param alLastChar last ASCII character to be rendered
-		 * \return
-		 */
-		FontData* CreateFontData(const tString& asName, int alSize=16,unsigned short alFirstChar=32,
-								unsigned short alLastChar=255);
+		FontData* CreateFontData(const tString& asName);
 
 	private:
 		cGraphics* mpGraphics;

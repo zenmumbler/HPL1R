@@ -48,8 +48,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	FontData* cFontManager::CreateFontData(const tString& asName, int alSize,unsigned short alFirstChar,
-											unsigned short alLastChar)
+	FontData* cFontManager::CreateFontData(const tString& asName)
 	{
 		tString sPath;
 		FontData* pFont;

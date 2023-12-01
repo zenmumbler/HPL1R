@@ -59,11 +59,11 @@ namespace hpl {
 		 */
 		iResourceBase* FindLoadedResource(const tString &name, tString &filePath);
 		void AddResource(iResourceBase* resource, bool log=true);
-		void RemoveResource(iResourceBase* resource);
 
 		uint32_t GetHandle();
 
 	private:
+		void RemoveResource(iResourceBase* resource);
 		void DestroyAll();
 
 		tString _resourceTypeName;

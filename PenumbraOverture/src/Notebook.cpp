@@ -164,7 +164,7 @@ void cNotebookState_Front::OnExit()
 cNotebookState_TaskList::cNotebookState_TaskList(cInit *apInit, cNotebook *apNotebook) : iNotebookState(apInit, apNotebook)
 {
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
-	mpTextFont =  mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("cour.fnt",14);
+	mpTextFont =  mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("cour.fnt");
 
 	mfFontSize = 15;
 	
@@ -393,7 +393,7 @@ cNotebookState_NoteList::cNotebookState_NoteList(cInit *apInit, cNotebook *apNot
 	mpTextBack = mpDrawer->CreateGfxObject("notebook_listtextback.bmp",eGfxMaterial::DiffuseAlpha);
 	mpTab = mpDrawer->CreateGfxObject("notebook_tab.bmp",eGfxMaterial::DiffuseAlpha);
 
-	mpTextFont =  mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt",14);
+	mpTextFont =  mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt");
 
 	msUnread = kTranslate("Notebook","Unread");
 		
@@ -666,7 +666,7 @@ cNotebookState_Note::cNotebookState_Note(cInit *apInit, cNotebook *apNotebook) :
 	mpOptionsImage[0] = mpDrawer->CreateGfxObject("notebook_nextpage.bmp",eGfxMaterial::DiffuseAlpha);
 	mpOptionsImage[1] = mpDrawer->CreateGfxObject("notebook_prevpage.bmp",eGfxMaterial::DiffuseAlpha);
 
-	mpTextFont =  mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("cour.fnt",14);
+	mpTextFont =  mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("cour.fnt");
 	mpNavigateFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt");
 
 	mvSize = cVector2f(14,14);

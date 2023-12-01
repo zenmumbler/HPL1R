@@ -62,6 +62,8 @@ namespace hpl {
 
 	constexpr const bool DEBUG_BTREE = false;
 
+	// [Rehatched]: see if stb_rect_pack is better than this at some point
+	// unsure as that lib indicates it's better for all the rects at once
 	cRect2l cFrameBitmap::AddBitmap(const Bitmap &aSrc)
 	{
 		//source size

@@ -95,7 +95,7 @@ cMainMenuWidget_MainButton::cMainMenuWidget_MainButton(cInit *apInit, const cVec
 											  const tWString& asText, eMainMenuState aNextState)
 											: cMainMenuWidget(apInit,avPos,cVector2f(1,1))
 {
-	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt",30);
+	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt");
 
 	msText = asText;
 	mvFontSize = 35;
@@ -182,7 +182,7 @@ cMainMenuWidget_Button::cMainMenuWidget_Button(cInit *apInit, const cVector3f &a
 													   cVector2f avFontSize, eFontAlign aAlignment)
 													   : cMainMenuWidget(apInit,avPos,cVector2f(1,1))
 {
-	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt",30);
+	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt");
 
 	msText = asText;
 	mvFontSize = avFontSize;
@@ -285,7 +285,7 @@ cMainMenuWidget_Text::cMainMenuWidget_Text(cInit *apInit, const cVector3f &avPos
 											cMainMenuWidget *apExtra, float afMaxWidth)
 : cMainMenuWidget(apInit,avPos,cVector2f(1,1))
 {
-	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt",30);
+	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt");
 
 	mfMaxWidth = afMaxWidth;
 
@@ -402,7 +402,7 @@ cMainMenuWidget_List::cMainMenuWidget_List(cInit *apInit, const cVector3f &avPos
 {
 	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
 
-	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt",30);
+	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt");
 
 	mpBackGfx = mpDrawer->CreateGfxObject("effect_white.jpg",eGfxMaterial::DiffuseAlpha);
 
@@ -1834,7 +1834,7 @@ cMainMenu::cMainMenu(cInit *apInit)  : iUpdateable("MainMenu")
 	}
 	
 	//load fonts
-	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt",20,32,255);
+	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt");
 	mpTipFont  = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt");
 
 	//////////////////////////////////
