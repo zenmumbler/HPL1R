@@ -173,7 +173,7 @@ void cMapLoadText::SetActive(bool abX)
 		mpInit->mpGraphicsHelper->ClearScreen();
 		mpDrawer->DrawTexture(mpBack, 0, {800,600});
 		DrawText(true);
-		mpDrawer->DrawAll();
+		mpDrawer->Render();
 		mpInit->mpGraphicsHelper->SwapBuffers();
 
 		mpInit->mpGame->GetGraphics()->GetRenderer3D()->GetRenderList()->Clear();

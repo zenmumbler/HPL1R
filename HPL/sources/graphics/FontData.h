@@ -26,32 +26,26 @@
 #include "system/ArrayTypes.h"
 
 #include <vector>
+#include <unordered_map>
 
 namespace hpl {
 
 	class ImageManager;
 	class iLowLevelGraphics;
 	class cGraphicsDrawer;
-	struct cGfxObject;
+	class iTexture;
 	class Bitmap;
 
 	//------------------------------------------------
 
-	class cGlyph
+	struct cGlyph
 	{
-	public:
-		cGlyph(	const cGfxObject *apObject, const cVector2f &avOffset,
-				const cVector2f &avSize, float afAdvance);
-		~cGlyph() = default;
-
-		const cGfxObject *mpGfxObject;
-		cVector2f mvOffset;
-		cVector2f mvSize;
-		float mfAdvance;
+		cVector2f offset;
+		cVector2f size;
+		float xAdvance;
+		QuadUVs uvs;
+		int page;
 	};
-
-	typedef std::vector<cGlyph*> tGlyphVec;
-	typedef tGlyphVec::iterator tGlyphVecIt;
 
 	class FontData : public iResourceBase
 	{
@@ -59,27 +53,16 @@ namespace hpl {
 		FontData(const tString &asName);
 		~FontData();
 
-		bool CreateFromBitmapFile(const tString &asFileName);
+		bool LoadAngelBMFont(const tString &asFileName);
 
 		/**
 		 * Used internally
 		 */
-		void SetUp(cGraphicsDrawer *apGraphicsDrawer)
+		void SetUp(iLowLevelGraphics *llGfx, cGraphicsDrawer *drawer)
 		{
-			mpGraphicsDrawer = apGraphicsDrawer;
+			_llGfx = llGfx;
+			_drawer = drawer;
 		}
-
-		/**
-		 * Used internally
-		 * \param alNum
-		 * \return
-		 */
-		inline cGlyph* GetGlyph(int alNum)const { return mvGlyphs[alNum];}
-
-		inline unsigned short GetFirstChar(){ return mlFirstChar;}
-		inline unsigned short GetLastChar(){ return mlLastChar;}
-
-		inline const cVector2f& GetSizeRatio()const{ return mvSizeRatio;}
 
 		/**
 		 * Draw a string.
@@ -114,7 +97,7 @@ namespace hpl {
 		 * Get height of the font.
 		 * \return
 		 */
-		inline float GetHeight()const{ return mfHeight; }
+		inline float GetHeight()const{ return mfLineHeight; }
 
 		/**
 		 * Get the length in virtual screen size "pixels" of a formated string
@@ -132,20 +115,14 @@ namespace hpl {
 		 */
 		float GetLength(const cVector2f& avSize,const wchar_t* sText);
 
-	protected:
-		cGraphicsDrawer *mpGraphicsDrawer;
+	private:
+		iLowLevelGraphics *_llGfx;
+		cGraphicsDrawer *_drawer;
+		std::vector<iTexture*> _pages;
+		std::unordered_map<int, cGlyph> _glyphs;
 
-		tGlyphVec mvGlyphs;
-
-		float mfHeight;
-		unsigned short mlFirstChar;
-		unsigned short mlLastChar;
-
-		cVector2f mvSizeRatio;
-
-		cGlyph* CreateGlyph(const Bitmap &aBmp, const cVector2l &avOffset,const cVector2l &avSize,
-							const cVector2l& avFontSize, int alAdvance);
-		void AddGlyph(cGlyph *apGlyph);
+		float mfLineHeight, mfBase, mfBaseOverLineHeight;
+		float _pagePixelWidth, _pagePixelHeight;
 	};
 
 };

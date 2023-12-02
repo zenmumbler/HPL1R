@@ -46,31 +46,31 @@ namespace hpl {
 		tString sourceFile;
 		cResourceImage* image;
 		eGfxMaterial material;
-		std::vector<cVector2f> uvs;
+		QuadUVs uvs;
 		bool isManaged;
 
 		cVector2l GetSize() const;
 		cVector2f GetFloatSize() const;
 	};
-	
-	struct cGfxBufferObject
+
+	struct GfxDrawable
 	{
 		iTexture* texture;
-		eGfxMaterial material;
-		cVector3f mvPosition;
-		cVector2f mvSize;
-		cColor mColor;
-		cVector2f uv0, uv1, uv2, uv3;
+		eGfxMaterial material = eGfxMaterial::DiffuseAlpha;
+		cVector3f mvPosition = 0;
+		cVector2f mvSize = 1;
+		cColor mColor = cColor::White;
+		QuadUVs uvs;
 	};
 
 
 	class cGfxBufferCompare
 	{
 	public:
-		bool operator()(const cGfxBufferObject& aObjectA,const cGfxBufferObject& aObjectB) const;
+		bool operator()(const GfxDrawable& aObjectA,const GfxDrawable& aObjectB) const;
 	};
 
-	typedef std::multiset<cGfxBufferObject,cGfxBufferCompare> tGfxBufferSet;
+	typedef std::multiset<GfxDrawable,cGfxBufferCompare> tGfxBufferSet;
 
 	class cResources;
 
@@ -80,11 +80,12 @@ namespace hpl {
 		cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics, cImageManager* apImageManager, cGpuProgramManager* programManager);
 		~cGraphicsDrawer();
 
+		void Draw(GfxDrawable drawable);
+		void DrawTexture(iTexture *apTex, const cVector3f& avPos, const cVector2f& avSize, const cColor &aColor = cColor::White);
 		void DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos);
 		void DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos, const cVector2f& avSize, const cColor& aColor);
-		void DrawTexture(iTexture *apTex, const cVector3f& avPos, const cVector2f& avSize, const cColor &aColor = cColor::White);
 
-		void DrawAll();
+		void Render();
 
 		const cGfxObject* CreateGfxObject(const tString &fileName, eGfxMaterial material);
 		const cGfxObject* CreateUnmanagedGfxObject(const Bitmap &bitmap, eGfxMaterial material);

@@ -1569,6 +1569,7 @@
 					../dependencies/include,
 					../dependencies/sources,
 				);
+				WARNING_CFLAGS = "-Wpessimizing-move";
 			};
 			name = Debug;
 		};
@@ -1636,6 +1637,7 @@
 					../dependencies/include,
 					../dependencies/sources,
 				);
+				WARNING_CFLAGS = "-Wpessimizing-move";
 			};
 			name = Release;
 		};

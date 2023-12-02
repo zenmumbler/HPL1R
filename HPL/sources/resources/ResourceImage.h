@@ -43,13 +43,13 @@ namespace hpl {
 		cVector2l GetPosition()const{return cVector2l(mRect.x,mRect.y);}
 
 		iTexture *GetTexture() const;
-		const std::vector<cVector2f>& GetUVs() const { return _uvs; };
+		const QuadUVs& GetUVs() const { return _uvs; };
 
 		cFrameBitmap *GetFrameBitmap() const { return _frameBitmap.get(); }
 
 	private:
 		std::shared_ptr<cFrameBitmap> _frameBitmap;
-		std::vector<cVector2f> _uvs;
+		QuadUVs _uvs;
 		cRect2l mRect;
 	};
 

@@ -185,13 +185,7 @@ namespace hpl {
 
 		cBoundingVolume mFogBV;
 
-		tVertexVec mvVtxRect;
-
-		int aaa = 0xAABBCCDD;
-		int bbb = 0x11223344;
 		cRenderList *mpRenderList;
-		int aaa2 = 0xAABBCCDD;
-		int bbb2 = 0x11223344;
 
 		iVertexBuffer* mpSkyBox;
 		iTexture* mpSkyBoxTexture;

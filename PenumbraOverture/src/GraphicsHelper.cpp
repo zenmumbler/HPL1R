@@ -68,7 +68,7 @@ void cGraphicsHelper::DrawLoadingScreen(const tString &asFile)
 	mpFont->Draw(cVector3f(400,300,50),22,cColor(1,1),eFontAlign_Center,
 				_W("%ls"),kTranslate("LoadTexts", "Loading").c_str());
 
-	mpDrawer->DrawAll();
+	mpDrawer->Render();
 
 	SwapBuffers();
 

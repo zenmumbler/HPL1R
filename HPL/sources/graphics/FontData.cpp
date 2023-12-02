@@ -19,8 +19,8 @@
 #include "graphics/FontData.h"
 
 #include "graphics/GraphicsDrawer.h"
+#include "graphics/LowLevelGraphics.h"
 
-#include "resources/ResourceImage.h"
 #include "resources/LoadImage.h"
 #include "system/Log.h"
 
@@ -33,18 +33,6 @@ namespace hpl {
 	// CONSTRUCTORS
 	//////////////////////////////////////////////////////////////////////////
 
-
-	//-----------------------------------------------------------------------
-
-	cGlyph::cGlyph(	const cGfxObject *apObject, const cVector2f &avOffset,
-					const cVector2f &avSize, float afAdvance)
-	{
-		mpGfxObject = apObject;
-		mvOffset = avOffset;
-		mvSize = avSize;
-		mfAdvance = afAdvance;
-	}
-
 	//-----------------------------------------------------------------------
 
 	FontData::FontData(const tString &asName)
@@ -56,16 +44,8 @@ namespace hpl {
 
 	FontData::~FontData()
 	{
-		for(int i=0; i <(int)mvGlyphs.size(); i++)
-		{
-			if(mvGlyphs[i])
-			{
-				if (mvGlyphs[i]->mpGfxObject) {
-					// [zm] Graphics has already been destroyed at this point...
-					// mpGraphicsDrawer->DestroyGfxObject(mvGlyphs[i]->mpGfxObject);
-				}
-				delete mvGlyphs[i];
-			}
+		for (auto page : _pages) {
+			delete page;
 		}
 	}
 
@@ -78,7 +58,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool FontData::CreateFromBitmapFile(const tString &asFileName)
+	bool FontData::LoadAngelBMFont(const tString &asFileName)
 	{
 		tString sPath = cString::GetFilePath(asFileName);
 
@@ -88,7 +68,7 @@ namespace hpl {
 
 		if(pXmlDoc->LoadFile()==false)
 		{
-			Error("Couldn't load angle code font file '%s'\n",asFileName.c_str());
+			Error("Couldn't load angelcode BMFont file '%s'\n", asFileName.c_str());
 			delete pXmlDoc;
 			return false;
 		}
@@ -99,18 +79,15 @@ namespace hpl {
 		// Load Common info
 		TiXmlElement *pCommonElem = pRootElem->FirstChildElement("common");
 
-		int lLineHeight = cString::ToInt(pCommonElem->Attribute("lineHeight"),0);
-		int lBase = cString::ToInt(pCommonElem->Attribute("base"),0);
+		mfLineHeight = cString::ToFloat(pCommonElem->Attribute("lineHeight"),0);
+		mfBase = cString::ToInt(pCommonElem->Attribute("base"),0);
+		_pagePixelWidth = cString::ToFloat(pCommonElem->Attribute("scaleW"), 32);
+		_pagePixelHeight = cString::ToFloat(pCommonElem->Attribute("scaleH"), 32);
 
-		mlFirstChar =0;
-		mlLastChar = 3000; //Get this num from something.
+		mfBaseOverLineHeight = mfBase / mfLineHeight;
 
-		mfHeight = (float)lLineHeight;
+		_glyphs.reserve(500);
 
-		mvGlyphs.resize(3000, NULL);
-
-		mvSizeRatio.x = (float)lBase / (float)lLineHeight;
-		mvSizeRatio.y = 1;
 
 		////////////////////////////////////////////
 		// Load bitmaps
@@ -119,20 +96,36 @@ namespace hpl {
 		TiXmlElement *pPagesRootElem = pRootElem->FirstChildElement("pages");
 
 		TiXmlElement *pPageElem = pPagesRootElem->FirstChildElement("page");
-		for(; pPageElem != NULL; pPageElem = pPageElem->NextSiblingElement("page"))
+		for (int pageNumber = 0; pPageElem != NULL; pPageElem = pPageElem->NextSiblingElement("page"), pageNumber++)
 		{
 			tString sFileName = pPageElem->Attribute("file");
 			tString sFilePath = cString::SetFilePath(sFileName,sPath);
 
-			auto bitmap = LoadBitmapFile(sFilePath);
-			if (! bitmap)
+			auto maybeBitmap = LoadBitmapFile(sFilePath);
+			if (! maybeBitmap)
 			{
-				Error("Couldn't load bitmap %s for FNT file '%s'\n",sFilePath.c_str(),asFileName.c_str());
+				Error("Couldn't load bitmap %s for FNT file '%s'\n", sFilePath.c_str(), asFileName.c_str());
 				delete pXmlDoc;
 				return false;
 			}
 
-			vBitmaps.push_back(std::move(*bitmap));
+			auto bitmap = std::move(*maybeBitmap);
+			auto bmWidth = bitmap.GetWidth();
+			auto bmHeight = bitmap.GetHeight();
+
+			// Set alpha to grayscale value of glyph pixel
+			auto pixelData = bitmap.GetRawData<uint8_t>();
+			for (int y=0; y < bmHeight; y++) {
+				for (int x=0; x < bmWidth; x++) {
+					pixelData[3] = pixelData[0];
+					pixelData += 4;
+				}
+			}
+
+			// create page texture and add to the list
+			auto pageTexture = _llGfx->CreateTexture(GetName() + "_page" + std::to_string(pageNumber), eTextureTarget_2D);
+			pageTexture->CreateFromBitmap(bitmap);
+			_pages.push_back(pageTexture);
 		}
 
 		////////////////////////////////////////////
@@ -144,42 +137,50 @@ namespace hpl {
 		{
 			//Get the info on the character
 			int lId = cString::ToInt(pCharElem->Attribute("id"),0);
-			int lX = cString::ToInt(pCharElem->Attribute("x"),0);
-			int lY = cString::ToInt(pCharElem->Attribute("y"),0);
+			float fX = cString::ToInt(pCharElem->Attribute("x"),0);
+			float fY = cString::ToInt(pCharElem->Attribute("y"),0);
 
-			int lW = cString::ToInt(pCharElem->Attribute("width"),0);
-			int lH = cString::ToInt(pCharElem->Attribute("height"),0);
+			float fW = cString::ToInt(pCharElem->Attribute("width"),0);
+			float fH = cString::ToInt(pCharElem->Attribute("height"),0);
 
-			int lXOffset = cString::ToInt(pCharElem->Attribute("xoffset"),0);
-			int lYOffset = cString::ToInt(pCharElem->Attribute("yoffset"),0);
+			float fXOffset = cString::ToInt(pCharElem->Attribute("xoffset"),0);
+			float fYOffset = cString::ToInt(pCharElem->Attribute("yoffset"),0);
 
-			int lAdvance = cString::ToInt(pCharElem->Attribute("xadvance"),0);
+			float fAdvance = cString::ToInt(pCharElem->Attribute("xadvance"),0);
 
 			int lPage = cString::ToInt(pCharElem->Attribute("page"),0);
 
-			//Get the bitmap where the character graphics is
-			auto& sourceBitmap = vBitmaps[lPage];
-
-			//Create a bitmap for the character.
-			Bitmap bmp{lW, lH};
-
-			//Copy from source to character bitmap
-			bmp.CopyFromBitmap(sourceBitmap, lX, lY, lW, lH);
-
-			//Set alpha to grayscale value of glyph pixel
-			auto pixelData = bmp.GetRawData<uint8_t>();
-			for (int y=0; y < bmp.GetHeight(); y++) {
-				for (int x=0; x < bmp.GetWidth(); x++) {
-					uint8_t *Pix = pixelData + (y * bmp.GetWidth() * 4) + x * 4;
-					Pix[3] = Pix[0];
-				}
-			}
-
 			//Create glyph and place it correctly.
-			cGlyph *pGlyph = CreateGlyph(bmp, cVector2l(lXOffset,lYOffset), cVector2l(lW,lH),
-										cVector2l(lBase,lLineHeight), lAdvance);
+			cVector2f vSize {
+				fW / mfBase * mfBaseOverLineHeight,
+				fH / mfLineHeight
+			};
+			cVector2f vOffset {
+				fXOffset / mfBase,
+				fYOffset / mfLineHeight
+			};
+			float unitAdvance = fAdvance / mfBase * mfBaseOverLineHeight;
 
-			mvGlyphs[lId] = pGlyph;
+			float uvLeft = fX / _pagePixelWidth;
+			float uvTop = fY / _pagePixelHeight;
+			float uvRight = (fX + fW) / _pagePixelWidth;
+			float uvBottom = (fY + fH) / _pagePixelHeight;
+
+			_glyphs.insert({
+				lId,
+				{
+					.page = lPage,
+					.offset = vOffset,
+					.size = vSize,
+					.xAdvance = unitAdvance,
+					.uvs = {
+						.uv0 { uvLeft, uvTop },
+						.uv1 { uvRight, uvTop },
+						.uv2 { uvRight, uvBottom },
+						.uv3 { uvLeft, uvBottom }
+					}
+				}
+			});
 		}
 
 		//Destroy XML
@@ -214,23 +215,22 @@ namespace hpl {
 
 		while(sText[lCount] != 0)
 		{
-			wchar_t lGlyphNum = ((wchar_t)sText[lCount]);
-			if(lGlyphNum<mlFirstChar || lGlyphNum>mlLastChar){
-				lCount++;
-				continue;
-			}
-			lGlyphNum -= mlFirstChar;
+			wchar_t codePoint = sText[lCount];
 
+			if (_glyphs.find(codePoint) != _glyphs.end()) {
+				auto &glyph = _glyphs[codePoint];
+				cVector2f vOffset(glyph.offset * avSize);
+				cVector2f vSize(glyph.size * avSize);
 
-			cGlyph *pGlyph = mvGlyphs[lGlyphNum];
-			if(pGlyph)
-			{
-				cVector2f vOffset(pGlyph->mvOffset * avSize);
-				cVector2f vSize(pGlyph->mvSize * avSize);
+				_drawer->Draw({
+					.texture = _pages[glyph.page],
+					.mvPosition = vPos + vOffset,
+					.mvSize = vSize,
+					.mColor = aCol,
+					.uvs = glyph.uvs
+				});
 
-				mpGraphicsDrawer->DrawGfxObject(pGlyph->mpGfxObject,vPos + vOffset,vSize,aCol);
-
-				vPos.x += pGlyph->mfAdvance*avSize.x;
+				vPos.x += glyph.xAdvance * avSize.x;
 			}
 			lCount++;
 		}
@@ -391,28 +391,22 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	float FontData::GetLength(const cVector2f& avSize,const wchar_t* sText)
+	float FontData::GetLength(const cVector2f& avSize, const wchar_t* sText)
 	{
 		int lCount=0;
 		float lXAdd =0;
 		float fLength =0;
 		while(sText[lCount] != 0)
 		{
-			unsigned short lGlyphNum = ((wchar_t)sText[lCount]);
-			if(lGlyphNum<mlFirstChar || lGlyphNum>mlLastChar){
-				lCount++;
-				continue;
-			}
-			lGlyphNum -= mlFirstChar;
+			unsigned short codePoint = sText[lCount];
 
-
-			cGlyph *pGlyph = mvGlyphs[lGlyphNum];
-			if(pGlyph)
+			if (_glyphs.find(codePoint) != _glyphs.end())
 			{
-				cVector2f vOffset(pGlyph->mvOffset * avSize);
-				cVector2f vSize(pGlyph->mvSize * avSize);
+				auto& glyph = _glyphs[codePoint];
+				cVector2f vOffset(glyph.offset * avSize);
+				cVector2f vSize(glyph.size * avSize);
 
-				fLength += pGlyph->mfAdvance*avSize.x;
+				fLength += glyph.xAdvance * avSize.x;
 			}
 			lCount++;
 		}
@@ -421,7 +415,6 @@ namespace hpl {
 	}
 
 	//-----------------------------------------------------------------------
-
 
 	float FontData::GetLengthFmt(const cVector2f& avSize,const wchar_t* fmt,...)
 	{
@@ -434,6 +427,7 @@ namespace hpl {
 
 		return GetLength(avSize, sText);
 	}
+
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////
@@ -441,41 +435,6 @@ namespace hpl {
 	//////////////////////////////////////////////////////////////////////////
 
 	//-----------------------------------------------------------------------
-
-	cGlyph* FontData::CreateGlyph(const Bitmap &aBmp, const cVector2l &avOffset,const cVector2l &avSize,
-								const cVector2l& avFontSize, int alAdvance)
-	{
-		//Here the bitmap should be saved to diskk for faster loading.
-
-		//////////////////////////
-		//Gfx object
-		const cGfxObject* pObject = mpGraphicsDrawer->CreateUnmanagedGfxObject(aBmp, eGfxMaterial::DiffuseAlpha);
-
-		//////////////////////////
-		//Sizes
-		cVector2f vSize;
-		vSize.x = ((float)avSize.x)/((float)avFontSize.x) * mvSizeRatio.x;
-		vSize.y = ((float)avSize.y)/((float)avFontSize.y) * mvSizeRatio.y;
-
-		cVector2f vOffset;
-		vOffset.x = ((float)avOffset.x)/((float)avFontSize.x);
-		vOffset.y = ((float)avOffset.y)/((float)avFontSize.y);
-
-		float fAdvance = ((float)alAdvance)/((float)avFontSize.x) * mvSizeRatio.x;
-
-		cGlyph* pGlyph = new cGlyph(pObject,vOffset,vSize,fAdvance);
-
-		return pGlyph;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void FontData::AddGlyph(cGlyph *apGlyph)
-	{
-		mvGlyphs.push_back(apGlyph);
-	}
-
-
 
 	//-----------------------------------------------------------------------
 

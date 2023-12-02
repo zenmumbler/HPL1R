@@ -41,11 +41,12 @@ namespace hpl {
 		auto vTexSize   = cVector2f{(float)mRect.w, (float)mRect.h} / sourceSize;
 		auto vTexPos    = cVector2f{(float)mRect.x, (float)mRect.y} / sourceSize;
 
-		_uvs.reserve(4);
-		_uvs.emplace_back(vTexPos.x + kContractSize, vTexPos.y + kContractSize);
-		_uvs.emplace_back(vTexPos.x + vTexSize.x - kContractSize, vTexPos.y + kContractSize );
-		_uvs.emplace_back(vTexPos.x + vTexSize.x - kContractSize, vTexPos.y + vTexSize.y - kContractSize);
-		_uvs.emplace_back(vTexPos.x + kContractSize, vTexPos.y + vTexSize.y - kContractSize);
+		_uvs = {
+			.uv0 = { vTexPos.x + kContractSize, vTexPos.y + kContractSize },
+			.uv1 = { vTexPos.x + vTexSize.x - kContractSize, vTexPos.y + kContractSize },
+			.uv2 = { vTexPos.x + vTexSize.x - kContractSize, vTexPos.y + vTexSize.y - kContractSize },
+			.uv3 = { vTexPos.x + kContractSize, vTexPos.y + vTexSize.y - kContractSize }
+		};
 	}
 
 	//-----------------------------------------------------------------------

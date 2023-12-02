@@ -30,12 +30,6 @@ namespace hpl {
 	const int MAX_TEXTUREUNITS = 8;
 	const int MAX_NUM_OF_LIGHTS = 30;
 
-	enum eMatrix
-	{
-		eMatrix_ModelView,
-		eMatrix_Projection
-	};
-
 	enum ePrimitiveType
 	{
 		ePrimitiveType_Tri,
@@ -71,6 +65,15 @@ namespace hpl {
 		eFontAlign_Left,
 		eFontAlign_Right,
 		eFontAlign_Center
+	};
+
+	//---------------------------------------
+
+	struct QuadUVs {
+		cVector2f uv0 = {0,0};
+		cVector2f uv1 = {1,0};
+		cVector2f uv2 = {1,1};
+		cVector2f uv3 = {0,1};
 	};
 
 	//---------------------------------------

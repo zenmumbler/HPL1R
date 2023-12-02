@@ -234,7 +234,7 @@ namespace hpl {
 		{
 			apUpdater->OnPostSceneDraw();
 		}
-		mpGraphics->GetDrawer()->DrawAll();
+		mpGraphics->GetDrawer()->Render();
 
 		apUpdater->OnPostGUIDraw();
 	}

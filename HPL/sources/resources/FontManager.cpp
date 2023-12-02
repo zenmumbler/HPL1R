@@ -61,14 +61,14 @@ namespace hpl {
 		if(pFont==NULL && sPath!="")
 		{
 			pFont = new FontData(asNewName);
-			pFont->SetUp(mpGraphics->GetDrawer());
+			pFont->SetUp(mpGraphics->GetLowLevel(), mpGraphics->GetDrawer());
 
 			tString sExt = cString::ToLowerCase(cString::GetFileExt(asName));
 
 			//Angel code font type
 			if(sExt == "fnt")
 			{
-				if(pFont->CreateFromBitmapFile(sPath)==false){
+				if(pFont->LoadAngelBMFont(sPath)==false){
 					delete pFont;
 					EndLoad();
 					return NULL;

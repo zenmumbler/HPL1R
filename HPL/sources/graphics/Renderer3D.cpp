@@ -84,13 +84,6 @@ namespace hpl {
 
 		mfRenderTime =0;
 
-		mvVtxRect.resize(4);
-		mvVtxRect[0] = cVertex(cVector3f(0,0,0),cVector2f(0,1),cColor(1,1) );
-		mvVtxRect[1] = cVertex(cVector3f(1,0,0),cVector2f(1,1),cColor(1,1));
-		mvVtxRect[2] = cVertex(cVector3f(1,1,0),cVector2f(1,0),cColor(1,1));
-		mvVtxRect[3] = cVertex(cVector3f(0,1,40),cVector2f(0,0),cColor(1,1));
-
-
 		//Set up render settings.
 		mRenderSettings.mpLowLevel = _llGfx;
 		mRenderSettings.mbLog = false;

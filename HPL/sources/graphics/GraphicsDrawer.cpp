@@ -80,7 +80,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 	
-	bool cGfxBufferCompare::operator()(const cGfxBufferObject& aObjectA, const cGfxBufferObject& aObjectB) const
+	bool cGfxBufferCompare::operator()(const GfxDrawable& aObjectA, const GfxDrawable& aObjectB) const
 	{
 		float zA = aObjectA.mvPosition.z;
 		float zB = aObjectB.mvPosition.z;
@@ -104,21 +104,36 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	void cGraphicsDrawer::Draw(GfxDrawable drawable) {
+		m_setGfxBuffer.insert(drawable);
+	}
+
+	//-----------------------------------------------------------------------
+
+	void cGraphicsDrawer::DrawTexture(iTexture *apTex, const cVector3f& avPos, const cVector2f& avSize, const cColor &aColor) {
+		m_setGfxBuffer.insert({
+			.texture = apTex,
+			.mvPosition = avPos,
+			.mvSize = avSize,
+			.mColor = aColor,
+		});
+	}
+
+	//-----------------------------------------------------------------------
+
 	void cGraphicsDrawer::DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos,
 										const cVector2f& avSize, const cColor& aColor)
 	{
 		FlushImage(apObject);
 
-		cGfxBufferObject BuffObj {
+		m_setGfxBuffer.insert({
 			.texture = apObject->image->GetTexture(),
 			.material = apObject->material,
 			.mvPosition = avPos,
 			.mvSize = avSize,
 			.mColor = aColor,
-			.uv0 = apObject->uvs[0], .uv1 = apObject->uvs[1], .uv2 = apObject->uvs[2], .uv3 = apObject->uvs[3]
-		};
-
-		m_setGfxBuffer.insert(BuffObj);
+			.uvs = apObject->uvs
+		});
 	}
 
 	//-----------------------------------------------------------------------
@@ -126,21 +141,6 @@ namespace hpl {
 	void cGraphicsDrawer::DrawGfxObject(const cGfxObject* apObject, const cVector3f& avPos)
 	{
 		DrawGfxObject(apObject, avPos, apObject->GetFloatSize(), cColor::White);
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cGraphicsDrawer::DrawTexture(iTexture *apTex, const cVector3f& avPos, const cVector2f& avSize, const cColor &aColor) {
-		cGfxBufferObject BuffObj {
-			.texture = apTex,
-			.material = eGfxMaterial::DiffuseAlpha,
-			.mvPosition = avPos,
-			.mvSize = avSize,
-			.mColor = aColor,
-			.uv0 = {0,0}, .uv1 = {1,0}, .uv2 = {1,1}, .uv3 = {0,1}
-		};
-
-		m_setGfxBuffer.insert(BuffObj);
 	}
 
 	//-----------------------------------------------------------------------
@@ -170,7 +170,7 @@ namespace hpl {
 	
 	//-----------------------------------------------------------------------
 
-	void cGraphicsDrawer::DrawAll()
+	void cGraphicsDrawer::Render()
 	{
 		//Set all states
 		mpLowLevelGraphics->SetDepthTestActive(false);
@@ -228,13 +228,13 @@ namespace hpl {
 			};
 
 			// add quad as 2 triangles
-			_batch.AddVertex(vPos[0], color, pObj.uv0);
-			_batch.AddVertex(vPos[1], color, pObj.uv1);
-			_batch.AddVertex(vPos[2], color, pObj.uv2);
+			_batch.AddVertex(vPos[0], color, pObj.uvs.uv0);
+			_batch.AddVertex(vPos[1], color, pObj.uvs.uv1);
+			_batch.AddVertex(vPos[2], color, pObj.uvs.uv2);
 
-			_batch.AddVertex(vPos[2], color, pObj.uv2);
-			_batch.AddVertex(vPos[3], color, pObj.uv3);
-			_batch.AddVertex(vPos[0], color, pObj.uv0);
+			_batch.AddVertex(vPos[2], color, pObj.uvs.uv2);
+			_batch.AddVertex(vPos[3], color, pObj.uvs.uv3);
+			_batch.AddVertex(vPos[0], color, pObj.uvs.uv0);
 		}
 		
 		// render final batch, if any
