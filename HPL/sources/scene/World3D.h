@@ -177,7 +177,7 @@ namespace hpl {
 	{
 	public:
 		cWorld3D(tString asName,cGraphics *apGraphics,cResources *apResources,cSound* apSound,
-					cPhysics *apPhysics, cScene *apScene, cAI *apAI);
+					cPhysics *apPhysics, cScene *apScene);
 		~cWorld3D();
 
 		tString GetName(){ return msName;}
@@ -297,8 +297,6 @@ namespace hpl {
 
 		///// AI NODE METHODS ////////////////
 
-		void GenerateAINodes(cAINodeGeneratorParams *apParams);
-
 		cAINodeContainer* CreateAINodeContainer(const tString &asName,
 											const tString &asNodeName,
 											const cVector3f &avSize,
@@ -333,7 +331,6 @@ namespace hpl {
 		cResources *mpResources;
 		cPhysics *mpPhysics;
 		cScene *mpScene;
-		cAI *mpAI;
 
 		iPhysicsWorld *mpPhysicsWorld;
 		bool mbAutoDeletePhysicsWorld;

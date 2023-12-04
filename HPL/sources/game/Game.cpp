@@ -105,14 +105,11 @@ namespace hpl {
 		Log(" Creating physics module\n");
 		mpPhysics = mpGameSetup->CreatePhysics();
 
-		Log(" Creating ai module\n");
-		mpAI = mpGameSetup->CreateAI();
-
 		Log(" Creating script module\n");
 		mpScript = mpGameSetup->CreateScript(mpResources);
 
 		Log(" Creating scene module\n");
-		mpScene = new cScene(mpGraphics, mpResources, mpSound,mpPhysics, mpAI);
+		mpScene = new cScene(mpGraphics, mpResources, mpSound, mpPhysics);
 
 		Log("--------------------------------------------------------\n\n");
 
@@ -133,9 +130,6 @@ namespace hpl {
 		//Init physics
 		mpPhysics->Init(mpResources);
 
-		//Init AI
-		mpAI->Init();
-
 		Log("Initializing Game Module\n");
 		Log("--------------------------------------------------------\n");
 		//Create the updatehandler
@@ -147,7 +141,6 @@ namespace hpl {
 		mpUpdater->AddGlobalUpdate(mpPhysics);
 		mpUpdater->AddGlobalUpdate(mpScene);
 		mpUpdater->AddGlobalUpdate(mpSound);
-		mpUpdater->AddGlobalUpdate(mpAI);
 		mpUpdater->AddGlobalUpdate(mpResources);
 		mpUpdater->AddGlobalUpdate(mpScript);
 
@@ -195,7 +188,6 @@ namespace hpl {
 		delete mpGraphics;
 		delete mpResources;
 		delete mpPhysics;
-		delete mpAI;
 
 		Log(" Deleting game setup provided by user\n");
 		delete mpGameSetup;
@@ -383,13 +375,6 @@ namespace hpl {
 	cPhysics* cGame::GetPhysics()
 	{
 		return mpPhysics;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cAI* cGame::GetAI()
-	{
-		return mpAI;
 	}
 
 	//-----------------------------------------------------------------------

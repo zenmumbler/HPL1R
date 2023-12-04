@@ -33,7 +33,6 @@ namespace hpl {
 	class cSound;
 	class cScript;
 	class cPhysics;
-	class cAI;
 
 	class cFPSCounter
 	{
@@ -120,11 +119,6 @@ namespace hpl {
 		* \return A pointer to the Physics
 		*/
 		cPhysics* GetPhysics();
-		/**
-		*
-		* \return A pointer to the AI
-		*/
-		cAI* GetAI();
 
 		cScript* GetScript();
 
@@ -177,7 +171,6 @@ namespace hpl {
 		cScene *mpScene;
 		cSound *mpSound;
 		cPhysics *mpPhysics;
-		cAI *mpAI;
 		cScript *mpScript;
 	};
 

@@ -26,7 +26,6 @@
 #include "scene/Scene.h"
 #include "sound/Sound.h"
 #include "physics/Physics.h"
-#include "ai/AI.h"
 #include "script/Script.h"
 
 namespace hpl {
@@ -41,7 +40,6 @@ namespace hpl {
 		virtual cResources* CreateResources()=0;
 		virtual cSound* CreateSound()=0;
 		virtual cPhysics* CreatePhysics()=0;
-		virtual cAI* CreateAI()=0;
 		virtual cScript* CreateScript(cResources *apResources)=0;
 	};
 };

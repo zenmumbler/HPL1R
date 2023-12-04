@@ -48,18 +48,15 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cScene::cScene(cGraphics *apGraphics, cResources *apResources, cSound* apSound,cPhysics *apPhysics, cAI *apAI)
+	cScene::cScene(cGraphics *apGraphics, cResources *apResources, cSound* apSound,cPhysics *apPhysics)
 		: iUpdateable("HPL_Scene")
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;
 		mpSound = apSound;
 		mpPhysics = apPhysics;
-		mpAI = apAI;
 
 		mpCurrentWorld3D = NULL;
-
-		mbCameraIsListener = true;
 
 		mbDrawScene = true;
 		mbUpdateMap = true;
@@ -343,7 +340,7 @@ namespace hpl {
 
 	cWorld3D* cScene::CreateWorld3D(const tString& asName)
 	{
-		cWorld3D* pWorld = new cWorld3D(asName,mpGraphics,mpResources,mpSound,mpPhysics,this,mpAI);
+		cWorld3D* pWorld = new cWorld3D(asName, mpGraphics, mpResources, mpSound, mpPhysics, this);
 
 		mlstWorld3D.push_back(pWorld);
 

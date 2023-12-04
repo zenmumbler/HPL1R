@@ -117,14 +117,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cAI* cSDLGameSetup::CreateAI()
-	{
-		cAI *pAI = new cAI();
-		return pAI;
-	}
-
-	//-----------------------------------------------------------------------
-
 	cScript* cSDLGameSetup::CreateScript(cResources *apResources)
 	{
 		cScript *pScript = new cScript(apResources);

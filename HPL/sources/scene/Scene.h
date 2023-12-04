@@ -32,7 +32,6 @@
 
 namespace hpl {
 
-	class cAI;
 	class cGraphics;
 	class cResources;
 	class cSound;
@@ -50,7 +49,7 @@ namespace hpl {
 	class cScene : public iUpdateable
 	{
 	public:
-		cScene(cGraphics *apGraphics,cResources *apResources, cSound* apSound, cPhysics *apPhysics, cAI *apAI);
+		cScene(cGraphics *apGraphics, cResources *apResources, cSound* apSound, cPhysics *apPhysics);
 		~cScene();
 
 		void Reset();
@@ -114,7 +113,6 @@ namespace hpl {
 		cResources *mpResources;
 		cSound *mpSound;
 		cPhysics *mpPhysics;
-		cAI *mpAI;
 
 		bool mbDrawScene;
 		bool mbUpdateMap;

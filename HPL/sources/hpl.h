@@ -141,7 +141,6 @@
 #include "physics/PhysicsJointSlider.h"
 #include "physics/SurfaceData.h"
 
-#include "ai/AI.h"
 #include "ai/AStar.h"
 #include "ai/AINodeContainer.h"
 #include "ai/AINodeGenerator.h"

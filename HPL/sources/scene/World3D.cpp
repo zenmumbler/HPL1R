@@ -68,7 +68,6 @@
 #include "physics/PhysicsWorld.h"
 #include "physics/PhysicsBody.h"
 
-#include "ai/AI.h"
 #include "ai/AINodeContainer.h"
 #include "ai/AINodeGenerator.h"
 #include "ai/AStar.h"
@@ -84,14 +83,13 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cWorld3D::cWorld3D(tString asName,cGraphics *apGraphics,cResources *apResources,cSound* apSound,
-						cPhysics *apPhysics, cScene *apScene, cAI *apAI)
+						cPhysics *apPhysics, cScene *apScene)
 	{
 		mpGraphics = apGraphics;
 		mpResources = apResources;
 		mpSound = apSound;
 		mpPhysics = apPhysics;
 		mpScene = apScene;
-		mpAI = apAI;
 
 		mpRootNode = new cNode3D();
 
@@ -860,14 +858,6 @@ namespace hpl {
 		if(mlstStartPosEntities.empty()) return NULL;
 
 		return mlstStartPosEntities.front();
-	}
-
-
-	//-----------------------------------------------------------------------
-
-	void  cWorld3D::GenerateAINodes(cAINodeGeneratorParams *apParams)
-	{
-		mpAI->GetNodeGenerator()->Generate(this, apParams);
 	}
 
 	//-----------------------------------------------------------------------

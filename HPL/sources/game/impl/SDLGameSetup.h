@@ -39,7 +39,6 @@ namespace hpl {
 		cResources* CreateResources();
 		cSound* CreateSound();
 		cPhysics* CreatePhysics();
-		cAI* CreateAI();
 		cScript* CreateScript(cResources *apResources);
 
 	private:
