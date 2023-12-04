@@ -124,14 +124,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceBase* iResourceManager::FindLoadedResource(const tString &asName, tString &asFilePath)
+	iResourceBase* iResourceManager::FindLoadedResource(const tString &name, tString &outFilePath)
 	{
-		iResourceBase* pResource = GetByName(asName);
-		if(pResource==NULL){
-			asFilePath = FileSearcher::GetFilePath(asName);
+		iResourceBase* pResource = GetByName(name);
+		if (pResource==NULL) {
+			outFilePath = FileSearcher::GetFilePath(name);
 		}
 		else {
-			asFilePath = "";
+			outFilePath = "";
 		}
 
 		return pResource;

@@ -54,10 +54,10 @@ namespace hpl {
 		/**
 		 * Checks if a resource alllready is in the manager, else searches the resources.
 		 * \param &name Name of the resource.
-		 * \param &filePath If the file is not in the manager, the path is put here. "" if there is no such file.
+		 * \param &outFilePath If the file is not in the manager, the path is put here. "" if there is no such file.
 		 * \return A pointer to the resource. NULL if not in manager.
 		 */
-		iResourceBase* FindLoadedResource(const tString &name, tString &filePath);
+		iResourceBase* FindLoadedResource(const tString &name, tString &outFilePath);
 		void AddResource(iResourceBase* resource, bool log=true);
 
 		uint32_t GetHandle();

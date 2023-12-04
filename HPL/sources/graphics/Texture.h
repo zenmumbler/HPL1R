@@ -132,12 +132,6 @@ namespace hpl {
 		bool UsesMipMaps(){ return false; }
 		eTextureTarget GetTarget(){ return mTarget;}
 
-		virtual bool HasAnimation()=0;
-		virtual void NextFrame()=0;
-		virtual void PrevFrame()=0;
-		virtual float GetT()=0;
-		virtual float GetTimeCount()=0;
-		virtual void SetTimeCount(float afX)=0;
 		virtual unsigned int GetCurrentLowlevelHandle()=0;
 
 		int GetWidth() const { return mlWidth; }

@@ -243,9 +243,8 @@ namespace hpl {
 
 	iMaterial* cMaterialManager::LoadFromFile(const tString& asName, const tString& asPath)
 	{
-		TiXmlDocument *pDoc = new TiXmlDocument(asPath.c_str());
+		auto pDoc = std::unique_ptr<TiXmlDocument>(new TiXmlDocument(asPath.c_str()));
 		if(!pDoc->LoadFile()){
-			delete pDoc;
 			return NULL;
 		}
 
@@ -255,14 +254,12 @@ namespace hpl {
 		//Main
 		TiXmlElement *pMain = pRoot->FirstChildElement("Main");
 		if(pMain==NULL){
-			delete pDoc;
 			Error("Main child not found.\n");
 			return NULL;
 		}
 
 		const char* sType = pMain->Attribute("Type");
 		if(sType ==NULL){
-			delete pDoc;
 			Error("Type not found.\n");
 			return NULL;
 		}
@@ -273,7 +270,6 @@ namespace hpl {
 		iMaterial* pMat = mpGraphics->GetMaterialHandler()->Create(asName, sType);
 		if(pMat==NULL){
 			Error("Invalid material type '%s'\n",sType);
-			delete pDoc;
 			return NULL;
 		}
 
@@ -284,7 +280,6 @@ namespace hpl {
 		//Textures
 		TiXmlElement *pTexRoot = pRoot->FirstChildElement("TextureUnits");
 		if(pTexRoot==NULL){
-			delete pDoc;
 			Error("TextureUnits child not found.\n");
 			return NULL;
 		}
@@ -299,8 +294,6 @@ namespace hpl {
 		///////////////////////////
 		//Custom
 		pMat->LoadData(pRoot);
-
-		delete pDoc;
 
 		return pMat;
 	}

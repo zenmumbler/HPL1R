@@ -60,12 +60,6 @@ namespace hpl {
 
 		void Update(float afTimeStep) override;
 
-		bool HasAnimation() override;
-		void NextFrame() override;
-		void PrevFrame() override;
-		float GetT() override;
-		float GetTimeCount() override;
-		void SetTimeCount(float afX) override;
 		unsigned int GetCurrentLowlevelHandle() override;
 
 	private:
