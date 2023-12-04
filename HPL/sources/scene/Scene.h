@@ -90,8 +90,6 @@ namespace hpl {
 		void SetCamera(cCamera* pCam);
 		cCamera* GetCamera(){ return mpActiveCamera; }
 
-		void SetCameraIsListener(bool abX){ mbCameraIsListener = abX; }
-
 		///// WORLD METHODS ////////////////////
 
 		cWorld3D* LoadWorld3D(const tString& asFile, bool abLoadScript, tWorldLoadFlag aFlags);
@@ -122,7 +120,6 @@ namespace hpl {
 
 		tCameraList mlstCamera;
 		cCamera *mpActiveCamera;
-		bool mbCameraIsListener;
 
 		tScriptVarMap m_mapLocalVars;
 		tScriptVarMap m_mapGlobalVars;

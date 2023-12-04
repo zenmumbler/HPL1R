@@ -123,8 +123,7 @@ namespace hpl {
 
 	cScriptVar* cScene::CreateLocalVar(const tString& asName)
 	{
-		cScriptVar* pVar;
-		pVar= GetLocalVar(asName);
+		cScriptVar* pVar = GetLocalVar(asName);
 		if(pVar==NULL)
 		{
 			cScriptVar Var;
@@ -242,14 +241,11 @@ namespace hpl {
 	{
 		if(mpActiveCamera==NULL)return;
 
-		if(mbCameraIsListener)
-		{
-			mpSound->GetLowLevel()->SetListenerAttributes(
-					mpActiveCamera->GetPosition(),
-					cVector3f(0,0,0),
-					mpActiveCamera->GetForward()*-1.0f,
-					mpActiveCamera->GetUp());
-		}
+		mpSound->GetLowLevel()->SetListenerAttributes(
+				mpActiveCamera->GetPosition(),
+				cVector3f(0,0,0),
+				mpActiveCamera->GetForward()*-1.0f,
+				mpActiveCamera->GetUp());
 
 		if(mbUpdateMap && mpCurrentWorld3D)
 		{
