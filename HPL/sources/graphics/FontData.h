@@ -50,19 +50,10 @@ namespace hpl {
 	class FontData : public iResourceBase
 	{
 	public:
-		FontData(const tString &asName);
+		FontData(const tString &name, iLowLevelGraphics *llGfx, cGraphicsDrawer *drawer);
 		~FontData();
 
-		bool LoadAngelBMFont(const tString &asFileName);
-
-		/**
-		 * Used internally
-		 */
-		void SetUp(iLowLevelGraphics *llGfx, cGraphicsDrawer *drawer)
-		{
-			_llGfx = llGfx;
-			_drawer = drawer;
-		}
+		bool LoadAngelBMFont(const tString &fileName);
 
 		/**
 		 * Draw a string.

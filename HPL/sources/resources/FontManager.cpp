@@ -18,10 +18,8 @@
  */
 #include "resources/FontManager.h"
 #include "system/String.h"
-#include "resources/Resources.h"
 #include "graphics/Graphics.h"
 #include "graphics/LowLevelGraphics.h"
-#include "resources/ImageManager.h"
 #include "graphics/FontData.h"
 #include "system/Log.h"
 
@@ -33,11 +31,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cFontManager::cFontManager(cGraphics* apGraphics,cResources *apResources)
+	cFontManager::cFontManager(iLowLevelGraphics *llGfx, cGraphicsDrawer *drawer)
 		: iResourceManager{"font"}
+		, _llGfx{llGfx}
+		, _drawer{drawer}
 	{
-		mpGraphics = apGraphics;
-		mpResources = apResources;
 	}
 
 	//-----------------------------------------------------------------------
@@ -60,8 +58,7 @@ namespace hpl {
 
 		if(pFont==NULL && sPath!="")
 		{
-			pFont = new FontData(asNewName);
-			pFont->SetUp(mpGraphics->GetLowLevel(), mpGraphics->GetDrawer());
+			pFont = new FontData(asNewName, _llGfx, _drawer);
 
 			tString sExt = cString::ToLowerCase(cString::GetFileExt(asName));
 

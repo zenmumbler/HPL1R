@@ -24,13 +24,12 @@
 namespace hpl {
 
 	class cSound;
-	class cResources;
 	class cSoundEntityData;
 
 	class cSoundEntityManager : public iResourceManager
 	{
 	public:
-		cSoundEntityManager(cSound* apSound,cResources *apResources);
+		cSoundEntityManager(cSound* apSound);
 
 		void Preload(const tString& asFile);
 
@@ -38,7 +37,6 @@ namespace hpl {
 
 	private:
 		cSound* mpSound;
-		cResources* mpResources;
 	};
 
 };

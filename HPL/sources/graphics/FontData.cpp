@@ -35,8 +35,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	FontData::FontData(const tString &asName)
-	: iResourceBase(asName)
+	FontData::FontData(const tString &name, iLowLevelGraphics *llGfx, cGraphicsDrawer *drawer)
+	: iResourceBase(name)
+	, _llGfx{llGfx}
+	, _drawer{drawer}
 	{
 	}
 
@@ -91,8 +93,6 @@ namespace hpl {
 
 		////////////////////////////////////////////
 		// Load bitmaps
-		std::vector<Bitmap> vBitmaps;
-
 		TiXmlElement *pPagesRootElem = pRootElem->FirstChildElement("pages");
 
 		TiXmlElement *pPageElem = pPagesRootElem->FirstChildElement("page");

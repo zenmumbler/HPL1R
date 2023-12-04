@@ -35,6 +35,7 @@
 #include "resources/LanguageFile.h"
 #include "resources/impl/MeshLoaderGLTF2.h"
 #include "resources/impl/MeshLoaderCollada.h"
+#include "graphics/Graphics.h"
 
 #include "system/Log.h"
 #include "system/Files.h"
@@ -109,6 +110,7 @@ namespace hpl {
 		AddBaseDirectories();
 
 		Log(" Creating resource managers\n");
+		mlstManagers.reserve(16);
 
 		mpImageManager = new cImageManager(mpLowLevelGraphics);
 		mlstManagers.push_back(mpImageManager);
@@ -118,7 +120,7 @@ namespace hpl {
 		mlstManagers.push_back(mpParticleManager);
 		mpSoundManager = new cSoundManager(apSound, this);
 		mlstManagers.push_back(mpParticleManager);
-		mpFontManager = new cFontManager(apGraphics, this);
+		mpFontManager = new cFontManager(apGraphics->GetLowLevel(), apGraphics->GetDrawer());
 		mlstManagers.push_back(mpFontManager);
 		mpScriptManager = new cScriptManager(apScript, this);
 		mlstManagers.push_back(mpScriptManager);
@@ -128,7 +130,7 @@ namespace hpl {
 		mlstManagers.push_back(mpMaterialManager);
 		mpMeshManager = new cMeshManager(apGraphics, this);
 		mlstManagers.push_back(mpMeshManager);
-		mpSoundEntityManager = new cSoundEntityManager(apSound, this);
+		mpSoundEntityManager = new cSoundEntityManager(apSound);
 		mlstManagers.push_back(mpSoundEntityManager);
 		mpAnimationManager = new cAnimationManager(apGraphics, this);
 		mlstManagers.push_back(mpAnimationManager);
@@ -146,12 +148,9 @@ namespace hpl {
 
 	void cResources::Update(float afTimeStep)
 	{
-		tResourceManagerListIt it = mlstManagers.begin();
-		for(; it != mlstManagers.end(); ++it)
+		for (auto manager : mlstManagers)
 		{
-			iResourceManager *pManager = *it;
-
-			pManager->Update(afTimeStep);
+			manager->Update(afTimeStep);
 		}
 	}
 

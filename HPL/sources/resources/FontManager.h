@@ -23,20 +23,20 @@
 
 namespace hpl {
 
-	class cGraphics;
-	class cResources;
+	class iLowLevelGraphics;
+	class cGraphicsDrawer;
 	class FontData;
 
 	class cFontManager : public iResourceManager
 	{
 	public:
-		cFontManager(cGraphics* apGraphics, cResources *apResources);
+		cFontManager(iLowLevelGraphics *llGfx, cGraphicsDrawer *drawer);
 
 		FontData* CreateFontData(const tString& asName);
 
 	private:
-		cGraphics* mpGraphics;
-		cResources *mpResources;
+		iLowLevelGraphics *_llGfx;
+		cGraphicsDrawer *_drawer;
 	};
 
 };

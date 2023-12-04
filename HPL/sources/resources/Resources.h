@@ -98,16 +98,6 @@ namespace hpl {
 
 	//-------------------------------------------------------
 
-	// Should this be made a map so you can do
-	// GetManager(tString) when getting a manager?
-	// This way you would be able to add your own resource types
-	// easily.
-	typedef std::list<iResourceManager*> tResourceManagerList;
-	typedef tResourceManagerList::iterator tResourceManagerListIt;
-
-	//-------------------------------------------------------
-
-
 	class cResources : public iUpdateable
 	{
 	public:
@@ -149,7 +139,7 @@ namespace hpl {
 
 		iLowLevelGraphics *mpLowLevelGraphics;
 
-		tResourceManagerList mlstManagers;
+		std::vector<iResourceManager*> mlstManagers;
 		cImageManager *mpImageManager;
 		cGpuProgramManager *mpGpuProgramManager;
 		cParticleManager* mpParticleManager;
