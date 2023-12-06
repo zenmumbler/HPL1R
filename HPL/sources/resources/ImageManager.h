@@ -35,7 +35,6 @@ namespace hpl {
 		cImageManager(iLowLevelGraphics *apLowLevelGraphics);
 
 		cResourceImage* CreateImage(const tString& asName);
-		cResourceImage* CreateFromBitmap(const Bitmap &bmp);
 
 	private:
 		iLowLevelGraphics *mpLowLevelGraphics;
@@ -48,4 +47,5 @@ namespace hpl {
 	};
 
 };
+
 #endif // HPL_RESOURCEMANAGER_H

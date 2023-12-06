@@ -47,7 +47,6 @@ namespace hpl {
 		cResourceImage* image;
 		eGfxMaterial material;
 		QuadUVs uvs;
-		bool isManaged;
 
 		cVector2l GetSize() const;
 		cVector2f GetFloatSize() const;
@@ -88,7 +87,6 @@ namespace hpl {
 		void Render();
 
 		const cGfxObject* CreateGfxObject(const tString &fileName, eGfxMaterial material);
-		const cGfxObject* CreateUnmanagedGfxObject(const Bitmap &bitmap, eGfxMaterial material);
 		void DestroyGfxObject(const cGfxObject* apObject);
 
 		cImageManager *GetImageManager() const { return mpImageManager; }

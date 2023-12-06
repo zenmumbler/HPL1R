@@ -39,6 +39,7 @@ namespace hpl {
 	: mpLowLevelGraphics{apLowLevelGraphics}
 	, mpImageManager{apImageManager}
 	, _programManager{programManager}
+	, m_setGfxBuffer{}
 	, _batch(BATCH_VERTEX_COUNT, apLowLevelGraphics)
 	{
 		_program = _programManager->CreateProgram("Drawer.vert", "Drawer.frag");
@@ -265,7 +266,6 @@ namespace hpl {
 			.image = pImage,
 			.material = material,
 			.uvs = pImage->GetUVs(),
-			.isManaged = true
 		};
 
 		mvGfxObjects.push_back(go);
@@ -274,31 +274,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	const cGfxObject* cGraphicsDrawer::CreateUnmanagedGfxObject(const Bitmap &bitmap, eGfxMaterial material)
-	{
-		cResourceImage* pImage = mpImageManager->CreateFromBitmap(bitmap);
-		if (pImage == nullptr) {
-			Error("Couldn't create image from bitmap!\n");
-			return nullptr;
-		}
-
-		return new cGfxObject{
-			.sourceFile = "",
-			.image = pImage,
-			.material = material,
-			.uvs = pImage->GetUVs(),
-			.isManaged = false
-		};
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cGraphicsDrawer::DestroyGfxObject(const cGfxObject* obj)
 	{
 		mpImageManager->Destroy(obj->image);
-		if (obj->isManaged) {
-			STLFindAndDelete(mvGfxObjects, obj);
-		}
+		STLFindAndDelete(mvGfxObjects, obj);
 	}
 
 	//-----------------------------------------------------------------------

@@ -86,20 +86,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cResourceImage* cImageManager::CreateFromBitmap(const Bitmap &bmp)
-	{
-		cResourceImage *pImage = AddToFrame(bmp);
-
-		if(pImage){
-			AddResource(pImage, false);
-			pImage->IncUserCount();
-		}
-
-		return pImage;
-	}
-
-	//-----------------------------------------------------------------------
-
 	//////////////////////////////////////////////////////////////////////////
 	// PRIVATE METHODS
 	//////////////////////////////////////////////////////////////////////////
@@ -145,7 +131,7 @@ namespace hpl {
 
 		if (frameIter == _currentFrames.end()) {
 			// No applicable frame found. Append new frame to end, update iterator
-			// Log("RESIMG: No frame with space found, creating new #%d\n", s_FrameIndex);
+			Log("RESIMG: No frame with space found, creating new #%d\n", s_FrameIndex);
 			iTexture *pTex = mpLowLevelGraphics->CreateTexture(tString{"FRAME_"} + std::to_string(s_FrameIndex), eTextureTarget_2D);
 			auto newFrame = std::make_shared<cFrameBitmap>(FRAME_DIM, FRAME_DIM, pTex, s_FrameIndex++);
 			frameIter = _currentFrames.insert(_currentFrames.end(), newFrame);
