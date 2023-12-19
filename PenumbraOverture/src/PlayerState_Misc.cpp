@@ -227,7 +227,7 @@ void cPlayerState_InteractMode::OnUpdate(float afTimeStep)
 
 	cVector3f vDir = mpPlayer->GetCamera()->UnProject(
 		mpPlayer->GetCrossHairPos(),
-		mpInit->mpGame->GetGraphics()->GetLowLevel());
+		mpInit->mpGame->GetLowLevelGraphics());
 	vStart = mpPlayer->GetCamera()->GetPosition();
 	vEnd = vStart + vDir * mpPlayer->GetPickRay()->mfMaxDistance;
 
@@ -452,7 +452,7 @@ void cPlayerState_UseItem::OnUpdate(float afTimeStep)
 
 	cVector3f vDir = mpPlayer->GetCamera()->UnProject(
 		mpPlayer->GetCrossHairPos(),
-		mpInit->mpGame->GetGraphics()->GetLowLevel());
+		mpInit->mpGame->GetLowLevelGraphics());
 	vStart = mpPlayer->GetCamera()->GetPosition();
 	vEnd = vStart + vDir * mpPlayer->GetPickRay()->mfMaxDistance;
 

@@ -161,7 +161,7 @@ void cGameLadder::OnPlayerInteract()
 
 void cGameLadder::OnPostSceneDraw()
 {
-	//mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawLine(mvBodies[0]->GetWorldPosition(),
+	//mpInit->mpGame->GetLowLevelGraphics()->DrawLine(mvBodies[0]->GetWorldPosition(),
 	//											mvBodies[0]->GetWorldPosition()+mvForward,
 	//											cColor(0,1,0,1));
 }

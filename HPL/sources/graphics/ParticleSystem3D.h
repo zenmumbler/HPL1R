@@ -28,7 +28,7 @@ namespace hpl {
 	class iParticleEmitter3D;
 	class iParticleEmitterData;
 	class cParticleManager;
-	class cGraphics;
+	class cMaterialManager;
 
 	//----------------------------------------------------
 
@@ -37,20 +37,18 @@ namespace hpl {
 	class cParticleSystemData3D : public iResourceBase
 	{
 	public:
-		cParticleSystemData3D(const tString &asName,cResources* apResources,cGraphics *apGraphics);
+		cParticleSystemData3D(const tString &asName, iLowLevelGraphics *llGfx, cMaterialManager *materialMgr);
 		virtual ~cParticleSystemData3D();
 
 		cParticleSystem3D* Create(tString asName, cVector3f avSize,const cMatrixf& a_mtxTransform);
 
 		bool LoadFromFile(const tString &asFile);
 
-		void AddEmitterData(iParticleEmitterData *apData);
-
 		iParticleEmitterData* GetEmitterData(int alIdx) const { return mvEmitterData[alIdx]; }
 
 	private:
-		cResources* mpResources;
-		cGraphics *mpGraphics;
+		iLowLevelGraphics *_llGfx;
+		cMaterialManager *_materialMgr;
 
 		std::vector<iParticleEmitterData*> mvEmitterData;
 	};
@@ -88,8 +86,7 @@ namespace hpl {
 		typedef iEntity3D __super;
 	#endif
 	public:
-		cParticleSystem3D(	const tString asName,cParticleSystemData3D *apData,
-							cResources *apResources, cGraphics *apGraphics);
+		cParticleSystem3D(const tString asName, cParticleSystemData3D *apData);
 		~cParticleSystem3D();
 
 		void SetVisible(bool abVisible);
@@ -127,8 +124,6 @@ namespace hpl {
 		void SaveDataSetup(cSaveObjectHandler *apSaveObjectHandler, cGame *apGame);
 
 	private:
-		cResources *mpResources;
-		cGraphics *mpGraphics;
 		cParticleManager *mpParticleManager;
 		cParticleSystemData3D *mpData;
 

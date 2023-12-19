@@ -19,10 +19,11 @@
 #ifndef HPL_TEXTURE_H
 #define HPL_TEXTURE_H
 
-#include <vector>
 #include "graphics/Bitmap.h"
 #include "graphics/GraphicsTypes.h"
 #include "resources/ResourceBase.h"
+
+#include <vector>
 
 namespace hpl {
 
@@ -108,8 +109,6 @@ namespace hpl {
 		eTextureFilter GetFilter(){ return mFilter;}
 		float GetAnisotropyDegree(float afX){ return mfAnisotropyDegree;}
 
-		virtual float GetGamma()=0;
-		virtual void SetGamma(float afGamma)=0;
 		virtual int GetHandle()=0;
 
 		virtual bool HasAlpha(){return false;}
@@ -156,7 +155,6 @@ namespace hpl {
 		cVector2l mvMinLevelSize;
 	};
 
-	typedef std::vector<iTexture*> tTextureVec;
-	typedef tTextureVec::iterator tTextureVecIt;
-};
+}
+
 #endif // HPL_TEXTURE_H

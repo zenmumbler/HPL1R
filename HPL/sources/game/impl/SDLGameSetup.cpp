@@ -22,8 +22,6 @@
 #endif
 
 #include "game/impl/SDLGameSetup.h"
-#include "input/impl/KeyboardSDL.h"
-#include "input/impl/MouseSDL.h"
 #include "graphics/impl/LowLevelGraphicsSDL.h"
 #include "input/impl/LowLevelInputSDL.h"
 #include "sound/impl/LowLevelSoundOAL.h"
@@ -42,14 +40,14 @@ namespace hpl {
 
 	cSDLGameSetup::cSDLGameSetup()
 	{
-		if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_TIMER ) < 0) {
-			FatalError("Error Initializing SDL: %s", SDL_GetError());
+		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) < 0) {
+			FatalError("Error Initializing SDL: %s\n", SDL_GetError());
 		}
 
-		mpLowLevelGraphics = new cLowLevelGraphicsSDL();
-		mpLowLevelInput = new cLowLevelInputSDL(mpLowLevelGraphics);
-		mpLowLevelSound	= new cLowLevelSoundOAL();
-		mpLowLevelPhysics = new cLowLevelPhysicsNewton();
+		_graphicsDevice = new cLowLevelGraphicsSDL();
+		_inputImpl = new cLowLevelInputSDL(_graphicsDevice);
+		_soundImpl	= new cLowLevelSoundOAL();
+		_physicsImpl = new cLowLevelPhysicsNewton();
 	}
 
 	//-----------------------------------------------------------------------
@@ -59,68 +57,15 @@ namespace hpl {
 		Log("- Deleting lowlevel stuff.\n");
 
 		Log("  Physics\n");
-		delete mpLowLevelPhysics;
+		delete _physicsImpl;
 		Log("  Sound\n");
-		delete mpLowLevelSound;
+		delete _soundImpl;
 		Log("  Input\n");
-		delete mpLowLevelInput;
+		delete _inputImpl;
 		Log("  Graphics\n");
-		delete mpLowLevelGraphics;
+		delete _graphicsDevice;
 
 		SDL_Quit();
-	}
-
-	//-----------------------------------------------------------------------
-
-	//////////////////////////////////////////////////////////////////////////
-	// PUBLIC METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	cResources* cSDLGameSetup::CreateResources()
-	{
-		cResources *pResources = new cResources(mpLowLevelGraphics);
-		return pResources;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cInput* cSDLGameSetup::CreateInput()
-	{
-		cInput *pInput = new cInput(mpLowLevelInput);
-		return pInput;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cGraphics* cSDLGameSetup::CreateGraphics()
-	{
-		cGraphics *pGraphics = new cGraphics(mpLowLevelGraphics);
-		return pGraphics;
-	}
-	//-----------------------------------------------------------------------
-
-	cSound* cSDLGameSetup::CreateSound()
-	{
-		cSound *pSound = new cSound(mpLowLevelSound);
-		return pSound;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cPhysics* cSDLGameSetup::CreatePhysics()
-	{
-		cPhysics *pPhysics = new cPhysics(mpLowLevelPhysics);
-		return pPhysics;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cScript* cSDLGameSetup::CreateScript(cResources *apResources)
-	{
-		cScript *pScript = new cScript(apResources);
-		return pScript;
 	}
 
 	//-----------------------------------------------------------------------

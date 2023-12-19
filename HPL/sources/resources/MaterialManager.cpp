@@ -18,13 +18,16 @@
  */
 
 #include "resources/MaterialManager.h"
-#include "system/String.h"
-#include "system/Log.h"
-#include "graphics/Graphics.h"
 #include "resources/TextureManager.h"
-#include "resources/Resources.h"
+#include "resources/GpuProgramManager.h"
+
 #include "graphics/Material.h"
 #include "graphics/MaterialHandler.h"
+#include "graphics/Material_Universal.h"
+
+#include "system/String.h"
+#include "system/Log.h"
+
 #include "tinyXML/tinyxml.h"
 
 
@@ -36,13 +39,19 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMaterialManager::cMaterialManager(cGraphics* apGraphics, cTextureManager* textureManager, cGpuProgramManager* programManager)
+	cMaterialManager::cMaterialManager(iLowLevelGraphics *llGfx, cTextureManager* textureManager, cGpuProgramManager* programManager)
 		: iResourceManager{"material"}
 		, _textureManager{textureManager}
 		, _programManager{programManager}
 	{
-		mpGraphics = apGraphics;
 		mfTextureAnisotropy = 8.0f;
+
+		_matHandler = new cMaterialHandler(llGfx, textureManager, programManager);
+		_matHandler->AddType(new MaterialType_Universal());
+	}
+
+	cMaterialManager::~cMaterialManager() {
+		delete _matHandler;
 	}
 
 	//-----------------------------------------------------------------------
@@ -90,7 +99,7 @@ namespace hpl {
 	void cMaterialManager::Update(float afTimeStep)
 	{
 		ForEachResource([=](iResourceBase *resource) {
-			iMaterial *material = static_cast<iMaterial*>(resource);
+			auto material = static_cast<iMaterial*>(resource);
 			material->Update(afTimeStep);
 		});
 	}
@@ -267,7 +276,7 @@ namespace hpl {
 		bool bUseAlpha = cString::ToBool(pMain->Attribute("UseAlpha"), false);
 		tString sPhysicsMatName = cString::ToString(pMain->Attribute("PhysicsMaterial"),"Default");
 
-		iMaterial* pMat = mpGraphics->GetMaterialHandler()->Create(asName, sType);
+		iMaterial* pMat = _matHandler->Create(asName, sType);
 		if(pMat==NULL){
 			Error("Invalid material type '%s'\n",sType);
 			return NULL;

@@ -25,7 +25,7 @@
 #include <time.h>
 
 #include "game/Game.h"
-#include "graphics/Graphics.h"
+#include "graphics/Renderer3D.h"
 #include "sound/Sound.h"
 #include "resources/Resources.h"
 #include "math/Math.h"
@@ -105,7 +105,7 @@ namespace hpl {
 
 	static cResources *gpResources=NULL;
 	static cInput *gpInput=NULL;
-	static cGraphics *gpGraphics=NULL;
+	static cRenderer3D *gpRenderer=NULL;
 	static cScene *gpScene=NULL;
 	static cSound *gpSound=NULL;
 	static cGame *gpGame=NULL;
@@ -162,7 +162,7 @@ namespace hpl {
 	**/
 	static void SetAmbientColor(float afR, float afG, float afB)
 	{
-		gpGraphics->GetRenderer3D()->SetAmbientColor(cColor(afR,afG,afB,1.0f));
+		gpRenderer->SetAmbientColor(cColor(afR,afG,afB,1.0f));
 	}
 
 	//-----------------------------------------------------------------------
@@ -172,7 +172,7 @@ namespace hpl {
 	**/
 	static void SetSkyboxActive(bool abX)
 	{
-		gpGraphics->GetRenderer3D()->SetSkyBoxActive(abX);
+		gpRenderer->SetSkyBoxActive(abX);
 	}
 
 	//-----------------------------------------------------------------------
@@ -182,7 +182,7 @@ namespace hpl {
 	**/
 	static void SetSkyboxColor(float afR, float afG, float afB, float afA)
 	{
-		gpGraphics->GetRenderer3D()->SetSkyBoxColor(cColor(afR,afG,afB,afA));
+		gpRenderer->SetSkyBoxColor(cColor(afR,afG,afB,afA));
 	}
 
 	//-----------------------------------------------------------------------
@@ -195,12 +195,12 @@ namespace hpl {
 	{
 		if(asTexture!="")
 		{
-			iTexture *pTex = gpResources->GetTextureManager()->CreateCubeMap(asTexture);
-			gpGraphics->GetRenderer3D()->SetSkyBox(pTex,true);
+			iTexture *pTex = gpGame->GetTextureManager()->CreateCubeMap(asTexture);
+			gpRenderer->SetSkyBox(pTex,true);
 		}
 		else
 		{
-			gpGraphics->GetRenderer3D()->SetSkyBox(NULL,false);
+			gpRenderer->SetSkyBox(NULL,false);
 		}
 	}
 
@@ -230,7 +230,7 @@ namespace hpl {
 	**/
 	static void SetFogActive(bool abX)
 	{
-		gpGraphics->GetRenderer3D()->SetFogActive(abX);
+		gpRenderer->SetFogActive(abX);
 	}
 
 	/**
@@ -239,7 +239,7 @@ namespace hpl {
 	**/
 	static void SetFogCulling(bool abX)
 	{
-		gpGraphics->GetRenderer3D()->SetFogCulling(abX);
+		gpRenderer->SetFogCulling(abX);
 	}
 
 	/**
@@ -250,9 +250,9 @@ namespace hpl {
 	**/
 	static void SetFogProperties(float afStart, float afEnd, float afR,float afG, float afB)
 	{
-		gpGraphics->GetRenderer3D()->SetFogStart(afStart);
-		gpGraphics->GetRenderer3D()->SetFogEnd(afEnd);
-		gpGraphics->GetRenderer3D()->SetFogColor(cColor(afR,afG,afB,1.0f));
+		gpRenderer->SetFogStart(afStart);
+		gpRenderer->SetFogEnd(afEnd);
+		gpRenderer->SetFogColor(cColor(afR,afG,afB,1.0f));
 	}
 
 	//-----------------------------------------------------------------------
@@ -1397,7 +1397,7 @@ namespace hpl {
 
 	void RegisterCoreFunctions(
 		cScript* apScript,
-		cGraphics* apGraphics,
+		cRenderer3D* apRenderer,
 		cResources *apResources,
 		cInput *apInput,
 		cScene *apScene,
@@ -1405,7 +1405,7 @@ namespace hpl {
 		cGame *apGame
 	)
 	{
-		gpGraphics = apGraphics;
+		gpRenderer = apRenderer;
 		gpResources = apResources;
 		gpInput = apInput;
 		gpScene = apScene;

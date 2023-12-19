@@ -133,7 +133,7 @@ void cPlayerState_Grab::OnUpdate(float afTimeStep)
 	///////////////////////////////////////
 	//Get the desired position
 	cVector3f vForward = pCamera->UnProject(mpPlayer->GetCrossHairPos(),
-											mpInit->mpGame->GetGraphics()->GetLowLevel());
+											mpInit->mpGame->GetLowLevelGraphics());
 	cVector3f vDesired = pCamera->GetPosition() + vForward * mfGrabDist;
 
 	///////////////////////////////////////
@@ -213,7 +213,7 @@ void cPlayerState_Grab::OnDraw()
 
 void cPlayerState_Grab::OnPostSceneDraw()
 {
-	iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
+	iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetLowLevelGraphics();
 
 	cVector3f vPickPoint = cMath::MatrixMul(mpPushBody->GetWorldMatrix(), mvRelPickPoint);
 
@@ -269,7 +269,7 @@ void cPlayerState_Grab::OnStartExamine()
 	
 	//Get the forward vector
 	cVector3f vForward = mpPlayer->GetCamera()->UnProject(mpPlayer->GetCrossHairPos(),
-															mpInit->mpGame->GetGraphics()->GetLowLevel());
+															mpInit->mpGame->GetLowLevelGraphics());
 	//Get the point which you hare grabbing at.
 	cVector3f vPickPoint = cMath::MatrixMul(mpPushBody->GetLocalMatrix(), mvRelPickPoint);
 
@@ -654,7 +654,7 @@ void cPlayerState_Move::OnStartExamine()
 	if(mpPlayer->mbCanBeThrown)
 	{
 		cVector3f vForward = mpPlayer->GetCamera()->UnProject(mpPlayer->GetCrossHairPos(),
-													mpInit->mpGame->GetGraphics()->GetLowLevel());
+													mpInit->mpGame->GetLowLevelGraphics());
 
 		float fMassMul = mpPushBody->GetMass();
 		if(fMassMul>3) fMassMul = 3;
@@ -855,7 +855,7 @@ void cPlayerState_Move::LeaveState(iPlayerState* apNextState)
 
 void cPlayerState_Move::OnPostSceneDraw()
 {
-	//mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawSphere(mvPickPoint,0.1f,cColor(1,1,1,1));
+	//mpInit->mpGame->GetLowLevelGraphics()->DrawSphere(mvPickPoint,0.1f,cColor(1,1,1,1));
 }
 
 //-----------------------------------------------------------------------
@@ -1182,7 +1182,7 @@ void cPlayerState_Push::OnPostSceneDraw()
 {
 /*
 	cVector3f vPos = cMath::MatrixMul(mpPushBody->GetLocalMatrix(), mvLocalPickPoint);
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawSphere(vPos,0.3f,cColor(1,0,1));
+	mpInit->mpGame->GetLowLevelGraphics()->DrawSphere(vPos,0.3f,cColor(1,0,1));
 */
 }
 

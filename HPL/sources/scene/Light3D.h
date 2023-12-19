@@ -108,7 +108,7 @@ namespace hpl {
 		typedef iRenderable __super;
 	#endif
 	public:
-		iLight3D(tString asName, cResources *apResources);
+		iLight3D(tString asName, cTextureManager *apTextureMgr);
 		virtual ~iLight3D();
 
 		void UpdateLogic(float afTimeStep);

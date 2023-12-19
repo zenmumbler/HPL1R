@@ -238,7 +238,7 @@ void cGameForceArea::Update(float afTimeStep)
 void cGameForceArea::OnPostSceneDraw()
 {
 	/*
-	iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
+	iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetLowLevelGraphics();
 	mvBodies[0]->RenderDebugGeometry(pLowGfx,cColor(1,1,1,1));
 	*/
 }

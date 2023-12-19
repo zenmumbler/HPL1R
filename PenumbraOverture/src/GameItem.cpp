@@ -369,7 +369,7 @@ void cGameItem::Update(float afTimeStep)
 
 void cGameItem::OnPostSceneDraw()
 {
-	/*iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
+	/*iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetLowLevelGraphics();
 	auto pCam = mpInit->mpPlayer->GetCamera();
 
 	

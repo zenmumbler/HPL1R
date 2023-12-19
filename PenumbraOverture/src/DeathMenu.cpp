@@ -34,7 +34,7 @@
 cDeathMenuButton::cDeathMenuButton(cInit *apInit, cVector2f avPos, const tWString& asText)
 {
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 
 	mvPositon = cVector3f(avPos.x, avPos.y, 40);
 	
@@ -168,7 +168,7 @@ void cDeathMenuButton_BackToMain::OnMouseUp()
 cDeathMenu::cDeathMenu(cInit *apInit)  : iUpdateable("NumericalPanel")
 {
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 
 	//Load graphics (use notebook background for now).
 	mpGfxBackground = mpDrawer->CreateGfxObject("notebook_background.bmp",eGfxMaterial::DiffuseAlpha);

@@ -23,7 +23,6 @@
 
 namespace hpl {
 
-	class cResources;
 	class iTexture;
 	class cFrustum;
 
@@ -51,7 +50,7 @@ namespace hpl {
 		typedef iLight3D __super;
 	#endif
 	public:
-		cLight3DSpot(tString asName, cResources *apResources);
+		cLight3DSpot(tString asName, cTextureManager *apTextureMgr);
 		~cLight3DSpot();
 
 		const cMatrixf& GetViewMatrix();

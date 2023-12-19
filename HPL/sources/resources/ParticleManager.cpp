@@ -17,9 +17,7 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/ParticleManager.h"
-#include "resources/Resources.h"
 #include "resources/FileSearcher.h"
-#include "graphics/Graphics.h"
 #include "graphics/ParticleSystem3D.h"
 #include "system/Log.h"
 
@@ -31,11 +29,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cParticleManager::cParticleManager(cGraphics* apGraphics, cResources *apResources)
+	cParticleManager::cParticleManager(iLowLevelGraphics *llGfx, cMaterialManager *materialMgr)
 		: iResourceManager{"particle"}
 	{
-		mpGraphics = apGraphics;
-		mpResources = apResources;
+		_llGfx = llGfx;
+		_materialMgr = materialMgr;
 	}
 
 	//-----------------------------------------------------------------------
@@ -49,14 +47,9 @@ namespace hpl {
 	cParticleSystem3D* cParticleManager::CreatePS3D(const tString& asName,const tString& asType,
 												cVector3f avSize,const cMatrixf& a_mtxTransform)
 	{
-		cParticleSystemData3D *pData = NULL;
-
 		tString sTypeName = cString::SetFileExt(cString::ToLowerCase(asType),"");
 
-
-		//tParticleSystemData3DMapIt it = m_mapData3D.find(sTypeName);
-		//if(it == m_mapData3D.end())
-		pData = static_cast<cParticleSystemData3D*>(GetByName(sTypeName));
+		cParticleSystemData3D *pData = static_cast<cParticleSystemData3D*>(GetByName(sTypeName));
 		if(pData == NULL)
 		{
 			tString sFile = cString::SetFileExt(asType,"ps");
@@ -69,7 +62,7 @@ namespace hpl {
 				return NULL;
 			}
 
-			cParticleSystemData3D *pPSData = new cParticleSystemData3D(sTypeName,mpResources,mpGraphics);
+			cParticleSystemData3D *pPSData = new cParticleSystemData3D(sTypeName, _llGfx, _materialMgr);
 
 			if(pPSData->LoadFromFile(sPath)==false)
 			{
@@ -78,7 +71,7 @@ namespace hpl {
 				return NULL;
 			}
 
-			AddData3D(pPSData);
+			AddResource(pPSData);
 
 			pData = pPSData;
 		}
@@ -95,21 +88,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cParticleManager::AddData3D(cParticleSystemData3D *apData)
-	{
-		AddResource(apData);
-		//m.insert(tParticleSystemData3DMap::value_type(cString::ToLowerCase(apData->GetName()),
-		//														apData));
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cParticleManager::Preload(const tString& asFile)
 	{
 		tString sTypeName = cString::SetFileExt(cString::ToLowerCase(asFile),"");
 
-		//tParticleSystemData3DMapIt it = m_mapData3D.find(sTypeName);
-		//if(it == m_mapData3D.end())
 		cParticleSystemData3D *pData = static_cast<cParticleSystemData3D*>(GetByName(sTypeName));
 		if(pData == NULL)
 		{
@@ -121,7 +103,7 @@ namespace hpl {
 				return;
 			}
 
-			cParticleSystemData3D *pPSData = new cParticleSystemData3D(sTypeName,mpResources,mpGraphics);
+			cParticleSystemData3D *pPSData = new cParticleSystemData3D(sTypeName, _llGfx, _materialMgr);
 
 			if(pPSData->LoadFromFile(sPath)==false)
 			{
@@ -130,7 +112,7 @@ namespace hpl {
 				return;
 			}
 
-			AddData3D(pPSData);
+			AddResource(pPSData);
 		}
 	}
 

@@ -25,19 +25,17 @@
 namespace hpl {
 
 	class cSound;
-	class cResources;
 	class iSoundData;
 
 	class cSoundManager : public iResourceManager
 	{
 	public:
-		cSoundManager(cSound* apSound,cResources *apResources);
+		cSoundManager(cSound* apSound);
 
 		iSoundData* CreateSoundData(const tString& asName, bool abStream, bool abLoopStream=false);
 
 	private:
 		cSound* mpSound;
-		cResources *mpResources;
 
 		tStringVec _fileFormats;
 

@@ -367,7 +367,6 @@ private:
 	cInit *mpInit;
 
     cScene *mpScene;
-	cGraphics *mpGraphics;
 	cResources *mpResources;
 	cGraphicsDrawer *mpGfxDrawer;
 

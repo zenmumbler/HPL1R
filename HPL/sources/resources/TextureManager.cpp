@@ -17,14 +17,11 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/TextureManager.h"
-#include "system/String.h"
-#include "graphics/Graphics.h"
-#include "resources/Resources.h"
-#include "graphics/Texture.h"
 #include "graphics/LowLevelGraphics.h"
 #include "resources/LoadImage.h"
 #include "resources/FileSearcher.h"
 #include "graphics/Bitmap.h"
+#include "system/String.h"
 #include "system/Log.h"
 
 namespace hpl {
@@ -35,11 +32,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cTextureManager::cTextureManager(cGraphics* apGraphics,cResources *apResources)
-		: iResourceManager{"texture"}
+	cTextureManager::cTextureManager(iLowLevelGraphics *llGfx)
+		: iResourceManager{"texture"}, iUpdateable{"HPL_TextureMgr"}
 	{
-		mpGraphics = apGraphics;
-		mpResources = apResources;
+		_llGfx = llGfx;
 
 		GetSupportedImageFormats(mvFileFormats);
 
@@ -132,7 +128,7 @@ namespace hpl {
 			}
 
 			//Create the animated texture
-			pTexture = mpGraphics->GetLowLevel()->CreateTexture(fileName, eTextureTarget_2D);
+			pTexture = _llGfx->CreateTexture(fileName, eTextureTarget_2D);
 			pTexture->SetAnimMode(animMode);
 
 			if(pTexture->CreateAnimFromBitmapVec(vBitmaps)==false)
@@ -203,7 +199,7 @@ namespace hpl {
 			}
 
 			//Create the cubemap
-			pTexture = mpGraphics->GetLowLevel()->CreateTexture(sName, eTextureTarget_CubeMap);
+			pTexture = _llGfx->CreateTexture(sName, eTextureTarget_CubeMap);
 
 			if (pTexture->CreateCubeFromBitmapVec(vBitmaps)==false)
 			{
@@ -262,7 +258,7 @@ namespace hpl {
 			}
 
 			//Create the texture and load from bitmap
-			pTexture = mpGraphics->GetLowLevel()->CreateTexture(asName, aTarget);
+			pTexture = _llGfx->CreateTexture(asName, aTarget);
 			if(pTexture->CreateFromBitmap(*pBmp)==false)
 			{
 				delete pTexture;

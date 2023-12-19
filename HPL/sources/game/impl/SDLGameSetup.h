@@ -24,7 +24,6 @@
 #include "input/LowLevelInput.h"
 #include "physics/LowLevelPhysics.h"
 #include "sound/LowLevelSound.h"
-#include "script/Script.h"
 
 namespace hpl {
 
@@ -34,18 +33,17 @@ namespace hpl {
 		cSDLGameSetup();
 		~cSDLGameSetup();
 
-		cGraphics* CreateGraphics();
-		cInput* CreateInput();
-		cResources* CreateResources();
-		cSound* CreateSound();
-		cPhysics* CreatePhysics();
-		cScript* CreateScript(cResources *apResources);
+		iLowLevelGraphics* GetGraphicsDevice() const override { return _graphicsDevice; }
+		iLowLevelInput* GetInputImpl() const override { return _inputImpl; }
+		iLowLevelSound* GetSoundImpl() const override { return _soundImpl; }
+		iLowLevelPhysics* GetPhysicsImpl() const override { return _physicsImpl; }
 
 	private:
-		iLowLevelGraphics *mpLowLevelGraphics;
-		iLowLevelInput *mpLowLevelInput;
-		iLowLevelSound*	mpLowLevelSound;
-		iLowLevelPhysics* mpLowLevelPhysics;
+		iLowLevelGraphics *_graphicsDevice;
+		iLowLevelInput *_inputImpl;
+		iLowLevelSound *_soundImpl;
+		iLowLevelPhysics *_physicsImpl;
 	};
 };
+
 #endif // HPL_LOWLEVELGAMESETUP_SDL_H

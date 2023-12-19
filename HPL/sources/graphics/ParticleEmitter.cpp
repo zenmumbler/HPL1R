@@ -17,10 +17,6 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "graphics/ParticleEmitter.h"
-#include "resources/Resources.h"
-#include "graphics/Graphics.h"
-#include "graphics/MaterialHandler.h"
-#include "resources/ImageManager.h"
 #include "resources/MaterialManager.h"
 
 
@@ -32,12 +28,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iParticleEmitterData::iParticleEmitterData(const tString &asName,cResources* apResources,
-											cGraphics *apGraphics)
+	iParticleEmitterData::iParticleEmitterData(const tString &asName, iLowLevelGraphics *llGfx, cMaterialManager *materialMgr)
 	{
 		msName = asName;
-		mpResources = apResources;
-		mpGraphics = apGraphics;
+		_llGfx = llGfx;
+		_materialMgr = materialMgr;
 
 		mfWarmUpTime =0;
 		mfWarmUpStepsPerSec = 20;
@@ -49,7 +44,7 @@ namespace hpl {
 	{
 		for(int i=0;i<(int)mvMaterials.size();i++)
 		{
-			if(mvMaterials[i]) mpResources->GetMaterialManager()->Destroy(mvMaterials[i]);
+			if(mvMaterials[i]) _materialMgr->Destroy(mvMaterials[i]);
 		}
 	}
 	//-----------------------------------------------------------------------
@@ -67,18 +62,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iParticleEmitter::iParticleEmitter(tMaterialVec *avMaterials,
-									unsigned int alMaxParticles, cVector3f avSize,
-									cGraphics *apGraphics, cResources *apResources)
+	iParticleEmitter::iParticleEmitter(tMaterialVec *avMaterials, unsigned int alMaxParticles, cVector3f avSize)
 	{
-		mpGraphics = apGraphics;
-		mpResources = apResources;
-
 		mvParticles.resize(alMaxParticles);
-		for(int i=0;i<(int)alMaxParticles;i++)
-		{
-			mvParticles[i] = new cParticle();
-		}
 		mlMaxParticles = alMaxParticles;
 		mlNumOfParticles =0;
 
@@ -91,15 +77,6 @@ namespace hpl {
 
 		mbUpdateGfx = true;
 		mbUpdateBV = true;
-	}
-
-	//-----------------------------------------------------------------------
-
-	iParticleEmitter::~iParticleEmitter()
-	{
-		for(int i=0;i<(int)mvParticles.size();i++){
-			delete mvParticles[i];
-		}
 	}
 
 	//-----------------------------------------------------------------------
@@ -137,22 +114,23 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cParticle* iParticleEmitter::CreateParticle()
+	cParticle& iParticleEmitter::CreateParticle()
 	{
-		if(mlNumOfParticles == mlMaxParticles) return NULL;
-		++mlNumOfParticles;
-		return mvParticles[mlNumOfParticles-1];
+		// [Rehatched]: if too many particles are created, the last one will be overwritten
+		// while this is not amazing, the original implementation return NULL in this case (return type was ptr)
+		// but this was not actually checked at the call site, meaning it would have crashed if this occured in-game
+		if(mlNumOfParticles < mlMaxParticles) ++mlNumOfParticles;
+		return mvParticles[mlNumOfParticles - 1];
 	}
 
 	//-----------------------------------------------------------------------
 
 	void iParticleEmitter::SwapRemove(unsigned int alIndex)
 	{
-		if(alIndex < mlNumOfParticles-1)
+		if (alIndex < mlNumOfParticles-1)
 		{
-			cParticle* pTemp = mvParticles[alIndex];
+			// just overwrite the particle to be removed with the data of the last one
 			mvParticles[alIndex] = mvParticles[mlNumOfParticles-1];
-			mvParticles[mlNumOfParticles-1] = pTemp;
 		}
 		mlNumOfParticles--;
 	}

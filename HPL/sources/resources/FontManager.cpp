@@ -18,7 +18,6 @@
  */
 #include "resources/FontManager.h"
 #include "system/String.h"
-#include "graphics/Graphics.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/FontData.h"
 #include "system/Log.h"

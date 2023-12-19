@@ -30,37 +30,12 @@
 
 namespace hpl {
 
-	enum ePENoiseType
-	{
-		ePENoiseType_LowFreq,
-		ePENoiseType_HighFreq,
-		ePENoiseType_Both,
-		ePENoiseType_None,
-		ePENoiseType_LastEnum,
-	};
-
-	typedef struct
-	{
-		float				fRelToBeamPos;
-		float				fRelToBendPos;
-		int					lLowFreqNoiseIdx;
-		int					lHighFreqNoiseIdx;
-		ePENoiseType	noiseType;
-	} tBeamNoisePoint;
-
-
-	// ---
-
-
 	//////////////////////////////////////////////////////
 	/////////////// PARTICLE /////////////////////////////
 	//////////////////////////////////////////////////////
 
-	class cParticle
+	struct cParticle
 	{
-	public:
-		cParticle(){}
-
 		cVector3f mvPos;
 		cVector3f mvLastPos;
 		cVector3f mvLastCollidePos;
@@ -89,43 +64,26 @@ namespace hpl {
 		float mfBounceAmount;
 		int mlBounceCount;
 
-		cVector3f mvExtra;
-
 		// NEW
 
 		float mfSpin;
 		float mfSpinVel;
 		float mfSpinFactor;
 
-
 		cVector3f mvRevolutionVel;
-
-		// Beam Specific
-
-		int mlLowFreqPoints;
-		int mlHighFreqPoints;
-		std::vector<cVector3f> mvBeamPoints;
-
-		// ---
-
 	};
-
-	typedef std::vector<cParticle*> tParticleVec;
-	typedef tParticleVec::iterator tParticleVecIt;
 
 	//////////////////////////////////////////////////////
 	/////////////// PARTICLE SYSTEM //////////////////////
 	//////////////////////////////////////////////////////
 
-	class cGraphics;
-	class cResources;
+	class cMaterialManager;
 
 	class iParticleEmitter
 	{
 	public:
-		iParticleEmitter(tMaterialVec* avMaterials,unsigned int alMaxParticles,
-						cVector3f avSize, cGraphics* apGraphics, cResources *apResources);
-		virtual ~iParticleEmitter();
+		iParticleEmitter(tMaterialVec* avMaterials, unsigned int alMaxParticles, cVector3f avSize);
+		virtual ~iParticleEmitter() = default;
 
 		void Update(float afTimeStep);
 
@@ -146,13 +104,10 @@ namespace hpl {
 		int GetParticleNum(){ return mlNumOfParticles;}
 
 	protected:
-		cGraphics *mpGraphics;
-		cResources *mpResources;
-
 		tString msDataName;
 		cVector3f mvDataSize;
 
-		tParticleVec mvParticles;
+		std::vector<cParticle> mvParticles;
 		unsigned int mlNumOfParticles;
 		unsigned int mlMaxParticles;
 
@@ -170,14 +125,14 @@ namespace hpl {
 
 		virtual void UpdateMotion(float afTimeStep)=0;
 
-		virtual void SetParticleDefaults(cParticle *apParticle)=0;
+		virtual void SetParticleDefaults(cParticle& apParticle)=0;
 
 		/**
 		 * Swaps the position with index and the last particle and lowers the number of particles.
 		 * \param alIndex
 		 */
 		void SwapRemove(unsigned int alIndex);
-		cParticle* CreateParticle();
+		cParticle& CreateParticle();
 	};
 
 	typedef std::list<iParticleEmitter*> tParticleEmitterList;
@@ -187,19 +142,14 @@ namespace hpl {
 	/////////////// PARTICLE DATA ///////////////////////
 	//////////////////////////////////////////////////////
 
-	class cResources;
-
 	class iParticleEmitterData
 	{
 	friend class cParticleSystemData3D;
 	public:
 		/**
 		 * This inits the data needed for the particles system type
-		 * \param &asName name of the type
-		 * \param apResources
-		 * \param apGraphics
 		 */
-		iParticleEmitterData(const tString &asName,cResources* apResources,cGraphics *apGraphics);
+		iParticleEmitterData(const tString &asName, iLowLevelGraphics *llGfx, cMaterialManager* materialMgr);
 		virtual ~iParticleEmitterData();
 
 		void AddMaterial(iMaterial *apMaterial);
@@ -212,8 +162,8 @@ namespace hpl {
 		float GetWarmUpStepsPerSec() const { return mfWarmUpStepsPerSec;}
 
 	protected:
-		cResources *mpResources;
-		cGraphics *mpGraphics;
+		iLowLevelGraphics *_llGfx;
+		cMaterialManager *_materialMgr;
 
 		tString msName;
 		tMaterialVec mvMaterials;

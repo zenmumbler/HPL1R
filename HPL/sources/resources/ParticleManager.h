@@ -22,41 +22,28 @@
 #include "resources/ResourceManager.h"
 #include "math/MathTypes.h"
 
-#include <map>
-
 namespace hpl {
 
-	class cGraphics;
-	class cResources;
+	class iLowLevelGraphics;
+	class cMaterialManager;
 	class cParticleSystem3D;
-	class cParticleSystemData3D;
-
-	//----------------------------------------------------
-
-	typedef std::map<tString, cParticleSystemData3D*> tParticleSystemData3DMap;
-	typedef tParticleSystemData3DMap::iterator tParticleSystemData3DMapIt;
-
 
 	//----------------------------------------------------
 
 	class cParticleManager : public iResourceManager
 	{
 	public:
-		cParticleManager(cGraphics* apGraphics,cResources *apResources);
+		cParticleManager(iLowLevelGraphics *llGfx, cMaterialManager *materialMgr);
 
-		cParticleSystem3D* CreatePS3D(const tString& asName,const tString& asType, cVector3f avSize,
-										const cMatrixf& a_mtxTransform);
-
-		void AddData3D(cParticleSystemData3D *apData);
+		cParticleSystem3D* CreatePS3D(const tString& asName, const tString& asType, cVector3f avSize, const cMatrixf& a_mtxTransform);
 
 		void Preload(const tString& asFile);
 
 	private:
-		cGraphics* mpGraphics;
-		cResources *mpResources;
-
-		std::list<cParticleSystem3D*> mlstSystems;
+		iLowLevelGraphics* _llGfx;
+		cMaterialManager *_materialMgr;
 	};
 
 };
+
 #endif // HPL_PARTICLE_SYSTEM_MANAGER_H

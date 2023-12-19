@@ -48,7 +48,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cLight3DSpot::cLight3DSpot(tString asName, cResources *apResources) : iLight3D(asName,apResources)
+	cLight3DSpot::cLight3DSpot(tString asName, cTextureManager *apTextureMgr) : iLight3D(asName,apTextureMgr)
 	{
 		mbProjectionUpdated = true;
 		mbViewProjUpdated = true;
@@ -316,11 +316,10 @@ namespace hpl {
 	iSaveObject* cSaveData_cLight3DSpot::CreateSaveObject(cSaveObjectHandler *apSaveObjectHandler,cGame *apGame)
 	{
 		cWorld3D *pWorld = apGame->GetScene()->GetWorld3D();
-		cResources *pResources = apGame->GetResources();
 
 		cLight3DSpot *pLight = pWorld->CreateLightSpot(msName);
 		if(pLight && msTexture!=""){
-			iTexture *pTex = pResources->GetTextureManager()->Create2D(msTexture);
+			iTexture *pTex = apGame->GetTextureManager()->Create2D(msTexture);
 			if(pTex) pLight->SetTexture(pTex);
 		}
 

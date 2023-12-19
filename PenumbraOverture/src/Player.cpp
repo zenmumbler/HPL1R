@@ -51,8 +51,7 @@ cPlayer::cPlayer(cInit *apInit)  : iUpdateable("Player")
 	mpInit = apInit;
 
 	mpScene = apInit->mpGame->GetScene();
-	mpGraphics = apInit->mpGame->GetGraphics();
-	mpGfxDrawer = mpGraphics->GetDrawer();
+	mpGfxDrawer = apInit->mpGame->GetDrawer();
 	mpResources = apInit->mpGame->GetResources();
     
 	//Create and setup camera
@@ -1272,7 +1271,7 @@ void cPlayer::Reset()
 	mpCamera->SetYawLimits(0);
 	mpCamera->SetFOV(cMath::ToRad(70));
 
-	cVector2f vScreenSize = mpInit->mpGame->GetGraphics()->GetLowLevel()->GetScreenSize();
+	cVector2f vScreenSize = mpInit->mpGame->GetLowLevelGraphics()->GetScreenSize();
 	mpCamera->SetAspect(vScreenSize.x / vScreenSize.y);
 
 
@@ -1561,15 +1560,15 @@ void cPlayer::OnPostSceneDraw()
 {
 /*
 	auto pCam = mpScene->GetCamera();
-	iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
+	iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetLowLevelGraphics();
 	pLowGfx->SetMatrix(eMatrix_ModelView, pCam->GetViewMatrix());
 
 	pLowGfx->SetTexture(0,NULL);
 	pLowGfx->SetBlendActive(false);
 
-	//mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawLine(mvLineStart,mvLineEnd,cColor(1,1,1,1));
-	//mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawSphere(mvLineStart,0.1f,cColor(1,0,1,1));
-	//mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawSphere(mvLineEnd,0.1f,cColor(1,0,1,1));
+	//mpInit->mpGame->GetLowLevelGraphics()->DrawLine(mvLineStart,mvLineEnd,cColor(1,1,1,1));
+	//mpInit->mpGame->GetLowLevelGraphics()->DrawSphere(mvLineStart,0.1f,cColor(1,0,1,1));
+	//mpInit->mpGame->GetLowLevelGraphics()->DrawSphere(mvLineEnd,0.1f,cColor(1,0,1,1));
 
 	mpFlashLight->OnPostSceneDraw();
 

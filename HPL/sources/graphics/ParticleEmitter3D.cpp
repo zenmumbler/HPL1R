@@ -17,8 +17,6 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "graphics/ParticleEmitter3D.h"
-#include "resources/Resources.h"
-#include "graphics/Graphics.h"
 #include "scene/Camera.h"
 #include "math/Math.h"
 
@@ -37,12 +35,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iParticleEmitter3D::iParticleEmitter3D(tString asName,tMaterialVec *avMaterials,
-									unsigned int alMaxParticles, cVector3f avSize,
-									cGraphics *apGraphics,cResources *apResources)
-	:iRenderable(asName),iParticleEmitter(avMaterials, alMaxParticles,avSize,apGraphics,apResources)
+	iParticleEmitter3D::iParticleEmitter3D(tString asName, tMaterialVec *avMaterials, unsigned int alMaxParticles, cVector3f avSize, iLowLevelGraphics *llGfx)
+		: iRenderable(asName)
+		, iParticleEmitter(avMaterials, alMaxParticles, avSize)
 	{
-		mpVtxBuffer = apGraphics->GetLowLevel()->CreateVertexBuffer(
+		mpVtxBuffer = llGfx->CreateVertexBuffer(
 							VertexMask_Position | VertexMask_Color0 | VertexMask_UV0,
 							VertexBufferPrimitiveType::Triangles, VertexBufferUsageType::Stream,
 							alMaxParticles * 4, alMaxParticles * 6);
@@ -203,7 +200,7 @@ namespace hpl {
 		apTex[1] = aPos.y;
 	}
 
-	void iParticleEmitter3D::UpdateGraphics(cCamera *apCamera,float afFrameTime, cRenderList *apRenderList)
+	void iParticleEmitter3D::UpdateGraphics(cCamera *apCamera, float afFrameTime, cRenderList *apRenderList)
 	{
 		if(apCamera==NULL) return;
 
@@ -215,289 +212,259 @@ namespace hpl {
 			int colStride = mpVtxBuffer->GetArrayStride(VertexAttr_Color0);
 			int posStrideQuad = 4 * posStride;
 			int colStrideQuad = 4 * colStride;
-// NEW
-			if ( mPEType == ePEType_Beam)
-			{
-//				for (int i=0; i<(int)mlNumOfParticles; i++)
-//				{
-//					cParticle *pParticle = mvParticles[i];
 
-//					for (int j = 0; j < (int) pParticle->mvBeamPoints->size(); j++)
-//					{
-
-//					}
-//				}
-
-			}
-			else
-			{
 			//////////////////////////////////////////////////
 			// SUB DIVISION SET UP
-				if(mvSubDivUV.size() > 1)
+			if(mvSubDivUV.size() > 1)
+			{
+				float *pTexArray = mpVtxBuffer->GetArray(VertexAttr_UV0);
+				int texStride = mpVtxBuffer->GetArrayStride(VertexAttr_UV0);
+				int texStrideQuad = 4 * texStride;
+
+				for(int i=0;i<(int)mlNumOfParticles;i++)
 				{
-					float *pTexArray = mpVtxBuffer->GetArray(VertexAttr_UV0);
-					int texStride = mpVtxBuffer->GetArrayStride(VertexAttr_UV0);
-					int texStrideQuad = 4 * texStride;
+					cParticle &pParticle = mvParticles[i];
 
-					for(int i=0;i<(int)mlNumOfParticles;i++)
-					{
-						cParticle *pParticle = mvParticles[i];
+					cPESubDivision &subDiv = mvSubDivUV[pParticle.mlSubDivNum];
 
-						cPESubDivision &subDiv = mvSubDivUV[pParticle->mlSubDivNum];
-
-						SetTex(&pTexArray[i*texStrideQuad + 0*texStride],subDiv.mvUV[0]);
-						SetTex(&pTexArray[i*texStrideQuad + 1*texStride],subDiv.mvUV[1]);
-						SetTex(&pTexArray[i*texStrideQuad + 2*texStride],subDiv.mvUV[2]);
-						SetTex(&pTexArray[i*texStrideQuad + 3*texStride],subDiv.mvUV[3]);
-
-						/*SetTex(&pTexArray[i*12 + 0*3], cVector2f(1,1));
-						SetTex(&pTexArray[i*12 + 1*3], cVector2f(0,1));
-						SetTex(&pTexArray[i*12 + 2*3], cVector2f(0,0));
-						SetTex(&pTexArray[i*12 + 3*3], cVector2f(1,0));*/
-					}
-				}
-
-				//////////////////////////////////////////////////
-				// FIXED POINT
-				if(mDrawType == eParticleEmitter3DType_FixedPoint)
-				{
-					cVector3f vAdd[4] = {
-						cVector3f( mvDrawSize.x,-mvDrawSize.y,0),
-						cVector3f(-mvDrawSize.x,-mvDrawSize.y,0),
-						cVector3f(-mvDrawSize.x, mvDrawSize.y,0),
-						cVector3f( mvDrawSize.x, mvDrawSize.y,0)
-					};
-
-				// NEW
-
-				// ---
-
-					for(int i=0;i<(int)mlNumOfParticles;i++)
-					{
-						cParticle *pParticle = mvParticles[i];
-
-						//This is not the fastest thing possible...
-						cVector3f vParticlePos = pParticle->mvPos;
-
-						if(mCoordSystem == eParticleEmitter3DCoordSystem_Local){
-							vParticlePos = cMath::MatrixMul(mpParentSystem->GetWorldMatrix(), vParticlePos);
-						}
-
-						cVector3f vPos = cMath::MatrixMul(apCamera->GetViewMatrix(), vParticlePos);
-
-
-						SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos + vAdd[0]);
-						SetCol(&pColArray[i*colStrideQuad + 0*colStride], pParticle->mColor);
-
-						SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos + vAdd[1]);
-						SetCol(&pColArray[i*colStrideQuad + 1*colStride], pParticle->mColor);
-
-						SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos + vAdd[2]);
-						SetCol(&pColArray[i*colStrideQuad + 2*colStride], pParticle->mColor);
-
-						SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos + vAdd[3]);
-						SetCol(&pColArray[i*colStrideQuad + 3*colStride], pParticle->mColor);
-					}
-				}
-				//////////////////////////////////////////////////
-				// DYNAMIC POINT
-				else if(mDrawType == eParticleEmitter3DType_DynamicPoint)
-				{
-					cVector3f vAdd[4] = {
-						cVector3f( mvDrawSize.x,-mvDrawSize.y, 0),
-						cVector3f(-mvDrawSize.x,-mvDrawSize.y, 0),
-						cVector3f(-mvDrawSize.x, mvDrawSize.y, 0),
-						cVector3f( mvDrawSize.x, mvDrawSize.y, 0)
-					};
-
-					for(int i=0;i<(int)mlNumOfParticles;i++)
-					{
-						cParticle *pParticle = mvParticles[i];
-
-						//This is not the fastest thing possible
-						cVector3f vParticlePos = pParticle->mvPos;
-
-
-						if(mCoordSystem == eParticleEmitter3DCoordSystem_Local){
-							vParticlePos = cMath::MatrixMul(mpParentSystem->GetWorldMatrix(), vParticlePos);
-						}
-
-						cVector3f vPos = cMath::MatrixMul(apCamera->GetViewMatrix(), vParticlePos);
-
-
-						// NEW
-
-						cVector3f vParticleSize = pParticle->mvSize;
-						cColor& colParticleColor = pParticle->mColor;
-
-						if ( mbUsePartSpin )
-						{
-							cMatrixf mtxRotationMatrix = cMath::MatrixRotateZ(pParticle->mfSpin);
-
-
-							SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[0]*vParticleSize));
-							SetCol(&pColArray[i*colStrideQuad + 0*colStride], colParticleColor);
-
-							SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[1]*vParticleSize));
-							SetCol(&pColArray[i*colStrideQuad + 1*colStride], colParticleColor);
-
-							SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[2]*vParticleSize));
-							SetCol(&pColArray[i*colStrideQuad + 2*colStride], colParticleColor);
-
-							SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[3]*vParticleSize));
-							SetCol(&pColArray[i*colStrideQuad + 3*colStride], colParticleColor);
-
-						}
-						else
-						{
-						//--
-
-							SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos + vAdd[0]*vParticleSize);
-							SetCol(&pColArray[i*colStrideQuad + 0*colStride], colParticleColor);
-
-							SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos + vAdd[1]*vParticleSize);
-							SetCol(&pColArray[i*colStrideQuad + 1*colStride], colParticleColor);
-
-							SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos + vAdd[2]*vParticleSize);
-							SetCol(&pColArray[i*colStrideQuad + 2*colStride], colParticleColor);
-
-							SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos + vAdd[3]*vParticleSize);
-							SetCol(&pColArray[i*colStrideQuad + 3*colStride], colParticleColor);
-
-						}
-					}
-				}
-				//////////////////////////////////////////////////
-				// LINE
-				else if(mDrawType == eParticleEmitter3DType_Line)
-				{
-					cVector3f vAdd[4] = {
-						cVector3f( mvDrawSize.x,-mvDrawSize.y,0),
-						cVector3f(-mvDrawSize.x,-mvDrawSize.y,0),
-						cVector3f(-mvDrawSize.x, mvDrawSize.y,0),
-						cVector3f( mvDrawSize.x, mvDrawSize.y,0)
-					};
-
-					for(int i=0;i<(int)mlNumOfParticles;i++)
-					{
-						cParticle *pParticle = mvParticles[i];
-
-						//This is not the fastest thing possible...
-
-						cVector3f vParticlePos1 = pParticle->mvPos;
-						cVector3f vParticlePos2 = pParticle->mvLastPos;
-
-						if(mCoordSystem == eParticleEmitter3DCoordSystem_Local){
-							vParticlePos1 = cMath::MatrixMul(mpParentSystem->GetWorldMatrix(), vParticlePos1);
-							vParticlePos2 = cMath::MatrixMul(mpParentSystem->GetWorldMatrix(), vParticlePos2);
-						}
-
-						cVector3f vPos1 = cMath::MatrixMul(apCamera->GetViewMatrix(), vParticlePos1);
-						cVector3f vPos2 = cMath::MatrixMul(apCamera->GetViewMatrix(), vParticlePos2);
-
-						cVector3f vDirY;
-						cVector2f vDirX;
-
-						if(vPos1 == vPos2)
-						{
-							vDirY = cVector3f(0,1,0);
-							vDirX = cVector2f(1,0);
-						}
-						else
-						{
-							vDirY = vPos1 - vPos2;
-							vDirY.Normalise();
-							vDirX = cVector2f(vDirY.y,-vDirY.x);
-							vDirX.Normalise();
-						}
-
-						vDirX = vDirX * mvDrawSize.x * pParticle->mvSize.x;
-						vDirY = vDirY * mvDrawSize.y * pParticle->mvSize.y;
-
-						SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos2 + vDirY*-1 + vDirX);
-						SetCol(&pColArray[i*colStrideQuad + 0*colStride], pParticle->mColor);
-
-						SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos2 + vDirY*-1 + vDirX*-1);
-						SetCol(&pColArray[i*colStrideQuad + 1*colStride], pParticle->mColor);
-
-						SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos1 + vDirY + vDirX*-1);
-						SetCol(&pColArray[i*colStrideQuad + 2*colStride], pParticle->mColor);
-
-						SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos1 + vDirY + vDirX);
-						SetCol(&pColArray[i*colStrideQuad + 3*colStride], pParticle->mColor);
-					}
-				}
-				//////////////////////////////////////////////////
-				// AXIS
-				else if(mDrawType == eParticleEmitter3DType_Axis)
-				{
-					if(mlAxisDrawUpdateCount != GetMatrixUpdateCount())
-					{
-						mlAxisDrawUpdateCount = GetMatrixUpdateCount();
-						cMatrixf mtxInv = cMath::MatrixInverse(GetWorldMatrix());
-						mvRight = mtxInv.GetRight();
-						mvForward = mtxInv.GetForward();
-					}
-
-					cVector3f vAdd[4];
-					/*=
-					{
-						mvRight		 +	mvForward * 1,
-						mvRight * -1 +	mvForward * 1,
-						mvRight * -1 +	mvForward * -1,
-						mvRight		 +	mvForward * -1
-					};*/
-
-					for(int i=0;i<(int)mlNumOfParticles;i++)
-					{
-						cParticle *pParticle = mvParticles[i];
-
-						//This is not the fastest thing possible
-						cVector3f vParticlePos = pParticle->mvPos;
-
-
-						if(mCoordSystem == eParticleEmitter3DCoordSystem_Local){
-							vParticlePos = cMath::MatrixMul(mpParentSystem->GetWorldMatrix(), vParticlePos);
-						}
-
-						cVector3f vPos = vParticlePos;//cMath::MatrixMul(apCamera->GetViewMatrix(), vParticlePos);
-						cVector2f &vSize = pParticle->mvSize;
-
-						vAdd[0] = mvRight * vSize.x  + mvForward * vSize.y;
-						vAdd[1] = mvRight * -vSize.x + mvForward * vSize.y;
-						vAdd[2] = mvRight * -vSize.x + mvForward * -vSize.y;
-						vAdd[3] = mvRight * vSize.x  + mvForward * -vSize.y;
-
-						cColor& colParticleColor = pParticle->mColor;
-
-						SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos + vAdd[0]);
-						SetCol(&pColArray[i*colStrideQuad + 0*colStride], colParticleColor);
-
-						SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos + vAdd[1]);
-						SetCol(&pColArray[i*colStrideQuad + 1*colStride], colParticleColor);
-
-						SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos + vAdd[2]);
-						SetCol(&pColArray[i*colStrideQuad + 2*colStride], colParticleColor);
-
-						SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos + vAdd[3]);
-						SetCol(&pColArray[i*colStrideQuad + 3*colStride], colParticleColor);
-					}
-				}
-
-				mpVtxBuffer->SetIndexCount(mlNumOfParticles * 6);
-
-				mbUpdateGfx = false;
-
-				//Update the vertex buffer data
-
-				if(mvSubDivUV.size() > 1)
-					mpVtxBuffer->UpdateData(VertexMask_Position | VertexMask_Color0 | VertexMask_UV0, false);
-				else
-					mpVtxBuffer->UpdateData(VertexMask_Position | VertexMask_Color0, false);
-
+					SetTex(&pTexArray[i*texStrideQuad + 0*texStride],subDiv.mvUV[0]);
+					SetTex(&pTexArray[i*texStrideQuad + 1*texStride],subDiv.mvUV[1]);
+					SetTex(&pTexArray[i*texStrideQuad + 2*texStride],subDiv.mvUV[2]);
+					SetTex(&pTexArray[i*texStrideQuad + 3*texStride],subDiv.mvUV[3]);
 				}
 			}
 
+			//////////////////////////////////////////////////
+			// FIXED POINT
+			if(mDrawType == eParticleEmitter3DType_FixedPoint)
+			{
+				cVector3f vAdd[4] = {
+					cVector3f( mvDrawSize.x,-mvDrawSize.y,0),
+					cVector3f(-mvDrawSize.x,-mvDrawSize.y,0),
+					cVector3f(-mvDrawSize.x, mvDrawSize.y,0),
+					cVector3f( mvDrawSize.x, mvDrawSize.y,0)
+				};
+
+			// NEW
+
+			// ---
+
+				for(int i=0;i<(int)mlNumOfParticles;i++)
+				{
+					cParticle &pParticle = mvParticles[i];
+
+					//This is not the fastest thing possible...
+					cVector3f vParticlePos = pParticle.mvPos;
+
+					if(mCoordSystem == eParticleEmitter3DCoordSystem_Local){
+						vParticlePos = cMath::MatrixMul(mpParentSystem->GetWorldMatrix(), vParticlePos);
+					}
+
+					cVector3f vPos = cMath::MatrixMul(apCamera->GetViewMatrix(), vParticlePos);
+
+
+					SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos + vAdd[0]);
+					SetCol(&pColArray[i*colStrideQuad + 0*colStride], pParticle.mColor);
+
+					SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos + vAdd[1]);
+					SetCol(&pColArray[i*colStrideQuad + 1*colStride], pParticle.mColor);
+
+					SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos + vAdd[2]);
+					SetCol(&pColArray[i*colStrideQuad + 2*colStride], pParticle.mColor);
+
+					SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos + vAdd[3]);
+					SetCol(&pColArray[i*colStrideQuad + 3*colStride], pParticle.mColor);
+				}
+			}
+			//////////////////////////////////////////////////
+			// DYNAMIC POINT
+			else if(mDrawType == eParticleEmitter3DType_DynamicPoint)
+			{
+				cVector3f vAdd[4] = {
+					cVector3f( mvDrawSize.x,-mvDrawSize.y, 0),
+					cVector3f(-mvDrawSize.x,-mvDrawSize.y, 0),
+					cVector3f(-mvDrawSize.x, mvDrawSize.y, 0),
+					cVector3f( mvDrawSize.x, mvDrawSize.y, 0)
+				};
+
+				for(int i=0;i<(int)mlNumOfParticles;i++)
+				{
+					cParticle &pParticle = mvParticles[i];
+
+					//This is not the fastest thing possible
+					cVector3f vParticlePos = pParticle.mvPos;
+
+
+					if(mCoordSystem == eParticleEmitter3DCoordSystem_Local){
+						vParticlePos = cMath::MatrixMul(mpParentSystem->GetWorldMatrix(), vParticlePos);
+					}
+
+					cVector3f vPos = cMath::MatrixMul(apCamera->GetViewMatrix(), vParticlePos);
+
+
+					// NEW
+
+					cVector3f vParticleSize = pParticle.mvSize;
+					cColor& colParticleColor = pParticle.mColor;
+
+					if ( mbUsePartSpin )
+					{
+						cMatrixf mtxRotationMatrix = cMath::MatrixRotateZ(pParticle.mfSpin);
+
+
+						SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[0]*vParticleSize));
+						SetCol(&pColArray[i*colStrideQuad + 0*colStride], colParticleColor);
+
+						SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[1]*vParticleSize));
+						SetCol(&pColArray[i*colStrideQuad + 1*colStride], colParticleColor);
+
+						SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[2]*vParticleSize));
+						SetCol(&pColArray[i*colStrideQuad + 2*colStride], colParticleColor);
+
+						SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos + cMath::MatrixMul(mtxRotationMatrix, vAdd[3]*vParticleSize));
+						SetCol(&pColArray[i*colStrideQuad + 3*colStride], colParticleColor);
+
+					}
+					else
+					{
+					//--
+
+						SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos + vAdd[0]*vParticleSize);
+						SetCol(&pColArray[i*colStrideQuad + 0*colStride], colParticleColor);
+
+						SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos + vAdd[1]*vParticleSize);
+						SetCol(&pColArray[i*colStrideQuad + 1*colStride], colParticleColor);
+
+						SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos + vAdd[2]*vParticleSize);
+						SetCol(&pColArray[i*colStrideQuad + 2*colStride], colParticleColor);
+
+						SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos + vAdd[3]*vParticleSize);
+						SetCol(&pColArray[i*colStrideQuad + 3*colStride], colParticleColor);
+
+					}
+				}
+			}
+			//////////////////////////////////////////////////
+			// LINE
+			else if(mDrawType == eParticleEmitter3DType_Line)
+			{
+				cVector3f vAdd[4] = {
+					cVector3f( mvDrawSize.x,-mvDrawSize.y,0),
+					cVector3f(-mvDrawSize.x,-mvDrawSize.y,0),
+					cVector3f(-mvDrawSize.x, mvDrawSize.y,0),
+					cVector3f( mvDrawSize.x, mvDrawSize.y,0)
+				};
+
+				for(int i=0;i<(int)mlNumOfParticles;i++)
+				{
+					cParticle &pParticle = mvParticles[i];
+
+					//This is not the fastest thing possible...
+
+					cVector3f vParticlePos1 = pParticle.mvPos;
+					cVector3f vParticlePos2 = pParticle.mvLastPos;
+
+					if(mCoordSystem == eParticleEmitter3DCoordSystem_Local){
+						vParticlePos1 = cMath::MatrixMul(mpParentSystem->GetWorldMatrix(), vParticlePos1);
+						vParticlePos2 = cMath::MatrixMul(mpParentSystem->GetWorldMatrix(), vParticlePos2);
+					}
+
+					cVector3f vPos1 = cMath::MatrixMul(apCamera->GetViewMatrix(), vParticlePos1);
+					cVector3f vPos2 = cMath::MatrixMul(apCamera->GetViewMatrix(), vParticlePos2);
+
+					cVector3f vDirY;
+					cVector2f vDirX;
+
+					if(vPos1 == vPos2)
+					{
+						vDirY = cVector3f(0,1,0);
+						vDirX = cVector2f(1,0);
+					}
+					else
+					{
+						vDirY = vPos1 - vPos2;
+						vDirY.Normalise();
+						vDirX = cVector2f(vDirY.y,-vDirY.x);
+						vDirX.Normalise();
+					}
+
+					vDirX = vDirX * mvDrawSize.x * pParticle.mvSize.x;
+					vDirY = vDirY * mvDrawSize.y * pParticle.mvSize.y;
+
+					SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos2 + vDirY*-1 + vDirX);
+					SetCol(&pColArray[i*colStrideQuad + 0*colStride], pParticle.mColor);
+
+					SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos2 + vDirY*-1 + vDirX*-1);
+					SetCol(&pColArray[i*colStrideQuad + 1*colStride], pParticle.mColor);
+
+					SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos1 + vDirY + vDirX*-1);
+					SetCol(&pColArray[i*colStrideQuad + 2*colStride], pParticle.mColor);
+
+					SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos1 + vDirY + vDirX);
+					SetCol(&pColArray[i*colStrideQuad + 3*colStride], pParticle.mColor);
+				}
+			}
+			//////////////////////////////////////////////////
+			// AXIS
+			else if(mDrawType == eParticleEmitter3DType_Axis)
+			{
+				if(mlAxisDrawUpdateCount != GetMatrixUpdateCount())
+				{
+					mlAxisDrawUpdateCount = GetMatrixUpdateCount();
+					cMatrixf mtxInv = cMath::MatrixInverse(GetWorldMatrix());
+					mvRight = mtxInv.GetRight();
+					mvForward = mtxInv.GetForward();
+				}
+
+				cVector3f vAdd[4];
+
+				for(int i=0;i<(int)mlNumOfParticles;i++)
+				{
+					cParticle &pParticle = mvParticles[i];
+
+					//This is not the fastest thing possible
+					cVector3f vParticlePos = pParticle.mvPos;
+
+
+					if(mCoordSystem == eParticleEmitter3DCoordSystem_Local){
+						vParticlePos = cMath::MatrixMul(mpParentSystem->GetWorldMatrix(), vParticlePos);
+					}
+
+					cVector3f vPos = vParticlePos;//cMath::MatrixMul(apCamera->GetViewMatrix(), vParticlePos);
+					cVector2f &vSize = pParticle.mvSize;
+
+					vAdd[0] = mvRight * vSize.x  + mvForward * vSize.y;
+					vAdd[1] = mvRight * -vSize.x + mvForward * vSize.y;
+					vAdd[2] = mvRight * -vSize.x + mvForward * -vSize.y;
+					vAdd[3] = mvRight * vSize.x  + mvForward * -vSize.y;
+
+					cColor& colParticleColor = pParticle.mColor;
+
+					SetPos(&pPosArray[i*posStrideQuad + 0*posStride], vPos + vAdd[0]);
+					SetCol(&pColArray[i*colStrideQuad + 0*colStride], colParticleColor);
+
+					SetPos(&pPosArray[i*posStrideQuad + 1*posStride], vPos + vAdd[1]);
+					SetCol(&pColArray[i*colStrideQuad + 1*colStride], colParticleColor);
+
+					SetPos(&pPosArray[i*posStrideQuad + 2*posStride], vPos + vAdd[2]);
+					SetCol(&pColArray[i*colStrideQuad + 2*colStride], colParticleColor);
+
+					SetPos(&pPosArray[i*posStrideQuad + 3*posStride], vPos + vAdd[3]);
+					SetCol(&pColArray[i*colStrideQuad + 3*colStride], colParticleColor);
+				}
+			}
+
+			mpVtxBuffer->SetIndexCount(mlNumOfParticles * 6);
+
+			mbUpdateGfx = false;
+
+			//Update the vertex buffer data
+
+			if(mvSubDivUV.size() > 1)
+				mpVtxBuffer->UpdateData(VertexMask_Position | VertexMask_Color0 | VertexMask_UV0, false);
+			else
+				mpVtxBuffer->UpdateData(VertexMask_Position | VertexMask_Color0, false);
+		}
 	}
 
 	//-----------------------------------------------------------------------
@@ -526,19 +493,19 @@ namespace hpl {
 
 			for(int i=0;i<(int)mlNumOfParticles;i++)
 			{
-				cParticle *pParticle = mvParticles[i];
+				cParticle &pParticle = mvParticles[i];
 
 				//X
-				if(pParticle->mvPos.x < vMin.x)		 vMin.x = pParticle->mvPos.x;
-				else if(pParticle->mvPos.x > vMax.x) vMax.x = pParticle->mvPos.x;
+				if(pParticle.mvPos.x < vMin.x)      vMin.x = pParticle.mvPos.x;
+				else if(pParticle.mvPos.x > vMax.x) vMax.x = pParticle.mvPos.x;
 
 				//Y
-				if(pParticle->mvPos.y < vMin.y)		 vMin.y = pParticle->mvPos.y;
-				else if(pParticle->mvPos.y > vMax.y) vMax.y = pParticle->mvPos.y;
+				if(pParticle.mvPos.y < vMin.y)      vMin.y = pParticle.mvPos.y;
+				else if(pParticle.mvPos.y > vMax.y) vMax.y = pParticle.mvPos.y;
 
 				//Z
-				if(pParticle->mvPos.z < vMin.z)		 vMin.z = pParticle->mvPos.z;
-				else if(pParticle->mvPos.z > vMax.z) vMax.z = pParticle->mvPos.z;
+				if(pParticle.mvPos.z < vMin.z)      vMin.z = pParticle.mvPos.z;
+				else if(pParticle.mvPos.z > vMax.z) vMax.z = pParticle.mvPos.z;
 			}
 
 			vMax += cVector3f(mvMaxDrawSize.x,mvMaxDrawSize.y, mvMaxDrawSize.x);

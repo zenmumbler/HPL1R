@@ -30,7 +30,6 @@ namespace hpl {
 
 	class cMaterialManager;
 	class cResources;
-	class cGraphics;
 	class iLowLevelGraphics;
 	class iMaterial;
 	class iVertexBuffer;
@@ -74,7 +73,7 @@ namespace hpl {
 	#endif
 	friend class cBeamEnd;
 	public:
-		cBeam(const tString asName, cResources *apResources,cGraphics *apGraphics);
+		cBeam(const tString asName, iLowLevelGraphics* llGfx, cMaterialManager* materialMgr);
 		~cBeam();
 
 		void SetMaterial(iMaterial * apMaterial);

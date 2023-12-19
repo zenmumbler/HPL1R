@@ -36,12 +36,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cParticleSystemData3D::cParticleSystemData3D(const tString &asName,
-												cResources* apResources,cGraphics *apGraphics)
-												: iResourceBase(asName)
+	cParticleSystemData3D::cParticleSystemData3D(const tString &asName, iLowLevelGraphics *llGfx, cMaterialManager *materialMgr)
+		: iResourceBase(asName)
 	{
-		mpResources = apResources;
-		mpGraphics = apGraphics;
+		_llGfx = llGfx;
+		_materialMgr = materialMgr;
 	}
 
 	//-----------------------------------------------------------------------
@@ -53,15 +52,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cParticleSystemData3D::AddEmitterData(iParticleEmitterData *apData)
-	{
-		mvEmitterData.push_back(apData);
-	}
-
-	//-----------------------------------------------------------------------
-
-	cParticleSystem3D* cParticleSystemData3D::Create(tString asName, cVector3f avSize,
-													const cMatrixf& a_mtxTransform)
+	cParticleSystem3D* cParticleSystemData3D::Create(tString asName, cVector3f avSize, const cMatrixf& a_mtxTransform)
 	{
 		if(mvEmitterData.empty())
 		{
@@ -69,7 +60,7 @@ namespace hpl {
 			return NULL;
 		}
 
-		cParticleSystem3D *pPS = new cParticleSystem3D(asName,this,mpResources,mpGraphics);
+		cParticleSystem3D *pPS = new cParticleSystem3D(asName, this);
 		pPS->SetMatrix(a_mtxTransform);
 
 		for(size_t i=0; i<mvEmitterData.size(); ++i)
@@ -101,7 +92,7 @@ namespace hpl {
 		TiXmlElement *pEmitterElem = pRootElem->FirstChildElement("ParticleEmitter");
 		for(; pEmitterElem != NULL; pEmitterElem = pEmitterElem->NextSiblingElement("ParticleEmitter"))
 		{
-			cParticleEmitterData3D_UserData *pPE = new cParticleEmitterData3D_UserData("",mpResources,mpGraphics);
+			cParticleEmitterData3D_UserData *pPE = new cParticleEmitterData3D_UserData("", _llGfx, _materialMgr);
 
 			pPE->LoadFromElement(pEmitterElem);
 
@@ -122,13 +113,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cParticleSystem3D::cParticleSystem3D(const tString asName,
-										cParticleSystemData3D *apData,
-										cResources *apResources, cGraphics *apGraphics)
+	cParticleSystem3D::cParticleSystem3D(const tString asName, cParticleSystemData3D *apData)
 		: iEntity3D(asName)
 	{
-		mpResources = apResources;
-		mpGraphics = apGraphics;
 		mpParticleManager = NULL;
 		mpData = apData;
 
@@ -243,12 +230,12 @@ namespace hpl {
 			{
 				iParticleEmitterData *pData =  mpData->GetEmitterData((int)i);
 
-				if(pData->GetWarmUpTime() >0)
+				float fTime = pData->GetWarmUpTime();
+				if (fTime > 0)
 				{
-					float fTime = pData->GetWarmUpTime();
-					float fStepSize = 1.0f /pData->GetWarmUpStepsPerSec();
+					float fStepSize = 1.0f / pData->GetWarmUpStepsPerSec();
 
-					while(fTime >0)
+					while (fTime > 0)
 					{
 						pPE->UpdateLogic(fStepSize);
 						fTime -= fStepSize;

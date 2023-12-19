@@ -28,11 +28,11 @@
 
 #include "game/Game.h"
 
+#include "graphics/LowLevelGraphics.h"
 #include "graphics/Mesh.h"
 #include "graphics/BillBoard.h"
 #include "graphics/Beam.h"
 #include "graphics/ParticleSystem3D.h"
-#include "graphics/Graphics.h"
 #include "graphics/Renderer3D.h"
 #include "graphics/ParticleEmitter3D.h"
 
@@ -82,10 +82,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cWorld3D::cWorld3D(tString asName,cGraphics *apGraphics,cResources *apResources,cSound* apSound,
+	cWorld3D::cWorld3D(tString asName, iLowLevelGraphics *apGraphics, cTextureManager *apTextureMgr, cResources *apResources, cSound* apSound,
 						cPhysics *apPhysics, cScene *apScene)
 	{
-		mpGraphics = apGraphics;
+		_llGfx = apGraphics;
+		_textureMgr = apTextureMgr;
 		mpResources = apResources;
 		mpSound = apSound;
 		mpPhysics = apPhysics;
@@ -524,7 +525,7 @@ namespace hpl {
 			if(abStatic==false && pEntity->IsStatic()) continue;
 
 			cBoundingVolume *pBV = pEntity->GetBoundingVolume();
-			// mpGraphics->GetLowLevel()->DrawBoxMaxMin(pBV->GetMax(), pBV->GetMin(), aColor);
+			// _llGfx->DrawBoxMaxMin(pBV->GetMax(), pBV->GetMin(), aColor);
 		}
 	}
 
@@ -533,7 +534,7 @@ namespace hpl {
 
 	cLight3DPoint* cWorld3D::CreateLightPoint(const tString &asName,bool abAddToContainer)
 	{
-		cLight3DPoint* pLight = new cLight3DPoint(asName,mpResources);
+		cLight3DPoint* pLight = new cLight3DPoint(asName, _textureMgr);
 		mlstLights.push_back(pLight);
 
 		if(abAddToContainer)
@@ -549,12 +550,12 @@ namespace hpl {
 	cLight3DSpot* cWorld3D::CreateLightSpot(const tString &asName, const tString &asGobo,
 									bool abAddToContainer)
 	{
-		cLight3DSpot* pLight = new cLight3DSpot(asName,mpResources);
+		cLight3DSpot* pLight = new cLight3DSpot(asName, _textureMgr);
 		mlstLights.push_back(pLight);
 
 		if(asGobo != "")
 		{
-			iTexture *pTexture = mpResources->GetTextureManager()->Create2D(asGobo);
+			iTexture *pTexture = _textureMgr->Create2D(asGobo);
 			if(pTexture!=NULL)
 				pLight->SetTexture(pTexture);
 			else
@@ -597,7 +598,7 @@ namespace hpl {
 										const tString& asMaterial,
 										bool abAddToContainer, cMatrixf *apTransform)
 	{
-		cBillboard* pBillboard = new cBillboard(asName, avSize,mpResources,mpGraphics);
+		cBillboard* pBillboard = new cBillboard(asName, avSize, _llGfx, mpResources->GetMaterialManager());
 		mlstBillboards.push_back(pBillboard);
 
 		if(apTransform) pBillboard->SetMatrix(*apTransform);
@@ -639,7 +640,7 @@ namespace hpl {
 
 	cBeam* cWorld3D::CreateBeam(const tString& asName)
 	{
-		cBeam* pBeam = new cBeam(asName,mpResources,mpGraphics);
+		cBeam* pBeam = new cBeam(asName, _llGfx, mpResources->GetMaterialManager());
 		mlstBeams.push_back(pBeam);
 
 		mpPortalContainer->Add(pBeam, false);
@@ -676,8 +677,7 @@ namespace hpl {
 	cParticleSystem3D* cWorld3D::CreateParticleSystem(const tString& asName,const tString& asType,
 													const cVector3f& avSize,const cMatrixf& a_mtxTransform)
 	{
-		cParticleSystem3D* pPS = mpResources->GetParticleManager()->CreatePS3D(asName,asType,
-																			avSize,a_mtxTransform);
+		cParticleSystem3D* pPS = mpResources->GetParticleManager()->CreatePS3D(asName, asType, avSize, a_mtxTransform);
 		if(pPS == NULL){
 			Error("Couldn't create particle system '%s' of type '%s'\n",asName.c_str(), asType.c_str());
 			return NULL;

@@ -110,11 +110,7 @@ namespace hpl {
 		iTexture* GetTexture(eMaterialTexture aType) { return mvTexture[aType]; }
 		void SetTexture(iTexture* apTex,eMaterialTexture aType){ mvTexture[aType] = apTex; }
 
-		/**
-		 * return true if the material is transparent
-		 * \return
-		 */
-		virtual bool IsTransperant() {return mbIsTransperant;}
+		bool IsTransperant() {return mbIsTransperant;}
 
 		const tString& GetPhysicsMaterial(){ return msPhysicsMaterial;}
 		void SetPhysicsMaterial(const tString& asName){ msPhysicsMaterial = asName;}
@@ -129,7 +125,7 @@ namespace hpl {
 
 		tString msPhysicsMaterial;
 
-		tTextureVec mvTexture;
+		std::vector<iTexture*> mvTexture;
 	};
 
 	typedef std::vector<iMaterial*> tMaterialVec;

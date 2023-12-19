@@ -38,7 +38,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cLight3DPoint::cLight3DPoint(tString asName, cResources *apResources) : iLight3D(asName,apResources)
+	cLight3DPoint::cLight3DPoint(tString asName, cTextureManager *apTextureMgr) : iLight3D(asName,apTextureMgr)
 	{
 		mLightType = eLight3DType_Point;
 

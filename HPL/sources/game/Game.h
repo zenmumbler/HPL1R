@@ -28,7 +28,12 @@ namespace hpl {
 
 	class cInput;
 	class cResources;
-	class cGraphics;
+	class cImageManager;
+	class cGpuProgramManager;
+	class cTextureManager;
+	class iLowLevelGraphics;
+	class cRenderer3D;
+	class cGraphicsDrawer;
 	class cScene;
 	class cSound;
 	class cScript;
@@ -64,110 +69,76 @@ namespace hpl {
 	class cGame
 	{
 	public:
-		cGame(iLowLevelGameSetup *apGameSetup, GameSetupOptions &options);
+		cGame(iLowLevelGameSetup *setup, GameSetupOptions &options);
 		~cGame();
 	private:
-		void GameInit(iLowLevelGameSetup *apGameSetup, GameSetupOptions &options);
+		void GameInit(iLowLevelGameSetup *setup, GameSetupOptions &options);
 
 	public:
-
-		/**
-		 * Starts the game loop. To make stuff run they must be added as updatables..
-		 */
 		void Run();
-		/**
-		 * Exists the game.
-		 * \todo is this a good way to do it? Should game be global. If so, make a singleton.
-		 */
 		void Exit();
 
-		/**
-		*
-		* \return A pointer to Scene
-		*/
-		cScene* GetScene();
-		/**
-		 *
-		 * \return A pointer to Resources
-		 */
-		cResources* GetResources();
+		// all the managers and modules
+		iLowLevelGraphics* GetLowLevelGraphics() { return _llGfx; }
+		cRenderer3D* GetRenderer() { return _renderer; }
+		cGraphicsDrawer* GetDrawer() { return _drawer; }
+		cImageManager* GetImageManager() { return _imageMgr; }
+		cGpuProgramManager* GetShaderManager() { return _shaderMgr; }
+		cTextureManager* GetTextureManager() { return _textureMgr; }
 
-		/**
-		 *
-		 * \return A pointer to the Updater
-		 */
-		cUpdater* GetUpdater();
+		cScene* GetScene() { return mpScene; }
+		cResources* GetResources() { return mpResources; }
+		cUpdater* GetUpdater() { return mpUpdater; }
+		cInput* GetInput() { return mpInput; }
+		cSound* GetSound() { return mpSound; }
+		cPhysics* GetPhysics() { return mpPhysics; }
+		cScript* GetScript() { return mpScript; }
 
-		/**
-		*
-		* \return A pointer to the Input
-		*/
-		cInput* GetInput();
-
-		/**
-		*
-		* \return A pointer to the Graphics
-		*/
-		cGraphics* GetGraphics();
-		/**
-		*
-		* \return A pointer to the Sound
-		*/
-		cSound* GetSound();
-		/**
-		*
-		* \return A pointer to the Physics
-		*/
-		cPhysics* GetPhysics();
-
-		cScript* GetScript();
-
+		// logic update timing
 		void ResetLogicTimer();
 		void SetUpdatesPerSec(int alUpdatesPerSec);
 		int GetUpdatesPerSec();
 		float GetStepSize();
-
 		cLogicTimer* GetLogicTimer(){ return mpLogicTimer;}
 
+		// fps stuff
 		float GetFPS();
-
 		void SetFPSUpdateRate(float afSec);
 		float GetFPSUpdateRate();
-
-		void SetRenderOnce(bool abX){mbRenderOnce = abX;}
-
-		float GetFrameTime(){ return mfFrameTime;}
-
-		float GetUpdateTime(){ return mfUpdateTime;}
-
-		double GetGameTime(){ return mfGameTime;}
-
 		void SetLimitFPS(bool abX){ mbLimitFPS = abX;}
 		bool GetLimitFPS(){ return mbLimitFPS;}
 
+		// render timing
+		void SetRenderOnce(bool abX){mbRenderOnce = abX;}
+		float GetFrameTime(){ return mfFrameTime;}
+		float GetUpdateTime(){ return mfUpdateTime;}
+		double GetGameTime(){ return mfGameTime;}
+
+
 	private:
 		bool mbGameIsDone;
-
 		bool mbRenderOnce;
 
 		float mfFrameTime;
-
 		float mfUpdateTime;
-
 		double mfGameTime;
 
-		iLowLevelGameSetup *mpGameSetup;
 		cUpdater *mpUpdater;
 		cLogicTimer *mpLogicTimer;
 
 		cFPSCounter* mpFPSCounter;
-
 		bool mbLimitFPS;
 
 		//Modules that Game connnect to:
+		iLowLevelGraphics *_llGfx;
+		cImageManager *_imageMgr;
+		cGpuProgramManager *_shaderMgr;
+		cTextureManager *_textureMgr;
+
+		cRenderer3D *_renderer;
+		cGraphicsDrawer *_drawer;
 		cResources *mpResources;
 		cInput *mpInput;
-		cGraphics *mpGraphics;
 		cScene *mpScene;
 		cSound *mpSound;
 		cPhysics *mpPhysics;

@@ -275,7 +275,7 @@ void cIntroImage::OnDraw(cGraphicsDrawer *drawer)
 cIntroStory::cIntroStory(cInit *apInit)  : iUpdateable("StoryIntro")
 {
 	mpInit = apInit;
-	mpTexManager = mpInit->mpGame->GetResources()->GetTextureManager();
+	mpTexManager = mpInit->mpGame->GetTextureManager();
 	mpSoundHandler = mpInit->mpGame->GetSound()->GetSoundHandler();
 	
 	for(int i=0; i<INTRO_IMAGE_NUM; ++i)
@@ -430,7 +430,7 @@ void cIntroStory::OnDraw()
 void cIntroStory::OnPostSceneDraw()
 {
 	mpInit->mpGraphicsHelper->ClearScreen();
-	auto drawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	auto drawer = mpInit->mpGame->GetDrawer();
 
 	for(int i=0; i< INTRO_IMAGE_NUM; ++i)
 	{

@@ -650,7 +650,7 @@ void iGameEnemy::OnPostSceneDraw()
 	if(IsActive()==false) return;
 	if(mbShowDebug == false) return;
 	
-	iLowLevelGraphics *pLowLevelGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
+	iLowLevelGraphics *pLowLevelGfx = mpInit->mpGame->GetLowLevelGraphics();
 	mpMover->OnPostSceneDraw(pLowLevelGfx);
 
 	ExtraPostSceneDraw();

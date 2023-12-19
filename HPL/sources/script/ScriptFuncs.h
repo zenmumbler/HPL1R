@@ -24,7 +24,7 @@
 namespace hpl {
 
 	class cScript;
-	class cGraphics;
+	class cRenderer3D;
 	class cResources;
 	class cSound;
 	class cScene;
@@ -53,7 +53,7 @@ namespace hpl {
 
 	void RegisterCoreFunctions(
 		cScript* apScript,
-		cGraphics* apGraphics,
+		cRenderer3D* apRenderer,
 		cResources *apResources,
 		cInput *apInput,
 		cScene *apScene,

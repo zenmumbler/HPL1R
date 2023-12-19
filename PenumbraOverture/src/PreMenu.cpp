@@ -33,7 +33,7 @@
 cPreMenu::cPreMenu(cInit *apInit)  : iUpdateable("PreMenu")
 {
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 
 	//Load fonts
 	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt");
@@ -675,12 +675,12 @@ void cPreMenu::SetActive(bool abX)
 
 		for(size_t i=0; i< mvTexNames.size(); ++i)
 		{
-			iTexture *pTex = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D(mvTexNames[i]);
+			iTexture *pTex = mpInit->mpGame->GetTextureManager()->Create2D(mvTexNames[i]);
 			if(pTex) mvTextures.push_back(pTex);
 		}
 
-		mpLogoTexture = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("title_logo.jpg");
-		// mpEpTexture = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("title_ep1.jpg");
+		mpLogoTexture = mpInit->mpGame->GetTextureManager()->Create2D("title_logo.jpg");
+		// mpEpTexture = mpInit->mpGame->GetTextureManager()->Create2D("title_ep1.jpg");
 
 		mfAlpha =0;
 	}
@@ -696,16 +696,16 @@ void cPreMenu::SetActive(bool abX)
 		mpFlashGfx = NULL;
 
 		if (mpLogoTexture)
-			mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mpLogoTexture);
+			mpInit->mpGame->GetTextureManager()->Destroy(mpLogoTexture);
 		//if (mpEpTexture)
-		//	mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mpEpTexture);
+		//	mpInit->mpGame->GetTextureManager()->Destroy(mpEpTexture);
 
 		mpLogoTexture = NULL;
 		// mpEpTexture = NULL;
 
 		for(size_t i=0; i< mvTextures.size(); ++i)
 		{
-			mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mvTextures[i]);
+			mpInit->mpGame->GetTextureManager()->Destroy(mvTextures[i]);
 		}
 		mvTextures.clear();
 		

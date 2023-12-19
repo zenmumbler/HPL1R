@@ -23,20 +23,18 @@
 
 namespace hpl {
 
-	class cGraphics;
-	class cResources;
+	class cMeshLoaderHandler;
 	class cAnimation;
 
 	class cAnimationManager : public iResourceManager
 	{
 	public:
-		cAnimationManager(cGraphics* apGraphics,cResources *apResources);
+		cAnimationManager(cMeshLoaderHandler *meshLoadHandler);
 
 		cAnimation* CreateAnimation(const tString& asName);
 
 	private:
-		cGraphics* mpGraphics;
-		cResources* mpResources;
+		cMeshLoaderHandler *_meshLoadHandler;
 	};
 
 };

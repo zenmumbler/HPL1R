@@ -73,7 +73,7 @@ namespace hpl {
 	{
 	friend class cParticleEmitter3D_UserData;
 	public:
-		cParticleEmitterData3D_UserData(const tString &asName,cResources* apResources,cGraphics *apGraphics);
+		cParticleEmitterData3D_UserData(const tString &asName, iLowLevelGraphics *llGfx, cMaterialManager *materialMgr);
 
 		iParticleEmitter* Create(tString asName, cVector3f avSize);
 
@@ -92,10 +92,6 @@ namespace hpl {
 		cVector3f *mpIntersectPos;
 
 		///////// GENERAL /////////////
-
-		// NEW
-		ePEType	mPEType;
-		// ---
 
 		int mlMaxParticleNum;
 
@@ -172,9 +168,6 @@ namespace hpl {
 		cVector3f	mvMinRevVel;
 		cVector3f	mvMaxRevVel;
 
-//		iVertexBuffer *mVBMeshData;
-//		float *mpfMeshVtxData;
-
 		// ---
 
 		/////////// LIFESPAN ////////
@@ -220,29 +213,6 @@ namespace hpl {
 		int  mlMaxCollisionMax;
 
 		int  mlCollisionUpdateRate;
-
-		// NEW
-		/////// BEAM SPECIFIC ///////
-
-		bool mbUseBeamNoise;
-
-		int mlLowFreqPoints;
-		std::vector<unsigned int> mvLFIndices;
-		cVector3f mvMinLowFreqNoise;
-		cVector3f mvMaxLowFreqNoise;
-
-		int mlHighFreqPoints;
-		cVector3f mvMinHighFreqNoise;
-		cVector3f mvMaxHighFreqNoise;
-
-		std::vector<tBeamNoisePoint> mvBeamNoisePoints;
-
-
-		// ---
-
-
-
-
 };
 
 	//----------------------------------------------------------
@@ -250,10 +220,7 @@ namespace hpl {
 	class cParticleEmitter3D_UserData : public iParticleEmitter3D
 	{
 	public:
-		cParticleEmitter3D_UserData(	tString asName,tMaterialVec* avMaterials,
-										cVector3f avSize, cGraphics* apGraphics,cResources *apResources,
-										cParticleEmitterData3D_UserData *apData
-										);
+		cParticleEmitter3D_UserData(tString asName,tMaterialVec* avMaterials, cVector3f avSize, cParticleEmitterData3D_UserData *apData, iLowLevelGraphics *llGfx);
 		~cParticleEmitter3D_UserData(void);
 
 		void Kill();
@@ -262,7 +229,7 @@ namespace hpl {
 
 	private:
 		void UpdateMotion(float afTimeStep);
-		void SetParticleDefaults(cParticle *apParticle);
+		void SetParticleDefaults(cParticle &apParticle);
 
 
 		cParticleEmitterData3D_UserData *mpData;

@@ -31,7 +31,7 @@
 cMapLoadText::cMapLoadText(cInit *apInit)  : iUpdateable("MapLoadText")
 {
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 
 	//load fonts
 	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt");
@@ -168,7 +168,7 @@ void cMapLoadText::SetActive(bool abX)
 
 		mpInit->mpButtonHandler->ChangeState(eButtonHandlerState_MapLoadText);
 
-		mpBack = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("other_load_text_back.jpg");
+		mpBack = mpInit->mpGame->GetTextureManager()->Create2D("other_load_text_back.jpg");
 		
 		mpInit->mpGraphicsHelper->ClearScreen();
 		mpDrawer->DrawTexture(mpBack, 0, {800,600});
@@ -176,11 +176,11 @@ void cMapLoadText::SetActive(bool abX)
 		mpDrawer->Render();
 		mpInit->mpGraphicsHelper->SwapBuffers();
 
-		mpInit->mpGame->GetGraphics()->GetRenderer3D()->GetRenderList()->Clear();
+		mpInit->mpGame->GetRenderer()->GetRenderList()->Clear();
 	}
 	else
 	{
-		if(mpBack) mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mpBack);
+		if(mpBack) mpInit->mpGame->GetTextureManager()->Destroy(mpBack);
 		mpBack = NULL;
 
 		mpInit->mpGame->GetUpdater()->SetContainer("Default");

@@ -31,8 +31,10 @@ class TiXmlElement;
 
 namespace hpl {
 
-	class cGraphics;
+	class iLowLevelGraphics;
 	class cResources;
+	class cTextureManager;
+	class cMaterialManager;
 	class cSound;
 	class cPhysics;
 	class cScene;
@@ -176,7 +178,7 @@ namespace hpl {
 	class cWorld3D
 	{
 	public:
-		cWorld3D(tString asName,cGraphics *apGraphics,cResources *apResources,cSound* apSound,
+		cWorld3D(tString asName,iLowLevelGraphics *apGraphics,cTextureManager *apTextureMgr,cResources *apResources,cSound* apSound,
 					cPhysics *apPhysics, cScene *apScene);
 		~cWorld3D();
 
@@ -326,8 +328,9 @@ namespace hpl {
 
 		tString msName;
 		tString msFileName;
-		cGraphics *mpGraphics;
+		iLowLevelGraphics *_llGfx;
 		cSound* mpSound;
+		cTextureManager *_textureMgr;
 		cResources *mpResources;
 		cPhysics *mpPhysics;
 		cScene *mpScene;

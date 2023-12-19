@@ -20,14 +20,13 @@
 
 #include "tinyXML/tinyxml.h"
 
-#include "resources/Resources.h"
 #include "resources/MaterialManager.h"
 #include "resources/FileSearcher.h"
 #include "graphics/VertexBuffer.h"
 #include "graphics/Material.h"
-#include "graphics/Graphics.h"
 #include "graphics/MeshCreator.h"
 #include "graphics/LowLevelGraphics.h"
+#include "graphics/MaterialHandler.h"
 #include "scene/Camera.h"
 #include "scene/World3D.h"
 #include "scene/Scene.h"
@@ -44,12 +43,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cBillboard::cBillboard(const tString asName,const cVector2f& avSize, cResources *apResources,
-							cGraphics *apGraphics) :
+	cBillboard::cBillboard(const tString asName,const cVector2f& avSize, iLowLevelGraphics* llGfx, cMaterialManager* materialMgr) :
 	iRenderable(asName)
 	{
-		mpMaterialManager = apResources->GetMaterialManager();
-		mpLowLevelGraphics = apGraphics->GetLowLevel();
+		mpMaterialManager = materialMgr;
+		mpLowLevelGraphics = llGfx;
 
 		mpHaloSourceBuffer = CreateBoxVertexBuffer(mpLowLevelGraphics, 1);
 

@@ -19,44 +19,30 @@
 #ifndef HPL_PARTICLE_EMITTER_3D_H
 #define HPL_PARTICLE_EMITTER_3D_H
 
-#include "graphics/Renderable.h"
 #include "scene/Entity3D.h"
+#include "graphics/Renderable.h"
 #include "graphics/ParticleEmitter.h"
-
+#include "graphics/LowLevelGraphics.h"
 
 namespace hpl {
 
-	class cGraphics;
 	class cWorld3D;
 	class cParticleSystem3D;
 
 	//---------------------------------------------
-
-	// NEW
-	enum ePEType
-	{
-		ePEType_Normal,
-		ePEType_Beam,
-		ePEType_LastEnum,
-	};
-
-
-	// ---
 
 	enum eParticleEmitter3DType
 	{
 		eParticleEmitter3DType_FixedPoint,
 		eParticleEmitter3DType_DynamicPoint,
 		eParticleEmitter3DType_Line,
-		eParticleEmitter3DType_Axis,
-		eParticleEmitter3DType_LastEnum,
+		eParticleEmitter3DType_Axis
 	};
 
 	enum eParticleEmitter3DCoordSystem
 	{
 		eParticleEmitter3DCoordSystem_World,
-		eParticleEmitter3DCoordSystem_Local,
-		eParticleEmitter3DCoordSystem_LastEnum,
+		eParticleEmitter3DCoordSystem_Local
 	};
 
 	//------------------------------------------
@@ -93,8 +79,7 @@ namespace hpl {
 	class iParticleEmitter3D : public iParticleEmitter, public iRenderable
 	{
 	public:
-		iParticleEmitter3D(	tString asName,tMaterialVec* avMaterials,unsigned int alMaxParticles,
-							cVector3f avSize, cGraphics* apGraphics,cResources *apResources);
+		iParticleEmitter3D(tString asName, tMaterialVec* avMaterials, unsigned int alMaxParticles, cVector3f avSize, iLowLevelGraphics *llGfx);
 		virtual ~iParticleEmitter3D();
 
 		void UpdateLogic(float afTimeStep);
@@ -166,10 +151,6 @@ namespace hpl {
 		// NEW
 		bool mbUsePartSpin;
 		bool mbUseRevolution;
-
-		ePEType mPEType;
-
-		// ---
 	};
 };
 

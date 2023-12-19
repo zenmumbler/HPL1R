@@ -82,7 +82,6 @@
 		DBF84AD20AC76F1E00BB15CD /* ScriptVar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8494F0AC76D5700BB15CD /* ScriptVar.cpp */; };
 		DBF84AD50AC76F1E00BB15CD /* GPUProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8495D0AC76D5700BB15CD /* GPUProgram.cpp */; };
 		DBF84AD60AC76F1E00BB15CD /* GpuProgramManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849DB0AC76D5800BB15CD /* GpuProgramManager.cpp */; };
-		DBF84AD70AC76F1E00BB15CD /* Graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8495E0AC76D5700BB15CD /* Graphics.cpp */; };
 		DBF84AD80AC76F1E00BB15CD /* GraphicsDrawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF8495F0AC76D5700BB15CD /* GraphicsDrawer.cpp */; };
 		DBF84ADD0AC76F1E00BB15CD /* ImageManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849DD0AC76D5800BB15CD /* ImageManager.cpp */; };
 		DBF84ADE0AC76F1E00BB15CD /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849B90AC76D5800BB15CD /* Input.cpp */; };
@@ -305,7 +304,6 @@
 		DB27F02D0ACB9AB90054ACA3 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		DB27F02E0ACB9AB90054ACA3 /* FontData.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FontData.h; sourceTree = "<group>"; };
 		DB27F0300ACB9AB90054ACA3 /* GPUProgram.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GPUProgram.h; sourceTree = "<group>"; };
-		DB27F0310ACB9AB90054ACA3 /* Graphics.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Graphics.h; sourceTree = "<group>"; };
 		DB27F0320ACB9AB90054ACA3 /* GraphicsDrawer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GraphicsDrawer.h; sourceTree = "<group>"; };
 		DB27F0330ACB9AB90054ACA3 /* GraphicsTypes.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GraphicsTypes.h; sourceTree = "<group>"; };
 		DB27F0350ACB9AB90054ACA3 /* LowLevelGraphics.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LowLevelGraphics.h; sourceTree = "<group>"; };
@@ -469,7 +467,6 @@
 		DBF8495A0AC76D5700BB15CD /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
 		DBF8495B0AC76D5700BB15CD /* FontData.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = FontData.cpp; sourceTree = "<group>"; };
 		DBF8495D0AC76D5700BB15CD /* GPUProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GPUProgram.cpp; sourceTree = "<group>"; };
-		DBF8495E0AC76D5700BB15CD /* Graphics.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Graphics.cpp; sourceTree = "<group>"; };
 		DBF8495F0AC76D5700BB15CD /* GraphicsDrawer.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GraphicsDrawer.cpp; sourceTree = "<group>"; };
 		DBF849610AC76D5700BB15CD /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
 		DBF849740AC76D5800BB15CD /* MaterialHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = MaterialHandler.cpp; sourceTree = "<group>"; };
@@ -945,8 +942,6 @@
 				8EE896D0262459E800FFF4C3 /* GfxBatch.h */,
 				DBF8495D0AC76D5700BB15CD /* GPUProgram.cpp */,
 				DB27F0300ACB9AB90054ACA3 /* GPUProgram.h */,
-				DBF8495E0AC76D5700BB15CD /* Graphics.cpp */,
-				DB27F0310ACB9AB90054ACA3 /* Graphics.h */,
 				DBF8495F0AC76D5700BB15CD /* GraphicsDrawer.cpp */,
 				DB27F0320ACB9AB90054ACA3 /* GraphicsDrawer.h */,
 				DB27F0330ACB9AB90054ACA3 /* GraphicsTypes.h */,
@@ -1362,7 +1357,6 @@
 				DBF84AD20AC76F1E00BB15CD /* ScriptVar.cpp in Sources */,
 				DBF84AD50AC76F1E00BB15CD /* GPUProgram.cpp in Sources */,
 				DBF84AD60AC76F1E00BB15CD /* GpuProgramManager.cpp in Sources */,
-				DBF84AD70AC76F1E00BB15CD /* Graphics.cpp in Sources */,
 				DBF84AD80AC76F1E00BB15CD /* GraphicsDrawer.cpp in Sources */,
 				DBF84ADD0AC76F1E00BB15CD /* ImageManager.cpp in Sources */,
 				DBF84ADE0AC76F1E00BB15CD /* Input.cpp in Sources */,

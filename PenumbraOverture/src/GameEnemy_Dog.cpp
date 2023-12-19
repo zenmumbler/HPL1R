@@ -1184,10 +1184,10 @@ void cGameEnemyState_Dog_Attack::OnPostSceneDraw()
 	
 	cMatrixf mtxCollider = cMath::MatrixMul(pCamera->GetViewMatrix(),mtxOffset);
 
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetMatrix(eMatrix_ModelView,mtxCollider);
+	mpInit->mpGame->GetLowLevelGraphics()->SetMatrix(eMatrix_ModelView,mtxCollider);
 
 	cVector3f vSize = mpEnemyDog->GetAttackShape()->GetSize();
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(vSize*0.5f,vSize*-0.5f,
+	mpInit->mpGame->GetLowLevelGraphics()->DrawBoxMaxMin(vSize*0.5f,vSize*-0.5f,
 		cColor(1,0,1,1));
 */
 }
@@ -1593,10 +1593,10 @@ void cGameEnemyState_Dog_BreakDoor::OnPostSceneDraw()
 
 	cMatrixf mtxCollider = cMath::MatrixMul(pCamera->GetViewMatrix(),mtxOffset);
 
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetMatrix(eMatrix_ModelView,mtxCollider);
+	mpInit->mpGame->GetLowLevelGraphics()->SetMatrix(eMatrix_ModelView,mtxCollider);
 
 	cVector3f vSize = mpEnemyDog->GetBreakDoorShape()->GetSize();
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(vSize*0.5f,vSize*-0.5f,
+	mpInit->mpGame->GetLowLevelGraphics()->DrawBoxMaxMin(vSize*0.5f,vSize*-0.5f,
 		cColor(1,0,1,1));
 */
 }

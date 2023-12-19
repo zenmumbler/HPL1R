@@ -38,7 +38,7 @@
 cInventory::cInventory(cInit *apInit)  : iUpdateable("Inventory")
 {
 	mpInit = apInit;
-	mpDrawer = apInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = apInit->mpGame->GetDrawer();
 
 	mpGfxBackground = mpDrawer->CreateGfxObject("inventory_background.bmp",eGfxMaterial::DiffuseAlpha);
 
@@ -141,7 +141,7 @@ iInventoryWidget::iInventoryWidget(cInit *apInit, const cRect2f &aRect, const cG
 	mpGfxObject = apGfxObject;
 	mfZ = afZ;
 
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 }
 
 void iInventoryWidget::Draw()
@@ -437,7 +437,7 @@ void cInventorySlot::OnUpdate(float afTimeStep)
 cInventoryItem::cInventoryItem(cInit *apInit)
 {
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 	mpGfxObject = NULL;
 	mpGfxObjectAdditive = NULL;
 }
@@ -707,7 +707,7 @@ void cInventoryHealth::OnUpdate(float afTimeStep)
 cInventoryContext::cInventoryContext(cInit *apInit)
 {
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 
 	mbActive = false;
 

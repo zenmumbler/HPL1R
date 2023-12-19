@@ -853,7 +853,7 @@ void cEffect_WaveGravity::Reset()
 cEffectHandler::cEffectHandler(cInit *apInit)  : iUpdateable("EffectHandler")
 {
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 
 	mpFlash = new cEffect_Flash(mpInit,mpDrawer);
 	mpWaveGravity = new cEffect_WaveGravity(mpInit);

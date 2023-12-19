@@ -46,8 +46,6 @@ namespace hpl {
 							eColorDataFormat aDataFormat, void *apPixelData) override;
 
 
-		float GetGamma() override {return 0;}
-		void SetGamma(float afGamma) override {}
 		int GetHandle() override {return (int) mvTextureHandles[0];}
 
 		void SetFilter(eTextureFilter aFilter) override;

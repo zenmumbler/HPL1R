@@ -274,14 +274,14 @@ cMapHandler::cMapHandler(cInit *apInit) : iUpdateable("MapHandler")
 	mpSoundCallback = new cMapHandlerSoundCallback(apInit);
 	cSoundEntity::AddGlobalCallback(mpSoundCallback);
 
-	mpMapChangeTexture = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("other_mapchange.jpg");
+	mpMapChangeTexture = mpInit->mpGame->GetTextureManager()->Create2D("other_mapchange.jpg");
 }
 
 //-----------------------------------------------------------------------
 
 cMapHandler::~cMapHandler(void)
 {
-	if(mpMapChangeTexture)mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mpMapChangeTexture);
+	if(mpMapChangeTexture)mpInit->mpGame->GetTextureManager()->Destroy(mpMapChangeTexture);
 	
 	delete mpSoundCallback ;
 	delete  mpWorldCache ;
@@ -354,9 +354,9 @@ bool cMapHandler::Load(const tString &asFile,const tString& asStartPos)
 		mpInit->mpInventory->ClearCallbacks();
 
 		//Reset the rendering.
-		mpInit->mpGame->GetGraphics()->GetRenderer3D()->SetAmbientColor(cColor(0,1));
-		mpInit->mpGame->GetGraphics()->GetRenderer3D()->SetSkyBoxActive(false);
-		mpInit->mpGame->GetGraphics()->GetRenderer3D()->SetFogActive(false);
+		mpInit->mpGame->GetRenderer()->SetAmbientColor(cColor(0,1));
+		mpInit->mpGame->GetRenderer()->SetSkyBoxActive(false);
+		mpInit->mpGame->GetRenderer()->SetFogActive(false);
 
 		//Remove all current objects
 		mpInit->mbDestroyGraphics =false;
@@ -516,7 +516,7 @@ bool cMapHandler::LoadSimple(const tString &asFile, bool abLoadEntities)
 	mpInit->mpGame->GetSound()->GetSoundHandler()->StopAll(eSoundDest_World);
 	mpInit->mpGame->GetSound()->Update(1.0f/60.0f);
 
-    mpInit->mpGame->GetGraphics()->GetRenderer3D()->SetAmbientColor(cColor(0,1)); 
+    mpInit->mpGame->GetRenderer()->SetAmbientColor(cColor(0,1)); 
 	
 	cWorld3D *pOldWorld = mpScene->GetWorld3D();
 
@@ -1069,7 +1069,7 @@ void cMapHandler::RenderItemEffect()
 	if(bFound==false) return;
 
 	auto pCam = mpScene->GetCamera();
-	iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
+	iLowLevelGraphics *pLowGfx = mpInit->mpGame->GetLowLevelGraphics();
 
 	pLowGfx->SetDepthTestActive(true);
 	pLowGfx->SetDepthWriteActive(false);
@@ -1127,13 +1127,13 @@ void cMapHandler::OnPostSceneDraw()
 
 
 	// auto pCam = mpScene->GetCamera();
-	// mpInit->mpGame->GetGraphics()->GetLowLevel()->SetMatrix(eMatrix_ModelView, pCam->GetViewMatrix());
+	// mpInit->mpGame->GetLowLevelGraphics()->SetMatrix(eMatrix_ModelView, pCam->GetViewMatrix());
 
 	//mpScene->GetWorld3D()->GetPhysicsWorld()->RenderDebugGeometry(
-	//	mpInit->mpGame->GetGraphics()->GetLowLevel(),cColor(1,0.5f,1));
+	//	mpInit->mpGame->GetLowLevelGraphics(),cColor(1,0.5f,1));
 
 	
-	/*mpInit->mpGame->GetGraphics()->GetLowLevel()->SetDepthTestActive(false);
+	/*mpInit->mpGame->GetLowLevelGraphics()->SetDepthTestActive(false);
 	cParticleSystem3DIterator PIt = mpScene->GetWorld3D()->GetParticleSystemIterator();
 	while(PIt.HasNext())
 	{
@@ -1148,16 +1148,16 @@ void cMapHandler::OnPostSceneDraw()
 		//	bStatic =false;
 
 			//pPS->SetPosition(pPS->GetLocalPosition());
-			mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawSphere(pPS->GetWorldPosition(),
+			mpInit->mpGame->GetLowLevelGraphics()->DrawSphere(pPS->GetWorldPosition(),
 																0.3f,cColor(1,0,1));	
 
-			mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(
+			mpInit->mpGame->GetLowLevelGraphics()->DrawBoxMaxMin(
 												pPS->GetEmitter(0)->GetBoundingVolume()->GetMax(),
 												pPS->GetEmitter(0)->GetBoundingVolume()->GetMin(),
 												cColor(0,1,1));
 		
 	}
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetDepthTestActive(true);*/
+	mpInit->mpGame->GetLowLevelGraphics()->SetDepthTestActive(true);*/
 	
 	////////////////////////////////////
 	// Let Entities post draw
@@ -1170,21 +1170,21 @@ void cMapHandler::OnPostSceneDraw()
 	}
 	
 	/*
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetTexture(0,NULL);
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetBlendActive(false);
+	mpInit->mpGame->GetLowLevelGraphics()->SetTexture(0,NULL);
+	mpInit->mpGame->GetLowLevelGraphics()->SetBlendActive(false);
 	
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetDepthTestActive(false);
+	mpInit->mpGame->GetLowLevelGraphics()->SetDepthTestActive(false);
 
 	cVector3f vMin = mpScene->GetWorld3D()->GetPhysicsWorld()->GetWorldSizeMin();
 	cVector3f vMax = mpScene->GetWorld3D()->GetPhysicsWorld()->GetWorldSizeMax();
 
-	//mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(vMax,vMin,cColor(1,0,1));
+	//mpInit->mpGame->GetLowLevelGraphics()->DrawBoxMaxMin(vMax,vMin,cColor(1,0,1));
 
 	//mpScene->GetWorld3D()->DrawMeshBoundingBoxes(cColor(1,0.5f,1),false);
 	//mpScene->GetWorld3D()->GetPhysicsWorld()->RenderDebugGeometry(
-	//						mpInit->mpGame->GetGraphics()->GetLowLevel(),cColor(1,0.5f,1));
+	//						mpInit->mpGame->GetLowLevelGraphics(),cColor(1,0.5f,1));
 	//mpScene->GetWorld3D()->GetPhysicsWorld()->SetSaveContactPoints(true);
-	//mpScene->GetWorld3D()->GetPhysicsWorld()->RenderContactPoints(mpInit->mpGame->GetGraphics()->GetLowLevel(),cColor(1,0.5f,1),
+	//mpScene->GetWorld3D()->GetPhysicsWorld()->RenderContactPoints(mpInit->mpGame->GetLowLevelGraphics(),cColor(1,0.5f,1),
 	//											cColor(1,1,0.5f));
 	
 	cLight3DListIterator lightIt = mpScene->GetWorld3D()->GetLightIterator();
@@ -1195,19 +1195,19 @@ void cMapHandler::OnPostSceneDraw()
 		if(pLight->IsVisible() && pLight->IsActive() && pLight->GetLightType() == eLight3DType_Spot)
 		{
 			cBoundingVolume *pBV = pLight->GetBoundingVolume();
-			mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(
+			mpInit->mpGame->GetLowLevelGraphics()->DrawBoxMaxMin(
 									pBV->GetMax(),pBV->GetMin(),cColor(1,0,1));
 		}
 	}
 
 	
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetDepthTestActive(false);
+	mpInit->mpGame->GetLowLevelGraphics()->SetDepthTestActive(false);
 	cBillboardIterator billIt = mpScene->GetWorld3D()->GetBillboardIterator();
 	while(billIt.HasNext())
 	{
 		cBillboard *pBillboard = billIt.Next();
 
-		mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(
+		mpInit->mpGame->GetLowLevelGraphics()->DrawBoxMaxMin(
 								pBillboard->GetBoundingVolume()->GetMax(),
 								pBillboard->GetBoundingVolume()->GetMin(),cColor(1,0,1));
 	}
@@ -1219,9 +1219,9 @@ void cMapHandler::OnPostSceneDraw()
 
 		//if(pEntity->GetBodyNum()<=0) continue;
 		
-		//mpInit->mpGame->GetGraphics()->GetLowLevel()->SetDepthTestActive(false);
+		//mpInit->mpGame->GetLowLevelGraphics()->SetDepthTestActive(false);
 
-		//mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(
+		//mpInit->mpGame->GetLowLevelGraphics()->DrawBoxMaxMin(
 		//						pEntity->GetMeshEntity()->GetBoundingVolume()->GetMax(),
 		//						pEntity->GetMeshEntity()->GetBoundingVolume()->GetMin(),cColor(1,0,1));
 
@@ -1230,15 +1230,15 @@ void cMapHandler::OnPostSceneDraw()
 			iPhysicsBody* pBody = pEntity->GetBody(i);
 			if(pBody){
 				cBoundingVolume *pBV = pBody->GetBV();
-				mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(pBV->GetMax(),pBV->GetMin(),
+				mpInit->mpGame->GetLowLevelGraphics()->DrawBoxMaxMin(pBV->GetMax(),pBV->GetMin(),
 																cColor(1,0.5f,1));
-				//pBody->RenderDebugGeometry(mpInit->mpGame->GetGraphics()->GetLowLevel(),cColor(1,0.5f,1));
+				//pBody->RenderDebugGeometry(mpInit->mpGame->GetLowLevelGraphics(),cColor(1,0.5f,1));
 			}
 		}
 	}
 	
 
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetDepthTestActive(true);
+	mpInit->mpGame->GetLowLevelGraphics()->SetDepthTestActive(true);
 	*/
 }
 
@@ -1370,7 +1370,7 @@ void cMapHandler::Reset()
 	mpScene->SetWorld3D(NULL);
 
 	//Make sure no occulssion queries are left.
-	mpInit->mpGame->GetGraphics()->GetRenderer3D()->GetRenderList()->Clear();
+	mpInit->mpGame->GetRenderer()->GetRenderList()->Clear();
 }
 
 //-----------------------------------------------------------------------

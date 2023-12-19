@@ -122,7 +122,7 @@ cButtonHandler::cButtonHandler(cInit *apInit)  : iUpdateable("ButtonHandler")
 	mpInit = apInit;
 
 	mpInput = mpInit->mpGame->GetInput();
-	mpLowLevelGraphics = mpInit->mpGame->GetGraphics()->GetLowLevel();
+	mpLowLevelGraphics = mpInit->mpGame->GetLowLevelGraphics();
 
 	mState = eButtonHandlerState_Game;
 
@@ -189,10 +189,10 @@ void cButtonHandler::OnStart()
 
 void cButtonHandler::OnPostSceneDraw()
 {
-	if(mpInit->mpGame->GetGraphics()->GetRenderer3D()->GetDebugFlags() & eRendererDebugFlag_LogRendering)
+	if(mpInit->mpGame->GetRenderer()->GetDebugFlags() & eRendererDebugFlag_LogRendering)
 	{
 		Log("-------------- STOP RENDERING LOG ------------------------\n");
-		mpInit->mpGame->GetGraphics()->GetRenderer3D()->SetDebugFlags(0);
+		mpInit->mpGame->GetRenderer()->SetDebugFlags(0);
 	}
 }
 
@@ -220,7 +220,7 @@ void cButtonHandler::Update(float afTimeStep)
 			++lCount;
 		}
 
-		auto screenPixels = mpInit->mpGame->GetGraphics()->GetLowLevel()->GetScreenPixels();
+		auto screenPixels = mpInit->mpGame->GetLowLevelGraphics()->GetScreenPixels();
 		// TODO: actually save file
 	}
 	if(mpInput->BecameTriggerd("DebugMenu"))
@@ -348,7 +348,7 @@ void cButtonHandler::Update(float afTimeStep)
 		if(mpInput->BecameTriggerd("PrintLog"))
 		{
 			Log("-------------- START RENDERING LOG ------------------------\n");
-			mpInit->mpGame->GetGraphics()->GetRenderer3D()->SetDebugFlags(eRendererDebugFlag_LogRendering);
+			mpInit->mpGame->GetRenderer()->SetDebugFlags(eRendererDebugFlag_LogRendering);
 		}
 		//Check if no jump is pressed always.
 		bool bPlayerStateIsActive = false;

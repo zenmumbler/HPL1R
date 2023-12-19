@@ -3,14 +3,13 @@
  * This file is part of Rehatched
  */
 
-#include "angelscript.h"
-
 #include "script/Script.h"
-#include "resources/ResourceManager.h"
 #include "system/String.h"
 #include "system/Files.h"
 #include "system/Log.h"
 
+// AngelScript core and libraries
+#include "angelscript.h"
 #include "script/impl/scriptarray.h"
 #include "script/impl/scriptstdstring.h"
 #include "script/impl/scripthelper.h"
@@ -85,8 +84,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cScriptModule::cScriptModule(const tString& asName,asIScriptEngine *apScriptEngine,
-							cScriptOutput *apScriptOutput)
+	cScriptModule::cScriptModule(const tString& asName, asIScriptEngine *apScriptEngine, cScriptOutput *apScriptOutput)
 		: iResourceBase(asName)
 		, mpEngine{apScriptEngine}
 		, mpOutput{apScriptOutput}
@@ -126,12 +124,7 @@ namespace hpl {
 			return false;
 		}
 
-		int lBuildOutput = mpModule->Build();
-//		if (apCompileMessages) {
-//			*apCompileMessages = mpScriptOutput->GetMessage();
-//		}
-
-		bool success = lBuildOutput >= 0;
+		bool success = mpModule->Build() == asSUCCESS;
 		if (! success)
 		{
 			Error("Couldn't build script '%s'!\n",asFileName.c_str());
@@ -159,17 +152,18 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cScript::cScript(cResources *resources)
-		: iUpdateable("HPL_Scripting"), mpResources(resources)
+	cScript::cScript()
+		: iUpdateable("HPL_Scripting")
 	{
 		mpEngine = asCreateScriptEngine(ANGELSCRIPT_VERSION);
 		if (mpEngine == NULL) {
-			Error("Failed to start angel script!\n");
+			FatalError("Failed to start scripting engine!\n");
 		}
 
 		mpOutput = new cScriptOutput();
 		mpEngine->SetMessageCallback(asMETHOD(cScriptOutput,AddMessage), mpOutput, asCALL_THISCALL);
 
+		// extension libraries
 		RegisterScriptArray(mpEngine, true);
 		RegisterStdString(mpEngine);
 		RegisterStdStringUtils(mpEngine);

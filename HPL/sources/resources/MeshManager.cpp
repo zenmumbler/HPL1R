@@ -17,12 +17,11 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/MeshManager.h"
-#include "system/String.h"
-#include "system/Log.h"
-#include "resources/Resources.h"
 #include "graphics/Mesh.h"
 #include "resources/MeshLoaderHandler.h"
 #include "resources/FileSearcher.h"
+#include "system/String.h"
+#include "system/Log.h"
 
 
 namespace hpl {
@@ -33,11 +32,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMeshManager::cMeshManager(cGraphics* apGraphic,cResources *apResources)
+	cMeshManager::cMeshManager(cMeshLoaderHandler *meshLoadHandler)
 		: iResourceManager{"mesh"}
 	{
-		mpGraphics = apGraphic;
-		mpResources = apResources;
+		_meshLoadHandler = meshLoadHandler;
 	}
 
 	//-----------------------------------------------------------------------
@@ -62,7 +60,7 @@ namespace hpl {
 		if(cString::GetFileExt(asNewName) == "")
 		{
 			bool bFound = false;
-			tStringVec *pTypes = mpResources->GetMeshLoaderHandler()->GetSupportedTypes();
+			tStringVec *pTypes = _meshLoadHandler->GetSupportedTypes();
 			for(size_t i=0; i< pTypes->size(); i++)
 			{
 				asNewName = cString::SetFileExt(asNewName, (*pTypes)[i]);
@@ -85,7 +83,7 @@ namespace hpl {
 
 		if(pMesh==NULL && sPath!="")
 		{
-			pMesh = mpResources->GetMeshLoaderHandler()->LoadMesh(sPath,0);
+			pMesh = _meshLoadHandler->LoadMesh(sPath,0);
 			if(pMesh == NULL)
 			{
 				EndLoad();

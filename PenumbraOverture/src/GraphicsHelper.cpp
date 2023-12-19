@@ -31,9 +31,9 @@
 cGraphicsHelper::cGraphicsHelper(cInit *apInit)
 {
 	mpInit = apInit; // for Translate
-	mpLowLevelGfx = apInit->mpGame->GetGraphics()->GetLowLevel();
-	mpTexManager = apInit->mpGame->GetResources()->GetTextureManager();
-	mpDrawer = apInit->mpGame->GetGraphics()->GetDrawer();
+	mpLowLevelGfx = apInit->mpGame->GetLowLevelGraphics();
+	mpTexManager = apInit->mpGame->GetTextureManager();
+	mpDrawer = apInit->mpGame->GetDrawer();
 
 	mpFont = apInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt");
 }

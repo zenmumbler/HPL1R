@@ -32,7 +32,7 @@
 
 cNotebookState_Front::cNotebookState_Front(cInit *apInit, cNotebook *apNotebook) : iNotebookState(apInit, apNotebook)
 {
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 	mpTextBack = mpDrawer->CreateGfxObject("notebook_textback.bmp",eGfxMaterial::DiffuseAlpha);
 	
 	mpFrontFont =  mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("verdana.fnt");
@@ -163,7 +163,7 @@ void cNotebookState_Front::OnExit()
 
 cNotebookState_TaskList::cNotebookState_TaskList(cInit *apInit, cNotebook *apNotebook) : iNotebookState(apInit, apNotebook)
 {
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 	mpTextFont =  mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("cour.fnt");
 
 	mfFontSize = 15;
@@ -389,7 +389,7 @@ void cNotebookState_TaskList::OnExit()
 
 cNotebookState_NoteList::cNotebookState_NoteList(cInit *apInit, cNotebook *apNotebook) : iNotebookState(apInit, apNotebook)
 {
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 	mpTextBack = mpDrawer->CreateGfxObject("notebook_listtextback.bmp",eGfxMaterial::DiffuseAlpha);
 	mpTab = mpDrawer->CreateGfxObject("notebook_tab.bmp",eGfxMaterial::DiffuseAlpha);
 
@@ -662,7 +662,7 @@ void cNotebookState_NoteList::OnExit()
 
 cNotebookState_Note::cNotebookState_Note(cInit *apInit, cNotebook *apNotebook) : iNotebookState(apInit, apNotebook)
 {
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 	mpOptionsImage[0] = mpDrawer->CreateGfxObject("notebook_nextpage.bmp",eGfxMaterial::DiffuseAlpha);
 	mpOptionsImage[1] = mpDrawer->CreateGfxObject("notebook_prevpage.bmp",eGfxMaterial::DiffuseAlpha);
 
@@ -889,7 +889,7 @@ void cNotebookState_Note::OnExit()
 cNotebook::cNotebook(cInit *apInit)  : iUpdateable("Notebook")
 {
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 
 	Reset();
 

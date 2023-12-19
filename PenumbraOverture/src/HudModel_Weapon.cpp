@@ -417,7 +417,7 @@ void cHudModel_WeaponMelee::PostSceneDraw()
 	float fAttackRange = mvAttacks[mlCurrentAttack].mfAttackRange;	
 
 	cVector3f vPos = pCamera->GetPosition() + pCamera->GetForward()*fAttackRange;
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawSphere(vPos,0.1f,cColor(1,0,1,1));
+	mpInit->mpGame->GetLowLevelGraphics()->DrawSphere(vPos,0.1f,cColor(1,0,1,1));
 		
 	//return;
 	
@@ -442,15 +442,15 @@ void cHudModel_WeaponMelee::PostSceneDraw()
 	
 	cMatrixf mtxCollider = cMath::MatrixMul(pCamera->GetViewMatrix(),mtxDamage);
 		
-	mpInit->mpGame->GetGraphics()->GetLowLevel()->SetMatrix(eMatrix_ModelView,mtxCollider);
+	mpInit->mpGame->GetLowLevelGraphics()->SetMatrix(eMatrix_ModelView,mtxCollider);
 
 	cVector3f vSize = mvAttacks[mlCurrentAttack].mvDamageSize;
 	
 	if(bCollide)
-		mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(vSize*0.5f,vSize*-0.5f,
+		mpInit->mpGame->GetLowLevelGraphics()->DrawBoxMaxMin(vSize*0.5f,vSize*-0.5f,
 																cColor(0,1,0,1));
 	else
-		mpInit->mpGame->GetGraphics()->GetLowLevel()->DrawBoxMaxMin(vSize*0.5f,vSize*-0.5f,
+		mpInit->mpGame->GetLowLevelGraphics()->DrawBoxMaxMin(vSize*0.5f,vSize*-0.5f,
 																cColor(1,0,1,1));
 */
 }

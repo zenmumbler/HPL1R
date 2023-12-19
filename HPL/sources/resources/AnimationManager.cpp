@@ -17,13 +17,12 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/AnimationManager.h"
-#include "system/String.h"
-#include "system/Log.h"
-#include "resources/Resources.h"
 #include "graphics/Mesh.h"
 #include "graphics/Animation.h"
 #include "resources/MeshLoaderHandler.h"
 #include "resources/FileSearcher.h"
+#include "system/String.h"
+#include "system/Log.h"
 
 
 namespace hpl {
@@ -34,11 +33,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cAnimationManager::cAnimationManager(cGraphics* apGraphic,cResources *apResources)
+	cAnimationManager::cAnimationManager(cMeshLoaderHandler *meshLoadHandler)
 		: iResourceManager{"animation"}
 	{
-		mpGraphics = apGraphic;
-		mpResources = apResources;
+		_meshLoadHandler = meshLoadHandler;
 	}
 
 	//-----------------------------------------------------------------------
@@ -63,7 +61,7 @@ namespace hpl {
 		if(cString::GetFileExt(asNewName) == "")
 		{
 			bool bFound = false;
-			tStringVec *pTypes = mpResources->GetMeshLoaderHandler()->GetSupportedTypes();
+			tStringVec *pTypes = _meshLoadHandler->GetSupportedTypes();
 			for(size_t i=0; i< pTypes->size(); i++)
 			{
 				asNewName = cString::SetFileExt(asNewName, (*pTypes)[i]);
@@ -86,10 +84,8 @@ namespace hpl {
 
 		if(pAnimation==NULL && sPath!="")
 		{
-			cMeshLoaderHandler *pMeshLoadHandler = mpResources->GetMeshLoaderHandler();
-
 			//try to load animation from mesh
-			cMesh *pTempMesh = pMeshLoadHandler->LoadMesh(sPath,0);
+			cMesh *pTempMesh = _meshLoadHandler->LoadMesh(sPath,0);
 			if(pTempMesh==NULL){
 				Error("Couldn't load animation from '%s'\n",sPath.c_str());
 				EndLoad();

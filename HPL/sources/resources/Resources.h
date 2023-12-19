@@ -20,8 +20,6 @@
 #define HPL_RESOURCES_H
 
 #include "graphics/GPUProgram.h"
-#include "graphics/GPUProgram.h"
-#include "game/Updateable.h"
 #include "system/StringTypes.h"
 
 #include <map>
@@ -33,14 +31,13 @@ namespace hpl {
 	class cImageEntity;
 
 	class iLowLevelGraphics;
-	class iResourceManager;
-	class cImageManager;
+	class cTextureManager;
 	class cGpuProgramManager;
+	class iResourceManager;
 	class cParticleManager;
 	class cSoundManager;
 	class cFontManager;
 	class cScriptManager;
-	class cTextureManager;
 	class cMaterialManager;
 	class cSoundEntityManager;
 	class cAnimationManager;
@@ -51,7 +48,7 @@ namespace hpl {
 	class cScript;
 	class cMeshLoaderHandler;
 	class cScene;
-	class cGraphics;
+	class cGraphicsDrawer;
 	class iRenderable;
 	class cWorld3D;
 	class iEntity3D;
@@ -98,13 +95,13 @@ namespace hpl {
 
 	//-------------------------------------------------------
 
-	class cResources : public iUpdateable
+	class cResources
 	{
 	public:
-		cResources(iLowLevelGraphics *apLowLevelGraphics);
+		cResources();
 		~cResources();
 
-		void Init(cGraphics* apGraphics, cSound *apSound, cScript *apScript, cScene *apScene);
+		void Init(iLowLevelGraphics *llGfx, cGraphicsDrawer* drawer, cTextureManager *textureMgr, cGpuProgramManager *shaderMgr, cSound *apSound, cScript *apScript, cScene *apScene);
 
 		void Update(float afTimeStep);
 
@@ -120,13 +117,10 @@ namespace hpl {
 		void AddArea3DLoader(iArea3DLoader* apLoader, bool abSetAsDefault=false);
 		iArea3DLoader* GetArea3DLoader(const tString& asName);
 
-		cImageManager* GetImageManager(){return mpImageManager;}
-		cGpuProgramManager* GetGpuProgramManager(){return mpGpuProgramManager;}
 		cParticleManager* GetParticleManager(){ return mpParticleManager;}
 		cSoundManager* GetSoundManager(){ return mpSoundManager;}
 		cFontManager* GetFontManager(){ return mpFontManager;}
 		cScriptManager* GetScriptManager(){ return mpScriptManager;}
-		cTextureManager* GetTextureManager(){ return mpTextureManager;}
 		cMaterialManager* GetMaterialManager(){ return mpMaterialManager;}
 		cMeshManager* GetMeshManager(){ return mpMeshManager;}
 		cMeshLoaderHandler* GetMeshLoaderHandler(){ return mpMeshLoaderHandler;}
@@ -137,16 +131,10 @@ namespace hpl {
 		void AddBaseDirectories();
 		bool SetLanguageFile(const tString &asFile);
 
-		iLowLevelGraphics *mpLowLevelGraphics;
-
-		std::vector<iResourceManager*> mlstManagers;
-		cImageManager *mpImageManager;
-		cGpuProgramManager *mpGpuProgramManager;
 		cParticleManager* mpParticleManager;
 		cSoundManager* mpSoundManager;
 		cFontManager* mpFontManager;
 		cScriptManager* mpScriptManager;
-		cTextureManager* mpTextureManager;
 		cMaterialManager* mpMaterialManager;
 		cSoundEntityManager* mpSoundEntityManager;
 		cAnimationManager *mpAnimationManager;

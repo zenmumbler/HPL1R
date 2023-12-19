@@ -20,12 +20,10 @@
 
 #include "tinyXML/tinyxml.h"
 
-#include "resources/Resources.h"
 #include "resources/MaterialManager.h"
 #include "resources/FileSearcher.h"
 #include "graphics/VertexBuffer.h"
 #include "graphics/Material.h"
-#include "graphics/Graphics.h"
 #include "graphics/LowLevelGraphics.h"
 #include "scene/Camera.h"
 #include "scene/World3D.h"
@@ -43,11 +41,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cBeam::cBeam(const tString asName, cResources *apResources, cGraphics *apGraphics) :
+	cBeam::cBeam(const tString asName, iLowLevelGraphics* llGfx, cMaterialManager* materialMgr) :
 	iRenderable(asName)
 	{
-		mpMaterialManager = apResources->GetMaterialManager();
-		mpLowLevelGraphics = apGraphics->GetLowLevel();
+		mpMaterialManager = materialMgr;
+		mpLowLevelGraphics = llGfx;
 
 		msFileName = "";
 

@@ -32,7 +32,7 @@ cNumericalButton::cNumericalButton(cInit *apInit, cNumericalPanel* apPanel, cVec
 {
 	mpInit = apInit;
 	mpPanel = apPanel;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 
     mvPositon = cVector3f(avPos.x, avPos.y, 40);
 
@@ -133,7 +133,7 @@ void cNumericalButton::OnMouseOver(bool abOver)
 cNumericalPanel::cNumericalPanel(cInit *apInit)  : iUpdateable("NumericalPanel")
 {
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 
 	//Load graphics (use notebook background for now).
 	mpGfxBackground = mpDrawer->CreateGfxObject("notebook_background.bmp",eGfxMaterial::DiffuseAlpha);

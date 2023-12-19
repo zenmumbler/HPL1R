@@ -19,7 +19,6 @@
 #include "scene/Scene.h"
 #include "game/Updater.h"
 
-#include "graphics/Graphics.h"
 #include "resources/Resources.h"
 #include "sound/Sound.h"
 #include "sound/LowLevelSound.h"
@@ -30,6 +29,7 @@
 #include "graphics/GraphicsDrawer.h"
 #include "graphics/RenderList.h"
 #include "resources/ScriptManager.h"
+#include "script/Script.h"
 
 #include "physics/Physics.h"
 
@@ -48,10 +48,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cScene::cScene(cGraphics *apGraphics, cResources *apResources, cSound* apSound,cPhysics *apPhysics)
+	cScene::cScene(iLowLevelGraphics *llGfx, cRenderer3D *renderer, cGraphicsDrawer *drawer, cTextureManager *apTextureMgr, cResources *apResources, cSound* apSound, cPhysics *apPhysics)
 		: iUpdateable("HPL_Scene")
 	{
-		mpGraphics = apGraphics;
+		_llGfx = llGfx;
+		_renderer = renderer;
+		_drawer = drawer;
+		_textureMgr = apTextureMgr;
 		mpResources = apResources;
 		mpSound = apSound;
 		mpPhysics = apPhysics;
@@ -89,8 +92,7 @@ namespace hpl {
 	cCamera *cScene::CreateCamera(eCameraMoveMode aMoveMode)
 	{
 		auto pCamera = new cCamera();
-		pCamera->SetAspect(mpGraphics->GetLowLevel()->GetScreenSize().x /
-							mpGraphics->GetLowLevel()->GetScreenSize().y);
+		pCamera->SetAspect(_llGfx->GetScreenSize().x / _llGfx->GetScreenSize().y);
 
 		//Add Camera to list
 		mlstCamera.push_back(pCamera);
@@ -193,7 +195,7 @@ namespace hpl {
 		if(mbDrawScene && mpActiveCamera)
 		{
 			if(mpCurrentWorld3D)
-				mpGraphics->GetRenderer3D()->UpdateRenderList(mpCurrentWorld3D, mpActiveCamera, afFrameTime);
+				_renderer->UpdateRenderList(mpCurrentWorld3D, mpActiveCamera, afFrameTime);
 		}
 	}
 
@@ -202,7 +204,7 @@ namespace hpl {
 	void cScene::SetDrawScene(bool abX)
 	{
 		mbDrawScene = abX;
-		mpGraphics->GetRenderer3D()->GetRenderList()->Clear();
+		_renderer->GetRenderList()->Clear();
 	}
 
 	//-----------------------------------------------------------------------
@@ -214,7 +216,7 @@ namespace hpl {
 			if(mpCurrentWorld3D)
 			{
 				START_TIMING(RenderWorld)
-				mpGraphics->GetRenderer3D()->RenderWorld(mpCurrentWorld3D, mpActiveCamera, afFrameTime);
+				_renderer->RenderWorld(mpCurrentWorld3D, mpActiveCamera, afFrameTime);
 				STOP_TIMING(RenderWorld)
 			}
 
@@ -223,14 +225,14 @@ namespace hpl {
 			STOP_TIMING(PostSceneDraw)
 
 			START_TIMING(PostEffects)
-			// mpGraphics->GetRendererPostEffects()->Render();
+			// GetRendererPostEffects()->Render();
 			STOP_TIMING(PostEffects)
 		}
 		else
 		{
 			apUpdater->OnPostSceneDraw();
 		}
-		mpGraphics->GetDrawer()->Render();
+		_drawer->Render();
 
 		apUpdater->OnPostGUIDraw();
 	}
@@ -336,7 +338,7 @@ namespace hpl {
 
 	cWorld3D* cScene::CreateWorld3D(const tString& asName)
 	{
-		cWorld3D* pWorld = new cWorld3D(asName, mpGraphics, mpResources, mpSound, mpPhysics, this);
+		cWorld3D* pWorld = new cWorld3D(asName, _llGfx, _textureMgr, mpResources, mpSound, mpPhysics, this);
 
 		mlstWorld3D.push_back(pWorld);
 

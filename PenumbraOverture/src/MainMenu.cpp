@@ -66,7 +66,7 @@ static eMainMenuState gvMenuBackStates[] = {
 cMainMenuWidget::cMainMenuWidget(cInit *apInit, const cVector3f &avPos, const cVector2f &avSize)
 {
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 
 	mvPositon = cVector3f(avPos.x, avPos.y, 40);
 	
@@ -400,7 +400,7 @@ cMainMenuWidget_List::cMainMenuWidget_List(cInit *apInit, const cVector3f &avPos
 					 cVector2f avFontSize)
  : cMainMenuWidget(apInit,avPos,avSize)
 {
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 
 	mpFont = mpInit->mpGame->GetResources()->GetFontManager()->CreateFontData("font_menu_small.fnt");
 
@@ -1371,7 +1371,7 @@ public:
 	cMainMenuWidget_Shadows(cInit *apInit, const cVector3f &avPos, const tWString& asText,cVector2f avFontSize, eFontAlign aAlignment)
 		: cMainMenuWidget_Button(apInit,avPos,asText,eMainMenuState_LastEnum,avFontSize,aAlignment)
 	{
-		mlCurrent = apInit->mpGame->GetGraphics()->GetRenderer3D()->GetShowShadows();
+		mlCurrent = apInit->mpGame->GetRenderer()->GetShowShadows();
 		msTip = kTranslate("MainMenu", "TipGraphicsShadows");
 	}
 
@@ -1389,7 +1389,7 @@ public:
 		}
 
 		gpShadowsText->msText = kTranslate("MainMenu",gvShadowTypes[mlCurrent]);
-		mpInit->mpGame->GetGraphics()->GetRenderer3D()->SetShowShadows((eRendererShowShadows)mlCurrent);
+		mpInit->mpGame->GetRenderer()->SetShowShadows((eRendererShowShadows)mlCurrent);
 	}
 
 	int mlCurrent;
@@ -1662,7 +1662,7 @@ public:
 	void OnMouseDown(eMButton aButton)
 	{
 		mpInit->mbVsync = !mpInit->mbVsync;
-		mpInit->mpGame->GetGraphics()->GetLowLevel()->SetVsyncActive(mpInit->mbVsync);
+		mpInit->mpGame->GetLowLevelGraphics()->SetVsyncActive(mpInit->mbVsync);
 
 		gpVSyncText->msText = mpInit->mbVsync ? kTranslate("MainMenu","On") : kTranslate("MainMenu","Off");
 	}
@@ -1803,7 +1803,7 @@ cMainMenu::cMainMenu(cInit *apInit)  : iUpdateable("MainMenu")
 	mpBackground = NULL;
 
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 
 	//Load graphics
 	mpGfxBlackQuad = mpDrawer->CreateGfxObject("effect_black.bmp",eGfxMaterial::DiffuseAlpha);
@@ -1857,8 +1857,8 @@ cMainMenu::~cMainMenu(void)
 	mpDrawer->DestroyGfxObject(mpGfxRainSplash);
 	mpDrawer->DestroyGfxObject(mpGfxSnowFlake);
 
-	if(mpLogo) mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mpLogo);
-	if(mpBackground) mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mpBackground);
+	if(mpLogo) mpInit->mpGame->GetTextureManager()->Destroy(mpLogo);
+	if(mpBackground) mpInit->mpGame->GetTextureManager()->Destroy(mpBackground);
 	
 }
 
@@ -2296,12 +2296,12 @@ void cMainMenu::SetActive(bool abX)
 
 		mpCurrentActionText = NULL;
 
-		mpLogo = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("menu_logo.jpg");
+		mpLogo = mpInit->mpGame->GetTextureManager()->Create2D("menu_logo.jpg");
 
 		if(mbGameActive)
-			mpBackground = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("menu_background_ingame.jpg");
+			mpBackground = mpInit->mpGame->GetTextureManager()->Create2D("menu_background_ingame.jpg");
 		else
-			mpBackground = mpInit->mpGame->GetResources()->GetTextureManager()->Create2D("menu_background.jpg");
+			mpBackground = mpInit->mpGame->GetTextureManager()->Create2D("menu_background.jpg");
 	}
 	else
 	{
@@ -2332,9 +2332,9 @@ void cMainMenu::SetActive(bool abX)
 
 		mpInit->mpButtonHandler->ChangeState(eButtonHandlerState_Game);
 
-		if(mpLogo) mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mpLogo);
+		if(mpLogo) mpInit->mpGame->GetTextureManager()->Destroy(mpLogo);
 		mpLogo = NULL;
-		if(mpBackground) mpInit->mpGame->GetResources()->GetTextureManager()->Destroy(mpBackground);
+		if(mpBackground) mpInit->mpGame->GetTextureManager()->Destroy(mpBackground);
 		mpBackground = NULL;
 	}
 }
@@ -3203,7 +3203,7 @@ void cMainMenu::CreateWidgets()
 	//Text
 	vPos = cVector3f(vTextStart.x+12, vTextStart.y+37, vTextStart.z) + cVector3f(40,0,0);
 
-	sText = kTranslate("MainMenu",gvShadowTypes[mpInit->mpGame->GetGraphics()->GetRenderer3D()->GetShowShadows()]);
+	sText = kTranslate("MainMenu",gvShadowTypes[mpInit->mpGame->GetRenderer()->GetShowShadows()]);
 	gpShadowsText = new cMainMenuWidget_Text(mpInit,vPos,sText,20,eFontAlign_Left);
 	AddWidgetToState(eMainMenuState_OptionsGraphicsAdvanced,gpShadowsText); 
 	gpShadowsText->SetExtraWidget(pShadowsButton);

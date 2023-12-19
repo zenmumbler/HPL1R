@@ -19,8 +19,7 @@ namespace hpl {
 
 	class cScriptModule : public iResourceBase {
 	public:
-		cScriptModule(const tString& asName,asIScriptEngine *apScriptEngine,
-					  cScriptOutput *apScriptOutput);
+		cScriptModule(const tString& asName,asIScriptEngine *apScriptEngine, cScriptOutput *apScriptOutput);
 		~cScriptModule();
 
 		bool CreateFromFile(const tString& asFile);
@@ -42,7 +41,7 @@ namespace hpl {
 	class cScript : public iUpdateable
 	{
 	public:
-		cScript(cResources *apResources);
+		cScript();
 		~cScript();
 
 		void Init();
@@ -74,7 +73,6 @@ namespace hpl {
 		asIScriptEngine* GetEngine() const { return mpEngine; };
 
 	private:
-		cResources* mpResources;
 		asIScriptEngine *mpEngine;
 		cScriptOutput *mpOutput;
 	};

@@ -42,7 +42,7 @@ namespace hpl {
 		typedef iLight3D __super;
 	#endif
 	public:
-		cLight3DPoint(tString asName, cResources *apResources);
+		cLight3DPoint(tString asName, cTextureManager *apTextureMgr);
 
 		//SaveObject implementation
 		virtual iSaveData* CreateSaveData();

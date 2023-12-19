@@ -69,7 +69,7 @@ void cDebugMenu::OnDraw() {
 		}
 
 		if (ImGui::CollapsingHeader("Geometry")) {
-			auto renderer = mpInit->mpGame->GetGraphics()->GetRenderer3D();
+			auto renderer = mpInit->mpGame->GetRenderer();
 			auto renderFlags = renderer->GetDebugFlags();
 
 			ImGui::CheckboxFlags("Show Wireframes", &renderFlags, eRendererDebugFlag_RenderLines);

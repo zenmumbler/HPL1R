@@ -35,7 +35,6 @@
 #include "resources/LanguageFile.h"
 #include "resources/impl/MeshLoaderGLTF2.h"
 #include "resources/impl/MeshLoaderCollada.h"
-#include "graphics/Graphics.h"
 
 #include "system/Log.h"
 #include "system/Files.h"
@@ -50,15 +49,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cResources::cResources(iLowLevelGraphics *apLowLevelGraphics)
-		: iUpdateable("Resources")
+	cResources::cResources()
 	{
-		mpLowLevelGraphics = apLowLevelGraphics;
-
 		mpDefaultEntity3DLoader = NULL;
 		mpDefaultArea3DLoader = NULL;
 
 		mpLanguageFile = NULL;
+
+		AddBaseDirectories();
 	}
 
 	//-----------------------------------------------------------------------
@@ -77,9 +75,6 @@ namespace hpl {
 		delete mpSoundManager;
 		delete mpMeshManager;
 		delete mpMaterialManager;
-		delete mpGpuProgramManager;
-		delete mpImageManager;
-		delete mpTextureManager;
 		delete mpSoundEntityManager;
 		delete mpAnimationManager;
 
@@ -89,7 +84,6 @@ namespace hpl {
 
 		if(mpLanguageFile) delete mpLanguageFile;
 
-		mlstManagers.clear();
 		Log("--------------------------------------------------------\n\n");
 	}
 
@@ -101,57 +95,29 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cResources::Init(cGraphics* apGraphics, cSound *apSound, cScript *apScript, cScene *apScene)
+	void cResources::Init(iLowLevelGraphics *llGfx, cGraphicsDrawer* drawer, cTextureManager *textureMgr, cGpuProgramManager *shaderMgr, cSound *apSound, cScript *apScript, cScene *apScene)
 	{
-		Log("Initializing Resources Module\n");
+		Log(" Creating resource managers\n");
 		Log("--------------------------------------------------------\n");
 
-		Log(" Setting default directories\n");
-		AddBaseDirectories();
+		mpMaterialManager = new cMaterialManager(llGfx, textureMgr, shaderMgr);
+		mpParticleManager = new cParticleManager(llGfx, mpMaterialManager);
+		mpFontManager = new cFontManager(llGfx, drawer);
 
-		Log(" Creating resource managers\n");
-		mlstManagers.reserve(16);
+		mpScriptManager = new cScriptManager(apScript);
 
-		mpImageManager = new cImageManager(mpLowLevelGraphics);
-		mlstManagers.push_back(mpImageManager);
-		mpGpuProgramManager = new cGpuProgramManager(mpLowLevelGraphics);
-		mlstManagers.push_back(mpGpuProgramManager);
-		mpParticleManager = new cParticleManager(apGraphics, this);
-		mlstManagers.push_back(mpParticleManager);
-		mpSoundManager = new cSoundManager(apSound, this);
-		mlstManagers.push_back(mpParticleManager);
-		mpFontManager = new cFontManager(apGraphics->GetLowLevel(), apGraphics->GetDrawer());
-		mlstManagers.push_back(mpFontManager);
-		mpScriptManager = new cScriptManager(apScript, this);
-		mlstManagers.push_back(mpScriptManager);
-		mpTextureManager = new cTextureManager(apGraphics, this);
-		mlstManagers.push_back(mpTextureManager);
-		mpMaterialManager = new cMaterialManager(apGraphics, mpTextureManager, mpGpuProgramManager);
-		mlstManagers.push_back(mpMaterialManager);
-		mpMeshManager = new cMeshManager(apGraphics, this);
-		mlstManagers.push_back(mpMeshManager);
+		mpSoundManager = new cSoundManager(apSound);
 		mpSoundEntityManager = new cSoundEntityManager(apSound);
-		mlstManagers.push_back(mpSoundEntityManager);
-		mpAnimationManager = new cAnimationManager(apGraphics, this);
-		mlstManagers.push_back(mpAnimationManager);
 
-		Log(" Misc Creation\n");
-
+		// [Rehatched]: this should not be in here, shared by mesh/anim loads
 		mpMeshLoaderHandler = new cMeshLoaderHandler(this, apScene);
-		mpMeshLoaderHandler->AddLoader(new cMeshLoaderGLTF2(mpLowLevelGraphics));
-		mpMeshLoaderHandler->AddLoader(new cMeshLoaderCollada(mpLowLevelGraphics));
+		mpMeshLoaderHandler->AddLoader(new cMeshLoaderGLTF2(llGfx));
+		mpMeshLoaderHandler->AddLoader(new cMeshLoaderCollada(llGfx));
+
+		mpMeshManager = new cMeshManager(mpMeshLoaderHandler);
+		mpAnimationManager = new cAnimationManager(mpMeshLoaderHandler);
 
 		Log("--------------------------------------------------------\n\n");
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cResources::Update(float afTimeStep)
-	{
-		for (auto manager : mlstManagers)
-		{
-			manager->Update(afTimeStep);
-		}
 	}
 
 	//-----------------------------------------------------------------------

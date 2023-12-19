@@ -299,7 +299,7 @@ void cSaveHandler::SaveData(const tString &asName)
 	
 	///////////////////////
 	//Map properties
-	cRenderer3D *pRenderer = mpInit->mpGame->GetGraphics()->GetRenderer3D();
+	cRenderer3D *pRenderer = mpInit->mpGame->GetRenderer();
 
 	pSavedWorld->mAmbientColor = pRenderer->GetAmbientColor();
 
@@ -376,8 +376,7 @@ void cSaveHandler::LoadData(const tString &asName)
 
 	///////////////////////
 	//Map properties
-	cRenderer3D *pRenderer = mpInit->mpGame->GetGraphics()->GetRenderer3D();
-	cResources *pResources = mpInit->mpGame->GetResources();
+	cRenderer3D *pRenderer = mpInit->mpGame->GetRenderer();
 
 	pRenderer->SetAmbientColor(pSavedWorld->mAmbientColor);
 
@@ -391,7 +390,7 @@ void cSaveHandler::LoadData(const tString &asName)
 	pRenderer->SetSkyBoxColor(pSavedWorld->mSkyboxColor);
 
 	if(pSavedWorld->msSkyboxFile != "") {
-		iTexture *pTex = pResources->GetTextureManager()->CreateCubeMap(pSavedWorld->msSkyboxFile);
+		iTexture *pTex = mpInit->mpGame->GetTextureManager()->CreateCubeMap(pSavedWorld->msSkyboxFile);
 		pRenderer->SetSkyBox(pTex,true);
 	}
 	else {

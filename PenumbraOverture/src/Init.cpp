@@ -71,7 +71,7 @@ cInit* gpInit;
 
 bool CheckSupport(cInit *apInit)
 {
-//	iLowLevelGraphics *pLowLevelGraphics = apInit->mpGame->GetGraphics()->GetLowLevel();
+//	iLowLevelGraphics *pLowLevelGraphics = apInit->mpGame->GetLowLevelGraphics();
 	Log("Success!\n");
 
 	return true;
@@ -114,15 +114,6 @@ cInit::~cInit(void)
 //////////////////////////////////////////////////////////////////////////
 // PUBLIC METHODS
 //////////////////////////////////////////////////////////////////////////
-
-//-----------------------------------------------------------------------
-
-void cInit::CreateHardCodedPS(iParticleEmitterData *apPE)
-{
-	cParticleSystemData3D *pPS = new cParticleSystemData3D(apPE->GetName(),mpGame->GetResources(),mpGame->GetGraphics());
-	pPS->AddEmitterData(apPE);
-	mpGame->GetResources()->GetParticleManager()->AddData3D(pPS);
-}
 
 //-----------------------------------------------------------------------
 
@@ -246,7 +237,7 @@ bool cInit::Init(tString asCommandLine)
 	iLowLevelGameSetup *pSetUp = new cSDLGameSetup();
 	mpGame = new cGame(pSetUp, options);
 
-	mpGame->GetGraphics()->GetLowLevel()->SetVsyncActive(mbVsync);
+	mpGame->GetLowLevelGraphics()->SetVsyncActive(mbVsync);
 
 	mbShowPreMenu = mpConfig->GetBool("Game","ShowPreMenu",true);
 	mbShowMenu = mpConfig->GetBool("Game","ShowMenu",true);
@@ -303,16 +294,16 @@ bool cInit::Init(tString asCommandLine)
 //	mpGame->GetGraphics()->GetRendererPostEffects()->SetMotionBlurActive(mpConfig->GetBool("Graphics", "MotionBlur", false));
 //	mpGame->GetGraphics()->GetRendererPostEffects()->SetMotionBlurAmount(mpConfig->GetFloat("Graphics", "MotionBlurAmount", 0.3f));
 
-//	mpGame->GetGraphics()->GetRenderer3D()->SetRefractionUsed(mpConfig->GetBool("Graphics", "Refractions", false));
+//	mpGame->GetRenderer()->SetRefractionUsed(mpConfig->GetBool("Graphics", "Refractions", false));
 
 	mpEffectHandler->GetDepthOfField()->SetDisabled(!mpConfig->GetBool("Graphics", "DepthOfField", true));
 
 	mpGame->GetResources()->GetMaterialManager()->SetTextureAnisotropy(mpConfig->GetFloat("Graphics","TextureAnisotropy",8.0f));
 
 	// Rehatched: this will be moved to a post-proc step
-	// mpGame->GetGraphics()->GetLowLevel()->SetGammaCorrection(mpConfig->GetFloat("Graphics","Gamma",1.0f));
+	// mpGame->GetLowLevelGraphics()->SetGammaCorrection(mpConfig->GetFloat("Graphics","Gamma",1.0f));
 
-	mpGame->GetGraphics()->GetRenderer3D()->SetShowShadows((eRendererShowShadows)mpConfig->GetInt("Graphics","Shadows",0));
+	mpGame->GetRenderer()->SetShowShadows((eRendererShowShadows)mpConfig->GetInt("Graphics","Shadows",0));
 
 	mpGame->SetLimitFPS( mpConfig->GetBool("Graphics","LimitFPS",true));
 
@@ -407,7 +398,7 @@ bool cInit::Init(tString asCommandLine)
 	//mpCredits->SetActive(true);
 
 	//mpGame->SetRenderOnce(true);
-	//mpGame->GetGraphics()->GetRenderer3D()->SetDebugFlags(eRendererDebugFlag_LogRendering);
+	//mpGame->GetRenderer()->SetDebugFlags(eRendererDebugFlag_LogRendering);
 	
 	if(mbShowPreMenu)
 	{
@@ -556,7 +547,7 @@ void cInit::Exit()
 //	mpConfig->SetBool("Graphics", "MotionBlur",mpGame->GetGraphics()->GetRendererPostEffects()->GetMotionBlurActive());
 //	mpConfig->SetFloat("Graphics", "MotionBlurAmount",mpGame->GetGraphics()->GetRendererPostEffects()->GetMotionBlurAmount());
 	mpConfig->SetBool("Graphics", "DepthOfField",!mpEffectHandler->GetDepthOfField()->IsDisabled());
-//	mpConfig->GetBool("Graphics", "Refractions", mpGame->GetGraphics()->GetRenderer3D()->GetRefractionUsed());
+//	mpConfig->GetBool("Graphics", "Refractions", mpGame->GetRenderer()->GetRefractionUsed());
 	
 	mpConfig->SetFloat("Sound","Volume",mpGame->GetSound()->GetLowLevel()->GetVolume());
 	mpConfig->SetString("Sound","DeviceName",msDeviceName);
@@ -564,14 +555,14 @@ void cInit::Exit()
 	mpConfig->SetFloat("Graphics","TextureAnisotropy",mpGame->GetResources()->GetMaterialManager()->GetTextureAnisotropy());
 
 	// Rehatched: the value for correction will have to be kept elsewhere
-	// mpConfig->SetFloat("Graphics","Gamma",mpGame->GetGraphics()->GetLowLevel()->GetGammaCorrection());
+	// mpConfig->SetFloat("Graphics","Gamma",mpGame->GetLowLevelGraphics()->GetGammaCorrection());
 
 	mpConfig->SetInt("Graphics","FSAA",mlFSAA);
 	mpConfig->SetBool("Graphics","PostEffects",mbPostEffects);
 	mpConfig->SetInt("Graphics","ShaderQuality", 3); // Default to old "high" setting (ignored)
 	mpConfig->SetBool("Graphics","LimitFPS",mpGame->GetLimitFPS());
 
-	mpConfig->SetInt("Graphics","Shadows",mpGame->GetGraphics()->GetRenderer3D()->GetShowShadows());
+	mpConfig->SetInt("Graphics","Shadows",mpGame->GetRenderer()->GetShowShadows());
 		
 	Log(" Exit Effect Handler\n");
 	delete  mpEffectHandler ;

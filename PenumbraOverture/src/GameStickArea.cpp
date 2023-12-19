@@ -388,7 +388,7 @@ void cGameStickArea::OnPostSceneDraw()
 {
 	//iPhysicsBody *pAreaBody = mvBodies[0];
 
-	//pAreaBody->RenderDebugGeometry(mpInit->mpGame->GetGraphics()->GetLowLevel(),cColor(1,1));
+	//pAreaBody->RenderDebugGeometry(mpInit->mpGame->GetLowLevelGraphics(),cColor(1,1));
 }
 
 //-----------------------------------------------------------------------

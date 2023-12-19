@@ -18,9 +18,9 @@
  */
 
 #include "resources/ScriptManager.h"
+#include "script/Script.h"
 #include "system/String.h"
 #include "system/Log.h"
-#include "resources/Resources.h"
 
 namespace hpl {
 
@@ -30,11 +30,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cScriptManager::cScriptManager(cScript* apScript, cResources *apResources)
+	cScriptManager::cScriptManager(cScript* apScript)
 		: iResourceManager{"script"}
 	{
 		mpScript = apScript;
-		mpResources = apResources;
 	}
 
 	//-----------------------------------------------------------------------

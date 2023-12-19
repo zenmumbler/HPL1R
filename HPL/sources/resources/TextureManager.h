@@ -19,21 +19,18 @@
 #ifndef HPL_TEXTURE_MANAGER_H
 #define HPL_TEXTURE_MANAGER_H
 
+#include "game/Updateable.h"
 #include "resources/ResourceManager.h"
 #include "graphics/Texture.h"
 
 namespace hpl {
 
-	class cGraphics;
-	class cResources;
-	class iTexture;
-
 	//------------------------------------------------------
 
-	class cTextureManager : public iResourceManager
+	class cTextureManager : public iResourceManager, public iUpdateable
 	{
 	public:
-		cTextureManager(cGraphics* apGraphics,cResources *apResources);
+		cTextureManager(iLowLevelGraphics *llGfx);
 
 		iTexture* Create1D(const tString& asName);
 		iTexture* Create2D(const tString& asName);
@@ -57,8 +54,7 @@ namespace hpl {
 
 		tStringVec mvCubeSideSuffixes;
 
-		cGraphics* mpGraphics;
-		cResources* mpResources;
+		iLowLevelGraphics *_llGfx;
 	};
 
 };

@@ -35,8 +35,6 @@ namespace hpl {
 	};
 
 	class cMaterialManager;
-	class cResources;
-	class cGraphics;
 	class cMeshCreator;
 	class iLowLevelGraphics;
 	class iMaterial;
@@ -74,8 +72,7 @@ namespace hpl {
 		typedef iRenderable __super;
 	#endif
 	public:
-		cBillboard(const tString asName,const cVector2f& avSize, cResources *apResources,
-					cGraphics *apGraphics);
+		cBillboard(const tString asName,const cVector2f& avSize, iLowLevelGraphics* llGfx, cMaterialManager* materialMgr);
 		~cBillboard();
 
 		void SetMaterial(iMaterial * apMaterial);

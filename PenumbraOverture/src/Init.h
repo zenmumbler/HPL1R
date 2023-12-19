@@ -95,8 +95,6 @@ public:
 
 	void RunScriptCommand(const tString& asCommand);
 
-	void CreateHardCodedPS(iParticleEmitterData *apPE);
-
 	void PreloadSoundEntityData(const tString &asFile);
 	void PreloadParticleSystem(const tString &asFile);
 	

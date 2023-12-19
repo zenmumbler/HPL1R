@@ -16,12 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-// NEW
-#include "graphics/Graphics.h"
-// ---
 #include "graphics/ParticleEmitter3D_UserData.h"
-//#include "graphics/Mesh.h"
-//#include "graphics/SubMesh.h"
 #include "graphics/ParticleSystem3D.h"
 #include "graphics/RenderList.h"
 
@@ -29,7 +24,6 @@
 
 #include "resources/Resources.h"
 #include "resources/MaterialManager.h"
-//#include "resources/MeshManager.h"
 
 #include "physics/PhysicsWorld.h"
 #include "physics/PhysicsBody.h"
@@ -37,6 +31,7 @@
 #include "scene/World3D.h"
 
 #include "math/Math.h"
+#include "system/Log.h"
 
 namespace hpl {
 
@@ -47,9 +42,8 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cParticleEmitterData3D_UserData::cParticleEmitterData3D_UserData(
-		const tString &asName,cResources* apResources,cGraphics *apGraphics)
-		: iParticleEmitterData(asName,apResources,apGraphics)
+	cParticleEmitterData3D_UserData::cParticleEmitterData3D_UserData(const tString &asName, iLowLevelGraphics *llGfx, cMaterialManager* materialMgr)
+		: iParticleEmitterData(asName, llGfx, materialMgr)
 	{
 	}
 
@@ -57,7 +51,7 @@ namespace hpl {
 
 	iParticleEmitter* cParticleEmitterData3D_UserData::Create(tString asName, cVector3f avSize)
 	{
-		iParticleEmitter3D *pPE = new cParticleEmitter3D_UserData(asName,&mvMaterials,avSize, mpGraphics,mpResources,this);
+		iParticleEmitter3D *pPE = new cParticleEmitter3D_UserData(asName, &mvMaterials, avSize, this, _llGfx);
 
 		cMatrixf mtxOffset = cMath::MatrixRotate(mvAngleOffset,eEulerRotationOrder_XYZ);
 		mtxOffset.SetTranslation(mvPosOffset);
@@ -67,22 +61,6 @@ namespace hpl {
 	}
 
 	//////////////////////////
-
-	// NEW
-	static ePEType GetPEType(const char *apString)
-	{
-		if(apString==NULL) return ePEType_Normal;
-		tString sType = cString::ToLowerCase(apString);
-
-		if(sType == "beam") return ePEType_Beam;
-		else if(sType == "normal") return ePEType_Normal;
-
-		return ePEType_Normal;
-	}
-
-	// ---
-
-	/////////////////////////
 
 	static ePEStartPosType GetStartPosType(const char *apString)
 	{
@@ -191,12 +169,6 @@ namespace hpl {
 		///////// GENERAL /////////////
 		msName =  cString::ToString(apElement->Attribute("Name"),"");
 
-		// NEW
-
-		mPEType = GetPEType (apElement->Attribute("PEType"));
-
-		// ---
-
 		mlMaxParticleNum = cString::ToInt(apElement->Attribute("MaxParticleNum"),1);
 
 		mbRespawn = cString::ToBool(apElement->Attribute("Respawn"),false);
@@ -230,7 +202,7 @@ namespace hpl {
 		if(lMaterialNum <= 1)
 		{
 			sMaterial = cString::SetFileExt(sMaterial,"mat");
-			iMaterial *pMaterial = mpResources->GetMaterialManager()->CreateMaterial(sMaterial);
+			iMaterial *pMaterial = _materialMgr->CreateMaterial(sMaterial);
 
 			if(pMaterial) mvMaterials.push_back(pMaterial);
 		}
@@ -244,7 +216,7 @@ namespace hpl {
 
 				sFileName = cString::SetFileExt(sFileName,"mat");
 
-				iMaterial *pMaterial = mpResources->GetMaterialManager()->CreateMaterial(sFileName);
+				iMaterial *pMaterial = _materialMgr->CreateMaterial(sFileName);
 				if(pMaterial) mvMaterials.push_back(pMaterial);
 			}
 		}
@@ -267,15 +239,6 @@ namespace hpl {
 
 		mfMinStartRadius = cString::ToFloat(apElement->Attribute("MinStartRadius"),0);
 		mfMaxStartRadius = cString::ToFloat(apElement->Attribute("MaxStartRadius"),0);
-
-// NEW
-//		cMesh *mshTempMesh = mpResources->GetMeshManager()->CreateMesh("character_roach.dae");
-//		mVBMeshData = mshTempMesh->GetSubMeshName("polySurfaceShape38")->GetVertexBuffer();
-//		mpfMeshVtxData = mVBMeshData->GetArray(VertexMask_Position);
-
-
-// ---
-
 
 		/////////// MOVEMENT ////////
 		mStartVelType = GetStartPosType(apElement->Attribute("StartVelType"));
@@ -370,23 +333,6 @@ namespace hpl {
 		mlMaxCollisionMax = cString::ToInt(apElement->Attribute("MaxCollisionMax"),0);
 
 		mlCollisionUpdateRate = cString::ToInt(apElement->Attribute("CollisionUpdateRate"),0);
-
-
-		// NEW
-		////////// BEAM SPECIFIC //////////
-
-		mbUseBeamNoise = cString::ToBool(apElement->Attribute("UseBeamNoise"),false);
-
-		mlLowFreqPoints = cString::ToInt(apElement->Attribute("LowFreqPoints"),4);
-		mlHighFreqPoints = cString::ToInt(apElement->Attribute("HighFreqPoints"),5);
-
-		mvMinLowFreqNoise = cString::ToVector3f(apElement->Attribute("MinLowFreqNoise"),0);
-		mvMaxLowFreqNoise = cString::ToVector3f(apElement->Attribute("MaxLowFreqNoise"),0);
-
-		mvMinHighFreqNoise = cString::ToVector3f(apElement->Attribute("MinHighFreqNoise"),0);
-		mvMaxHighFreqNoise = cString::ToVector3f(apElement->Attribute("MaxHighFreqNoise"),0);
-
-		// ---
 	}
 
 	//-----------------------------------------------------------------------
@@ -435,12 +381,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cParticleEmitter3D_UserData::cParticleEmitter3D_UserData(
-									tString asName,tMaterialVec* apMaterials,
-									cVector3f avSize, cGraphics* apGraphics,cResources *apResources,
-									cParticleEmitterData3D_UserData *apData)
-					: iParticleEmitter3D(	asName,apMaterials,apData->mlMaxParticleNum,
-											avSize,apGraphics,apResources)
+	cParticleEmitter3D_UserData::cParticleEmitter3D_UserData(tString asName, tMaterialVec* apMaterials, cVector3f avSize,
+															 cParticleEmitterData3D_UserData *apData, iLowLevelGraphics *llGfx)
+					: iParticleEmitter3D(asName, apMaterials,apData->mlMaxParticleNum, avSize, llGfx)
 	{
 		mpData = apData;
 
@@ -471,142 +414,11 @@ namespace hpl {
 		mbUsePartSpin = apData->mbUsePartSpin;
 		mbUseRevolution = apData->mbUseRevolution;
 
-		mPEType = apData->mPEType;
-
-
 		//Calculate max size of particles.
 		float fSizeMul = apData->mfStartRelSize;
 		if(fSizeMul < apData->mfMiddleRelSize) fSizeMul = apData->mfMiddleRelSize;
 		if(fSizeMul < apData->mfEndRelSize) fSizeMul = apData->mfEndRelSize;
 		mvMaxDrawSize = apData->mvMaxStartSize * fSizeMul;
-
-
-
-/*		int i = 0;
-		int j = 0;
-		int k = 0;
-		switch ( mPEType )
-		{
-			case ePEType_Beam:
-				delete mpVtxBuffer;								// Destroy the current Vertex Buffer, as it's filled with quads we don't need now :)
-
-				if ( apData->mbUseBeamNoise )
-				{
-					// Calculate the Frequency Points Lookup Table, this is needed to create the Vertex Buffer.It is also needed by every beam particle created,
-					// as it needs to know the type and index of each when updating.
-					while ( (i < apData->mlLowFreqPoints)  && (j < apData->mlHighFreqPoints) )
-					{
-						float fLowRelPos = (float) i / (apData->mlLowFreqPoints -1 );
-						float fHighRelPos = (float) j / (apData->mlHighFreqPoints -1 );
-						float fLastLowRelPos = 0.0f;
-
-						tBeamNoisePoint tempBNP;
-
-			//			tempBNP.lLowFreqNoiseIdx = i;
-			//			tempBNP.lHighFreqNoiseIdx = j;
-						tempBNP.fRelToBendPos = (fHighRelPos-fLastLowRelPos)/(fLowRelPos-fLastLowRelPos);
-
-						if ( fLowRelPos <= fHighRelPos )
-						{
-							if ( fLowRelPos == fHighRelPos )
-							{
-								tempBNP.noiseType = ePENoiseType_Both;
-								++i;
-								++j;
-							}
-							else
-							{
-								tempBNP.noiseType = ePENoiseType_LowFreq;
-								++i;
-							}
-
-							tempBNP.fRelToBeamPos = fLowRelPos;
-							apData->mvLFIndices.push_back (k);
-
-						}
-						else
-						{
-							tempBNP.fRelToBeamPos = fHighRelPos;
-							tempBNP.noiseType = ePENoiseType_HighFreq;
-							++j;
-						}
-
-						fLastLowRelPos = fLowRelPos;
-
-
-						mpData->mvBeamNoisePoints.push_back(tempBNP);
-						++k;
-					}
-				}
-				else
-				{
-					tBeamNoisePoint tempBNP;
-
-					tempBNP.fRelToBeamPos = 0.0f;
-					tempBNP.fRelToBendPos = 0.0f;
-					tempBNP.noiseType = ePENoiseType_None;
-
-					mpData->mvBeamNoisePoints.push_back(tempBNP);
-
-					tempBNP.fRelToBeamPos = 1.0f;
-					tempBNP.fRelToBendPos = 1.0f;
-					tempBNP.noiseType = ePENoiseType_None;
-
-					mpData->mvBeamNoisePoints.push_back(tempBNP);
-				}
-
-				mpVtxBuffer = apGraphics->GetLowLevel()->CreateVertexBuffer ( VertexMask_Position,		// Now that we know how many points we have, we create the Vertex Buffer
-						eVertexBufferDrawType_Tri, VertexBufferUsageType::Stream,
-						mlMaxParticles*mpData->mvBeamNoisePoints.size()*2, mlMaxParticles*(mpData->mvBeamNoisePoints.size()-1)*6);
-
-				for ( int i = 0; i < (int) mlMaxParticles; ++i )
-				{
-					for ( int j = 0; j < (int) mpData->mvBeamNoisePoints.size()-1; ++j )
-					{
-						int lStart = j*2;
-						mpVtxBuffer->AddIndex(lStart);		// Half quad ( tri )
-						mpVtxBuffer->AddIndex(lStart+1);
-						mpVtxBuffer->AddIndex(lStart+3);
-
-						mpVtxBuffer->AddIndex(lStart+3);	// The other half
-						mpVtxBuffer->AddIndex(lStart+2);
-						mpVtxBuffer->AddIndex(lStart);
-					}
-
-				}
-
-				for ( int i = 0; i < (int) mlMaxParticles; ++i )
-				{
-					for (int j = 0; j < (int) mpData->mvBeamNoisePoints.size(); ++j )
-					{
-						mpVtxBuffer->AddVertex(VertexMask_UV0, cVector2f(mpData->mvBeamNoisePoints[j].fRelToBeamPos,1));
-						mpVtxBuffer->AddVertex(VertexMask_UV0, cVector2f(mpData->mvBeamNoisePoints[j].fRelToBeamPos,0));
-					}
-				}
-
-				for ( int i = 0; i < (int) mlMaxParticles; ++i )
-				{
-					for (int j = 0; j < (int) mpData->mvBeamNoisePoints.size()*2; ++j )
-					{
-						mpVtxBuffer->AddVertex(VertexMask_Position, 0);
-						mpVtxBuffer->AddColor(VertexMask_Color0, cColor(1,1));
-					}
-				}
-
-				mpVtxBuffer->Compile(0);
-
-
-
-
-
-				break;
-			case ePEType_Normal:
-				break;
-			default:
-				break;
-			}
-*/
-		// ---
 
 	}
 
@@ -648,21 +460,21 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cParticleEmitter3D_UserData::SetParticleDefaults(cParticle *apParticle)
+	void cParticleEmitter3D_UserData::SetParticleDefaults(cParticle &apParticle)
 	{
 		///////////////////////////////////
 		//Start Color
-		apParticle->mStartColor = cMath::RandRectColor(mpData->mMinStartColor,mpData->mMaxStartColor);
-		apParticle->mColor = apParticle->mStartColor * mpData->mStartRelColor;
+		apParticle.mStartColor = cMath::RandRectColor(mpData->mMinStartColor,mpData->mMaxStartColor);
+		apParticle.mColor = apParticle.mStartColor * mpData->mStartRelColor;
 
 
 		///////////////////////////////////
 		//Start Size
 		if(mpData->mvMinStartSize.y == 0 && mpData->mvMaxStartSize.y==0)
-			apParticle->mvStartSize = cMath::RandRectf(mpData->mvMinStartSize.x,mpData->mvMaxStartSize.x);
+			apParticle.mvStartSize = cMath::RandRectf(mpData->mvMinStartSize.x,mpData->mvMaxStartSize.x);
 		else
-			apParticle->mvStartSize = cMath::RandRectVector2f(mpData->mvMinStartSize,mpData->mvMaxStartSize);
-		apParticle->mvSize = apParticle->mvStartSize * mpData->mfStartRelSize;
+			apParticle.mvStartSize = cMath::RandRectVector2f(mpData->mvMinStartSize,mpData->mvMaxStartSize);
+		apParticle.mvSize = apParticle.mvStartSize * mpData->mfStartRelSize;
 
 		////////////////////////////////////
 		//Start sub division
@@ -670,18 +482,18 @@ namespace hpl {
 		{
 			if(mpData->mSubDivType == ePESubDivType_Animation)
 			{
-				apParticle->mlSubDivNum = 0;
+				apParticle.mlSubDivNum = 0;
 			}
 			else
 			{
-				apParticle->mlSubDivNum = cMath::RandRectl(0,(int)mvSubDivUV.size()-1);
+				apParticle.mlSubDivNum = cMath::RandRectl(0,(int)mvSubDivUV.size()-1);
 			}
 		}
 
 		////////////////////////////////////
 		//Start collision
-		apParticle->mfBounceAmount = cMath::RandRectf(mpData->mfMinBounceAmount, mpData->mfMaxBounceAmount);
-		apParticle->mlBounceCount = cMath::RandRectl(mpData->mlMinCollisionMax, mpData->mlMaxCollisionMax);
+		apParticle.mfBounceAmount = cMath::RandRectf(mpData->mfMinBounceAmount, mpData->mfMaxBounceAmount);
+		apParticle.mlBounceCount = cMath::RandRectl(mpData->mlMinCollisionMax, mpData->mlMaxCollisionMax);
 
 
 		////////////////////////////////////
@@ -700,7 +512,7 @@ namespace hpl {
 		//Sphere or box start
 		if(mpData->mStartPosType == ePEStartPosType_Box)
 		{
-			apParticle->mvPos = mtxStart.GetTranslation() +
+			apParticle.mvPos = mtxStart.GetTranslation() +
 								cMath::RandRectVector3f(mpData->mvMinStartPos,mpData->mvMaxStartPos);
 		}
 		else if(mpData->mStartPosType == ePEStartPosType_Sphere)
@@ -710,33 +522,11 @@ namespace hpl {
 			cMatrixf mtxRot = cMath::MatrixRotate(vRot,eEulerRotationOrder_XYZ);
 			cVector3f vPos = cVector3f(0,cMath::RandRectf(mpData->mfMinStartRadius,mpData->mfMaxStartRadius),0);
 
-			apParticle->mvPos = mtxStart.GetTranslation() + cMath::MatrixMul(mtxRot,vPos);
+			apParticle.mvPos = mtxStart.GetTranslation() + cMath::MatrixMul(mtxRot,vPos);
 		}
 
-// NEW
-
-//		if (mpData->mVBMeshData)
-//		{
-/*
-			cVector3f vTrans = mtxStart.GetTranslation();
-			posI = cMath::RandRectl(0,mpData->mVBMeshData->GetVertexNum()-1);
-			vTrans.x += mpData->mpfMeshVtxData[posI*4];
-			vTrans.y += mpData->mpfMeshVtxData[posI*4 + 1];
-			vTrans.z += mpData->mpfMeshVtxData[posI*4 + 2];
-
-			apParticle->mvPos = vTrans;
-			*/
-//			apParticle->mvPos = mtxStart.GetTranslation() + mpData->mVBMeshData->GetVector3( VertexMask_Position, cMath::RandRectl(0,mpData->mVBMeshData->GetVertexNum()-1) );
-//			++posI;
-	//		if ( posI == mpData->mVBMeshData->GetVertexNum() )
-	//			posI = 0;
-//		}
-
-// ---
-
-
-		apParticle->mvLastPos = apParticle->mvPos;
-		apParticle->mvLastCollidePos = apParticle->mvPos;
+		apParticle.mvLastPos = apParticle.mvPos;
+		apParticle.mvLastCollidePos = apParticle.mvPos;
 
 
 		////////////////////////////////////
@@ -745,7 +535,7 @@ namespace hpl {
 		//Sphere or box start
 		if(mpData->mStartVelType == ePEStartPosType_Box)
 		{
-			apParticle->mvVel = cMath::RandRectVector3f(mpData->mvMinStartVel,mpData->mvMaxStartVel);
+			apParticle.mvVel = cMath::RandRectVector3f(mpData->mvMinStartVel,mpData->mvMaxStartVel);
 		}
 		else if(mpData->mStartVelType == ePEStartPosType_Sphere)
 		{
@@ -754,40 +544,40 @@ namespace hpl {
 			cMatrixf mtxRot = cMath::MatrixRotate(vRot,eEulerRotationOrder_XYZ);
 			cVector3f vPos = cVector3f(0,cMath::RandRectf(mpData->mfMinStartVelSpeed,mpData->mfMaxStartVelSpeed),0);
 
-			apParticle->mvVel = cMath::MatrixMul(mtxRot,vPos);
+			apParticle.mvVel = cMath::MatrixMul(mtxRot,vPos);
 		}
 
 		//If it uses the direction,
 		if(mpData->mbUsesDirection && mpData->mCoordSystem == eParticleEmitter3DCoordSystem_World)
 		{
-			apParticle->mvVel = cMath::MatrixMul(mtxStart.GetRotation(), apParticle->mvVel);
+			apParticle.mvVel = cMath::MatrixMul(mtxStart.GetRotation(), apParticle.mvVel);
 		}
 
-		apParticle->mfMaxSpeed = cMath::RandRectf(mpData->mfMinVelMaximum,mpData->mfMaxVelMaximum);
+		apParticle.mfMaxSpeed = cMath::RandRectf(mpData->mfMinVelMaximum,mpData->mfMaxVelMaximum);
 
-		apParticle->mfSpeedMul = cMath::RandRectf(mpData->mfMinSpeedMultiply,mpData->mfMaxSpeedMultiply);
+		apParticle.mfSpeedMul = cMath::RandRectf(mpData->mfMinSpeedMultiply,mpData->mfMaxSpeedMultiply);
 
 		////////////////////////////////////
 		//Start Acceleration
-		apParticle->mvAcc = cMath::RandRectVector3f(mpData->mvMinStartAcc,mpData->mvMaxStartAcc);
+		apParticle.mvAcc = cMath::RandRectVector3f(mpData->mvMinStartAcc,mpData->mvMaxStartAcc);
 
 		// NEW
 		////////////////////////////////////
 		//Start Spin Velocity
 		if ( mpData->mPartSpinType == ePEPartSpinType_Constant )
 		{
-			apParticle->mfSpinVel = cMath::RandRectf (mpData->mfMinSpinRange, mpData->mfMaxSpinRange);
+			apParticle.mfSpinVel = cMath::RandRectf (mpData->mfMinSpinRange, mpData->mfMaxSpinRange);
 		}
 		else if ( mpData->mPartSpinType == ePEPartSpinType_Movement )
 		{
-			apParticle->mfSpinFactor = cMath::RandRectf (mpData->mfMinSpinRange, mpData->mfMaxSpinRange);
-			apParticle->mfSpinVel = 0.0f;
+			apParticle.mfSpinFactor = cMath::RandRectf (mpData->mfMinSpinRange, mpData->mfMaxSpinRange);
+			apParticle.mfSpinVel = 0.0f;
 		}
-		apParticle->mfSpin = apParticle->mfSpin = cMath::RandRectf ( 0.0f, k2Pif );
+		apParticle.mfSpin = apParticle.mfSpin = cMath::RandRectf ( 0.0f, k2Pif );
 
 		////////////////////////////////////
 		//Start Revolution Velocity
-		apParticle->mvRevolutionVel = cMath::RandRectVector3f ( mpData->mvMinRevVel, mpData->mvMaxRevVel );
+		apParticle.mvRevolutionVel = cMath::RandRectVector3f ( mpData->mvMinRevVel, mpData->mvMaxRevVel );
 
 		// ---
 
@@ -795,73 +585,26 @@ namespace hpl {
 
 		///////////////////////////////////
 		//Life Span
-		apParticle->mfStartLife = cMath::RandRectf(mpData->mfMinLifeSpan,mpData->mfMaxLifeSpan );
-		apParticle->mfLife = apParticle->mfStartLife;
+		apParticle.mfStartLife = cMath::RandRectf(mpData->mfMinLifeSpan,mpData->mfMaxLifeSpan );
+		apParticle.mfLife = apParticle.mfStartLife;
 
-		apParticle->mfLifeSize_MiddleStart = apParticle->mfLife * (1 - mpData->mfMiddleRelSizeTime);
-		apParticle->mfLifeSize_MiddleEnd  = apParticle->mfLife * (1 - (mpData->mfMiddleRelSizeTime +
+		apParticle.mfLifeSize_MiddleStart = apParticle.mfLife * (1 - mpData->mfMiddleRelSizeTime);
+		apParticle.mfLifeSize_MiddleEnd  = apParticle.mfLife * (1 - (mpData->mfMiddleRelSizeTime +
 																		mpData->mfMiddleRelSizeLength));
 
-		apParticle->mfLifeColor_MiddleStart  = apParticle->mfLife * (1 - mpData->mfMiddleRelColorTime);
-		apParticle->mfLifeColor_MiddleEnd  = apParticle->mfLife * (1 - (mpData->mfMiddleRelColorTime +
+		apParticle.mfLifeColor_MiddleStart  = apParticle.mfLife * (1 - mpData->mfMiddleRelColorTime);
+		apParticle.mfLifeColor_MiddleEnd  = apParticle.mfLife * (1 - (mpData->mfMiddleRelColorTime +
 																		mpData->mfMiddleRelColorLength));
 
 		/*Log("Created particle with Pos: (%s) Color: (%s) Size (%s) Vel: (%s) Acc: (%s) Life: %f SizeMiddleStart: %f SizeMiddleEnd: %f\n",
-					apParticle->mvPos.ToString().c_str(),
-					apParticle->mColor.ToString().c_str(),
-					apParticle->mvSize.ToString().c_str(),
-					apParticle->mvVel.ToString().c_str(),
-					apParticle->mvAcc.ToString().c_str(),
-					apParticle->mfLife,
-					apParticle->mfLifeSize_MiddleStart,
-					apParticle->mfLifeSize_MiddleEnd);*/
-		// NEW
-		/////////////////////////////////////
-		//Beam Specific
-		if (mPEType == ePEType_Beam )
-		{
-			/*
-			if (apParticle->mvBeamPoints.size() == 0 )
-			{
-				for (int i = 0; i < (int) mpData->mvBeamNoisePoints.size(); ++i)
-					apParticle->mvBeamPoints.push_back(cVector(0.0f));
-			}
-
-
-			int j = 1;
-			cVector3f vLFPointPos = apParticle->mvPos + apParticle->mvVel * mpData->mvBeamNoisePoints.at(mpData->mvLFIndices[j]).fRelToBeamPos;
-			cVector3f vLastLFPointPos = apParticle->mvPos;
-			cVector3f vDir;
-			for ( int i = 1; i < (int) mpData->mvBeamNoisePoints.size(); ++i )
-			{
-				apParticle->mvBeamPoints[i] = vLastLFPointPos + vDir * mpData->mvBeamNoisePoints[i].fRelToBendPos;
-
-				switch (mpData->mvBeamNoisePoints[i].noiseType)
-				{
-
-				case ePENoiseType_HighFreq:
-					apParticle->mvBeamPoints[i] += cMath::RandRectVector3f(mpData->mvMinHighFreqNoise, mpData->mvMaxHighFreqNoise);
-					break;
-				case ePENoiseType_LowFreq:
-					++j;
-					vLastLFPointPos = vLFPointPos;
-					vLFPointPos = apParticle->mvPos + apParticle->mvVel * mpData->mvBeamNoisePoints.at(mpData->mvLFIndices[j]).fRelToBeamPos + cMath::RandRectVector3f(mpData->mvMinLowFreqNoise, mpData->mvMaxLowFreqNoise);
-					vDir = vLFPointPos - vLastLFPointPos;
-					break;
-				case ePENoiseType_Both:
-					apParticle->mvBeamPoints[i] += cMath::RandRectVector3f(mpData->mvMinHighFreqNoise, mpData->mvMaxHighFreqNoise);
-					++j;
-					vLastLFPointPos = vLFPointPos;
-					vLFPointPos = apParticle->mvPos + apParticle->mvVel * mpData->mvBeamNoisePoints.at(mpData->mvLFIndices[j]).fRelToBeamPos + cMath::RandRectVector3f(mpData->mvMinLowFreqNoise, mpData->mvMaxLowFreqNoise);
-					vDir = vLFPointPos - vLastLFPointPos;
-					break;
-				default:
-					break;
-				}
-			}
-			*/
-		}
-
+					apParticle.mvPos.ToString().c_str(),
+					apParticle.mColor.ToString().c_str(),
+					apParticle.mvSize.ToString().c_str(),
+					apParticle.mvVel.ToString().c_str(),
+					apParticle.mvAcc.ToString().c_str(),
+					apParticle.mfLife,
+					apParticle.mfLifeSize_MiddleStart,
+					apParticle.mfLifeSize_MiddleEnd);*/
 
 		// ---
 	}
@@ -949,17 +692,17 @@ namespace hpl {
 		//Particle update
 		for(unsigned int i=0; i< mlNumOfParticles; ++i)
 		{
-			cParticle *pParticle = mvParticles[i];
+			cParticle &pParticle = mvParticles[i];
 
 			////////////
 			//Position Update
-			pParticle->mvLastPos = pParticle->mvPos;
+			pParticle.mvLastPos = pParticle.mvPos;
 
-			pParticle->mvPos += pParticle->mvVel * afTimeStep;
+			pParticle.mvPos += pParticle.mvVel * afTimeStep;
 
 			////////////
 			//Speed Update
-			pParticle->mvVel += pParticle->mvAcc * afTimeStep;
+			pParticle.mvVel += pParticle.mvAcc * afTimeStep;
 
 			//gravity
 			switch(mpData->mGravityType)
@@ -970,7 +713,7 @@ namespace hpl {
 				}
 			case ePEGravityType_Vector:
 				{
-					pParticle->mvVel += mpData->mvGravityAcc * afTimeStep;
+					pParticle.mvVel += mpData->mvGravityAcc * afTimeStep;
 					break;
 				}
 			case ePEGravityType_Center:
@@ -978,34 +721,34 @@ namespace hpl {
 					cVector3f vDir;
 					cMatrixf mtxStart;
 					if(mpData->mCoordSystem == eParticleEmitter3DCoordSystem_World){
-						vDir = pParticle->mvPos - GetWorldMatrix().GetTranslation();
+						vDir = pParticle.mvPos - GetWorldMatrix().GetTranslation();
 					}
 					else {
 						//Perhaps on mvPos is needed.. and no substraction.
-						vDir = pParticle->mvPos - GetLocalMatrix().GetTranslation();
+						vDir = pParticle.mvPos - GetLocalMatrix().GetTranslation();
 					}
 
 					vDir.Normalise();
 
-					pParticle->mvVel += vDir * mpData->mvGravityAcc.y * afTimeStep;
+					pParticle.mvVel += vDir * mpData->mvGravityAcc.y * afTimeStep;
 
 					break;
 				}
 			}
 
 
-			if(pParticle->mfMaxSpeed > 0)
+			if(pParticle.mfMaxSpeed > 0)
 			{
-				float fSpeed = pParticle->mvVel.Length();
-				if(fSpeed > pParticle->mfMaxSpeed)
+				float fSpeed = pParticle.mvVel.Length();
+				if(fSpeed > pParticle.mfMaxSpeed)
 				{
-					pParticle->mvVel = (pParticle->mvVel / fSpeed) * pParticle->mfMaxSpeed;
+					pParticle.mvVel = (pParticle.mvVel / fSpeed) * pParticle.mfMaxSpeed;
 				}
 			}
 
-			if(pParticle->mfSpeedMul!=0 && pParticle->mfSpeedMul!=1)
+			if(pParticle.mfSpeedMul!=0 && pParticle.mfSpeedMul!=1)
 			{
-				pParticle->mvVel = pParticle->mvVel * pow(pParticle->mfSpeedMul,afTimeStep);
+				pParticle.mvVel = pParticle.mvVel * pow(pParticle.mfSpeedMul,afTimeStep);
 			}
 
 			// NEW
@@ -1013,15 +756,15 @@ namespace hpl {
 			//Spin Update
 			if (mpData->mbUsePartSpin)
 			{
-				pParticle->mfSpin += pParticle->mfSpinVel * afTimeStep;
+				pParticle.mfSpin += pParticle.mfSpinVel * afTimeStep;
 
 				if (mpData->mPartSpinType == ePEPartSpinType_Movement)
-					pParticle->mfSpinVel = pParticle->mvVel.Length() * pParticle->mfSpinFactor;
+					pParticle.mfSpinVel = pParticle.mvVel.Length() * pParticle.mfSpinFactor;
 
-				if (pParticle->mfSpin >= k2Pif)
-					pParticle->mfSpin -= k2Pif;
-				else if (pParticle->mfSpin <= -k2Pif)
-					pParticle->mfSpin += k2Pif;
+				if (pParticle.mfSpin >= k2Pif)
+					pParticle.mfSpin -= k2Pif;
+				else if (pParticle.mfSpin <= -k2Pif)
+					pParticle.mfSpin += k2Pif;
 
 			}
 
@@ -1031,10 +774,10 @@ namespace hpl {
 			// Revolution
 			if ( mbUseRevolution )
 			{
-				//pParticle->mvRevolution += pParticle->mvRevolutionVel * afTimeStep;
-				cMatrixf mtxRotationMatrix = cMath::MatrixRotate( pParticle->mvRevolutionVel * afTimeStep,  eEulerRotationOrder_XYZ );
-				pParticle->mvPos = cMath::MatrixMul(mtxRotationMatrix, pParticle->mvPos);
-				pParticle->mvVel = cMath::MatrixMul(mtxRotationMatrix, pParticle->mvVel);
+				//pParticle.mvRevolution += pParticle.mvRevolutionVel * afTimeStep;
+				cMatrixf mtxRotationMatrix = cMath::MatrixRotate( pParticle.mvRevolutionVel * afTimeStep,  eEulerRotationOrder_XYZ );
+				pParticle.mvPos = cMath::MatrixMul(mtxRotationMatrix, pParticle.mvPos);
+				pParticle.mvVel = cMath::MatrixMul(mtxRotationMatrix, pParticle.mvVel);
 			}
 
 			// ---
@@ -1046,38 +789,38 @@ namespace hpl {
 			{
 				cVector3f vPos, vNormal;
 
-				if(mpData->CheckCollision(pParticle->mvLastCollidePos, pParticle->mvPos,
+				if(mpData->CheckCollision(pParticle.mvLastCollidePos, pParticle.mvPos,
 											mpWorld->GetPhysicsWorld(),
 											&vNormal, &vPos))
 				{
 					//Log("Coll pos: %s\n",vPos.ToString().c_str());
 					//Log("Coll normal: %s\n",vNormal.ToString().c_str());
 
-					pParticle->mvPos = vPos;
+					pParticle.mvPos = vPos;
 
-					float fSpeed = pParticle->mvVel.Length();
+					float fSpeed = pParticle.mvVel.Length();
 
-					cVector3f vReflection = pParticle->mvVel -
-											(vNormal * 2* cMath::Vector3Dot(pParticle->mvVel,vNormal));
+					cVector3f vReflection = pParticle.mvVel -
+											(vNormal * 2* cMath::Vector3Dot(pParticle.mvVel,vNormal));
 					vReflection.Normalise();
 
-					pParticle->mvVel = vReflection * (fSpeed * pParticle->mfBounceAmount);
+					pParticle.mvVel = vReflection * (fSpeed * pParticle.mfBounceAmount);
 
-					pParticle->mlBounceCount--;
-					if(pParticle->mlBounceCount<=0)
+					pParticle.mlBounceCount--;
+					if(pParticle.mlBounceCount<=0)
 					{
-						pParticle->mfLife =0;
+						pParticle.mfLife =0;
 					}
 				}
 
-				pParticle->mvLastCollidePos = pParticle->mvPos;
+				pParticle.mvLastCollidePos = pParticle.mvPos;
 			}
 
 			////////////
 			//Life Update
-			pParticle->mfLife -= afTimeStep;
+			pParticle.mfLife -= afTimeStep;
 
-			if(pParticle->mfLife <=0)
+			if(pParticle.mfLife <=0)
 			{
 				if(mbRespawn)
 				{
@@ -1103,67 +846,67 @@ namespace hpl {
 
 			if(mpData->mSubDivType == ePESubDivType_Animation)
 			{
-				float fLifePercent = (1.0f - (pParticle->mfLife / pParticle->mfStartLife));
-				pParticle->mlSubDivNum = (int)(fLifePercent * (float)mvSubDivUV.size() - 0.0001f);
+				float fLifePercent = (1.0f - (pParticle.mfLife / pParticle.mfStartLife));
+				pParticle.mlSubDivNum = (int)(fLifePercent * (float)mvSubDivUV.size() - 0.0001f);
 			}
 
 			////////////
 			//Color Update
 
 			//Start
-			if(pParticle->mfLife > pParticle->mfLifeColor_MiddleStart)
+			if(pParticle.mfLife > pParticle.mfLifeColor_MiddleStart)
 			{
-				float fT = (pParticle->mfLife - pParticle->mfLifeColor_MiddleStart) /
-						   (pParticle->mfStartLife - pParticle->mfLifeColor_MiddleStart);
+				float fT = (pParticle.mfLife - pParticle.mfLifeColor_MiddleStart) /
+						   (pParticle.mfStartLife - pParticle.mfLifeColor_MiddleStart);
 
-				pParticle->mColor = (pParticle->mStartColor * mpData->mStartRelColor * fT) +
-									(pParticle->mStartColor * mpData->mMiddleRelColor * (1-fT));
+				pParticle.mColor = (pParticle.mStartColor * mpData->mStartRelColor * fT) +
+									(pParticle.mStartColor * mpData->mMiddleRelColor * (1-fT));
 			}
 			//Middle
-			else if(pParticle->mfLife > pParticle->mfLifeColor_MiddleEnd)
+			else if(pParticle.mfLife > pParticle.mfLifeColor_MiddleEnd)
 			{
-				pParticle->mColor = pParticle->mStartColor * mpData->mMiddleRelColor;
+				pParticle.mColor = pParticle.mStartColor * mpData->mMiddleRelColor;
 			}
 			//End
 			else
 			{
-				float fT =	pParticle->mfLife / pParticle->mfLifeColor_MiddleEnd;
+				float fT =	pParticle.mfLife / pParticle.mfLifeColor_MiddleEnd;
 
-				pParticle->mColor = (pParticle->mStartColor * mpData->mMiddleRelColor * fT) +
-									(pParticle->mStartColor * mpData->mEndRelColor * (1-fT));
+				pParticle.mColor = (pParticle.mStartColor * mpData->mMiddleRelColor * fT) +
+									(pParticle.mStartColor * mpData->mEndRelColor * (1-fT));
 			}
 
 			if(mpData->mbMultiplyRGBWithAlpha)
 			{
-				pParticle->mColor.r *= pParticle->mColor.a;
-				pParticle->mColor.g *= pParticle->mColor.a;
-				pParticle->mColor.b *= pParticle->mColor.a;
+				pParticle.mColor.r *= pParticle.mColor.a;
+				pParticle.mColor.g *= pParticle.mColor.a;
+				pParticle.mColor.b *= pParticle.mColor.a;
 			}
 
 			////////////
 			//Size Update
 
 			//Start
-			if(pParticle->mfLife > pParticle->mfLifeSize_MiddleStart)
+			if(pParticle.mfLife > pParticle.mfLifeSize_MiddleStart)
 			{
-				float fT = (pParticle->mfLife - pParticle->mfLifeSize_MiddleStart) /
-							(pParticle->mfStartLife - pParticle->mfLifeSize_MiddleStart);
+				float fT = (pParticle.mfLife - pParticle.mfLifeSize_MiddleStart) /
+							(pParticle.mfStartLife - pParticle.mfLifeSize_MiddleStart);
 
-				pParticle->mvSize = (pParticle->mvStartSize * mpData->mfStartRelSize * fT) +
-									(pParticle->mvStartSize * mpData->mfMiddleRelSize * (1-fT));
+				pParticle.mvSize = (pParticle.mvStartSize * mpData->mfStartRelSize * fT) +
+									(pParticle.mvStartSize * mpData->mfMiddleRelSize * (1-fT));
 			}
 			//Middle
-			else if(pParticle->mfLife > pParticle->mfLifeSize_MiddleEnd)
+			else if(pParticle.mfLife > pParticle.mfLifeSize_MiddleEnd)
 			{
-				pParticle->mvSize = pParticle->mvStartSize * mpData->mfMiddleRelSize;
+				pParticle.mvSize = pParticle.mvStartSize * mpData->mfMiddleRelSize;
 			}
 			//End
 			else
 			{
-				float fT =	pParticle->mfLife / pParticle->mfLifeSize_MiddleEnd;
+				float fT =	pParticle.mfLife / pParticle.mfLifeSize_MiddleEnd;
 
-				pParticle->mvSize = (pParticle->mvStartSize * mpData->mfMiddleRelSize * fT) +
-									(pParticle->mvStartSize * mpData->mfEndRelSize * (1-fT));
+				pParticle.mvSize = (pParticle.mvStartSize * mpData->mfMiddleRelSize * fT) +
+									(pParticle.mvStartSize * mpData->mfEndRelSize * (1-fT));
 			}
 		}
 

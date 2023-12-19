@@ -18,20 +18,30 @@
  */
 #include "game/Game.h"
 
+#include "input/Input.h"
+#include "input/Mouse.h"
+
+#include "resources/Resources.h"
+#include "resources/ImageManager.h"
+#include "resources/GpuProgramManager.h"
+#include "resources/TextureManager.h"
+
+#include "graphics/LowLevelGraphics.h"
+#include "graphics/Renderer3D.h"
+#include "graphics/GraphicsDrawer.h"
+
+#include "script/Script.h"
+#include "script/ScriptFuncs.h"
+
+#include "game/Updater.h"
+#include "game/LowLevelGameSetup.h"
+
+#include "scene/Scene.h"
+
 #include "system/System.h"
 #include "system/Log.h"
 #include "system/LogicTimer.h"
 #include "system/String.h"
-#include "input/Input.h"
-#include "input/Mouse.h"
-#include "resources/Resources.h"
-#include "graphics/Graphics.h"
-#include "graphics/LowLevelGraphics.h"
-#include "game/Updater.h"
-#include "script/ScriptFuncs.h"
-#include "graphics/Renderer3D.h"
-
-#include "game/LowLevelGameSetup.h"
 
 namespace hpl {
 
@@ -75,54 +85,51 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cGame::cGame(iLowLevelGameSetup *apGameSetup, GameSetupOptions &options)
+	cGame::cGame(iLowLevelGameSetup *setup, GameSetupOptions &options)
 	{
-		GameInit(apGameSetup, options);
+		GameInit(setup, options);
 	}
 
 	//-----------------------------------------------------------------------
 
-	void cGame::GameInit(iLowLevelGameSetup *apGameSetup, GameSetupOptions &options)
+	void cGame::GameInit(iLowLevelGameSetup *setup, GameSetupOptions &options)
 	{
-		mpGameSetup = apGameSetup;
-
 		Log("Creating Engine Modules\n");
 		Log("--------------------------------------------------------\n");
 
-		//Create the modules that game connects to and init them!
-		Log(" Creating graphics module\n");
-		mpGraphics = mpGameSetup->CreateGraphics();
-
 		Log(" Creating resource module\n");
-		mpResources = mpGameSetup->CreateResources();
+		mpResources = new cResources();
+
+		Log(" Creating graphics systems\n");
+		_llGfx = setup->GetGraphicsDevice();
+		_llGfx->Init(options.ScreenWidth, options.ScreenHeight, options.Fullscreen, options.WindowCaption);
+
+		_imageMgr = new cImageManager(_llGfx);
+		_shaderMgr = new cGpuProgramManager(_llGfx);
+		_textureMgr = new cTextureManager(_llGfx);
+
+		_drawer = new cGraphicsDrawer(_llGfx, _imageMgr, _shaderMgr);
+		_renderer = new cRenderer3D(_llGfx, _textureMgr, _shaderMgr);
 
 		Log(" Creating input module\n");
-		mpInput = mpGameSetup->CreateInput();
+		mpInput = new cInput(setup->GetInputImpl());
 
 		Log(" Creating sound module\n");
-		mpSound = mpGameSetup->CreateSound();
+		mpSound = new cSound(setup->GetSoundImpl());
 
 		Log(" Creating physics module\n");
-		mpPhysics = mpGameSetup->CreatePhysics();
+		mpPhysics = new cPhysics(setup->GetPhysicsImpl());
 
 		Log(" Creating script module\n");
-		mpScript = mpGameSetup->CreateScript(mpResources);
+		mpScript = new cScript();
 
 		Log(" Creating scene module\n");
-		mpScene = new cScene(mpGraphics, mpResources, mpSound, mpPhysics);
+		mpScene = new cScene(_llGfx, _renderer, _drawer, _textureMgr, mpResources, mpSound, mpPhysics);
 
 		Log("--------------------------------------------------------\n\n");
 
-
 		//Init the resources
-		mpResources->Init(mpGraphics, mpSound, mpScript, mpScene);
-
-		//Init the graphics
-		mpGraphics->Init(options.ScreenWidth,
-			options.ScreenHeight,
-			options.Fullscreen,
-			options.WindowCaption,
-			mpResources);
+		mpResources->Init(_llGfx, _drawer, _textureMgr, _shaderMgr, mpSound, mpScript, mpScene);
 
 		//Init Sound
 		mpSound->Init(mpResources, options.AudioDeviceName);
@@ -141,7 +148,7 @@ namespace hpl {
 		mpUpdater->AddGlobalUpdate(mpPhysics);
 		mpUpdater->AddGlobalUpdate(mpScene);
 		mpUpdater->AddGlobalUpdate(mpSound);
-		mpUpdater->AddGlobalUpdate(mpResources);
+		mpUpdater->AddGlobalUpdate(_textureMgr);
 		mpUpdater->AddGlobalUpdate(mpScript);
 
 		//Setup the "default" updater container
@@ -153,7 +160,7 @@ namespace hpl {
 
 		//Init some standard script funcs
 		Log(" Initializing script functions\n");
-		RegisterCoreFunctions(mpScript,mpGraphics,mpResources,mpInput,mpScene,mpSound,this);
+		RegisterCoreFunctions(mpScript, _renderer, mpResources, mpInput, mpScene, mpSound, this);
 
 		//Since game is not done:
 		mbGameIsDone = false;
@@ -185,12 +192,14 @@ namespace hpl {
 		delete mpScene;
 		delete mpInput;
 		delete mpSound;
-		delete mpGraphics;
+		delete _renderer;
+		delete _drawer;
 		delete mpResources;
 		delete mpPhysics;
-
-		Log(" Deleting game setup provided by user\n");
-		delete mpGameSetup;
+		delete _shaderMgr;
+		delete _imageMgr;
+		delete _textureMgr;
+		delete _llGfx;
 
 		Log("HPL Exit was successful!\n");
 	}
@@ -252,15 +261,6 @@ namespace hpl {
 			}
 			mpLogicTimer->EndUpdateLoop();
 
-
-			//If not making a single rendering is better to use gpu and
-			//cpu at the same time and make query checks etc after logic update.
-			//If any delete has occured in the update this might crash. so skip it for now.
-			/*if(mbRenderOnce==false)	{
-				mpGraphics->GetRenderer3D()->FetchOcclusionQueries();
-				mpUpdater->OnPostBufferSwap();
-			}*/
-
 			//Draw graphics!
 			if(mbRenderOnce && bDone)continue;
 			if(mbRenderOnce)bDone = true;
@@ -283,7 +283,7 @@ namespace hpl {
 				tempFrameTime = GetAppTimeFloat();
 
 				//Draw this frame
-				mpGraphics->GetLowLevel()->StartFrame();
+				_llGfx->StartFrame();
 				mpUpdater->OnDraw();
 				mpScene->Render(mpUpdater,mfFrameTime);
 
@@ -291,10 +291,10 @@ namespace hpl {
 				mpFPSCounter->AddFrame();
 
 				//Update the screen.
-				mpGraphics->GetLowLevel()->EndFrame();
+				_llGfx->EndFrame();
 				//if(mbRenderOnce)
 				{
-					mpGraphics->GetRenderer3D()->FetchOcclusionQueries();
+					_renderer->FetchOcclusionQueries();
 					mpUpdater->OnPostBufferSwap();
 				}
 
@@ -337,67 +337,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cScene* cGame::GetScene()
-	{
-		return mpScene;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cResources* cGame::GetResources()
-	{
-		return mpResources;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cGraphics* cGame::GetGraphics()
-	{
-		return mpGraphics;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cInput* cGame::GetInput()
-	{
-		return mpInput;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cSound* cGame::GetSound()
-	{
-		return mpSound;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cPhysics* cGame::GetPhysics()
-	{
-		return mpPhysics;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cScript* cGame::GetScript()
-	{
-		return mpScript;
-	}
-
-	//-----------------------------------------------------------------------
-
-	cUpdater* cGame::GetUpdater()
-	{
-		return mpUpdater;
-	}
-
 	float cGame::GetFPS()
 	{
 		return mpFPSCounter->mfFPS;
 	}
-
-	//-----------------------------------------------------------------------
-
 	void cGame::SetFPSUpdateRate(float afSec)
 	{
 		mpFPSCounter->mfUpdateRate = afSec;

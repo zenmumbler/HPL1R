@@ -19,14 +19,10 @@
 #ifndef HPL_LOWLEVELGAMESETUP_H
 #define HPL_LOWLEVELGAMESETUP_H
 
-#include "system/System.h"
+#include "graphics/LowLevelGraphics.h"
 #include "input/Input.h"
-#include "graphics/Graphics.h"
-#include "resources/Resources.h"
-#include "scene/Scene.h"
 #include "sound/Sound.h"
 #include "physics/Physics.h"
-#include "script/Script.h"
 
 namespace hpl {
 
@@ -35,12 +31,11 @@ namespace hpl {
 	public:
 		virtual ~iLowLevelGameSetup(){}
 
-		virtual cGraphics* CreateGraphics()=0;
-		virtual cInput* CreateInput()=0;
-		virtual cResources* CreateResources()=0;
-		virtual cSound* CreateSound()=0;
-		virtual cPhysics* CreatePhysics()=0;
-		virtual cScript* CreateScript(cResources *apResources)=0;
+		virtual iLowLevelGraphics* GetGraphicsDevice() const = 0;
+		virtual iLowLevelInput* GetInputImpl() const = 0;
+		virtual iLowLevelSound* GetSoundImpl() const = 0;
+		virtual iLowLevelPhysics* GetPhysicsImpl() const = 0;
 	};
 };
+
 #endif // HPL_LOWLEVELGAMESETUP_H

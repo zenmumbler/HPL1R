@@ -32,7 +32,10 @@
 
 namespace hpl {
 
-	class cGraphics;
+	class iLowLevelGraphics;
+	class cTextureManager;
+	class cRenderer3D;
+	class cGraphicsDrawer;
 	class cResources;
 	class cSound;
 	class cPhysics;
@@ -49,7 +52,7 @@ namespace hpl {
 	class cScene : public iUpdateable
 	{
 	public:
-		cScene(cGraphics *apGraphics, cResources *apResources, cSound* apSound, cPhysics *apPhysics);
+		cScene(iLowLevelGraphics *llGfx, cRenderer3D *renderer, cGraphicsDrawer *drawer, cTextureManager *apTextureMgr, cResources *apResources, cSound* apSound, cPhysics *apPhysics);
 		~cScene();
 
 		void Reset();
@@ -107,7 +110,10 @@ namespace hpl {
 		bool GetUpdateMap(){return mbUpdateMap;}
 
 	private:
-		cGraphics *mpGraphics;
+		iLowLevelGraphics *_llGfx;
+		cTextureManager *_textureMgr;
+		cRenderer3D *_renderer;
+		cGraphicsDrawer *_drawer;
 		cResources *mpResources;
 		cSound *mpSound;
 		cPhysics *mpPhysics;

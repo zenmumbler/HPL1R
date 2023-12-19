@@ -35,7 +35,7 @@ cFadeHandler::cFadeHandler(cInit *apInit)  : iUpdateable("FadeHandler")
 {
 	mpInit = apInit;
 	
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 	
 	mpBlackGfx = mpDrawer->CreateGfxObject("effect_black.bmp",eGfxMaterial::DiffuseAlpha);
 

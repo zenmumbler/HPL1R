@@ -20,23 +20,21 @@
 #define HPL_SCRIPT_MANAGER_H
 
 #include "resources/ResourceManager.h"
-#include "script/Script.h"
 
 namespace hpl {
 
-	class cResources;
+	class cScript;
 	class cScriptModule;
 
 	class cScriptManager : public iResourceManager
 	{
 	public:
-		cScriptManager(cScript* apScript, cResources *apResources);
+		cScriptManager(cScript* apScript);
 
 		cScriptModule* CreateScript(const tString& asName);
 
 	private:
 		cScript* mpScript;
-		cResources *mpResources;
 	};
 
 };

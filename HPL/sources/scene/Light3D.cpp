@@ -46,7 +46,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iLight3D::iLight3D(tString asName, cResources *apResources) : iLight(), iRenderable(asName)
+	iLight3D::iLight3D(tString asName, cTextureManager *apTextureMgr) : iLight(), iRenderable(asName)
 	{
 		mbStaticCasterAdded = false;
 
@@ -54,7 +54,7 @@ namespace hpl {
 
 		mbApplyTransformToBV = false;
 
-		mpTextureManager = apResources->GetTextureManager();
+		mpTextureManager = apTextureMgr;
 
 		mpFalloffMap = mpTextureManager->Create1D("core_falloff_linear");
 		mpFalloffMap->SetWrapS(eTextureWrap_ClampToEdge);

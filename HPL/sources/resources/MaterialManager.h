@@ -24,13 +24,14 @@
 
 namespace hpl {
 
-	class cGraphics;
+	class cMaterialHandler;
 	class iMaterial;
 
 	class cMaterialManager : public iResourceManager
 	{
 	public:
-		cMaterialManager(cGraphics* apGraphics, cTextureManager* textureManager, cGpuProgramManager* programManager);
+		cMaterialManager(iLowLevelGraphics *llGfx, cTextureManager* textureManager, cGpuProgramManager* programManager);
+		~cMaterialManager();
 
 		iMaterial* CreateMaterial(const tString& asName);
 
@@ -46,9 +47,9 @@ namespace hpl {
 
 		float mfTextureAnisotropy;
 
-		cGraphics* mpGraphics;
-		cTextureManager* _textureManager;
-		cGpuProgramManager* _programManager;
+		cTextureManager *_textureManager;
+		cGpuProgramManager *_programManager;
+		cMaterialHandler *_matHandler;
 	};
 
 };

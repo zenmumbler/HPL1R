@@ -24,7 +24,6 @@
 #include "math/Math.h"
 #include "graphics/RenderState.h"
 #include "graphics/Renderer3D.h"
-#include "graphics/Graphics.h"
 
 
 namespace hpl {

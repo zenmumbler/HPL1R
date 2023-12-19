@@ -546,7 +546,7 @@ cPlayerHealth::cPlayerHealth(cInit *apInit)
 	mpInit = apInit;
 	mfTimeCount = 0;
 
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 	
 	mpDamageGfx = mpDrawer->CreateGfxObject("player_hurt.bmp",eGfxMaterial::DiffuseAlpha);
 
@@ -1032,7 +1032,7 @@ void cPlayerLean::Lean(float afMul, float afTimeStep)
 cPlayerDamage::cPlayerDamage(cInit *apInit)
 {
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 //	mpPostEffects = mpInit->mpGame->GetGraphics()->GetRendererPostEffects();
 
 	mbActive = false;
@@ -1169,7 +1169,7 @@ void cPlayerDamage::Draw()
 cPlayerDeath::cPlayerDeath(cInit *apInit)
 {
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 //	mpPostEffects = mpInit->mpGame->GetGraphics()->GetRendererPostEffects();
 
 	mpFadeGfx = mpDrawer->CreateGfxObject("player_death_fade.bmp",eGfxMaterial::Smoke);
@@ -1562,7 +1562,7 @@ void cPlayerFlashLight::SetDisabled(bool abX)
 
 void cPlayerFlashLight::OnPostSceneDraw()
 {
-	/*iLowLevelGraphics *mpLowGfx = mpInit->mpGame->GetGraphics()->GetLowLevel();
+	/*iLowLevelGraphics *mpLowGfx = mpInit->mpGame->GetLowLevelGraphics();
 
 	mpLowGfx->DrawLine(mvStart,mvEnd,cColor(1,0,1));*/
 }
@@ -1851,7 +1851,7 @@ void cPlayerFlare::SetActive(bool abX)
 cPlayerNoiseFilter::cPlayerNoiseFilter(cInit *apInit)
 {
 	mpInit = apInit;
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 
 	mlAmount = 6;
     
@@ -2099,14 +2099,14 @@ void cPlayerLookAt::SetActive(bool abX)
 cPlayerHidden::cPlayerHidden(cInit *apInit)
 {
 	mpInit = apInit;
-	mpRenderer = mpInit->mpGame->GetGraphics()->GetRenderer3D();
-	mpDrawer = mpInit->mpGame->GetGraphics()->GetDrawer();
+	mpRenderer = mpInit->mpGame->GetRenderer();
+	mpDrawer = mpInit->mpGame->GetDrawer();
 	
 	mpSoundHandler = mpInit->mpGame->GetSound()->GetSoundHandler();
 
 	mfUpdateCount = 1.0f / 3.0f;
 
-	cVector2f vScreenSize = mpInit->mpGame->GetGraphics()->GetLowLevel()->GetScreenSize();
+	cVector2f vScreenSize = mpInit->mpGame->GetLowLevelGraphics()->GetScreenSize();
 	
 	mfStartEffectOffset = 40;
 	mfHiddenEffectOffset = 0;
@@ -2407,7 +2407,7 @@ void cPlayerHidden::Update(float afTimeStep)
 	{
 		mfUpdateCount = 1.0f / 2.0f;
 		
-		mfLight =  GetMaxRGB(mpInit->mpGame->GetGraphics()->GetRenderer3D()->GetAmbientColor());
+		mfLight =  GetMaxRGB(mpInit->mpGame->GetRenderer()->GetAmbientColor());
 		cWorld3D *pWorld = mpInit->mpGame->GetScene()->GetWorld3D();
 		if(pWorld==NULL) return;
 		iPhysicsWorld *pPhysicsWorld = pWorld->GetPhysicsWorld();
