@@ -98,6 +98,7 @@ namespace hpl {
 
 	void cMaterialManager::Update(float afTimeStep)
 	{
+		// [Rehatched]: Not currently called and no materials use or used this
 		ForEachResource([=](iResourceBase *resource) {
 			auto material = static_cast<iMaterial*>(resource);
 			material->Update(afTimeStep);

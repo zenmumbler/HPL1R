@@ -45,8 +45,6 @@ namespace hpl {
 
 		void Destroy(iResourceBase* resource);
 
-		virtual void Update(float timeStep){}
-
 	protected:
 		void BeginLoad(const tString& fileName);
 		void EndLoad();
