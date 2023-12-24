@@ -31,6 +31,7 @@
 #include "scene/World3D.h"
 
 #include "math/Math.h"
+#include "system/String.h"
 #include "system/Log.h"
 
 namespace hpl {

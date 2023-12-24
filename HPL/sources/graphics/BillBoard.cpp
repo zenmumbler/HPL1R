@@ -18,8 +18,6 @@
  */
 #include "graphics/BillBoard.h"
 
-#include "tinyXML/tinyxml.h"
-
 #include "resources/MaterialManager.h"
 #include "resources/FileSearcher.h"
 #include "graphics/VertexBuffer.h"
@@ -34,6 +32,10 @@
 
 #include "game/Game.h"
 #include "system/Log.h"
+#include "system/String.h"
+
+#include "tinyXML/tinyxml.h"
+
 
 namespace hpl {
 

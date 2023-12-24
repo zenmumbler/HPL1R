@@ -22,6 +22,7 @@
 #include "game/Updateable.h"
 #include "resources/ResourceManager.h"
 #include "graphics/Texture.h"
+#include <vector>
 
 namespace hpl {
 
@@ -54,7 +55,7 @@ namespace hpl {
 
 		iTexture* FindTexture2D(const tString &name, tString &fullPath);
 
-		tStringVec mvFileFormats;
+		std::vector<tString> mvFileFormats;
 
 		iLowLevelGraphics *_llGfx;
 	};

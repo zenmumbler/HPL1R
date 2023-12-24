@@ -21,6 +21,8 @@
 
 #include "graphics/Texture.h"
 
+#include <vector>
+
 #if defined(__APPLE__)&&defined(__MACH__)
 #include <OpenGL/gltypes.h>
 #else
@@ -68,7 +70,7 @@ namespace hpl {
 
 		void GetSettings(const Bitmap &bmp, int &channels, GLint &internalFormat, GLenum &format);
 
-		tUIntVec mvTextureHandles;
+		std::vector<unsigned int> mvTextureHandles;
 		bool mbContainsData;
 
 		float mfTimeCount;

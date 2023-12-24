@@ -37,6 +37,7 @@
 #include "resources/MeshLoaderHandler.h"
 
 #include "system/Log.h"
+#include "system/String.h"
 #include "system/STLHelpers.h"
 #include "system/UpdateTimerMacros.h"
 

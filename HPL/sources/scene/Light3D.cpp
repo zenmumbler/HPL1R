@@ -36,7 +36,7 @@
 #include "scene/SectorVisibility.h"
 #include "scene/PortalContainer.h"
 #include "system/Log.h"
-
+#include "system/String.h"
 
 namespace hpl {
 

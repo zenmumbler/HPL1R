@@ -5,7 +5,7 @@
 #ifndef HPL_BITMAP_H
 #define HPL_BITMAP_H
 
-#include "system/String.h"
+#include "graphics/GraphicsTypes.h"
 
 namespace hpl {
 
@@ -50,16 +50,12 @@ namespace hpl {
 		int GetHeight() const { return height_; }
 		int GetWidth() const { return width_; }
 
-		void SetPath(const tString& newPath) { path_ = newPath; }
-		tString GetPath() const { return path_; }
-		tString GetFileName() const { return cString::GetFileName(path_); }
-
 	private:
 		int height_;
 		int width_;
 		uint32_t *data_;
-		tString path_;
 	};
 
-};
+}
+
 #endif // HPL_BITMAP_H

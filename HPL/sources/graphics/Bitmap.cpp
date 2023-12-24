@@ -14,7 +14,7 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	Bitmap::Bitmap()
-	: width_(0), height_(0), data_{nullptr}, path_{}
+	: width_(0), height_(0), data_{nullptr}
 	{
 	}
 
@@ -26,7 +26,6 @@ namespace hpl {
 		width_ = source.width_;
 		height_ = source.height_;
 		data_ = source.data_;
-		path_ = source.path_;
 
 		source.width_ = source.height_ = 0;
 		source.data_ = nullptr;

@@ -25,7 +25,6 @@ namespace hpl {
 			return std::nullopt;
 		}
 		bmp.TogglePixelFormat();
-		bmp.SetPath(fullPath);
 		stbi_image_free(pixels);
 
 	//		Log("Image: %s - %d x %d - Chans: %d\n", asFilePath.c_str(), width, height, chans);

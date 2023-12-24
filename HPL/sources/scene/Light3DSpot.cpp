@@ -18,7 +18,6 @@
  */
 #include "scene/Light3DSpot.h"
 
-#include "tinyXML/tinyxml.h"
 #include "math/Math.h"
 #include "math/Frustum.h"
 #include "resources/TextureManager.h"
@@ -33,6 +32,10 @@
 
 #include "scene/SectorVisibility.h"
 #include "scene/PortalContainer.h"
+
+#include "system/String.h"
+
+#include "tinyXML/tinyxml.h"
 
 namespace hpl {
 
