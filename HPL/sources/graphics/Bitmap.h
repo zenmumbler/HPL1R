@@ -5,7 +5,8 @@
 #ifndef HPL_BITMAP_H
 #define HPL_BITMAP_H
 
-#include "graphics/GraphicsTypes.h"
+#include "math/MathTypes.h"
+#include "graphics/Color.h"
 
 namespace hpl {
 

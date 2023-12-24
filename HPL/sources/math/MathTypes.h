@@ -19,13 +19,15 @@
 #ifndef HPL_MATHTYPES_H
 #define HPL_MATHTYPES_H
 
+#include "math/Vector2.h"
+#include "math/Vector3.h"
+#include "math/Matrix.h"
+#include "math/Quaternion.h"
+
 #include <list>
 #include <vector>
 #include <cmath>
 #include <cstdlib>
-#include "math/Vector2.h"
-#include "math/Vector3.h"
-#include "math/Matrix.h"
 
 namespace hpl {
 
@@ -267,8 +269,5 @@ namespace hpl {
 
 	//-------------------------------------------
 }
-
-#include "math/Quaternion.h"
-
 
 #endif // HPL_MATHTYPES_H
