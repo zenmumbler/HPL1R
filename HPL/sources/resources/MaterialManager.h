@@ -35,6 +35,9 @@ namespace hpl {
 
 		iMaterial* CreateMaterial(const tString& asName);
 
+		iResourceBase* LoadAsset(const tString &name, const tString &fullPath) override;
+		std::span<const tString> SupportedExtensions() const override;
+
 		void Update(float afTimeStep);
 
 		void SetTextureAnisotropy(float afX);
@@ -43,8 +46,6 @@ namespace hpl {
 		tString GetPhysicsMaterialName(const tString& asName);
 
 	private:
-		iMaterial* LoadFromFile(const tString& asName,const tString& asPath);
-
 		float mfTextureAnisotropy;
 
 		cTextureManager *_textureManager;

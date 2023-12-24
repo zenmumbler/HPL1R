@@ -20,7 +20,10 @@
 #define HPL_RESOURCEMANAGER_H
 
 #include "system/StringTypes.h"
+
 #include <unordered_map>
+#include <vector>
+#include <span>
 
 namespace hpl {
 
@@ -34,6 +37,7 @@ namespace hpl {
 
 		iResourceBase* GetByName(const tString& name);
 		iResourceBase* GetByHandle(unsigned long handle);
+		iResourceBase* GetOrLoadResource(const tString& name);
 
 		template <typename Fn>
 		void ForEachResource(const Fn&& fn) {
@@ -44,6 +48,9 @@ namespace hpl {
 		}
 
 		void Destroy(iResourceBase* resource);
+
+		virtual iResourceBase* LoadAsset(const tString &name, const tString &fullPath) = 0;
+		virtual std::span<const tString> SupportedExtensions() const = 0;
 
 	protected:
 		void BeginLoad(const tString& fileName);
@@ -74,5 +81,6 @@ namespace hpl {
 		static int _tabCount;
 	};
 
-};
+}
+
 #endif // HPL_RESOURCEMANAGER_H

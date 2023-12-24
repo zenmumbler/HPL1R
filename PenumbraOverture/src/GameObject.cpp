@@ -810,7 +810,7 @@ void cGameObject::SetupBreakObject()
 	if(mBreakProps.msEntity!="") PreloadModel(mBreakProps.msEntity);
 	if(mBreakProps.msPS!="") 
 	{
-		cParticleSystem3D *pPS  = mpInit->mpGame->GetResources()->GetParticleManager()->CreatePS3D(
+		cParticleSystem3D *pPS  = mpInit->mpGame->GetResources()->GetParticleManager()->CreateParticleSystem(
 															"",mBreakProps.msPS,1,cMatrixf::Identity);
 		delete  pPS ;
 	}

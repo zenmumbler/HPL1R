@@ -20,8 +20,6 @@
 #include "graphics/Mesh.h"
 #include "graphics/Animation.h"
 #include "resources/MeshLoaderHandler.h"
-#include "resources/FileSearcher.h"
-#include "system/String.h"
 #include "system/Log.h"
 
 
@@ -47,82 +45,36 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cAnimation* cAnimationManager::CreateAnimation(const tString& asName)
-	{
-		tString sPath;
-		cAnimation *pAnimation=NULL;
-		tString asNewName;
-
-		BeginLoad(asName);
-
-		asNewName = asName;
-
-		//If the file is missing an extension, search for an existing file.
-		if(cString::GetFileExt(asNewName) == "")
-		{
-			bool bFound = false;
-			tStringVec *pTypes = _meshLoadHandler->GetSupportedTypes();
-			for(size_t i=0; i< pTypes->size(); i++)
-			{
-				asNewName = cString::SetFileExt(asNewName, (*pTypes)[i]);
-				sPath = FileSearcher::GetFilePath(asNewName);
-				if(sPath != "")
-				{
-					bFound = true;
-					break;
-				}
-			}
-
-			if(bFound == false){
-				Error("Couldn't create mesh '%s'\n",asName.c_str());
-				EndLoad();
-				return NULL;
-			}
+	iResourceBase* cAnimationManager::LoadAsset(const tString &_name, const tString &fullPath) {
+		auto mesh = _meshLoadHandler->LoadMesh(fullPath, 0);
+		if (mesh == nullptr) {
+			return nullptr;
 		}
 
-		pAnimation = static_cast<cAnimation*>(this->FindLoadedResource(asNewName,sPath));
-
-		if(pAnimation==NULL && sPath!="")
+		if (mesh->GetAnimationNum() <= 0)
 		{
-			//try to load animation from mesh
-			cMesh *pTempMesh = _meshLoadHandler->LoadMesh(sPath,0);
-			if(pTempMesh==NULL){
-				Error("Couldn't load animation from '%s'\n",sPath.c_str());
-				EndLoad();
-				return NULL;
-			}
-
-			if(pTempMesh->GetAnimationNum()<=0)
-			{
-				Error("No animations found in '%s'\n",sPath.c_str());
-				delete pTempMesh;
-				EndLoad();
-				return NULL;
-			}
-
-			pAnimation = pTempMesh->GetAnimation(0);
-			pTempMesh->ClearAnimations(false);
-
-			delete pTempMesh;
-
-			AddResource(pAnimation);
+			Error("No animations found in '%s'\n", fullPath.c_str());
+			delete mesh;
+			return nullptr;
 		}
 
-		if(pAnimation) pAnimation->IncUserCount();
-		else Error("Couldn't create animation '%s'\n",asNewName.c_str());
+		auto animation = mesh->GetAnimation(0);
+		mesh->ClearAnimations(false);
+		delete mesh;
 
-		EndLoad();
-		return pAnimation;
+		return animation;
+	}
+
+	std::span<const tString> cAnimationManager::SupportedExtensions() const {
+		return { *(_meshLoadHandler->GetSupportedTypes()) };
 	}
 
 	//-----------------------------------------------------------------------
 
-	//////////////////////////////////////////////////////////////////////////
-	// PRIVATE METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
+	cAnimation* cAnimationManager::CreateAnimation(const tString& name)
+	{
+		return static_cast<cAnimation*>(GetOrLoadResource(name));
+	}
 
 	//-----------------------------------------------------------------------
 }

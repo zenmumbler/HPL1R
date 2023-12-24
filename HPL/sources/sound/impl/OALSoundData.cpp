@@ -2,13 +2,14 @@
  * 2021 by zenmumbler
  * This file is part of Rehatched
  */
-#include <AL/al.h>
 #include "sound/impl/OALSoundData.h"
 #include "sound/impl/OALSoundChannel.h"
 #include "sound/impl/WAVFile.h"
 #include "stb/stb_vorbis.h"
 #include "system/String.h"
 #include "system/Log.h"
+
+#include <AL/al.h>
 
 namespace hpl {
 
@@ -18,7 +19,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cOALSoundData::cOALSoundData(tString asName, bool abStream) : iSoundData(asName,abStream)
+	cOALSoundData::cOALSoundData(const tString& name) : iSoundData(name)
 	{
 	}
 
@@ -26,12 +27,12 @@ namespace hpl {
 
 	cOALSoundData::~cOALSoundData()
 	{
-		if (mVorbis) {
-			stb_vorbis_close(mVorbis);
+		if (_vorbis) {
+			stb_vorbis_close(_vorbis);
 		}
-		if (mSampleData) {
+		if (_sampleData) {
 			// use free because of stb_vorbis_decode_file usage
-			free(mSampleData);
+			free(_sampleData);
 		}
 	}
 
@@ -43,46 +44,44 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cOALSoundData::CreateFromFile(const tString &asFile)
+	bool cOALSoundData::CreateFromFile(const tString &fullPath, bool streaming)
 	{
-		auto ext = cString::GetFileExt(asFile);
+		auto ext = cString::GetFileExt(fullPath);
 		if (ext == "wav") {
-			int samples = LoadWAVFile(asFile, &mChannels, &mFormat, &mRate, &mSampleData);
+			int samples = LoadWAVFile(fullPath, &_channels, &_format, &_rate, &_sampleData);
 			if (samples == 0) {
-				Error("Cannot load WAV file '%s'\n", asFile.c_str());
+				Error("Cannot load WAV file '%s'\n", fullPath.c_str());
 				return false;
 			}
-			mByteSize = samples * sizeof(short);
-
-			mbStream = false;
+			_byteSize = samples * sizeof(short);
 		}
 		else if (ext == "ogg") {
 			int error;
 
-			if (mbStream) {
-				mVorbis = stb_vorbis_open_filename(asFile.c_str(), &error, nullptr);
-				if (mVorbis == nullptr) {
-					Error("Cannot open Ogg file '%s' for streaming, error code: %d\n", asFile.c_str(), error);
+			if (streaming) {
+				_vorbis = stb_vorbis_open_filename(fullPath.c_str(), &error, nullptr);
+				if (_vorbis == nullptr) {
+					Error("Cannot open Ogg file '%s' for streaming, error code: %d\n", fullPath.c_str(), error);
 					return false;
 				}
 				
-				auto info = stb_vorbis_get_info(mVorbis);
-				mRate = info.sample_rate;
-				mChannels = info.channels;
-				mByteSize = 0;
+				auto info = stb_vorbis_get_info(_vorbis);
+				_rate = info.sample_rate;
+				_channels = info.channels;
+				_byteSize = 0;
 			}
 			else {
-				int samples = stb_vorbis_decode_filename(asFile.c_str(), &mChannels, &mRate, &mSampleData);
+				int samples = stb_vorbis_decode_filename(fullPath.c_str(), &_channels, &_rate, &_sampleData);
 				if (samples == 0) {
-					Error("Cannot load Ogg file '%s'\n", asFile.c_str());
+					Error("Cannot load Ogg file '%s'\n", fullPath.c_str());
 					return false;
 				}
-				mByteSize = samples * sizeof(short);
+				_byteSize = samples * sizeof(short);
 			}
-			mFormat = mChannels == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16;
+			_format = _channels == 1 ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16;
 		}
 		else {
-			Error("Unknown file extension '%s'\n", asFile.c_str());
+			Error("Unknown file extension '%s'\n", fullPath.c_str());
 			return false;
 		}
 
@@ -93,7 +92,7 @@ namespace hpl {
 
 	iSoundChannel* cOALSoundData::CreateChannel(int alPriority)
 	{
-		if ((mVorbis == nullptr) && (mSampleData == nullptr)) {
+		if ((_vorbis == nullptr) && (_sampleData == nullptr)) {
 			return nullptr;
 		}
 
@@ -107,7 +106,7 @@ namespace hpl {
 
 	bool cOALSoundData::IsStereo()
 	{
-		return mChannels == 2;
+		return _channels == 2;
 	}
 
 	//-----------------------------------------------------------------------

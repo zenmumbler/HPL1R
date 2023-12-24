@@ -20,6 +20,7 @@
 #include "resources/MaterialManager.h"
 #include "resources/TextureManager.h"
 #include "resources/GpuProgramManager.h"
+#include "resources/FileSearcher.h"
 
 #include "graphics/Material.h"
 #include "graphics/MaterialHandler.h"
@@ -33,141 +34,10 @@
 
 namespace hpl {
 
-	//////////////////////////////////////////////////////////////////////////
-	// CONSTRUCTORS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	cMaterialManager::cMaterialManager(iLowLevelGraphics *llGfx, cTextureManager* textureManager, cGpuProgramManager* programManager)
-		: iResourceManager{"material"}
-		, _textureManager{textureManager}
-		, _programManager{programManager}
-	{
-		mfTextureAnisotropy = 8.0f;
-
-		_matHandler = new cMaterialHandler(llGfx, textureManager, programManager);
-		_matHandler->AddType(new MaterialType_Universal());
-	}
-
-	cMaterialManager::~cMaterialManager() {
-		delete _matHandler;
-	}
-
 	//-----------------------------------------------------------------------
 
 	//////////////////////////////////////////////////////////////////////////
-	// PUBLIC METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	iMaterial* cMaterialManager::CreateMaterial(const tString& asName)
-	{
-		tString sPath;
-		iMaterial* pMaterial;
-		tString asNewName;
-
-		BeginLoad(asName);
-
-		asNewName = cString::SetFileExt(asName,"mat");
-
-		pMaterial = static_cast<iMaterial*>(this->FindLoadedResource(asNewName,sPath));
-
-		if (pMaterial==NULL && sPath!="")
-		{
-			pMaterial = LoadFromFile(asNewName,sPath);
-
-			if(pMaterial==NULL){
-				Error("Couldn't load material '%s'\n",asNewName.c_str());
-				EndLoad();
-				return NULL;
-			}
-
-			AddResource(pMaterial);
-		}
-
-		if(pMaterial)pMaterial->IncUserCount();
-		else Error("Couldn't create material '%s'\n",asNewName.c_str());
-
-		EndLoad();
-		return pMaterial;
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cMaterialManager::Update(float afTimeStep)
-	{
-		// [Rehatched]: Not currently called and no materials use or used this
-		ForEachResource([=](iResourceBase *resource) {
-			auto material = static_cast<iMaterial*>(resource);
-			material->Update(afTimeStep);
-		});
-	}
-
-	//-----------------------------------------------------------------------
-
-	void cMaterialManager::SetTextureAnisotropy(float afX)
-	{
-		if(mfTextureAnisotropy == afX) return;
-		mfTextureAnisotropy = afX;
-
-		ForEachResource([this](iResourceBase *resource) {
-			iMaterial *pMat = static_cast<iMaterial*>(resource);
-
-			for (int i=0; i < eMaterialTexture_None; ++i)
-			{
-				iTexture *pTex = pMat->GetTexture((eMaterialTexture)i);
-				if(pTex)pTex->SetAnisotropyDegree(mfTextureAnisotropy);
-			}
-		});
-	}
-
-	//-----------------------------------------------------------------------
-
-	tString cMaterialManager::GetPhysicsMaterialName(const tString& asName)
-	{
-		tString sPath;
-		iMaterial* pMaterial;
-		tString asNewName;
-
-		asNewName = cString::SetFileExt(asName,"mat");
-
-		pMaterial = static_cast<iMaterial*>(this->FindLoadedResource(asNewName,sPath));
-
-		if(pMaterial==NULL && sPath!="")
-		{
-			TiXmlDocument *pDoc = new TiXmlDocument(sPath.c_str());
-			if(!pDoc->LoadFile()){
-				return "";
-			}
-
-			TiXmlElement *pRoot = pDoc->RootElement();
-
-			TiXmlElement *pMain = pRoot->FirstChildElement("Main");
-			if(pMain==NULL){
-				delete pDoc;
-				Error("Main child not found in '%s'\n",sPath.c_str());
-				return "";
-			}
-
-			tString sPhysicsName = cString::ToString(pMain->Attribute("PhysicsMaterial"),"Default");
-
-			delete pDoc;
-
-			return sPhysicsName;
-		}
-
-		if(pMaterial)
-			return pMaterial->GetPhysicsMaterial();
-		else
-			return "";
-	}
-
-	//-----------------------------------------------------------------------
-
-	//////////////////////////////////////////////////////////////////////////
-	// PRIVATE METHODS
+	// STATIC METHODS
 	//////////////////////////////////////////////////////////////////////////
 
 	//-----------------------------------------------------------------------
@@ -251,36 +121,64 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iMaterial* cMaterialManager::LoadFromFile(const tString& asName, const tString& asPath)
+	//////////////////////////////////////////////////////////////////////////
+	// CONSTRUCTORS
+	//////////////////////////////////////////////////////////////////////////
+
+	//-----------------------------------------------------------------------
+
+	cMaterialManager::cMaterialManager(iLowLevelGraphics *llGfx, cTextureManager* textureManager, cGpuProgramManager* programManager)
+		: iResourceManager{"material"}
+		, _textureManager{textureManager}
+		, _programManager{programManager}
 	{
-		auto pDoc = std::unique_ptr<TiXmlDocument>(new TiXmlDocument(asPath.c_str()));
-		if(!pDoc->LoadFile()){
-			return NULL;
+		mfTextureAnisotropy = 8.0f;
+
+		_matHandler = new cMaterialHandler(llGfx, textureManager, programManager);
+		_matHandler->AddType(new MaterialType_Universal());
+	}
+
+	cMaterialManager::~cMaterialManager() {
+		delete _matHandler;
+	}
+
+	//-----------------------------------------------------------------------
+
+	//////////////////////////////////////////////////////////////////////////
+	// PUBLIC METHODS
+	//////////////////////////////////////////////////////////////////////////
+
+	//-----------------------------------------------------------------------
+
+	iResourceBase* cMaterialManager::LoadAsset(const tString &name, const tString &fullPath) {
+		auto doc = std::unique_ptr<TiXmlDocument>(new TiXmlDocument(fullPath.c_str()));
+		if (! doc->LoadFile()) {
+			return nullptr;
 		}
 
-		TiXmlElement *pRoot = pDoc->RootElement();
+		TiXmlElement *pRoot = doc->RootElement();
 
 		///////////////////////////
 		//Main
 		TiXmlElement *pMain = pRoot->FirstChildElement("Main");
-		if(pMain==NULL){
+		if(pMain == nullptr){
 			Error("Main child not found.\n");
-			return NULL;
+			return nullptr;
 		}
 
-		const char* sType = pMain->Attribute("Type");
-		if(sType ==NULL){
+		auto sType = pMain->Attribute("Type");
+		if (sType == nullptr){
 			Error("Type not found.\n");
-			return NULL;
+			return nullptr;
 		}
 
 		bool bUseAlpha = cString::ToBool(pMain->Attribute("UseAlpha"), false);
 		tString sPhysicsMatName = cString::ToString(pMain->Attribute("PhysicsMaterial"),"Default");
 
-		iMaterial* pMat = _matHandler->Create(asName, sType);
-		if(pMat==NULL){
+		iMaterial* pMat = _matHandler->Create(name, sType);
+		if (pMat == nullptr){
 			Error("Invalid material type '%s'\n",sType);
-			return NULL;
+			return nullptr;
 		}
 
 		pMat->SetHasAlpha(bUseAlpha);
@@ -288,13 +186,13 @@ namespace hpl {
 
 		///////////////////////////
 		//Textures
-		TiXmlElement *pTexRoot = pRoot->FirstChildElement("TextureUnits");
-		if(pTexRoot==NULL){
+		auto texRoot = pRoot->FirstChildElement("TextureUnits");
+		if (texRoot == nullptr){
 			Error("TextureUnits child not found.\n");
-			return NULL;
+			return nullptr;
 		}
 
-		for (auto texElem = pTexRoot->FirstChildElement(); texElem != nullptr; texElem = texElem->NextSiblingElement())
+		for (auto texElem = texRoot->FirstChildElement(); texElem != nullptr; texElem = texElem->NextSiblingElement())
 		{
 			auto [texture, texType] = CreateTextureFromElement(texElem, _textureManager, mfTextureAnisotropy);
 			if (texture)
@@ -308,5 +206,80 @@ namespace hpl {
 		return pMat;
 	}
 
+	static const tString s_Extensions[] { "mat" };
+
+	std::span<const tString> cMaterialManager::SupportedExtensions() const {
+		return { s_Extensions };
+	}
+
 	//-----------------------------------------------------------------------
+
+	iMaterial* cMaterialManager::CreateMaterial(const tString& name)
+	{
+		return static_cast<iMaterial*>(GetOrLoadResource(name));
+	}
+
+	//-----------------------------------------------------------------------
+
+	void cMaterialManager::Update(float afTimeStep)
+	{
+		// [Rehatched]: Not currently called and no materials use or used this
+		ForEachResource([=](iResourceBase *resource) {
+			auto material = static_cast<iMaterial*>(resource);
+			material->Update(afTimeStep);
+		});
+	}
+
+	//-----------------------------------------------------------------------
+
+	void cMaterialManager::SetTextureAnisotropy(float afX)
+	{
+		if(mfTextureAnisotropy == afX) return;
+		mfTextureAnisotropy = afX;
+
+		ForEachResource([this](iResourceBase *resource) {
+			iMaterial *pMat = static_cast<iMaterial*>(resource);
+
+			for (int i=0; i < eMaterialTexture_None; ++i)
+			{
+				iTexture *pTex = pMat->GetTexture((eMaterialTexture)i);
+				if(pTex)pTex->SetAnisotropyDegree(mfTextureAnisotropy);
+			}
+		});
+	}
+
+	//-----------------------------------------------------------------------
+
+	tString cMaterialManager::GetPhysicsMaterialName(const tString& name)
+	{
+		tString fullPath;
+		auto qualifiedName = FileSearcher::ResolveAssetName(name, SupportedExtensions());
+		auto material = static_cast<iMaterial*>(FindLoadedResource(qualifiedName, fullPath));
+
+		if (material == nullptr && fullPath.length() > 0)
+		{
+			auto doc = new TiXmlDocument(fullPath.c_str());
+			if (! doc->LoadFile()) {
+				return "";
+			}
+
+			auto root = doc->RootElement();
+			auto main = root->FirstChildElement("Main");
+			if (main == NULL) {
+				delete doc;
+				Error("Main child not found in '%s'\n", fullPath.c_str());
+				return "";
+			}
+
+			auto physicsMaterial = cString::ToString(main->Attribute("PhysicsMaterial"), "Default");
+			delete doc;
+			return physicsMaterial;
+		}
+
+		if (material)
+			return material->GetPhysicsMaterial();
+		else
+			return "";
+	}
+
 }

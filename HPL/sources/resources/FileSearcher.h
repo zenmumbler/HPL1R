@@ -20,6 +20,7 @@
 #define HPL_FILESEARCHER_H
 
 #include "system/StringTypes.h"
+#include <span>
 
 namespace hpl {
 
@@ -30,7 +31,7 @@ namespace hpl {
 		 * \param asMask What files that should be searched for, for example: "*.jpeg".
 		 * \param asPath The path to the directory.
 		 */
-		void AddDirectory(tString asPath, tString asMask);
+		void AddDirectory(const tString &path, const tString &mask);
 
 		/**
 		 * Clears all directories
@@ -39,10 +40,12 @@ namespace hpl {
 
 		/**
 		 * Gets a file pointer and searches through all added resources.
-		 * \param asName Name of the file.
+		 * \param name Name of the file.
 		 * \return Path to the file. "" if file is not found.
 		 */
-		tString GetFilePath(tString asName);
+		tString GetFilePath(const tString &name);
+
+		tString ResolveAssetName(const tString& name, std::span<const tString> extensions);
 	}
 
 }

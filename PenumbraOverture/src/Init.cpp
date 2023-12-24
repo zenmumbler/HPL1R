@@ -632,17 +632,12 @@ void cInit::RunScriptCommand(const tString& asCommand)
 }
 
 //-----------------------------------------------------------------------
+
 void cInit::PreloadSoundEntityData(const tString &asFile)
 {
 	if(asFile=="") return;
 	
 	mpGame->GetResources()->GetSoundEntityManager()->Preload(asFile);
-		
-	/*iSoundData *pSound = mpGame->GetResources()->GetSoundManager()->CreateSoundData(asFile,false);
-	if(pSound){
-		Warning("Couldn't preload sound '%s'\n",asFile.c_str());
-	}*/
-	
 }
 
 //-----------------------------------------------------------------------
@@ -650,8 +645,7 @@ void cInit::PreloadSoundEntityData(const tString &asFile)
 void cInit::PreloadParticleSystem(const tString &asFile)
 {
 	if(asFile=="") return;
-	cParticleSystem3D *pPS  = mpGame->GetResources()->GetParticleManager()->CreatePS3D(
-																"",asFile,1,cMatrixf::Identity);
+	cParticleSystem3D *pPS  = mpGame->GetResources()->GetParticleManager()->CreateParticleSystem("", asFile, 1, cMatrixf::Identity);
 	delete  pPS ;
 }
 

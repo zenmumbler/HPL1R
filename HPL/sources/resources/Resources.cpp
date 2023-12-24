@@ -35,6 +35,7 @@
 #include "resources/LanguageFile.h"
 #include "resources/impl/MeshLoaderGLTF2.h"
 #include "resources/impl/MeshLoaderCollada.h"
+#include "sound/Sound.h"
 
 #include "system/Log.h"
 #include "system/Files.h"
@@ -102,11 +103,11 @@ namespace hpl {
 
 		mpMaterialManager = new cMaterialManager(llGfx, textureMgr, shaderMgr);
 		mpParticleManager = new cParticleManager(llGfx, mpMaterialManager);
-		mpFontManager = new cFontManager(llGfx, drawer);
+		mpFontManager = new cFontManager(textureMgr, drawer);
 
 		mpScriptManager = new cScriptManager(apScript);
 
-		mpSoundManager = new cSoundManager(apSound);
+		mpSoundManager = new cSoundManager(apSound->GetLowLevel());
 		mpSoundEntityManager = new cSoundEntityManager(apSound);
 
 		// [Rehatched]: this should not be in here, shared by mesh/anim loads

@@ -30,9 +30,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cFontManager::cFontManager(iLowLevelGraphics *llGfx, cGraphicsDrawer *drawer)
+	cFontManager::cFontManager(cTextureManager *textureMgr, cGraphicsDrawer *drawer)
 		: iResourceManager{"font"}
-		, _llGfx{llGfx}
+		, _textureMgr{textureMgr}
 		, _drawer{drawer}
 	{
 	}
@@ -45,57 +45,25 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	FontData* cFontManager::CreateFontData(const tString& asName)
-	{
-		tString sPath;
-		FontData* pFont;
-		tString asNewName = cString::ToLowerCase(asName);
-
-		BeginLoad(asName);
-
-		pFont = static_cast<FontData*>(this->FindLoadedResource(asNewName,sPath));
-
-		if(pFont==NULL && sPath!="")
-		{
-			pFont = new FontData(asNewName, _llGfx, _drawer);
-
-			tString sExt = cString::ToLowerCase(cString::GetFileExt(asName));
-
-			//Angel code font type
-			if(sExt == "fnt")
-			{
-				if(pFont->LoadAngelBMFont(sPath)==false){
-					delete pFont;
-					EndLoad();
-					return NULL;
-				}
-			}
-			else
-			{
-				Error("Font '%s' has an unkown extension!\n",asName.c_str());
-				delete pFont;
-				EndLoad();
-				return NULL;
-			}
-
-			AddResource(pFont);
+	iResourceBase* cFontManager::LoadAsset(const tString &name, const tString &fullPath) {
+		auto font = new FontData(name, _textureMgr, _drawer);
+		if (font->LoadAngelBMFont(fullPath) == false) {
+			delete font;
+			return nullptr;
 		}
-
-		if(pFont)pFont->IncUserCount();
-		else Error("Couldn't create font '%s'\n",asNewName.c_str());
-
-		EndLoad();
-		return pFont;
+		return font;
 	}
 
-	//-----------------------------------------------------------------------
+	static const tString s_Extensions[] { "fnt" };
 
-	//////////////////////////////////////////////////////////////////////////
-	// PRIVATE METHODS
-	//////////////////////////////////////////////////////////////////////////
+	std::span<const tString> cFontManager::SupportedExtensions() const {
+		return { s_Extensions };
+	}
 
-	//-----------------------------------------------------------------------
-
+	FontData* cFontManager::CreateFontData(const tString& name)
+	{
+		return static_cast<FontData*>(GetOrLoadResource(name));
+	}
 
 	//-----------------------------------------------------------------------
 }

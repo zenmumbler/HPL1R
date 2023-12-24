@@ -44,28 +44,16 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iSoundData* cLowLevelSoundOAL::LoadSoundData(const tString& asName, const tString& asFilePath,
-												const tString& asType, bool abStream,bool abLoopStream)
-	{
-		cOALSoundData* pSoundData = new cOALSoundData(asName,abStream);
-
-		pSoundData->SetLoopStream(abLoopStream);
-
-		if(pSoundData->CreateFromFile(asFilePath)==false)
-		{
-			delete pSoundData;
-			return NULL;
-		}
-
-		return pSoundData;
+	iSoundData* cLowLevelSoundOAL::CreateSoundData(const tString &name) {
+		return new cOALSoundData(name);
 	}
 
 	//-----------------------------------------------------------------------
 
 	void cLowLevelSoundOAL::GetSupportedFormats(tStringVec &alstFormats)
 	{
-		alstFormats.push_back("WAV");
-		alstFormats.push_back("OGG");
+		alstFormats.push_back("wav");
+		alstFormats.push_back("ogg");
 	}
 
 	//-----------------------------------------------------------------------

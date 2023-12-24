@@ -44,86 +44,44 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cParticleSystem3D* cParticleManager::CreatePS3D(const tString& asName,const tString& asType,
-												cVector3f avSize,const cMatrixf& a_mtxTransform)
+	iResourceBase* cParticleManager::LoadAsset(const tString &name, const tString &fullPath) {
+		auto psData = new cParticleSystemData3D(name, _llGfx, _materialMgr);
+		if (! psData->LoadFromFile(fullPath)) {
+			delete psData;
+			return nullptr;
+		}
+		return psData;
+	}
+
+	static const tString s_Extensions[] { "ps" };
+
+	std::span<const tString> cParticleManager::SupportedExtensions() const {
+		return { s_Extensions };
+	}
+
+	//-----------------------------------------------------------------------
+
+	cParticleSystem3D* cParticleManager::CreateParticleSystem(const tString& name, const tString& asType, cVector3f avSize,const cMatrixf& a_mtxTransform)
 	{
-		tString sTypeName = cString::SetFileExt(cString::ToLowerCase(asType),"");
-
-		cParticleSystemData3D *pData = static_cast<cParticleSystemData3D*>(GetByName(sTypeName));
-		if(pData == NULL)
-		{
-			tString sFile = cString::SetFileExt(asType,"ps");
-
-			tString sPath = FileSearcher::GetFilePath(sFile);
-
-			if(sPath == "")
-			{
-				Error("Couldn't find particle system file '%s'\n",sFile.c_str());
-				return NULL;
-			}
-
-			cParticleSystemData3D *pPSData = new cParticleSystemData3D(sTypeName, _llGfx, _materialMgr);
-
-			if(pPSData->LoadFromFile(sPath)==false)
-			{
-				Error("Can't load data from particle system file '%s'\n",sTypeName.c_str());
-				delete pPSData;
-				return NULL;
-			}
-
-			AddResource(pPSData);
-
-			pData = pPSData;
+		auto data = static_cast<cParticleSystemData3D*>(GetOrLoadResource(name));
+		if (data) {
+			cParticleSystem3D* system = data->Create(name, avSize, a_mtxTransform);
+			system->SetDataName(asType);
+			system->SetDataSize(avSize);
+			system->SetParticleManager(this);
+			return system;
 		}
 
-
-		pData->IncUserCount();
-		cParticleSystem3D* pPS = pData->Create(asName,avSize,a_mtxTransform);
-		pPS->SetDataName(asType);
-		pPS->SetDataSize(avSize);
-		pPS->SetParticleManager(this);
-
-		return pPS;
+		return nullptr;
 	}
 
 	//-----------------------------------------------------------------------
 
 	void cParticleManager::Preload(const tString& asFile)
 	{
-		tString sTypeName = cString::SetFileExt(cString::ToLowerCase(asFile),"");
-
-		cParticleSystemData3D *pData = static_cast<cParticleSystemData3D*>(GetByName(sTypeName));
-		if(pData == NULL)
-		{
-			tString sFile = cString::SetFileExt(asFile,"ps");
-			tString sPath = FileSearcher::GetFilePath(sFile);
-			if(sPath == "")
-			{
-				Error("Couldn't find particle system file '%s'\n",sFile.c_str());
-				return;
-			}
-
-			cParticleSystemData3D *pPSData = new cParticleSystemData3D(sTypeName, _llGfx, _materialMgr);
-
-			if(pPSData->LoadFromFile(sPath)==false)
-			{
-				Error("Can't load data from particle system file '%s'\n",sTypeName.c_str());
-				delete pPSData;
-				return;
-			}
-
-			AddResource(pPSData);
-		}
+		GetOrLoadResource(asFile);
 	}
 
 	//-----------------------------------------------------------------------
 
-	//////////////////////////////////////////////////////////////////////////
-	// PRIVATE METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-
-	//-----------------------------------------------------------------------
 }

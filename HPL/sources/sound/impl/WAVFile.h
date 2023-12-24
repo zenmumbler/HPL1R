@@ -10,7 +10,7 @@
 
 namespace hpl {
 
-	uint32_t LoadWAVFile(const tString& filePath, int *channels, ALint *format, int *rate, short **samples);
+	uint32_t LoadWAVFile(const tString& filePath, int *channels, int *format, int *rate, short **samples);
 
 }
 

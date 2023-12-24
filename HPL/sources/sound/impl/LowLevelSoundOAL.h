@@ -23,8 +23,7 @@ namespace hpl
 		void GetOutputDeviceNames(tStringVec &devices) override;
 		tString GetCurrentDeviceName() override;
 
-		iSoundData* LoadSoundData(const tString& asName,const tString& asFilePath,
-									const tString& asType, bool abStream,bool abLoopStream) override;
+		iSoundData* CreateSoundData(const tString& name) override;
 
 		void UpdateSound(float afTimeStep) override;
 

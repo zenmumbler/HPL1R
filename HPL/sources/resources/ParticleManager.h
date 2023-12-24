@@ -35,7 +35,10 @@ namespace hpl {
 	public:
 		cParticleManager(iLowLevelGraphics *llGfx, cMaterialManager *materialMgr);
 
-		cParticleSystem3D* CreatePS3D(const tString& asName, const tString& asType, cVector3f avSize, const cMatrixf& a_mtxTransform);
+		iResourceBase* LoadAsset(const tString &name, const tString &fullPath) override;
+		std::span<const tString> SupportedExtensions() const override;
+
+		cParticleSystem3D* CreateParticleSystem(const tString& asName, const tString& asType, cVector3f avSize, const cMatrixf& a_mtxTransform);
 
 		void Preload(const tString& asFile);
 

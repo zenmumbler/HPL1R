@@ -304,13 +304,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cMusicHandler::LoadAndStart(const tString& asFileName,cMusicEntry* apSong  ,float afVolume, bool abLoop)
+	bool cMusicHandler::LoadAndStart(const tString& asFileName, cMusicEntry* apSong, float afVolume, bool abLoop)
 	{
-		iSoundData* pData = mpResources->GetSoundManager()->CreateSoundData(asFileName,true,abLoop);
+		iSoundData* pData = mpResources->GetSoundManager()->CreateSoundData(asFileName, true);
 		if(pData==NULL){
 			Error("Couldn't load music '%s'\n",asFileName.c_str());
 			return false;
 		}
+		pData->SetLoopStream(abLoop);
 
 		iSoundChannel *pStream = pData->CreateChannel(256);
 		if(pStream == NULL){

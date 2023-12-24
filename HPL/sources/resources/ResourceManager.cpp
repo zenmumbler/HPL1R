@@ -76,6 +76,38 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	iResourceBase* iResourceManager::GetOrLoadResource(const tString& name) {
+		BeginLoad(name);
+
+		tString qualifiedName = FileSearcher::ResolveAssetName(name, SupportedExtensions());
+		if (qualifiedName.length() == 0) {
+			Error("Couldn't resolve %s resource name '%s'\n", _resourceTypeName.c_str(), qualifiedName.c_str());
+			return nullptr;
+		}
+
+		tString fullPath;
+		iResourceBase *resource = this->FindLoadedResource(qualifiedName, fullPath);
+
+		if (resource == nullptr && fullPath.length() > 0)
+		{
+			resource = LoadAsset(qualifiedName, fullPath);
+			if (resource == nullptr) {
+				Error("Couldn't load %s resource from '%s'\n", _resourceTypeName.c_str(), fullPath.c_str());
+				EndLoad();
+				return nullptr;
+			}
+
+			AddResource(resource);
+		}
+
+		resource->IncUserCount();
+
+		EndLoad();
+		return resource;
+	}
+
+	//-----------------------------------------------------------------------
+
 	void iResourceManager::Destroy(iResourceBase* apResource)
 	{
 		apResource->DecUserCount();

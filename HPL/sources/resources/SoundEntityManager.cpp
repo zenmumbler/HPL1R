@@ -17,13 +17,10 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/SoundEntityManager.h"
-
 #include "sound/Sound.h"
-#include "resources/Resources.h"
 #include "sound/SoundEntityData.h"
 #include "sound/SoundHandler.h"
 #include "sound/SoundChannel.h"
-#include "system/String.h"
 #include "system/Log.h"
 
 namespace hpl {
@@ -34,7 +31,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cSoundEntityManager::cSoundEntityManager(cSound* apSound)
+	cSoundEntityManager::cSoundEntityManager(cSound *apSound)
 		: iResourceManager{"sound_entity"}
 	{
 		mpSound = apSound;
@@ -48,62 +45,52 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void cSoundEntityManager::Preload(const tString& asFile)
+	iResourceBase* cSoundEntityManager::LoadAsset(const tString &name, const tString &fullPath) {
+		auto snt = new cSoundEntityData(name);
+
+		if (! snt->CreateFromFile(fullPath))
+		{
+			delete snt;
+			return nullptr;
+		}
+		return snt;
+	}
+
+	static const tString s_Extensions[] { "snt" };
+
+	std::span<const tString> cSoundEntityManager::SupportedExtensions() const {
+		return { s_Extensions };
+	}
+
+	//-----------------------------------------------------------------------
+
+	void cSoundEntityManager::Preload(const tString &name)
 	{
-		cSoundEntityData *pData = CreateSoundEntity(asFile);
-		if(pData == NULL) {
-			Warning("Couldn't preload sound '%s'\n",asFile.c_str());
+		auto snt = CreateSoundEntity(name);
+		if (! snt) {
+			Warning("Couldn't preload sound '%s'\n", name.c_str());
 			return;
 		}
 
-		if(pData->GetMainSoundName() != ""){
-			iSoundChannel *pChannel = mpSound->GetSoundHandler()->CreateChannel(pData->GetMainSoundName(),0);
-			if(pChannel) delete pChannel;
+		if (snt->GetMainSoundName() != "") {
+			iSoundChannel *channel = mpSound->GetSoundHandler()->CreateChannel(snt->GetMainSoundName(), 0);
+			if(channel) delete channel;
 		}
-		if(pData->GetStartSoundName() != ""){
-			iSoundChannel *pChannel = mpSound->GetSoundHandler()->CreateChannel(pData->GetStartSoundName(),0);
-			if(pChannel) delete pChannel;
+		if (snt->GetStartSoundName() != "") {
+			auto channel = mpSound->GetSoundHandler()->CreateChannel(snt->GetStartSoundName(), 0);
+			if (channel) delete channel;
 		}
-		if(pData->GetStopSoundName() != ""){
-			iSoundChannel *pChannel = mpSound->GetSoundHandler()->CreateChannel(pData->GetStopSoundName(),0);
-			if(pChannel) delete pChannel;
+		if (snt->GetStopSoundName() != "") {
+			iSoundChannel *channel = mpSound->GetSoundHandler()->CreateChannel(snt->GetStopSoundName(), 0);
+			if (channel) delete channel;
 		}
 	}
 
 	//-----------------------------------------------------------------------
 
-	cSoundEntityData* cSoundEntityManager::CreateSoundEntity(const tString& asName)
+	cSoundEntityData* cSoundEntityManager::CreateSoundEntity(const tString &name)
 	{
-		tString sPath;
-		cSoundEntityData* pSoundEntity;
-		tString asNewName;
-
-		BeginLoad(asName);
-
-		asNewName = cString::SetFileExt(asName,"snt");
-
-		pSoundEntity = static_cast<cSoundEntityData*>(this->FindLoadedResource(asNewName,sPath));
-
-		if(pSoundEntity==NULL && sPath!="")
-		{
-			pSoundEntity = new cSoundEntityData(asNewName);
-
-			if(pSoundEntity->CreateFromFile(sPath))
-			{
-				AddResource(pSoundEntity);
-			}
-			else
-			{
-				delete pSoundEntity;
-				pSoundEntity =NULL;
-			}
-		}
-
-		if(pSoundEntity)pSoundEntity->IncUserCount();
-		else Error("Couldn't create SoundEntity '%s'\n",asNewName.c_str());
-
-		EndLoad();
-		return pSoundEntity;
+		return static_cast<cSoundEntityData*>(GetOrLoadResource(name));
 	}
 
 	//-----------------------------------------------------------------------

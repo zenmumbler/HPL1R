@@ -12,8 +12,8 @@
 
 namespace hpl {
 
-	std::optional<Bitmap> LoadBitmapFile(const tString &asFilePath);
-	void GetSupportedImageFormats(std::vector<tString> &alstFormats);
+	std::optional<Bitmap> LoadBitmapFile(const tString &fullPath);
+	void GetSupportedImageFormats(std::vector<tString> &formats);
 
 }
 

@@ -3,11 +3,12 @@
  * This file is part of Rehatched
  */
 
-#include <cstdio>
-#include <AL/al.h>
 #include "sound/impl/WAVFile.h"
 #include "system/Files.h"
 #include "system/Log.h"
+
+#include <cstdio>
+#include <AL/al.h>
 
 struct WAVHeader {
 	uint32_t wavID; // "RIFF"

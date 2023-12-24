@@ -45,7 +45,6 @@ namespace hpl {
 	class cLight3DSpot;
 	class cLight3DPoint;
 	class iLight3D;
-	class cImageEntity;
 	class cParticleManager;
 	class cParticleSystem3D;
 	class cScriptModule;

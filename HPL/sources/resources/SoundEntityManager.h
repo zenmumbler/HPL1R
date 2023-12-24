@@ -29,11 +29,13 @@ namespace hpl {
 	class cSoundEntityManager : public iResourceManager
 	{
 	public:
-		cSoundEntityManager(cSound* apSound);
+		cSoundEntityManager(cSound *apSound);
 
-		void Preload(const tString& asFile);
+		iResourceBase* LoadAsset(const tString &name, const tString &fullPath) override;
+		std::span<const tString> SupportedExtensions() const override;
 
-		cSoundEntityData* CreateSoundEntity(const tString& asName);
+		cSoundEntityData* CreateSoundEntity(const tString &name);
+		void Preload(const tString &name);
 
 	private:
 		cSound* mpSound;

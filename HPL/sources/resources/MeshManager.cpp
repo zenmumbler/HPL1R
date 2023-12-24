@@ -16,13 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "resources/MeshManager.h"
-#include "graphics/Mesh.h"
-#include "resources/MeshLoaderHandler.h"
-#include "resources/FileSearcher.h"
-#include "system/String.h"
-#include "system/Log.h"
 
+#include "resources/MeshManager.h"
+#include "resources/MeshLoaderHandler.h"
+#include "graphics/Mesh.h"
 
 namespace hpl {
 
@@ -46,68 +43,19 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cMesh* cMeshManager::CreateMesh(const tString& asName)
+	iResourceBase* cMeshManager::LoadAsset(const tString &name, const tString &fullPath) {
+		return _meshLoadHandler->LoadMesh(fullPath, 0);
+	}
+
+	std::span<const tString> cMeshManager::SupportedExtensions() const {
+		return { *(_meshLoadHandler->GetSupportedTypes()) };
+	}
+
+	cMesh* cMeshManager::CreateMesh(const tString &name)
 	{
-		tString sPath;
-		cMesh* pMesh;
-		tString asNewName;
-
-		BeginLoad(asName);
-
-		asNewName = asName;//cString::SetFileExt(asName,"mesh");
-
-		//If the file is missing an extension, search for an existing file.
-		if(cString::GetFileExt(asNewName) == "")
-		{
-			bool bFound = false;
-			tStringVec *pTypes = _meshLoadHandler->GetSupportedTypes();
-			for(size_t i=0; i< pTypes->size(); i++)
-			{
-				asNewName = cString::SetFileExt(asNewName, (*pTypes)[i]);
-				tString sPath = FileSearcher::GetFilePath(asNewName);
-				if(sPath != "")
-				{
-					bFound = true;
-					break;
-				}
-			}
-
-			if(bFound == false){
-				Error("Couldn't create mesh '%s'\n",asName.c_str());
-				EndLoad();
-				return NULL;
-			}
-		}
-
-		pMesh = static_cast<cMesh*>(this->FindLoadedResource(asNewName,sPath));
-
-		if(pMesh==NULL && sPath!="")
-		{
-			pMesh = _meshLoadHandler->LoadMesh(sPath,0);
-			if(pMesh == NULL)
-			{
-				EndLoad();
-				return NULL;
-			}
-
-			AddResource(pMesh);
-		}
-
-		if(pMesh)pMesh->IncUserCount();
-		else Error("Couldn't create mesh '%s'\n",asNewName.c_str());
-
-		EndLoad();
-		return pMesh;
+		return static_cast<cMesh*>(GetOrLoadResource(name));
 	}
 
 	//-----------------------------------------------------------------------
 
-	//////////////////////////////////////////////////////////////////////////
-	// PRIVATE METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-
-	//-----------------------------------------------------------------------
 }

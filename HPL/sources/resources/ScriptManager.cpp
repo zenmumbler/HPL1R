@@ -19,8 +19,6 @@
 
 #include "resources/ScriptManager.h"
 #include "script/Script.h"
-#include "system/String.h"
-#include "system/Log.h"
 
 namespace hpl {
 
@@ -44,46 +42,27 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cScriptModule* cScriptManager::CreateScript(const tString& asName)
-	{
-		tString sPath;
-		cScriptModule* pScript;
-		tString asNewName;
-
-		BeginLoad(asName);
-
-		asNewName = cString::SetFileExt(asName,"hps");
-
-		pScript = static_cast<cScriptModule*>(this->FindLoadedResource(asNewName,sPath));
-
-		if (pScript == nullptr && sPath!="")
-		{
-			pScript = mpScript->CreateScript(asNewName);
-
-			if (pScript->CreateFromFile(sPath)==false){
-				delete pScript;
-				EndLoad();
-				return nullptr;
-			}
-
-			AddResource(pScript);
+	iResourceBase* cScriptManager::LoadAsset(const tString &name, const tString &fullPath) {
+		auto script = mpScript->CreateScript(name);
+		if (! script->CreateFromFile(fullPath)){
+			delete script;
+			return nullptr;
 		}
+		return script;
+	}
 
-		if (pScript) pScript->IncUserCount();
-		else Error("Couldn't create script '%s'\n", asNewName.c_str());
+	static const tString s_Extensions[] { "hps" };
 
-		EndLoad();
-		return pScript;
+	std::span<const tString> cScriptManager::SupportedExtensions() const {
+		return { s_Extensions };
 	}
 
 	//-----------------------------------------------------------------------
 
-	//////////////////////////////////////////////////////////////////////////
-	// PRIVATE METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
+	cScriptModule* cScriptManager::CreateScript(const tString& name)
+	{
+		return static_cast<cScriptModule*>(GetOrLoadResource(name));
+	}
 
 	//-----------------------------------------------------------------------
 }

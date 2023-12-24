@@ -279,15 +279,16 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iSoundChannel* cSoundHandler::PlayStream(const tString& asFileName,bool abLoop,float afVolume,bool ab3D, eSoundDest aEffectType)
+	iSoundChannel* cSoundHandler::PlayStream(const tString& asFileName, bool abLoop, float afVolume, bool ab3D, eSoundDest aEffectType)
 	{
 		if(asFileName == "")return NULL;
 
-		iSoundData* pData = mpResources->GetSoundManager()->CreateSoundData(asFileName,true,abLoop);
+		iSoundData* pData = mpResources->GetSoundManager()->CreateSoundData(asFileName, true);
 		if(pData==NULL){
 			Error("Couldn't load stream '%s'\n",asFileName.c_str());
 			return NULL;
 		}
+		pData->SetLoopStream(abLoop);
 
 		iSoundChannel *pSound = pData->CreateChannel(256);
 		if(!pSound){
@@ -1008,7 +1009,7 @@ namespace hpl {
 		{
 			sName = "stream_"+sBaseName;
 
-			pData = mpResources->GetSoundManager()->CreateSoundData(sName,true);
+			pData = mpResources->GetSoundManager()->CreateSoundData(sBaseName, true);
 			if(pData==NULL){
 				Error("Couldn't stream sound '%s'\n",asName.c_str());
 				return NULL;

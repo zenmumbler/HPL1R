@@ -677,7 +677,7 @@ namespace hpl {
 	cParticleSystem3D* cWorld3D::CreateParticleSystem(const tString& asName,const tString& asType,
 													const cVector3f& avSize,const cMatrixf& a_mtxTransform)
 	{
-		cParticleSystem3D* pPS = mpResources->GetParticleManager()->CreatePS3D(asName, asType, avSize, a_mtxTransform);
+		cParticleSystem3D* pPS = mpResources->GetParticleManager()->CreateParticleSystem(asName, asType, avSize, a_mtxTransform);
 		if(pPS == NULL){
 			Error("Couldn't create particle system '%s' of type '%s'\n",asName.c_str(), asType.c_str());
 			return NULL;

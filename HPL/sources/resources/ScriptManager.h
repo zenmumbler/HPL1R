@@ -31,11 +31,15 @@ namespace hpl {
 	public:
 		cScriptManager(cScript* apScript);
 
-		cScriptModule* CreateScript(const tString& asName);
+		iResourceBase* LoadAsset(const tString &name, const tString &fullPath) override;
+		std::span<const tString> SupportedExtensions() const override;
+
+		cScriptModule* CreateScript(const tString& name);
 
 	private:
 		cScript* mpScript;
 	};
 
 };
+
 #endif // HPL_SCRIPT_MANAGER_H

@@ -2,16 +2,16 @@
  * 2021 by zenmumbler
  * This file is part of Rehatched
  */
-#include <vector>
-#include <algorithm>
-#include <AL/al.h>
-
 #include "resources/SoundManager.h"
 #include "math/Math.h"
 
 #include "sound/impl/OALSoundChannel.h"
 #include "sound/impl/OALSoundData.h"
 #include "stb/stb_vorbis.h"
+
+#include <vector>
+#include <algorithm>
+#include <AL/al.h>
 
 static const int STREAM_BUF_SAMPLES = 22050;
 
@@ -31,15 +31,15 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cOALSoundChannel::cOALSoundChannel(iSoundData* apData,cSoundManager* apSoundManger)
+	cOALSoundChannel::cOALSoundChannel(iSoundData* apData, cSoundManager* apSoundManger)
 	: iSoundChannel(apData, apSoundManger)
 	{
 		alGenSources(1, &mSource);
 		
 		const auto sound = dynamic_cast<cOALSoundData*>(apData);
-		if (sound->mVorbis) {
+		if (sound->_vorbis) {
 			alGenBuffers(2, mBuffers);
-			mOutput = new short[STREAM_BUF_SAMPLES * sound->mChannels];
+			mOutput = new short[STREAM_BUF_SAMPLES * sound->_channels];
 
 			FeedNextBuffer(mBuffers[0]);
 			FeedNextBuffer(mBuffers[1]);
@@ -47,7 +47,7 @@ namespace hpl {
 		else {
 			alGenBuffers(1, mBuffers);
 			mOutput = nullptr;
-			alBufferData(mBuffers[0], sound->mFormat, sound->mSampleData, sound->mByteSize, sound->mRate);
+			alBufferData(mBuffers[0], sound->_format, sound->_sampleData, sound->_byteSize, sound->_rate);
 			alSourcei(mSource, AL_BUFFER, mBuffers[0]);
 		}
 		alSourcePause(mSource);
@@ -71,7 +71,7 @@ namespace hpl {
 		
 		s_AllChannels.erase(std::remove(std::begin(s_AllChannels), std::end(s_AllChannels), this));
 
-		// [ZM] this is the counterpart to the IncUserCount call in SoundData::CreateChannel
+		// [Rehatched] this is the counterpart to the IncUserCount call in SoundData::CreateChannel
 		if (mpSoundManger) {
 			mpSoundManger->Destroy(mpData);
 		}
@@ -81,15 +81,15 @@ namespace hpl {
 
 	int cOALSoundChannel::FeedNextBuffer(unsigned int buf) {
 		const auto sound = dynamic_cast<cOALSoundData*>(mpData);
-		int samples = stb_vorbis_get_samples_short_interleaved(sound->mVorbis, sound->mChannels, mOutput, STREAM_BUF_SAMPLES * sound->mChannels);
+		int samples = stb_vorbis_get_samples_short_interleaved(sound->_vorbis, sound->_channels, mOutput, STREAM_BUF_SAMPLES * sound->_channels);
 		if (samples < STREAM_BUF_SAMPLES && sound->GetLoopStream()) {
 			int remainder = STREAM_BUF_SAMPLES - samples;
 
-			stb_vorbis_seek_start(sound->mVorbis);
-			samples += stb_vorbis_get_samples_short_interleaved(sound->mVorbis, sound->mChannels, mOutput + (samples * sound->mChannels), remainder * sound->mChannels);
+			stb_vorbis_seek_start(sound->_vorbis);
+			samples += stb_vorbis_get_samples_short_interleaved(sound->_vorbis, sound->_channels, mOutput + (samples * sound->_channels), remainder * sound->_channels);
 		}
 		if (samples > 0) {
-			alBufferData(buf, sound->mFormat, mOutput, samples * sizeof(short) * sound->mChannels, sound->mRate);
+			alBufferData(buf, sound->_format, mOutput, samples * sizeof(short) * sound->_channels, sound->_rate);
 			alSourceQueueBuffers(mSource, 1, &buf);
 		}
 		return samples;

@@ -23,19 +23,22 @@
 
 namespace hpl {
 
-	class iLowLevelGraphics;
+	class cTextureManager;
 	class cGraphicsDrawer;
 	class FontData;
 
 	class cFontManager : public iResourceManager
 	{
 	public:
-		cFontManager(iLowLevelGraphics *llGfx, cGraphicsDrawer *drawer);
+		cFontManager(cTextureManager *textureMgr, cGraphicsDrawer *drawer);
 
-		FontData* CreateFontData(const tString& asName);
+		FontData* CreateFontData(const tString& name);
+
+		iResourceBase* LoadAsset(const tString &name, const tString &fullPath) override;
+		std::span<const tString> SupportedExtensions() const override;
 
 	private:
-		iLowLevelGraphics *_llGfx;
+		cTextureManager *_textureMgr;
 		cGraphicsDrawer *_drawer;
 	};
 

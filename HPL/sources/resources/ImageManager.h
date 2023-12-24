@@ -34,7 +34,10 @@ namespace hpl {
 	public:
 		cImageManager(iLowLevelGraphics *apLowLevelGraphics);
 
-		cResourceImage* CreateImage(const tString& asName);
+		iResourceBase* LoadAsset(const tString &name, const tString &fullPath) override;
+		std::span<const tString> SupportedExtensions() const override;
+
+		cResourceImage* CreateImage(const tString& name);
 
 	private:
 		iLowLevelGraphics *mpLowLevelGraphics;
@@ -42,8 +45,7 @@ namespace hpl {
 
 		std::vector<tString> mvFileFormats;
 
-		cResourceImage *FindImage(const tString &asName, tString &asFilePath);
-		cResourceImage *AddToFrame(const Bitmap &bmp);
+		cResourceImage *AddToFrame(const tString &name, const Bitmap &bmp);
 	};
 
 };

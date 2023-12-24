@@ -17,10 +17,13 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/GpuProgramManager.h"
+#include "resources/FileSearcher.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/GPUProgram.h"
 #include "system/String.h"
 #include "system/Log.h"
+
+using namespace std::string_literals;
 
 namespace hpl {
 
@@ -30,10 +33,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cGpuProgramManager::cGpuProgramManager(iLowLevelGraphics *apLowLevelGraphics)
+	cGpuProgramManager::cGpuProgramManager(iLowLevelGraphics *llGfx)
 		: iResourceManager{"shader"}
 	{
-		mpLowLevelGraphics = apLowLevelGraphics;
+		_llGfx = llGfx;
 	}
 
 	//-----------------------------------------------------------------------
@@ -44,20 +47,51 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iGpuProgram* cGpuProgramManager::CreateProgram(const tString& asVertexName,
-												   const tString& asFragmentName)
+	iResourceBase* cGpuProgramManager::LoadAsset(const tString &name, const tString &fullPath) {
+		// FIXME: this is unused currently
+		// FIXME: this will be removed when we've moved to shader objects / separate functions
+		auto separator = name.find("__"s);
+		if (separator == tString::npos) {
+			Error("Invalid program name '%s'\n", name.c_str());
+			return nullptr;
+		}
+		auto vertexName = name.substr(0, separator) + ".vert";
+		auto fragmentName = name.substr(separator + 2) + ".frag";
+		auto vertexPath = FileSearcher::GetFilePath(vertexName);
+		auto fragmentPath = FileSearcher::GetFilePath(fragmentName);
+
+		// FIXME: normal creation continues here
+		auto shader = _llGfx->CreateGpuProgram(name);
+		if (shader->CreateFromFile(vertexPath, fragmentPath) == false)
+		{
+			Error("Couldn't create program '%s'\n", name.c_str());
+			delete shader;
+			return nullptr;
+		}
+		return shader;
+	}
+
+	static const tString s_Extensions[] { "vert", "frag" };
+
+	std::span<const tString> cGpuProgramManager::SupportedExtensions() const {
+		return { s_Extensions };
+	}
+
+	//-----------------------------------------------------------------------
+
+	iGpuProgram* cGpuProgramManager::CreateProgram(const tString &vertexName, const tString &fragmentName)
 	{
-		auto combinedName = asVertexName + "__" + asFragmentName;
+		auto combinedName = vertexName + "__" + fragmentName;
 		tString dummyPath, vertexPath, fragmentPath;
 		iGpuProgram* pProgram;
 		pProgram = static_cast<iGpuProgram*>(FindLoadedResource(combinedName, dummyPath));
-		FindLoadedResource(asVertexName, vertexPath);
-		FindLoadedResource(asFragmentName, fragmentPath);
+		FindLoadedResource(vertexName, vertexPath);
+		FindLoadedResource(fragmentName, fragmentPath);
 
 		BeginLoad(combinedName);
 
 		if (pProgram == NULL && vertexPath.length() > 0 && fragmentPath.length() > 0) {
-			pProgram = mpLowLevelGraphics->CreateGpuProgram(combinedName);
+			pProgram = _llGfx->CreateGpuProgram(combinedName);
 
 			if(pProgram->CreateFromFile(vertexPath, fragmentPath) == false)
 			{
@@ -79,12 +113,4 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	//////////////////////////////////////////////////////////////////////////
-	// PRIVATE METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-
-	//-----------------------------------------------------------------------
 }

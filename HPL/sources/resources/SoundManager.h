@@ -24,23 +24,24 @@
 
 namespace hpl {
 
-	class cSound;
+	class iLowLevelSound;
 	class iSoundData;
 
 	class cSoundManager : public iResourceManager
 	{
 	public:
-		cSoundManager(cSound* apSound);
+		cSoundManager(iLowLevelSound *soundDevice);
 
-		iSoundData* CreateSoundData(const tString& asName, bool abStream, bool abLoopStream=false);
+		iResourceBase* LoadAsset(const tString &name, const tString &fullPath) override;
+		std::span<const tString> SupportedExtensions() const override;
+
+		iSoundData* CreateSoundData(const tString &name, bool stream);
 
 	private:
-		cSound* mpSound;
-
+		iLowLevelSound *_soundDevice;
 		tStringVec _fileFormats;
-
-		iSoundData *FindData(const tString &asName, tString &asFilePath);
 	};
 
 };
+
 #endif // HPL_SOUND_MANAGER_H

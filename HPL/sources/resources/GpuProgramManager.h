@@ -20,7 +20,6 @@
 #define HPL_GPU_PROGRAM_MANAGER_H
 
 #include "resources/ResourceManager.h"
-
 #include "graphics/GPUProgram.h"
 
 namespace hpl {
@@ -30,13 +29,17 @@ namespace hpl {
 	class cGpuProgramManager : public iResourceManager
 	{
 	public:
-		cGpuProgramManager(iLowLevelGraphics *apLowLevelGraphics);
+		cGpuProgramManager(iLowLevelGraphics *llGfx);
 
-		iGpuProgram* CreateProgram(const tString& asVertexName,const tString& asFragmentName);
+		iGpuProgram* CreateProgram(const tString &vertexName,const tString &fragmentName);
+
+		iResourceBase* LoadAsset(const tString &name, const tString &fullPath) override;
+		std::span<const tString> SupportedExtensions() const override;
 
 	private:
-		iLowLevelGraphics *mpLowLevelGraphics;
+		iLowLevelGraphics *_llGfx;
 	};
 
-};
+}
+
 #endif // HPL_GPU_PROGRAM_MANAGER_H

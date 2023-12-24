@@ -17,7 +17,6 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/ImageManager.h"
-#include "system/String.h"
 #include "resources/ResourceImage.h"
 #include "resources/FrameBitmap.h"
 #include "graphics/LowLevelGraphics.h"
@@ -48,40 +47,29 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cResourceImage* cImageManager::CreateImage(const tString& asName)
-	{
-		cResourceImage *pImage = NULL;
-		tString sPath;
-
-		BeginLoad(asName);
-
-		pImage = FindImage(asName, sPath);
-		if(!pImage)
-		{
-			if(sPath != "")
-			{
-				auto bitmap = LoadBitmapFile(sPath);
-				if(! bitmap) {
-					Error("Imagemanager Couldn't load bitmap '%s'\n", sPath.c_str());
-					EndLoad();
-					return NULL;
-				}
-
-				pImage = AddToFrame(*bitmap);
-
-				if(pImage == NULL){
-					Error("Imagemanager couldn't create image '%s'\n", asName.c_str());
-				}
-
-				if(pImage) AddResource(pImage);
-			}
+	iResourceBase* cImageManager::LoadAsset(const tString &name, const tString &fullPath) {
+		auto bitmap = LoadBitmapFile(fullPath);
+		if (! bitmap) {
+			Error("ImageManager Couldn't load bitmap '%s'\n", fullPath.c_str());
+			return nullptr;
 		}
 
-		if(pImage)pImage->IncUserCount();
-		else Error("Couldn't load image '%s'\n",asName.c_str());
+		auto image = AddToFrame(name, *bitmap);
+		if (image == nullptr) {
+			Error("ImageManager couldn't frame image '%s'\n", name.c_str());
+		}
+		return image;
+	}
 
-		EndLoad();
-		return pImage;
+	std::span<const tString> cImageManager::SupportedExtensions() const {
+		return { mvFileFormats };
+	}
+
+	//-----------------------------------------------------------------------
+
+	cResourceImage* cImageManager::CreateImage(const tString& name)
+	{
+		return static_cast<cResourceImage*>(GetOrLoadResource(name));
 	}
 
 	//-----------------------------------------------------------------------
@@ -92,34 +80,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cResourceImage *cImageManager::FindImage(const tString &asName, tString &asFilePath)
-	{
-		cResourceImage *pImage=NULL;
-
-		if(cString::GetFileExt(asName)=="")
-		{
-			for (const tString& sExt : mvFileFormats)
-			{
-				tString sNewName = cString::SetFileExt(asName, sExt);
-				pImage = static_cast<cResourceImage*> (FindLoadedResource(sNewName, asFilePath));
-
-				if((pImage==NULL && asFilePath!="") || pImage!=NULL)break;
-			}
-		}
-		else
-		{
-			pImage = static_cast<cResourceImage*> (FindLoadedResource(asName, asFilePath));
-		}
-
-		return pImage;
-	}
-
-	//-----------------------------------------------------------------------
-
 	constexpr int FRAME_DIM = 512;
 	static int s_FrameIndex = 0;
 
-	cResourceImage *cImageManager::AddToFrame(const Bitmap &aBmp)
+	cResourceImage *cImageManager::AddToFrame(const tString &name, const Bitmap &aBmp)
 	{
 		cRect2l destRect;
 
@@ -146,7 +110,7 @@ namespace hpl {
 		}
 
 		// Log("RESIMG: Added bitmap of size [%d, %d] to frame %d\n", aBmp.GetWidth(), aBmp.GetHeight(), (*frameIter)->GetIndex());
-		auto image = new cResourceImage(aBmp.GetFileName(), *frameIter, destRect, cVector2l{FRAME_DIM, FRAME_DIM});
+		auto image = new cResourceImage(name, *frameIter, destRect, cVector2l{FRAME_DIM, FRAME_DIM});
 
 		// did this new image fill up the frame we found, then remove from active frames
 		if ((*frameIter)->IsFull()) {

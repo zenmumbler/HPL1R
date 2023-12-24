@@ -14,16 +14,17 @@ namespace hpl {
 	class cOALSoundData : public iSoundData
 	{
 	public:
-		cOALSoundData(tString asName, bool abStream);
+		cOALSoundData(const tString& name);
 		~cOALSoundData();
 
-		bool CreateFromFile(const tString &asFile);
-		iSoundChannel* CreateChannel(int alPriority);
-		bool IsStereo();
-		
-		stb_vorbis *mVorbis = nullptr;
-		short *mSampleData = nullptr;
-		int mRate = 0, mChannels = 0, mByteSize = 0, mFormat = 0;
+		bool CreateFromFile(const tString &fullPath, bool streaming) override;
+		iSoundChannel* CreateChannel(int priority) override;
+		bool IsStereo() override;
+		bool IsStream() override { return _vorbis != nullptr; };
+
+		stb_vorbis *_vorbis = nullptr;
+		short *_sampleData = nullptr;
+		int _rate = 0, _channels = 0, _byteSize = 0, _format = 0;
 	};
 };
 

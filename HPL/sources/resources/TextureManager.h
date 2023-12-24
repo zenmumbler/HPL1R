@@ -25,37 +25,40 @@
 
 namespace hpl {
 
-	//------------------------------------------------------
+	class Bitmap;
 
 	class cTextureManager : public iResourceManager, public iUpdateable
 	{
 	public:
 		cTextureManager(iLowLevelGraphics *llGfx);
 
-		iTexture* Create1D(const tString& asName);
-		iTexture* Create2D(const tString& asName);
+		iResourceBase* LoadAsset(const tString &name, const tString &fullPath) override;
+		std::span<const tString> SupportedExtensions() const override;
+
+		iTexture* Create1D(const tString &name);
+		iTexture* Create2D(const tString &name);
 
 		/**
 		 * Creates an animated texture. The name must be [name].[ext]. And then the textures in the animtion must
 		 * be named [name]01.[ext], [name]02.[ext], etc
 		 */
-		iTexture* CreateAnim2D(const tString& asName, eTextureAnimMode animMode);
+		iTexture* CreateAnim2D(const tString &name, eTextureAnimMode animMode);
+		iTexture* CreateCubeMap(const tString &name);
 
-		iTexture* CreateCubeMap(const tString& asName);
+		iTexture* CreateFromBitmap(const tString &name, const Bitmap& bitmap);
 
-		void Update(float afTimeStep);
+		void Update(float afTimeStep) override;
 
 	private:
-		iTexture* CreateFlatTexture(const tString& asName, eTextureTarget aTarget);
+		iTexture* CreateFlatTexture(const tString &name, eTextureTarget target);
 
-		iTexture* FindTexture2D(const tString &asName, tString &asFilePath);
+		iTexture* FindTexture2D(const tString &name, tString &fullPath);
 
 		tStringVec mvFileFormats;
-
-		tStringVec mvCubeSideSuffixes;
 
 		iLowLevelGraphics *_llGfx;
 	};
 
-};
+}
+
 #endif // HPL_TEXTURE_MANAGER_H

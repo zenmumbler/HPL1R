@@ -31,7 +31,10 @@ namespace hpl {
 	public:
 		cAnimationManager(cMeshLoaderHandler *meshLoadHandler);
 
-		cAnimation* CreateAnimation(const tString& asName);
+		cAnimation* CreateAnimation(const tString& name);
+
+		iResourceBase* LoadAsset(const tString &name, const tString &fullPath) override;
+		std::span<const tString> SupportedExtensions() const override;
 
 	private:
 		cMeshLoaderHandler *_meshLoadHandler;

@@ -31,7 +31,10 @@ namespace hpl {
 	public:
 		cMeshManager(cMeshLoaderHandler *meshLoadHandler);
 
-		cMesh* CreateMesh(const tString& asName);
+		iResourceBase* LoadAsset(const tString &name, const tString &fullPath) override;
+		std::span<const tString> SupportedExtensions() const override;
+
+		cMesh* CreateMesh(const tString &name);
 
 	private:
 		cMeshLoaderHandler *_meshLoadHandler;

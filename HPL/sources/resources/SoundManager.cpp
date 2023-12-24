@@ -17,11 +17,9 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/SoundManager.h"
-#include "sound/Sound.h"
-#include "sound/SoundData.h"
+#include "resources/FileSearcher.h"
 #include "sound/LowLevelSound.h"
-#include "system/String.h"
-#include "system/Log.h"
+#include "sound/SoundData.h"
 
 namespace hpl {
 
@@ -31,11 +29,11 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cSoundManager::cSoundManager(cSound* apSound)
+	cSoundManager::cSoundManager(iLowLevelSound* soundDevice)
 		: iResourceManager{"sound"}
 	{
-		mpSound = apSound;
-		mpSound->GetLowLevel()->GetSupportedFormats(_fileFormats);
+		_soundDevice = soundDevice;
+		_soundDevice->GetSupportedFormats(_fileFormats);
 	}
 
 	//-----------------------------------------------------------------------
@@ -46,66 +44,35 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iSoundData* cSoundManager::CreateSoundData(const tString& asName, bool abStream,bool abLoopStream)
-	{
-		tString sPath;
-		iSoundData* pSound=NULL;
+	iResourceBase* cSoundManager::LoadAsset(const tString &name, const tString &fullPath) {
+		return nullptr;
+	}
 
-		BeginLoad(asName);
-
-		pSound = FindData(asName, sPath);
-
-		if(pSound==NULL && sPath!="")
-		{
-			pSound = mpSound->GetLowLevel()->LoadSoundData(cString::GetFileName(sPath),sPath,"",abStream,
-															abLoopStream);
-			if(pSound)
-			{
-				AddResource(pSound);
-				pSound->SetSoundManager(this);
-			}
-
-		}
-		else
-		{
-
-		}
-
-
-		//if(!pSound) Error("Couldn't load sound data '%s'\n",asName.c_str());
-		EndLoad();
-		return pSound;
+	std::span<const tString> cSoundManager::SupportedExtensions() const {
+		return { _fileFormats };
 	}
 
 	//-----------------------------------------------------------------------
 
-	//////////////////////////////////////////////////////////////////////////
-	// PRIVATE METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	iSoundData *cSoundManager::FindData(const tString &asName, tString &asFilePath)
+	iSoundData* cSoundManager::CreateSoundData(const tString &name, bool stream)
 	{
-		iSoundData *pData=NULL;
-
-		if(cString::GetFileExt(asName)=="")
-		{
-			for(const tString& sExt : _fileFormats)
+		tString fullPath;
+		auto qualifiedName = FileSearcher::ResolveAssetName(name, SupportedExtensions());
+		auto sound = static_cast<iSoundData*>(FindLoadedResource(qualifiedName, fullPath));
+		if (! sound && fullPath.length() > 0) {
+			sound = _soundDevice->CreateSoundData(name);
+			if (sound->CreateFromFile(fullPath, stream) == false)
 			{
-				tString sNewName = cString::SetFileExt(asName, sExt);
-				pData = static_cast<iSoundData*> (FindLoadedResource(sNewName, asFilePath));
-
-				if((pData==NULL && asFilePath!="") || pData!=NULL)break;
+				delete sound;
+				return nullptr;
 			}
-		}
-		else
-		{
-			pData = static_cast<iSoundData*> (FindLoadedResource(asName, asFilePath));
+			AddResource(sound);
 		}
 
-		return pData;
+		if (sound) sound->IncUserCount();
+		return sound;
 	}
 
 	//-----------------------------------------------------------------------
+
 }

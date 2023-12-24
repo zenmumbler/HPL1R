@@ -28,8 +28,6 @@ class TiXmlElement;
 
 namespace hpl {
 
-	class cImageEntity;
-
 	class iLowLevelGraphics;
 	class cTextureManager;
 	class cGpuProgramManager;

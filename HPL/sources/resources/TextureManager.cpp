@@ -17,14 +17,23 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/TextureManager.h"
-#include "graphics/LowLevelGraphics.h"
 #include "resources/LoadImage.h"
 #include "resources/FileSearcher.h"
+#include "graphics/LowLevelGraphics.h"
 #include "graphics/Bitmap.h"
 #include "system/String.h"
 #include "system/Log.h"
 
 namespace hpl {
+
+	static tString s_CubeSideSuffixes[] {
+		"_pos_x",
+		"_neg_x",
+		"_pos_y",
+		"_neg_y",
+		"_pos_z",
+		"_neg_z"
+	};
 
 	//////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
@@ -38,13 +47,6 @@ namespace hpl {
 		_llGfx = llGfx;
 
 		GetSupportedImageFormats(mvFileFormats);
-
-		mvCubeSideSuffixes.push_back("_pos_x");
-		mvCubeSideSuffixes.push_back("_neg_x");
-		mvCubeSideSuffixes.push_back("_pos_y");
-		mvCubeSideSuffixes.push_back("_neg_y");
-		mvCubeSideSuffixes.push_back("_pos_z");
-		mvCubeSideSuffixes.push_back("_neg_z");
 	}
 
 	//-----------------------------------------------------------------------
@@ -55,16 +57,26 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cTextureManager::Create1D(const tString& asName)
-	{
-		return CreateFlatTexture(asName, eTextureTarget_1D);
+	iResourceBase* cTextureManager::LoadAsset(const tString &name, const tString &fullPath) {
+		return nullptr;
+	}
+
+	std::span<const tString> cTextureManager::SupportedExtensions() const {
+		return { mvFileFormats };
 	}
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cTextureManager::Create2D(const tString& asName)
+	iTexture* cTextureManager::Create1D(const tString& name)
 	{
-		return CreateFlatTexture(asName, eTextureTarget_2D);
+		return CreateFlatTexture(name, eTextureTarget_1D);
+	}
+
+	//-----------------------------------------------------------------------
+
+	iTexture* cTextureManager::Create2D(const tString& name)
+	{
+		return CreateFlatTexture(name, eTextureTarget_2D);
 	}
 
 	//-----------------------------------------------------------------------
@@ -79,8 +91,6 @@ namespace hpl {
 		{
 			tString sFileExt = cString::GetFileExt(fileName);
 			tString sFileName = cString::SetFileExt(cString::GetFileName(fileName),"");
-
-			tStringVec mvFileNames;
 
 			tString sTest = sFileName + "01."+sFileExt;
 			int lNum = 2;
@@ -109,7 +119,6 @@ namespace hpl {
 			if(vPaths.empty())
 			{
 				Error("No textures found for animation %s\n", fileName.c_str());
-				Error("Couldn't texture '%s'\n", fileName.c_str());
 				EndLoad();
 				return NULL;
 			}
@@ -168,7 +177,7 @@ namespace hpl {
 			{
 				for(const tString& sExt : mvFileFormats)
 				{
-					tString sNewName = sName + mvCubeSideSuffixes[i] + "." + sExt;
+					tString sNewName = sName + s_CubeSideSuffixes[i] + "." + sExt;
 					sPath = FileSearcher::GetFilePath(sNewName);
 
 					if(sPath!="")break;
@@ -176,7 +185,7 @@ namespace hpl {
 
 				if(sPath=="")
 				{
-					tString sNewName = sName + mvCubeSideSuffixes[i];
+					tString sNewName = sName + s_CubeSideSuffixes[i];
 					Error("Couldn't find %d-face '%s', for cubemap '%s'\n",i,sNewName.c_str(),sName.c_str());
 					return NULL;
 				}
@@ -221,6 +230,23 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	iTexture* cTextureManager::CreateFromBitmap(const tString &name, const Bitmap& bitmap) {
+		BeginLoad(name);
+
+		auto texture = _llGfx->CreateTexture(name, eTextureTarget_2D);
+		if (! texture->CreateFromBitmap(bitmap)) {
+			delete texture;
+			return nullptr;
+		}
+		AddResource(texture);
+		texture->IncUserCount();
+
+		EndLoad();
+		return texture;
+	}
+
+	//-----------------------------------------------------------------------
+
 	void cTextureManager::Update(float afTimeStep)
 	{
 		ForEachResource([=](iResourceBase *resource) {
@@ -237,14 +263,14 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cTextureManager::CreateFlatTexture(const tString& asName, eTextureTarget aTarget)
+	iTexture* cTextureManager::CreateFlatTexture(const tString &name, eTextureTarget target)
 	{
 		tString sPath;
 		iTexture* pTexture;
 
-		BeginLoad(asName);
+		BeginLoad(name);
 
-		pTexture = FindTexture2D(asName,sPath);
+		pTexture = FindTexture2D(name, sPath);
 
 		if(pTexture==NULL && sPath!="")
 		{
@@ -258,7 +284,7 @@ namespace hpl {
 			}
 
 			//Create the texture and load from bitmap
-			pTexture = _llGfx->CreateTexture(asName, aTarget);
+			pTexture = _llGfx->CreateTexture(name, target);
 			if(pTexture->CreateFromBitmap(*pBmp)==false)
 			{
 				delete pTexture;
@@ -270,7 +296,7 @@ namespace hpl {
 		}
 
 		if(pTexture)pTexture->IncUserCount();
-		else Error("Couldn't texture '%s'\n",asName.c_str());
+		else Error("Couldn't texture '%s'\n", name.c_str());
 
 		EndLoad();
 		return pTexture;
@@ -278,24 +304,23 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cTextureManager::FindTexture2D(const tString &asName, tString &asFilePath)
+	iTexture* cTextureManager::FindTexture2D(const tString &name, tString &fullPath)
 	{
-		iTexture *pTexture=NULL;
+		iTexture *pTexture = nullptr;
 
-
-		if(cString::GetFileExt(asName)=="")
+		if (cString::GetFileExt(name).length() == 0)
 		{
 			for (const tString& sExt : mvFileFormats)
 			{
-				tString sNewName = cString::SetFileExt(asName, sExt);
-				pTexture = static_cast<iTexture*> (FindLoadedResource(sNewName, asFilePath));
+				auto qualifiedName = cString::SetFileExt(name, sExt);
+				pTexture = static_cast<iTexture*> (FindLoadedResource(qualifiedName, fullPath));
 
-				if((pTexture==NULL && asFilePath!="") || pTexture!=NULL)break;
+				if((pTexture==nullptr && fullPath.length() > 0) || pTexture!=nullptr) break;
 			}
 		}
 		else
 		{
-			pTexture = static_cast<iTexture*> (FindLoadedResource(asName, asFilePath));
+			pTexture = static_cast<iTexture*> (FindLoadedResource(name, fullPath));
 		}
 
 		return pTexture;

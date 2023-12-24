@@ -49,8 +49,7 @@ namespace hpl {
 
 		virtual tString GetCurrentDeviceName()=0;
 
-		virtual iSoundData* LoadSoundData(const tString& asName,const tString& asFilePath,
-											const tString& asType, bool abStream,bool abLoopStream)=0;
+		virtual iSoundData* CreateSoundData(const tString& asName)=0;
 
 		virtual void UpdateSound(float afTimeStep)=0;
 

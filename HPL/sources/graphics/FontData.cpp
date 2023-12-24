@@ -19,8 +19,7 @@
 #include "graphics/FontData.h"
 
 #include "graphics/GraphicsDrawer.h"
-#include "graphics/LowLevelGraphics.h"
-
+#include "resources/TextureManager.h"
 #include "resources/LoadImage.h"
 #include "system/Log.h"
 
@@ -35,9 +34,9 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	FontData::FontData(const tString &name, iLowLevelGraphics *llGfx, cGraphicsDrawer *drawer)
+	FontData::FontData(const tString &name, cTextureManager *textureMgr, cGraphicsDrawer *drawer)
 	: iResourceBase(name)
-	, _llGfx{llGfx}
+	, _textureMgr{textureMgr}
 	, _drawer{drawer}
 	{
 	}
@@ -47,7 +46,7 @@ namespace hpl {
 	FontData::~FontData()
 	{
 		for (auto page : _pages) {
-			delete page;
+			_textureMgr->Destroy(page);
 		}
 	}
 
@@ -123,8 +122,7 @@ namespace hpl {
 			}
 
 			// create page texture and add to the list
-			auto pageTexture = _llGfx->CreateTexture(GetName() + "_page" + std::to_string(pageNumber), eTextureTarget_2D);
-			pageTexture->CreateFromBitmap(bitmap);
+			auto pageTexture = _textureMgr->CreateFromBitmap(GetName() + "_page" + std::to_string(pageNumber), bitmap);
 			_pages.push_back(pageTexture);
 		}
 

@@ -31,7 +31,7 @@
 namespace hpl {
 
 	class ImageManager;
-	class iLowLevelGraphics;
+	class cTextureManager;
 	class cGraphicsDrawer;
 	class iTexture;
 	class Bitmap;
@@ -50,7 +50,7 @@ namespace hpl {
 	class FontData : public iResourceBase
 	{
 	public:
-		FontData(const tString &name, iLowLevelGraphics *llGfx, cGraphicsDrawer *drawer);
+		FontData(const tString &name, cTextureManager *textureMgr, cGraphicsDrawer *drawer);
 		~FontData();
 
 		bool LoadAngelBMFont(const tString &fileName);
@@ -107,7 +107,7 @@ namespace hpl {
 		float GetLength(const cVector2f& avSize,const wchar_t* sText);
 
 	private:
-		iLowLevelGraphics *_llGfx;
+		cTextureManager *_textureMgr;
 		cGraphicsDrawer *_drawer;
 		std::vector<iTexture*> _pages;
 		std::unordered_map<int, cGlyph> _glyphs;

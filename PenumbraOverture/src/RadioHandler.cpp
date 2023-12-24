@@ -119,7 +119,7 @@ void cRadioHandler::Update(float afTimeStep)
 		mfAlpha =0;
 
         //Start newer message
-		mpCurrentMessage->mpChannel = mpSoundHandler->PlayStream(mpCurrentMessage->msSound,false,1);
+		mpCurrentMessage->mpChannel = mpSoundHandler->PlayStream(mpCurrentMessage->msSound, false, 1);
 	}
 	
 	////////////////////////

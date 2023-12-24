@@ -376,7 +376,7 @@ void cGameSwingDoor::SetupBreakObject()
 	if(msBreakEntity!="") PreloadModel(msBreakEntity);
 	if(msBreakPS!="") 
 	{
-		cParticleSystem3D *pPS  = mpInit->mpGame->GetResources()->GetParticleManager()->CreatePS3D(
+		cParticleSystem3D *pPS  = mpInit->mpGame->GetResources()->GetParticleManager()->CreateParticleSystem(
 			"",msBreakPS,1,cMatrixf::Identity);
 		delete  pPS ;
 	}
