@@ -80,7 +80,8 @@ namespace hpl::FileSearcher {
 
 	tString ResolveAssetName(const tString& name, std::span<const tString> extensions) {
 		tString sPath;
-		auto baseExt = cString::ToLowerCase(cString::GetFileExt(name));
+		auto normalisedName = cString::ToLowerCase(name);
+		auto baseExt = cString::GetFileExt(name);
 		bool explicitExtension = baseExt.length() > 0;
 
 		if (explicitExtension) {
@@ -94,21 +95,16 @@ namespace hpl::FileSearcher {
 
 		if (explicitExtension) {
 			// A supported extension was specified, only check for that specific asset name in that case
-			auto it = s_mapFiles.find(cString::ToLowerCase(name));
-			if (it != s_mapFiles.end())
-			{
-				return name;
+			if (s_mapFiles.contains(normalisedName)) {
+				return normalisedName;
 			}
 		}
 		else {
 			// No valid extension was provided, try each extension and return first hit, if any
-			bool bFound = false;
-			for (auto extension : extensions)
+			for (const auto& extension : extensions)
 			{
-				tString qualifiedName = cString::SetFileExt(name, extension);
-				auto it = s_mapFiles.find(cString::ToLowerCase(qualifiedName));
-				if (it != s_mapFiles.end())
-				{
+				tString qualifiedName = cString::SetFileExt(normalisedName, extension);
+				if (s_mapFiles.contains(qualifiedName)) {
 					return qualifiedName;
 				}
 			}
