@@ -22,7 +22,7 @@
 #include "input/Mouse.h"
 
 #include "resources/Resources.h"
-#include "resources/ImageManager.h"
+#include "resources/AtlasImageManager.h"
 #include "resources/GpuProgramManager.h"
 #include "resources/TextureManager.h"
 
@@ -104,11 +104,11 @@ namespace hpl {
 		_llGfx = setup->GetGraphicsDevice();
 		_llGfx->Init(options.ScreenWidth, options.ScreenHeight, options.Fullscreen, options.WindowCaption);
 
-		_imageMgr = new cImageManager(_llGfx);
-		_shaderMgr = new cGpuProgramManager(_llGfx);
 		_textureMgr = new cTextureManager(_llGfx);
+		_atlasImageMgr = new cAtlasImageManager(_llGfx);
+		_shaderMgr = new cGpuProgramManager(_llGfx);
 
-		_drawer = new cGraphicsDrawer(_llGfx, _imageMgr, _shaderMgr);
+		_drawer = new cGraphicsDrawer(_llGfx, _atlasImageMgr, _shaderMgr);
 		_renderer = new cRenderer3D(_llGfx, _textureMgr, _shaderMgr);
 
 		Log(" Creating input module\n");
@@ -197,7 +197,7 @@ namespace hpl {
 		delete mpResources;
 		delete mpPhysics;
 		delete _shaderMgr;
-		delete _imageMgr;
+		delete _atlasImageMgr;
 		delete _textureMgr;
 		delete _llGfx;
 

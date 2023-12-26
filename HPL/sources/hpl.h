@@ -83,7 +83,7 @@
 
 #include "resources/Resources.h"
 #include "resources/FileSearcher.h"
-#include "resources/ImageManager.h"
+#include "resources/AtlasImageManager.h"
 #include "resources/ResourceImage.h"
 #include "resources/GpuProgramManager.h"
 #include "resources/ParticleManager.h"

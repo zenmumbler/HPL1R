@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef HPL_IMAGEMANAGER_H
-#define HPL_IMAGEMANAGER_H
+#ifndef HPL_ATLAS_IMAGEMANAGER_H
+#define HPL_ATLAS_IMAGEMANAGER_H
 
 #include "resources/ResourceManager.h"
 #include "resources/FrameBitmap.h"
@@ -29,10 +29,10 @@ namespace hpl {
 	class iLowLevelGraphics;
 	class Bitmap;
 
-	class cImageManager : public iResourceManager
+	class cAtlasImageManager : public iResourceManager
 	{
 	public:
-		cImageManager(iLowLevelGraphics *apLowLevelGraphics);
+		cAtlasImageManager(iLowLevelGraphics *llGfx);
 
 		iResourceBase* LoadAsset(const tString &name, const tString &fullPath) override;
 		std::span<const tString> SupportedExtensions() const override;
@@ -40,14 +40,15 @@ namespace hpl {
 		cResourceImage* CreateImage(const tString& name);
 
 	private:
-		iLowLevelGraphics *mpLowLevelGraphics;
+		iLowLevelGraphics *_llGfx;
 		std::vector<std::shared_ptr<cFrameBitmap>> _currentFrames;
 
-		std::vector<tString> mvFileFormats;
+		std::vector<tString> _fileFormats;
 
 		cResourceImage *AddToFrame(const tString &name, const Bitmap &bmp);
 	};
 
 };
 
-#endif // HPL_IMAGEMANAGER_H
+#endif // HPL_ATLAS_IMAGEMANAGER_H
+

@@ -23,6 +23,7 @@
 		8E11637026BF08840065E04C /* cgltf_write.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E11636F26BF08840065E04C /* cgltf_write.c */; };
 		8E11637526C1D4620065E04C /* MeshLoaderGLTF2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11637426C1D4620065E04C /* MeshLoaderGLTF2.cpp */; };
 		8E11637A26C1FDD40065E04C /* Files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11637926C1FDD40065E04C /* Files.cpp */; };
+		8E284F8F2B3B3213005A1628 /* AtlasImageManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E284F8E2B3B3213005A1628 /* AtlasImageManager.cpp */; };
 		8E3A5C19289D5991006D99BF /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A5C17289D5991006D99BF /* Log.cpp */; };
 		8E3A72852611363F0086F8ED /* Script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A72832611363F0086F8ED /* Script.cpp */; };
 		8E5BCD602AD5958700B64AD3 /* Material_Universal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BCD5E2AD5958700B64AD3 /* Material_Universal.cpp */; };
@@ -240,6 +241,8 @@
 		8E11637426C1D4620065E04C /* MeshLoaderGLTF2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MeshLoaderGLTF2.cpp; sourceTree = "<group>"; };
 		8E11637826C1FD520065E04C /* Files.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Files.h; sourceTree = "<group>"; };
 		8E11637926C1FDD40065E04C /* Files.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Files.cpp; sourceTree = "<group>"; };
+		8E284F8E2B3B3213005A1628 /* AtlasImageManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AtlasImageManager.cpp; sourceTree = "<group>"; };
+		8E284F902B3B3235005A1628 /* AtlasImageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AtlasImageManager.h; sourceTree = "<group>"; };
 		8E3A5C17289D5991006D99BF /* Log.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Log.cpp; sourceTree = "<group>"; };
 		8E3A5C18289D5991006D99BF /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		8E3A72832611363F0086F8ED /* Script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Script.cpp; path = sources/script/Script.cpp; sourceTree = SOURCE_ROOT; };
@@ -1078,6 +1081,8 @@
 				8E3A742326177A420086F8ED /* impl */,
 				DBF849D40AC76D5800BB15CD /* AnimationManager.cpp */,
 				DB27F0B40ACB9AB90054ACA3 /* AnimationManager.h */,
+				8E284F8E2B3B3213005A1628 /* AtlasImageManager.cpp */,
+				8E284F902B3B3235005A1628 /* AtlasImageManager.h */,
 				DBF849D50AC76D5800BB15CD /* ConfigFile.cpp */,
 				DB27F0B50ACB9AB90054ACA3 /* ConfigFile.h */,
 				DBF849D60AC76D5800BB15CD /* EntityLoader_Object.cpp */,
@@ -1318,6 +1323,7 @@
 				DBF84AAD0AC76F1E00BB15CD /* AINodeGenerator.cpp in Sources */,
 				DBF84AAE0AC76F1E00BB15CD /* Animation.cpp in Sources */,
 				8E11637526C1D4620065E04C /* MeshLoaderGLTF2.cpp in Sources */,
+				8E284F8F2B3B3213005A1628 /* AtlasImageManager.cpp in Sources */,
 				8E71FB1C2B0635D000A842AE /* imgui_impl_opengl3.cpp in Sources */,
 				DBF84AAF0AC76F1E00BB15CD /* AnimationManager.cpp in Sources */,
 				DBF84AB00AC76F1E00BB15CD /* AnimationState.cpp in Sources */,

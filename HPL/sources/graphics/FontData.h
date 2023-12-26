@@ -30,7 +30,6 @@
 
 namespace hpl {
 
-	class ImageManager;
 	class cTextureManager;
 	class cGraphicsDrawer;
 	class iTexture;

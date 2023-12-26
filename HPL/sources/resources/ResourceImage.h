@@ -33,7 +33,6 @@ namespace hpl {
 
 	class cResourceImage : public iResourceBase
 	{
-	friend class cImageManager;
 	public:
 		cResourceImage(tString asName, std::shared_ptr<cFrameBitmap> frameBmp, cRect2l aRect, cVector2l avSrcSize);
 
@@ -52,9 +51,6 @@ namespace hpl {
 		QuadUVs _uvs;
 		cRect2l mRect;
 	};
-
-	typedef std::vector<cResourceImage*> tResourceImageVec;
-	typedef tResourceImageVec::iterator tResourceImageVecIt;
 
 };
 

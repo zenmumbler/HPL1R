@@ -28,7 +28,7 @@ namespace hpl {
 
 	class cInput;
 	class cResources;
-	class cImageManager;
+	class cAtlasImageManager;
 	class cGpuProgramManager;
 	class cTextureManager;
 	class iLowLevelGraphics;
@@ -82,7 +82,7 @@ namespace hpl {
 		iLowLevelGraphics* GetLowLevelGraphics() { return _llGfx; }
 		cRenderer3D* GetRenderer() { return _renderer; }
 		cGraphicsDrawer* GetDrawer() { return _drawer; }
-		cImageManager* GetImageManager() { return _imageMgr; }
+		cAtlasImageManager* GetAtlasImageManager() { return _atlasImageMgr; }
 		cGpuProgramManager* GetShaderManager() { return _shaderMgr; }
 		cTextureManager* GetTextureManager() { return _textureMgr; }
 
@@ -131,7 +131,7 @@ namespace hpl {
 
 		//Modules that Game connnect to:
 		iLowLevelGraphics *_llGfx;
-		cImageManager *_imageMgr;
+		cAtlasImageManager *_atlasImageMgr;
 		cGpuProgramManager *_shaderMgr;
 		cTextureManager *_textureMgr;
 

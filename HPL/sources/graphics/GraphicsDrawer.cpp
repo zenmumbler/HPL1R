@@ -17,13 +17,15 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "system/STLHelpers.h"
-#include "system/Log.h"
 #include "graphics/GraphicsDrawer.h"
 #include "graphics/LowLevelGraphics.h"
+#include "resources/AtlasImageManager.h"
+#include "resources/GpuProgramManager.h"
 #include "resources/ResourceImage.h"
 #include "resources/FrameBitmap.h"
 #include "math/Math.h"
+#include "system/STLHelpers.h"
+#include "system/Log.h"
 
 namespace hpl {
 
@@ -35,9 +37,9 @@ namespace hpl {
 
 	const int BATCH_VERTEX_COUNT = 20'000;
 
-	cGraphicsDrawer::cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics,	cImageManager* apImageManager, cGpuProgramManager* programManager)
+	cGraphicsDrawer::cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics,	cAtlasImageManager* atlasImageMgr, cGpuProgramManager* programManager)
 	: mpLowLevelGraphics{apLowLevelGraphics}
-	, mpImageManager{apImageManager}
+	, _atlasImageMgr{atlasImageMgr}
 	, _programManager{programManager}
 	, m_setGfxBuffer{}
 	, _batch(BATCH_VERTEX_COUNT, apLowLevelGraphics)
@@ -56,7 +58,7 @@ namespace hpl {
 	cGraphicsDrawer::~cGraphicsDrawer()
 	{
 		for (auto obj : mvGfxObjects) {
-			mpImageManager->Destroy(obj->image);
+			_atlasImageMgr->Destroy(obj->image);
 		}
 		_programManager->Destroy(_program);
 		STLDeleteAll(mvGfxObjects);
@@ -255,7 +257,7 @@ namespace hpl {
 
 	const cGfxObject* cGraphicsDrawer::CreateGfxObject(const tString &asFileName, eGfxMaterial material)
 	{
-		cResourceImage* pImage = mpImageManager->CreateImage(asFileName);
+		cResourceImage* pImage = _atlasImageMgr->CreateImage(asFileName);
 		if (pImage == nullptr) {
 			Error("Couldn't load image '%s'!\n", asFileName.c_str());
 			return nullptr;
@@ -276,7 +278,7 @@ namespace hpl {
 
 	void cGraphicsDrawer::DestroyGfxObject(const cGfxObject* obj)
 	{
-		mpImageManager->Destroy(obj->image);
+		_atlasImageMgr->Destroy(obj->image);
 		STLFindAndDelete(mvGfxObjects, obj);
 	}
 

@@ -19,17 +19,18 @@
 #ifndef HPL_GRAPHICSDRAWER_H
 #define HPL_GRAPHICSDRAWER_H
 
-#include "resources/ImageManager.h"
-#include "resources/GpuProgramManager.h"
 #include "graphics/GraphicsTypes.h"
 #include "graphics/Bitmap.h"
 #include "graphics/GfxBatch.h"
-#include "graphics/GPUProgram.h"
 
 #include <set>
 
 namespace hpl {
 
+	class cResourceImage;
+	class iGpuProgram;
+	class cAtlasImageManager;
+	class cGpuProgramManager;
 	class iLowLevelGraphics;
 	class iTexture;
 
@@ -76,7 +77,7 @@ namespace hpl {
 	class cGraphicsDrawer
 	{
 	public:
-		cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics, cImageManager* apImageManager, cGpuProgramManager* programManager);
+		cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics, cAtlasImageManager* _atlasImageMgr, cGpuProgramManager* programManager);
 		~cGraphicsDrawer();
 
 		void Draw(GfxDrawable drawable);
@@ -89,13 +90,13 @@ namespace hpl {
 		const cGfxObject* CreateGfxObject(const tString &fileName, eGfxMaterial material);
 		void DestroyGfxObject(const cGfxObject* apObject);
 
-		cImageManager *GetImageManager() const { return mpImageManager; }
+		cAtlasImageManager *GetAtlasImageManager() const { return _atlasImageMgr; }
 
 	private:
 		void UseMaterial(eGfxMaterial material);
 
 		iLowLevelGraphics *mpLowLevelGraphics;
-		cImageManager *mpImageManager;
+		cAtlasImageManager *_atlasImageMgr;
 		cGpuProgramManager* _programManager;
 
 		tGfxBufferSet m_setGfxBuffer;
