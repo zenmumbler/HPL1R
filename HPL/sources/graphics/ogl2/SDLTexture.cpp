@@ -24,6 +24,7 @@
 #endif
 
 #include "graphics/Bitmap.h"
+#include "graphics/Image.h"
 #include "graphics/ogl2/SDLTexture.h"
 #include "graphics/impl/LowLevelGraphicsSDL.h"
 
@@ -47,16 +48,66 @@ namespace hpl {
 		}
 	}
 
-	static GLenum ColorFormatToGL(eColorDataFormat aFormat)
-	{
-		switch (aFormat) {
-			case eColorDataFormat_RGB:		return GL_RGB;
-			case eColorDataFormat_RGBA:		return GL_RGBA;
-			case eColorDataFormat_ALPHA:	return GL_RED;
-			case eColorDataFormat_BGR:		return GL_BGR;
-			case eColorDataFormat_BGRA:		return GL_BGRA;
-			default:						return 0;
+	struct GLPixelFormat {
+		GLenum format;
+		GLenum type; // GL_NONE for compressed formats
+	};
+
+	static GLPixelFormat PixelFormatToGL(PixelFormat format) {
+		switch (format) {
+			case PixelFormat::None: return { GL_NONE, GL_NONE };
+
+			case PixelFormat::RGB8: return { GL_RGB, GL_UNSIGNED_BYTE };
+			case PixelFormat::RGBA8: return { GL_RGBA, GL_UNSIGNED_BYTE };
+
+			case PixelFormat::SRGB8: return { GL_SRGB, GL_UNSIGNED_BYTE };
+			case PixelFormat::SRGBA8: return { GL_SRGB_ALPHA, GL_UNSIGNED_BYTE };
+
+			case PixelFormat::BGR8: return { GL_BGR, GL_UNSIGNED_BYTE };
+			case PixelFormat::BGRA8: return { GL_BGRA, GL_UNSIGNED_BYTE };
+
+			case PixelFormat::BC1_RGB: return { GL_COMPRESSED_RGB_S3TC_DXT1_EXT, GL_NONE };
+			case PixelFormat::BC1_RGBA: return { GL_COMPRESSED_RGBA_S3TC_DXT1_EXT, GL_NONE };
+			case PixelFormat::BC3_RGBA: return { GL_COMPRESSED_RGBA_S3TC_DXT3_EXT, GL_NONE };
+			case PixelFormat::BC5_RGBA: return { GL_COMPRESSED_RGBA_S3TC_DXT5_EXT, GL_NONE };
+
+			case PixelFormat::BC1_SRGB: return { GL_COMPRESSED_SRGB_S3TC_DXT1_EXT, GL_NONE };
+			case PixelFormat::BC1_SRGBA: return { GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT, GL_NONE };
+			case PixelFormat::BC3_SRGBA: return { GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT, GL_NONE };
+			case PixelFormat::BC5_SRGBA: return { GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT, GL_NONE };
 		}
+		// Warning("Unknown pixelformat %d", format);
+		return { GL_NONE, GL_NONE };
+	}
+
+	static GLenum PixelFormatToInternalGL(PixelFormat pf) {
+		switch (pf) {
+			case PixelFormat::None: return GL_NONE;
+
+			case PixelFormat::RGB8: return GL_RGB8;
+			case PixelFormat::RGBA8: return GL_RGBA8;
+
+			case PixelFormat::SRGB8: return GL_SRGB8;
+			case PixelFormat::SRGBA8: return GL_SRGB8_ALPHA8;
+
+			case PixelFormat::BGR8: return GL_RGB8;   // BGR formats are converted to RGB internally
+			case PixelFormat::BGRA8: return GL_RGBA8;
+
+			// compressed formats do not use this method
+			case PixelFormat::BC1_RGB:
+			case PixelFormat::BC1_RGBA:
+			case PixelFormat::BC3_RGBA:
+			case PixelFormat::BC5_RGBA:
+
+			case PixelFormat::BC1_SRGB:
+			case PixelFormat::BC1_SRGBA:
+			case PixelFormat::BC3_SRGBA:
+			case PixelFormat::BC5_SRGBA:
+				return GL_NONE;
+				break;
+		}
+		// Warning("Unknown pixelformat %d", format);
+		return GL_NONE;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -86,6 +137,46 @@ namespace hpl {
 	//////////////////////////////////////////////////////////////////////////
 	// PUBLIC METHODS
 	//////////////////////////////////////////////////////////////////////////
+
+	//-----------------------------------------------------------------------
+
+	bool cSDLTexture::CreateFromImage(const Image *image) {
+		// TODO: method incomplete, proto impl
+		GLenum target = InitCreation(0);
+
+		mlWidth = image->GetWidth();
+		mlHeight = image->GetHeight();
+		auto pixels = image->GetData();
+
+		auto format = image->GetPixelFormat();
+		auto [glFormat, glType] = PixelFormatToGL(format);
+
+		// Clear error flags
+		glGetError();
+
+		if (glType == GL_NONE) {
+			// compressed
+		}
+		else {
+			// uncompressed
+			auto internalFormat = PixelFormatToInternalGL(format);
+			if (mTarget == eTextureTarget_1D)
+				glTexImage1D(target, 0, internalFormat, mlWidth, 0, glFormat, glType, pixels);
+			else
+				glTexImage2D(target, 0, internalFormat, mlWidth, mlHeight, 0, glFormat, glType, pixels);
+		}
+
+		auto texErr = glGetError();
+		if (texErr != GL_NO_ERROR) {
+			Error("Could not upload texture to GL! Err: %d", texErr);
+			return false;
+		}
+
+		PostCreation(target);
+
+		return true;
+
+	}
 
 	//-----------------------------------------------------------------------
 
@@ -160,8 +251,7 @@ namespace hpl {
 			GLenum format;
 			GetSettings(bmp, channels, internalFormat, format);
 
-			glTexImage2D(target, 0, internalFormat, bmp.GetWidth(), bmp.GetHeight(),
-				0, format, GL_UNSIGNED_BYTE, bmp.GetRawData());
+			glTexImage2D(target, 0, internalFormat, bmp.GetWidth(), bmp.GetHeight(), 0, format, GL_UNSIGNED_BYTE, bmp.GetRawData());
 
 			mlWidth = bmp.GetWidth();
 			mlHeight = bmp.GetHeight();
@@ -175,67 +265,6 @@ namespace hpl {
 		PostCreation(GLTarget);
 
 		return true;
-	}
-
-	//-----------------------------------------------------------------------
-
-	bool cSDLTexture::CreateFromArray(unsigned char *apPixelData, int channels, const cVector3l &avSize)
-	{
-		if(mvTextureHandles.empty())
-		{
-			mvTextureHandles.resize(1);
-			glGenTextures(1,(GLuint *)&mvTextureHandles[0]);
-		}
-
-		GLenum GLTarget = InitCreation(0);
-
-		GLint internalFormat;
-		GLenum format;
-		switch (channels)
-		{
-			case 1: format = GL_RED;  internalFormat = GL_R8; break;
-			case 2: format = GL_RG;   internalFormat = GL_RG8; break;
-			case 3: format = GL_RGB;  internalFormat = GL_RGB8; break;
-			case 4: format = GL_RGBA; internalFormat = GL_RGBA8; break;
-		}
-
-		mlWidth = avSize.x;
-		mlHeight = avSize.y;
-		mlDepth = avSize.z;
-
-		if(!cMath::IsPow2(mlHeight) || !cMath::IsPow2(mlWidth) || !cMath::IsPow2(mlDepth))
-		{
-			Warning("Texture '%s' does not have a pow2 size!\n",msName.c_str());
-		}
-
-		if(mTarget == eTextureTarget_1D)
-		{
-			glTexImage1D(GLTarget, 0, internalFormat, mlWidth, 0, format, GL_UNSIGNED_BYTE, apPixelData);
-		}
-		else if(mTarget == eTextureTarget_2D)
-		{
-			glTexImage2D(GLTarget, 0, internalFormat, mlWidth, mlHeight, 0, format, GL_UNSIGNED_BYTE, apPixelData);
-		}
-		else if(mTarget == eTextureTarget_3D)
-		{
-			glTexImage3D(GLTarget, 0, internalFormat, mlWidth, mlHeight, mlDepth, 0, format, GL_UNSIGNED_BYTE, apPixelData);
-		}
-
-		PostCreation(GLTarget);
-
-		return true;
-	}
-
-
-	//-----------------------------------------------------------------------
-
-	void cSDLTexture::SetPixels2D(	int alLevel, const cVector2l& avOffset, const cVector2l& avSize,
-									eColorDataFormat aDataFormat, void *apPixelData)
-	{
-		if(mTarget != eTextureTarget_2D) return;
-
-		glTexSubImage2D(TextureTargetToGL(mTarget),alLevel,avOffset.x,avOffset.y, avSize.x,avSize.y,
-						ColorFormatToGL(aDataFormat),GL_UNSIGNED_BYTE,apPixelData);
 	}
 
 	//-----------------------------------------------------------------------

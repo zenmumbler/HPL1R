@@ -49,17 +49,6 @@ namespace hpl {
 
 	//-----------------------------------------
 
-	enum eColorDataFormat
-	{
-		eColorDataFormat_RGB,
-		eColorDataFormat_RGBA,
-		eColorDataFormat_ALPHA,
-		eColorDataFormat_BGR,
-		eColorDataFormat_BGRA
-	};
-
-	//---------------------------------------
-
 	enum eFontAlign
 	{
 		eFontAlign_Left,

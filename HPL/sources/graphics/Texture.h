@@ -66,6 +66,7 @@ namespace hpl {
 	//-----------------------------------------
 
 	class iLowLevelGraphics;
+	class Image;
 
 	class iTexture : public iResourceBase
 	{
@@ -75,13 +76,13 @@ namespace hpl {
 				mlWidth(0), mlHeight(0), mlDepth(1),
 				mTarget(aTarget),
 				mWrapS(eTextureWrap_Repeat), mWrapT(eTextureWrap_Repeat),mWrapR(eTextureWrap_Repeat),
-				mfFrameTime(1), mAnimMode(eTextureAnimMode_Loop), mlSizeLevel(0), mvMinLevelSize(16,16),
-				mfAnisotropyDegree(1.0f),mFilter(eTextureFilter_Bilinear){}
+				mfFrameTime(1), mAnimMode(eTextureAnimMode_Loop),
+				mfAnisotropyDegree(1.0f),mFilter(eTextureFilter_Bilinear)
+			{}
 
-		virtual ~iTexture(){}
+		virtual ~iTexture() = default;
 
-		void SetSizeLevel(unsigned int alLevel){mlSizeLevel = alLevel;}
-		void SetMinLevelSize(const cVector2l& avSize){ mvMinLevelSize = avSize;}
+		virtual bool CreateFromImage(const Image *image) = 0;
 
 		/**
 		 * Create a texture from a bitmap, work only for 1D, 2D and Rect targets. Doesn't work with render targets.
@@ -97,21 +98,17 @@ namespace hpl {
 		 */
 		virtual bool CreateCubeFromBitmapVec(const std::vector<Bitmap>& bitmaps)=0;
 		virtual bool CreateAnimFromBitmapVec(const std::vector<Bitmap>& bitmaps)=0;
-		virtual bool CreateFromArray(unsigned char *apPixelData, int alChannels, const cVector3l &avSize)=0;
 
 		virtual void Update(float afTimeStep)=0;
 
-		virtual void SetPixels2D(int alLevel, const cVector2l& avOffset, const cVector2l& avSize,
-								eColorDataFormat aDataFormat, void *apPixelData)=0;
+		virtual int GetHandle()=0;
+		virtual unsigned int GetCurrentLowlevelHandle()=0;
 
+		// SAMPLER STUFF -->
 		virtual void SetFilter(eTextureFilter aFilter)=0;
 		virtual void SetAnisotropyDegree(float afX)=0;
 		eTextureFilter GetFilter(){ return mFilter;}
 		float GetAnisotropyDegree(float afX){ return mfAnisotropyDegree;}
-
-		virtual int GetHandle()=0;
-
-		virtual bool HasAlpha(){return false;}
 
 		virtual void SetWrapAll(eTextureWrap aMode)=0;
 		virtual void SetWrapS(eTextureWrap aMode)=0;
@@ -121,17 +118,18 @@ namespace hpl {
 		eTextureWrap GetWrapS(){ return mWrapS;}
 		eTextureWrap GetWrapT(){ return mWrapT;}
 		eTextureWrap GetWrapR(){ return mWrapR;}
+		// <-- SAMPLER STUFF
 
-		void SetFrameTime(float afX){ mfFrameTime = afX;}
-		float GetFrameTime(){ return mfFrameTime;}
+		// ANIMATED TEXTURES ->
+		void SetFrameTime(float afX){ mfFrameTime = afX; }
+		float GetFrameTime(){ return mfFrameTime; }
 
-		eTextureAnimMode GetAnimMode() { return mAnimMode;}
-		void SetAnimMode(eTextureAnimMode aMode) {mAnimMode = aMode;};
+		eTextureAnimMode GetAnimMode() { return mAnimMode; }
+		void SetAnimMode(eTextureAnimMode aMode) { mAnimMode = aMode; }
+		// <-- ANIMATED TEXTURES
 
 		bool UsesMipMaps(){ return false; }
-		eTextureTarget GetTarget(){ return mTarget;}
-
-		virtual unsigned int GetCurrentLowlevelHandle()=0;
+		eTextureTarget GetTarget(){ return mTarget; }
 
 		int GetWidth() const { return mlWidth; }
 		int GetHeight() const { return mlHeight; }
@@ -143,16 +141,17 @@ namespace hpl {
 		int mlDepth;
 
 		eTextureTarget mTarget;
+
+		// filtering / sampler
 		eTextureWrap mWrapS;
 		eTextureWrap mWrapT;
 		eTextureWrap mWrapR;
 		eTextureFilter mFilter;
 		float mfAnisotropyDegree;
 
+		// animated
 		float mfFrameTime;
 		eTextureAnimMode mAnimMode;
-		unsigned int mlSizeLevel;
-		cVector2l mvMinLevelSize;
 	};
 
 }
