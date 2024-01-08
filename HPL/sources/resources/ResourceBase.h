@@ -26,13 +26,12 @@ namespace hpl {
 	class iResourceBase
 	{
 	public:
-		iResourceBase(tString asName);
+		iResourceBase(tString name);
 		virtual ~iResourceBase();
 
 		tString GetName(){return msName;}
 		unsigned long GetHandle(){return mlHandle;}
 		void SetHandle(unsigned long alHandle){mlHandle=alHandle;}
-		tString GetFilePath(){return msFilePath;}
 		unsigned long GetTime(){return mlTime;}
 
 		void SetLogDestruction(bool abX){ mbLogDestruction = abX;}
@@ -48,12 +47,10 @@ namespace hpl {
 	protected:
 		static bool mbLogCreateAndDelete;
 
+		tString msName;
 		unsigned long mlTime; //Time for creation.
-
 		unsigned int mlUserCount;
 		unsigned long mlHandle;
-		tString msName;
-		tString msFilePath;
 		bool mbLogDestruction;
 	};
 

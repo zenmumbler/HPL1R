@@ -30,11 +30,12 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iResourceBase::iResourceBase(tString asName){
+	iResourceBase::iResourceBase(tString name)
+		: msName{std::move(name)}
+	{
 		mlTime = (unsigned long)time(NULL);
 		mlHandle = 0;
 		mlUserCount =0;
-		msName = asName;
 		mbLogDestruction = false;
 	}
 
