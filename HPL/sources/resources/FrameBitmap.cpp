@@ -35,7 +35,6 @@ namespace hpl {
 	cFrameBitmap::cFrameBitmap(int width, int height, iTexture *texture, int index)
 	: mBitmap{width, height}, mpTexture{texture}
 	{
-		mBitmap.FillRect(cRect2l(0,0,0,0), cColor::White);
 		mlMinHole = 6;
 		mbIsFull = false;
 		_index = index;

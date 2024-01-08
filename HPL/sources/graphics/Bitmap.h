@@ -28,16 +28,6 @@ namespace hpl {
 		void DrawToBitmap(const Bitmap &dest, int x, int y) const;
 
 		/**
-		 * Copy rectangular area from passed source bitmap onto this one at origin.
-		 */
-		void CopyFromBitmap(const Bitmap &src, int x, int y, int w, int h) const;
-
-		/**
-		 * Draws a solid rect onto the bitmap. IF h and w is than w and how of the bitmap is used.
-		 */
-		void FillRect(const cRect2l &aRect, const cColor &aColor);
-
-		/**
 		 * Flip the R and G channels to convert between RGBA and BGRA format.
 		 */
 		void TogglePixelFormat();

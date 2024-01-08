@@ -122,33 +122,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void Bitmap::CopyFromBitmap(const Bitmap &src, int x, int y, int w, int h) const
-	{
-		if (x < 0 || y < 0 || w > width_ || h > height_) {
-			return;
-		}
-		if (data_ == nullptr || src.data_ == nullptr) {
-			return;
-		}
-
-		int sourceSkip = src.GetWidth() - w;
-		int destSkip = width_ - w;
-		auto srcBuffer = src.data_ + (y * src.GetWidth()) + x;
-		auto destBuffer = data_;
-
-		for (int col=0; col < h; col++)
-		{
-			for (int row=0; row < w; row++)
-			{
-				*destBuffer++ = *srcBuffer++;
-			}
-			srcBuffer += sourceSkip;
-			destBuffer += destSkip;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
 	void Bitmap::TogglePixelFormat() {
 		if (data_ == nullptr) {
 			return;
@@ -162,41 +135,6 @@ namespace hpl {
 				uint32_t pixOut = (pixIn & 0xff00ff00) | ((pixIn & 0xff) << 16) | ((pixIn & 0xff0000) >> 16);
 				*current++ = pixOut;
 			}
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void Bitmap::FillRect(const cRect2l &aRect, const cColor &aColor)
-	{
-		if (data_ == nullptr) {
-			return;
-		}
-
-		int x = aRect.x;
-		int y = aRect.y;
-		int w = aRect.w <= 0 ? width_ : aRect.w;
-		int h = aRect.h <= 0 ? height_ : aRect.h;
-
-		uint32_t col =
-			(static_cast<uint8_t>(aColor.r * 255.0f) << 24) |
-			(static_cast<uint8_t>(aColor.g * 255.0f) << 16) |
-			(static_cast<uint8_t>(aColor.b * 255.0f) << 8) |
-			(static_cast<uint8_t>(aColor.a * 255.0f));
-
-		int horizFill = std::min(width_ - x, w);
-		int vertFill = std::min(height_ - y, h);
-		int skip = width_ - horizFill;
-
-		auto pixels = data_ + (y * width_) + x;
-
-		for (int j=0; j < vertFill; j++)
-		{
-			for (int i=0; i < horizFill; i++)
-			{
-				*pixels = col;
-			}
-			pixels += skip;
 		}
 	}
 
