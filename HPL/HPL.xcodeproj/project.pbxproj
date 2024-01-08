@@ -24,6 +24,7 @@
 		8E11637526C1D4620065E04C /* MeshLoaderGLTF2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11637426C1D4620065E04C /* MeshLoaderGLTF2.cpp */; };
 		8E11637A26C1FDD40065E04C /* Files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E11637926C1FDD40065E04C /* Files.cpp */; };
 		8E284F8F2B3B3213005A1628 /* AtlasImageManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E284F8E2B3B3213005A1628 /* AtlasImageManager.cpp */; };
+		8E284F922B3B420E005A1628 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E284F912B3B420E005A1628 /* Image.cpp */; };
 		8E3A5C19289D5991006D99BF /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A5C17289D5991006D99BF /* Log.cpp */; };
 		8E3A72852611363F0086F8ED /* Script.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3A72832611363F0086F8ED /* Script.cpp */; };
 		8E5BCD602AD5958700B64AD3 /* Material_Universal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BCD5E2AD5958700B64AD3 /* Material_Universal.cpp */; };
@@ -243,6 +244,9 @@
 		8E11637926C1FDD40065E04C /* Files.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Files.cpp; sourceTree = "<group>"; };
 		8E284F8E2B3B3213005A1628 /* AtlasImageManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AtlasImageManager.cpp; sourceTree = "<group>"; };
 		8E284F902B3B3235005A1628 /* AtlasImageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AtlasImageManager.h; sourceTree = "<group>"; };
+		8E284F912B3B420E005A1628 /* Image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
+		8E284F932B3B4258005A1628 /* Image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		8E284F942B3DBD61005A1628 /* PixelFormat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PixelFormat.h; sourceTree = "<group>"; };
 		8E3A5C17289D5991006D99BF /* Log.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Log.cpp; sourceTree = "<group>"; };
 		8E3A5C18289D5991006D99BF /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		8E3A72832611363F0086F8ED /* Script.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Script.cpp; path = sources/script/Script.cpp; sourceTree = SOURCE_ROOT; };
@@ -445,7 +449,6 @@
 		DB294E120C11DC7C005DA55C /* CRC.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CRC.h; sourceTree = "<group>"; };
 		DB4AFB8C0D70768B00809E03 /* OpenALSoundEnvironment.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = OpenALSoundEnvironment.cpp; sourceTree = "<group>"; };
 		DB4AFBA10D7076EE00809E03 /* LowLevelSound.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = LowLevelSound.cpp; sourceTree = "<group>"; };
-		DB4AFBE10D70773700809E03 /* VideoStream.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = VideoStream.h; sourceTree = "<group>"; };
 		DB4AFBF10D70776800809E03 /* OpenALSoundEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = OpenALSoundEnvironment.h; sourceTree = "<group>"; };
 		DB4AFBF60D7077A100809E03 /* SoundEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SoundEnvironment.h; sourceTree = "<group>"; };
 		DB6E15BA0B6B173800203538 /* scriptstring.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = scriptstring.h; sourceTree = "<group>"; };
@@ -950,6 +953,8 @@
 				DBF8495F0AC76D5700BB15CD /* GraphicsDrawer.cpp */,
 				DB27F0320ACB9AB90054ACA3 /* GraphicsDrawer.h */,
 				DB27F0330ACB9AB90054ACA3 /* GraphicsTypes.h */,
+				8E284F912B3B420E005A1628 /* Image.cpp */,
+				8E284F932B3B4258005A1628 /* Image.h */,
 				DB27F0350ACB9AB90054ACA3 /* LowLevelGraphics.h */,
 				8E5BCD5E2AD5958700B64AD3 /* Material_Universal.cpp */,
 				8E5BCD5F2AD5958700B64AD3 /* Material_Universal.h */,
@@ -984,7 +989,7 @@
 				DB27F05D0ACB9AB90054ACA3 /* SubMesh.h */,
 				DB27F05E0ACB9AB90054ACA3 /* Texture.h */,
 				DB27F05F0ACB9AB90054ACA3 /* VertexBuffer.h */,
-				DB4AFBE10D70773700809E03 /* VideoStream.h */,
+				8E284F942B3DBD61005A1628 /* PixelFormat.h */,
 			);
 			name = graphics;
 			path = sources/graphics;
@@ -1359,6 +1364,7 @@
 				DBF84ACD0AC76F1E00BB15CD /* FontManager.cpp in Sources */,
 				DBF84ACE0AC76F1E00BB15CD /* FrameBitmap.cpp in Sources */,
 				DBF84AD00AC76F1E00BB15CD /* Frustum.cpp in Sources */,
+				8E284F922B3B420E005A1628 /* Image.cpp in Sources */,
 				DBF84AD10AC76F1E00BB15CD /* Game.cpp in Sources */,
 				DBF84AD20AC76F1E00BB15CD /* ScriptVar.cpp in Sources */,
 				DBF84AD50AC76F1E00BB15CD /* GPUProgram.cpp in Sources */,
