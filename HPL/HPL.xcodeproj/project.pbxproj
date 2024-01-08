@@ -809,6 +809,8 @@
 		8E3A742326177A420086F8ED /* impl */ = {
 			isa = PBXGroup;
 			children = (
+				8E9B9330289C623F007BC193 /* LoadImage.cpp */,
+				8E9B9331289C623F007BC193 /* LoadImage.h */,
 				DBF849940AC76D5800BB15CD /* MeshLoaderCollada.cpp */,
 				DB27F06E0ACB9AB90054ACA3 /* MeshLoaderCollada.h */,
 				DBF849950AC76D5800BB15CD /* MeshLoaderColladaHelpers.cpp */,
@@ -1125,8 +1127,6 @@
 				DB27F0CD0ACB9AB90054ACA3 /* SoundManager.h */,
 				DBF849EA0AC76D5800BB15CD /* TextureManager.cpp */,
 				DB27F0CE0ACB9AB90054ACA3 /* TextureManager.h */,
-				8E9B9330289C623F007BC193 /* LoadImage.cpp */,
-				8E9B9331289C623F007BC193 /* LoadImage.h */,
 			);
 			name = resources;
 			path = sources/resources;

@@ -20,7 +20,7 @@
 
 #include "graphics/GraphicsDrawer.h"
 #include "resources/TextureManager.h"
-#include "resources/LoadImage.h"
+#include "resources/impl/LoadImage.h"
 #include "system/Log.h"
 
 #include "tinyXML/tinyxml.h"
@@ -112,6 +112,8 @@ namespace hpl {
 			auto bmWidth = bitmap.GetWidth();
 			auto bmHeight = bitmap.GetHeight();
 
+			// TODO: [Rehatched]: just make a text shader and remove this
+			// TODO: [Rehatched]: This will be part of the text rendering extraction from FontData
 			// Set alpha to grayscale value of glyph pixel
 			auto pixelData = bitmap.GetRawData<uint8_t>();
 			for (int y=0; y < bmHeight; y++) {

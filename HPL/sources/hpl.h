@@ -99,7 +99,6 @@
 #include "resources/MeshLoader.h"
 #include "resources/ConfigFile.h"
 #include "resources/EntityLoader_Object.h"
-#include "resources/LoadImage.h"
 
 #include "scene/Scene.h"
 #include "scene/World3D.h"

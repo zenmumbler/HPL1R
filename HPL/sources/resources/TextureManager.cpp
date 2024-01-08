@@ -17,7 +17,7 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/TextureManager.h"
-#include "resources/LoadImage.h"
+#include "resources/impl/LoadImage.h"
 #include "resources/FileSearcher.h"
 #include "graphics/LowLevelGraphics.h"
 #include "graphics/Bitmap.h"

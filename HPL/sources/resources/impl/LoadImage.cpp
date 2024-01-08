@@ -2,7 +2,7 @@
  * 2022 by zenmumbler
  * This file is part of Rehatched
  */
-#include "resources/LoadImage.h"
+#include "resources/impl/LoadImage.h"
 #include "stb/stb_image.h"
 #include "system/Log.h"
 
@@ -34,13 +34,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void GetSupportedImageFormats(std::vector<tString> &alstFormats)
+	void GetSupportedImageFormats(std::vector<tString> &formats)
 	{
-		alstFormats.push_back("bmp");
-		alstFormats.push_back("jpg");
-		alstFormats.push_back("jpeg");
-		alstFormats.push_back("png");
-		alstFormats.push_back("tga");
+		formats.push_back("bmp");
+		formats.push_back("jpg");
+		formats.push_back("jpeg");
+		formats.push_back("png");
+		formats.push_back("tga");
 	}
 
 }
