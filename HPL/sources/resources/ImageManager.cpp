@@ -17,10 +17,7 @@
  * along with HPL1 Engine.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "resources/ImageManager.h"
-#include "resources/ResourceImage.h"
-#include "resources/FrameBitmap.h"
-#include "graphics/LowLevelGraphics.h"
-#include "resources/LoadImage.h"
+#include "graphics/Image.h"
 #include "system/Log.h"
 
 namespace hpl {
@@ -31,12 +28,10 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	cImageManager::cImageManager(iLowLevelGraphics *apLowLevelGraphics)
-	: iResourceManager{"image"}
+	cImageManager::cImageManager()
+		: iResourceManager{"image"}
 	{
-	   mpLowLevelGraphics = apLowLevelGraphics;
-
-	   GetSupportedImageFormats(mvFileFormats);
+	   GetSupportedImageFormatsX(_fileFormats);
 	}
 
 	//-----------------------------------------------------------------------
@@ -48,77 +43,24 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	iResourceBase* cImageManager::LoadAsset(const tString &name, const tString &fullPath) {
-		auto bitmap = LoadBitmapFile(fullPath);
-		if (! bitmap) {
-			Error("ImageManager Couldn't load bitmap '%s'\n", fullPath.c_str());
+		auto image = new Image{name};
+		if (! image->CreateFromFile(fullPath)) {
+			Error("ImageManager couldn't load '%s'\n", fullPath.c_str());
+			delete image;
 			return nullptr;
-		}
-
-		auto image = AddToFrame(name, *bitmap);
-		if (image == nullptr) {
-			Error("ImageManager couldn't frame image '%s'\n", name.c_str());
 		}
 		return image;
 	}
 
 	std::span<const tString> cImageManager::SupportedExtensions() const {
-		return { mvFileFormats };
+		return { _fileFormats };
 	}
 
 	//-----------------------------------------------------------------------
 
-	cResourceImage* cImageManager::CreateImage(const tString& name)
+	Image* cImageManager::CreateImage(const tString& name)
 	{
-		return static_cast<cResourceImage*>(GetOrLoadResource(name));
-	}
-
-	//-----------------------------------------------------------------------
-
-	//////////////////////////////////////////////////////////////////////////
-	// PRIVATE METHODS
-	//////////////////////////////////////////////////////////////////////////
-
-	//-----------------------------------------------------------------------
-
-	constexpr int FRAME_DIM = 512;
-	static int s_FrameIndex = 0;
-
-	cResourceImage *cImageManager::AddToFrame(const tString &name, const Bitmap &aBmp)
-	{
-		cRect2l destRect;
-
-		// check if any non-full frames can fit the bitmap
-		auto frameIter = std::find_if(_currentFrames.begin(), _currentFrames.end(), [&](std::shared_ptr<cFrameBitmap>& frame) {
-			destRect = frame->AddBitmap(aBmp);
-			return destRect.w > 0;
-		});
-
-		if (frameIter == _currentFrames.end()) {
-			// No applicable frame found. Append new frame to end, update iterator
-			Log("RESIMG: No frame with space found, creating new #%d\n", s_FrameIndex);
-			iTexture *pTex = mpLowLevelGraphics->CreateTexture(tString{"FRAME_"} + std::to_string(s_FrameIndex), eTextureTarget_2D);
-			auto newFrame = std::make_shared<cFrameBitmap>(FRAME_DIM, FRAME_DIM, pTex, s_FrameIndex++);
-			frameIter = _currentFrames.insert(_currentFrames.end(), newFrame);
-
-			// try inserting the bitmap into the new frame
-			destRect = newFrame->AddBitmap(aBmp);
-		}
-
-		if (destRect.w == 0) {
-			Error("ImageManager: unable to insert bitmap into any frame!\n");
-			return nullptr;
-		}
-
-		// Log("RESIMG: Added bitmap of size [%d, %d] to frame %d\n", aBmp.GetWidth(), aBmp.GetHeight(), (*frameIter)->GetIndex());
-		auto image = new cResourceImage(name, *frameIter, destRect, cVector2l{FRAME_DIM, FRAME_DIM});
-
-		// did this new image fill up the frame we found, then remove from active frames
-		if ((*frameIter)->IsFull()) {
-			// Log("RESIMG: Frame %d was full, no longer tracking\n", (*frameIter)->GetIndex());
-			_currentFrames.erase(frameIter);
-		}
-
-		return image;
+		return static_cast<Image*>(GetOrLoadResource(name));
 	}
 
 	//-----------------------------------------------------------------------

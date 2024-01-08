@@ -20,34 +20,25 @@
 #define HPL_IMAGEMANAGER_H
 
 #include "resources/ResourceManager.h"
-#include "resources/FrameBitmap.h"
-#include "math/MathTypes.h"
 
 namespace hpl {
 
-	class cResourceImage;
-	class iLowLevelGraphics;
-	class Bitmap;
+	class Image;
 
 	class cImageManager : public iResourceManager
 	{
 	public:
-		cImageManager(iLowLevelGraphics *apLowLevelGraphics);
+		cImageManager();
 
 		iResourceBase* LoadAsset(const tString &name, const tString &fullPath) override;
 		std::span<const tString> SupportedExtensions() const override;
 
-		cResourceImage* CreateImage(const tString& name);
+		Image* CreateImage(const tString& name);
 
 	private:
-		iLowLevelGraphics *mpLowLevelGraphics;
-		std::vector<std::shared_ptr<cFrameBitmap>> _currentFrames;
-
-		std::vector<tString> mvFileFormats;
-
-		cResourceImage *AddToFrame(const tString &name, const Bitmap &bmp);
+		std::vector<tString> _fileFormats;
 	};
 
-};
+}
 
 #endif // HPL_IMAGEMANAGER_H

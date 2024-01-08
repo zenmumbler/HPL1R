@@ -20,7 +20,7 @@
 #include "resources/ResourceImage.h"
 #include "resources/FrameBitmap.h"
 #include "graphics/LowLevelGraphics.h"
-#include "resources/LoadImage.h"
+#include "resources/impl/LoadImage.h"
 #include "system/Log.h"
 
 namespace hpl {
