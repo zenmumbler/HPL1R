@@ -27,6 +27,29 @@
 namespace hpl {
 
 	class Bitmap;
+	class Image;
+
+	enum class TextureType {
+		Single1D,
+		Single2D,
+		Anim2D,
+		CubeMap
+	};
+
+	struct TextureSpec {
+		TextureType type;
+		union {
+			struct {
+				Image *image;
+			} Single;
+			struct {
+				Image *top, *bottom, *left, *right, *front, *back;
+			} Cube;
+			struct {
+				std::vector<Image*> frames;
+			} Anim2D;
+		};
+	};
 
 	class cTextureManager : public iResourceManager, public iUpdateable
 	{
