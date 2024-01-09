@@ -13,7 +13,9 @@ namespace hpl {
 	enum class PixelFormat {
 		None,
 
-		// 8bpc Linear RGB
+		// 8bpc Linear
+		R8,
+		RG8,
 		RGB8,
 		RGBA8,
 
@@ -38,13 +40,22 @@ namespace hpl {
 		BC5_SRGBA,
 	};
 
+	constexpr int ChannelCountForPixelFormat(PixelFormat pf) {
+		if (pf == PixelFormat::R8) return 1;
+		if (pf == PixelFormat::RG8) return 2;
+		if (pf == PixelFormat::RGB8 || pf == PixelFormat::SRGB8 || pf == PixelFormat::BGR8) return 3;
+		if (pf == PixelFormat::BC1_RGB || pf == PixelFormat::BC1_SRGB) return 3;
+		return 4;
+	}
+
 	constexpr bool IsCompressedPixelFormat(PixelFormat pf) {
 		return pf >= PixelFormat::BC1_RGB;
 	}
 
 	constexpr int BytesPerPixel(PixelFormat pf) {
 		if (IsCompressedPixelFormat(pf)) return 0;
-		return 4;
+		// TODO: update when non-8bpc formats are added
+		return ChannelCountForPixelFormat(pf);
 	}
 
 }

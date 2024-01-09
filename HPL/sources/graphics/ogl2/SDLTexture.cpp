@@ -57,6 +57,8 @@ namespace hpl {
 		switch (format) {
 			case PixelFormat::None: return { GL_NONE, GL_NONE };
 
+			case PixelFormat::R8: return { GL_RED, GL_UNSIGNED_BYTE };
+			case PixelFormat::RG8: return { GL_RG, GL_UNSIGNED_BYTE };
 			case PixelFormat::RGB8: return { GL_RGB, GL_UNSIGNED_BYTE };
 			case PixelFormat::RGBA8: return { GL_RGBA, GL_UNSIGNED_BYTE };
 
@@ -84,6 +86,8 @@ namespace hpl {
 		switch (pf) {
 			case PixelFormat::None: return GL_NONE;
 
+			case PixelFormat::R8: return GL_R8;
+			case PixelFormat::RG8: return GL_RG8;
 			case PixelFormat::RGB8: return GL_RGB8;
 			case PixelFormat::RGBA8: return GL_RGBA8;
 
