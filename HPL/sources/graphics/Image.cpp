@@ -14,8 +14,10 @@ namespace hpl {
 	Image::Image(tString name)
 		: iResourceBase{std::move(name)}
 	{
-		_data = nullptr;
 		_format = PixelFormat::None;
+		_data = nullptr;
+		_byteSize = 0;
+		_levels = 1; // number of mipmaps in data
 		_width = 0;
 		_height = 0;
 	}
@@ -36,11 +38,12 @@ namespace hpl {
 			return false;
 		}
 		if (width <= 0 || height <= 0 || width > 32768 || height > 32768) {
+			Error("Image width and height must be 1 <= x <= 32768.");
 			return false;
 		}
 
-		auto byteSize = width * height * BytesPerPixel(format);
-		_data = static_cast<uint8_t*>(malloc(byteSize)); // use malloc to have compat with stbi allocs
+		_byteSize = width * height * BytesPerPixel(format);
+		_data = static_cast<uint8_t*>(malloc(_byteSize)); // use malloc to have compat with stbi allocs
 
 		_format = format;
 		_width = width;
@@ -61,8 +64,11 @@ namespace hpl {
 			return false;
 		}
 		else {
+			// TODO: make comp=0 and actually accept chans from stbi
 			int chans;
 			_data = stbi_load(fullPath.c_str(), &_width, &_height, &chans, 4);
+			_byteSize = chans * _width * _height;
+			_format = PixelFormat::SRGBA8;
 
 			if (_data == nullptr) {
 				Error("Failed to load image: %s!\n", fullPath.c_str());

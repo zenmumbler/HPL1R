@@ -148,22 +148,26 @@ namespace hpl {
 		// TODO: method incomplete, proto impl
 		GLenum target = InitCreation(0);
 
-		mlWidth = image->GetWidth();
-		mlHeight = image->GetHeight();
-		auto pixels = image->GetData();
+		mlWidth = image->GetWidth(0);
+		mlHeight = image->GetHeight(0);
+		auto pixels = image->GetData(0);
 
 		auto format = image->GetPixelFormat();
 		auto [glFormat, glType] = PixelFormatToGL(format);
+		auto internalFormat = PixelFormatToInternalGL(format);
 
 		// Clear error flags
 		glGetError();
 
 		if (glType == GL_NONE) {
 			// compressed
+			if (mTarget == eTextureTarget_1D)
+				glCompressedTexImage1D(GL_TEXTURE_1D, 0, internalFormat, mlWidth, 0, image->GetByteSize(0), pixels);
+			else
+				glCompressedTexImage2D(GL_TEXTURE_2D, 0, internalFormat, mlWidth, mlHeight, 0, image->GetByteSize(0), pixels);
 		}
 		else {
 			// uncompressed
-			auto internalFormat = PixelFormatToInternalGL(format);
 			if (mTarget == eTextureTarget_1D)
 				glTexImage1D(target, 0, internalFormat, mlWidth, 0, glFormat, glType, pixels);
 			else

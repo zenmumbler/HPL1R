@@ -20,14 +20,19 @@ namespace hpl {
 		bool CreateBlank(int width, int height, PixelFormat format);
 		bool CreateFromFile(const tString& fullPath);
 
-		const uint8_t *GetData() const { return _data; }
 		PixelFormat GetPixelFormat() const { return _format; }
-		int GetWidth() const { return _width; }
-		int GetHeight() const { return _height; }
+
+		const uint8_t *GetData(int level) const { return _data; }
+		int GetByteSize(int level) const { return _byteSize; }
+		int GetMipMapCount() { return _levels; }
+		int GetWidth(int level) const { return _width; }
+		int GetHeight(int level) const { return _height; }
 
 	private:
-		uint8_t *_data;
 		PixelFormat _format;
+		uint8_t *_data;
+		int _byteSize;
+		int _levels;
 		int _width;
 		int _height;
 	};
