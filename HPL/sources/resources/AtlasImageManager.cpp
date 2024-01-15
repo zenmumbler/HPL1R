@@ -79,7 +79,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	constexpr int FRAME_DIM = 512;
+	constexpr int FRAME_DIM = 1024;
 	static int s_FrameIndex = 0;
 
 	cResourceImage *cAtlasImageManager::AddToFrame(const tString &name, const Bitmap &aBmp)
