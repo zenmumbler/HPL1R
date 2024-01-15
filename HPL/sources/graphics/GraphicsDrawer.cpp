@@ -46,11 +46,20 @@ namespace hpl {
 	{
 		_program = _programManager->CreateProgram("Drawer.vert", "Drawer.frag");
 		if (! _program) {
-			FatalError("Could not create GraphicsDrawer program!");
+			FatalError("Could not create GraphicsDrawer main program!");
 		}
 		_program->Bind();
 		_program->SetTextureBindingIndex("image", 0);
 		_program->UnBind();
+
+		_glyphProgram = _programManager->CreateProgram("Drawer.vert", "Glyph.frag");
+		if (! _glyphProgram) {
+			FatalError("Could not create GraphicsDrawer glyph program!");
+		}
+		_glyphProgram->Bind();
+		_glyphProgram->SetTextureBindingIndex("image", 0);
+		_glyphProgram->UnBind();
+
 	}
 
 	//-----------------------------------------------------------------------
@@ -61,6 +70,7 @@ namespace hpl {
 			_atlasImageMgr->Destroy(obj->image);
 		}
 		_programManager->Destroy(_program);
+		_programManager->Destroy(_glyphProgram);
 		STLDeleteAll(mvGfxObjects);
 	}
 
@@ -151,6 +161,7 @@ namespace hpl {
 	void cGraphicsDrawer::UseMaterial(eGfxMaterial material) {
 		switch (material) {
 			case eGfxMaterial::DiffuseAlpha:
+			case eGfxMaterial::Text:
 				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_OneMinusSrcAlpha);
 				break;
 
@@ -175,14 +186,20 @@ namespace hpl {
 
 	void cGraphicsDrawer::Render()
 	{
-		//Set all states
+		// set all states
 		mpLowLevelGraphics->SetDepthTestActive(false);
 		mpLowLevelGraphics->SetBlendActive(true);
-		_program->Bind();
 
 		auto orthoDim = mpLowLevelGraphics->GetVirtualSize();
 		cMatrixf orthoProjection = cMatrixf::CreateOrtho(0, orthoDim.x, orthoDim.y, 0, -1, 1);
+
+		// selection of main and text programs
+		_glyphProgram->Bind();
+		_glyphProgram->SetMatrixf("projection", orthoProjection);
+		_program->Bind();
 		_program->SetMatrixf("projection", orthoProjection);
+		int currentProgram = 0;
+		iGpuProgram* programs[2] = { _program, _glyphProgram };
 
 		eGfxMaterial material = eGfxMaterial::Null;
 		iTexture *curTexture = nullptr;
@@ -208,13 +225,18 @@ namespace hpl {
 				renderBatch();
 
 				// apply changes to shader
-				if (newTexture != curTexture) {
-					curTexture = newTexture;
-					mpLowLevelGraphics->SetTexture(0, curTexture);
-				}
 				if (newMaterial != material) {
 					material = newMaterial;
 					UseMaterial(material);
+					int desiredProgram = newMaterial == eGfxMaterial::Text ? 1 : 0;
+					if (desiredProgram != currentProgram) {
+						programs[desiredProgram]->Bind();
+						currentProgram = desiredProgram;
+					}
+				}
+				if (newTexture != curTexture) {
+					curTexture = newTexture;
+					mpLowLevelGraphics->SetTexture(0, curTexture);
 				}
 			}
 
@@ -247,7 +269,7 @@ namespace hpl {
 		m_setGfxBuffer.clear();
 
 		//Reset all states
-		_program->UnBind();
+		programs[currentProgram]->UnBind();
 		mpLowLevelGraphics->SetDepthTestActive(true);
 		mpLowLevelGraphics->SetBlendActive(false);
 		UseMaterial(eGfxMaterial::Null);

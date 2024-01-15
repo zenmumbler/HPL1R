@@ -213,18 +213,18 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool cFrameBitmap::MinimumFit(cRect2l aSrc,cRect2l aDest)
+	bool cFrameBitmap::MinimumFit(cRect2l aSrc, cRect2l aDest)
 	{
-		if(aDest.w-aSrc.w<mlMinHole && aDest.h-aSrc.h<mlMinHole) return true;
-
-		return false;
+		return
+			aDest.w - aSrc.w < mlMinHole &&
+			aDest.h - aSrc.h < mlMinHole;
 	}
 
 	//-----------------------------------------------------------------------
 
 	bool cFrameBitmap::FlushToTexture()
 	{
-		if(mbIsUpdated)
+		if (mbIsUpdated)
 		{
 			// Log("FB: updating texture #%d\n", _index);
 			mpTexture->CreateFromBitmap(mBitmap);

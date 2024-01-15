@@ -40,7 +40,8 @@ namespace hpl {
 
 		DiffuseAlpha,
 		DiffuseAdditive,
-		Smoke
+		Smoke,
+		Text,
    };
 
 	struct cGfxObject {
@@ -101,7 +102,7 @@ namespace hpl {
 
 		tGfxBufferSet m_setGfxBuffer;
 		cGfxBatch _batch;
-		iGpuProgram *_program;
+ 		iGpuProgram *_program, *_glyphProgram;
 		std::vector<const cGfxObject*> mvGfxObjects;
 	};
 

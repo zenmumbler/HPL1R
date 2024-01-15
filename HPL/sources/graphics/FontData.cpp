@@ -89,43 +89,13 @@ namespace hpl {
 
 		_glyphs.reserve(500);
 
-
 		////////////////////////////////////////////
-		// Load bitmaps
+		// Load page textures
 		TiXmlElement *pPagesRootElem = pRootElem->FirstChildElement("pages");
-
-		TiXmlElement *pPageElem = pPagesRootElem->FirstChildElement("page");
-		for (int pageNumber = 0; pPageElem != NULL; pPageElem = pPageElem->NextSiblingElement("page"), pageNumber++)
+		for (auto page = pPagesRootElem->FirstChildElement("page"); page != nullptr; page = page->NextSiblingElement("page"))
 		{
-			tString sFileName = pPageElem->Attribute("file");
-			tString sFilePath = cString::SetFilePath(sFileName,sPath);
-
-			auto maybeBitmap = LoadBitmapFile(sFilePath);
-			if (! maybeBitmap)
-			{
-				Error("Couldn't load bitmap %s for FNT file '%s'\n", sFilePath.c_str(), asFileName.c_str());
-				delete pXmlDoc;
-				return false;
-			}
-
-			auto bitmap = std::move(*maybeBitmap);
-			auto bmWidth = bitmap.GetWidth();
-			auto bmHeight = bitmap.GetHeight();
-
-			// TODO: [Rehatched]: just make a text shader and remove this
-			// TODO: [Rehatched]: This will be part of the text rendering extraction from FontData
-			// Set alpha to grayscale value of glyph pixel
-			auto pixelData = bitmap.GetRawData<uint8_t>();
-			for (int y=0; y < bmHeight; y++) {
-				for (int x=0; x < bmWidth; x++) {
-					pixelData[3] = pixelData[0];
-					pixelData += 4;
-				}
-			}
-
-			// create page texture and add to the list
-			auto pageTexture = _textureMgr->CreateFromBitmap(GetName() + "_page" + std::to_string(pageNumber), bitmap);
-			_pages.push_back(pageTexture);
+			tString fileName = page->Attribute("file");
+			_pages.push_back(_textureMgr->Create2D(fileName));
 		}
 
 		////////////////////////////////////////////
@@ -227,7 +197,8 @@ namespace hpl {
 					.mvPosition = vPos + vOffset,
 					.mvSize = vSize,
 					.mColor = aCol,
-					.uvs = glyph.uvs
+					.uvs = glyph.uvs,
+					.material = eGfxMaterial::Text
 				});
 
 				vPos.x += glyph.xAdvance * avSize.x;
