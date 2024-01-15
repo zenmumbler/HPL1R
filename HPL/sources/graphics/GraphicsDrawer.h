@@ -91,19 +91,19 @@ namespace hpl {
 		const cGfxObject* CreateGfxObject(const tString &fileName, eGfxMaterial material);
 		void DestroyGfxObject(const cGfxObject* apObject);
 
-		cAtlasImageManager *GetAtlasImageManager() const { return _atlasImageMgr; }
+		cAtlasImageManager *GetAtlasImageManager() const { return atlasImageMgr_; }
 
 	private:
 		void UseMaterial(eGfxMaterial material);
 
-		iLowLevelGraphics *mpLowLevelGraphics;
-		cAtlasImageManager *_atlasImageMgr;
-		cGpuProgramManager* _programManager;
+		iLowLevelGraphics *llGfx_;
+		cAtlasImageManager *atlasImageMgr_;
+		cGpuProgramManager* programManager_;
 
-		tGfxBufferSet m_setGfxBuffer;
-		cGfxBatch _batch;
- 		iGpuProgram *_program, *_glyphProgram;
-		std::vector<const cGfxObject*> mvGfxObjects;
+		tGfxBufferSet gfxBuffers_;
+		cGfxBatch batch_;
+ 		iGpuProgram *program_, *glyphProgram_;
+		std::vector<const cGfxObject*> gfxObjects_;
 	};
 
 };

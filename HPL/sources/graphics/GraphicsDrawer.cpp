@@ -38,27 +38,27 @@ namespace hpl {
 	const int BATCH_VERTEX_COUNT = 20'000;
 
 	cGraphicsDrawer::cGraphicsDrawer(iLowLevelGraphics *apLowLevelGraphics,	cAtlasImageManager* atlasImageMgr, cGpuProgramManager* programManager)
-	: mpLowLevelGraphics{apLowLevelGraphics}
-	, _atlasImageMgr{atlasImageMgr}
-	, _programManager{programManager}
-	, m_setGfxBuffer{}
-	, _batch(BATCH_VERTEX_COUNT, apLowLevelGraphics)
+	: llGfx_{apLowLevelGraphics}
+	, atlasImageMgr_{atlasImageMgr}
+	, programManager_{programManager}
+	, gfxBuffers_{}
+	, batch_(BATCH_VERTEX_COUNT, apLowLevelGraphics)
 	{
-		_program = _programManager->CreateProgram("Drawer.vert", "Drawer.frag");
-		if (! _program) {
+		program_ = programManager_->CreateProgram("Drawer.vert", "Drawer.frag");
+		if (! program_) {
 			FatalError("Could not create GraphicsDrawer main program!");
 		}
-		_program->Bind();
-		_program->SetTextureBindingIndex("image", 0);
-		_program->UnBind();
+		program_->Bind();
+		program_->SetTextureBindingIndex("image", 0);
+		program_->UnBind();
 
-		_glyphProgram = _programManager->CreateProgram("Drawer.vert", "Glyph.frag");
-		if (! _glyphProgram) {
+		glyphProgram_ = programManager_->CreateProgram("Drawer.vert", "Glyph.frag");
+		if (! glyphProgram_) {
 			FatalError("Could not create GraphicsDrawer glyph program!");
 		}
-		_glyphProgram->Bind();
-		_glyphProgram->SetTextureBindingIndex("image", 0);
-		_glyphProgram->UnBind();
+		glyphProgram_->Bind();
+		glyphProgram_->SetTextureBindingIndex("image", 0);
+		glyphProgram_->UnBind();
 
 	}
 
@@ -66,12 +66,12 @@ namespace hpl {
 
 	cGraphicsDrawer::~cGraphicsDrawer()
 	{
-		for (auto obj : mvGfxObjects) {
-			_atlasImageMgr->Destroy(obj->image);
+		for (auto obj : gfxObjects_) {
+			atlasImageMgr_->Destroy(obj->image);
 		}
-		_programManager->Destroy(_program);
-		_programManager->Destroy(_glyphProgram);
-		STLDeleteAll(mvGfxObjects);
+		programManager_->Destroy(program_);
+		programManager_->Destroy(glyphProgram_);
+		STLDeleteAll(gfxObjects_);
 	}
 
 	//-----------------------------------------------------------------------
@@ -118,13 +118,13 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	void cGraphicsDrawer::Draw(GfxDrawable drawable) {
-		m_setGfxBuffer.insert(drawable);
+		gfxBuffers_.insert(drawable);
 	}
 
 	//-----------------------------------------------------------------------
 
 	void cGraphicsDrawer::DrawTexture(iTexture *apTex, const cVector3f& avPos, const cVector2f& avSize, const cColor &aColor) {
-		m_setGfxBuffer.insert({
+		gfxBuffers_.insert({
 			.texture = apTex,
 			.mvPosition = avPos,
 			.mvSize = avSize,
@@ -139,7 +139,7 @@ namespace hpl {
 	{
 		FlushImage(apObject);
 
-		m_setGfxBuffer.insert({
+		gfxBuffers_.insert({
 			.texture = apObject->image->GetTexture(),
 			.material = apObject->material,
 			.mvPosition = avPos,
@@ -162,19 +162,19 @@ namespace hpl {
 		switch (material) {
 			case eGfxMaterial::DiffuseAlpha:
 			case eGfxMaterial::Text:
-				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_OneMinusSrcAlpha);
+				llGfx_->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_OneMinusSrcAlpha);
 				break;
 
 			case eGfxMaterial::DiffuseAdditive:
-				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_One);
+				llGfx_->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_One);
 				break;
 
 			case eGfxMaterial::Smoke:
-				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_Zero, eBlendFunc_OneMinusSrcColor);
+				llGfx_->SetBlendFunc(eBlendFunc_Zero, eBlendFunc_OneMinusSrcColor);
 				break;
 
 			case eGfxMaterial::Null:
-				mpLowLevelGraphics->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_OneMinusSrcAlpha);
+				llGfx_->SetBlendFunc(eBlendFunc_SrcAlpha, eBlendFunc_OneMinusSrcAlpha);
 				break;
 				
 			default:
@@ -187,35 +187,35 @@ namespace hpl {
 	void cGraphicsDrawer::Render()
 	{
 		// set all states
-		mpLowLevelGraphics->SetDepthTestActive(false);
-		mpLowLevelGraphics->SetBlendActive(true);
+		llGfx_->SetDepthTestActive(false);
+		llGfx_->SetBlendActive(true);
 
-		auto orthoDim = mpLowLevelGraphics->GetVirtualSize();
+		auto orthoDim = llGfx_->GetVirtualSize();
 		cMatrixf orthoProjection = cMatrixf::CreateOrtho(0, orthoDim.x, orthoDim.y, 0, -1, 1);
 
 		// selection of main and text programs
-		_glyphProgram->Bind();
-		_glyphProgram->SetMatrixf("projection", orthoProjection);
-		_program->Bind();
-		_program->SetMatrixf("projection", orthoProjection);
+		glyphProgram_->Bind();
+		glyphProgram_->SetMatrixf("projection", orthoProjection);
+		program_->Bind();
+		program_->SetMatrixf("projection", orthoProjection);
 		int currentProgram = 0;
-		iGpuProgram* programs[2] = { _program, _glyphProgram };
+		iGpuProgram* programs[2] = { program_, glyphProgram_ };
 
 		eGfxMaterial material = eGfxMaterial::Null;
 		iTexture *curTexture = nullptr;
 		
 		const auto renderBatch = [this]() {
-			if (_batch.HasContent()) {
+			if (batch_.HasContent()) {
 				// TODO: clean this up when upgrading to GL Core
-				_batch.vertexBuffer->UpdateData(0xff, true);
-				_batch.vertexBuffer->Bind();
-				_batch.vertexBuffer->Draw();
-				_batch.vertexBuffer->UnBind();
-				_batch.Clear();
+				batch_.vertexBuffer->UpdateData(0xff, true);
+				batch_.vertexBuffer->Bind();
+				batch_.vertexBuffer->Draw();
+				batch_.vertexBuffer->UnBind();
+				batch_.Clear();
 			}
 		};
 
-		for (const auto &pObj : m_setGfxBuffer)
+		for (const auto &pObj : gfxBuffers_)
 		{
 			// get next settings
 			auto newMaterial = pObj.material;
@@ -236,7 +236,7 @@ namespace hpl {
 				}
 				if (newTexture != curTexture) {
 					curTexture = newTexture;
-					mpLowLevelGraphics->SetTexture(0, curTexture);
+					llGfx_->SetTexture(0, curTexture);
 				}
 			}
 
@@ -253,25 +253,25 @@ namespace hpl {
 			};
 
 			// add quad as 2 triangles
-			_batch.AddVertex(vPos[0], color, pObj.uvs.uv0);
-			_batch.AddVertex(vPos[1], color, pObj.uvs.uv1);
-			_batch.AddVertex(vPos[2], color, pObj.uvs.uv2);
+			batch_.AddVertex(vPos[0], color, pObj.uvs.uv0);
+			batch_.AddVertex(vPos[1], color, pObj.uvs.uv1);
+			batch_.AddVertex(vPos[2], color, pObj.uvs.uv2);
 
-			_batch.AddVertex(vPos[2], color, pObj.uvs.uv2);
-			_batch.AddVertex(vPos[3], color, pObj.uvs.uv3);
-			_batch.AddVertex(vPos[0], color, pObj.uvs.uv0);
+			batch_.AddVertex(vPos[2], color, pObj.uvs.uv2);
+			batch_.AddVertex(vPos[3], color, pObj.uvs.uv3);
+			batch_.AddVertex(vPos[0], color, pObj.uvs.uv0);
 		}
 		
 		// render final batch, if any
 		renderBatch();
 
 		//Clear the buffer of objects.
-		m_setGfxBuffer.clear();
+		gfxBuffers_.clear();
 
 		//Reset all states
 		programs[currentProgram]->UnBind();
-		mpLowLevelGraphics->SetDepthTestActive(true);
-		mpLowLevelGraphics->SetBlendActive(false);
+		llGfx_->SetDepthTestActive(true);
+		llGfx_->SetBlendActive(false);
 		UseMaterial(eGfxMaterial::Null);
 	}
 
@@ -279,7 +279,7 @@ namespace hpl {
 
 	const cGfxObject* cGraphicsDrawer::CreateGfxObject(const tString &asFileName, eGfxMaterial material)
 	{
-		cResourceImage* pImage = _atlasImageMgr->CreateImage(asFileName);
+		cResourceImage* pImage = atlasImageMgr_->CreateImage(asFileName);
 		if (pImage == nullptr) {
 			Error("Couldn't load image '%s'!\n", asFileName.c_str());
 			return nullptr;
@@ -292,7 +292,7 @@ namespace hpl {
 			.uvs = pImage->GetUVs(),
 		};
 
-		mvGfxObjects.push_back(go);
+		gfxObjects_.push_back(go);
 		return go;
 	}
 
@@ -300,8 +300,8 @@ namespace hpl {
 
 	void cGraphicsDrawer::DestroyGfxObject(const cGfxObject* obj)
 	{
-		_atlasImageMgr->Destroy(obj->image);
-		STLFindAndDelete(mvGfxObjects, obj);
+		atlasImageMgr_->Destroy(obj->image);
+		STLFindAndDelete(gfxObjects_, obj);
 	}
 
 	//-----------------------------------------------------------------------
