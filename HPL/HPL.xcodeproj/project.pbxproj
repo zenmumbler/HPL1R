@@ -407,7 +407,6 @@
 		DB27F0C70ACB9AB90054ACA3 /* ResourceImage.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ResourceImage.h; sourceTree = "<group>"; };
 		DB27F0C80ACB9AB90054ACA3 /* ResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ResourceManager.h; sourceTree = "<group>"; };
 		DB27F0C90ACB9AB90054ACA3 /* Resources.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Resources.h; sourceTree = "<group>"; };
-		DB27F0CA0ACB9AB90054ACA3 /* ResourcesTypes.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ResourcesTypes.h; sourceTree = "<group>"; };
 		DB27F0CB0ACB9AB90054ACA3 /* ScriptManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ScriptManager.h; sourceTree = "<group>"; };
 		DB27F0CC0ACB9AB90054ACA3 /* SoundEntityManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SoundEntityManager.h; sourceTree = "<group>"; };
 		DB27F0CD0ACB9AB90054ACA3 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
@@ -936,8 +935,8 @@
 				DBCEE5A20B4B332E0088A7E3 /* Beam.h */,
 				DBF849570AC76D5700BB15CD /* BillBoard.cpp */,
 				DB27F0290ACB9AB90054ACA3 /* BillBoard.h */,
-				DB27F02A0ACB9AB90054ACA3 /* Bitmap.h */,
 				8E77420528989E02008E9570 /* Bitmap.cpp */,
+				DB27F02A0ACB9AB90054ACA3 /* Bitmap.h */,
 				DBF849580AC76D5700BB15CD /* Bone.cpp */,
 				DB27F02B0ACB9AB90054ACA3 /* Bone.h */,
 				DBF849590AC76D5700BB15CD /* BoneState.cpp */,
@@ -1123,7 +1122,6 @@
 				DB27F0C80ACB9AB90054ACA3 /* ResourceManager.h */,
 				DBF849E60AC76D5800BB15CD /* Resources.cpp */,
 				DB27F0C90ACB9AB90054ACA3 /* Resources.h */,
-				DB27F0CA0ACB9AB90054ACA3 /* ResourcesTypes.h */,
 				DBF849E70AC76D5800BB15CD /* ScriptManager.cpp */,
 				DB27F0CB0ACB9AB90054ACA3 /* ScriptManager.h */,
 				DBF849E80AC76D5800BB15CD /* SoundEntityManager.cpp */,
