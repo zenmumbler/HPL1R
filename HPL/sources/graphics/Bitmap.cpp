@@ -4,6 +4,7 @@
  */
 
 #include "graphics/Bitmap.h"
+#include <algorithm>
 
 namespace hpl {
 
@@ -117,24 +118,6 @@ namespace hpl {
 			}
 			srcBuffer += sourceSkip;
 			destBuffer += destSkip;
-		}
-	}
-
-	//-----------------------------------------------------------------------
-
-	void Bitmap::TogglePixelFormat() {
-		if (data_ == nullptr) {
-			return;
-		}
-
-		uint32_t* current = data_;
-		for (int y = 0; y < height_; ++y) {
-			for (int x = 0; x < width_; ++x) {
-				uint32_t pixIn = *current;
-				// flip R and G RGBA -> BGRA
-				uint32_t pixOut = (pixIn & 0xff00ff00) | ((pixIn & 0xff) << 16) | ((pixIn & 0xff0000) >> 16);
-				*current++ = pixOut;
-			}
 		}
 	}
 

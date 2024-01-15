@@ -6,8 +6,6 @@
 #ifndef HPL_PIXELFORMAT_H
 #define HPL_PIXELFORMAT_H
 
-#include <cstddef>
-
 namespace hpl {
 
 	enum class PixelFormat {

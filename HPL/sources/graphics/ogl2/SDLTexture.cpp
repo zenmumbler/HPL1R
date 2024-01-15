@@ -523,12 +523,12 @@ namespace hpl {
 		if(channels==4)
 		{
 			internalFormat = GL_RGBA8;
-			format = GL_BGRA;
+			format = GL_RGBA;
 		}
 		else if(channels==3)
 		{
 			internalFormat = GL_RGB8;
-			format = GL_BGR;
+			format = GL_RGB;
 		}
 		else if(channels==1)
 		{

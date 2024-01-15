@@ -5,8 +5,7 @@
 #ifndef HPL_BITMAP_H
 #define HPL_BITMAP_H
 
-#include "math/MathTypes.h"
-#include "graphics/Color.h"
+#include <cstdint>
 
 namespace hpl {
 
@@ -27,15 +26,9 @@ namespace hpl {
 		 */
 		void DrawToBitmap(const Bitmap &dest, int x, int y) const;
 
-		/**
-		 * Flip the R and G channels to convert between RGBA and BGRA format.
-		 */
-		void TogglePixelFormat();
-
 		template <typename T=uint8_t>
 		T* GetRawData() const { return reinterpret_cast<T*>(data_); }
 
-		int GetBPP() const { return 32; }
 		int GetNumChannels() const { return 4; }
 
 		int GetHeight() const { return height_; }

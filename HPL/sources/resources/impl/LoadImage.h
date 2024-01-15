@@ -5,10 +5,11 @@
 #ifndef HPL_LOADIMAGE_H
 #define HPL_LOADIMAGE_H
 
-#include <optional>
-#include <vector>
 #include "system/String.h"
 #include "graphics/Bitmap.h"
+
+#include <optional>
+#include <vector>
 
 namespace hpl {
 

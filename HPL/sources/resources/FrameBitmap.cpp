@@ -33,8 +33,9 @@ namespace hpl {
 	//-----------------------------------------------------------------------
 
 	cFrameBitmap::cFrameBitmap(int width, int height, iTexture *texture, int index)
-	: mBitmap{width, height}, mpTexture{texture}
+		: mpTexture{texture}
 	{
+		mBitmap.Create(width, height);
 		mlMinHole = 6;
 		mbIsFull = false;
 		_index = index;

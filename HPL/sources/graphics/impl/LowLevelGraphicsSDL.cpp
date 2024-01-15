@@ -277,7 +277,8 @@ namespace hpl {
 	{
 		glFinish();
 
-		Bitmap bmp{mvScreenSize.x, mvScreenSize.y};
+		Bitmap bmp;
+		bmp.Create(mvScreenSize.x, mvScreenSize.y);
 
 		auto pixels = bmp.GetRawData<unsigned char>();
 
