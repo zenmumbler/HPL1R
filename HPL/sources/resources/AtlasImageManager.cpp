@@ -35,7 +35,7 @@ namespace hpl {
 	: iResourceManager{"atlas_image"}
 	{
 	   _llGfx = llGfx;
-	   GetSupportedImageFormats(_fileFormats);
+	   GetSupportedBitmapFormats(_fileFormats);
 	}
 
 	//-----------------------------------------------------------------------

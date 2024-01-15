@@ -33,7 +33,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	void GetSupportedImageFormats(std::vector<tString> &formats)
+	void GetSupportedBitmapFormats(std::vector<tString> &formats)
 	{
 		formats.push_back("bmp");
 		formats.push_back("jpg");

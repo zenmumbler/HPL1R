@@ -46,7 +46,7 @@ namespace hpl {
 	{
 		_llGfx = llGfx;
 
-		GetSupportedImageFormats(mvFileFormats);
+		GetSupportedBitmapFormats(mvFileFormats);
 	}
 
 	//-----------------------------------------------------------------------
