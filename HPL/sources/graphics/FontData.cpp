@@ -20,7 +20,7 @@
 
 #include "graphics/GraphicsDrawer.h"
 #include "resources/TextureManager.h"
-#include "resources/impl/LoadImage.h"
+#include "resources/impl/LoadBitmapFile.h"
 #include "system/Log.h"
 
 #include "tinyXML/tinyxml.h"

@@ -37,7 +37,7 @@
 		8E84E79626055B2500DC6065 /* OALSoundChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E79526055B2500DC6065 /* OALSoundChannel.cpp */; };
 		8E84E79C260819F800DC6065 /* WAVFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E84E79B260819F800DC6065 /* WAVFile.cpp */; };
 		8E9728DF254CBBAF0033415B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9728DE254CBBAF0033415B /* SDL2.framework */; };
-		8E9B9332289C623F007BC193 /* LoadImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B9330289C623F007BC193 /* LoadImage.cpp */; };
+		8E9B9332289C623F007BC193 /* LoadBitmapFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B9330289C623F007BC193 /* LoadBitmapFile.cpp */; };
 		8EA48718260FFCD3000D1AB7 /* scriptstdstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF849AD0AC76D5800BB15CD /* scriptstdstring.cpp */; };
 		8EA4871E2610A67C000D1AB7 /* scriptarray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4871B2610A67B000D1AB7 /* scriptarray.cpp */; };
 		8EA4871F2610A67C000D1AB7 /* scriptstdstring_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */; };
@@ -259,6 +259,7 @@
 		8E71FB1A2B0635D000A842AE /* imgui_impl_opengl3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_opengl3.h; sourceTree = "<group>"; };
 		8E71FB1B2B0635D000A842AE /* imgui_impl_opengl3_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_opengl3_loader.h; sourceTree = "<group>"; };
 		8E77420528989E02008E9570 /* Bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
+		8E78CB322B4DAF3A0083707F /* Sampler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sampler.h; sourceTree = "<group>"; };
 		8E7FAB6B2B0011040069D40B /* STLHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STLHelpers.h; sourceTree = "<group>"; };
 		8E815946260C1036001CBF63 /* GLSLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
 		8E815947260C1127001CBF63 /* GLSLProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLProgram.cpp; sourceTree = "<group>"; };
@@ -275,8 +276,8 @@
 		8E9728CF254CB92F0033415B /* scripthelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripthelper.h; sourceTree = "<group>"; };
 		8E9728DE254CBBAF0033415B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
 		8E9787602617A35A00C4395C /* MemoryPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemoryPool.h; sourceTree = "<group>"; };
-		8E9B9330289C623F007BC193 /* LoadImage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LoadImage.cpp; sourceTree = "<group>"; };
-		8E9B9331289C623F007BC193 /* LoadImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoadImage.h; sourceTree = "<group>"; };
+		8E9B9330289C623F007BC193 /* LoadBitmapFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LoadBitmapFile.cpp; sourceTree = "<group>"; };
+		8E9B9331289C623F007BC193 /* LoadBitmapFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoadBitmapFile.h; sourceTree = "<group>"; };
 		8EA4871B2610A67B000D1AB7 /* scriptarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptarray.cpp; sourceTree = "<group>"; };
 		8EA4871C2610A67B000D1AB7 /* scriptarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptarray.h; sourceTree = "<group>"; };
 		8EA4871D2610A67C000D1AB7 /* scriptstdstring_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scriptstdstring_utils.cpp; sourceTree = "<group>"; };
@@ -811,8 +812,8 @@
 		8E3A742326177A420086F8ED /* impl */ = {
 			isa = PBXGroup;
 			children = (
-				8E9B9330289C623F007BC193 /* LoadImage.cpp */,
-				8E9B9331289C623F007BC193 /* LoadImage.h */,
+				8E9B9330289C623F007BC193 /* LoadBitmapFile.cpp */,
+				8E9B9331289C623F007BC193 /* LoadBitmapFile.h */,
 				DBF849940AC76D5800BB15CD /* MeshLoaderCollada.cpp */,
 				DB27F06E0ACB9AB90054ACA3 /* MeshLoaderCollada.h */,
 				DBF849950AC76D5800BB15CD /* MeshLoaderColladaHelpers.cpp */,
@@ -989,6 +990,7 @@
 				DB27F05E0ACB9AB90054ACA3 /* Texture.h */,
 				DB27F05F0ACB9AB90054ACA3 /* VertexBuffer.h */,
 				8E284F942B3DBD61005A1628 /* PixelFormat.h */,
+				8E78CB322B4DAF3A0083707F /* Sampler.h */,
 			);
 			name = graphics;
 			path = sources/graphics;
@@ -1480,7 +1482,7 @@
 				DBCEE7390B4B56440088A7E3 /* MeshLoaderColladaLoader.cpp in Sources */,
 				8E71FB182B06346A00A842AE /* imgui_impl_sdl2.cpp in Sources */,
 				DB294E100C11DC6E005DA55C /* CRC.cpp in Sources */,
-				8E9B9332289C623F007BC193 /* LoadImage.cpp in Sources */,
+				8E9B9332289C623F007BC193 /* LoadBitmapFile.cpp in Sources */,
 				DB4AFB9B0D70768B00809E03 /* OpenALSoundEnvironment.cpp in Sources */,
 				DB4AFBA20D7076EE00809E03 /* LowLevelSound.cpp in Sources */,
 			);

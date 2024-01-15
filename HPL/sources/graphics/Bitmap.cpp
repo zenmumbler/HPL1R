@@ -67,7 +67,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	bool Bitmap::CreateFromPixels(void* source, int width, int height) {
+	bool Bitmap::CreateFromRGBAPixels(void* source, int width, int height) {
 		if (width < 0 || height < 0 || width > 32768 || height > 32768) {
 			return false;
 		}

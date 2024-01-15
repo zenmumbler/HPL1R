@@ -2,7 +2,7 @@
  * 2022 by zenmumbler
  * This file is part of Rehatched
  */
-#include "resources/impl/LoadImage.h"
+#include "resources/impl/LoadBitmapFile.h"
 #include "stb/stb_image.h"
 #include "system/Log.h"
 
@@ -19,7 +19,7 @@ namespace hpl {
 		}
 
 		Bitmap bmp;
-		if (! bmp.CreateFromPixels(pixels, width, height)) {
+		if (! bmp.CreateFromRGBAPixels(pixels, width, height)) {
 			Error("Failed to create bitmap for image: %s!\n", fullPath.c_str());
 			stbi_image_free(pixels);
 			return std::nullopt;

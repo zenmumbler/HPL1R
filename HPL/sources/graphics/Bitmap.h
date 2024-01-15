@@ -19,7 +19,7 @@ namespace hpl {
 		~Bitmap();
 
 		bool Create(int width, int height);
-		bool CreateFromPixels(void* source, int width, int height);
+		bool CreateFromRGBAPixels(void* source, int width, int height);
 
 		/**
 		 * Draw this bitmap onto another at specified position
@@ -30,7 +30,6 @@ namespace hpl {
 		T* GetRawData() const { return reinterpret_cast<T*>(data_); }
 
 		int GetNumChannels() const { return 4; }
-
 		int GetHeight() const { return height_; }
 		int GetWidth() const { return width_; }
 
