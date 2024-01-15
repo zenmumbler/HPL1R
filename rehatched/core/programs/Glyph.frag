@@ -9,7 +9,7 @@ layout(location = 0) out vec4 fragColor;
 uniform sampler2D image;
 
 void main() {
-	fragColor = texture(image, oUV) * oColor;
-	// multiply alpha with red/gray intensity
-	fragColor.a *= fragColor.r;
+	fragColor = texture(image, oUV);
+	fragColor.a = fragColor.r;
+	fragColor *= oColor;
 }
