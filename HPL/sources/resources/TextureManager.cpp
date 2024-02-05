@@ -35,6 +35,61 @@ namespace hpl {
 		"_neg_z"
 	};
 
+	static std::vector<tString> s_fileFormats;
+
+
+	static bool ResolveCubemapPaths(const tString &name, std::vector<tString> &paths) {
+		auto baseName = cString::GetFileName(name);
+		auto ext = cString::GetFileExt(name);
+
+		for (int ix = 0; ix < 6; ++ix) {
+			auto sideName = baseName + s_CubeSideSuffixes[ix] + "." + ext;
+			auto sidePath = FileSearcher::ResolveAssetName(sideName, { s_fileFormats });
+			if (sidePath.length() == 0) {
+				return false;
+			}
+			paths.push_back(sidePath);
+		}
+
+		return true;
+	}
+
+	static bool ResolveSequencePaths(const tString &name, std::vector<tString> &paths) {
+		auto baseName = cString::GetFileName(name);
+		auto ext = cString::GetFileExt(name);
+
+		for (int ix = 0; ix < 100; ++ix) {
+			auto frameName = baseName + (ix < 10 ? "0" : "") + std::to_string(ix) + "." + ext;
+			auto framePath = FileSearcher::ResolveAssetName(frameName, { s_fileFormats });
+			if (framePath.length() == 0) {
+				break;
+			}
+			paths.push_back(framePath);
+		}
+
+		return paths.size() > 0;
+	}
+
+	static std::optional<Bitmap> LoadBitmap(const tString &fullPath) {
+		auto maybeBitmap = LoadBitmapFile(fullPath);
+		if (! maybeBitmap) {
+			Error("Bitmap file '%s' could not be loaded!", fullPath.c_str());
+			return std::nullopt;
+		}
+		return maybeBitmap;
+	}
+
+	static bool LoadBitmaps(const std::vector<tString> &paths, std::vector<Bitmap> &bitmaps) {
+		for (const auto& path : paths) {
+			auto maybeBitmap = LoadBitmap(path);
+			if (! maybeBitmap) {
+				return false;
+			}
+			bitmaps.push_back(std::move(*maybeBitmap));
+		}
+		return true;
+	}
+
 	//////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS
 	//////////////////////////////////////////////////////////////////////////
@@ -44,9 +99,9 @@ namespace hpl {
 	cTextureManager::cTextureManager(iLowLevelGraphics *llGfx)
 		: iResourceManager{"texture"}, iUpdateable{"HPL_TextureMgr"}
 	{
-		_llGfx = llGfx;
+		llGfx_ = llGfx;
 
-		GetSupportedBitmapFormats(mvFileFormats);
+		GetSupportedBitmapFormats(s_fileFormats);
 	}
 
 	//-----------------------------------------------------------------------
@@ -62,7 +117,7 @@ namespace hpl {
 	}
 
 	std::span<const tString> cTextureManager::SupportedExtensions() const {
-		return { mvFileFormats };
+		return { s_fileFormats };
 	}
 
 	//-----------------------------------------------------------------------
@@ -89,70 +144,36 @@ namespace hpl {
 
 		if(pTexture==NULL)
 		{
-			tString sFileExt = cString::GetFileExt(fileName);
-			tString sFileName = cString::SetFileExt(cString::GetFileName(fileName),"");
+			std::vector<tString> paths;
+			std::vector<Bitmap> bitmaps;
 
-			tString sTest = sFileName + "01."+sFileExt;
-			int lNum = 2;
-			tStringVec vPaths;
-
-			while(true)
-			{
-				tString sPath = FileSearcher::GetFilePath(sTest);
-
-				if(sPath == "")
-				{
-					break;
-				}
-				else
-				{
-					vPaths.push_back(sPath);
-					if(lNum<10)
-						sTest = sFileName + "0"+cString::ToString(lNum)+"."+sFileExt;
-					else
-						sTest = sFileName + cString::ToString(lNum)+"."+sFileExt;
-
-					++lNum;
-				}
-			}
-
-			if(vPaths.empty())
-			{
+			if (! ResolveSequencePaths(fileName, paths)) {
 				Error("No textures found for animation %s\n", fileName.c_str());
 				EndLoad();
-				return NULL;
+				return nullptr;
 			}
-
-			std::vector<Bitmap> vBitmaps;
-			for(size_t i =0; i< vPaths.size(); ++i)
-			{
-				auto bmp = LoadBitmapFile(vPaths[i]);
-				if (! bmp){
-					Error("Couldn't load bitmap '%s'!\n",vPaths[i].c_str());
-					EndLoad();
-					return NULL;
-				}
-
-				vBitmaps.push_back(std::move(*bmp));
+			if (! LoadBitmaps(paths, bitmaps)) {
+				EndLoad();
+				return nullptr;
 			}
 
 			//Create the animated texture
-			pTexture = _llGfx->CreateTexture(fileName, eTextureTarget_2D);
+			pTexture = llGfx_->CreateTexture(fileName, eTextureTarget_2D);
 			pTexture->SetAnimMode(animMode);
 
-			if(pTexture->CreateAnimFromBitmapVec(vBitmaps)==false)
+			if (pTexture->CreateAnimFromBitmapVec(bitmaps)==false)
 			{
 				Error("Couldn't create animated texture '%s'!\n", fileName.c_str());
 				delete pTexture;
 				EndLoad();
-				return NULL;
+				return nullptr;
 			}
 
 			AddResource(pTexture);
 		}
 
 		if(pTexture)pTexture->IncUserCount();
-		else Error("Couldn't texture '%s'\n", fileName.c_str());
+		else Error("Couldn't resolve texture '%s'\n", fileName.c_str());
 
 		EndLoad();
 		return pTexture;
@@ -160,59 +181,33 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cTextureManager::CreateCubeMap(const tString& asPathName)
+	iTexture* cTextureManager::CreateCubeMap(const tString& fileName)
 	{
-		tString sName = cString::SetFileExt(asPathName,"");
+		BeginLoad(fileName);
 
-		iTexture* pTexture = static_cast<iTexture*>(GetByName(sName));
+		iTexture* pTexture = static_cast<iTexture*>(GetByName(fileName));
 
-		BeginLoad(asPathName);
-
-		if(pTexture==NULL)
+		if (pTexture==NULL)
 		{
-			//See if files for all faces exist
-			tStringVec vPaths;
-			tString sPath="";
-			for(int i=0;i <6 ;i++)
-			{
-				for(const tString& sExt : mvFileFormats)
-				{
-					tString sNewName = sName + s_CubeSideSuffixes[i] + "." + sExt;
-					sPath = FileSearcher::GetFilePath(sNewName);
+			std::vector<tString> paths;
+			std::vector<Bitmap> bitmaps;
 
-					if(sPath!="")break;
-				}
-
-				if(sPath=="")
-				{
-					tString sNewName = sName + s_CubeSideSuffixes[i];
-					Error("Couldn't find %d-face '%s', for cubemap '%s'\n",i,sNewName.c_str(),sName.c_str());
-					return NULL;
-				}
-
-				vPaths.push_back(sPath);
+			if (! ResolveCubemapPaths(fileName, paths)) {
+				Error("No textures found for animation %s\n", fileName.c_str());
+				EndLoad();
+				return nullptr;
 			}
-
-			//Load bitmaps for all faces
-			std::vector<Bitmap> vBitmaps;
-			for(int i=0;i<6; i++)
-			{
-				auto bmp = LoadBitmapFile(vPaths[i]);
-				if (! bmp) {
-					Error("Couldn't load bitmap '%s'!\n",vPaths[i].c_str());
-					EndLoad();
-					return NULL;
-				}
-
-				vBitmaps.push_back(std::move(*bmp));
+			if (! LoadBitmaps(paths, bitmaps)) {
+				EndLoad();
+				return nullptr;
 			}
 
 			//Create the cubemap
-			pTexture = _llGfx->CreateTexture(sName, eTextureTarget_CubeMap);
+			pTexture = llGfx_->CreateTexture(fileName, eTextureTarget_CubeMap);
 
-			if (pTexture->CreateCubeFromBitmapVec(vBitmaps)==false)
+			if (pTexture->CreateCubeFromBitmapVec(bitmaps)==false)
 			{
-				Error("Couldn't create cubemap '%s'!\n", sName.c_str());
+				Error("Couldn't create cubemap '%s'!\n", fileName.c_str());
 				delete pTexture;
 				EndLoad();
 				return NULL;
@@ -222,7 +217,7 @@ namespace hpl {
 		}
 
 		if(pTexture)pTexture->IncUserCount();
-		else Error("Couldn't texture '%s'\n",sName.c_str());
+		else Error("Couldn't resolve texture '%s'\n", fileName.c_str());
 
 		EndLoad();
 		return pTexture;
@@ -233,7 +228,7 @@ namespace hpl {
 	iTexture* cTextureManager::CreateFromBitmap(const tString &name, const Bitmap& bitmap) {
 		BeginLoad(name);
 
-		auto texture = _llGfx->CreateTexture(name, eTextureTarget_2D);
+		auto texture = llGfx_->CreateTexture(name, eTextureTarget_2D);
 		if (! texture->CreateFromBitmap(bitmap)) {
 			delete texture;
 			return nullptr;
@@ -284,7 +279,7 @@ namespace hpl {
 			}
 
 			//Create the texture and load from bitmap
-			pTexture = _llGfx->CreateTexture(name, target);
+			pTexture = llGfx_->CreateTexture(name, target);
 			if(pTexture->CreateFromBitmap(*pBmp)==false)
 			{
 				delete pTexture;
@@ -310,7 +305,7 @@ namespace hpl {
 
 		if (cString::GetFileExt(name).length() == 0)
 		{
-			for (const tString& sExt : mvFileFormats)
+			for (const tString& sExt : s_fileFormats)
 			{
 				auto qualifiedName = cString::SetFileExt(name, sExt);
 				pTexture = static_cast<iTexture*> (FindLoadedResource(qualifiedName, fullPath));

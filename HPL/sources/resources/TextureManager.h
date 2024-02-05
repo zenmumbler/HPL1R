@@ -22,33 +22,16 @@
 #include "game/Updateable.h"
 #include "resources/ResourceManager.h"
 #include "graphics/Texture.h"
-#include <vector>
 
 namespace hpl {
 
 	class Bitmap;
-	class Image;
 
 	enum class TextureType {
 		Single1D,
 		Single2D,
 		Anim2D,
 		CubeMap
-	};
-
-	struct TextureSpec {
-		TextureType type;
-		union {
-			struct {
-				Image *image;
-			} Single;
-			struct {
-				Image *top, *bottom, *left, *right, *front, *back;
-			} Cube;
-			struct {
-				std::vector<Image*> frames;
-			} Anim2D;
-		};
 	};
 
 	class cTextureManager : public iResourceManager, public iUpdateable
@@ -61,26 +44,21 @@ namespace hpl {
 
 		iTexture* Create1D(const tString &name);
 		iTexture* Create2D(const tString &name);
-
 		/**
 		 * Creates an animated texture. The name must be [name].[ext]. And then the textures in the animtion must
 		 * be named [name]01.[ext], [name]02.[ext], etc
 		 */
 		iTexture* CreateAnim2D(const tString &name, eTextureAnimMode animMode);
 		iTexture* CreateCubeMap(const tString &name);
-
 		iTexture* CreateFromBitmap(const tString &name, const Bitmap& bitmap);
 
 		void Update(float afTimeStep) override;
 
 	private:
 		iTexture* CreateFlatTexture(const tString &name, eTextureTarget target);
-
 		iTexture* FindTexture2D(const tString &name, tString &fullPath);
 
-		std::vector<tString> mvFileFormats;
-
-		iLowLevelGraphics *_llGfx;
+		iLowLevelGraphics *llGfx_;
 	};
 
 }
