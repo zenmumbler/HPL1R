@@ -66,7 +66,6 @@ namespace hpl {
 	//-----------------------------------------
 
 	class iLowLevelGraphics;
-	class Image;
 
 	class iTexture : public iResourceBase
 	{
@@ -82,26 +81,29 @@ namespace hpl {
 
 		virtual ~iTexture() = default;
 
-		virtual bool CreateFromImage(const Image *image) = 0;
+		virtual bool CreateBlank(int width, int height) = 0;
+
+		virtual bool CreateFromFile(const tString& fullPath) = 0;
 
 		/**
 		 * Create a texture from a bitmap, work only for 1D, 2D and Rect targets. Doesn't work with render targets.
 		 * \param pBmp
 		 * \return
 		 */
-		virtual bool CreateFromBitmap(const Bitmap &bmp)=0;
+		virtual bool CreateFromBitmap(const Bitmap &bmp) = 0;
 		/**
 		 * Create a cube map texture from a vector of bitmaps. Doesn't work with render targets.
 		 * All bitmaps most be square, a power of 2 and the same same. The order must be: posX, negX, posY, negY, posZ and negZ.
 		 * \param *avBitmaps a vector with at least 6 bitmaps
 		 * \return
 		 */
-		virtual bool CreateCubeFromBitmapVec(const std::vector<Bitmap>& bitmaps)=0;
-		virtual bool CreateAnimFromBitmapVec(const std::vector<Bitmap>& bitmaps)=0;
+		virtual bool CreateCubeFromBitmapVec(const std::vector<Bitmap>& bitmaps) = 0;
+		virtual bool CreateAnimFromBitmapVec(const std::vector<Bitmap>& bitmaps) = 0;
+
+		virtual bool UpdateFromBitmap(const Bitmap &bitmap) = 0;
 
 		virtual void Update(float afTimeStep)=0;
 
-		virtual int GetHandle()=0;
 		virtual unsigned int GetCurrentLowlevelHandle()=0;
 
 		// SAMPLER STUFF -->

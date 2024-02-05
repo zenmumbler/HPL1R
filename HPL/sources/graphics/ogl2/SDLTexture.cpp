@@ -62,8 +62,8 @@ namespace hpl {
 			case PixelFormat::RGB8: return { GL_RGB, GL_UNSIGNED_BYTE };
 			case PixelFormat::RGBA8: return { GL_RGBA, GL_UNSIGNED_BYTE };
 
-			case PixelFormat::SRGB8: return { GL_SRGB, GL_UNSIGNED_BYTE };
-			case PixelFormat::SRGBA8: return { GL_SRGB_ALPHA, GL_UNSIGNED_BYTE };
+			case PixelFormat::SRGB8: return { GL_RGB, GL_UNSIGNED_BYTE };
+			case PixelFormat::SRGBA8: return { GL_RGBA, GL_UNSIGNED_BYTE };
 
 			case PixelFormat::BGR8: return { GL_BGR, GL_UNSIGNED_BYTE };
 			case PixelFormat::BGRA8: return { GL_BGRA, GL_UNSIGNED_BYTE };
@@ -144,6 +144,7 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+/*
 	bool cSDLTexture::CreateFromImage(const Image *image) {
 		// TODO: method incomplete, proto impl
 		GLenum target = InitCreation(0);
@@ -184,6 +185,28 @@ namespace hpl {
 
 		return true;
 
+	}
+*/
+
+	//-----------------------------------------------------------------------
+
+	bool cSDLTexture::CreateFromFile(const tString& fullPath) {
+		return false;
+	}
+
+	//-----------------------------------------------------------------------
+
+	bool cSDLTexture::CreateBlank(int width, int height) {
+		mlWidth = width;
+		mlHeight = height;
+
+		mvTextureHandles.resize(1);
+		glGenTextures(1, mvTextureHandles.data());
+
+		GLenum GLTarget = InitCreation(0);
+		glTexImage2D(GLTarget, 0, GL_RGBA8, mlWidth, mlHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+		PostCreation(GLTarget);
+		return true;
 	}
 
 	//-----------------------------------------------------------------------
@@ -273,6 +296,18 @@ namespace hpl {
 		PostCreation(GLTarget);
 
 		return true;
+	}
+
+	//-----------------------------------------------------------------------
+
+	bool cSDLTexture::UpdateFromBitmap(const Bitmap &bitmap)
+	{
+		auto [formatGL, typeGL] = PixelFormatToGL(PixelFormat::RGBA8);
+		glBindTexture(GL_TEXTURE_2D, mvTextureHandles[0]);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, bitmap.GetWidth(), bitmap.GetHeight(), formatGL, typeGL, bitmap.GetRawData());
+		auto err = glGetError();
+		glBindTexture(GL_TEXTURE_2D, 0);
+		return err == GL_NONE;
 	}
 
 	//-----------------------------------------------------------------------

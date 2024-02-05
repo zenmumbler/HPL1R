@@ -37,14 +37,22 @@ namespace hpl {
 		cSDLTexture(const tString &asName, eTextureTarget aTarget);
 		~cSDLTexture();
 
-		bool CreateFromImage(const Image *image) override;
-		bool CreateFromBitmap(const Bitmap &bmp) override;
+		bool CreateBlank(int width, int height) override;
 
+		bool CreateFromFile(const tString& fullPath) override;
+
+		bool CreateFromBitmap(const Bitmap &bmp) override;
 		bool CreateAnimFromBitmapVec(const std::vector<Bitmap>& bitmaps) override;
 		bool CreateCubeFromBitmapVec(const std::vector<Bitmap>& bitmaps) override;
 
-		int GetHandle() override {return (int) mvTextureHandles[0];}
+		bool UpdateFromBitmap(const Bitmap &bitmap) override;
 
+		// --> ANIM
+		void Update(float afTimeStep) override;
+		unsigned int GetCurrentLowlevelHandle() override;
+		// <-- ANIM
+
+		// --> SAMPLER STUFF
 		void SetFilter(eTextureFilter aFilter) override;
 		void SetAnisotropyDegree(float afX) override;
 
@@ -52,10 +60,7 @@ namespace hpl {
 		void SetWrapS(eTextureWrap aMode) override;
 		void SetWrapT(eTextureWrap aMode) override;
 		void SetWrapR(eTextureWrap aMode) override;
-
-		void Update(float afTimeStep) override;
-
-		unsigned int GetCurrentLowlevelHandle() override;
+		// <-- SAMPLER STUFF
 
 	private:
 		bool CreateFromBitmapToHandle(const Bitmap &bmp, int alHandleIdx);
@@ -73,5 +78,6 @@ namespace hpl {
 		float mfTimeDir;
 	};
 
-};
+}
+
 #endif // HPL_SDL_TEXTURE_H
