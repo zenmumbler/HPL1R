@@ -40,6 +40,10 @@ namespace hpl {
 		mbIsFull = false;
 		_index = index;
 
+		mpTexture->CreateBlank(width, height);
+		mpTexture->SetWrapS(eTextureWrap_ClampToEdge);
+		mpTexture->SetWrapT(eTextureWrap_ClampToEdge);
+
 		//Root node in rect tree
 		mRects.Insert(cFBitmapRect(0, 0, mBitmap.GetWidth(), mBitmap.GetHeight(), -1));
 
@@ -227,9 +231,10 @@ namespace hpl {
 		if (mbIsUpdated)
 		{
 			// Log("FB: updating texture #%d\n", _index);
-			mpTexture->CreateFromBitmap(mBitmap);
-			mpTexture->SetWrapS(eTextureWrap_ClampToEdge);
-			mpTexture->SetWrapT(eTextureWrap_ClampToEdge);
+			bool success = mpTexture->UpdateFromBitmap(mBitmap);
+			if (! success) {
+				Error("Could not update texture\n");
+			}
 
 			mbIsUpdated = false;
 			return true;
