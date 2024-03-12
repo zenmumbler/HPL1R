@@ -1,9 +1,9 @@
 {
 	"compilerOptions": {
 		"strict": true,
-		"lib": ["ESNext"],
+		"lib": ["ESNext", "node"],
 		"module": "ESNext",
 		"target": "ESNext",
-		"types": ["bun-types"]
+		"moduleResolution": "node"
 	}
 }
