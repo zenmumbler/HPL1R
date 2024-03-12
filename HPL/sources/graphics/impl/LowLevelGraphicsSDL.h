@@ -64,6 +64,7 @@ namespace hpl {
 		iVertexBuffer* CreateVertexBuffer(VertexAttributes aFlags, VertexBufferPrimitiveType aDrawType,
 										VertexBufferUsageType aUsageType,
 										int alReserveVtxSize, int alReserveIdxSize) override;
+		Sampler CreateSampler(const SamplerDesc& descriptor) override;
 
 		Bitmap GetScreenPixels() override;
 

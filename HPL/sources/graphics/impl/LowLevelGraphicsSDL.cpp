@@ -314,6 +314,13 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
+	Sampler cLowLevelGraphicsSDL::CreateSampler(const SamplerDesc& descriptor)
+	{
+		return { 0 };
+	}
+
+	//-----------------------------------------------------------------------
+
 	void cLowLevelGraphicsSDL::SetTexture(unsigned int alUnit, iTexture* apTex)
 	{
 		if(apTex == mpCurrentTexture[alUnit]) return;

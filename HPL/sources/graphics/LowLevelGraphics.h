@@ -19,6 +19,7 @@
 #ifndef HPL_LOWLEVELGRAPHICS_H
 #define HPL_LOWLEVELGRAPHICS_H
 
+#include "graphics/Sampler.h"
 #include "graphics/Bitmap.h"
 #include "graphics/Texture.h"
 #include "graphics/GPUProgram.h"
@@ -108,6 +109,10 @@ namespace hpl {
 
 	class iOcclusionQuery;
 
+	struct Sampler {
+		int _id;
+	};
+
 	class iLowLevelGraphics
 	{
 	public:
@@ -150,6 +155,7 @@ namespace hpl {
 		virtual iVertexBuffer* CreateVertexBuffer(VertexAttributes aFlags, VertexBufferPrimitiveType aDrawType,
 								VertexBufferUsageType aUsageType,
 								int alReserveVtxSize, int alReserveIdxSize)=0;
+		virtual Sampler CreateSampler(const SamplerDesc& descriptor) = 0;
 
 		virtual Bitmap GetScreenPixels()=0;
 
@@ -189,7 +195,7 @@ namespace hpl {
 		virtual void SetScissorActive(bool abX)=0;
 		virtual void SetScissorRect(const cRect2l &aRect)=0;
 
-		//TEXTURE
+		//TEXTURE + SAMPLER
 		virtual void SetTexture(unsigned int alUnit,iTexture* apTex)=0;
 
 		//BLENDING
