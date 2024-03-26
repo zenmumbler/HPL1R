@@ -225,23 +225,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-	iTexture* cTextureManager::CreateFromBitmap(const tString &name, const Bitmap& bitmap) {
-		BeginLoad(name);
-
-		auto texture = llGfx_->CreateTexture(name, eTextureTarget_2D);
-		if (! texture->CreateFromBitmap(bitmap)) {
-			delete texture;
-			return nullptr;
-		}
-		AddResource(texture);
-		texture->IncUserCount();
-
-		EndLoad();
-		return texture;
-	}
-
-	//-----------------------------------------------------------------------
-
 	void cTextureManager::Update(float afTimeStep)
 	{
 		ForEachResource([=](iResourceBase *resource) {

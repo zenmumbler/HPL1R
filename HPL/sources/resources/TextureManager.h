@@ -50,7 +50,6 @@ namespace hpl {
 		 */
 		iTexture* CreateAnim2D(const tString &name, eTextureAnimMode animMode);
 		iTexture* CreateCubeMap(const tString &name);
-		iTexture* CreateFromBitmap(const tString &name, const Bitmap& bitmap);
 
 		void Update(float afTimeStep) override;
 

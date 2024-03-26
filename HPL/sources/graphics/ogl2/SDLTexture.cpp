@@ -144,52 +144,6 @@ namespace hpl {
 
 	//-----------------------------------------------------------------------
 
-/*
-	bool cSDLTexture::CreateFromImage(const Image *image) {
-		// TODO: method incomplete, proto impl
-		GLenum target = InitCreation(0);
-
-		mlWidth = image->GetWidth(0);
-		mlHeight = image->GetHeight(0);
-		auto pixels = image->GetData(0);
-
-		auto format = image->GetPixelFormat();
-		auto [glFormat, glType] = PixelFormatToGL(format);
-		auto internalFormat = PixelFormatToInternalGL(format);
-
-		// Clear error flags
-		glGetError();
-
-		if (glType == GL_NONE) {
-			// compressed
-			if (mTarget == eTextureTarget_1D)
-				glCompressedTexImage1D(GL_TEXTURE_1D, 0, internalFormat, mlWidth, 0, image->GetByteSize(0), pixels);
-			else
-				glCompressedTexImage2D(GL_TEXTURE_2D, 0, internalFormat, mlWidth, mlHeight, 0, image->GetByteSize(0), pixels);
-		}
-		else {
-			// uncompressed
-			if (mTarget == eTextureTarget_1D)
-				glTexImage1D(target, 0, internalFormat, mlWidth, 0, glFormat, glType, pixels);
-			else
-				glTexImage2D(target, 0, internalFormat, mlWidth, mlHeight, 0, glFormat, glType, pixels);
-		}
-
-		auto texErr = glGetError();
-		if (texErr != GL_NO_ERROR) {
-			Error("Could not upload texture to GL! Err: %d", texErr);
-			return false;
-		}
-
-		PostCreation(target);
-
-		return true;
-
-	}
-*/
-
-	//-----------------------------------------------------------------------
-
 	bool cSDLTexture::CreateFromFile(const tString& fullPath) {
 		return false;
 	}
@@ -325,7 +279,7 @@ namespace hpl {
 				{
 					if(mAnimMode == eTextureAnimMode_Loop)
 					{
-						mfTimeCount =0;
+						mfTimeCount = 0;
 					}
 					else
 					{
